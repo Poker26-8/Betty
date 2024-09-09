@@ -1180,8 +1180,8 @@ Module Facturacion
                 servidorx.EnableSsl = seguridad
                 servidorx.Credentials = New System.Net.NetworkCredential(cuentamail, passmail)
                 servidorx.Send(mail)
-
                 MessageBox.Show("Mensaje enviado correctamene", "Exito!", MessageBoxButtons.OK)
+                frmfacturacion.Cmb_RazonS.Focus.Equals(True)
                 Return True
 
             Catch ex As Exception
@@ -1221,7 +1221,7 @@ Module Facturacion
 
                 MessageBox.Show("Mensaje enviado correctamene", "Exito!", MessageBoxButtons.OK)
                 Return True
-
+                frmfacturacion.Cmb_RazonS.Focus.Equals(True)
             Catch ex As Exception
                 MessageBox.Show(ex.ToString, "Error!", MessageBoxButtons.OK)
                 Return False

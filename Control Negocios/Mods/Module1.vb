@@ -373,12 +373,12 @@ Module Module1
         Dim sinfo As String = ""
         Dim oData As New ToolKitSQL.oledbdata
         Dim dr As DataRow
-        sTarget = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & My.Application.Info.DirectoryPath & "\CIAS.mdb;"
+        sTargett = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & My.Application.Info.DirectoryPath & "\CIAS.mdb;"
         sSQL = "select base,Servidor from Server"
         With oData
             If .dbOpen(cnn, sTarget, sinfo) Then
                 If .getDr(cnn, dr, sSQL, sinfo) Then
-                    varnumbase = 1 'dr(0).ToString
+                    varnumbase = dr(0).ToString
                     varrutabase = dr(1).ToString
                     If varrutabase = "" Then
 
