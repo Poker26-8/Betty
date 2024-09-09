@@ -2864,8 +2864,8 @@ SAFO:
             e.Graphics.DrawString("-------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
             Y += 15
 
-            e.Graphics.DrawString("CANTIDAD", New Drawing.Font(tipografia, 13, FontStyle.Bold), Brushes.Black, 1, Y)
-            e.Graphics.DrawString("PRODUCTO", New Drawing.Font(tipografia, 13, FontStyle.Bold), Brushes.Black, 200, Y, sf)
+            e.Graphics.DrawString("CANTIDAD", New Drawing.Font(tipografia, 15, FontStyle.Bold), Brushes.Black, 1, Y)
+            e.Graphics.DrawString("PRODUCTO", New Drawing.Font(tipografia, 15, FontStyle.Bold), Brushes.Black, 280, Y, sf)
             Y += 10
             e.Graphics.DrawString("-------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
             Y += 15
@@ -3016,8 +3016,8 @@ SAFO:
                 e.Graphics.DrawString("-------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
             End If
             Y += 15
-            e.Graphics.DrawString("MESERO", New Font("Arial", 15, FontStyle.Regular), Brushes.Black, 1, Y)
-            e.Graphics.DrawString(lblatiende.Text, New Font("Arial", 15, FontStyle.Regular), Brushes.Black, 285, Y, sf)
+            e.Graphics.DrawString("MESERO", New Font("Arial", 17, FontStyle.Regular), Brushes.Black, 1, Y)
+            e.Graphics.DrawString(lblatiende.Text, New Font("Arial", 17, FontStyle.Regular), Brushes.Black, 285, Y, sf)
 
             cnn2.Close()
             cnn1.Close()

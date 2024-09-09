@@ -4564,10 +4564,10 @@ Door:
     Private Sub PComanda80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PComanda80.PrintPage
 
         Dim tipografia As String = "Lucida Sans Typewriter"
-        Dim fuente_r As New Font("Lucida Sans Typewriter", 8, FontStyle.Regular)
-        Dim fuente_b As New Font("Lucida Sans Typewriter", 8, FontStyle.Bold)
-        Dim fuente_c As New Font("Lucida Sans Typewriter", 8, FontStyle.Regular)
-        Dim fuente_p As New Font("Lucida Sans Typewriter", 7, FontStyle.Regular)
+        Dim fuente_r As New Font("Lucida Sans Typewriter", 13, FontStyle.Regular)
+        Dim fuente_b As New Font("Lucida Sans Typewriter", 10, FontStyle.Bold)
+        Dim fuente_c As New Font("Lucida Sans Typewriter", 10, FontStyle.Regular)
+        Dim fuente_p As New Font("Lucida Sans Typewriter", 15, FontStyle.Regular)
         Dim derecha As New StringFormat With {.Alignment = StringAlignment.Far}
         Dim centro As New StringFormat With {.Alignment = StringAlignment.Center}
         Dim hoja As New Pen(Brushes.Black, 1)
@@ -4580,55 +4580,6 @@ Door:
 
         cnn4.Close() : cnn4.Open()
 
-        cmd4 = cnn4.CreateCommand
-        cmd4.CommandText =
-                "select Cab0,Cab1,Cab2,Cab3,Cab4,Cab5,Cab6 from Ticket"
-        rd4 = cmd4.ExecuteReader
-        If rd4.HasRows Then
-            If rd4.Read Then
-
-                'Razón social
-                If rd4("Cab0").ToString() <> "" Then
-                    e.Graphics.DrawString(rd4("Cab0").ToString, New Drawing.Font(tipografia, 8, FontStyle.Bold), Brushes.Black, 140, Y, centro)
-                    Y += 12.5
-                End If
-                'RFC
-                If rd4("Cab1").ToString() <> "" Then
-                    e.Graphics.DrawString(rd4("Cab1").ToString, New Drawing.Font(tipografia, 8, FontStyle.Bold), Brushes.Black, 140, Y, centro)
-                    Y += 12.5
-                End If
-                'Calle  N°.
-                If rd4("Cab2").ToString() <> "" Then
-                    e.Graphics.DrawString(rd4("Cab2").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, centro)
-                    Y += 12
-                End If
-                'Colonia
-                If rd4("Cab3").ToString() <> "" Then
-                    e.Graphics.DrawString(rd4("Cab3").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, centro)
-                    Y += 12
-                End If
-                'Delegación / Municipio - Entidad
-                If rd4("Cab4").ToString() <> "" Then
-                    e.Graphics.DrawString(rd4("Cab4").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, centro)
-                    Y += 12
-                End If
-                'Teléfono
-                If rd4("Cab5").ToString() <> "" Then
-                    e.Graphics.DrawString(rd4("Cab5").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, centro)
-                    Y += 12
-                End If
-                'Correo
-                If rd4("Cab6").ToString() <> "" Then
-                    e.Graphics.DrawString(rd4("Cab6").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, centro)
-                    Y += 12
-                End If
-                Y += 17
-            End If
-        Else
-            Y += 0
-        End If
-        rd4.Close()
-
         e.Graphics.DrawString("--------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
         Y += 15
         e.Graphics.DrawString("C O M A N D A", fuente_b, Brushes.Black, 135, Y, centro)
@@ -4638,14 +4589,14 @@ Door:
 
         e.Graphics.DrawString("FOLIO:" & MYFOLIO, fuente_b, Brushes.Black, 1, Y)
         Y += 15
-        e.Graphics.DrawString("Fecha: " & Format(Date.Now, "yyyy/MM/dd"), fuente_r, Brushes.Black, 1, Y)
-        e.Graphics.DrawString("Hora: " & Format(Date.Now, "HH:mm"), fuente_r, Brushes.Black, 270, Y, derecha)
+        e.Graphics.DrawString("Fecha: " & Format(Date.Now, "yyyy/MM/dd"), fuente_c, Brushes.Black, 1, Y)
+        e.Graphics.DrawString("Hora: " & Format(Date.Now, "HH:mm"), fuente_c, Brushes.Black, 270, Y, derecha)
         Y += 11
         e.Graphics.DrawString("--------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
         Y += 15
 
-        e.Graphics.DrawString("CANT", fuente_b, Brushes.Black, 1, Y)
-        e.Graphics.DrawString("DESCRIPION", fuente_b, Brushes.Black, 35, Y)
+        e.Graphics.DrawString("CANT", fuente_p, Brushes.Black, 1, Y)
+        e.Graphics.DrawString("DESCRIPION", fuente_p, Brushes.Black, 280, Y, derecha)
         Y += 20
         e.Graphics.DrawString("--------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
         Y += 15
@@ -4659,8 +4610,20 @@ Door:
                 Dim comentario2 As String = rd4("Comentario").ToString
                 Dim nombre As String = rd4("Nombre").ToString
                 Dim cantidad As Double = rd4("Cantidad").ToString
-                e.Graphics.DrawString(cantidad, fuente_b, Brushes.Black, 1, Y)
-                e.Graphics.DrawString(nombre, fuente_b, Brushes.Black, 35, Y)
+                e.Graphics.DrawString(cantidad, fuente_r, Brushes.Black, 1, Y)
+
+                Dim caracteresPorLinea2 As Integer = 30
+                Dim texto2 As String = nombre
+                Dim inicio2 As Integer = 0
+                Dim longitudTexto2 As Integer = texto2.Length
+
+                While inicio2 < longitudTexto2
+                    Dim longitudBloque2 As Integer = Math.Min(caracteresPorLinea2, longitudTexto2 - inicio2)
+                    Dim bloque2 As String = texto2.Substring(inicio2, longitudBloque2)
+                    e.Graphics.DrawString(bloque2, New Font("Arial", 10, FontStyle.Regular), Brushes.Black, 1, Y)
+                    Y += 13
+                    inicio2 += caracteresPorLinea2
+                End While
                 Y += 20
 
                 If comentario2 = "" Then
