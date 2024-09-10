@@ -659,7 +659,7 @@ Public Class frmManejo
                                     cnn2.Close() : cnn2.Open()
 
                                     cmd1 = cnn1.CreateCommand
-                                    cmd1.CommandText = "Select Nombre FROM AsigPC WHERE Nombre='" & btnHabitacionn.Text & "'"
+                                    cmd1.CommandText = "Select Nombre,HorEnt FROM AsigPC WHERE Nombre='" & btnHabitacionn.Text & "'"
                                     rd1 = cmd1.ExecuteReader
                                     If rd1.HasRows Then
                                         If rd1.Read Then

@@ -65,8 +65,8 @@
                 If rd2.Read Then
 
                     Dim fechaentrada As Date = Nothing
-                    fechaentrada = rd1("HorEnt").ToString
-                    lblhorini.Text = Format(fechaentrada, "yyyy/MM/dd HH:mm")
+                    fechaentrada = rd2("HorEnt").ToString
+                    lblHorIni.Text = Format(fechaentrada, "yyyy/MM/dd HH:mm")
                     lblHorFin.Text = Format(Date.Now, "yyyy/MM/dd HH:mm")
 
                     vardias = DateDiff(DateInterval.Day, CDate(lblHorIni.Text), CDate(lblHorFin.Text))

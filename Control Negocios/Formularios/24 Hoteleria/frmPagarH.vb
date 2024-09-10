@@ -23,7 +23,7 @@ Public Class frmPagarH
     Dim nLogo As String = ""
     Dim tLogo As String = ""
     Dim DesglosaIVA As String = ""
-    Dim facLinea As Integer = ""
+    Dim facLinea As Integer = 0
     Private Sub frmPagarH_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 

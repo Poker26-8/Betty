@@ -4459,7 +4459,13 @@ doorcita:
                             MyPrecio = rd1("PrecioVentaIVA").ToString()
                         End If
                     Else
-                        MsgBox("El código: '" & codigo & "' fue eliminado de la base de datos. Para realizar la cancelación debe darlo de alta nuevamente.") : rd1.Close() : cnn1.Close() : Exit Sub
+                        If codigo = "xc3" Then
+                            codigo = "xc3"
+                        Else
+                            MsgBox("El código: '" & codigo & "' fue eliminado de la base de datos. Para realizar la cancelación debe darlo de alta nuevamente.") : rd1.Close() : cnn1.Close() : Exit Sub
+                        End If
+
+
                     End If
                     rd1.Close()
 
@@ -4592,8 +4598,15 @@ doorcita:
                             End If
                         End If
                     Else
-                        MsgBox("El código " & codigo & " fue eliminado de la base de datos." & vbNewLine & "La nota de venta no puede ser cancelada.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                        Exit Sub
+
+                        If codigo = "xc3" Then
+                            codigo = "xc3"
+                        Else
+                            MsgBox("El código " & codigo & " fue eliminado de la base de datos." & vbNewLine & "La nota de venta no puede ser cancelada.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                            Exit Sub
+                        End If
+
+
                     End If
                     rd1.Close()
                 End If
