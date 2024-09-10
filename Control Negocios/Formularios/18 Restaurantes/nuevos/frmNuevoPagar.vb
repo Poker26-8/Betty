@@ -5923,7 +5923,7 @@ deku:
                 cmd1.ExecuteNonQuery()
 
                 cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "INSERT INTO cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio) VALUES('" & CODIG & "','" & DESC1 & "','Cortesia'," & existe & "," & cant & "," & nuv_existencia & "," & PUVCIVA & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & lblusuario2.Text & "','" & lblfolio.Text & "')"
+                cmd1.CommandText = "INSERT INTO cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio) VALUES('" & CODIG & "','" & DESC1 & "','Cortesia'," & existe & "," & cant & "," & nuv_existencia & "," & PUVCIVA & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblusuario2.Text & "','" & lblfolio.Text & "')"
                 cmd1.ExecuteNonQuery()
                 cnn1.Close()
 
