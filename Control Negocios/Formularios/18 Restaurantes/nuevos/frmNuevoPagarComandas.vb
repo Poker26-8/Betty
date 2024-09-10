@@ -3351,7 +3351,8 @@ Door:
             Dim departamento As String = ""
             Dim grupo As String = ""
             Dim gprint As String = ""
-
+            Dim existe As Double = 0
+            Dim NEW_EXISTE As Double = 0
             If lblUsuario.Text = "" Then MsgBox("Ingrese la contraseña de favor", vbInformation + vbOKOnly, titulorestaurante) : txtContra.Focus.Equals(True) : Exit Sub
 
             If codigoeliminar = "" Then MsgBox("Necesita seleccionar un producto", vbInformation + vbOKOnly, titulorestaurante) : Exit Sub
@@ -3398,7 +3399,7 @@ Door:
             End If
 
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT PrecioCompra,Departamento,Grupo,GPrint FROM productos WHERE Codigo='" & codigoeliminar & "'"
+            cmd1.CommandText = "SELECT PrecioCompra,Departamento,Grupo,GPrint,Existencia FROM productos WHERE Codigo='" & codigoeliminar & "'"
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then
@@ -3406,12 +3407,13 @@ Door:
                     departamento = rd1("Departamento").ToString
                     grupo = rd1("Grupo").ToString
                     gprint = rd1("GPrint").ToString
+                    existe = rd1("Existencia")
                 End If
             End If
             rd1.Close()
             cnn1.Close()
 
-
+            NEW_EXISTE = CDec(existe) - CDec(cantidadeliminar)
 
 
             cnn1.Close() : cnn1.Open()
@@ -3453,6 +3455,10 @@ Door:
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText = "UPDATE productos SET Existencia=Existencia-" & CDbl(cantidadeliminar) & " WHERE Codigo='" & codigoeliminar & "'"
+            cmd2.ExecuteNonQuery()
+
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText = "INSERT INTO Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio) VALUES('" & codigoeliminar & "','" & descripcioneliminar & "','Cortesia'," & existe & "," & cantidadeliminar & "," & NEW_EXISTE & "," & precioeliminar & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblUsuario.Text & "','" & lblfolio.Text & "')"
             cmd2.ExecuteNonQuery()
             cnn2.Close()
 
