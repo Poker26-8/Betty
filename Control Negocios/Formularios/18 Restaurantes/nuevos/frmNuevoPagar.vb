@@ -5876,6 +5876,9 @@ deku:
 
             For LUFFY As Integer = 0 To grdComanda.Rows.Count - 1
 
+                Dim existe As Double = 0
+                Dim nuv_existencia As Double = 0
+
                 CODIG = grdComanda.Rows(LUFFY).Cells(1).Value.ToString
                 DESC1 = grdComanda.Rows(LUFFY).Cells(2).Value.ToString
                 cant = grdComanda.Rows(LUFFY).Cells(4).Value.ToString
@@ -5885,7 +5888,7 @@ deku:
 
                 cnn5.Close() : cnn5.Open()
                 cmd5 = cnn5.CreateCommand
-                cmd5.CommandText = "SELECT PrecioCompra,Departamento,Grupo,UVenta FROM Productos WHERE Codigo='" & CODIG & "'"
+                cmd5.CommandText = "SELECT PrecioCompra,Departamento,Grupo,UVenta,Existencia FROM Productos WHERE Codigo='" & CODIG & "'"
                 rd5 = cmd5.ExecuteReader
                 If rd5.HasRows <> 0 Then
                     If rd5.Read Then
@@ -5895,10 +5898,16 @@ deku:
                         DEPA = Trim(rd5("Departamento").ToString)
                         GRUPO1 = rd5("Grupo").ToString
                         UDV = rd5("UVenta").ToString
+                        existe = rd5("Existencia").ToString
                     End If
                 End If
                 rd5.Close()
+
+                nuv_existencia = CDec(existe) - CDec(cant)
+
                 cnn5.Close()
+
+
 
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -5910,7 +5919,12 @@ deku:
                 cmd1.ExecuteNonQuery()
 
                 cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "UPDATE Productos SET Existencia=Existencia -" & CDec(cant) & " WHERE Codigo='" & CODIG & "'"
+                cmd1.CommandText = "UPDATE Productos SET Existencia= " & nuv_existencia & " WHERE Codigo='" & CODIG & "'"
+                cmd1.ExecuteNonQuery()
+
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "INSERT INTO cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio) VALUES('" & CODIG & "','" & DESC1 & "','Cortesia'," & existe & "," & cant & "," & nuv_existencia & "," & PUVCIVA & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & lblusuario2.Text & "','" & lblfolio.Text & "')"
+                cmd1.ExecuteNonQuery()
                 cnn1.Close()
 
             Next
