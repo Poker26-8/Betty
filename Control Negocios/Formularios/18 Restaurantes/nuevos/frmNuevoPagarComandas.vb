@@ -1371,7 +1371,7 @@ Public Class frmNuevoPagarComandas
                 While inicio < longitudTexto
                     Dim longitudBloque As Integer = Math.Min(caracteresPorLinea, longitudTexto - inicio)
                     Dim bloque As String = texto.Substring(inicio, longitudBloque)
-                    e.Graphics.DrawString(bloque, New Font("Arial", 10, FontStyle.Regular), Brushes.Black, 35, Y)
+                    e.Graphics.DrawString(bloque, New Font("Arial", 10, FontStyle.Regular), Brushes.Black, 30, Y)
                     Y += 17
                     inicio += caracteresPorLinea
                 End While

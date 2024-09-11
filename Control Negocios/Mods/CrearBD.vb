@@ -1,7 +1,7 @@
 ﻿Module CrearBD
 
     'prescripcion
-    Public VartablaPrescripcion As String = "CREATE TABLE `prescripcion` (
+    Public VartablaPrescripcion As String = "CREATE TABLE IF NOT EXIST `prescripcion` (
                                               `Folio` int(11) NOT NULL,
                                               `Id` int(11) NOT NULL DEFAULT '0',
                                               `Paciente` varchar(250) NOT NULL DEFAULT '',
@@ -14,7 +14,7 @@
                                             ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
     'hisclinica
-    Public vartablahisclinica As String = "CREATE TABLE `hisclinica` (
+    Public vartablahisclinica As String = "CREATE TABLE IF NOT EXIST `hisclinica` (
                                                   `Id` int(11) NOT NULL,
                                                   `Medico` varchar(250) NOT NULL DEFAULT '',
                                                   `Fecha` date NOT NULL,

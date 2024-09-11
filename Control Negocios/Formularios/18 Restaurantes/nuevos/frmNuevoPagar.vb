@@ -2612,8 +2612,16 @@ deku:
                 Y += 20
             End If
 
-            Dim caracteresPorLinea1 As Integer = 36
-            Dim texto1 As String = pie1
+
+            Dim dire As String = pie1
+            Dim dircort As String = ""
+            Dim nuvdiree As String = ""
+
+            dircort = dire.TrimStart(vbCrLf.ToCharArray)
+            nuvdiree = dircort.TrimEnd(vbCrLf.ToCharArray)
+
+            Dim caracteresPorLinea1 As Integer = 37
+            Dim texto1 As String = nuvdiree
             Dim inicio1 As Integer = 0
             Dim longitudTexto1 As Integer = texto1.Length
 

@@ -10669,6 +10669,7 @@ ecomoda:
             End If
 
             Dim IVA As Double = CDbl(txtPagar.Text) - TotalIVAPrint
+
             If DesglosaIVA = "1" Then
                 If TotalIVAPrint > 0 Then
                     If IVA > 0 And IVA <> CDbl(txtPagar.Text) Then

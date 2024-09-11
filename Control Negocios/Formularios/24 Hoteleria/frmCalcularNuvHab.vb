@@ -214,7 +214,7 @@
             Else
 
                 cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "SELECT Id FROM asigpc WHERE Nombre='" & lblpc.Text & "'"
+                cmd1.CommandText = "SELECT Id,HorEnt FROM asigpc WHERE Nombre='" & lblpc.Text & "'"
                 rd1 = cmd1.ExecuteReader
                 If rd1.HasRows Then
                     If rd1.Read Then

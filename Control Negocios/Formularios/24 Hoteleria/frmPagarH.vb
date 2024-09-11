@@ -684,7 +684,13 @@ Public Class frmPagarH
         Dim codigo As String = ""
         Dim cantidad As Double = 0
 
-        btnCobrar.Enabled = False
+        If txtEfectivo.Text > 0 Then
+            btnCobrar.Enabled = False
+        End If
+
+        If txtMontoP.Text > 0 Then
+            btnCobrar.Enabled = False
+        End If
 
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand
