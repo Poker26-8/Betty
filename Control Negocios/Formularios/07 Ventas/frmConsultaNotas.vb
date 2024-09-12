@@ -202,23 +202,39 @@ Public Class frmConsultaNotas
                             txtsubtotal.Text = FormatNumber(rd1("Totales").ToString(), 2)
                             cbonombre.Text = rd1("Cliente").ToString()
                             txtdescuento.Text = FormatNumber(IIf(rd1("Descuento").ToString() = "", 0, rd1("Descuento").ToString()), 2)
+
                             ' txtfecha.Text = FormatDateTime(rd1("Fecha").ToString(), DateFormat.ShortDate)
                             lblfechaventa.Text = FormatDateTime(rd1("Fecha").ToString(), DateFormat.ShortDate)
                             ' txthora.Text = FormatDateTime(rd1("Hora").ToString(), DateFormat.LongTime)
                             lblhoraventa.Text = FormatDateTime(rd1("Hora").ToString(), DateFormat.LongTime)
                         Else
+
+
+
                             txtsubtotal.Text = FormatNumber(IIf(rd1("MontoSinDesc").ToString() = "", "0", rd1("MontoSinDesc".ToString())), 2)
                             cbonombre.Text = rd1("Cliente").ToString()
                             txtdescuento.Text = FormatNumber(IIf(rd1("Descuento").ToString() = "", 0, rd1("Descuento").ToString()), 2)
+
+                            Dim iva As Double = 0
+
+                            If (optnotas.Checked) Then
+                                iva = rd1("IVA").ToString()
+
+                                If iva > 0 Then
+                                    txtdescuento.Text = CDec(txtdescuento.Text) * (1.16)
+                                    txtdescuento.Text = FormatNumber(txtdescuento.Text, 2)
+                                End If
+                            End If
+
                             'txtfecha.Text = FormatDateTime(rd1("FVenta").ToString(), DateFormat.ShortDate)
                             'txthora.Text = FormatDateTime(rd1("HVenta").ToString(), DateFormat.LongTime)
                             lblfechaventa.Text = FormatDateTime(rd1("FVenta").ToString(), DateFormat.ShortDate)
-                            lblhoraventa.Text = FormatDateTime(rd1("HVenta").ToString(), DateFormat.LongTime)
-                        End If
+                                lblhoraventa.Text = FormatDateTime(rd1("HVenta").ToString(), DateFormat.LongTime)
+                            End If
 
 
 
-                        If Not (optcotiz.Checked) And Not (optdevos.Checked) And Not (optPedidos.Checked) Then
+                            If Not (optcotiz.Checked) And Not (optdevos.Checked) And Not (optPedidos.Checked) Then
                             If CDbl(rd1("Devolucion").ToString()) > 0 Then
                                 lbldescuento.Text = "Devolución:"
                                 txtdescuento.Text = FormatNumber(CDbl(txtdescuento.Text) + CDbl(rd1("Devolucion").ToString()), 2)
@@ -2572,7 +2588,7 @@ Public Class frmConsultaNotas
                 If (optnotas.Checked) Then
                     If formato = "TICKET" Then
                         If tamticket = "80" Then
-                            If imp_ticket = "" Then MsgBox("No hay una impresora configurada para imprimir la copia.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                            If imp_ticket = "" Then MsgBox("No hay una impresora configurada para imprimir la copia.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
                             pVentas80.PrinterSettings.PrinterName = imp_ticket
                             pVentas80.Print()
                         Else
@@ -5552,6 +5568,12 @@ doorcita:
 
             TotalIVAPrint = FormatNumber(TotalIVAPrint, 4)
             MySubtotal = FormatNumber(MySubtotal, 4)
+
+            If txtsubtotal.Text > 0 Then
+                e.Graphics.DrawString("Total Venta:", fuente_prods, Brushes.Black, 1, Y)
+                e.Graphics.DrawString(simbolo & FormatNumber(txtsubtotal.Text, 2), fuente_prods, Brushes.Black, 270, Y, sf)
+                Y += 13.5
+            End If
 
             If CDbl(txtdescuento.Text) > 0 Then
                 e.Graphics.DrawString("Descuento:", fuente_prods, Brushes.Black, 1, Y)
