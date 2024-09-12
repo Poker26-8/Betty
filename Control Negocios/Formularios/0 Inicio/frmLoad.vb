@@ -25,7 +25,11 @@ Public Class frmLoad
         Label1.Text = "Cargando base de datos..."
         ProgressBar1.Value = 25
         My.Application.DoEvents()
-        BuscarTablas()
+
+        ' BuscarTablas()
+
+
+
 
         ProgressBar1.Value = 40
         My.Application.DoEvents()
@@ -2612,7 +2616,7 @@ Public Class frmLoad
             Dim cnnprueba As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
             Dim sinfo As String = ""
             Dim odata As New ToolKitSQL.myssql
-            Dim sTargetprueba = "server=" & dameIP2() & ";uid=Delsscom;password=jipl22;database=cn" & baseseleccionada & ";persist security info=false;connect timeout=300"
+            Dim sTargetprueba = "server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & baseseleccionada & ";persist security info=false;connect timeout=300"
             'Dim sTargetprueba = "Server=localhost;user id = root; password=;"
             With odata
                 If .dbOpen(cnnprueba, sTargetprueba, sinfo) Then
