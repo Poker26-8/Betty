@@ -266,7 +266,13 @@ Public Class frmConsultaNotas
                                     precio = rd2("Precio").ToString()
                                     total = rd2("Total").ToString()
                                 comentario = IIf(rd2("Comentario").ToString = "", "", rd2("Comentario").ToString)
-                                grdcaptura.Rows.Add(codigo, nombre, unidad, cantidad, FormatNumber(precio, 4), FormatNumber(total, 4), "0", comentario)
+
+                                Dim varcodunico As String = Format(CDate(Date.Now), "yyyy/MM/ddHH:mm:ss.fff") & codigo
+                                varcodunico = QuitarCaracteresEspeciales(varcodunico)
+
+
+                                grdcaptura.Rows.Add(codigo, nombre, unidad, cantidad, FormatNumber(precio, 4), FormatNumber(total, 4), "0", comentario, varcodunico)
+
                                 If comentario <> "" Then
                                     grdcaptura.Rows.Add("", comentario, "", "", "", "")
                                 End If
@@ -767,9 +773,6 @@ Public Class frmConsultaNotas
                     .Show()
                     .btnnuevo.PerformClick()
 
-
-
-
                     cnn1.Close() : cnn1.Open()
                     For ctm As Integer = 0 To grdcaptura.Rows.Count - 1
 
@@ -853,6 +856,9 @@ Public Class frmConsultaNotas
                             .grdcaptura(4, degm).Value = FormatNumber(grdcaptura(4, degm).Value.ToString(), 4)
                             'Total
                             .grdcaptura(5, degm).Value = FormatNumber(grdcaptura(5, degm).Value.ToString(), 4)
+                            'codunico
+                            .grdcaptura(15, degm).Value = grdcaptura(8, degm).Value.ToString()
+
                             cmd1 = cnn1.CreateCommand
                             cmd1.CommandText =
                                  "select * from Productos where Codigo='" & VarCode & "'"
@@ -9140,5 +9146,9 @@ doorcita:
         txtpagos.Text = FormatNumber(pagos, 4)
     End Sub
 
-
+    Function QuitarCaracteresEspeciales(ByVal input As String) As String
+        ' Utilizamos una expresión regular para reemplazar todos los caracteres que no son letras o números.
+        Dim regex As New System.Text.RegularExpressions.Regex("[^a-zA-Z0-9]")
+        Return regex.Replace(input, String.Empty)
+    End Function
 End Class

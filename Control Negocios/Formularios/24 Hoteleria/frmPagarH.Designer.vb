@@ -688,9 +688,9 @@ Partial Class frmPagarH
         Me.btnCancelar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancelar.Image = CType(resources.GetObject("btnCancelar.Image"), System.Drawing.Image)
         Me.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnCancelar.Location = New System.Drawing.Point(871, 8)
+        Me.btnCancelar.Location = New System.Drawing.Point(878, 8)
         Me.btnCancelar.Name = "btnCancelar"
-        Me.btnCancelar.Size = New System.Drawing.Size(104, 82)
+        Me.btnCancelar.Size = New System.Drawing.Size(100, 82)
         Me.btnCancelar.TabIndex = 253
         Me.btnCancelar.Text = "Cancelar Producto"
         Me.btnCancelar.TextAlign = System.Drawing.ContentAlignment.BottomCenter

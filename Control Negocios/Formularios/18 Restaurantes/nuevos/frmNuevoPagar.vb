@@ -164,7 +164,7 @@ Public Class frmNuevoPagar
         grdComanda.Rows.Clear()
         TFolio.Start()
 
-        tim.Interval = 5000
+        tim.Interval = 10000
         AddHandler tim.Tick, AddressOf Timer_Tick
         tim.Start()
 
@@ -3271,7 +3271,7 @@ deku:
 
                         cnn2.Close() : cnn2.Open()
                         cmd2 = cnn2.CreateCommand
-                        cmd2.CommandText = "SELECT Id FROM Rep_Comandas WHERE Id=" & verid & " AND Codigo='" & vercodigo & "' AND Status<>'CANCELADA'"
+                        cmd2.CommandText = "SELECT Id,Codigo,Status,Nombre,UVenta,CostVUE,CostVP,Precio,Total,PrecioSinIVA,TotalSinIVA,Comisionista,Depto,Comensal,Comentario,GPrint,CUsuario,Total_comensales,Grupo FROM Rep_Comandas WHERE Id=" & verid & " AND Codigo='" & vercodigo & "' AND Status<>'CANCELADA'"
                         rd2 = cmd2.ExecuteReader
                         If rd2.HasRows Then
                             If rd2.Read Then
