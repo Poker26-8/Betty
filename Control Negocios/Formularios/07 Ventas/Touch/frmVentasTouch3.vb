@@ -963,11 +963,15 @@ Public Class frmVentasTouch3
     End Sub
 
     Public Sub UpGrid()
+
+        Dim varcodunico As String = Format(CDate(Date.Now), "yyyy/MM/ddHH:mm:ss.fff") & CodigoProducto
+        varcodunico = QuitarCaracteresEspeciales(varcodunico)
+
         grdcaptura.DefaultCellStyle.SelectionBackColor = Color.WhiteSmoke
         grdcaptura.DefaultCellStyle.SelectionForeColor = Color.Blue
         If cantidad = 0 Then Exit Sub
         With grdcaptura.Rows
-            .Add(CodigoProducto & vbNewLine & myDescrip, FormatNumber(cantidad, 2), FormatNumber(MyPrecio, 2), FormatNumber(MyImporte, 2), MyUnidad)
+            .Add(CodigoProducto & vbNewLine & myDescrip, FormatNumber(cantidad, 2), FormatNumber(MyPrecio, 2), FormatNumber(MyImporte, 2), MyUnidad, varcodunico)
         End With
         Dim TotalVenta As Double = 0
         For T As Integer = 0 To grdcaptura.Rows.Count - 1
@@ -2009,11 +2013,27 @@ kakaxd:
                 End If
                 rd1.Close()
 Door:
-                If grdcaptura.Rows(R).Cells(0).Value.ToString <> "" Then
+                If grdcaptura.Rows(R).Cells(5).Value.ToString <> "" Then
+                    Dim codunico As String = grdcaptura.Rows(R).Cells(5).Value.ToString()
+
                     cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "insert into VentasDetalle(Folio,Codigo,Nombre,Unidad,Cantidad,CostoVP,CostoVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,Comisionista,Facturado,Depto,Grupo,CostVR,Descto,VDCosteo,TotalIEPS,TasaIEPS,Caducidad,Lote,CantidadE,Descuento,GPrint) values(" & MYFOLIO & ",'" & mycode & "','" & mydesc & "','" & myunid & "'," & mycant & "," & MyProm & "," & MyCostVUE & "," & myprecio & "," & mytotal & "," & myprecioS & "," & mytotalS & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','','0','" & MyDepto & "','" & MyGrupo & "',''," & descuprod & ",0," & ieps & "," & tasaieps & ",'" & caduca & "','" & lote & "',0," & descuprod & ",'" & GPrint & "')"
-                    cmd1.ExecuteNonQuery()
+                    cmd1.CommandText = "SELECT CodUnico FROM ventasdetalle WHERE CodUnico='" & codunico & "'"
+                    rd1 = cmd1.ExecuteReader
+                    If rd1.HasRows Then
+                        If rd1.Read Then
+
+                        End If
+                    Else
+                        cnn2.Close() : cnn2.Open()
+                        cmd2 = cnn2.CreateCommand
+                        cmd2.CommandText =
+                        "insert into VentasDetalle(Folio,Codigo,Nombre,Unidad,Cantidad,CostoVP,CostoVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,Comisionista,Facturado,Depto,Grupo,CostVR,Descto,VDCosteo,TotalIEPS,TasaIEPS,Caducidad,Lote,CantidadE,Descuento,GPrint,FechaCompleta,CodUnico) values(" & MYFOLIO & ",'" & mycode & "','" & mydesc & "','" & myunid & "'," & mycant & "," & MyProm & "," & MyCostVUE & "," & myprecio & "," & mytotal & "," & myprecioS & "," & mytotalS & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','','0','" & MyDepto & "','" & MyGrupo & "',''," & descuprod & ",0," & ieps & "," & tasaieps & ",'" & caduca & "','" & lote & "',0," & descuprod & ",'" & GPrint & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & codunico & "')"
+                        cmd2.ExecuteNonQuery()
+                        cnn2.Close()
+                    End If
+                    rd1.Close()
+
+
 
                     If MyDepto <> "SERVICIOS" And Kit = False Then
 
@@ -3112,5 +3132,12 @@ Door:
         validaTarjeta = 0
         My.Application.DoEvents()
     End Sub
+
+
+    Function QuitarCaracteresEspeciales(ByVal input As String) As String
+        ' Utilizamos una expresión regular para reemplazar todos los caracteres que no son letras o números.
+        Dim regex As New System.Text.RegularExpressions.Regex("[^a-zA-Z0-9]")
+        Return regex.Replace(input, String.Empty)
+    End Function
 
 End Class

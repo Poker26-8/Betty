@@ -81,10 +81,6 @@ Partial Class frmVentasTouch
         Me.Button1 = New System.Windows.Forms.Button()
         Me.panDerecha = New System.Windows.Forms.Panel()
         Me.grdcaptura = New System.Windows.Forms.DataGridView()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.grdProducto = New System.Windows.Forms.DataGridView()
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -92,6 +88,12 @@ Partial Class frmVentasTouch
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.lblTotal = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.panCantidad.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
@@ -138,7 +140,7 @@ Partial Class frmVentasTouch
         Me.panCantidad.Controls.Add(Me.btn2)
         Me.panCantidad.Controls.Add(Me.btn1)
         Me.panCantidad.Controls.Add(Me.txtcantidad)
-        Me.panCantidad.Location = New System.Drawing.Point(414, 150)
+        Me.panCantidad.Location = New System.Drawing.Point(471, 150)
         Me.panCantidad.Name = "panCantidad"
         Me.panCantidad.Size = New System.Drawing.Size(189, 305)
         Me.panCantidad.TabIndex = 13
@@ -662,7 +664,7 @@ Partial Class frmVentasTouch
         Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox1.Location = New System.Drawing.Point(216, 49)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(91, 29)
+        Me.TextBox1.Size = New System.Drawing.Size(95, 29)
         Me.TextBox1.TabIndex = 3
         Me.TextBox1.Text = "0"
         Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -711,7 +713,7 @@ Partial Class frmVentasTouch
         Me.panDerecha.Font = New System.Drawing.Font("Segoe UI", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.panDerecha.Location = New System.Drawing.Point(768, 0)
         Me.panDerecha.Name = "panDerecha"
-        Me.panDerecha.Size = New System.Drawing.Size(249, 605)
+        Me.panDerecha.Size = New System.Drawing.Size(362, 605)
         Me.panDerecha.TabIndex = 7
         '
         'grdcaptura
@@ -723,7 +725,7 @@ Partial Class frmVentasTouch
         Me.grdcaptura.BackgroundColor = System.Drawing.Color.FloralWhite
         Me.grdcaptura.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.grdcaptura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdcaptura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4})
+        Me.grdcaptura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column8, Me.Column7})
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -739,8 +741,88 @@ Partial Class frmVentasTouch
         Me.grdcaptura.ReadOnly = True
         Me.grdcaptura.RowHeadersVisible = False
         Me.grdcaptura.RowTemplate.Height = 40
-        Me.grdcaptura.Size = New System.Drawing.Size(249, 396)
+        Me.grdcaptura.Size = New System.Drawing.Size(362, 396)
         Me.grdcaptura.TabIndex = 5
+        '
+        'grdProducto
+        '
+        Me.grdProducto.AllowUserToAddRows = False
+        Me.grdProducto.AllowUserToDeleteRows = False
+        Me.grdProducto.BackgroundColor = System.Drawing.Color.AliceBlue
+        Me.grdProducto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdProducto.ColumnHeadersVisible = False
+        Me.grdProducto.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column5, Me.Column6})
+        Me.grdProducto.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.grdProducto.GridColor = System.Drawing.Color.AliceBlue
+        Me.grdProducto.Location = New System.Drawing.Point(0, 516)
+        Me.grdProducto.Name = "grdProducto"
+        Me.grdProducto.ReadOnly = True
+        Me.grdProducto.RowHeadersVisible = False
+        Me.grdProducto.RowTemplate.Height = 20
+        Me.grdProducto.Size = New System.Drawing.Size(362, 89)
+        Me.grdProducto.TabIndex = 4
+        '
+        'Column5
+        '
+        Me.Column5.HeaderText = ""
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
+        '
+        'Column6
+        '
+        Me.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Column6.HeaderText = ""
+        Me.Column6.Name = "Column6"
+        Me.Column6.ReadOnly = True
+        '
+        'lblcantidadletra
+        '
+        Me.lblcantidadletra.BackColor = System.Drawing.Color.White
+        Me.lblcantidadletra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblcantidadletra.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblcantidadletra.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblcantidadletra.Location = New System.Drawing.Point(0, 79)
+        Me.lblcantidadletra.Name = "lblcantidadletra"
+        Me.lblcantidadletra.Size = New System.Drawing.Size(362, 41)
+        Me.lblcantidadletra.TabIndex = 3
+        Me.lblcantidadletra.Text = "CANTIDAD CON LETRA"
+        Me.lblcantidadletra.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel8
+        '
+        Me.Panel8.BackColor = System.Drawing.Color.White
+        Me.Panel8.Controls.Add(Me.lblTotal)
+        Me.Panel8.Controls.Add(Me.Label1)
+        Me.Panel8.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel8.Location = New System.Drawing.Point(0, 0)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Size = New System.Drawing.Size(362, 79)
+        Me.Panel8.TabIndex = 2
+        '
+        'lblTotal
+        '
+        Me.lblTotal.BackColor = System.Drawing.Color.White
+        Me.lblTotal.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblTotal.Font = New System.Drawing.Font("Segoe UI Semilight", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotal.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.lblTotal.Location = New System.Drawing.Point(0, 19)
+        Me.lblTotal.Name = "lblTotal"
+        Me.lblTotal.Size = New System.Drawing.Size(362, 60)
+        Me.lblTotal.TabIndex = 4
+        Me.lblTotal.Text = "0.00"
+        Me.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label1
+        '
+        Me.Label1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Label1.Location = New System.Drawing.Point(0, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(362, 19)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "VENTA TOTAL"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Column1
         '
@@ -782,91 +864,28 @@ Partial Class frmVentasTouch
         Me.Column4.ReadOnly = True
         Me.Column4.Width = 50
         '
-        'grdProducto
+        'Column8
         '
-        Me.grdProducto.AllowUserToAddRows = False
-        Me.grdProducto.AllowUserToDeleteRows = False
-        Me.grdProducto.BackgroundColor = System.Drawing.Color.AliceBlue
-        Me.grdProducto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdProducto.ColumnHeadersVisible = False
-        Me.grdProducto.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column5, Me.Column6})
-        Me.grdProducto.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.grdProducto.GridColor = System.Drawing.Color.AliceBlue
-        Me.grdProducto.Location = New System.Drawing.Point(0, 516)
-        Me.grdProducto.Name = "grdProducto"
-        Me.grdProducto.ReadOnly = True
-        Me.grdProducto.RowHeadersVisible = False
-        Me.grdProducto.RowTemplate.Height = 20
-        Me.grdProducto.Size = New System.Drawing.Size(249, 89)
-        Me.grdProducto.TabIndex = 4
+        Me.Column8.HeaderText = "UVenta"
+        Me.Column8.Name = "Column8"
+        Me.Column8.ReadOnly = True
+        Me.Column8.Visible = False
+        Me.Column8.Width = 61
         '
-        'Column5
+        'Column7
         '
-        Me.Column5.HeaderText = ""
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
-        '
-        'Column6
-        '
-        Me.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Column6.HeaderText = ""
-        Me.Column6.Name = "Column6"
-        Me.Column6.ReadOnly = True
-        '
-        'lblcantidadletra
-        '
-        Me.lblcantidadletra.BackColor = System.Drawing.Color.White
-        Me.lblcantidadletra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblcantidadletra.Dock = System.Windows.Forms.DockStyle.Top
-        Me.lblcantidadletra.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblcantidadletra.Location = New System.Drawing.Point(0, 79)
-        Me.lblcantidadletra.Name = "lblcantidadletra"
-        Me.lblcantidadletra.Size = New System.Drawing.Size(249, 41)
-        Me.lblcantidadletra.TabIndex = 3
-        Me.lblcantidadletra.Text = "CANTIDAD CON LETRA"
-        Me.lblcantidadletra.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Panel8
-        '
-        Me.Panel8.BackColor = System.Drawing.Color.White
-        Me.Panel8.Controls.Add(Me.lblTotal)
-        Me.Panel8.Controls.Add(Me.Label1)
-        Me.Panel8.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel8.Location = New System.Drawing.Point(0, 0)
-        Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(249, 79)
-        Me.Panel8.TabIndex = 2
-        '
-        'lblTotal
-        '
-        Me.lblTotal.BackColor = System.Drawing.Color.White
-        Me.lblTotal.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblTotal.Font = New System.Drawing.Font("Segoe UI Semilight", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotal.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lblTotal.Location = New System.Drawing.Point(0, 19)
-        Me.lblTotal.Name = "lblTotal"
-        Me.lblTotal.Size = New System.Drawing.Size(249, 60)
-        Me.lblTotal.TabIndex = 4
-        Me.lblTotal.Text = "0.00"
-        Me.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label1
-        '
-        Me.Label1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(0, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(249, 19)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "VENTA TOTAL"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column7.HeaderText = "CodUnico"
+        Me.Column7.Name = "Column7"
+        Me.Column7.ReadOnly = True
+        Me.Column7.Visible = False
+        Me.Column7.Width = 74
         '
         'frmVentasTouch
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1017, 605)
+        Me.ClientSize = New System.Drawing.Size(1130, 605)
         Me.Controls.Add(Me.panCantidad)
         Me.Controls.Add(Me.pProductos)
         Me.Controls.Add(Me.pGrupos)
@@ -951,10 +970,6 @@ Partial Class frmVentasTouch
     Friend WithEvents Button1 As Button
     Friend WithEvents panDerecha As Panel
     Friend WithEvents grdcaptura As DataGridView
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents grdProducto As DataGridView
     Friend WithEvents Column5 As DataGridViewTextBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
@@ -962,4 +977,10 @@ Partial Class frmVentasTouch
     Friend WithEvents Panel8 As Panel
     Friend WithEvents lblTotal As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents Column8 As DataGridViewTextBoxColumn
+    Friend WithEvents Column7 As DataGridViewTextBoxColumn
 End Class

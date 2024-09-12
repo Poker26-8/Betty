@@ -1657,7 +1657,7 @@ Partial Class frmConsultaNotas
         Me.Column12.Name = "Column12"
         Me.Column12.ReadOnly = True
         Me.Column12.Visible = False
-        Me.Column12.Width = 85
+        Me.Column12.Width = 5
         '
         'frmConsultaNotas
         '

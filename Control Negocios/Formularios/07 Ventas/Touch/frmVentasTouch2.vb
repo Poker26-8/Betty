@@ -965,11 +965,15 @@ Class frmVentasTouch2
     End Sub
 
     Public Sub UpGrid()
+
+        Dim varcodunico As String = Format(CDate(Date.Now), "yyyy/MM/ddHH:mm:ss.fff") & CodigoProducto
+        varcodunico = QuitarCaracteresEspeciales(varcodunico)
+
         grdcaptura.DefaultCellStyle.SelectionBackColor = Color.WhiteSmoke
         grdcaptura.DefaultCellStyle.SelectionForeColor = Color.Blue
         If cantidad = 0 Then Exit Sub
         With grdcaptura.Rows
-            .Add(CodigoProducto & vbNewLine & myDescrip, FormatNumber(cantidad, 2), FormatNumber(MyPrecio, 2), FormatNumber(MyImporte, 2), MyUnidad)
+            .Add(CodigoProducto & vbNewLine & myDescrip, FormatNumber(cantidad, 2), FormatNumber(MyPrecio, 2), FormatNumber(MyImporte, 2), MyUnidad, varcodunico)
         End With
         Dim TotalVenta As Double = 0
         For T As Integer = 0 To grdcaptura.Rows.Count - 1
@@ -2012,108 +2016,125 @@ kakaxd:
                 End If
                 rd1.Close()
 Door:
-                If grdcaptura.Rows(R).Cells(0).Value.ToString <> "" Then
+                If grdcaptura.Rows(R).Cells(5).Value.ToString <> "" Then
+
+                    Dim codunico As String = grdcaptura.Rows(R).Cells(5).Value.ToString()
+
                     cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "insert into VentasDetalle(Folio,Codigo,Nombre,Unidad,Cantidad,CostoVP,CostoVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,Comisionista,Facturado,Depto,Grupo,CostVR,Descto,VDCosteo,TotalIEPS,TasaIEPS,Caducidad,Lote,CantidadE,Descuento,GPrint) values(" & MYFOLIO & ",'" & mycode & "','" & mydesc & "','" & myunid & "'," & mycant & "," & MyProm & "," & MyCostVUE & "," & myprecio & "," & mytotal & "," & myprecioS & "," & mytotalS & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','','0','" & MyDepto & "','" & MyGrupo & "',''," & descuprod & ",0," & ieps & "," & tasaieps & ",'" & caduca & "','" & lote & "',0," & descuprod & ",'" & GPrint & "')"
-                    cmd1.ExecuteNonQuery()
+                    cmd1.CommandText = "SELECT CodUnico FROM ventasdetalle WHERE CodUnico='" & codunico & "'"
+                    rd1 = cmd1.ExecuteReader
+                    If rd1.HasRows Then
+                        If rd1.Read Then
+
+                        End If
+                    Else
+                        cnn2.Close() : cnn2.Open()
+                        cmd2 = cnn2.CreateCommand
+                        cmd2.CommandText =
+                        "insert into VentasDetalle(Folio,Codigo,Nombre,Unidad,Cantidad,CostoVP,CostoVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,Comisionista,Facturado,Depto,Grupo,CostVR,Descto,VDCosteo,TotalIEPS,TasaIEPS,Caducidad,Lote,CantidadE,Descuento,GPrint,FechaCompleta,CodUnico) values(" & MYFOLIO & ",'" & mycode & "','" & mydesc & "','" & myunid & "'," & mycant & "," & MyProm & "," & MyCostVUE & "," & myprecio & "," & mytotal & "," & myprecioS & "," & mytotalS & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','','0','" & MyDepto & "','" & MyGrupo & "',''," & descuprod & ",0," & ieps & "," & tasaieps & ",'" & caduca & "','" & lote & "',0," & descuprod & ",'" & GPrint & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & codunico & "')"
+                        cmd2.ExecuteNonQuery()
+                        cnn2.Close()
+                    End If
+                    rd1.Close()
+
+
 
                     If MyDepto <> "SERVICIOS" And Kit = False Then
 
 
-                        Dim existencia_inicial As Double = 0
-                        Dim opecantreal As Double = 0
-                        Dim opediferencia As Double = 0
+                            Dim existencia_inicial As Double = 0
+                            Dim opecantreal As Double = 0
+                            Dim opediferencia As Double = 0
 
-                        Dim codigoingre As String = ""
-                        Dim descripingre As String = ""
-                        Dim cantiingre As Double = 0
+                            Dim codigoingre As String = ""
+                            Dim descripingre As String = ""
+                            Dim cantiingre As Double = 0
 
-                        If modo_almacen = 1 Then
+                            If modo_almacen = 1 Then
 
 
 
-                            cnn4.Close() : cnn4.Open()
-                            cnn3.Close() : cnn3.Open()
+                                cnn4.Close() : cnn4.Open()
+                                cnn3.Close() : cnn3.Open()
 
-                            cmd4 = cnn4.CreateCommand
-                            cmd4.CommandText = "SELECT CodigoP,Codigo,Descrip,Cantidad FROM miprod WHERE CodigoP='" & mycode & "'"
-                            rd4 = cmd4.ExecuteReader
-                            Do While rd4.Read
-                                If rd4.HasRows Then
+                                cmd4 = cnn4.CreateCommand
+                                cmd4.CommandText = "SELECT CodigoP,Codigo,Descrip,Cantidad FROM miprod WHERE CodigoP='" & mycode & "'"
+                                rd4 = cmd4.ExecuteReader
+                                Do While rd4.Read
+                                    If rd4.HasRows Then
 
-                                    existencia_inicial = 0
-                                    opecantreal = 0
-                                    opediferencia = 0
+                                        existencia_inicial = 0
+                                        opecantreal = 0
+                                        opediferencia = 0
 
-                                    codigoingre = rd4("Codigo").ToString
-                                    descripingre = rd4("Descrip").ToString
-                                    cantiingre = rd4("Cantidad").ToString * mycant
+                                        codigoingre = rd4("Codigo").ToString
+                                        descripingre = rd4("Descrip").ToString
+                                        cantiingre = rd4("Cantidad").ToString * mycant
 
-                                    cmd3 = cnn3.CreateCommand
-                                    cmd3.CommandText = "select Existencia,Multiplo,PrecioCompra from Productos where Codigo = '" & codigoingre & "'"
-                                    rd3 = cmd3.ExecuteReader
-                                    If rd3.HasRows Then
-                                        If rd3.Read Then
-                                            existencia_inicial = rd3(0).ToString
-                                            opecantreal = cantiingre * CDec(rd3(1).ToString)
-                                            opediferencia = existencia_inicial + opecantreal
+                                        cmd3 = cnn3.CreateCommand
+                                        cmd3.CommandText = "select Existencia,Multiplo,PrecioCompra from Productos where Codigo = '" & codigoingre & "'"
+                                        rd3 = cmd3.ExecuteReader
+                                        If rd3.HasRows Then
+                                            If rd3.Read Then
+                                                existencia_inicial = rd3(0).ToString
+                                                opecantreal = cantiingre * CDec(rd3(1).ToString)
+                                                opediferencia = existencia_inicial + opecantreal
 
-                                            cnn2.Close() : cnn2.Open()
-                                            cmd2 = cnn2.CreateCommand
-                                            cmd2.CommandText = "INSERT INTO cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio) VALUES('" & codigoingre & "','" & descripingre & "','Venta - Ingrediente'," & existencia_inicial & "," & opecantreal & "," & opediferencia & "," & rd3(2).ToString & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & lblatiende.Text & "','" & MYFOLIO & "')"
-                                            cmd2.ExecuteNonQuery()
-                                            cnn2.Close()
+                                                cnn2.Close() : cnn2.Open()
+                                                cmd2 = cnn2.CreateCommand
+                                                cmd2.CommandText = "INSERT INTO cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio) VALUES('" & codigoingre & "','" & descripingre & "','Venta - Ingrediente'," & existencia_inicial & "," & opecantreal & "," & opediferencia & "," & rd3(2).ToString & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & lblatiende.Text & "','" & MYFOLIO & "')"
+                                                cmd2.ExecuteNonQuery()
+                                                cnn2.Close()
 
+                                            End If
                                         End If
+                                        rd3.Close()
+
+
+                                        cnn2.Close() : cnn2.Open()
+                                        cmd2 = cnn2.CreateCommand
+                                        cmd2.CommandText = "UPDATE Productos SET Existencia=Existencia-" & cantiingre * mycant & "*" & MyMulti2 & " WHERE Codigo='" & codigoingre & "'"
+                                        cmd2.ExecuteNonQuery()
+
+                                        cmd2 = cnn2.CreateCommand
+                                        cmd2.CommandText = "insert into Mov_Ingre(Codigo,Descripcion,Cantidad,Fecha)values('" & codigoingre & "','" & descripingre & "','" & cantiingre & "','" & Format(Date.Now, "yyyy-MM-dd") & "')"
+                                        cmd2.ExecuteNonQuery()
+                                        cnn2.Close()
+
+
                                     End If
-                                    rd3.Close()
+                                Loop
+                                rd4.Close()
+                                cnn4.Close()
+                                cnn3.Close()
 
-
-                                    cnn2.Close() : cnn2.Open()
-                                    cmd2 = cnn2.CreateCommand
-                                    cmd2.CommandText = "UPDATE Productos SET Existencia=Existencia-" & cantiingre * mycant & "*" & MyMulti2 & " WHERE Codigo='" & codigoingre & "'"
-                                    cmd2.ExecuteNonQuery()
-
-                                    cmd2 = cnn2.CreateCommand
-                                    cmd2.CommandText = "insert into Mov_Ingre(Codigo,Descripcion,Cantidad,Fecha)values('" & codigoingre & "','" & descripingre & "','" & cantiingre & "','" & Format(Date.Now, "yyyy-MM-dd") & "')"
-                                    cmd2.ExecuteNonQuery()
-                                    cnn2.Close()
-
-
-                                End If
-                            Loop
-                            rd4.Close()
-                            cnn4.Close()
-                            cnn3.Close()
-
-                        Else
-                            Dim nueva_existe As Double = 0
-                            nueva_existe = FormatNumber(Existencia - (mycant * MyMultiplo), 2)
-
-                            cmd1 = cnn1.CreateCommand
-                            cmd1.CommandText =
-                            "update Productos set CargadoInv=0, Cargado=0, Existencia=" & nueva_existe & " where Codigo='" & Strings.Left(mycode, 6) & "'"
-                            cmd1.ExecuteNonQuery()
-
-                            If Len(mycode) = 6 Then
-                                cmd1 = cnn1.CreateCommand
-                                cmd1.CommandText =
-                                "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & mycode & "','" & mydesc & "','Venta'," & Existencia & "," & mycant & "," & nueva_existe & "," & myprecio & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblatiende.Text & "','" & MYFOLIO & "','','','','','')"
-                                cmd1.ExecuteNonQuery()
                             Else
+                                Dim nueva_existe As Double = 0
+                                nueva_existe = FormatNumber(Existencia - (mycant * MyMultiplo), 2)
+
                                 cmd1 = cnn1.CreateCommand
                                 cmd1.CommandText =
-                                "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & mycode & "','" & mydesc & "','Venta'," & existe & "," & mycant & "," & nueva_existe & "," & myprecio & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblatiende.Text & "','" & MYFOLIO & "','','','','','')"
+                            "update Productos set CargadoInv=0, Cargado=0, Existencia=" & nueva_existe & " where Codigo='" & Strings.Left(mycode, 6) & "'"
                                 cmd1.ExecuteNonQuery()
+
+                                If Len(mycode) = 6 Then
+                                    cmd1 = cnn1.CreateCommand
+                                    cmd1.CommandText =
+                                "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & mycode & "','" & mydesc & "','Venta'," & Existencia & "," & mycant & "," & nueva_existe & "," & myprecio & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblatiende.Text & "','" & MYFOLIO & "','','','','','')"
+                                    cmd1.ExecuteNonQuery()
+                                Else
+                                    cmd1 = cnn1.CreateCommand
+                                    cmd1.CommandText =
+                                "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & mycode & "','" & mydesc & "','Venta'," & existe & "," & mycant & "," & nueva_existe & "," & myprecio & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblatiende.Text & "','" & MYFOLIO & "','','','','','')"
+                                    cmd1.ExecuteNonQuery()
+                                End If
+
                             End If
 
                         End If
-
                     End If
-                End If
 
-                If Kit = True Then
+                    If Kit = True Then
                     cmd1 = cnn1.CreateCommand
                     cmd1.CommandText =
                         "select Codigo,Cantidad from Kits where Nombre='" & mydesc & "'"
@@ -3116,4 +3137,10 @@ Door:
         validaTarjeta = 0
         My.Application.DoEvents()
     End Sub
+
+    Function QuitarCaracteresEspeciales(ByVal input As String) As String
+        ' Utilizamos una expresión regular para reemplazar todos los caracteres que no son letras o números.
+        Dim regex As New System.Text.RegularExpressions.Regex("[^a-zA-Z0-9]")
+        Return regex.Replace(input, String.Empty)
+    End Function
 End Class
