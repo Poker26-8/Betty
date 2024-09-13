@@ -6828,13 +6828,13 @@ Door:
 
                     Dim nombre As String = grdcaptura.Rows(pipo).Cells(1).Value.ToString()
                     Dim unidad As String = grdcaptura.Rows(pipo).Cells(2).Value.ToString()
-                    Dim cantidad As Double = grdcaptura.Rows(pipo).Cells(3).Value.ToString()
+                    Dim cantidad As String = grdcaptura.Rows(pipo).Cells(3).Value.ToString()
                     Dim precio_original As Double = grdcaptura.Rows(pipo).Cells(4).Value.ToString()
                     Dim total_original As Double = precio_original * cantidad
 
                     If codigo <> "" Then
                         cod_temp = codigo
-                        If .runSp(a_cnn, "insert into VentasDetalle(Folio,Codigo,Nombre,Cantidad,UVenta,Precio_Original,Total_Original,Dscto_Unitario,Dscto_Total,Precio_Descuento,Total_Descuento,Depto,Grupo,CostVR,FechaCad,LoteCad,NumParte) values(" & my_folio & ",'" & codigo & "','" & nombre & "'," & cantidad & ",'" & unidad & "'," & precio_original & "," & total_original & ",0,0,0,0,'','','','','','')", sinfo) Then
+                        If .runSp(a_cnn, "insert into VentasDetalle(Folio,Codigo,Nombre,Cantidad,UVenta,Precio_Original,Total_Original,Dscto_Unitario,Dscto_Total,Precio_Descuento,Total_Descuento,Depto,Grupo,CostVR,FechaCad,LoteCad,NumParte) values(" & my_folio & ",'" & codigo & "','" & nombre & "','" & cantidad & "','" & unidad & "'," & precio_original & "," & total_original & ",0,0,0,0,'','','','','','')", sinfo) Then
                             sinfo = ""
                         Else
                             MsgBox(sinfo)
