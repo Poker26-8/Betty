@@ -633,4 +633,35 @@ nopaso:
     Private Sub cboCodigo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboCodigo.SelectedIndexChanged
 
     End Sub
+
+    Private Sub txtSerie2_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtSerie2.KeyPress
+        e.KeyChar = UCase(e.KeyChar)
+        If AscW(e.KeyChar) = Keys.Enter Then
+
+            Try
+                cnn1.Close() : cnn1.Open()
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "SELECT CodBarra,Codigo,Nombre,Ubicacion,UVenta,N_Serie FROM productos WHERE N_Serie2='" & txtSerie2.Text & "'"
+                rd1 = cmd1.ExecuteReader
+                If rd1.HasRows Then
+                    If rd1.Read Then
+
+                        txtbarras.Text = rd1(0).ToString
+                        cboCodigo.Text = rd1(1).ToString
+                        cboNombre.Text = rd1(2).ToString
+                        cboubicacion.Text = rd1(3).ToString
+                        txtunidad.Text = rd1(4).ToString
+                        txtnumparte.Text = rd1(5).ToString
+                    End If
+                End If
+                rd1.Close()
+                cnn1.Close()
+
+            Catch ex As Exception
+                MessageBox.Show(ex.ToString)
+                cnn1.Close()
+            End Try
+
+        End If
+    End Sub
 End Class

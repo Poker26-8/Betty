@@ -13857,7 +13857,7 @@ ecomoda:
                 Else
                     cnn2.Close() : cnn2.Open()
                     cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "SELECT Nombre FROM productos WHERE N_serie='" & txtparte.Text & "'"
+                    cmd2.CommandText = "SELECT Nombre FROM productos WHERE N_serie='" & txtparte.Text & "' OR N_Serie2='" & txtparte.Text & "'"
                     rd2 = cmd2.ExecuteReader
                     If rd2.Read Then
                         If rd2.HasRows Then

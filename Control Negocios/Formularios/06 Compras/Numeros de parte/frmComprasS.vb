@@ -334,7 +334,7 @@ Public Class frmComprasS
 
                 cnn3.Close() : cnn3.Open()
                 cmd3 = cnn3.CreateCommand
-                cmd3.CommandText = "SELECT Codigo,Nombre,UCompra,PrecioCompra,Existencia FROM Productos where N_Serie='" & cbonombre.Text & "'"
+                cmd3.CommandText = "SELECT Codigo,Nombre,UCompra,PrecioCompra,Existencia FROM Productos where N_Serie='" & cbonombre.Text & "' or N_Serie2='" & cbonombre.Text & "'"
                 rd3 = cmd3.ExecuteReader
                 If rd3.HasRows Then
                     If rd3.Read Then
