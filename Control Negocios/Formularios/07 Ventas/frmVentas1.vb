@@ -6840,6 +6840,7 @@ Door:
                             MsgBox(sinfo)
                         End If
                     End If
+
                     Continue For
 doorcita:
                     If grdcaptura.Rows(pipo).Cells(1).Value.ToString() <> "" Then

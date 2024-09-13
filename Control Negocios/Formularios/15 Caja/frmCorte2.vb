@@ -2313,20 +2313,31 @@ Public Class frmCorte2
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then
-                    txtSaldoGlobal.Text = FormatNumber(rd1("Saldo_Ini").ToString(), 2)
-                    MsgBox("Ya cuentas con un saldo inicial registrado para el día " & FormatDateTime(dtpFecha.Value, DateFormat.ShortDate), vbInformation + vbOKOnly, "Delsscom COntrol Negocios Pro")
-                    btnCalcularGlobal.Focus().Equals(True)
+
+                    cnn2.Close() : cnn2.Open()
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "UPDATE cortecaja SET Saldo_Ini=" & saldo_global & " WHERE Fecha='" & Format(dtpFecha.Value, "yyyy-MM-dd") & "'"
+                    If cmd2.ExecuteNonQuery Then
+                        MsgBox("Saldo inicial actualizado para el día " & FormatDateTime(dtpFecha.Value, DateFormat.ShortDate), vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                    End If
+                    cnn2.Close()
+                    'txtSaldoGlobal.Text = FormatNumber(rd1("Saldo_Ini").ToString(), 2)
+                    'MsgBox("Ya cuentas con un saldo inicial registrado para el día " & FormatDateTime(dtpFecha.Value, DateFormat.ShortDate), vbInformation + vbOKOnly, "Delsscom COntrol Negocios Pro")
+                    'btnCalcularGlobal.Focus().Equals(True)
                 End If
             Else
                 If MsgBox("¿Deseas registrar el saldo inicial para el día de hoy " & FormatDateTime(dtpFecha.Value, DateFormat.ShortDate) & "?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+
+
                     cnn2.Close() : cnn2.Open()
 
-                    cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText =
-                        "insert into CorteCaja(NumCorte,Saldo_Ini,Fecha,Saldo_Fin) values(0," & saldo_global & ",'" & Format(dtpFecha.Value, "yyyy-MM-dd") & "',0)"
-                    If cmd2.ExecuteNonQuery Then
-                        MsgBox("Saldo inicial registrado para el día " & FormatDateTime(dtpFecha.Value, DateFormat.ShortDate), vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                    End If
+                        cmd2 = cnn2.CreateCommand
+                        cmd2.CommandText =
+                            "insert into CorteCaja(NumCorte,Saldo_Ini,Fecha,Saldo_Fin) values(0," & saldo_global & ",'" & Format(dtpFecha.Value, "yyyy-MM-dd") & "',0)"
+                        If cmd2.ExecuteNonQuery Then
+                            MsgBox("Saldo inicial registrado para el día " & FormatDateTime(dtpFecha.Value, DateFormat.ShortDate), vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                        End If
                     cnn2.Close()
                 Else
                     txtSaldoGlobal.Focus().Equals(True)
