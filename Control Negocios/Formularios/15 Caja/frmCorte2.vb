@@ -97,8 +97,16 @@ Public Class frmCorte2
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then
-                    MsgBox("Ya cuentas con un saldo inicial registrado para el usuario " & cboUsuario.Text, vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                    Exit Sub
+
+                    cnn2.Close() : cnn2.Open()
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "UPDATE corteusuario SET Saldo_Ini=" & txtSaldoUsuario.Text & " WHERE Fecha='" & Format(Date.Now, "yyyy-MM-dd") & "'"
+                    If cmd2.ExecuteNonQuery Then
+                        MsgBox("Saldo inicial actualizado.", vbInformation + vbOKOnly, "Delsscom Control Negocios 2022")
+                    End If
+                    cnn2.Close()
+                    'MsgBox("Ya cuentas con un saldo inicial registrado para el usuario " & cboUsuario.Text, vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                    'Exit Sub
                 End If
             Else
                 If MsgBox("¿Deseas registrar el saldo inicial para el usuario " & cboUsuario.Text & "?", vbInformation + vbOKCancel, "Delsscom Control Negocios 2022") = vbOK Then
@@ -106,7 +114,7 @@ Public Class frmCorte2
 
                     cmd2 = cnn2.CreateCommand
                     cmd2.CommandText =
-                        "insert into CorteUsuario(NumCorte,Saldo_Ini,Calculo,Diferencia,Saldo_Fin,Usuario,Fecha) values(" & txtNumCorte.Text & "," & CDbl(txtSaldoUsuario.Text) & ",0,0,0,'" & cboUsuario.Text & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "')"
+                        "insert into CorteUsuario(NumCorte,Saldo_Ini,Calculo,Diferencia,Saldo_Fin,Usuario,Fecha) values(" & txtNumCorte.Text & "," & CDbl(txtSaldoUsuario.Text) & ",0,0,0,'" & cboUsuario.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "')"
                     If cmd2.ExecuteNonQuery Then
                         MsgBox("Saldo inicial registrado.", vbInformation + vbOKOnly, "Delsscom Control Negocios 2022")
                     End If

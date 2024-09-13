@@ -12,19 +12,24 @@ Public Class frmProductosSSerie
             cmd1 = cnn1.CreateCommand
             If tipo = "BARRAS" Then
                 cmd1.CommandText =
-                    "select * from Productos where CodBarra='" & txtbarras.Text & "'"
+                    "select CodBarra,Codigo,Nombre,IVA,UVenta,PrecioCompra,PrecioVentaIVA,ProvPri,Departamento,Grupo,Ubicacion,ProvRes,UnidadSat,ClaveSat,Porcentaje,N_Serie,N_Serie2 from Productos where CodBarra='" & txtbarras.Text & "'"
             End If
             If tipo = "CODIGO" Then
                 cmd1.CommandText =
-                    "select * from Productos where Codigo='" & cboCodigo.Text & "'"
+                    "select CodBarra,Codigo,Nombre,IVA,UVenta,PrecioCompra,PrecioVentaIVA,ProvPri,Departamento,Grupo,Ubicacion,ProvRes,UnidadSat,ClaveSat,Porcentaje,N_Serie,N_Serie2 from Productos where Codigo='" & cboCodigo.Text & "'"
             End If
             If tipo = "PRODU" Then
                 cmd1.CommandText =
-                    "select * from Productos where Nombre='" & cboNombre.Text & "' and Length(Codigo)<=6"
+                    "select CodBarra,Codigo,Nombre,IVA,UVenta,PrecioCompra,PrecioVentaIVA,ProvPri,Departamento,Grupo,Ubicacion,ProvRes,UnidadSat,ClaveSat,Porcentaje,N_Serie,N_Serie2 from Productos where Nombre='" & cboNombre.Text & "'"
             End If
             If tipo = "SERIE" Then
                 cmd1.CommandText =
-                    "select * from Productos where N_Serie='" & txtn_serie.Text & "'"
+                    "select CodBarra,Codigo,Nombre,IVA,UVenta,PrecioCompra,PrecioVentaIVA,ProvPri,Departamento,Grupo,Ubicacion,ProvRes,UnidadSat,ClaveSat,Porcentaje,N_Serie,N_Serie2 from Productos where N_Serie='" & txtn_serie.Text & "'"
+            End If
+
+            If tipo = "SERIE2" Then
+                cmd1.CommandText =
+                    "select CodBarra,Codigo,Nombre,IVA,UVenta,PrecioCompra,PrecioVentaIVA,ProvPri,Departamento,Grupo,Ubicacion,ProvRes,UnidadSat,ClaveSat,Porcentaje,N_Serie,N_Serie2 from Productos where N_Serie2='" & txtSerie2.Text & "'"
             End If
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
@@ -46,6 +51,7 @@ Public Class frmProductosSSerie
                     txtCodigoSAT.Text = rd1("ClaveSat").ToString()
                     txtutilidad.Text = rd1("Porcentaje").ToString()
                     txtn_serie.Text = rd1("N_Serie").ToString()
+                    txtSerie2.Text = rd1("N_Serie2").ToString()
                     txtpcompra.Enabled = False
                     txtpventa.Enabled = False
                     txtpcompra2.Enabled = False
@@ -405,6 +411,7 @@ Public Class frmProductosSSerie
         picImagen.Image = Nothing
         txtrutaimagen.Text = ""
         txtn_serie.Text = ""
+        txtSerie2.Text = ""
         cboComanda.Text = ""
         cboCodigo.Focus().Equals(True)
     End Sub
@@ -874,7 +881,7 @@ Public Class frmProductosSSerie
             Else
                 ShowData("SERIE")
             End If
-            cboIVA.Focus().Equals(True)
+            txtSerie2.Focus().Equals(True)
         End If
     End Sub
 
@@ -927,6 +934,16 @@ Public Class frmProductosSSerie
     Private Sub cboComanda_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboComanda.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             btnGuardar.Focus().Equals(True)
+        End If
+    End Sub
+
+    Private Sub txtSerie2_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtSerie2.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            If txtSerie2.Text = "" Then
+            Else
+                ShowData("SERIE2")
+            End If
+            cboIVA.Focus().Equals(True)
         End If
     End Sub
 End Class

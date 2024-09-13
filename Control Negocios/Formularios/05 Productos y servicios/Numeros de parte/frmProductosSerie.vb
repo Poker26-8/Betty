@@ -14,19 +14,24 @@ Public Class frmProductosSerie
             cmd1 = cnn1.CreateCommand
             If vemos = "CODIGO" Then
                 cmd1.CommandText =
-                    "select Codigo,Nombre,CodBarra,NombreLargo,IVA,UCompra,UVenta,UMinima,MCD,Multiplo,Min,Max,Comision,ProvPri,ProvEme,Departamento,Grupo,Ubicacion,ProvRes,PercentIVAret,IIEPS,ClaveSat,UnidadSat,N_Serie,GPrint from Productos where Codigo='" & cboCodigo.Text & "'"
+                    "select Codigo,Nombre,CodBarra,NombreLargo,IVA,UCompra,UVenta,UMinima,MCD,Multiplo,Min,Max,Comision,ProvPri,ProvEme,Departamento,Grupo,Ubicacion,ProvRes,PercentIVAret,IIEPS,ClaveSat,UnidadSat,N_Serie,N_Serie2,GPrint from Productos where Codigo='" & cboCodigo.Text & "'"
             End If
             If vemos = "BARRAS" Then
                 cmd1.CommandText =
-                    "select Codigo,Nombre,CodBarra,NombreLargo,IVA,UCompra,UVenta,UMinima,MCD,Multiplo,Min,Max,Comision,ProvPri,ProvEme,Departamento,Grupo,Ubicacion,ProvRes,PercentIVAret,IIEPS,ClaveSat,UnidadSat,N_Serie,GPrint from Productos where CodBarra='" & txtbarras.Text & "'"
+                    "select Codigo,Nombre,CodBarra,NombreLargo,IVA,UCompra,UVenta,UMinima,MCD,Multiplo,Min,Max,Comision,ProvPri,ProvEme,Departamento,Grupo,Ubicacion,ProvRes,PercentIVAret,IIEPS,ClaveSat,UnidadSat,N_Serie,N_Serie2,GPrint from Productos where CodBarra='" & txtbarras.Text & "'"
             End If
             If vemos = "NOMBRE" Then
                 cmd1.CommandText =
-                    "select Codigo,Nombre,CodBarra,NombreLargo,IVA,UCompra,UVenta,UMinima,MCD,Multiplo,Min,Max,Comision,ProvPri,ProvEme,Departamento,Grupo,Ubicacion,ProvRes,PercentIVAret,IIEPS,ClaveSat,UnidadSat,N_Serie,GPrint from Productos where Nombre='" & cboNombre.Text & "'"
+                    "select Codigo,Nombre,CodBarra,NombreLargo,IVA,UCompra,UVenta,UMinima,MCD,Multiplo,Min,Max,Comision,ProvPri,ProvEme,Departamento,Grupo,Ubicacion,ProvRes,PercentIVAret,IIEPS,ClaveSat,UnidadSat,N_Serie,N_Serie2,GPrint from Productos where Nombre='" & cboNombre.Text & "'"
             End If
             If vemos = "SERIE" Then
                 cmd1.CommandText =
-                    "select Codigo,Nombre,CodBarra,NombreLargo,IVA,UCompra,UVenta,UMinima,MCD,Multiplo,Min,Max,Comision,ProvPri,ProvEme,Departamento,Grupo,Ubicacion,ProvRes,PercentIVAret,IIEPS,ClaveSat,UnidadSat,N_Serie,GPrint from Productos where N_Serie='" & txtn_serie.Text & "'"
+                    "select Codigo,Nombre,CodBarra,NombreLargo,IVA,UCompra,UVenta,UMinima,MCD,Multiplo,Min,Max,Comision,ProvPri,ProvEme,Departamento,Grupo,Ubicacion,ProvRes,PercentIVAret,IIEPS,ClaveSat,UnidadSat,N_Serie,N_Serie2,GPrint from Productos where N_Serie='" & txtn_serie.Text & "'"
+            End If
+
+            If vemos = "SERIE2" Then
+                cmd1.CommandText =
+                    "select Codigo,Nombre,CodBarra,NombreLargo,IVA,UCompra,UVenta,UMinima,MCD,Multiplo,Min,Max,Comision,ProvPri,ProvEme,Departamento,Grupo,Ubicacion,ProvRes,PercentIVAret,IIEPS,ClaveSat,UnidadSat,N_Serie,N_Serie2,GPrint from Productos where N_Serie2='" & txt_Serie2.Text & "'"
             End If
 
             rd1 = cmd1.ExecuteReader
@@ -56,6 +61,7 @@ Public Class frmProductosSerie
                     txtCodigoSAT.Text = rd1("ClaveSat").ToString
                     txtClaveSAT.Text = rd1("UnidadSat").ToString
                     txtn_serie.Text = rd1("N_Serie").ToString()
+                    txt_Serie2.Text = rd1("N_Serie2").ToString()
                     cboComanda.Text = rd1("GPrint").ToString
                     '-------------------------
                     '- Red
@@ -70,7 +76,7 @@ Public Class frmProductosSerie
 
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
-                      "select id,nombre_moneda from tb_moneda,Productos where Codigo='" & cboCodigo.Text & "' and Productos.id_tbMoneda=tb_moneda.id"
+                      "select tb.id,tb.nombre_moneda from tb_moneda tb,Productos p where p.Codigo='" & cboCodigo.Text & "' and p.id_tbMoneda=tb.id"
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then
@@ -839,6 +845,7 @@ Public Class frmProductosSerie
         picImagen.Image = Nothing
         txtrutaimagen.Text = ""
         txtn_serie.Text = ""
+        txt_Serie2.Text = ""
         cboComanda.Text = ""
         frmProductosSerie_Load(Me, New EventArgs())
     End Sub
@@ -935,7 +942,7 @@ Public Class frmProductosSerie
 
                     cmd2 = cnn2.CreateCommand
                     cmd2.CommandText =
-                        "update Productos set CodBarra='" & txtbarras.Text & "', Nombre='" & cboNombre.Text & "', NombreLargo='" & txtNombreL.Text & "', ProvPri='" & cboProvP.Text & "', ProvEme='" & cboProvE.Text & "', ProvRes=" & IIf(chkKIT.Checked, 1, 0) & ", UCompra='" & txtMaxima.Text & "', UVenta='" & txtActual.Text & "', UMinima='" & txtMinima.Text & "', MCD=" & mcd & ", Multiplo=" & multiplo & ", Departamento='" & cboDepto.Text & "', Grupo='" & cboGrupo.Text & "', Ubicacion='" & cboubicacion.Text & "', Min=" & minimo & ", Max=" & maximo & ", Comision=" & comision & ", IVA=" & cboIVA.Text & ", id_tbMoneda=" & cboMoneda.Tag & ", PercentIVAret=" & retIVA & ", IIEPS=" & ieps & ", Cargado=0, Unico=0, N_Serie='" & txtn_serie.Text & "',GPrint='" & cboComanda.Text & "' where Codigo='" & cboCodigo.Text & "'"
+                        "update Productos set CodBarra='" & txtbarras.Text & "', Nombre='" & cboNombre.Text & "', NombreLargo='" & txtNombreL.Text & "', ProvPri='" & cboProvP.Text & "', ProvEme='" & cboProvE.Text & "', ProvRes=" & IIf(chkKIT.Checked, 1, 0) & ", UCompra='" & txtMaxima.Text & "', UVenta='" & txtActual.Text & "', UMinima='" & txtMinima.Text & "', MCD=" & mcd & ", Multiplo=" & multiplo & ", Departamento='" & cboDepto.Text & "', Grupo='" & cboGrupo.Text & "', Ubicacion='" & cboubicacion.Text & "', Min=" & minimo & ", Max=" & maximo & ", Comision=" & comision & ", IVA=" & cboIVA.Text & ", id_tbMoneda=" & cboMoneda.Tag & ", PercentIVAret=" & retIVA & ", IIEPS=" & ieps & ", Cargado=0, Unico=0, N_Serie='" & txtn_serie.Text & "',N_Serie2='" & txt_Serie2.Text & "',GPrint='" & cboComanda.Text & "' where Codigo='" & cboCodigo.Text & "'"
                     If cmd2.ExecuteNonQuery Then
 
                         If (picImagen.Image Is Nothing) Then
@@ -959,7 +966,7 @@ Public Class frmProductosSerie
 
                 cmd2 = cnn2.CreateCommand
                 cmd2.CommandText =
-                    "insert into Productos(Codigo,CodBarra,Nombre,NombreLargo,ProvPri,ProvEme,ProvRes,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Ubicacion,Min,Max,Comision,PrecioCompra,PrecioVenta,PrecioVentaIVA,IVA,Existencia,Fecha,pres_vol,id_tbMoneda,Promocion,Afecta_exis,PercentIVAret,Almacen3,IIEPS,ClaveSat,UnidadSat,Cargado,CargadoInv,Uso,Color,Genero,Marca,Articulo,Dia,Descu,Fecha_Inicial,Fecha_Final,Promo_Monedero,Unico,N_Serie,GPrint) values('" & cboCodigo.Text & "','" & txtbarras.Text & "','" & cboNombre.Text & "','" & txtNombreL.Text & "','" & cboProvP.Text & "','" & cboProvE.Text & "'," & IIf(chkKIT.Checked, 1, 0) & ",'" & txtMaxima.Text & "','" & txtActual.Text & "','" & txtMinima.Text & "'," & mcd & "," & multiplo & ",'" & cboDepto.Text & "','" & cboGrupo.Text & "','" & cboubicacion.Text & "'," & minimo & "," & maximo & "," & comision & ",0,0,0," & cboIVA.Text & ",0,'" & fecha & "',0," & cboMoneda.Tag & ",0,0," & retIVA & ",0," & ieps & ",'" & txtCodigoSAT.Text & "','" & txtClaveSAT.Text & "',0,0,'','','','','',0,'0','" & fecha & "','" & fecha & "',0,0,'" & txtn_serie.Text & "','" & cboComanda.Text & "')"
+                    "insert into Productos(Codigo,CodBarra,Nombre,NombreLargo,ProvPri,ProvEme,ProvRes,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Ubicacion,Min,Max,Comision,PrecioCompra,PrecioVenta,PrecioVentaIVA,IVA,Existencia,Fecha,pres_vol,id_tbMoneda,Promocion,Afecta_exis,PercentIVAret,Almacen3,IIEPS,ClaveSat,UnidadSat,Cargado,CargadoInv,Uso,Color,Genero,Marca,Articulo,Dia,Descu,Fecha_Inicial,Fecha_Final,Promo_Monedero,Unico,N_Serie,N_Serie2,GPrint) values('" & cboCodigo.Text & "','" & txtbarras.Text & "','" & cboNombre.Text & "','" & txtNombreL.Text & "','" & cboProvP.Text & "','" & cboProvE.Text & "'," & IIf(chkKIT.Checked, 1, 0) & ",'" & txtMaxima.Text & "','" & txtActual.Text & "','" & txtMinima.Text & "'," & mcd & "," & multiplo & ",'" & cboDepto.Text & "','" & cboGrupo.Text & "','" & cboubicacion.Text & "'," & minimo & "," & maximo & "," & comision & ",0,0,0," & cboIVA.Text & ",0,'" & fecha & "',0," & cboMoneda.Tag & ",0,0," & retIVA & ",0," & ieps & ",'" & txtCodigoSAT.Text & "','" & txtClaveSAT.Text & "',0,0,'','','','','',0,'0','" & fecha & "','" & fecha & "',0,0,'" & txtn_serie.Text & "','" & txt_Serie2.Text & "','" & cboComanda.Text & "')"
                 If cmd2.ExecuteNonQuery Then
 
                     If (picImagen.Image Is Nothing) Then
@@ -1268,7 +1275,7 @@ Public Class frmProductosSerie
             Else
                 TraeDatos("SERIE")
             End If
-            txtNombreL.Focus().Equals(True)
+            txt_Serie2.Focus().Equals(True)
         End If
     End Sub
 
@@ -1323,4 +1330,17 @@ Public Class frmProductosSerie
             txtClaveSAT.Focus().Equals(True)
         End If
     End Sub
+
+    Private Sub txt_Serie2_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txt_Serie2.KeyPress
+
+        If AscW(e.KeyChar) = Keys.Enter Then
+            If txt_Serie2.Text = "" Then
+            Else
+                TraeDatos("SERIE2")
+            End If
+            txtNombreL.Focus().Equals(True)
+        End If
+    End Sub
+
+
 End Class
