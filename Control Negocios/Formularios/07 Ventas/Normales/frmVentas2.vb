@@ -6920,6 +6920,8 @@ Door:
                         If Impresora = "" Then MsgBox("No se encontró una impresora.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Termina_Error_Ventas() : Exit Sub
                         If Tamaño = "80" Then
                             For t As Integer = 1 To Copias
+                                Dim ps As New System.Drawing.Printing.PaperSize("Custom", 269, 3000)
+                                pCotiza80.DefaultPageSettings.PaperSize = ps
                                 pCotiza80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
                                 pCotiza80.Print()
                             Next
@@ -9465,6 +9467,8 @@ Door:
                 If Tamaño = "80" Then
                     For t As Integer = 1 To Copias
                         pVenta80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
+                        Dim ps As New System.Drawing.Printing.PaperSize("Custom", 269, 3000)
+                        pVenta80.DefaultPageSettings.PaperSize = ps
                         If pVenta80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora Then
                             pVenta80.Print()
                         Else
@@ -15438,6 +15442,8 @@ rayos2:
                 If TPrint = "TICKET" Then
                     If impresora = "" Then MsgBox("No se encontró una impresora.", vbInformation + vbOKOnly, titulocentral) : Termina_Error_Coti() : Exit Sub
                     If Tamaño = "80" Then
+                        Dim ps As New System.Drawing.Printing.PaperSize("Custom", 269, 3000)
+                        pPedido80.DefaultPageSettings.PaperSize = ps
                         pPedido80.DefaultPageSettings.PrinterSettings.PrinterName = impresora
                         pPedido80.Print()
                     End If
