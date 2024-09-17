@@ -1606,7 +1606,7 @@ Public Class frmPagarH
             e.Graphics.DrawString("CANT", fuente_b, Brushes.Black, 1, Y)
             e.Graphics.DrawString("DESCRIPION", fuente_b, Brushes.Black, 35, Y)
             e.Graphics.DrawString("PRECIO", fuente_b, Brushes.Black, 215, Y, derecha)
-            e.Graphics.DrawString("IMPORTE", fuente_b, Brushes.Black, 270, Y, derecha)
+            e.Graphics.DrawString("IMPORTE", fuente_b, Brushes.Black, 280, Y, derecha)
             Y += 20
 
             For luffy As Integer = 0 To grdComanda.Rows.Count - 1
@@ -1645,22 +1645,22 @@ Public Class frmPagarH
             Y += 25
 
             e.Graphics.DrawString("SUBTOTAL: ", fuente_b, Brushes.Black, 1, Y)
-            e.Graphics.DrawString(simbolo & " " & FormatNumber(txtSubTotal.Text, 2), fuente_b, Brushes.Black, 270, Y, derecha)
+            e.Graphics.DrawString(simbolo & " " & FormatNumber(txtSubTotal.Text, 2), fuente_b, Brushes.Black, 280, Y, derecha)
             Y += 20
 
             If txtdescuento2.Text > 0 Then
                 e.Graphics.DrawString("DESCUENTO: ", fuente_b, Brushes.Black, 1, Y)
-                e.Graphics.DrawString(simbolo & " " & FormatNumber(txtdescuento2.Text, 2), fuente_b, Brushes.Black, 270, Y, derecha)
+                e.Graphics.DrawString(simbolo & " " & FormatNumber(txtdescuento2.Text, 2), fuente_b, Brushes.Black, 280, Y, derecha)
                 Y += 20
             End If
 
             e.Graphics.DrawString("TOTAL A PAGAR: ", fuente_b, Brushes.Black, 1, Y)
-            e.Graphics.DrawString(simbolo & " " & FormatNumber(txtTotal.Text, 2), fuente_b, Brushes.Black, 270, Y, derecha)
+            e.Graphics.DrawString(simbolo & " " & FormatNumber(txtTotal.Text, 2), fuente_b, Brushes.Black, 280, Y, derecha)
             Y += 20
 
             If CDec(txtEfectivo.Text) Then
                 e.Graphics.DrawString("EFECTIVO", fuente_b, Brushes.Black, 1, Y)
-                e.Graphics.DrawString(simbolo & " " & FormatNumber(txtEfectivo.Text, 2), fuente_b, Brushes.Black, 270, Y, derecha)
+                e.Graphics.DrawString(simbolo & " " & FormatNumber(txtEfectivo.Text, 2), fuente_b, Brushes.Black, 280, Y, derecha)
                 Y += 20
             End If
 
@@ -1674,7 +1674,7 @@ Public Class frmPagarH
                 If formapago = "MONEDERO" Then
 
                     e.Graphics.DrawString("MONEDERO: ", fuente_b, Brushes.Black, 1, Y)
-                    e.Graphics.DrawString(FormatNumber(montopago, 2), fuente_b, Brushes.Black, 270, Y, derecha)
+                    e.Graphics.DrawString(FormatNumber(montopago, 2), fuente_b, Brushes.Black, 280, Y, derecha)
                     Y += 20
 
                     e.Graphics.DrawString("FOLIO DEL MONEDERO: ", fuente_b, Brushes.Black, 1, Y)
@@ -1683,7 +1683,7 @@ Public Class frmPagarH
                 Else
                     If montopago > 0 Then
                         e.Graphics.DrawString("PAGO EN " & formapago & ":", fuente_b, Brushes.Black, 1, Y)
-                        e.Graphics.DrawString(simbolo & " " & FormatNumber(montopago, 2), fuente_b, Brushes.Black, 270, Y, derecha)
+                        e.Graphics.DrawString(simbolo & " " & FormatNumber(montopago, 2), fuente_b, Brushes.Black, 280, Y, derecha)
                         Y += 20
                         e.Graphics.DrawString("BANCO: ", fuente_b, Brushes.Black, 1, Y)
                         e.Graphics.DrawString(bancopago, fuente_b, Brushes.Black, 100, Y)
@@ -1698,13 +1698,13 @@ Public Class frmPagarH
 
             If CDec(txtResta.Text) <> 0 Then
                 e.Graphics.DrawString("RESTA: ", fuente_b, Brushes.Black, 1, Y)
-                e.Graphics.DrawString(simbolo & " " & FormatNumber(txtResta.Text, 2), fuente_b, Brushes.Black, 270, Y, derecha)
+                e.Graphics.DrawString(simbolo & " " & FormatNumber(txtResta.Text, 2), fuente_b, Brushes.Black, 280, Y, derecha)
                 Y += 20
             End If
 
             If CDec(txtCambio.Text) <> 0 Then
                 e.Graphics.DrawString("CAMBIO: ", fuente_b, Brushes.Black, 1, Y)
-                e.Graphics.DrawString(simbolo & " " & FormatNumber(txtCambio.Text, 2), fuente_b, Brushes.Black, 270, Y, derecha)
+                e.Graphics.DrawString(simbolo & " " & FormatNumber(txtCambio.Text, 2), fuente_b, Brushes.Black, 280, Y, derecha)
                 Y += 10
             End If
             Y += 15
