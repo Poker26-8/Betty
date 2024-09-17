@@ -5,6 +5,7 @@ Imports MySql.Data.MySqlClient
 Imports ClosedXML.Excel
 Imports Mysqlx
 Imports DocumentFormat.OpenXml.Spreadsheet
+Imports ClosedXML.Excel.XLPredefinedFormat
 
 Public Class frmListadoPrecios
     Dim Partes As Boolean = False
@@ -22,7 +23,7 @@ Public Class frmListadoPrecios
                         .HeaderText = "Código"
                         .Width = 60
                         .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
-                        .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+                        .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                         .Resizable = DataGridViewTriState.False
                     End With
 
@@ -30,7 +31,7 @@ Public Class frmListadoPrecios
                         .HeaderText = "Cod. Barras"
                         .Width = 120
                         .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+                        .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                         .Resizable = DataGridViewTriState.False
                     End With
 
@@ -38,7 +39,7 @@ Public Class frmListadoPrecios
                         .HeaderText = "N. Parte"
                         .Width = 120
                         .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-                        .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+                        .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                         .Resizable = DataGridViewTriState.False
                     End With
 
@@ -46,7 +47,7 @@ Public Class frmListadoPrecios
                         .HeaderText = "Producto"
                         .Width = 260
                         .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
-                        .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+                        .AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
                         .Resizable = DataGridViewTriState.True
                     End With
 
@@ -54,7 +55,7 @@ Public Class frmListadoPrecios
                         .HeaderText = "Unidad"
                         .Width = 50
                         .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-                        .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+                        .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                         .Resizable = DataGridViewTriState.False
                     End With
 
@@ -62,7 +63,7 @@ Public Class frmListadoPrecios
                         .HeaderText = "Proveedor"
                         .Width = 180
                         .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-                        .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+                        .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
                         .Resizable = DataGridViewTriState.False
                     End With
 
@@ -425,7 +426,7 @@ Public Class frmListadoPrecios
                         .HeaderText = "Producto"
                         .Width = 260
                         .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
-                        .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                        .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
                         .Resizable = DataGridViewTriState.True
                     End With
 
@@ -3572,11 +3573,10 @@ Public Class frmListadoPrecios
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         ' Exportar los datos del DataGridView al archivo Excel
-        Dim filePath As String = "C:\ControlNegociosPro\Archivos de importación\2\archivopr.xlsx"
-        ExportarDataGridViewAExcel(grdcaptura, filePath)
+        ExportarDataGridViewAExcel(grdcaptura)
     End Sub
 
-    Public Sub ExportarDataGridViewAExcel(dgv As DataGridView, filePath As String)
+    Public Sub ExportarDataGridViewAExcel(dgv As DataGridView)
         If grdcaptura.Rows.Count = 0 Then MsgBox("Genera el reporte para poder exportar los datos a Excel.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
         If MsgBox("¿Deseas exportar la información a un archivo de Excel?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
 
@@ -3603,7 +3603,7 @@ Public Class frmListadoPrecios
                         worksheet.Cell(rowIndex + 2, colIndex + 1).Value = cellValueString
                         Dim cell As IXLCell = worksheet.Cell(rowIndex + 2, colIndex + 1)
                         cell.Value = cellValueString
-                        Cell.Style.NumberFormat.Format = "@"
+                        cell.Style.NumberFormat.Format = "@"
                     Next
                     voy = voy + 1
                     txtCod.Text = voy
@@ -3626,8 +3626,96 @@ Public Class frmListadoPrecios
 
                 'workbook.SaveAs(filePath)
             End Using
-            MessageBox.Show("Datos exportados exitosamente a ")
+            MessageBox.Show("Datos exportados exitosamente")
 
         End If
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        CargarDatosDesdeExcel()
+    End Sub
+
+    ' Función para cargar datos de Excel a un DataGridView
+    Private Sub CargarDatosDesdeExcel()
+        ' Crear el OpenFileDialog para seleccionar el archivo Excel
+        Dim openFileDialog As New OpenFileDialog()
+        openFileDialog.Filter = "Archivos de Excel|*.xlsx"
+        openFileDialog.Title = "Seleccionar archivo Excel"
+
+        ' Si el usuario selecciona un archivo
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
+            ' Ruta del archivo Excel seleccionado
+            Dim filePath As String = openFileDialog.FileName
+
+            ' Crear un DataTable para almacenar los datos
+            Dim dt As New DataTable()
+
+            ' Abrir el archivo de Excel usando ClosedXML
+            Using workbook As New XLWorkbook(filePath)
+                ' Asumimos que los datos están en la primera hoja
+                Dim worksheet As IXLWorksheet = workbook.Worksheet(1)
+
+                ' Obtener la primera fila como encabezados y añadir columnas al DataTable
+                Dim firstRow As IXLRow = worksheet.Row(1)
+                For Each cell As IXLCell In firstRow.CellsUsed()
+                    dt.Columns.Add(cell.Value.ToString())
+                Next
+
+                ' Recorrer las filas restantes y añadirlas al DataTable
+                For rowIndex As Integer = 2 To worksheet.RowsUsed().Count()
+                    Dim row As DataRow = dt.NewRow()
+                    Dim currentRow As IXLRow = worksheet.Row(rowIndex)
+
+                    For colIndex As Integer = 1 To dt.Columns.Count
+                        row(colIndex - 1) = currentRow.Cell(colIndex).GetValue(Of String)()
+                    Next
+
+                    dt.Rows.Add(row)
+                Next
+            End Using
+
+            ' Asignar el DataTable al DataGridView para mostrar los datos
+            DataGridView1.DataSource = dt
+
+            Dim codigo As String = ""
+            Dim codbarra As String = ""
+            Dim producto As String = ""
+            Dim unidad As String = ""
+            Dim proveedor As String = ""
+            Dim costosiniva As Double = 0
+            Dim costoiva As Double = 0
+            Dim preminimo As Double = 0
+            Dim premayoreo As Double = 0
+
+            cnn2.Close() : cnn2.Open()
+
+            For X As Integer = 0 To DataGridView1.Rows.Count - 1
+
+                codigo = Convert.ToString(DataGridView1.Rows.Item(X).Cells(0).Value)
+                codbarra = Convert.ToString(DataGridView1.Rows.Item(X).Cells(1).Value)
+                producto = Convert.ToString(DataGridView1.Rows.Item(X).Cells(2).Value)
+                unidad = Convert.ToString(DataGridView1.Rows.Item(X).Cells(3).Value)
+                proveedor = Convert.ToString(DataGridView1.Rows.Item(X).Cells(4).Value)
+
+                costosiniva = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(5).Value)
+                costoiva = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(6).Value)
+                preminimo = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(7).Value)
+                premayoreo = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(8).Value)
+
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "update Productos set PrecioCompra=" & costosiniva & ",PreMin=" & preminimo & ",PreMay=" & premayoreo & "  where Codigo='" & codigo & "'"
+                If cmd2.ExecuteNonQuery Then
+                Else
+                    MsgBox("No se pudieron actualizar los precios del producto " & producto, vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                End If
+                ProgressBar1.Value = ProgressBar1.Value + 1
+                My.Application.DoEvents()
+            Next
+
+        End If
+        cnn2.Close()
+        MsgBox("Datos importados correctamente.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+    End Sub
+
 End Class
