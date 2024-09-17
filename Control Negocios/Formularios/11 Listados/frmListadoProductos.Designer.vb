@@ -22,9 +22,8 @@ Partial Class frmListadoProductos
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmListadoProductos))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.btnexportar = New System.Windows.Forms.Button()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmListadoProductos))
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtCod = New System.Windows.Forms.TextBox()
@@ -40,25 +39,11 @@ Partial Class frmListadoProductos
         Me.optproveedor = New System.Windows.Forms.RadioButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.bardatos = New System.Windows.Forms.ProgressBar()
+        Me.btnExpo = New System.Windows.Forms.Button()
         Me.GroupBox3.SuspendLayout()
         CType(Me.grdcaptura, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'btnexportar
-        '
-        Me.btnexportar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnexportar.BackgroundImage = CType(resources.GetObject("btnexportar.BackgroundImage"), System.Drawing.Image)
-        Me.btnexportar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnexportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnexportar.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnexportar.Location = New System.Drawing.Point(781, 48)
-        Me.btnexportar.Name = "btnexportar"
-        Me.btnexportar.Size = New System.Drawing.Size(82, 63)
-        Me.btnexportar.TabIndex = 258
-        Me.btnexportar.Text = "Exportar"
-        Me.btnexportar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnexportar.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
@@ -231,13 +216,29 @@ Partial Class frmListadoProductos
         Me.bardatos.TabIndex = 261
         Me.bardatos.Visible = False
         '
+        'btnExpo
+        '
+        Me.btnExpo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnExpo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.btnExpo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExpo.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExpo.Image = CType(resources.GetObject("btnExpo.Image"), System.Drawing.Image)
+        Me.btnExpo.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnExpo.Location = New System.Drawing.Point(781, 45)
+        Me.btnExpo.Name = "btnExpo"
+        Me.btnExpo.Size = New System.Drawing.Size(82, 70)
+        Me.btnExpo.TabIndex = 262
+        Me.btnExpo.Text = "Exportar"
+        Me.btnExpo.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnExpo.UseVisualStyleBackColor = True
+        '
         'frmListadoProductos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(873, 516)
+        Me.Controls.Add(Me.btnExpo)
         Me.Controls.Add(Me.bardatos)
-        Me.Controls.Add(Me.btnexportar)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.optord_grupo)
         Me.Controls.Add(Me.optord_depto)
@@ -261,7 +262,6 @@ Partial Class frmListadoProductos
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents btnexportar As System.Windows.Forms.Button
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents txtCod As System.Windows.Forms.TextBox
@@ -277,4 +277,5 @@ Partial Class frmListadoProductos
     Friend WithEvents optproveedor As System.Windows.Forms.RadioButton
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents bardatos As System.Windows.Forms.ProgressBar
+    Friend WithEvents btnExpo As Button
 End Class
