@@ -73,6 +73,8 @@ Public Class frmReporteFacturacion
                     Else
                         varFolioDx = varFolioDx
                     End If
+                Else
+                    varFolioDx = ""
                 End If
 
                 rd2.Close()
