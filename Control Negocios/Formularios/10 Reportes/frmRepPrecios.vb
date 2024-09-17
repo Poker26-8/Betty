@@ -159,7 +159,6 @@ Public Class frmRepPrecios
                         cell.Style.NumberFormat.Format = "@"
                     Next
                     voy = voy + 1
-                    txtCod.Text = voy
                     My.Application.DoEvents()
                 Next
 
