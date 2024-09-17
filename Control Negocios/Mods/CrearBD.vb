@@ -1,5 +1,7 @@
 ﻿Module CrearBD
 
+
+
     'prescripcion
     Public VartablaPrescripcion As String = "CREATE TABLE IF NOT EXIST `prescripcion` (
                                               `Folio` int(11) NOT NULL,

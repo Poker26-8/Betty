@@ -783,6 +783,7 @@ Public Class Login
                     With odata
                         If .dbOpen(cnnprueba, sTargetprueba, sinfo) Then
 
+
                             'hisclinica
                             .runSp(cnnprueba, vartablahisclinica, sinfo)
                             .runSp(cnnprueba, VarKeyhisclinica, sinfo)

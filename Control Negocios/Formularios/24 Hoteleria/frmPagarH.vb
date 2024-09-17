@@ -1594,9 +1594,6 @@ Public Class frmPagarH
 
             e.Graphics.DrawString("Folio: " & folioventa, fuente_r, Brushes.Black, 270, Y, derecha)
             Y += 23
-            e.Graphics.DrawString("Fecha: " & Format(Date.Now, "dd/MM/yyyy"), fuente_r, Brushes.Black, 1, Y)
-            e.Graphics.DrawString("Hora: " & Format(Date.Now, "HH:mm"), fuente_r, Brushes.Black, 270, Y, derecha)
-            Y += 11
             e.Graphics.DrawString("Fecha Entrada: ", fuente_r, Brushes.Black, 1, Y)
             e.Graphics.DrawString(fechaentra, fuente_r, Brushes.Black, 270, Y, derecha)
             Y += 11
