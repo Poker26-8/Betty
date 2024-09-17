@@ -73,6 +73,13 @@ Public Class frmVentas1
     Public franquicia As Integer = 0
     Public cadenafact As String = ""
 
+    Dim nLogo As String = ""
+    Dim tLogo As String = ""
+    Dim simbolo As String = ""
+    Dim DesglosaIVA As String = ""
+    Dim whats As String = ""
+    Dim autofact As String = ""
+    Dim siqr As String = ""
     Private Sub frmVentas1_Activated(sender As Object, e As System.EventArgs) Handles Me.Activated
         txtdia.Text = Weekday(Date.Now)
     End Sub
@@ -211,6 +218,14 @@ Public Class frmVentas1
     End Sub
 
     Private Async Sub frmVentas1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+
+        nLogo = DatosRecarga("LogoG")
+        tLogo = DatosRecarga("TipoLogo")
+        simbolo = DatosRecarga("Simbolo")
+        DesglosaIVA = DatosRecarga("Desglosa")
+        whats = DatosRecarga("Whatsapp")
+        autofact = DatosRecarga("LinkAuto")
+        siqr = DatosRecarga2("LinkAuto")
 
         Me.KeyPreview = True
         txtResta.ReadOnly = True
@@ -5580,6 +5595,7 @@ kaka:
         ordetrabajo = 0
 
         FunctionVentasAsync()
+        FunctionClinetesAsync()
         Timer1.Start()
 
     End Sub
@@ -7503,11 +7519,7 @@ doorcita:
             GoTo kakaxd
         End If
 
-
-
 kakaxd:
-
-
 
         'Sí el cliente existe en el catálogo, valida su credito disponible; y sí la venta es por pagar recalcula para saber sí su crédito alcanza
         Dim credito_dispo As Double = 0
@@ -8270,25 +8282,55 @@ Door:
                 If grdcaptura.Rows(R).Cells(15).Value.ToString() <> "" Then
                     Dim codunico As String = grdcaptura.Rows(R).Cells(15).Value.ToString()
                     Dim mycodd As String = mycode
+
                     If ordetrabajo = 0 Then
-                        cmd1 = cnn1.CreateCommand
-                        cmd1.CommandText = "SELECT CodUnico FROM ventasdetalle WHERE CodUnico='" & codunico & "'"
-                        rd1 = cmd1.ExecuteReader
-                        If rd1.HasRows Then
-                            If rd1.Read Then
 
-                            End If
-                        Else
-                            cnn2.Close() : cnn2.Open()
-                            cmd2 = cnn2.CreateCommand
-                            cmd2.CommandText =
-                        "insert into VentasDetalle(Folio,Codigo,Nombre,Unidad,Cantidad,CostoVP,CostoVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,FechaCompleta,Comisionista,Facturado,Depto,Grupo,CostVR,Descto,VDCosteo,TotalIEPS,TasaIEPS,Caducidad,Lote,CantidadE,Promo_Monedero,Unico,Descuento,Gprint,CodUnico) values(" & MYFOLIO & ",'" & mycode & "','" & mydesc & "','" & myunid & "'," & mycant & "," & MyProm & "," & MyCostVUE & "," & mypreciodescuento & "," & mytotal & "," & myprecioS & "," & mytotalS & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & cbocomisionista.Text & "','0','" & MyDepto & "','" & MyGrupo & "','0'," & descuentoproducto & ",0," & ieps & "," & tasaieps & ",'" & caduca & "','" & lote & "',0," & monedero & "," & IIf(Unico = False, 0, 1) & "," & descuentoproducto & ",'" & gprint & "','" & codunico & "')"
-                            cmd2.ExecuteNonQuery()
-                            cnn2.Close()
-                        End If
-                        rd1.Close()
+                        Using command As New MySqlCommand("InsertaVDetalle", cnn5)
+                            cnn5.Close() : cnn5.Open()
+                            ' Especifica que es un procedimiento almacenado
+                            command.CommandType = CommandType.StoredProcedure
+                            ' Añade los parámetros requeridos por el procedimiento almacenado
 
+                            command.Parameters.AddWithValue("Fol", MYFOLIO)
+                            command.Parameters.AddWithValue("Cod", mycode)
+                            command.Parameters.AddWithValue("Nom", mydesc)
+                            command.Parameters.AddWithValue("uni", myunid)
+                            command.Parameters.AddWithValue("canti", mycant)
+                            command.Parameters.AddWithValue("cvp", MyProm)
+                            command.Parameters.AddWithValue("cvue", MyCostVUE)
+                            command.Parameters.AddWithValue("pre", mypreciodescuento)
+                            command.Parameters.AddWithValue("tot", mytotal)
+                            command.Parameters.AddWithValue("presin", myprecioS)
+                            command.Parameters.AddWithValue("totalsin", mytotalS)
+                            command.Parameters.AddWithValue("fech", Format(Date.Now, "yyyy-MM-dd"))
+                            command.Parameters.AddWithValue("fcompleta", Format(Date.Now, "yyyy-MM-dd HH:mm:ss"))
+                            command.Parameters.AddWithValue("comisio", cbocomisionista.Text)
+                            command.Parameters.AddWithValue("factura", 0)
+                            command.Parameters.AddWithValue("depa", MyDepto)
+                            command.Parameters.AddWithValue("grup", MyGrupo)
+                            command.Parameters.AddWithValue("cvr", 0)
+                            command.Parameters.AddWithValue("descu", descuentoproducto)
+                            command.Parameters.AddWithValue("vdcoste", 0)
+                            command.Parameters.AddWithValue("tieps", ieps)
+                            command.Parameters.AddWithValue("tasaiep", tasaieps)
+                            command.Parameters.AddWithValue("caduca", caduca)
+                            command.Parameters.AddWithValue("lotep", lote)
+                            command.Parameters.AddWithValue("cantie", 0)
+                            command.Parameters.AddWithValue("promo", monedero)
+                            command.Parameters.AddWithValue("unic", IIf(Unico = False, 0, 1))
+                            command.Parameters.AddWithValue("descuen", descuentoproducto)
+                            command.Parameters.AddWithValue("impresora", gprint)
+                            command.Parameters.AddWithValue("cunico", codunico)
+                            command.ExecuteNonQuery()
+                            cnn5.Close()
+                        End Using
 
+                        '    cnn2.Close() : cnn2.Open()
+                        '    cmd2 = cnn2.CreateCommand
+                        '    cmd2.CommandText =
+                        '"insert into VentasDetalle(Folio,Codigo,Nombre,Unidad,Cantidad,CostoVP,CostoVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,FechaCompleta,Comisionista,Facturado,Depto,Grupo,CostVR,Descto,VDCosteo,TotalIEPS,TasaIEPS,Caducidad,Lote,CantidadE,Promo_Monedero,Unico,Descuento,Gprint,CodUnico) values(" & MYFOLIO & ",'" & mycode & "','" & mydesc & "','" & myunid & "'," & mycant & "," & MyProm & "," & MyCostVUE & "," & mypreciodescuento & "," & mytotal & "," & myprecioS & "," & mytotalS & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & cbocomisionista.Text & "','0','" & MyDepto & "','" & MyGrupo & "','0'," & descuentoproducto & ",0," & ieps & "," & tasaieps & ",'" & caduca & "','" & lote & "',0," & monedero & "," & IIf(Unico = False, 0, 1) & "," & descuentoproducto & ",'" & gprint & "','" & codunico & "')"
+                        '    cmd2.ExecuteNonQuery()
+                        '    cnn2.Close()
 
                     Else
 
@@ -8333,24 +8375,53 @@ Door:
 
                             '--------------------SACAR DESCUENMMTO PO PRODUCTO
 
+                            Using command As New MySqlCommand("InsertaVDetalle", cnn5)
+                                cnn5.Close() : cnn5.Open()
+                                ' Especifica que es un procedimiento almacenado
+                                command.CommandType = CommandType.StoredProcedure
+                                ' Añade los parámetros requeridos por el procedimiento almacenado
 
+                                command.Parameters.AddWithValue("Fol", MYFOLIO)
+                                command.Parameters.AddWithValue("Cod", mycodd)
+                                command.Parameters.AddWithValue("Nom", mydesc)
+                                command.Parameters.AddWithValue("uni", myunid)
+                                command.Parameters.AddWithValue("canti", mycant)
+                                command.Parameters.AddWithValue("cvp", MyProm)
+                                command.Parameters.AddWithValue("cvue", MyCostVUE)
+                                command.Parameters.AddWithValue("pre", myprecio)
+                                command.Parameters.AddWithValue("tot", mytotal)
+                                command.Parameters.AddWithValue("presin", myprecioS)
+                                command.Parameters.AddWithValue("totalsin", mytotalS)
+                                command.Parameters.AddWithValue("fech", Format(Date.Now, "yyyy-MM-dd"))
+                                command.Parameters.AddWithValue("fcompleta", Format(Date.Now, "yyyy-MM-dd HH:mm:ss"))
+                                command.Parameters.AddWithValue("comisio", cbocomisionista.Text)
+                                command.Parameters.AddWithValue("factura", 0)
+                                command.Parameters.AddWithValue("depa", MyDepto)
+                                command.Parameters.AddWithValue("grup", MyGrupo)
+                                command.Parameters.AddWithValue("cvr", 0)
+                                command.Parameters.AddWithValue("descu", DsctoProd)
+                                command.Parameters.AddWithValue("vdcoste", 0)
+                                command.Parameters.AddWithValue("tieps", ieps)
+                                command.Parameters.AddWithValue("tasaiep", tasaieps)
+                                command.Parameters.AddWithValue("caduca", caduca)
+                                command.Parameters.AddWithValue("lotep", lote)
+                                command.Parameters.AddWithValue("cantie", 0)
+                                command.Parameters.AddWithValue("promo", monedero)
+                                command.Parameters.AddWithValue("unic", IIf(Unico = False, 0, 1))
+                                command.Parameters.AddWithValue("descuen", DsctoProd)
+                                command.Parameters.AddWithValue("impresora", gprint)
+                                command.Parameters.AddWithValue("cunico", codunico)
+                                command.ExecuteNonQuery()
+                                cnn5.Close()
+                            End Using
 
-                            cmd1 = cnn1.CreateCommand
-                            cmd1.CommandText = "SELECT CodUnico FROM ventasdetalle WHERE CodUnico='" & codunico & "'"
-                            rd1 = cmd1.ExecuteReader
-                            If rd1.HasRows Then
-                                If rd1.Read Then
+                            ' cnn2.Close() : cnn2.Open()
+                            '     cmd2 = cnn2.CreateCommand
+                            '     cmd2.CommandText =
+                            '"insert into VentasDetalle(Folio,Codigo,Nombre,Unidad,Cantidad,CostoVP,CostoVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,FechaCompleta,Comisionista,Facturado,Depto,Grupo,CostVR,Descto,VDCosteo,TotalIEPS,TasaIEPS,Caducidad,Lote,CantidadE,Promo_Monedero,Unico,Descuento,Gprint,CodUnico) values(" & MYFOLIO & ",'" & mycodd & "','" & mydesc & "','" & myunid & "'," & mycant & "," & MyProm & "," & MyCostVUE & "," & myprecio & "," & mytotal & "," & myprecioS & "," & mytotalS & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & cbocomisionista.Text & "','0','" & MyDepto & "','" & MyGrupo & "','0'," & DsctoProd & ",0," & ieps & "," & tasaieps & ",'" & caduca & "','" & lote & "',0," & monedero & "," & IIf(Unico = False, 0, 1) & "," & DsctoProd & ",'" & gprint & "','" & codunico & "')"
+                            '     cmd2.ExecuteNonQuery()
+                            '     cnn2.Close()
 
-                                End If
-                            Else
-                                cnn2.Close() : cnn2.Open()
-                                cmd2 = cnn2.CreateCommand
-                                cmd2.CommandText =
-                           "insert into VentasDetalle(Folio,Codigo,Nombre,Unidad,Cantidad,CostoVP,CostoVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,FechaCompleta,Comisionista,Facturado,Depto,Grupo,CostVR,Descto,VDCosteo,TotalIEPS,TasaIEPS,Caducidad,Lote,CantidadE,Promo_Monedero,Unico,Descuento,Gprint,CodUnico) values(" & MYFOLIO & ",'" & mycodd & "','" & mydesc & "','" & myunid & "'," & mycant & "," & MyProm & "," & MyCostVUE & "," & myprecio & "," & mytotal & "," & myprecioS & "," & mytotalS & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & cbocomisionista.Text & "','0','" & MyDepto & "','" & MyGrupo & "','0'," & DsctoProd & ",0," & ieps & "," & tasaieps & ",'" & caduca & "','" & lote & "',0," & monedero & "," & IIf(Unico = False, 0, 1) & "," & DsctoProd & ",'" & gprint & "','" & codunico & "')"
-                                cmd2.ExecuteNonQuery()
-                                cnn2.Close()
-                            End If
-                            rd1.Close()
                         Loop
 
                     End If
@@ -10324,18 +10395,12 @@ ecomoda:
         Dim sf As New StringFormat With {.Alignment = StringAlignment.Far}
         Dim pen As New Pen(Brushes.Black, 1)
         Dim Y As Double = 0
-        Dim nLogo As String = DatosRecarga("LogoG")
         Dim Logotipo As Drawing.Image = Nothing
-        Dim tLogo As String = DatosRecarga("TipoLogo")
-        Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim pagare As String = ""
-        Dim DesglosaIVA As String = DatosRecarga("Desglosa")
         Dim ligaqr As String = ""
-        Dim whats As String = DatosRecarga("Whatsapp")
 
-        Dim autofact As String = DatosRecarga("LinkAuto")
-        Dim siqr As String = DatosRecarga2("LinkAuto")
+
 
         If whats <> "" Then
             ligaqr = "http://wa.me/" & whats
