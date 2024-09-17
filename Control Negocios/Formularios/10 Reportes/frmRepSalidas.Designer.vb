@@ -78,7 +78,7 @@ Partial Class frmRepSalidas
         'rbAbonoCredito
         '
         Me.rbAbonoCredito.AutoSize = True
-        Me.rbAbonoCredito.Location = New System.Drawing.Point(223, 154)
+        Me.rbAbonoCredito.Location = New System.Drawing.Point(227, 94)
         Me.rbAbonoCredito.Name = "rbAbonoCredito"
         Me.rbAbonoCredito.Size = New System.Drawing.Size(115, 19)
         Me.rbAbonoCredito.TabIndex = 59
@@ -189,10 +189,11 @@ Partial Class frmRepSalidas
         'btnNuevo
         '
         Me.btnNuevo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnNuevo.BackgroundImage = CType(resources.GetObject("btnNuevo.BackgroundImage"), System.Drawing.Image)
         Me.btnNuevo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNuevo.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNuevo.Image = CType(resources.GetObject("btnNuevo.Image"), System.Drawing.Image)
+        Me.btnNuevo.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btnNuevo.Location = New System.Drawing.Point(412, 110)
         Me.btnNuevo.Name = "btnNuevo"
         Me.btnNuevo.Size = New System.Drawing.Size(60, 63)

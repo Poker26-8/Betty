@@ -271,7 +271,7 @@ Partial Class frmRepEntradas
         Me.btnGuardar.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
         Me.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnGuardar.Location = New System.Drawing.Point(356, 40)
+        Me.btnGuardar.Location = New System.Drawing.Point(290, 40)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(60, 63)
         Me.btnGuardar.TabIndex = 287
@@ -424,7 +424,8 @@ Partial Class frmRepEntradas
         Me.btnExportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnExportar.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExportar.Image = CType(resources.GetObject("btnExportar.Image"), System.Drawing.Image)
-        Me.btnExportar.Location = New System.Drawing.Point(290, 40)
+        Me.btnExportar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnExportar.Location = New System.Drawing.Point(356, 40)
         Me.btnExportar.Name = "btnExportar"
         Me.btnExportar.Size = New System.Drawing.Size(60, 63)
         Me.btnExportar.TabIndex = 320
