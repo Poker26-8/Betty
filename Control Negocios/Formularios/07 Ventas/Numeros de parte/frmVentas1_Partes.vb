@@ -2473,6 +2473,8 @@ Public Class frmVentas1_Partes
 
 kaka:
 
+
+
                 cnn1.Close() : cnn1.Open()
 
                 cmd1 = cnn1.CreateCommand

@@ -6787,7 +6787,7 @@
     Public vartablaventas As String = "CREATE TABLE IF NOT EXISTS `ventas` (
                                               `Folio` int(11) NOT NULL,
                                               `IdCliente` int(11) NOT NULL DEFAULT '0',
-                                              `Cliente` varchar(40) NOT NULL DEFAULT '',
+                                              `Cliente` varchar(255) NOT NULL DEFAULT '',
                                               `Direccion` varchar(255) NOT NULL DEFAULT '',
                                               `Subtotal` float NOT NULL DEFAULT '0',
                                               `IVA` float NOT NULL DEFAULT '0',

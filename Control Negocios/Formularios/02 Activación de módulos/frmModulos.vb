@@ -179,4 +179,18 @@
         frmAct_Pediatra.BringToFront()
         frmAct_Pediatra.Show()
     End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        cnn1.Close() : cnn1.Open()
+        cmd1 = cnn1.CreateCommand
+        cmd1.CommandText = "ALTER TABLE VENTAS MODIFY Cliente VARCHAR(255) DEFAULT '' NOT NULL"
+        cmd1.ExecuteNonQuery()
+
+        cmd1 = cnn1.CreateCommand
+        cmd1.CommandText = "ALTER TABLE ventasdetalle MODIFY Nombre VARCHAR(255) DEFAULT '' NOT NULL"
+        If cmd1.ExecuteNonQuery() Then
+            MsgBox("TERMINO")
+        End If
+        cnn1.Close()
+    End Sub
 End Class
