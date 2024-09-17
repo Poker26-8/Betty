@@ -22,7 +22,7 @@ Partial Class frmListadoPrecios
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmListadoPrecios))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -68,7 +68,7 @@ Partial Class frmListadoPrecios
         Me.Label1.Location = New System.Drawing.Point(0, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Padding = New System.Windows.Forms.Padding(0, 3, 0, 0)
-        Me.Label1.Size = New System.Drawing.Size(1191, 31)
+        Me.Label1.Size = New System.Drawing.Size(947, 31)
         Me.Label1.TabIndex = 230
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -141,8 +141,8 @@ Partial Class frmListadoPrecios
         '
         Me.grdcaptura.AllowUserToAddRows = False
         Me.grdcaptura.AllowUserToDeleteRows = False
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.grdcaptura.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.grdcaptura.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.grdcaptura.BackgroundColor = System.Drawing.Color.White
         Me.grdcaptura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grdcaptura.Dock = System.Windows.Forms.DockStyle.Fill
@@ -152,14 +152,14 @@ Partial Class frmListadoPrecios
         Me.grdcaptura.ReadOnly = True
         Me.grdcaptura.RowHeadersVisible = False
         Me.grdcaptura.RowTemplate.Height = 25
-        Me.grdcaptura.Size = New System.Drawing.Size(1191, 384)
+        Me.grdcaptura.Size = New System.Drawing.Size(947, 384)
         Me.grdcaptura.TabIndex = 239
         '
         'optord_nombre
         '
         Me.optord_nombre.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.optord_nombre.AutoSize = True
-        Me.optord_nombre.Location = New System.Drawing.Point(214, 7)
+        Me.optord_nombre.Location = New System.Drawing.Point(92, 7)
         Me.optord_nombre.Name = "optord_nombre"
         Me.optord_nombre.Size = New System.Drawing.Size(134, 19)
         Me.optord_nombre.TabIndex = 240
@@ -171,7 +171,7 @@ Partial Class frmListadoPrecios
         '
         Me.optord_depto.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.optord_depto.AutoSize = True
-        Me.optord_depto.Location = New System.Drawing.Point(476, 7)
+        Me.optord_depto.Location = New System.Drawing.Point(354, 7)
         Me.optord_depto.Name = "optord_depto"
         Me.optord_depto.Size = New System.Drawing.Size(167, 19)
         Me.optord_depto.TabIndex = 241
@@ -183,7 +183,7 @@ Partial Class frmListadoPrecios
         '
         Me.optord_grupo.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.optord_grupo.AutoSize = True
-        Me.optord_grupo.Location = New System.Drawing.Point(821, 3)
+        Me.optord_grupo.Location = New System.Drawing.Point(699, 3)
         Me.optord_grupo.Name = "optord_grupo"
         Me.optord_grupo.Size = New System.Drawing.Size(124, 19)
         Me.optord_grupo.TabIndex = 242
@@ -226,13 +226,14 @@ Partial Class frmListadoPrecios
         Me.btnexportar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnexportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnexportar.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnexportar.Location = New System.Drawing.Point(1011, 10)
+        Me.btnexportar.Location = New System.Drawing.Point(598, 7)
         Me.btnexportar.Name = "btnexportar"
         Me.btnexportar.Size = New System.Drawing.Size(82, 63)
         Me.btnexportar.TabIndex = 247
         Me.btnexportar.Text = "Exportar"
         Me.btnexportar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnexportar.UseVisualStyleBackColor = True
+        Me.btnexportar.Visible = False
         '
         'btnimportar
         '
@@ -241,13 +242,14 @@ Partial Class frmListadoPrecios
         Me.btnimportar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnimportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnimportar.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnimportar.Location = New System.Drawing.Point(1099, 10)
+        Me.btnimportar.Location = New System.Drawing.Point(686, 7)
         Me.btnimportar.Name = "btnimportar"
         Me.btnimportar.Size = New System.Drawing.Size(82, 63)
         Me.btnimportar.TabIndex = 246
         Me.btnimportar.Text = "Importar"
         Me.btnimportar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnimportar.UseVisualStyleBackColor = True
+        Me.btnimportar.Visible = False
         '
         'ProgressBar1
         '
@@ -255,7 +257,7 @@ Partial Class frmListadoPrecios
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ProgressBar1.Location = New System.Drawing.Point(3, 358)
         Me.ProgressBar1.Name = "ProgressBar1"
-        Me.ProgressBar1.Size = New System.Drawing.Size(1173, 23)
+        Me.ProgressBar1.Size = New System.Drawing.Size(929, 23)
         Me.ProgressBar1.TabIndex = 248
         Me.ProgressBar1.Visible = False
         '
@@ -296,7 +298,7 @@ Partial Class frmListadoPrecios
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 31)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1191, 121)
+        Me.Panel1.Size = New System.Drawing.Size(947, 121)
         Me.Panel1.TabIndex = 251
         '
         'Button1
@@ -307,7 +309,7 @@ Partial Class frmListadoPrecios
         Me.Button1.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button1.Location = New System.Drawing.Point(923, 10)
+        Me.Button1.Location = New System.Drawing.Point(862, 7)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(82, 63)
         Me.Button1.TabIndex = 248
@@ -323,7 +325,7 @@ Partial Class frmListadoPrecios
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel2.Location = New System.Drawing.Point(0, 536)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1191, 29)
+        Me.Panel2.Size = New System.Drawing.Size(947, 29)
         Me.Panel2.TabIndex = 252
         '
         'Panel3
@@ -334,7 +336,7 @@ Partial Class frmListadoPrecios
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(0, 152)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1191, 384)
+        Me.Panel3.Size = New System.Drawing.Size(947, 384)
         Me.Panel3.TabIndex = 253
         '
         'Button2
@@ -345,7 +347,7 @@ Partial Class frmListadoPrecios
         Me.Button2.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
         Me.Button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button2.Location = New System.Drawing.Point(835, 10)
+        Me.Button2.Location = New System.Drawing.Point(774, 7)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(82, 63)
         Me.Button2.TabIndex = 249
@@ -363,12 +365,13 @@ Partial Class frmListadoPrecios
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.Size = New System.Drawing.Size(217, 78)
         Me.DataGridView1.TabIndex = 250
+        Me.DataGridView1.Visible = False
         '
         'frmListadoPrecios
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1191, 565)
+        Me.ClientSize = New System.Drawing.Size(947, 565)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)

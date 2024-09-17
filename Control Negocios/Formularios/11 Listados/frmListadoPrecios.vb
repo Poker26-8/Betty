@@ -3679,38 +3679,220 @@ Public Class frmListadoPrecios
             DataGridView1.DataSource = dt
 
             Dim codigo As String = ""
-            Dim codbarra As String = ""
-            Dim producto As String = ""
-            Dim unidad As String = ""
-            Dim proveedor As String = ""
-            Dim costosiniva As Double = 0
-            Dim costoiva As Double = 0
-            Dim preminimo As Double = 0
-            Dim premayoreo As Double = 0
+            Dim barras As String = ""
+            Dim nombre As String = ""
+            Dim pre_compra As Double = 0
+            Dim pre_minimo As Double = 0
+            Dim pre_mediom As Double = 0
+            Dim pre_mayore As Double = 0
+            Dim pre_especi As Double = 0
+            Dim pre_lista As Double = 0
 
+            Dim por_list As Double = 0
+            Dim por_list2 As Double = 0
+            Dim por_mini As Double = 0
+            Dim por_min2 As Double = 0
+            Dim por_medi As Double = 0
+            Dim por_mm2 As Double = 0
+            Dim por_mayo As Double = 0
+            Dim por_may2 As Double = 0
+            Dim por_espe As Double = 0
+            Dim por_esp2 As Double = 0
+
+            Dim IVA As Double = 0
+            Dim porcentaje As Double = 0
+
+            'marcia
+
+            Dim desdecantlista As Double = 0
+            Dim hastacantlista As Double = 0
+
+            Dim porminimo As Double = 0
+            Dim desdecantmin As Double = 0
+            Dim hastacantmin As Double = 0
+
+            Dim pormay As Double = 0
+            Dim desdecantmay As Double = 0
+            Dim hastacantmay As Double = 0
+
+            Dim pormedio As Double = 0
+            Dim desdecantmedio As Double = 0
+            Dim hastacantmedio As Double = 0
+
+            Dim poresp As Double = 0
+            Dim desdecantesp As Double = 0
+            Dim hastacantesp As Double = 0
+
+            'demas precios
+            Dim porcentajelista2 As Double = 0
+            Dim preciolista2 As Double = 0
+            Dim cantlista3 As Double = 0
+            Dim cantlista4 As Double = 0
+
+            Dim porcentajemin2 As Double = 0
+            Dim preciominimo2 As Double = 0
+            Dim cantminimo3 As Double = 0
+            Dim cantminimo4 As Double = 0
+
+            Dim porcentajemay2 As Double = 0
+            Dim preciomay2 As Double = 0
+            Dim cantmay3 As Double = 0
+            Dim cantmay4 As Double = 0
+
+            Dim porcentajemm2 As Double = 0
+            Dim preciomm2 As Double = 0
+            Dim cantmm3 As Double = 0
+            Dim cantmm4 As Double = 0
+
+            Dim porcentajeesp2 As Double = 0
+            Dim precioesp2 As Double = 0
+            Dim cantesp3 As Double = 0
+            Dim cantesp4 As Double = 0
+
+            ProgressBar1.Value = 0
+            ProgressBar1.Visible = True
+            ProgressBar1.Maximum = DataGridView1.Rows.Count
+
+            lblprod.Visible = True
+            lblprod.Text = ""
+
+            cnn1.Close() : cnn1.Open()
             cnn2.Close() : cnn2.Open()
 
             For X As Integer = 0 To DataGridView1.Rows.Count - 1
 
                 codigo = Convert.ToString(DataGridView1.Rows.Item(X).Cells(0).Value)
-                codbarra = Convert.ToString(DataGridView1.Rows.Item(X).Cells(1).Value)
-                producto = Convert.ToString(DataGridView1.Rows.Item(X).Cells(2).Value)
-                unidad = Convert.ToString(DataGridView1.Rows.Item(X).Cells(3).Value)
-                proveedor = Convert.ToString(DataGridView1.Rows.Item(X).Cells(4).Value)
+                barras = Convert.ToString(DataGridView1.Rows.Item(X).Cells(1).Value)
+                nombre = Convert.ToString(DataGridView1.Rows.Item(X).Cells(2).Value)
+                If codigo = "" Then Exit For
+                pre_compra = Convert.ToString(DataGridView1.Rows.Item(X).Cells(5).Value)
+                pre_minimo = Convert.ToString(DataGridView1.Rows.Item(X).Cells(7).Value)
+                pre_mayore = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(8).Value)
+                pre_mediom = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(9).Value)
+                pre_especi = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(10).Value)
+                pre_lista = Convert.ToString(DataGridView1.Rows.Item(X).Cells(11).Value)
+                porcentaje = Convert.ToString(DataGridView1.Rows.Item(X).Cells(12).Value)
 
-                costosiniva = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(5).Value)
-                costoiva = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(6).Value)
-                preminimo = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(7).Value)
-                premayoreo = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(8).Value)
+                desdecantlista = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(13).Value)
+                hastacantlista = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(14).Value)
 
-                cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "update Productos set PrecioCompra=" & costosiniva & ",PreMin=" & preminimo & ",PreMay=" & premayoreo & "  where Codigo='" & codigo & "'"
-                If cmd2.ExecuteNonQuery Then
+                porminimo = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(15).Value)
+                desdecantmin = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(16).Value)
+                hastacantmin = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(17).Value)
+
+                pormay = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(18).Value)
+                desdecantmay = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(19).Value)
+                hastacantmay = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(20).Value)
+
+                pormedio = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(21).Value)
+                desdecantmedio = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(22).Value)
+                hastacantmedio = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(23).Value)
+
+                poresp = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(24).Value)
+                desdecantesp = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(25).Value)
+                hastacantesp = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(26).Value)
+
+                porcentajelista2 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(27).Value)
+                preciolista2 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(28).Value)
+                cantlista3 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(29).Value)
+                cantlista4 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(30).Value)
+
+                porcentajemin2 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(31).Value)
+                preciominimo2 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(32).Value)
+                cantminimo3 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(33).Value)
+                cantminimo4 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(34).Value)
+
+                porcentajemay2 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(35).Value)
+                preciomay2 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(36).Value)
+                cantmay3 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(37).Value)
+                cantmay4 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(38).Value)
+
+                porcentajemm2 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(39).Value)
+                preciomm2 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(40).Value)
+                cantmm3 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(41).Value)
+                cantmm4 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(42).Value)
+
+                porcentajeesp2 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(43).Value)
+                precioesp2 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(44).Value)
+                cantesp3 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(45).Value)
+                cantesp4 = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(46).Value)
+
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText =
+                    "select IVA from Productos where Codigo='" & codigo & "'"
+                rd1 = cmd1.ExecuteReader
+                If rd1.HasRows Then
+                    If rd1.Read Then
+                        IVA = rd1("IVA").ToString
+                        lblprod.Text = "Importando producto: " & nombre
+                        My.Application.DoEvents()
+
+                        If pre_compra <> 0 Then
+                            por_list = ((pre_lista * 100) / pre_compra) - 100
+                            If por_list < 0 Then por_list = 0
+
+                            por_mini = ((pre_minimo * 100) / pre_compra) - 100
+                            If por_mini < 0 Then por_mini = 0
+
+                            por_medi = ((pre_mediom * 100) / pre_compra) - 100
+                            If por_medi < 0 Then por_medi = 0
+
+                            por_mayo = ((pre_mayore * 100) / pre_compra) - 100
+                            If por_mayo < 0 Then por_mayo = 0
+
+                            por_espe = ((pre_especi * 100) / pre_compra) - 100
+                            If por_espe < 0 Then por_espe = 0
+
+                            por_list2 = ((preciolista2 * 100) / pre_compra) - 100
+                            If por_list2 < 0 Then por_list2 = 0
+
+                            por_min2 = ((preciominimo2 * 100) / pre_compra) - 100
+                            If por_min2 < 0 Then por_min2 = 0
+
+                            por_may2 = ((preciomay2 * 100) / pre_compra) - 100
+                            If por_may2 < 0 Then por_may2 = 0
+
+                            por_mm2 = ((preciomm2 * 100) / pre_compra) - 100
+                            If por_mm2 < 0 Then por_mm2 = 0
+
+                            por_esp2 = ((precioesp2 * 100) / pre_compra) - 100
+                            If por_esp2 < 0 Then por_esp2 = 0
+
+                        Else
+                            por_list = 0
+                            por_mini = 0
+                            por_medi = 0
+                            por_mayo = 0
+                            por_espe = 0
+                            por_list2 = 0
+                            por_min2 = 0
+                            por_may2 = 0
+                            por_mm2 = 0
+                            por_esp2 = 0
+
+                        End If
+
+                        Dim pre_lista_siva As Double = pre_lista / (1 + IVA)
+                        Dim pre_lista2_siva As Double = preciolista2 / (1 + IVA)
+                        Dim pre_min2_siva As Double = preciominimo2 / (1 + IVA)
+                        Dim pre_may2_siva As Double = preciomay2 / (1 + IVA)
+
+                        cmd2 = cnn2.CreateCommand
+                        cmd2.CommandText =
+                            "update Productos set PrecioCompra=" & pre_compra & ", Porcentaje=" & por_list & ",Porcentaje2=" & por_list2 & ", PrecioVenta=" & pre_lista_siva & ",PrecioVenta2=" & pre_lista2_siva & ",PrecioventaIVA=" & pre_lista & ",PrecioVentaIVA2=" & preciolista2 & ", PorcMin=" & por_mini & ",PorcMin2=" & por_min2 & ", PreMin=" & pre_minimo & ",PreMin2=" & preciominimo2 & ", PorcMM=" & por_medi & ",PorcMM2=" & por_mm2 & ", PreMM=" & pre_mediom & ",PreMM2=" & preciomm2 & ", PorcMay=" & por_mayo & ",PorcMay2=" & por_may2 & ", PreMay=" & pre_mayore & ",PreMay2=" & preciomay2 & ", PorcEsp=" & por_espe & ",PorcEsp2=" & por_esp2 & ", PreEsp=" & pre_especi & ",PreEsp2=" & precioesp2 & ", Almacen3=" & pre_compra & ",Porcentaje=" & porcentaje & ",CantLst1=" & desdecantlista & ", CantLst2=" & hastacantlista & ",CantLst3=" & cantlista3 & ",CantLst4=" & cantlista4 & ",PorcMin=" & porminimo & ",PorcMin2=" & porcentajemin2 & ",CantMin1=" & desdecantmin & ",CantMin2=" & hastacantmin & ",CantMin3=" & cantminimo3 & ",CantMin4=" & cantminimo4 & ",PorcMay=" & pormay & ",PorcMay2=" & porcentajemay2 & ",PorcEsp2=" & porcentajeesp2 & ",CantMay1=" & desdecantmay & ",CantMay2=" & hastacantmay & ",CantMay3=" & cantmay3 & ",CantMay4=" & cantmay4 & ",PorcMM=" & pormedio & ",PorcMM2=" & porcentajemm2 & ",CantMM1=" & desdecantmedio & ",CantMM2=" & hastacantmedio & ",CantMM3=" & cantmm3 & ",CantMM4=" & cantmm4 & ",PorcEsp=" & poresp & ",CantEsp1=" & desdecantesp & ",CantEsp2=" & hastacantesp & ",CantEsp3=" & cantesp3 & ",CantEsp4=" & cantesp4 & "  where Codigo='" & codigo & "'"
+                        If cmd2.ExecuteNonQuery Then
+                        Else
+                            MsgBox("No se pudieron actualizar los precios del producto " & nombre, vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                        End If
+                        ProgressBar1.Value = ProgressBar1.Value + 1
+                        My.Application.DoEvents()
+                    End If
                 Else
-                    MsgBox("No se pudieron actualizar los precios del producto " & producto, vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                    MsgBox("No se puede localizar el código " & codigo & " ubicado en las fila " & X & ".")
+                    rd1.Close()
+                    Continue For
                 End If
-                ProgressBar1.Value = ProgressBar1.Value + 1
-                My.Application.DoEvents()
+                rd1.Close()
             Next
 
         End If
