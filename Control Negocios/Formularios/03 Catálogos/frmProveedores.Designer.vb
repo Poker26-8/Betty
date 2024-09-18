@@ -503,10 +503,11 @@ Partial Class frmProveedores
         'btnImportar
         '
         Me.btnImportar.BackColor = System.Drawing.Color.White
-        Me.btnImportar.BackgroundImage = CType(resources.GetObject("btnImportar.BackgroundImage"), System.Drawing.Image)
         Me.btnImportar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnImportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnImportar.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnImportar.Image = CType(resources.GetObject("btnImportar.Image"), System.Drawing.Image)
+        Me.btnImportar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btnImportar.Location = New System.Drawing.Point(119, 158)
         Me.btnImportar.Name = "btnImportar"
         Me.btnImportar.Size = New System.Drawing.Size(62, 63)

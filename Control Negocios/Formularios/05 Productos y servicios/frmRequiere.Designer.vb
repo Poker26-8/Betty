@@ -184,10 +184,11 @@ Partial Class frmRequiere
         '
         'btnexportar
         '
-        Me.btnexportar.BackgroundImage = CType(resources.GetObject("btnexportar.BackgroundImage"), System.Drawing.Image)
         Me.btnexportar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnexportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnexportar.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnexportar.Image = CType(resources.GetObject("btnexportar.Image"), System.Drawing.Image)
+        Me.btnexportar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btnexportar.Location = New System.Drawing.Point(563, 43)
         Me.btnexportar.Name = "btnexportar"
         Me.btnexportar.Size = New System.Drawing.Size(60, 63)
