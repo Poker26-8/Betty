@@ -1,4 +1,6 @@
-﻿Public Class frmComparador
+﻿Imports ClosedXML.Excel
+
+Public Class frmComparador
 
     Dim proveedorseleccionado As String = ""
     Dim codigoseleccionado As String = ""
@@ -250,7 +252,117 @@
 
     Private Sub btnImportar_Click(sender As Object, e As EventArgs) Handles btnImportar.Click
         If MsgBox("Estas apunto de importar tu catálogo desde un archivo de Excel, para evitar errores asegúrate de que la hoja de Excel tiene el nombre de 'Hoja1' y cerciórate de que el archivo está guardado y cerrado.", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
-            Excel_Grid_SQL(DataGridView1)
+            CargarDatosDesdeExcel()
+            ' Excel_Grid_SQL(DataGridView1)
+        End If
+    End Sub
+
+    Private Sub CargarDatosDesdeExcel()
+        ' Crear el OpenFileDialog para seleccionar el archivo Excel
+        Dim openFileDialog As New OpenFileDialog()
+        openFileDialog.Filter = "Archivos de Excel|*.xlsx"
+        openFileDialog.Title = "Seleccionar archivo Excel"
+
+        ' Si el usuario selecciona un archivo
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
+            ' Ruta del archivo Excel seleccionado
+            Dim filePath As String = openFileDialog.FileName
+
+            ' Crear un DataTable para almacenar los datos
+            Dim dt As New DataTable()
+
+            ' Abrir el archivo de Excel usando ClosedXML
+            Using workbook As New XLWorkbook(filePath)
+                ' Asumimos que los datos están en la primera hoja
+                Dim worksheet As IXLWorksheet = workbook.Worksheet(1)
+
+                ' Obtener la primera fila como encabezados y añadir columnas al DataTable
+                Dim firstRow As IXLRow = worksheet.Row(1)
+                For Each cell As IXLCell In firstRow.CellsUsed()
+                    dt.Columns.Add(cell.Value.ToString())
+                Next
+
+                ' Recorrer las filas restantes y añadirlas al DataTable
+                For rowIndex As Integer = 2 To worksheet.RowsUsed().Count()
+                    Dim row As DataRow = dt.NewRow()
+                    Dim currentRow As IXLRow = worksheet.Row(rowIndex)
+
+                    For colIndex As Integer = 1 To dt.Columns.Count
+                        row(colIndex - 1) = currentRow.Cell(colIndex).GetValue(Of String)()
+                    Next
+
+                    dt.Rows.Add(row)
+                Next
+            End Using
+
+            ' Asignar el DataTable al DataGridView para mostrar los datos
+            DataGridView1.DataSource = dt
+
+            'Variables para alojar los datos del archivo de excel
+            Dim codigo, barras, nombre, proveedor As String
+            Dim venta_civa As Double
+            Dim conteo As Integer = 0
+
+
+            pbsube.Value = 0
+            pbsube.Maximum = DataGridView1.Rows.Count
+
+            cnn1.Close() : cnn1.Open()
+
+            Dim contadorconexion As Integer = 0
+
+            For zef As Integer = 0 To DataGridView1.Rows.Count - 1
+
+                contadorconexion += 1
+
+                codigo = NulCad(DataGridView1.Rows(zef).Cells(0).Value.ToString())
+                If codigo = "" Then Exit For
+                barras = NulCad(DataGridView1.Rows(zef).Cells(1).Value.ToString())
+                nombre = UCase(NulCad(DataGridView1.Rows(zef).Cells(2).Value.ToString()))
+                proveedor = NulCad(DataGridView1.Rows(zef).Cells(3).Value.ToString())
+                venta_civa = NulVa(DataGridView1.Rows(zef).Cells(4).Value.ToString())
+
+                If contadorconexion > 499 Then
+                    cnn1.Close() : cnn1.Open()
+
+                    contadorconexion = 1
+                End If
+
+                nombre = Trim(Replace(nombre, "‘", ""))
+                nombre = Trim(Replace(nombre, "'", "''"))
+                nombre = Trim(Replace(nombre, "*", ""))
+                nombre = Trim(Replace(nombre, "", ""))
+
+                proveedor = Trim(Replace(proveedor, "'", "''"))
+
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "SELECT NComercial FROM proveedores WHERE NComercial='" & proveedor & "'"
+                rd1 = cmd1.ExecuteReader
+                If rd1.HasRows Then
+                    If rd1.Read Then
+                    End If
+                Else
+                    cnn2.Close() : cnn2.Open()
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "INSERT INTO proveedores(NComercial,Compania) VALUES('" & proveedor & "','" & proveedor & "')"
+                    cmd2.ExecuteNonQuery()
+                    cnn2.Close() : cnn2.Open()
+
+                End If
+                rd1.Close()
+
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "INSERT INTO precios(Codigo,CodBarra,Descripcion,PrecioAnt,Proveedor) VALUES('" & codigo & "','" & barras & "','" & nombre & "'," & venta_civa & ",'" & proveedor & "')"
+                cmd1.ExecuteNonQuery()
+
+                conteo += 1
+                pbsube.Value = conteo
+            Next
+            cnn1.Close()
+
+            pbsube.Value = 0
+
+            MsgBox(conteo & " productos fueron importados correctamente.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
         End If
     End Sub
 

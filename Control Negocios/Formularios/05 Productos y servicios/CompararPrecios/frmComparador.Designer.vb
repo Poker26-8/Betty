@@ -81,7 +81,7 @@ Partial Class frmComparador
         Me.Label3.ForeColor = System.Drawing.Color.White
         Me.Label3.Location = New System.Drawing.Point(3, 111)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(427, 22)
+        Me.Label3.Size = New System.Drawing.Size(559, 22)
         Me.Label3.TabIndex = 10
         Me.Label3.Text = "Proveedor"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -91,7 +91,7 @@ Partial Class frmComparador
         Me.cboproveedor.FormattingEnabled = True
         Me.cboproveedor.Location = New System.Drawing.Point(3, 136)
         Me.cboproveedor.Name = "cboproveedor"
-        Me.cboproveedor.Size = New System.Drawing.Size(427, 21)
+        Me.cboproveedor.Size = New System.Drawing.Size(559, 21)
         Me.cboproveedor.TabIndex = 11
         '
         'Label2
@@ -197,7 +197,7 @@ Partial Class frmComparador
         Me.btnImportar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnImportar.Image = CType(resources.GetObject("btnImportar.Image"), System.Drawing.Image)
         Me.btnImportar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnImportar.Location = New System.Drawing.Point(238, 3)
+        Me.btnImportar.Location = New System.Drawing.Point(244, 3)
         Me.btnImportar.Name = "btnImportar"
         Me.btnImportar.Size = New System.Drawing.Size(75, 81)
         Me.btnImportar.TabIndex = 3
@@ -212,7 +212,7 @@ Partial Class frmComparador
         Me.btnLimpiar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLimpiar.Image = CType(resources.GetObject("btnLimpiar.Image"), System.Drawing.Image)
         Me.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnLimpiar.Location = New System.Drawing.Point(319, 3)
+        Me.btnLimpiar.Location = New System.Drawing.Point(406, 3)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(75, 81)
         Me.btnLimpiar.TabIndex = 2
@@ -227,7 +227,7 @@ Partial Class frmComparador
         Me.btnGuardar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
         Me.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnGuardar.Location = New System.Drawing.Point(400, 3)
+        Me.btnGuardar.Location = New System.Drawing.Point(325, 3)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(75, 81)
         Me.btnGuardar.TabIndex = 1
@@ -242,7 +242,7 @@ Partial Class frmComparador
         Me.btnSalir.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
         Me.btnSalir.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSalir.Location = New System.Drawing.Point(481, 3)
+        Me.btnSalir.Location = New System.Drawing.Point(487, 3)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(75, 81)
         Me.btnSalir.TabIndex = 0
@@ -258,7 +258,7 @@ Partial Class frmComparador
         Me.Label6.ForeColor = System.Drawing.Color.White
         Me.Label6.Location = New System.Drawing.Point(3, 11)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(427, 22)
+        Me.Label6.Size = New System.Drawing.Size(559, 22)
         Me.Label6.TabIndex = 19
         Me.Label6.Text = "Cod Barra"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -267,7 +267,7 @@ Partial Class frmComparador
         '
         Me.txtCodBarra.Location = New System.Drawing.Point(3, 36)
         Me.txtCodBarra.Name = "txtCodBarra"
-        Me.txtCodBarra.Size = New System.Drawing.Size(427, 20)
+        Me.txtCodBarra.Size = New System.Drawing.Size(559, 20)
         Me.txtCodBarra.TabIndex = 20
         '
         'Panel2

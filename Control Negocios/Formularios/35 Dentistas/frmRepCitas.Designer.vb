@@ -22,24 +22,24 @@ Partial Class frmRepCitas
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmRepCitas))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmRepCitas))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.mchasta = New System.Windows.Forms.MonthCalendar()
+        Me.mcdesde = New System.Windows.Forms.MonthCalendar()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.optTodos = New System.Windows.Forms.RadioButton()
         Me.optClientes = New System.Windows.Forms.RadioButton()
         Me.cboDatos = New System.Windows.Forms.ComboBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnExportar = New System.Windows.Forms.Button()
+        Me.btnReporte = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.grdCaptura = New System.Windows.Forms.DataGridView()
-        Me.mcdesde = New System.Windows.Forms.MonthCalendar()
-        Me.mchasta = New System.Windows.Forms.MonthCalendar()
-        Me.btnReporte = New System.Windows.Forms.Button()
-        Me.btnExportar = New System.Windows.Forms.Button()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -63,6 +63,20 @@ Partial Class frmRepCitas
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(867, 177)
         Me.Panel1.TabIndex = 0
+        '
+        'mchasta
+        '
+        Me.mchasta.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.mchasta.Location = New System.Drawing.Point(612, 9)
+        Me.mchasta.Name = "mchasta"
+        Me.mchasta.TabIndex = 3
+        '
+        'mcdesde
+        '
+        Me.mcdesde.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.mcdesde.Location = New System.Drawing.Point(358, 9)
+        Me.mcdesde.Name = "mcdesde"
+        Me.mcdesde.TabIndex = 2
         '
         'GroupBox1
         '
@@ -115,6 +129,34 @@ Partial Class frmRepCitas
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(867, 89)
         Me.Panel2.TabIndex = 1
+        '
+        'btnExportar
+        '
+        Me.btnExportar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnExportar.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportar.Image = CType(resources.GetObject("btnExportar.Image"), System.Drawing.Image)
+        Me.btnExportar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnExportar.Location = New System.Drawing.Point(91, 6)
+        Me.btnExportar.Name = "btnExportar"
+        Me.btnExportar.Size = New System.Drawing.Size(75, 80)
+        Me.btnExportar.TabIndex = 1
+        Me.btnExportar.Text = "Exportar"
+        Me.btnExportar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnExportar.UseVisualStyleBackColor = True
+        '
+        'btnReporte
+        '
+        Me.btnReporte.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnReporte.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReporte.Image = CType(resources.GetObject("btnReporte.Image"), System.Drawing.Image)
+        Me.btnReporte.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnReporte.Location = New System.Drawing.Point(10, 6)
+        Me.btnReporte.Name = "btnReporte"
+        Me.btnReporte.Size = New System.Drawing.Size(75, 80)
+        Me.btnReporte.TabIndex = 0
+        Me.btnReporte.Text = "Reporte"
+        Me.btnReporte.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnReporte.UseVisualStyleBackColor = True
         '
         'Panel3
         '
@@ -169,48 +211,6 @@ Partial Class frmRepCitas
         Me.grdCaptura.RowsDefaultCellStyle = DataGridViewCellStyle5
         Me.grdCaptura.Size = New System.Drawing.Size(867, 286)
         Me.grdCaptura.TabIndex = 0
-        '
-        'mcdesde
-        '
-        Me.mcdesde.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.mcdesde.Location = New System.Drawing.Point(358, 9)
-        Me.mcdesde.Name = "mcdesde"
-        Me.mcdesde.TabIndex = 2
-        '
-        'mchasta
-        '
-        Me.mchasta.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.mchasta.Location = New System.Drawing.Point(612, 9)
-        Me.mchasta.Name = "mchasta"
-        Me.mchasta.TabIndex = 3
-        '
-        'btnReporte
-        '
-        Me.btnReporte.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnReporte.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReporte.Image = CType(resources.GetObject("btnReporte.Image"), System.Drawing.Image)
-        Me.btnReporte.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnReporte.Location = New System.Drawing.Point(10, 6)
-        Me.btnReporte.Name = "btnReporte"
-        Me.btnReporte.Size = New System.Drawing.Size(75, 80)
-        Me.btnReporte.TabIndex = 0
-        Me.btnReporte.Text = "Reporte"
-        Me.btnReporte.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnReporte.UseVisualStyleBackColor = True
-        '
-        'btnExportar
-        '
-        Me.btnExportar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnExportar.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExportar.Image = CType(resources.GetObject("btnExportar.Image"), System.Drawing.Image)
-        Me.btnExportar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnExportar.Location = New System.Drawing.Point(91, 6)
-        Me.btnExportar.Name = "btnExportar"
-        Me.btnExportar.Size = New System.Drawing.Size(75, 80)
-        Me.btnExportar.TabIndex = 1
-        Me.btnExportar.Text = "Exportar"
-        Me.btnExportar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnExportar.UseVisualStyleBackColor = True
         '
         'Column1
         '

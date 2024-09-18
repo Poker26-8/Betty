@@ -85,7 +85,7 @@ Partial Class frmRepComparador
         Me.btnExportar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExportar.Image = CType(resources.GetObject("btnExportar.Image"), System.Drawing.Image)
         Me.btnExportar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnExportar.Location = New System.Drawing.Point(325, 8)
+        Me.btnExportar.Location = New System.Drawing.Point(406, 8)
         Me.btnExportar.Name = "btnExportar"
         Me.btnExportar.Size = New System.Drawing.Size(75, 88)
         Me.btnExportar.TabIndex = 24
@@ -100,7 +100,7 @@ Partial Class frmRepComparador
         Me.btnConsultar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnConsultar.Image = CType(resources.GetObject("btnConsultar.Image"), System.Drawing.Image)
         Me.btnConsultar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnConsultar.Location = New System.Drawing.Point(406, 8)
+        Me.btnConsultar.Location = New System.Drawing.Point(326, 8)
         Me.btnConsultar.Name = "btnConsultar"
         Me.btnConsultar.Size = New System.Drawing.Size(75, 88)
         Me.btnConsultar.TabIndex = 23
