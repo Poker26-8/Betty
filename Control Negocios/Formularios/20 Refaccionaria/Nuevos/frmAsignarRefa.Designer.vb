@@ -67,6 +67,8 @@ Partial Class frmAsignarRefa
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cboMotor = New System.Windows.Forms.ComboBox()
+        Me.txtnumparte2 = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.grdCaptura, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -195,7 +197,7 @@ Partial Class frmAsignarRefa
         Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.White
-        Me.Label4.Location = New System.Drawing.Point(302, 142)
+        Me.Label4.Location = New System.Drawing.Point(302, 194)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(301, 23)
         Me.Label4.TabIndex = 529
@@ -207,7 +209,7 @@ Partial Class frmAsignarRefa
         Me.cboModelo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.cboModelo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboModelo.FormattingEnabled = True
-        Me.cboModelo.Location = New System.Drawing.Point(302, 168)
+        Me.cboModelo.Location = New System.Drawing.Point(302, 220)
         Me.cboModelo.Name = "cboModelo"
         Me.cboModelo.Size = New System.Drawing.Size(301, 23)
         Me.cboModelo.TabIndex = 530
@@ -365,9 +367,9 @@ Partial Class frmAsignarRefa
         Me.txtObservacion.BackColor = System.Drawing.Color.White
         Me.txtObservacion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtObservacion.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtObservacion.Location = New System.Drawing.Point(606, 168)
+        Me.txtObservacion.Location = New System.Drawing.Point(488, 168)
         Me.txtObservacion.Name = "txtObservacion"
-        Me.txtObservacion.Size = New System.Drawing.Size(291, 23)
+        Me.txtObservacion.Size = New System.Drawing.Size(409, 23)
         Me.txtObservacion.TabIndex = 536
         '
         'Label26
@@ -376,9 +378,9 @@ Partial Class frmAsignarRefa
         Me.Label26.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label26.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label26.ForeColor = System.Drawing.Color.White
-        Me.Label26.Location = New System.Drawing.Point(606, 142)
+        Me.Label26.Location = New System.Drawing.Point(488, 142)
         Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(291, 23)
+        Me.Label26.Size = New System.Drawing.Size(409, 23)
         Me.Label26.TabIndex = 535
         Me.Label26.Text = "Observaciones"
         Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -479,9 +481,9 @@ Partial Class frmAsignarRefa
         Me.btnModelos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnModelos.Image = CType(resources.GetObject("btnModelos.Image"), System.Drawing.Image)
         Me.btnModelos.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnModelos.Location = New System.Drawing.Point(542, 197)
+        Me.btnModelos.Location = New System.Drawing.Point(606, 197)
         Me.btnModelos.Name = "btnModelos"
-        Me.btnModelos.Size = New System.Drawing.Size(136, 74)
+        Me.btnModelos.Size = New System.Drawing.Size(72, 74)
         Me.btnModelos.TabIndex = 544
         Me.btnModelos.Text = "Marcas y Modelos"
         Me.btnModelos.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -533,12 +535,38 @@ Partial Class frmAsignarRefa
         Me.cboMotor.Size = New System.Drawing.Size(155, 23)
         Me.cboMotor.TabIndex = 548
         '
+        'txtnumparte2
+        '
+        Me.txtnumparte2.BackColor = System.Drawing.Color.White
+        Me.txtnumparte2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtnumparte2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtnumparte2.Location = New System.Drawing.Point(302, 168)
+        Me.txtnumparte2.Name = "txtnumparte2"
+        Me.txtnumparte2.Size = New System.Drawing.Size(183, 23)
+        Me.txtnumparte2.TabIndex = 550
+        Me.txtnumparte2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label11
+        '
+        Me.Label11.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.Label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.ForeColor = System.Drawing.Color.White
+        Me.Label11.Location = New System.Drawing.Point(302, 142)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(183, 24)
+        Me.Label11.TabIndex = 549
+        Me.Label11.Text = "N° de Parte 2"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'frmAsignarRefa
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(901, 501)
+        Me.Controls.Add(Me.txtnumparte2)
+        Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.cboMotor)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.cboAno)
@@ -625,4 +653,6 @@ Partial Class frmAsignarRefa
     Friend WithEvents Column10 As DataGridViewTextBoxColumn
     Friend WithEvents Column11 As DataGridViewTextBoxColumn
     Friend WithEvents Column12 As DataGridViewTextBoxColumn
+    Friend WithEvents txtnumparte2 As TextBox
+    Friend WithEvents Label11 As Label
 End Class

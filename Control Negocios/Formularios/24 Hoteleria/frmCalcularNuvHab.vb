@@ -15,16 +15,16 @@
         Dim precioaumento As Double = 0
         Try
             cnn2.Close() : cnn2.Open()
-            cmd2 = cnn2.CreateCommand
-            cmd2.CommandText = "SELECT NotasCred FROM formatos WHERE Facturas='SalidaHab'"
-            rd2 = cmd2.ExecuteReader
-            If rd2.HasRows Then
-                If rd2.Read Then
-                    salidahotel = IIf(rd2(0).ToString = "", 0, rd2(0).ToString)
-                    salidahotel2 = Format(salidahotel, "HH:mm")
-                End If
-            End If
-            rd2.Close()
+            'cmd2 = cnn2.CreateCommand
+            'cmd2.CommandText = "SELECT NotasCred FROM formatos WHERE Facturas='SalidaHab'"
+            'rd2 = cmd2.ExecuteReader
+            'If rd2.HasRows Then
+            '    If rd2.Read Then
+            '        salidahotel = IIf(rd2(0).ToString = "", 0, rd2(0).ToString)
+            '        salidahotel2 = Format(salidahotel, "HH:mm")
+            '    End If
+            'End If
+            'rd2.Close()
 
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText = "SELECT NotasCred FROM formatos WHERE Facturas='PrecioDia'"

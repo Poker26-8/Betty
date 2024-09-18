@@ -204,7 +204,7 @@
     Private Sub cboMarca_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboMarca.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
-            cboModelo.Focus.Equals(True)
+            txtnumparte2.Focus.Equals(True)
         End If
     End Sub
 
@@ -253,7 +253,7 @@
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             If dato = "NOMBRE" Then
-                cmd1.CommandText = "SELECT Codigo,CodBarra,N_Serie,Ubicacion FROM productos WHERE Nombre='" & cboNombre.Text & "'"
+                cmd1.CommandText = "SELECT Codigo,CodBarra,N_Serie,N_Serie2,Ubicacion FROM productos WHERE Nombre='" & cboNombre.Text & "'"
             End If
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
@@ -261,6 +261,7 @@
                     cboCodigo.Text = rd1("Codigo").ToString
                     txtbarras.Text = rd1("CodBarra").ToString
                     txtnumparte.Text = rd1("N_Serie").ToString
+                    txtnumparte2.Text = rd1("N_Serie2").ToString
                     cboUbicaicon.Text = rd1("Ubicacion").ToString
 
                     cnn2.Close() : cnn2.Open()
@@ -474,6 +475,13 @@
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
             txtObservacion.Focus.Equals(True)
+        End If
+    End Sub
+
+    Private Sub txtnumparte2_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtnumparte2.KeyPress
+        e.KeyChar = UCase(e.KeyChar)
+        If AscW(e.KeyChar) = Keys.Enter Then
+            cboModelo.Focus.Equals(True)
         End If
     End Sub
 End Class

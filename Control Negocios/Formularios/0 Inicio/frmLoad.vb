@@ -426,9 +426,28 @@ Public Class frmLoad
     End Sub
 
     Public Sub verif()
-        'codunico
 
+        'n_serie2
         'trasladosdet
+        Try
+            cnn1.Close()
+            cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT N_Serie2 FROM productos"
+            rd1 = cmd1.ExecuteReader
+            If rd1.Read Then
+            End If
+            rd1.Close()
+            cnn1.Close()
+        Catch ex As Exception
+            rd1.Close()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "ALTER TABLE productos add column N_Serie2 VARCHAR(150) DEFAULT ''"
+            cmd1.ExecuteNonQuery()
+            cnn1.Close()
+        End Try
+
+        'codunico
         Try
             cnn1.Close()
             cnn1.Open()
