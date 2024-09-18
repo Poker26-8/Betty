@@ -209,7 +209,7 @@ Partial Class frmDividirCuenta
         '
         'btncancelar
         '
-        Me.btncancelar.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.btncancelar.BackColor = System.Drawing.Color.White
         Me.btncancelar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btncancelar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btncancelar.Image = CType(resources.GetObject("btncancelar.Image"), System.Drawing.Image)
@@ -224,7 +224,7 @@ Partial Class frmDividirCuenta
         '
         'btnguardard
         '
-        Me.btnguardard.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.btnguardard.BackColor = System.Drawing.Color.White
         Me.btnguardard.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnguardard.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnguardard.Image = CType(resources.GetObject("btnguardard.Image"), System.Drawing.Image)

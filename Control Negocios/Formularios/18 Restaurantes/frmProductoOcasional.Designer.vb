@@ -70,7 +70,7 @@ Partial Class frmProductoOcasional
         '
         'btnsaliroca
         '
-        Me.btnsaliroca.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.btnsaliroca.BackColor = System.Drawing.Color.White
         Me.btnsaliroca.FlatAppearance.BorderSize = 0
         Me.btnsaliroca.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnsaliroca.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -86,7 +86,7 @@ Partial Class frmProductoOcasional
         '
         'btnlimpiaroca
         '
-        Me.btnlimpiaroca.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.btnlimpiaroca.BackColor = System.Drawing.Color.White
         Me.btnlimpiaroca.FlatAppearance.BorderSize = 0
         Me.btnlimpiaroca.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnlimpiaroca.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -102,7 +102,7 @@ Partial Class frmProductoOcasional
         '
         'btnagregaroca
         '
-        Me.btnagregaroca.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.btnagregaroca.BackColor = System.Drawing.Color.White
         Me.btnagregaroca.FlatAppearance.BorderSize = 0
         Me.btnagregaroca.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnagregaroca.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
