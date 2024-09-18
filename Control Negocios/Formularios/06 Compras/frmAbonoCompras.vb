@@ -603,7 +603,7 @@ Public Class frmAbonoCompras
                     e.Graphics.DrawString(rd1("Cab6").ToString, New Drawing.Font(tipografia, 9, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
                     Y += 12
                 End If
-                Y += 17
+                Y += 3
             End If
         Else
             Y += 0
@@ -639,17 +639,17 @@ Public Class frmAbonoCompras
         Dim MyPago As Double = (CDbl(txtefectivo.Text) - CDbl(TextBox1.Text)) + CDbl(txtpagos.Text)
 
         e.Graphics.DrawString("Total:", fuente_prods, Brushes.Black, 1, Y)
-        e.Graphics.DrawString(simbolo & FormatNumber(MyPago, 2), fuente_prods, Brushes.Black, 285, Y, sf)
+        e.Graphics.DrawString(simbolo & FormatNumber(MyPago, 2), fuente_prods, Brushes.Black, 280, Y, sf)
         Y += 17
 
         If CDbl(txtefectivo.Text) <> 0 Then
-            e.Graphics.DrawString("Efectivo:", fuente_prods, Brushes.Black, 15, Y)
-            e.Graphics.DrawString(simbolo & FormatNumber(txtefectivo.Text, 2), fuente_prods, Brushes.Black, 285, Y, sf)
+            e.Graphics.DrawString("Efectivo:", fuente_prods, Brushes.Black, 1, Y)
+            e.Graphics.DrawString(simbolo & FormatNumber(txtefectivo.Text, 2), fuente_prods, Brushes.Black, 280, Y, sf)
             Y += 13.5
         End If
         If CDbl(txtpagos.Text) <> 0 Then
-            e.Graphics.DrawString("Pagos:", fuente_prods, Brushes.Black, 15, Y)
-            e.Graphics.DrawString(simbolo & FormatNumber(txtpagos.Text, 2), fuente_prods, Brushes.Black, 285, Y, sf)
+            e.Graphics.DrawString("Pagos:", fuente_prods, Brushes.Black, 1, Y)
+            e.Graphics.DrawString(simbolo & FormatNumber(txtpagos.Text, 2), fuente_prods, Brushes.Black, 280, Y, sf)
             Y += 13.5
         End If
         e.HasMorePages = False
