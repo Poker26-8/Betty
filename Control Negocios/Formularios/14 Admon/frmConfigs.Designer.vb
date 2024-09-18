@@ -3645,10 +3645,10 @@ Partial Class frmConfigs
         Me.TabPage2.Controls.Add(Me.Label75)
         Me.TabPage2.Controls.Add(Me.Label77)
         Me.TabPage2.Controls.Add(Me.Label78)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 58)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 84)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(478, 463)
+        Me.TabPage2.Size = New System.Drawing.Size(478, 437)
         Me.TabPage2.TabIndex = 9
         Me.TabPage2.Text = "Recargas Telefonicas"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -3684,9 +3684,10 @@ Partial Class frmConfigs
         '
         Me.Button25.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Button25.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button25.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button25.Location = New System.Drawing.Point(368, 340)
         Me.Button25.Name = "Button25"
-        Me.Button25.Size = New System.Drawing.Size(93, 33)
+        Me.Button25.Size = New System.Drawing.Size(93, 69)
         Me.Button25.TabIndex = 26
         Me.Button25.Text = "Guardar"
         Me.Button25.UseVisualStyleBackColor = False
@@ -3750,21 +3751,22 @@ Partial Class frmConfigs
         Me.TabPage3.Controls.Add(Me.Label86)
         Me.TabPage3.Controls.Add(Me.Label85)
         Me.TabPage3.Controls.Add(Me.Label84)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 58)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 84)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(478, 463)
+        Me.TabPage3.Size = New System.Drawing.Size(478, 437)
         Me.TabPage3.TabIndex = 10
         Me.TabPage3.Text = "Configuración de Prosepago"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
         'btnCancela
         '
-        Me.btnCancela.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.btnCancela.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.btnCancela.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnCancela.Location = New System.Drawing.Point(248, 299)
+        Me.btnCancela.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancela.Location = New System.Drawing.Point(268, 299)
         Me.btnCancela.Name = "btnCancela"
-        Me.btnCancela.Size = New System.Drawing.Size(90, 29)
+        Me.btnCancela.Size = New System.Drawing.Size(90, 61)
         Me.btnCancela.TabIndex = 10
         Me.btnCancela.Text = "Cancelar"
         Me.btnCancela.UseVisualStyleBackColor = False
@@ -3773,9 +3775,10 @@ Partial Class frmConfigs
         '
         Me.btnGPago.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.btnGPago.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnGPago.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnGPago.Location = New System.Drawing.Point(364, 299)
         Me.btnGPago.Name = "btnGPago"
-        Me.btnGPago.Size = New System.Drawing.Size(90, 29)
+        Me.btnGPago.Size = New System.Drawing.Size(90, 61)
         Me.btnGPago.TabIndex = 9
         Me.btnGPago.Text = "Guardar"
         Me.btnGPago.UseVisualStyleBackColor = False
