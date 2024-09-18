@@ -1306,30 +1306,30 @@ Partial Class Inicio
         'ContenidoToolStripMenuItem
         '
         Me.ContenidoToolStripMenuItem.Name = "ContenidoToolStripMenuItem"
-        Me.ContenidoToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ContenidoToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
         Me.ContenidoToolStripMenuItem.Text = "&Contenido"
         '
         'ÍndiceToolStripMenuItem
         '
         Me.ÍndiceToolStripMenuItem.Name = "ÍndiceToolStripMenuItem"
-        Me.ÍndiceToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ÍndiceToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
         Me.ÍndiceToolStripMenuItem.Text = "Índic&e"
         '
         'BuscarToolStripMenuItem
         '
         Me.BuscarToolStripMenuItem.Name = "BuscarToolStripMenuItem"
-        Me.BuscarToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.BuscarToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
         Me.BuscarToolStripMenuItem.Text = "&Buscar"
         '
         'toolStripSeparator6
         '
         Me.toolStripSeparator6.Name = "toolStripSeparator6"
-        Me.toolStripSeparator6.Size = New System.Drawing.Size(177, 6)
+        Me.toolStripSeparator6.Size = New System.Drawing.Size(132, 6)
         '
         'AcercadeToolStripMenuItem
         '
         Me.AcercadeToolStripMenuItem.Name = "AcercadeToolStripMenuItem"
-        Me.AcercadeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AcercadeToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
         Me.AcercadeToolStripMenuItem.Text = "&Acerca de..."
         '
         'MenuVentasRuta
@@ -1618,7 +1618,7 @@ Partial Class Inicio
         Me.PictureBox1.Location = New System.Drawing.Point(435, 339)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Padding = New System.Windows.Forms.Padding(5, 5, 0, 0)
-        Me.PictureBox1.Size = New System.Drawing.Size(403, 142)
+        Me.PictureBox1.Size = New System.Drawing.Size(502, 196)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 3
         Me.PictureBox1.TabStop = False
