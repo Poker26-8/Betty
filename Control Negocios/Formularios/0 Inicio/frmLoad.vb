@@ -21,15 +21,14 @@ Public Class frmLoad
         PrimeraConfig = ""
         Login.Hide()
 
+        VerificarVentasDetalle()
+        My.Application.DoEvents()
 
         Label1.Text = "Cargando base de datos..."
         ProgressBar1.Value = 25
         My.Application.DoEvents()
 
         ' BuscarTablas()
-
-
-
 
         ProgressBar1.Value = 40
         My.Application.DoEvents()
@@ -3651,5 +3650,69 @@ Public Class frmLoad
             MsgBox("El Archivo CreateDB_Users no existe hay que colocarlo en la carpeta correspondiente")
         End Try
 
+    End Sub
+
+    Public Sub VerificarVentasDetalle()
+        Try
+            Dim foliovd As Integer = 0
+            Dim codunico As String = ""
+            Dim idvd As Integer = 0
+            Dim sumt As Integer = 0
+
+            cnn1.Close() : cnn1.Open()
+            cnn2.Close() : cnn2.Open()
+            cnn3.Close() : cnn3.Open()
+
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT Folio FROM ventas ORDER BY Folio desc LIMIT 60"
+            rd1 = cmd1.ExecuteReader
+            Do While rd1.Read
+                If rd1.HasRows Then
+                    foliovd = rd1(0).ToString
+
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "SELECT CodUnico FROM ventasdetalle WHERE Folio=" & foliovd & ""
+                    rd2 = cmd2.ExecuteReader
+                    Do While rd2.Read
+                        If rd2.HasRows Then
+                            codunico = rd2(0).ToString
+
+                            cmd3 = cnn3.CreateCommand
+                            cmd3.CommandText = "SELECT COUNT(CodUnico),Id FROM ventasdetalle WHERE CodUnico='" & codunico & "'"
+                            rd3 = cmd3.ExecuteReader
+                            If rd3.HasRows Then
+                                If rd3.Read Then
+                                    sumt = rd3(0).ToString
+                                    idvd = rd3(1).ToString
+
+                                    If sumt > 1 Then
+                                        cnn4.Close() : cnn4.Open()
+                                        cmd4 = cnn4.CreateCommand
+                                        cmd4.CommandText = "DELETE FROM ventasdetalle WHERE Id=" & idvd & " AND CodUnico='" & codunico & "'"
+                                        cmd4.ExecuteNonQuery()
+                                        cnn4.Close()
+                                    End If
+
+                                End If
+                            End If
+                            rd3.Close()
+
+                        End If
+                    Loop
+                    rd2.Close()
+
+                End If
+            Loop
+            rd1.Close()
+            cnn1.Close()
+            cnn2.Close()
+            cnn3.Close()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+            cnn2.Close()
+            cnn3.Close()
+        End Try
     End Sub
 End Class
