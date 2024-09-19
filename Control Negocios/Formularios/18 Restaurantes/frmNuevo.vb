@@ -13,25 +13,56 @@ Public Class frmNuevo
 
     Private Sub btnPdf_Click(sender As Object, e As EventArgs) Handles btnPdf.Click
 
-        Dim filePath As String = "C:\ControlNegociosPro\Archivos de importación\CATALOGO.txt"
-        Dim lines As String() = IO.File.ReadAllLines(filePath)
+        DataGridView1.Rows.Clear()
 
-        For Each line As String In lines
-            Dim part1 As String = line.Substring(0, 13).Trim()
-            Dim part2 As String = line.Substring(14, 35).Trim()
-            Dim part3 As String = line.Substring(46, 52).Trim()
-            Dim part4 As String = line.Substring(53, 61).Trim()
-            Dim part5 As String = line.Substring(62, 58).Trim()
+        Dim id As String = ""
+        Dim codigo As String = ""
+        Dim codunico As String = ""
+        cnn1.Close() : cnn1.Open()
+        cnn2.Close() : cnn2.Open()
+        cmd1 = cnn1.CreateCommand
+        cmd1.CommandText = "SELECT Id,Codigo,CodUnico FROM ventasdetalle WHERE Folio=21"
+        rd1 = cmd1.ExecuteReader
+        Do While rd1.Read
+            If rd1.HasRows Then
+                id = rd1(0).ToString
+                codigo = rd1(1).ToString
+                codunico = rd1(2).ToString
 
-            Console.WriteLine($"Parte 1: {part1}")
-            Console.WriteLine($"Parte 2: {part2}")
-            Console.WriteLine($"Parte 3: {part3}")
-            Console.WriteLine($"Parte 4: {part4}")
-            Console.WriteLine($"Parte 5: {part5}")
+                DataGridView1.Rows.Add(id, codigo, codunico)
+            End If
+        Loop
+        rd1.Close()
 
-            grdCaptura1.Rows.Add(part1, part2, part3, part4, part5)
+        Dim cunico As String = ""
+        Dim ideli As Integer = 0
+        Dim suma As Integer = 0
+        For LUFFY As Integer = 0 To DataGridView1.Rows.Count - 1
+            cunico = DataGridView1.Rows(LUFFY).Cells(2).Value.ToString
+
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText = "SELECT COUNT(CodUnico),Id from ventasdetalle WHERE CodUnico='" & cunico & "' AND Folio='21'"
+            rd2 = cmd2.ExecuteReader
+            If rd2.HasRows Then
+                If rd2.Read Then
+                    suma = rd2(0).ToString
+                    ideli = rd2(1).ToString
+                    If suma > 1 Then
+                        cnn3.Close() : cnn3.Open()
+                        cmd3 = cnn3.CreateCommand
+                        cmd3.CommandText = "DELETE FROM ventasdetalle WHERE Id=" & ideli & " AND CodUnico='" & cunico & "'"
+                        cmd3.ExecuteNonQuery()
+                        cnn3.Close()
+                    End If
+                End If
+            Else
+
+            End If
+            rd2.Close()
 
         Next
+        cnn1.Close()
+        cnn2.Close()
 
     End Sub
 End Class

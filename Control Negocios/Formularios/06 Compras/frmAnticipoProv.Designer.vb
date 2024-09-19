@@ -57,6 +57,7 @@ Partial Class frmAnticipoProv
         Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.lblusuario = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -432,11 +433,22 @@ Partial Class frmAnticipoProv
         Me.Column14.Name = "Column14"
         Me.Column14.ReadOnly = True
         '
+        'lblusuario
+        '
+        Me.lblusuario.BackColor = System.Drawing.Color.Navy
+        Me.lblusuario.ForeColor = System.Drawing.Color.White
+        Me.lblusuario.Location = New System.Drawing.Point(231, 3)
+        Me.lblusuario.Name = "lblusuario"
+        Me.lblusuario.Size = New System.Drawing.Size(98, 23)
+        Me.lblusuario.TabIndex = 228
+        Me.lblusuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'frmAnticipoProv
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(430, 318)
+        Me.Controls.Add(Me.lblusuario)
         Me.Controls.Add(Me.grdPagos)
         Me.Controls.Add(Me.txtusuario)
         Me.Controls.Add(Me.btnnuevo)
@@ -498,4 +510,5 @@ Partial Class frmAnticipoProv
     Friend WithEvents Column11 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column12 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column14 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents lblusuario As Label
 End Class

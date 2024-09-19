@@ -69,49 +69,59 @@ Public Class frmCompras
         If cboproveedor.Text <> "" Then
             txtsaldo.Text = "0.00"
             Dim dias As Integer = 0
+            Dim MySaldo As Double = 0
             Try
                 cnn1.Close() : cnn1.Open()
 
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
-                    "select DiasCred from Proveedores where Compania='" & cboproveedor.Text & "'"
+                    "select DiasCred,Saldo from Proveedores where Compania='" & cboproveedor.Text & "'"
                 rd1 = cmd1.ExecuteReader
                 If rd1.HasRows Then
                     If rd1.Read Then
                         dias = rd1("DiasCred").ToString
                         dtpfpago.Value = DateAdd(DateInterval.Day, dias, Date.Now)
+                        MySaldo = rd1("Saldo").ToString
                     End If
                 End If
                 rd1.Close()
 
-                Dim MySaldo As Double = 0
 
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText =
-                    "select Saldo from AbonoE where Id=(select MAX(Id) from AbonoE where Proveedor='" & cboproveedor.Text & "')"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        MySaldo = FormatNumber(CDbl(IIf(rd1(0).ToString() = "", 0, rd1(0).ToString())), 2)
-                        Button1.Enabled = True
-                        txtpAnticipo.Enabled = True
-                        lblpAnticipo.Enabled = True
-                    Else
-                        txtsaldo.Text = "0.00"
-                        Button1.Enabled = False
-                        txtpAnticipo.Enabled = False
-                        lblpAnticipo.Enabled = False
-                    End If
+
+                'cmd1 = cnn1.CreateCommand
+                'cmd1.CommandText =
+                '    "select Saldo from AbonoE where Id=(select MAX(Id) from AbonoE where Proveedor='" & cboproveedor.Text & "')"
+                'rd1 = cmd1.ExecuteReader
+                'If rd1.HasRows Then
+                '    If rd1.Read Then
+                '        MySaldo = FormatNumber(CDbl(IIf(rd1(0).ToString() = "", 0, rd1(0).ToString())), 2)
+                '        Button1.Enabled = True
+                '        txtpAnticipo.Enabled = True
+                '        lblpAnticipo.Enabled = True
+                '    Else
+                '        txtsaldo.Text = "0.00"
+                '        Button1.Enabled = False
+                '        txtpAnticipo.Enabled = False
+                '        lblpAnticipo.Enabled = False
+                '    End If
+                'Else
+                '    txtsaldo.Text = "0.00"
+                '    Button1.Enabled = False
+                '    txtpAnticipo.Enabled = False
+                '    lblpAnticipo.Enabled = False
+                'End If
+                'rd1.Close() : cnn1.Close()
+
+                If MySaldo > 0 Then
+                    Button1.Enabled = True
+                    txtpAnticipo.Enabled = True
+                    lblpAnticipo.Enabled = True
+                    txtsaldo.Text = FormatNumber(Math.Abs(MySaldo), 2)
                 Else
                     txtsaldo.Text = "0.00"
                     Button1.Enabled = False
                     txtpAnticipo.Enabled = False
                     lblpAnticipo.Enabled = False
-                End If
-                rd1.Close() : cnn1.Close()
-
-                If MySaldo < 0 Then
-                    txtsaldo.Text = FormatNumber(Math.Abs(MySaldo), 2)
                 End If
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
@@ -2681,34 +2691,35 @@ kaka:
                 cnn1.Close() : cnn1.Open()
 
                 cmd1 = cnn1.CreateCommand
-                cmd1.CommandText =
-                    "SELECT Anticipo FROM Pedidos WHERE Proveedor='" & cboproveedor.Text & "' AND Status=0"
+                cmd1.CommandText = "SELECT Saldo FROM proveedores WHERE Compania='" & cboproveedor.Text & "'"
+                ' "SELECT Anticipo FROM Pedidos WHERE Proveedor='" & cboproveedor.Text & "' AND Status=0"
+
                 rd1 = cmd1.ExecuteReader
                 Do While rd1.Read
                     If rd1.HasRows Then
-                        ant_pedidos = ant_pedidos + CDbl(rd1("Anticipo").ToString)
+                        ant_pedidos = ant_pedidos + CDbl(rd1("Saldo").ToString)
                     End If
                 Loop
                 rd1.Close()
 
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText =
-                    "select Saldo from AbonoE where Id=(SELECT MAX(Id) FROM AbonoE WHERE Proveedor='" & cboproveedor.Text & "')"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        saldo_disponible = CDbl(IIf(rd1(0).ToString = "", 0, rd1(0).ToString))
-                        saldo_disponible = Math.Abs(saldo_disponible)
-                    End If
-                End If
-                rd1.Close()
+                'cmd1 = cnn1.CreateCommand
+                'cmd1.CommandText =
+                '    "select Saldo from AbonoE where Id=(SELECT MAX(Id) FROM AbonoE WHERE Proveedor='" & cboproveedor.Text & "')"
+                'rd1 = cmd1.ExecuteReader
+                'If rd1.HasRows Then
+                '    If rd1.Read Then
+                '        saldo_disponible = CDbl(IIf(rd1(0).ToString = "", 0, rd1(0).ToString))
+                '        saldo_disponible = Math.Abs(saldo_disponible)
+                '    End If
+                'End If
+                'rd1.Close()
                 cnn1.Close()
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
                 cnn1.Close()
             End Try
 
-            ant_disponible = saldo_disponible - ant_pedidos
+            ant_disponible = ant_pedidos
             If CDbl(txtpAnticipo.Text) > ant_disponible Then
                 MsgBox("No cuentas con el saldo suficiente para aplicar este anticipo.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
                 txtpAnticipo.Text = "0.00"
@@ -5501,6 +5512,80 @@ quepasowey:
 
         cnn1.Close() : cnn1.Open()
 
+        'If MySaldoF = 0 Then
+        '    MsgBox("paso")
+
+        'Else
+        '    'Agregar la compra si el proveedor tiene saldo disponible
+        '    'Trear el saldo actual del proveedor
+
+        '    If txtanticipo.Text > 0 Then
+        '        cmd1 = cnn1.CreateCommand
+        '        cmd1.CommandText =
+        '                "select Saldo from AbonoE where Id=(select max(Id) from AbonoE where IdProv=" & MyID & ")"
+        '        rd1 = cmd1.ExecuteReader
+        '        If rd1.HasRows Then
+        '            If rd1.Read Then
+        '                MySaldo = CDbl(IIf(rd1(0).ToString = "", 0, rd1(0).ToString)) - CDbl(txtanticipo.Text)
+        '            End If
+        '        Else
+        '            MySaldo = CDbl(txtapagar.Text)
+        '        End If
+        '        rd1.Close()
+        '        MySaldo = FormatNumber(MySaldo, 4)
+        '    Else
+        '        cmd1 = cnn1.CreateCommand
+        '        cmd1.CommandText =
+        '                "select Saldo from AbonoE where Id=(select max(Id) from AbonoE where IdProv=" & MyID & ")"
+        '        rd1 = cmd1.ExecuteReader
+        '        If rd1.HasRows Then
+        '            If rd1.Read Then
+        '                MySaldo = CDbl(IIf(rd1(0).ToString = "", 0, rd1(0).ToString)) + CDbl(txtapagar.Text)
+        '            End If
+        '        Else
+        '            MySaldo = CDbl(txtapagar.Text)
+        '        End If
+        '        rd1.Close()
+        '        MySaldo = FormatNumber(MySaldo, 4)
+        '    End If
+        '    cmd1 = cnn1.CreateCommand
+        '    cmd1.CommandText =
+        '            "insert into AbonoE(NumRemision,NumFactura,NumPedido,IdProv,Proveedor,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,Banco,Referencia,Usuario) values('" & cboremision.Text & "','" & cbofactura.Text & "','" & cbopedido.Text & "'," & MyID & ",'" & cboproveedor.Text & "','COMPRA','" & Format(dtpfecha.Value, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & CDbl(txtapagar.Text) & ",0," & MySaldo & ",'','','" & alias_compras & "')"
+        '    cmd1.ExecuteNonQuery()
+
+        '    If CDbl(txtresta.Text) = 0 Then
+        '        Status = "PAGADO"
+        '    Else
+        '        Status = "RESTA"
+        '    End If
+
+        '    'traer la suma de lo que nos pago el proveedor
+        '    MyACuenta = CDbl(txtefectivo.Text) + CDbl(txtpagos.Text) + CDbl(txtanticipo.Text)
+        '    If MyACuenta > 0 Then
+        '        cmd1 = cnn1.CreateCommand
+        '        cmd1.CommandText =
+        '                "select Saldo from AbonoE where Id=(select max(Id) from AbonoE where IdProv=" & MyID & ")"
+        '        rd1 = cmd1.ExecuteReader
+        '        If rd1.HasRows Then
+        '            If rd1.Read Then
+        '                MySaldo = CDbl(IIf(rd1(0).ToString = "", 0, rd1(0).ToString)) - MyACuenta
+        '            End If
+        '        Else
+        '            MySaldo = MyACuenta
+        '        End If
+        '        rd1.Close()
+
+        '        tarjeta = txtpc_tarjeta.Text
+        '        transfe = txtpc_transfe.Text
+        '        otro = txtpc_otro.Text
+
+        '        cmd1 = cnn1.CreateCommand
+        '        cmd1.CommandText =
+        '                "insert into AbonoE(NumRemision,NumFactura,NumPedido,IdProv,Proveedor,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,Efectivo,Tarjeta,Transfe,Otro,Banco,Referencia,Usuario,Corte,CorteU,Cargado) values('" & cboremision.Text & "','" & cbofactura.Text & "','" & cbopedido.Text & "'," & MyID & ",'" & cboproveedor.Text & "','ABONO','" & Format(dtpfecha.Value, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & MyACuenta & "," & MySaldo & "," & efectivo & "," & tarjeta & "," & transfe & "," & otro & ",'','','" & alias_compras & "',0,0,0)"
+        '        cmd1.ExecuteNonQuery()
+        '    End If
+        'End If
+
         If MySaldoF = 0 Then
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
@@ -5579,7 +5664,7 @@ quepasowey:
                     Status = "RESTA"
                 End If
 
-                MyACuenta = CDbl(txtefectivo.Text) + CDbl(txtpagos.Text)
+                MyACuenta = CDbl(txtefectivo.Text) + CDbl(txtpagos.Text) + CDbl(txtanticipo.Text)
 
                 If MyACuenta > 0 Then
                     cmd1 = cnn1.CreateCommand
@@ -5669,7 +5754,10 @@ quepasowey:
                     End If
                 Else
                     If MySaldoF > 0 Then
-
+                        'cmd1 = cnn1.CreateCommand
+                        'cmd1.CommandText =
+                        '        "insert into AbonoE(NumRemision,NumFactura,NumPedido,IdProv,Proveedor,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,Banco,Referencia,Usuario) values('" & cboremision.Text & "','" & cbofactura.Text & "','" & cbopedido.Text & "'," & MyID & ",'" & cboproveedor.Text & "','COMPRA','" & Format(dtpfecha.Value, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & CDbl(txtapagar.Text) & ",0," & tota_abono & ",'','','" & alias_compras & "')"
+                        'cmd1.ExecuteNonQuery()
                     Else
 
                     End If
@@ -5698,7 +5786,7 @@ quepasowey:
                     Status = "PAGADO"
                     MyResta = 0
 
-                    MyACuenta = CDbl(txtapagar.Text)
+                    MyACuenta = CDbl(txtefectivo.Text) + CDbl(txtpagos.Text) + CDbl(txtanticipo.Text) 'CDbl(txtapagar.Text)
 
                     cmd1 = cnn1.CreateCommand
                     cmd1.CommandText =
@@ -5717,6 +5805,7 @@ quepasowey:
                     cmd1.CommandText =
                             "insert into AbonoE(NumRemision,NumFactura,NumPedido,IdProv,Proveedor,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,Efectivo,Tarjeta,Transfe,Otro,Banco,Referencia,Usuario,Corte,CorteU,Cargado) values('" & cboremision.Text & "','" & cbofactura.Text & "','" & cbopedido.Text & "'," & MyID & ",'" & cboproveedor.Text & "','ABONO','" & Format(dtpfecha.Value, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & MyACuenta & "," & MySaldo & "," & efectivo & "," & tarjeta & "," & transfe & "," & MyACuenta & ",'" & banco & "','" & refer & "','" & alias_compras & "',0,0,0)"
                     cmd1.ExecuteNonQuery()
+
                 ElseIf MySaldoF < CDbl(txtresta.Text) Then
                     If CDbl(txtresta.Text) = 0 Then
                         Status = "PAGADO"
@@ -5725,6 +5814,33 @@ quepasowey:
                     End If
 
                     MyACuenta = CDbl(txtefectivo.Text) + CDbl(txtpagos.Text)
+
+                    cmd1 = cnn1.CreateCommand
+                    cmd1.CommandText =
+                            "select Saldo from AbonoE where Id=(select max(Id) from AbonoE where IdProv=" & MyID & ")"
+                    rd1 = cmd1.ExecuteReader
+                    If rd1.HasRows Then
+                        If rd1.Read Then
+                            MySaldo = CDbl(IIf(rd1(0).ToString = "", 0, rd1(0).ToString)) - CDbl(txtanticipo.Text) 'MyACuenta
+                        End If
+                    Else
+                        MySaldo = MyACuenta
+                    End If
+                    rd1.Close()
+
+                    cmd1 = cnn1.CreateCommand
+                    cmd1.CommandText =
+                            "insert into AbonoE(NumRemision,NumFactura,NumPedido,IdProv,Proveedor,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,Banco,Referencia,Usuario) values('" & cboremision.Text & "','" & cbofactura.Text & "','" & cbopedido.Text & "'," & MyID & ",'" & cboproveedor.Text & "','COMPRA','" & Format(dtpfecha.Value, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & CDbl(txtapagar.Text) & ",0," & MySaldo & ",'','','" & alias_compras & "')"
+                    cmd1.ExecuteNonQuery()
+
+                    Dim abonoc As Double = 0
+                    abonoc = CDbl(txtapagar.Text) - CDbl(MySaldoF)
+
+                    cmd1 = cnn1.CreateCommand
+                    cmd1.CommandText =
+                            "insert into AbonoE(NumRemision,NumFactura,NumPedido,IdProv,Proveedor,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,Efectivo,Tarjeta,Transfe,Otro,Banco,Referencia,Usuario,Corte,CorteU,Cargado) values('" & cboremision.Text & "','" & cbofactura.Text & "','" & cbopedido.Text & "'," & MyID & ",'" & cboproveedor.Text & "','ABONO','" & Format(dtpfecha.Value, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & MySaldoF & "," & abonoc & "," & efectivo & "," & tarjeta & "," & transfe & "," & MyACuenta & ",'" & banco & "','" & refer & "','" & alias_compras & "',0,0,0)"
+                    cmd1.ExecuteNonQuery()
+
                 End If
             End If
         End If
@@ -5912,6 +6028,12 @@ quepasowey:
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                     "update Pedidos set Status=1 where Num='" & cbopedido.Text & "' and Proveedor='" & cboproveedor.Text & "'"
+            cmd1.ExecuteNonQuery()
+        End If
+        If txtsaldo.Text > 0 Then
+
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "UPDATE proveedores SET Saldo=Saldo - " & txtanticipo.Text & " WHERE Compania='" & cboproveedor.Text & "'"
             cmd1.ExecuteNonQuery()
         End If
 

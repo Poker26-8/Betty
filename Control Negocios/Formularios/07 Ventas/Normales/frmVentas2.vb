@@ -9295,6 +9295,40 @@ Door:
 
         Dim imprimeorden As Integer = 0
 
+        '---------------------------------------FUNCION PARA ELIMINAR DETALLES DE VENTAS DUPLICADOS-----------
+        Dim sumac As Integer = 0
+        Dim ideli As Integer = 0
+        Dim cunico As String = ""
+
+        cnn2.Close() : cnn2.Open()
+        For luffy As Integer = 0 To grdcaptura.Rows.Count - 1
+            cunico = grdcaptura.Rows(luffy).Cells(15).Value.ToString
+
+            If cunico = "" Then
+
+            Else
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "SELECT COUNT(CodUnico),Id FROM ventasdetalle WHERE CodUnico='" & cunico & "' AND Folio=" & MYFOLIO & ""
+                rd2 = cmd2.ExecuteReader
+                If rd2.HasRows Then
+                    If rd2.Read Then
+                        sumac = rd2(0).ToString
+                        ideli = rd2(1).ToString
+
+                        If sumac > 1 Then
+                            cnn3.Close() : cnn3.Open()
+                            cmd3 = cnn3.CreateCommand
+                            cmd3.CommandText = "DELETE FROM ventasdetalle WHERE Id=" & ideli & " AND CodUnico='" & cunico & "'"
+                            cmd3.ExecuteNonQuery()
+                            cnn3.Close()
+                        End If
+                    End If
+                End If
+                rd2.Close()
+            End If
+        Next
+        cnn2.Close()
+
         '---------------------------------------imprimir comandas---------------------------------------------
 
         cnn1.Close() : cnn1.Open()

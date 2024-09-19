@@ -727,7 +727,7 @@ Public Class frmVentas1
 
             Dim varcodunico As String = Format(CDate(Date.Now), "yyyy/MM/ddHH:mm:ss.fff") & codigo
             varcodunico = QuitarCaracteresEspeciales(varcodunico)
-
+            'varcodunico = "12345"
             If acumulaxd = 1 Then
                 For xxx As Integer = 0 To grdcaptura.Rows.Count - 1
                     If codigo = grdcaptura.Rows(xxx).Cells(0).Value.ToString Then
@@ -736,6 +736,8 @@ Public Class frmVentas1
                         GoTo kak
                     End If
                 Next
+
+
                 grdcaptura.Rows.Add(codigo, nombre, unidad, cantid, FormatNumber(precio, 4), FormatNumber(total, 2), existencia, id_lote, lote, fcad, FormatNumber(IvaIeps, 2), FormatNumber(ieps, 2), desucentoiva, total1, monedero, varcodunico)
             Else
                 grdcaptura.Rows.Add(codigo, nombre, unidad, cantid, FormatNumber(precio, 4), FormatNumber(total, 2), existencia, id_lote, lote, fcad, FormatNumber(IvaIeps, 2), FormatNumber(ieps, 2), desucentoiva, total1, monedero, varcodunico)
@@ -5641,6 +5643,9 @@ kaka:
     Private Sub Button5_Click(sender As System.Object, e As System.EventArgs) Handles Button5.Click
         frmAbonoNotas.Show()
         frmAbonoNotas.BringToFront()
+
+        frmNuevo.BringToFront()
+        frmNuevo.Show()
     End Sub
     Private Sub Button4_Click(sender As System.Object, e As System.EventArgs) Handles Button4.Click
         'frmPasa_Corte.Show()
@@ -8917,6 +8922,41 @@ Door:
 
 
         Dim imprimeorden As Integer = 0
+
+        '---------------------------------------FUNCION PARA ELIMINAR DETALLES DE VENTAS DUPLICADOS-----------
+        Dim sumac As Integer = 0
+        Dim ideli As Integer = 0
+        Dim cunico As String = ""
+
+        cnn2.Close() : cnn2.Open()
+        For luffy As Integer = 0 To grdcaptura.Rows.Count - 1
+            cunico = grdcaptura.Rows(luffy).Cells(15).Value.ToString
+
+            If cunico = "" Then
+
+            Else
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "SELECT COUNT(CodUnico),Id FROM ventasdetalle WHERE CodUnico='" & cunico & "' AND Folio=" & MYFOLIO & ""
+                rd2 = cmd2.ExecuteReader
+                If rd2.HasRows Then
+                    If rd2.Read Then
+                        sumac = rd2(0).ToString
+                        ideli = rd2(1).ToString
+
+                        If sumac > 1 Then
+                            cnn3.Close() : cnn3.Open()
+                            cmd3 = cnn3.CreateCommand
+                            cmd3.CommandText = "DELETE FROM ventasdetalle WHERE Id=" & ideli & " AND CodUnico='" & cunico & "'"
+                            cmd3.ExecuteNonQuery()
+                            cnn3.Close()
+                        End If
+                    End If
+                End If
+                rd2.Close()
+            End If
+
+        Next
+        cnn2.Close()
 
         '---------------------------------------imprimir comandas---------------------------------------------
 

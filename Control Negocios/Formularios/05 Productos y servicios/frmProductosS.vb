@@ -1,9 +1,10 @@
 ﻿Imports System.Net
 Imports System.IO
 Imports System.Data.OleDb
-Imports Microsoft.Office.Interop.Excel
+
 Imports MySql.Data
 Imports System.Runtime.Remoting.Contexts
+Imports ClosedXML.Excel
 
 Public Class frmProductosS
 
@@ -774,7 +775,6 @@ Public Class frmProductosS
 
     End Sub
 
-
     Private Sub btnImportar_Click(sender As System.Object, e As System.EventArgs) Handles btnImportar.Click
         If MsgBox("Estas apunto de importar tu catálogo desde un archivo de Excel, para evitar errores asegúrate de que la hoja de Excel tiene el nombre de 'Hoja1' y cerciórate de que el archivo está guardado y cerrado.", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
             Excel_Grid_SQL(DataGridView1)
@@ -1298,14 +1298,14 @@ Public Class frmProductosS
 
                     cnn2.Close()
                     cnn2.Open()
-                        cmd2 = cnn2.CreateCommand
-                        cmd2.CommandText = "Insert into Productos(Codigo, CodBarra, nombre, nombrelargo, provpri, proveme, provres, ucompra, uventa, UMinima, mcd, multiplo, departamento, grupo, ubicacion, min, max, comision, preciocompra, PorcMin, Porcentaje, precioventa, precioventaiva,PreMin, iva, existencia, PorcMay, PorcMM, PorcEsp, premay, premm, preesp, CantMin1, CantMay1, CantMM1, CantEsp1, CantLst1, cantmin2, cantmay2, cantmm2, cantesp2, CantLst2, pres_vol, id_tbmoneda, almacen3, clavesat, UnidadSat, isr,Fecha,Fecha_inicial,fecha_final) values('" & codigo & "','" & codbarras & "','" & nombre & "','" & nombrelargo & "','" & provpri & "','" & proveme & "'," & provres & ",'" & ucompra & "','" & uventa & "','" & ventamin & "'," & mcd & "," & multiplo & ",'" & departamento & "','" & grupo & "','" & ubicacion & "'," & min & "," & max & ",'" & comision & "'," & preciocompra & "," & porcentagemin & "," & porcentage & "," & precioventa & "," & precioventaiva & "," & precioventaminiva & "," & iva & "," & existencia & "," & pormay & "," & pormm & "," & poresp & "," & premay & "," & premm & "," & preesp & "," & cantmin & "," & cantmay & "," & cantmm & "," & cantesp & "," & cantlta & "," & cantmin2 & "," & cantmay2 & "," & cantmm2 & "," & cantesp2 & "," & cantlta & "," & presvol & "," & id_tbmoneda & "," & almacen3 & ",'" & clavesat & "','" & claveunidad & "'," & isr & ",'" & fecha & "','" & fecha & "','" & fecha & "')"
-                        If cmd2.ExecuteNonQuery Then
-                            cuantos = cuantos + 1
-                            txtbarras.Text = cuantos
-                            My.Application.DoEvents()
-                        Else
-                            MsgBox("Revisa el codigo " & codigo & " hay un error", vbCritical + vbOKOnly)
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "Insert into Productos(Codigo, CodBarra, nombre, nombrelargo, provpri, proveme, provres, ucompra, uventa, UMinima, mcd, multiplo, departamento, grupo, ubicacion, min, max, comision, preciocompra, PorcMin, Porcentaje, precioventa, precioventaiva,PreMin, iva, existencia, PorcMay, PorcMM, PorcEsp, premay, premm, preesp, CantMin1, CantMay1, CantMM1, CantEsp1, CantLst1, cantmin2, cantmay2, cantmm2, cantesp2, CantLst2, pres_vol, id_tbmoneda, almacen3, clavesat, UnidadSat, isr,Fecha,Fecha_inicial,fecha_final) values('" & codigo & "','" & codbarras & "','" & nombre & "','" & nombrelargo & "','" & provpri & "','" & proveme & "'," & provres & ",'" & ucompra & "','" & uventa & "','" & ventamin & "'," & mcd & "," & multiplo & ",'" & departamento & "','" & grupo & "','" & ubicacion & "'," & min & "," & max & ",'" & comision & "'," & preciocompra & "," & porcentagemin & "," & porcentage & "," & precioventa & "," & precioventaiva & "," & precioventaminiva & "," & iva & "," & existencia & "," & pormay & "," & pormm & "," & poresp & "," & premay & "," & premm & "," & preesp & "," & cantmin & "," & cantmay & "," & cantmm & "," & cantesp & "," & cantlta & "," & cantmin2 & "," & cantmay2 & "," & cantmm2 & "," & cantesp2 & "," & cantlta & "," & presvol & "," & id_tbmoneda & "," & almacen3 & ",'" & clavesat & "','" & claveunidad & "'," & isr & ",'" & fecha & "','" & fecha & "','" & fecha & "')"
+                    If cmd2.ExecuteNonQuery Then
+                        cuantos = cuantos + 1
+                        txtbarras.Text = cuantos
+                        My.Application.DoEvents()
+                    Else
+                        MsgBox("Revisa el codigo " & codigo & " hay un error", vbCritical + vbOKOnly)
                         End If
 
                     'Else
@@ -1441,131 +1441,265 @@ Public Class frmProductosS
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If MsgBox("Estas apunto de importar tu catálogo desde un archivo de Excel, para evitar errores asegúrate de que la hoja de Excel tiene el nombre de 'Hoja1' y cerciórate de que el archivo está guardado y cerrado.", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
-            Excel_Grid_10(DataGridView1)
+            ' Excel_Grid_10(DataGridView1)
+            CargarDatosDesdeExcel()
         End If
     End Sub
 
-    Private Sub Excel_Grid_10(ByVal tabla As DataGridView)
-        Dim con As OleDb.OleDbConnection
-        Dim dt As New System.Data.DataTable
-        Dim ds As New DataSet
-        Dim da As OleDb.OleDbDataAdapter
-        Dim cuadro_dialogo As New OpenFileDialog
-        Dim ruta As String = ""
-        Dim sheet As String = "hoja1"
+    Private Sub CargarDatosDesdeExcel()
 
-        With cuadro_dialogo
-            .Filter = "Archivos de cálculo(*.xls;*.xlsx)|*.xls;*.xlsx"
-            .Title = "Selecciona el archivo a importar"
-            .Multiselect = False
-            .InitialDirectory = My.Application.Info.DirectoryPath & "\Archivos de importación"
-            .ShowDialog()
-        End With
+        ' Crear el OpenFileDialog para seleccionar el archivo Excel
+        Dim openFileDialog As New OpenFileDialog()
+        openFileDialog.Filter = "Archivos de Excel|*.xlsx"
+        openFileDialog.Title = "Seleccionar archivo Excel"
 
-        Try
+        ' Si el usuario selecciona un archivo
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
 
-            If cuadro_dialogo.FileName.ToString() <> "" Then
-                ruta = cuadro_dialogo.FileName.ToString()
-                con = New OleDb.OleDbConnection(
-                    "Provider=Microsoft.ACE.OLEDB.12.0;" &
-                    " Data Source='" & ruta & "'; " &
-                    "Extended Properties='Excel 12.0 Xml;HDR=Yes'")
+            ' Ruta del archivo Excel seleccionado
+            Dim filePath As String = openFileDialog.FileName
 
-                da = New OleDb.OleDbDataAdapter("select * from [" & sheet & "$]", con)
+            ' Crear un DataTable para almacenar los datos
+            Dim dt As New DataTable()
 
-                con.Open()
-                da.Fill(ds, "MyData")
-                dt = ds.Tables("MyData")
-                tabla.DataSource = ds
-                tabla.DataMember = "MyData"
-                con.Close()
-            End If
+            ' Abrir el archivo de Excel usando ClosedXML
+            Using workbook As New XLWorkbook(filePath)
+                ' Asumimos que los datos están en la primera hoja
+                Dim worksheet As IXLWorksheet = workbook.Worksheet(1)
 
-            'Variables para alojar los datos del archivo de excel
-            Dim codigo, barras, nombre, unidad, proveedor, depto, grupo, prod_sat, unidad_sat, numparte As String
-            Dim fecha As String = Format(Date.Now, "yyyy-MM-dd")
-            Dim iva, compra, compra_iva, venta_siva, venta_civa, porcentaje, existencia, ieps As Double
-            Dim conteo As Integer = 0
+                ' Obtener la primera fila como encabezados y añadir columnas al DataTable
+                Dim firstRow As IXLRow = worksheet.Row(1)
+                For Each cell As IXLCell In firstRow.CellsUsed()
+                    dt.Columns.Add(cell.Value.ToString())
+                Next
 
-            barsube.Value = 0
-            barsube.Maximum = DataGridView1.Rows.Count
+                ' Recorrer las filas restantes y añadirlas al DataTable
+                For rowIndex As Integer = 2 To worksheet.RowsUsed().Count()
+                    Dim row As DataRow = dt.NewRow()
+                    Dim currentRow As IXLRow = worksheet.Row(rowIndex)
 
-            cnn1.Close() : cnn1.Open()
+                    For colIndex As Integer = 1 To dt.Columns.Count
+                        row(colIndex - 1) = currentRow.Cell(colIndex).GetValue(Of String)()
+                    Next
 
-            Dim contadorconexion As Integer = 0
+                    dt.Rows.Add(row)
+                Next
+            End Using
 
-            For zef As Integer = 0 To DataGridView1.Rows.Count - 1
+            ' Asignar el DataTable al DataGridView para mostrar los datos
+            DataGridView1.DataSource = dt
 
-                contadorconexion += 1
-
-                codigo = NulCad(DataGridView1.Rows(zef).Cells(0).Value.ToString())
-                If codigo = "" Then Exit For
-                barras = NulCad(DataGridView1.Rows(zef).Cells(1).Value.ToString())
-                nombre = UCase(NulCad(DataGridView1.Rows(zef).Cells(2).Value.ToString()))
-                iva = NulVa(DataGridView1.Rows(zef).Cells(3).Value.ToString())
-                unidad = NulCad(DataGridView1.Rows(zef).Cells(4).Value.ToString())
-                compra = NulVa(DataGridView1.Rows(zef).Cells(5).Value.ToString())
-                compra_iva = CDbl(compra) * (1 + CDbl(iva))
-                venta_siva = FormatNumber(NulVa(DataGridView1.Rows(zef).Cells(6).Value.ToString()) / (1 + iva), 2)
-                venta_civa = NulVa(DataGridView1.Rows(zef).Cells(6).Value.ToString())
-                porcentaje = IIf(compra_iva = 0, 0, FormatNumber(((venta_civa * 100) / compra_iva) - 100, 2))
-                proveedor = NulCad(DataGridView1.Rows(zef).Cells(7).Value.ToString())
-                depto = NulCad(DataGridView1.Rows(zef).Cells(8).Value.ToString())
-                grupo = NulCad(DataGridView1.Rows(zef).Cells(9).Value.ToString())
-                prod_sat = NulCad(DataGridView1.Rows(zef).Cells(10).Value.ToString())
-                unidad_sat = NulCad(DataGridView1.Rows(zef).Cells(11).Value.ToString())
-                existencia = NulVa(DataGridView1.Rows(zef).Cells(12).Value.ToString())
-                ieps = IIf(DataGridView1.Rows(zef).Cells(13).Value.ToString() = "", 0, DataGridView1.Rows(zef).Cells(13).Value.ToString())
-                numparte = IIf(DataGridView1.Rows(zef).Cells(14).Value.ToString() = "", 0, DataGridView1.Rows(zef).Cells(14).Value.ToString())
-
-                If contadorconexion > 499 Then
-                    cnn1.Close() : cnn1.Open()
-                    contadorconexion = 1
-                End If
-
-                nombre = Trim(Replace(nombre, "‘", ""))
-                nombre = Trim(Replace(nombre, "'", "''"))
-                proveedor = Trim(Replace(proveedor, "'", "''"))
-                depto = Trim(Replace(depto, "'", "''"))
-                grupo = Trim(Replace(grupo, "'", "''"))
+            Try
 
 
-                If (Comprueba(codigo, nombre, barras, proveedor)) Then
-                    If cnn1.State = 0 Then cnn1.Open()
 
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "insert into Productos(Codigo,CodBarra,Nombre,NombreLargo,ProvPri,ProvEme,ProvRes,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Ubicacion,Min,Max,Comision,PrecioCompra,PrecioVenta,PrecioVentaIVA,IVA,Existencia,Porcentaje,Fecha,pres_vol,id_tbMoneda,Promocion,Afecta_exis,Almacen3,ClaveSat,UnidadSat,Cargado,CargadoInv,Uso,Color,Genero,Marca,Articulo,Dia,Descu,Fecha_Inicial,Fecha_Final,Promo_Monedero,Unico,IIEPS,N_Serie,GPrint) values('" & codigo & "','" & barras & "','" & nombre & "','" & nombre & "','" & proveedor & "','" & proveedor & "',0,'" & unidad & "','" & unidad & "','" & unidad & "',1,1,'" & depto & "','" & grupo & "','',1,1,0," & compra & "," & venta_siva & "," & venta_civa & "," & iva & "," & existencia & "," & porcentaje & ",'" & fecha & "',0,1,0,0," & compra & ",'" & prod_sat & "','" & unidad_sat & "',0,0,'','','','','',0,'0','" & fecha & "','" & fecha & "',0,0," & ieps & ",'" & numparte & "','')"
-                    If cmd1.ExecuteNonQuery Then
+                'Variables para alojar los datos del archivo de excel
+                Dim codigo, barras, nombre, unidad, proveedor, depto, grupo, prod_sat, unidad_sat, numparte As String
+                Dim fecha As String = Format(Date.Now, "yyyy-MM-dd")
+                Dim iva, compra, compra_iva, venta_siva, venta_civa, porcentaje, existencia, ieps As Double
+                Dim conteo As Integer = 0
+
+                barsube.Value = 0
+                barsube.Maximum = DataGridView1.Rows.Count
+
+                cnn1.Close() : cnn1.Open()
+
+                Dim contadorconexion As Integer = 0
+
+                For zef As Integer = 0 To DataGridView1.Rows.Count - 1
+
+                    contadorconexion += 1
+
+                    codigo = NulCad(DataGridView1.Rows(zef).Cells(0).Value.ToString())
+                    If codigo = "" Then Exit For
+                    barras = NulCad(DataGridView1.Rows(zef).Cells(1).Value.ToString())
+                    nombre = UCase(NulCad(DataGridView1.Rows(zef).Cells(2).Value.ToString()))
+                    iva = NulVa(DataGridView1.Rows(zef).Cells(3).Value.ToString())
+                    unidad = NulCad(DataGridView1.Rows(zef).Cells(4).Value.ToString())
+                    compra = NulVa(DataGridView1.Rows(zef).Cells(5).Value.ToString())
+                    compra_iva = CDbl(compra) * (1 + CDbl(iva))
+                    venta_siva = FormatNumber(NulVa(DataGridView1.Rows(zef).Cells(6).Value.ToString()) / (1 + iva), 2)
+                    venta_civa = NulVa(DataGridView1.Rows(zef).Cells(6).Value.ToString())
+                    porcentaje = IIf(compra_iva = 0, 0, FormatNumber(((venta_civa * 100) / compra_iva) - 100, 2))
+                    proveedor = NulCad(DataGridView1.Rows(zef).Cells(7).Value.ToString())
+                    depto = NulCad(DataGridView1.Rows(zef).Cells(8).Value.ToString())
+                    grupo = NulCad(DataGridView1.Rows(zef).Cells(9).Value.ToString())
+                    prod_sat = NulCad(DataGridView1.Rows(zef).Cells(10).Value.ToString())
+                    unidad_sat = NulCad(DataGridView1.Rows(zef).Cells(11).Value.ToString())
+                    existencia = NulVa(DataGridView1.Rows(zef).Cells(12).Value.ToString())
+                    ieps = IIf(DataGridView1.Rows(zef).Cells(13).Value.ToString() = "", 0, DataGridView1.Rows(zef).Cells(13).Value.ToString())
+                    numparte = IIf(DataGridView1.Rows(zef).Cells(14).Value.ToString() = "", 0, DataGridView1.Rows(zef).Cells(14).Value.ToString())
+
+                    If contadorconexion > 499 Then
+                        cnn1.Close() : cnn1.Open()
+                        contadorconexion = 1
+                    End If
+
+                    nombre = Trim(Replace(nombre, "‘", ""))
+                    nombre = Trim(Replace(nombre, "'", "''"))
+                    proveedor = Trim(Replace(proveedor, "'", "''"))
+                    depto = Trim(Replace(depto, "'", "''"))
+                    grupo = Trim(Replace(grupo, "'", "''"))
+
+
+                    If (Comprueba(codigo, nombre, barras, proveedor)) Then
+                        If cnn1.State = 0 Then cnn1.Open()
+
+                        cmd1 = cnn1.CreateCommand
+                        cmd1.CommandText =
+                            "insert into Productos(Codigo,CodBarra,Nombre,NombreLargo,ProvPri,ProvEme,ProvRes,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Ubicacion,Min,Max,Comision,PrecioCompra,PrecioVenta,PrecioVentaIVA,IVA,Existencia,Porcentaje,Fecha,pres_vol,id_tbMoneda,Promocion,Afecta_exis,Almacen3,ClaveSat,UnidadSat,Cargado,CargadoInv,Uso,Color,Genero,Marca,Articulo,Dia,Descu,Fecha_Inicial,Fecha_Final,Promo_Monedero,Unico,IIEPS,N_Serie,GPrint) values('" & codigo & "','" & barras & "','" & nombre & "','" & nombre & "','" & proveedor & "','" & proveedor & "',0,'" & unidad & "','" & unidad & "','" & unidad & "',1,1,'" & depto & "','" & grupo & "','',1,1,0," & compra & "," & venta_siva & "," & venta_civa & "," & iva & "," & existencia & "," & porcentaje & ",'" & fecha & "',0,1,0,0," & compra & ",'" & prod_sat & "','" & unidad_sat & "',0,0,'','','','','',0,'0','" & fecha & "','" & fecha & "',0,0," & ieps & ",'" & numparte & "','')"
+                        If cmd1.ExecuteNonQuery Then
+
+                        Else
+                            MsgBox(codigo, nombre)
+                        End If
 
                     Else
                         MsgBox(codigo, nombre)
-                    End If
+                        conteo += 1
+                        barsube.Value = conteo
 
-                Else
-                    MsgBox(codigo, nombre)
+                        Continue For
+                    End If
                     conteo += 1
                     barsube.Value = conteo
+                Next
 
-                    Continue For
-                End If
-                conteo += 1
-                barsube.Value = conteo
-            Next
+                cnn1.Close()
+                barsube.Value = 0
 
-            cnn1.Close()
-            tabla.DataSource = Nothing
-            tabla.Dispose()
-            DataGridView1.Rows.Clear()
-            barsube.Value = 0
+                MsgBox(conteo & " productos fueron importados correctamente.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+            Catch ex As Exception
+                MessageBox.Show(ex.ToString)
+                cnn1.Close()
+            End Try
 
-            MsgBox(conteo & " productos fueron importados correctamente.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+        End If
 
-        Catch ex As Exception
-            MessageBox.Show(ex.ToString())
-            cnn1.Close()
-        End Try
+
     End Sub
+
+    'Private Sub Excel_Grid_10(ByVal tabla As DataGridView)
+    '    Dim con As OleDb.OleDbConnection
+    '    Dim dt As New System.Data.DataTable
+    '    Dim ds As New DataSet
+    '    Dim da As OleDb.OleDbDataAdapter
+    '    Dim cuadro_dialogo As New OpenFileDialog
+    '    Dim ruta As String = ""
+    '    Dim sheet As String = "hoja1"
+
+    '    With cuadro_dialogo
+    '        .Filter = "Archivos de cálculo(*.xls;*.xlsx)|*.xls;*.xlsx"
+    '        .Title = "Selecciona el archivo a importar"
+    '        .Multiselect = False
+    '        .InitialDirectory = My.Application.Info.DirectoryPath & "\Archivos de importación"
+    '        .ShowDialog()
+    '    End With
+
+    '    Try
+
+    '        If cuadro_dialogo.FileName.ToString() <> "" Then
+    '            ruta = cuadro_dialogo.FileName.ToString()
+    '            con = New OleDb.OleDbConnection(
+    '                "Provider=Microsoft.ACE.OLEDB.12.0;" &
+    '                " Data Source='" & ruta & "'; " &
+    '                "Extended Properties='Excel 12.0 Xml;HDR=Yes'")
+
+    '            da = New OleDb.OleDbDataAdapter("select * from [" & sheet & "$]", con)
+
+    '            con.Open()
+    '            da.Fill(ds, "MyData")
+    '            dt = ds.Tables("MyData")
+    '            tabla.DataSource = ds
+    '            tabla.DataMember = "MyData"
+    '            con.Close()
+    '        End If
+
+    '        'Variables para alojar los datos del archivo de excel
+    '        Dim codigo, barras, nombre, unidad, proveedor, depto, grupo, prod_sat, unidad_sat, numparte As String
+    '        Dim fecha As String = Format(Date.Now, "yyyy-MM-dd")
+    '        Dim iva, compra, compra_iva, venta_siva, venta_civa, porcentaje, existencia, ieps As Double
+    '        Dim conteo As Integer = 0
+
+    '        barsube.Value = 0
+    '        barsube.Maximum = DataGridView1.Rows.Count
+
+    '        cnn1.Close() : cnn1.Open()
+
+    '        Dim contadorconexion As Integer = 0
+
+    '        For zef As Integer = 0 To DataGridView1.Rows.Count - 1
+
+    '            contadorconexion += 1
+
+    '            codigo = NulCad(DataGridView1.Rows(zef).Cells(0).Value.ToString())
+    '            If codigo = "" Then Exit For
+    '            barras = NulCad(DataGridView1.Rows(zef).Cells(1).Value.ToString())
+    '            nombre = UCase(NulCad(DataGridView1.Rows(zef).Cells(2).Value.ToString()))
+    '            iva = NulVa(DataGridView1.Rows(zef).Cells(3).Value.ToString())
+    '            unidad = NulCad(DataGridView1.Rows(zef).Cells(4).Value.ToString())
+    '            compra = NulVa(DataGridView1.Rows(zef).Cells(5).Value.ToString())
+    '            compra_iva = CDbl(compra) * (1 + CDbl(iva))
+    '            venta_siva = FormatNumber(NulVa(DataGridView1.Rows(zef).Cells(6).Value.ToString()) / (1 + iva), 2)
+    '            venta_civa = NulVa(DataGridView1.Rows(zef).Cells(6).Value.ToString())
+    '            porcentaje = IIf(compra_iva = 0, 0, FormatNumber(((venta_civa * 100) / compra_iva) - 100, 2))
+    '            proveedor = NulCad(DataGridView1.Rows(zef).Cells(7).Value.ToString())
+    '            depto = NulCad(DataGridView1.Rows(zef).Cells(8).Value.ToString())
+    '            grupo = NulCad(DataGridView1.Rows(zef).Cells(9).Value.ToString())
+    '            prod_sat = NulCad(DataGridView1.Rows(zef).Cells(10).Value.ToString())
+    '            unidad_sat = NulCad(DataGridView1.Rows(zef).Cells(11).Value.ToString())
+    '            existencia = NulVa(DataGridView1.Rows(zef).Cells(12).Value.ToString())
+    '            ieps = IIf(DataGridView1.Rows(zef).Cells(13).Value.ToString() = "", 0, DataGridView1.Rows(zef).Cells(13).Value.ToString())
+    '            numparte = IIf(DataGridView1.Rows(zef).Cells(14).Value.ToString() = "", 0, DataGridView1.Rows(zef).Cells(14).Value.ToString())
+
+    '            If contadorconexion > 499 Then
+    '                cnn1.Close() : cnn1.Open()
+    '                contadorconexion = 1
+    '            End If
+
+    '            nombre = Trim(Replace(nombre, "‘", ""))
+    '            nombre = Trim(Replace(nombre, "'", "''"))
+    '            proveedor = Trim(Replace(proveedor, "'", "''"))
+    '            depto = Trim(Replace(depto, "'", "''"))
+    '            grupo = Trim(Replace(grupo, "'", "''"))
+
+
+    '            If (Comprueba(codigo, nombre, barras, proveedor)) Then
+    '                If cnn1.State = 0 Then cnn1.Open()
+
+    '                cmd1 = cnn1.CreateCommand
+    '                cmd1.CommandText =
+    '                    "insert into Productos(Codigo,CodBarra,Nombre,NombreLargo,ProvPri,ProvEme,ProvRes,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Ubicacion,Min,Max,Comision,PrecioCompra,PrecioVenta,PrecioVentaIVA,IVA,Existencia,Porcentaje,Fecha,pres_vol,id_tbMoneda,Promocion,Afecta_exis,Almacen3,ClaveSat,UnidadSat,Cargado,CargadoInv,Uso,Color,Genero,Marca,Articulo,Dia,Descu,Fecha_Inicial,Fecha_Final,Promo_Monedero,Unico,IIEPS,N_Serie,GPrint) values('" & codigo & "','" & barras & "','" & nombre & "','" & nombre & "','" & proveedor & "','" & proveedor & "',0,'" & unidad & "','" & unidad & "','" & unidad & "',1,1,'" & depto & "','" & grupo & "','',1,1,0," & compra & "," & venta_siva & "," & venta_civa & "," & iva & "," & existencia & "," & porcentaje & ",'" & fecha & "',0,1,0,0," & compra & ",'" & prod_sat & "','" & unidad_sat & "',0,0,'','','','','',0,'0','" & fecha & "','" & fecha & "',0,0," & ieps & ",'" & numparte & "','')"
+    '                If cmd1.ExecuteNonQuery Then
+
+    '                Else
+    '                    MsgBox(codigo, nombre)
+    '                End If
+
+    '            Else
+    '                MsgBox(codigo, nombre)
+    '                conteo += 1
+    '                barsube.Value = conteo
+
+    '                Continue For
+    '            End If
+    '            conteo += 1
+    '            barsube.Value = conteo
+    '        Next
+
+    '        cnn1.Close()
+    '        tabla.DataSource = Nothing
+    '        tabla.Dispose()
+    '        DataGridView1.Rows.Clear()
+    '        barsube.Value = 0
+
+    '        MsgBox(conteo & " productos fueron importados correctamente.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+
+    '    Catch ex As Exception
+    '        MessageBox.Show(ex.ToString())
+    '        cnn1.Close()
+    '    End Try
+    'End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         If MsgBox("Estas apunto de importar tu catálogo desde un archivo de Excel, para evitar errores asegúrate de que la hoja de Excel tiene el nombre de 'Hoja1' y cerciórate de que el archivo está guardado y cerrado.", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then

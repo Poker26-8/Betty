@@ -173,6 +173,47 @@ Public Class frmConsultaNotas
             grdAbonos.Rows.Clear()
             Try
                 cnn1.Close() : cnn1.Open()
+                '---------------------------------------FUNCION PARA ELIMINAR DETALLES DE VENTAS DUPLICADOS-----------
+                Dim sumac As Integer = 0
+                Dim ideli As Integer = 0
+                Dim cunico As String = ""
+
+                cnn3.Close() : cnn3.Open()
+
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "SELECT CodUnico FROM ventasdetalle WHERE Folio=" & cbofolio.Text
+                rd1 = cmd1.ExecuteReader
+                Do While rd1.Read
+                    If rd1.HasRows Then
+                        cunico = rd1(0).ToString
+
+                        If cunico = "" Then
+
+                        Else
+                            cmd3 = cnn3.CreateCommand
+                            cmd3.CommandText = "SELECT COUNT(CodUnico),Id FROM ventasdetalle WHERE CodUnico='" & cunico & "' AND Folio=" & cbofolio.Text & ""
+                            rd3 = cmd3.ExecuteReader
+                            If rd3.HasRows Then
+                                If rd3.Read Then
+                                    sumac = rd3(0).ToString
+                                    ideli = rd3(1).ToString
+
+                                    If sumac > 1 Then
+                                        cnn4.Close() : cnn4.Open()
+                                        cmd4 = cnn4.CreateCommand
+                                        cmd4.CommandText = "DELETE FROM ventasdetalle WHERE Id=" & ideli & " AND CodUnico='" & cunico & "'"
+                                        cmd4.ExecuteNonQuery()
+                                        cnn4.Close()
+                                    End If
+                                End If
+                            End If
+                            rd3.Close()
+                        End If
+                    End If
+                Loop
+                rd1.Close()
+                cnn3.Close()
+
 
                 cmd1 = cnn1.CreateCommand
                 If (optnotas.Checked) Then cmd1.CommandText = "select * from Ventas where Folio=" & MYFOLIO
@@ -261,14 +302,14 @@ Public Class frmConsultaNotas
                         If (optdevos.Checked) Then cmd2.CommandText = "select * from Devoluciones where Folio=" & MYFOLIO
                             rd2 = cmd2.ExecuteReader
                             Do While rd2.Read
-                                If rd2.HasRows Then
-                                    codigo = rd2("Codigo").ToString()
-                                    nombre = rd2("Nombre").ToString()
-                                    If (optdevos.Checked) Then
-                                        unidad = rd2("UVenta").ToString()
-                                        comentario = ""
-                                        descue = 0
-                                    Else
+                            If rd2.HasRows Then
+                                codigo = rd2("Codigo").ToString()
+                                nombre = rd2("Nombre").ToString()
+                                If (optdevos.Checked) Then
+                                    unidad = rd2("UVenta").ToString()
+                                    comentario = ""
+                                    descue = 0
+                                Else
                                     If (optpagadas.Checked) Or (optnotas.Checked) Or (optcobrar.Checked) Or (optanceladas.Checked) Or (optcotiz.Checked) Or (optPedidos.Checked) Then
                                         descue = rd2("Descuento").ToString()
                                         unidad = rd2("Unidad").ToString()
@@ -276,11 +317,11 @@ Public Class frmConsultaNotas
                                         unidad = rd2("Unidad").ToString()
                                         comentario = IIf(rd2("CostVR").ToString = "", "", rd2("CostVR").ToString)
                                         descue = 0
-                                        End If
                                     End If
-                                    cantidad = rd2("Cantidad").ToString()
-                                    precio = rd2("Precio").ToString()
-                                    total = rd2("Total").ToString()
+                                End If
+                                cantidad = rd2("Cantidad").ToString()
+                                precio = rd2("Precio").ToString()
+                                total = rd2("Total").ToString()
                                 comentario = IIf(rd2("Comentario").ToString = "", "", rd2("Comentario").ToString)
 
                                 Dim varcodunico As String = Format(CDate(Date.Now), "yyyy/MM/ddHH:mm:ss.fff") & codigo

@@ -3579,13 +3579,13 @@ Public Class frmListadoPrecios
     Public Sub ExportarDataGridViewAExcel(dgv As DataGridView)
         If grdcaptura.Rows.Count = 0 Then MsgBox("Genera el reporte para poder exportar los datos a Excel.", vbInformation + vbOKOnly, titulocentral) : Exit Sub
         If MsgBox("¿Deseas exportar la información a un archivo de Excel?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
-
             Dim voy As Integer = 0
             ' Crea un nuevo libro de trabajo de Excel
             Using workbook As New XLWorkbook()
 
                 ' Añade una nueva hoja de trabajo
-                Dim worksheet As IXLWorksheet = workbook.Worksheets.Add("Datos")
+                Dim worksheet As IXLWorksheet =
+            workbook.Worksheets.Add("Datos")
 
                 ' Escribe los encabezados de columna
                 For colIndex As Integer = 0 To dgv.Columns.Count - 1
