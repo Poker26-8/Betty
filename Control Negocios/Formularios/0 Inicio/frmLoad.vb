@@ -3654,6 +3654,7 @@ Public Class frmLoad
 
     Public Sub VerificarVentasDetalle()
         Try
+
             Dim foliovd As Integer = 0
             Dim codunico As String = ""
             Dim idvd As Integer = 0
@@ -3666,43 +3667,42 @@ Public Class frmLoad
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "SELECT Folio FROM ventas ORDER BY Folio desc LIMIT 60"
             rd1 = cmd1.ExecuteReader
-            Do While rd1.Read
-                If rd1.HasRows Then
+            If rd1.HasRows Then
+                Do While rd1.Read
                     foliovd = rd1(0).ToString
 
                     cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "SELECT CodUnico FROM ventasdetalle WHERE Folio=" & foliovd & ""
+                    cmd2.CommandText = "SELECT CodUnico FROM ventasdetalle WHERE Folio=" & foliovd & " AND CodUnico<>''"
                     rd2 = cmd2.ExecuteReader
-                    Do While rd2.Read
-                        If rd2.HasRows Then
+                    If rd2.HasRows Then
+                        Do While rd2.Read
                             codunico = rd2(0).ToString
+                            If codunico = "" Then
+                            Else
+                                cmd3 = cnn3.CreateCommand
+                                cmd3.CommandText = "SELECT COUNT(CodUnico),Id FROM ventasdetalle WHERE CodUnico='" & codunico & "'"
+                                rd3 = cmd3.ExecuteReader
+                                If rd3.HasRows Then
+                                    If rd3.Read Then
+                                        sumt = rd3(0).ToString
+                                        idvd = rd3(1).ToString
 
-                            cmd3 = cnn3.CreateCommand
-                            cmd3.CommandText = "SELECT COUNT(CodUnico),Id FROM ventasdetalle WHERE CodUnico='" & codunico & "'"
-                            rd3 = cmd3.ExecuteReader
-                            If rd3.HasRows Then
-                                If rd3.Read Then
-                                    sumt = rd3(0).ToString
-                                    idvd = rd3(1).ToString
-
-                                    If sumt > 1 Then
-                                        cnn4.Close() : cnn4.Open()
-                                        cmd4 = cnn4.CreateCommand
-                                        cmd4.CommandText = "DELETE FROM ventasdetalle WHERE Id=" & idvd & " AND CodUnico='" & codunico & "'"
-                                        cmd4.ExecuteNonQuery()
-                                        cnn4.Close()
+                                        If sumt > 1 Then
+                                            cnn4.Close() : cnn4.Open()
+                                            cmd4 = cnn4.CreateCommand
+                                            cmd4.CommandText = "DELETE FROM ventasdetalle WHERE Id=" & idvd & " AND CodUnico='" & codunico & "'"
+                                            cmd4.ExecuteNonQuery()
+                                            cnn4.Close()
+                                        End If
                                     End If
-
                                 End If
+                                rd3.Close()
                             End If
-                            rd3.Close()
-
-                        End If
-                    Loop
+                        Loop
+                    End If
                     rd2.Close()
-
-                End If
-            Loop
+                Loop
+            End If
             rd1.Close()
             cnn1.Close()
             cnn2.Close()
