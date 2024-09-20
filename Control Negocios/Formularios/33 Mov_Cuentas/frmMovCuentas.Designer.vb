@@ -159,7 +159,7 @@ Partial Class frmMovCuentas
         Me.cboFolio.FormattingEnabled = True
         Me.cboFolio.Location = New System.Drawing.Point(72, 6)
         Me.cboFolio.Name = "cboFolio"
-        Me.cboFolio.Size = New System.Drawing.Size(110, 24)
+        Me.cboFolio.Size = New System.Drawing.Size(167, 24)
         Me.cboFolio.TabIndex = 19
         '
         'btnguardar
@@ -485,7 +485,7 @@ Partial Class frmMovCuentas
         Me.btnNuevoE.Name = "btnNuevoE"
         Me.btnNuevoE.Size = New System.Drawing.Size(60, 63)
         Me.btnNuevoE.TabIndex = 279
-        Me.btnNuevoE.Text = "Nuevo"
+        Me.btnNuevoE.Text = "Limpiar"
         Me.btnNuevoE.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnNuevoE.UseVisualStyleBackColor = True
         '
@@ -496,7 +496,7 @@ Partial Class frmMovCuentas
         Me.cboFolioE.FormattingEnabled = True
         Me.cboFolioE.Location = New System.Drawing.Point(72, 6)
         Me.cboFolioE.Name = "cboFolioE"
-        Me.cboFolioE.Size = New System.Drawing.Size(110, 24)
+        Me.cboFolioE.Size = New System.Drawing.Size(187, 24)
         Me.cboFolioE.TabIndex = 39
         '
         'Label14

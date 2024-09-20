@@ -210,7 +210,7 @@ Public Class frmCorteCaja
             cnn2.Close() : cnn2.Open()
 
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT sum(Abono) FROM AbonoI where Concepto='ABONO' AND FormaPago<>'SALDO A FAVOR' AND Status=0 AND FechaCompleta BETWEEN '" & Format(dtpFecha.Value, "yyyy-MM-dd") & " " & Format(dtpHoraIni.Value, "HH:mm:ss") & "' AND '" & Format(dtpFechaFinal.Value, "yyyy-MM-dd") & " " & Format(dtpHoraFin.Value, "HH:mm:ss") & "'"
+            cmd1.CommandText = "SELECT sum(Monto) FROM AbonoI where Concepto='ABONO' AND FormaPago<>'SALDO A FAVOR' AND Status=0 AND FechaCompleta BETWEEN '" & Format(dtpFecha.Value, "yyyy-MM-dd") & " " & Format(dtpHoraIni.Value, "HH:mm:ss") & "' AND '" & Format(dtpFechaFinal.Value, "yyyy-MM-dd") & " " & Format(dtpHoraFin.Value, "HH:mm:ss") & "'"
             'cmd1.CommandText = "SELECT sum(Abono) FROM AbonoI where Concepto='ABONO' AND FormaPago<>'SALDO A FAVOR' AND Fecha BETWEEN '" & Format(dtpFecha.Value, "yyyy-MM-dd") & "' AND '" & Format(dtpFechaFinal.Value, "yyyy-MM-dd") & "' AND Hora BETWEEN '" & Format(dtpHoraIni.Value, "HH:mm:ss") & "' AND '" & Format(dtpHoraFin.Value, "HH:mm:ss") & "' AND Status=0"
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then

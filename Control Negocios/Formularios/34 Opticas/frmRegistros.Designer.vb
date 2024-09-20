@@ -53,7 +53,7 @@ Partial Class frmRegistros
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1025, 48)
+        Me.Panel1.Size = New System.Drawing.Size(1025, 42)
         Me.Panel1.TabIndex = 0
         '
         'cboCliente
@@ -61,7 +61,7 @@ Partial Class frmRegistros
         Me.cboCliente.FormattingEnabled = True
         Me.cboCliente.Location = New System.Drawing.Point(75, 6)
         Me.cboCliente.Name = "cboCliente"
-        Me.cboCliente.Size = New System.Drawing.Size(239, 21)
+        Me.cboCliente.Size = New System.Drawing.Size(475, 21)
         Me.cboCliente.TabIndex = 1
         '
         'Label1
@@ -78,9 +78,9 @@ Partial Class frmRegistros
         '
         Me.Panel2.Controls.Add(Me.grdCaptura)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(0, 48)
+        Me.Panel2.Location = New System.Drawing.Point(0, 42)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1025, 342)
+        Me.Panel2.Size = New System.Drawing.Size(1025, 348)
         Me.Panel2.TabIndex = 1
         '
         'grdCaptura
@@ -95,7 +95,7 @@ Partial Class frmRegistros
         Me.grdCaptura.Name = "grdCaptura"
         Me.grdCaptura.ReadOnly = True
         Me.grdCaptura.RowHeadersVisible = False
-        Me.grdCaptura.Size = New System.Drawing.Size(1025, 342)
+        Me.grdCaptura.Size = New System.Drawing.Size(1025, 348)
         Me.grdCaptura.TabIndex = 0
         '
         'Column1

@@ -58,14 +58,14 @@ Partial Class frmHisMesas
         '
         'Label1
         '
-        Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(195, Byte), Integer), CType(CType(89, Byte), Integer))
+        Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(251, Byte), Integer), CType(CType(187, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.Label1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Label1.Font = New System.Drawing.Font("Segoe UI Historic", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Black
         Me.Label1.Location = New System.Drawing.Point(0, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Padding = New System.Windows.Forms.Padding(0, 3, 0, 0)
-        Me.Label1.Size = New System.Drawing.Size(800, 31)
+        Me.Label1.Size = New System.Drawing.Size(802, 31)
         Me.Label1.TabIndex = 42
         Me.Label1.Text = "Historial de mesas"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -108,6 +108,7 @@ Partial Class frmHisMesas
         '
         'Panel1
         '
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(251, Byte), Integer), CType(CType(187, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.btnReporte)
         Me.Panel1.Controls.Add(Me.cboDatos)
@@ -119,11 +120,12 @@ Partial Class frmHisMesas
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 31)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(800, 204)
+        Me.Panel1.Size = New System.Drawing.Size(802, 204)
         Me.Panel1.TabIndex = 44
         '
         'Button1
         '
+        Me.Button1.BackColor = System.Drawing.Color.White
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
@@ -134,10 +136,11 @@ Partial Class frmHisMesas
         Me.Button1.TabIndex = 213
         Me.Button1.Text = "Salir"
         Me.Button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'btnReporte
         '
+        Me.btnReporte.BackColor = System.Drawing.Color.White
         Me.btnReporte.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnReporte.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnReporte.Image = CType(resources.GetObject("btnReporte.Image"), System.Drawing.Image)
@@ -148,7 +151,7 @@ Partial Class frmHisMesas
         Me.btnReporte.TabIndex = 212
         Me.btnReporte.Text = "Reporte"
         Me.btnReporte.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnReporte.UseVisualStyleBackColor = True
+        Me.btnReporte.UseVisualStyleBackColor = False
         '
         'cboDatos
         '
@@ -162,7 +165,7 @@ Partial Class frmHisMesas
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(440, 6)
+        Me.Label3.Location = New System.Drawing.Point(440, 3)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(57, 20)
         Me.Label3.TabIndex = 47
@@ -172,7 +175,7 @@ Partial Class frmHisMesas
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(186, 6)
+        Me.Label2.Location = New System.Drawing.Point(186, 3)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(61, 20)
         Me.Label2.TabIndex = 46
@@ -180,13 +183,13 @@ Partial Class frmHisMesas
         '
         'mcdesde
         '
-        Me.mcdesde.Location = New System.Drawing.Point(190, 33)
+        Me.mcdesde.Location = New System.Drawing.Point(190, 30)
         Me.mcdesde.Name = "mcdesde"
         Me.mcdesde.TabIndex = 45
         '
         'mchasta
         '
-        Me.mchasta.Location = New System.Drawing.Point(444, 33)
+        Me.mchasta.Location = New System.Drawing.Point(444, 30)
         Me.mchasta.Name = "mchasta"
         Me.mchasta.TabIndex = 44
         '
@@ -196,7 +199,7 @@ Partial Class frmHisMesas
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 235)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(800, 288)
+        Me.Panel2.Size = New System.Drawing.Size(802, 288)
         Me.Panel2.TabIndex = 45
         '
         'grdDatos
@@ -240,7 +243,7 @@ Partial Class frmHisMesas
         Me.grdDatos.RowHeadersVisible = False
         DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grdDatos.RowsDefaultCellStyle = DataGridViewCellStyle5
-        Me.grdDatos.Size = New System.Drawing.Size(800, 288)
+        Me.grdDatos.Size = New System.Drawing.Size(802, 288)
         Me.grdDatos.TabIndex = 0
         '
         'Column1
@@ -312,7 +315,7 @@ Partial Class frmHisMesas
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(800, 523)
+        Me.ClientSize = New System.Drawing.Size(802, 523)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label1)

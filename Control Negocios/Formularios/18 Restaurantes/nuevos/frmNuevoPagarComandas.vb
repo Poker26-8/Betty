@@ -156,13 +156,12 @@ Public Class frmNuevoPagarComandas
                 txtPropina.Text = FormatNumber(porcepropina, 2)
                 txttotal.Text = CDbl(txttotaldescuento.Text) + CDbl(txtPropina.Text)
                 lbltotalventa.Text = FormatNumber(CDbl(totalventa) + CDbl(txtPropina.Text), 2)
-                txtResta.Text = FormatNumber(lbltotalventa.Text, 2)
+
             Else
                 txttotaldescuento.Text = FormatNumber(totalventa, 2)
                 txttotal.Text = FormatNumber(totalventa, 2)
                 lblSubtotal.Text = FormatNumber(totalventa, 2)
                 lbltotalventa.Text = FormatNumber(totalventa, 2)
-                txtResta.Text = lbltotalventa.Text
             End If
             totalventa = 0
             foco = 1
@@ -2154,7 +2153,7 @@ kakaxd:
 
                 cnn3.Close() : cnn3.Open()
                 cmd3 = cnn3.CreateCommand
-                cmd3.CommandText = "INSERT INTO Abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Comentario,Propina,Comisiones,Mesero,Descuento) VALUES(" & folioventa & "," & idcliente & ",'" & nombre & "','ABONO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & nuevoabono & "," & SLD & ",'EFECTIVO'," & nuevoefectivo & ",'','','" & lblUsuario.Text & "',''," & propinaventa & "," & totalcomisiones & ",'" & lblMesero.Text & "'," & descuentoventa & ")"
+                cmd3.CommandText = "INSERT INTO Abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Comentario,Propina,Comisiones,Mesero,Descuento) VALUES(" & folioventa & "," & idcliente & ",'" & nombre & "','ABONO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & nuevoefectivo & "," & SLD & ",'EFECTIVO'," & nuevoefectivo & ",'','','" & lblUsuario.Text & "',''," & propinaventa & "," & totalcomisiones & ",'" & lblMesero.Text & "'," & descuentoventa & ")"
                 cmd3.ExecuteNonQuery()
                 cnn3.Close()
             End If
@@ -2543,6 +2542,8 @@ Door:
                 End If
             Else
                 MsgBox("No tienes una impresora configurada para imprimir en formato Ticket.", vbInformation + vbOKOnly, titulomensajes)
+
+                GoTo deku
                 cnn1.Close()
             End If
             rd1.Close()
@@ -2550,6 +2551,7 @@ Door:
 
             If imprime = 1 Then
                 If MessageBox.Show("Desea Imprimir el ticket", "Confirmación", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.OK Then
+                    btnLimpiar.PerformClick() : Exit Sub
 
                     If TamImpre = "80" Then
                         For naruto As Integer = 1 To copias
@@ -2584,6 +2586,7 @@ Door:
             End If
 
 #End Region
+deku:
 
             If CDec(txtResta.Text) = 0 Then
 

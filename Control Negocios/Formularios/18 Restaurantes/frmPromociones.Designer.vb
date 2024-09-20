@@ -23,7 +23,6 @@ Partial Class frmPromociones
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPromociones))
-        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnNuevo = New System.Windows.Forms.Button()
@@ -257,15 +256,6 @@ Partial Class frmPromociones
         Me.Panel30.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Panel1
-        '
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(251, Byte), Integer), CType(CType(187, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(698, 31)
-        Me.Panel1.TabIndex = 0
-        '
         'btnSalir
         '
         Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -274,7 +264,7 @@ Partial Class frmPromociones
         Me.btnSalir.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
         Me.btnSalir.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSalir.Location = New System.Drawing.Point(624, 38)
+        Me.btnSalir.Location = New System.Drawing.Point(616, 9)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(65, 68)
         Me.btnSalir.TabIndex = 16
@@ -290,7 +280,7 @@ Partial Class frmPromociones
         Me.btnGuardar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
         Me.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnGuardar.Location = New System.Drawing.Point(553, 38)
+        Me.btnGuardar.Location = New System.Drawing.Point(545, 9)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(65, 68)
         Me.btnGuardar.TabIndex = 15
@@ -306,7 +296,7 @@ Partial Class frmPromociones
         Me.btnNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNuevo.Image = CType(resources.GetObject("btnNuevo.Image"), System.Drawing.Image)
         Me.btnNuevo.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnNuevo.Location = New System.Drawing.Point(482, 38)
+        Me.btnNuevo.Location = New System.Drawing.Point(474, 9)
         Me.btnNuevo.Name = "btnNuevo"
         Me.btnNuevo.Size = New System.Drawing.Size(65, 68)
         Me.btnNuevo.TabIndex = 14
@@ -318,7 +308,7 @@ Partial Class frmPromociones
         '
         Me.txtUnidad.Enabled = False
         Me.txtUnidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUnidad.Location = New System.Drawing.Point(416, 64)
+        Me.txtUnidad.Location = New System.Drawing.Point(412, 35)
         Me.txtUnidad.Name = "txtUnidad"
         Me.txtUnidad.Size = New System.Drawing.Size(63, 24)
         Me.txtUnidad.TabIndex = 5
@@ -327,7 +317,7 @@ Partial Class frmPromociones
         '
         Me.cboNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboNombre.FormattingEnabled = True
-        Me.cboNombre.Location = New System.Drawing.Point(79, 64)
+        Me.cboNombre.Location = New System.Drawing.Point(75, 35)
         Me.cboNombre.Name = "cboNombre"
         Me.cboNombre.Size = New System.Drawing.Size(334, 24)
         Me.cboNombre.TabIndex = 4
@@ -336,7 +326,7 @@ Partial Class frmPromociones
         '
         Me.cboCodigo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboCodigo.FormattingEnabled = True
-        Me.cboCodigo.Location = New System.Drawing.Point(7, 64)
+        Me.cboCodigo.Location = New System.Drawing.Point(3, 35)
         Me.cboCodigo.Name = "cboCodigo"
         Me.cboCodigo.Size = New System.Drawing.Size(69, 24)
         Me.cboCodigo.TabIndex = 3
@@ -345,7 +335,7 @@ Partial Class frmPromociones
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Location = New System.Drawing.Point(7, 94)
+        Me.TabControl1.Location = New System.Drawing.Point(3, 65)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(682, 688)
@@ -2580,7 +2570,7 @@ Partial Class frmPromociones
         Me.Label88.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.Label88.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label88.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label88.Location = New System.Drawing.Point(7, 38)
+        Me.Label88.Location = New System.Drawing.Point(3, 9)
         Me.Label88.Name = "Label88"
         Me.Label88.Size = New System.Drawing.Size(69, 23)
         Me.Label88.TabIndex = 17
@@ -2592,7 +2582,7 @@ Partial Class frmPromociones
         Me.Label89.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.Label89.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label89.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label89.Location = New System.Drawing.Point(79, 38)
+        Me.Label89.Location = New System.Drawing.Point(75, 9)
         Me.Label89.Name = "Label89"
         Me.Label89.Size = New System.Drawing.Size(334, 23)
         Me.Label89.TabIndex = 18
@@ -2604,7 +2594,7 @@ Partial Class frmPromociones
         Me.Label90.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.Label90.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label90.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label90.Location = New System.Drawing.Point(416, 38)
+        Me.Label90.Location = New System.Drawing.Point(412, 9)
         Me.Label90.Name = "Label90"
         Me.Label90.Size = New System.Drawing.Size(63, 23)
         Me.Label90.TabIndex = 19
@@ -2616,7 +2606,7 @@ Partial Class frmPromociones
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(251, Byte), Integer), CType(CType(187, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(698, 790)
+        Me.ClientSize = New System.Drawing.Size(694, 759)
         Me.Controls.Add(Me.btnSalir)
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.btnNuevo)
@@ -2624,7 +2614,6 @@ Partial Class frmPromociones
         Me.Controls.Add(Me.Label88)
         Me.Controls.Add(Me.Label89)
         Me.Controls.Add(Me.Label90)
-        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.txtUnidad)
         Me.Controls.Add(Me.cboNombre)
         Me.Controls.Add(Me.cboCodigo)
@@ -2671,8 +2660,6 @@ Partial Class frmPromociones
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents Panel1 As Panel
     Friend WithEvents btnSalir As Button
     Friend WithEvents btnGuardar As Button
     Friend WithEvents btnNuevo As Button

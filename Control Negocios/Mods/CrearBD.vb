@@ -756,21 +756,24 @@
 
     'refaccionaria
     Public vartablarefaccionaria As String = "CREATE TABLE `refaccionaria` (
-                                              `Id` int(11) NOT NULL,
-                                              `CodigoPro` varchar(50) DEFAULT '',
-                                              `NumParte` varchar(50) DEFAULT '',
-                                              `CodBarra` varchar(50) DEFAULT '',
-                                              `Nombre` varchar(255) DEFAULT '',
-                                              `Marca` varchar(50) DEFAULT '',
-                                              `Modelo` varchar(100) DEFAULT '',
-                                              `Medida` varchar(50) DEFAULT '',
-                                              `Observaciones` varchar(255) DEFAULT '',
-                                              `Ubicacion` varchar(50) DEFAULT '',
-                                              `Servicio` varchar(80) DEFAULT '',
-                                              `Ano` varchar(20) DEFAULT '',
-                                              `Npiezas` varchar(20) DEFAULT '',
-                                              `IdVehiculo` int(11) DEFAULT '0'
-                                            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+                                                      `Id` int(11) NOT NULL,
+                                                      `CodigoPro` varchar(50) DEFAULT '',
+                                                      `NumParte` varchar(50) DEFAULT '',
+                                                      `CodBarra` varchar(50) DEFAULT '',
+                                                      `Nombre` varchar(255) DEFAULT '',
+                                                      `Marca` varchar(50) DEFAULT '',
+                                                      `Modelo` varchar(100) DEFAULT '',
+                                                      `Medida` varchar(50) DEFAULT '',
+                                                      `Observaciones` varchar(255) DEFAULT '',
+                                                      `Ubicacion` varchar(50) DEFAULT '',
+                                                      `Servicio` varchar(80) DEFAULT '',
+                                                      `UVenta` varchar(50) DEFAULT '',
+                                                      `MarcaRefa` varchar(70) DEFAULT '',
+                                                      `Ano` varchar(20) DEFAULT '',
+                                                      `Npiezas` varchar(20) DEFAULT '',
+                                                      `IdVehiculo` int(11) DEFAULT '0',
+                                                      `Motor` varchar(255) DEFAULT ''
+                                                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
     'vehiculo
     Public vartablavehiculo As String = "CREATE TABLE `vehiculo` (

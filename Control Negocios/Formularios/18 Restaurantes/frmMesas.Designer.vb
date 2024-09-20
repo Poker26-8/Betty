@@ -82,7 +82,7 @@ Partial Class frmMesas
         Me.psuperior.Dock = System.Windows.Forms.DockStyle.Top
         Me.psuperior.Location = New System.Drawing.Point(0, 0)
         Me.psuperior.Name = "psuperior"
-        Me.psuperior.Size = New System.Drawing.Size(1372, 104)
+        Me.psuperior.Size = New System.Drawing.Size(1372, 114)
         Me.psuperior.TabIndex = 0
         '
         'parea
@@ -92,7 +92,7 @@ Partial Class frmMesas
         Me.parea.Dock = System.Windows.Forms.DockStyle.Fill
         Me.parea.Location = New System.Drawing.Point(186, 0)
         Me.parea.Name = "parea"
-        Me.parea.Size = New System.Drawing.Size(531, 104)
+        Me.parea.Size = New System.Drawing.Size(531, 114)
         Me.parea.TabIndex = 4
         '
         'Panel1
@@ -103,7 +103,7 @@ Partial Class frmMesas
         Me.Panel1.ForeColor = System.Drawing.Color.CadetBlue
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(186, 104)
+        Me.Panel1.Size = New System.Drawing.Size(186, 114)
         Me.Panel1.TabIndex = 5
         '
         'PictureBox1
@@ -113,7 +113,7 @@ Partial Class frmMesas
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
         Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(186, 104)
+        Me.PictureBox1.Size = New System.Drawing.Size(186, 114)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 2
         Me.PictureBox1.TabStop = False
@@ -132,7 +132,7 @@ Partial Class frmMesas
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Right
         Me.Panel5.Location = New System.Drawing.Point(717, 0)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(655, 104)
+        Me.Panel5.Size = New System.Drawing.Size(655, 114)
         Me.Panel5.TabIndex = 3
         '
         'btntemporales
@@ -147,7 +147,7 @@ Partial Class frmMesas
         Me.btntemporales.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btntemporales.Location = New System.Drawing.Point(1, 0)
         Me.btntemporales.Name = "btntemporales"
-        Me.btntemporales.Size = New System.Drawing.Size(100, 104)
+        Me.btntemporales.Size = New System.Drawing.Size(100, 114)
         Me.btntemporales.TabIndex = 22
         Me.btntemporales.Text = "Temporales"
         Me.btntemporales.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -165,7 +165,7 @@ Partial Class frmMesas
         Me.btncambiar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btncambiar.Location = New System.Drawing.Point(101, 0)
         Me.btncambiar.Name = "btncambiar"
-        Me.btncambiar.Size = New System.Drawing.Size(81, 104)
+        Me.btncambiar.Size = New System.Drawing.Size(81, 114)
         Me.btncambiar.TabIndex = 21
         Me.btncambiar.Text = "Cambio de mesa"
         Me.btncambiar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -183,7 +183,7 @@ Partial Class frmMesas
         Me.btnjuntar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btnjuntar.Location = New System.Drawing.Point(182, 0)
         Me.btnjuntar.Name = "btnjuntar"
-        Me.btnjuntar.Size = New System.Drawing.Size(71, 104)
+        Me.btnjuntar.Size = New System.Drawing.Size(71, 114)
         Me.btnjuntar.TabIndex = 20
         Me.btnjuntar.Text = "Juntar mesas"
         Me.btnjuntar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -201,7 +201,7 @@ Partial Class frmMesas
         Me.btnagregar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btnagregar.Location = New System.Drawing.Point(253, 0)
         Me.btnagregar.Name = "btnagregar"
-        Me.btnagregar.Size = New System.Drawing.Size(88, 104)
+        Me.btnagregar.Size = New System.Drawing.Size(88, 114)
         Me.btnagregar.TabIndex = 19
         Me.btnagregar.Text = "Trasladar producto"
         Me.btnagregar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -219,7 +219,7 @@ Partial Class frmMesas
         Me.btncobro.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btncobro.Location = New System.Drawing.Point(341, 0)
         Me.btncobro.Name = "btncobro"
-        Me.btncobro.Size = New System.Drawing.Size(80, 104)
+        Me.btncobro.Size = New System.Drawing.Size(80, 114)
         Me.btncobro.TabIndex = 18
         Me.btncobro.Text = "Cobro"
         Me.btncobro.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -238,7 +238,7 @@ Partial Class frmMesas
         Me.btnconsulta.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btnconsulta.Location = New System.Drawing.Point(421, 0)
         Me.btnconsulta.Name = "btnconsulta"
-        Me.btnconsulta.Size = New System.Drawing.Size(80, 104)
+        Me.btnconsulta.Size = New System.Drawing.Size(80, 114)
         Me.btnconsulta.TabIndex = 17
         Me.btnconsulta.Text = "Consulta"
         Me.btnconsulta.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -256,7 +256,7 @@ Partial Class frmMesas
         Me.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btnLimpiar.Location = New System.Drawing.Point(501, 0)
         Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(80, 104)
+        Me.btnLimpiar.Size = New System.Drawing.Size(80, 114)
         Me.btnLimpiar.TabIndex = 16
         Me.btnLimpiar.Text = "Limpiar"
         Me.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -274,7 +274,7 @@ Partial Class frmMesas
         Me.btnSalir.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btnSalir.Location = New System.Drawing.Point(581, 0)
         Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(74, 104)
+        Me.btnSalir.Size = New System.Drawing.Size(74, 114)
         Me.btnSalir.TabIndex = 15
         Me.btnSalir.Text = "Salir"
         Me.btnSalir.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -305,9 +305,9 @@ Partial Class frmMesas
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Controls.Add(Me.Panel6)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel2.Location = New System.Drawing.Point(1108, 104)
+        Me.Panel2.Location = New System.Drawing.Point(1108, 114)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(264, 640)
+        Me.Panel2.Size = New System.Drawing.Size(264, 630)
         Me.Panel2.TabIndex = 1
         '
         'lblusuario
@@ -565,7 +565,7 @@ Partial Class frmMesas
         Me.Panel6.Controls.Add(Me.lbltotalmesa)
         Me.Panel6.Controls.Add(Me.lblfolio)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel6.Location = New System.Drawing.Point(0, 515)
+        Me.Panel6.Location = New System.Drawing.Point(0, 505)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(264, 125)
         Me.Panel6.TabIndex = 0
@@ -607,7 +607,7 @@ Partial Class frmMesas
         Me.pmesas.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pmesas.Location = New System.Drawing.Point(0, 0)
         Me.pmesas.Name = "pmesas"
-        Me.pmesas.Size = New System.Drawing.Size(1108, 640)
+        Me.pmesas.Size = New System.Drawing.Size(1108, 630)
         Me.pmesas.TabIndex = 3
         '
         'pcentral
@@ -616,9 +616,9 @@ Partial Class frmMesas
         Me.pcentral.Controls.Add(Me.pmesas)
         Me.pcentral.Controls.Add(Me.pmesaNM)
         Me.pcentral.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pcentral.Location = New System.Drawing.Point(0, 104)
+        Me.pcentral.Location = New System.Drawing.Point(0, 114)
         Me.pcentral.Name = "pcentral"
-        Me.pcentral.Size = New System.Drawing.Size(1108, 640)
+        Me.pcentral.Size = New System.Drawing.Size(1108, 630)
         Me.pcentral.TabIndex = 0
         '
         'pmesaNM
@@ -627,7 +627,7 @@ Partial Class frmMesas
         Me.pmesaNM.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pmesaNM.Location = New System.Drawing.Point(0, 0)
         Me.pmesaNM.Name = "pmesaNM"
-        Me.pmesaNM.Size = New System.Drawing.Size(1108, 640)
+        Me.pmesaNM.Size = New System.Drawing.Size(1108, 630)
         Me.pmesaNM.TabIndex = 4
         '
         'frmMesas
