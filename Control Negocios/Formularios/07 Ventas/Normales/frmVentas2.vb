@@ -9547,7 +9547,7 @@ Door:
                 If Tamaño = "80" Then
                     For t As Integer = 1 To Copias
                         pVenta80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
-                        Dim ps As New System.Drawing.Printing.PaperSize("Custom", 269, 3000)
+                        Dim ps As New System.Drawing.Printing.PaperSize("Custom", 297, 3000)
                         pVenta80.DefaultPageSettings.PaperSize = ps
                         If pVenta80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora Then
                             pVenta80.Print()

@@ -2630,7 +2630,7 @@ Public Class frmConsultaNotas
                     If formato = "TICKET" Then
                         If tamticket = "80" Then
                             If imp_ticket = "" Then MsgBox("No hay una impresora configurada para imprimir la copia.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
-                            Dim ps As New System.Drawing.Printing.PaperSize("Custom", 269, 3000)
+                            Dim ps As New System.Drawing.Printing.PaperSize("Custom", 297, 3000)
                             pVentas80.DefaultPageSettings.PaperSize = ps
                             pVentas80.PrinterSettings.PrinterName = imp_ticket
                             pVentas80.Print()
@@ -2647,7 +2647,7 @@ Public Class frmConsultaNotas
                     If formato = "TICKET" Then
                         If tamticket = "80" Then
                             If imp_ticket = "" Then MsgBox("No hay una impresora configurada para imprimir la copia.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                            Dim ps As New System.Drawing.Printing.PaperSize("Custom", 269, 3000)
+                            Dim ps As New System.Drawing.Printing.PaperSize("Custom", 297, 3000)
                             pCotiz80.DefaultPageSettings.PaperSize = ps
                             pCotiz80.PrinterSettings.PrinterName = imp_ticket
                             pCotiz80.Print()
@@ -2664,7 +2664,7 @@ Public Class frmConsultaNotas
 
                         If tamticket = "80" Then
                             If imp_ticket = "" Then MsgBox("No hay una impresora configurada para imprimir la copia.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                            Dim ps As New System.Drawing.Printing.PaperSize("Custom", 269, 3000)
+                            Dim ps As New System.Drawing.Printing.PaperSize("Custom", 297, 3000)
                             pCotiz80.DefaultPageSettings.PaperSize = ps
                             pCotiz80.PrinterSettings.PrinterName = imp_ticket
                             pCotiz80.Print()
@@ -2680,7 +2680,7 @@ Public Class frmConsultaNotas
                 If (optdevos.Checked) Then
                     If tamticket = "80" Then
                         If imp_ticket = "" Then MsgBox("No hay una impresora configurada para imprimir la copia.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                        Dim ps As New System.Drawing.Printing.PaperSize("Custom", 269, 3000)
+                        Dim ps As New System.Drawing.Printing.PaperSize("Custom", 297, 3000)
                         pDevos80.DefaultPageSettings.PaperSize = ps
                         pDevos80.PrinterSettings.PrinterName = imp_ticket
                         pDevos80.Print()
