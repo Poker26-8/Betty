@@ -424,7 +424,7 @@
 
                         sumasiniva = 0
                         cmd2 = cnn2.CreateCommand
-                        cmd2.CommandText = "SELECT Grupo,TotalSinIVA,Total FROM ventasdetalle WHERE FechaCompleta='" & Format(dtpFecha.Value, "yyyy-MM-dd") & " " & Format(dtpHoraIni.Value, "HH:mm:ss") & "' AND '" & Format(dtpFechaFin.Value, "yyyy-MM-dd") & " " & Format(dtpHoraFin.Value, "HH:mm:ss") & "' AND Folio=" & folio & ""
+                        cmd2.CommandText = "SELECT Grupo,TotalSinIVA,Total FROM ventasdetalle WHERE FechaCompleta BETWEEN '" & Format(dtpFecha.Value, "yyyy-MM-dd") & " " & Format(dtpHoraIni.Value, "HH:mm:ss") & "' AND '" & Format(dtpFechaFin.Value, "yyyy-MM-dd") & " " & Format(dtpHoraFin.Value, "HH:mm:ss") & "' AND Folio=" & folio & ""
                         rd2 = cmd2.ExecuteReader
                         If rd2.HasRows Then
                             If rd2.Read Then
@@ -438,7 +438,7 @@
                         End If
                         rd2.Close()
 
-                        e.Graphics.DrawString(grupo & ":", fuente_b, Brushes.Black, 10, Y)
+                        e.Graphics.DrawString(grupo & ":", fuente_b, Brushes.Black, 20, Y)
                         e.Graphics.DrawString(simbolo & FormatNumber(sumasiniva, 2), fuente_b, Brushes.Black, 270, Y, derecha)
                         Y += 20
 

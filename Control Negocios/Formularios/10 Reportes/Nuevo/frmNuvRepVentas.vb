@@ -3477,7 +3477,7 @@ Public Class frmNuvRepVentas
 
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "SELECT count(Folio) FROM Ventas WHERE Usuario='" & cboDatos.Text & "' AND Fecha between '" & Format(m1, "yyyy-MM-dd") & " " & dtpinicio.Text & "' AND '" & Format(m2, "yyyy-MM-dd") & " " & dtpFin.Text & "' AND Folio <>0"
+                cmd1.CommandText = "SELECT count(Folio) FROM Ventas WHERE Comisionista='" & cboDatos.Text & "' AND Fecha between '" & Format(m1, "yyyy-MM-dd") & " " & dtpinicio.Text & "' AND '" & Format(m2, "yyyy-MM-dd") & " " & dtpFin.Text & "' AND Folio <>0"
                 rd1 = cmd1.ExecuteReader
                 If rd1.HasRows Then
                     If rd1.Read Then
@@ -3491,7 +3491,7 @@ Public Class frmNuvRepVentas
                 barcarga.Maximum = cuantos
 
                 cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "SELECT Folio,Descuento,IVA,Subtotal,Totales,ACuenta,Resta,Status,Propina FROM Ventas WHERE Usuario='" & cboDatos.Text & "' AND Fecha between '" & Format(m1, "yyyy-MM-dd") & " " & dtpinicio.Text & "' AND '" & Format(m2, "yyyy-MM-dd") & " " & dtpFin.Text & "' AND Status<>'CANCELADA' order by Folio"
+                cmd1.CommandText = "SELECT Folio,Descuento,IVA,Subtotal,Totales,ACuenta,Resta,Status,Propina FROM Ventas WHERE Comisionista='" & cboDatos.Text & "' AND Fecha between '" & Format(m1, "yyyy-MM-dd") & " " & dtpinicio.Text & "' AND '" & Format(m2, "yyyy-MM-dd") & " " & dtpFin.Text & "' AND Status<>'CANCELADA' order by Folio"
                 rd1 = cmd1.ExecuteReader
                 Do While rd1.Read
                     If rd1.HasRows Then
@@ -4184,7 +4184,7 @@ Public Class frmNuvRepVentas
                 querry = "select distinct Nombre from VentasDetalle where Fecha between '" & Format(M1, "yyyy-MM-dd") & "' and '" & Format(M2, "yyyy-MM-dd") & "' and Nombre<>'' order by Nombre"
             End If
             If (rbVentasVendedor.Checked) Then
-                querry = "select distinct Usuario from Ventas where Fecha between '" & Format(M1, "yyyy-MM-dd") & " " & dtpinicio.Text & "' and '" & Format(M2, "yyyy-MM-dd") & " " & dtpFin.Text & "' and Usuario<>''"
+                querry = "select distinct Comisionista from Ventas where Fecha between '" & Format(M1, "yyyy-MM-dd") & " " & dtpinicio.Text & "' and '" & Format(M2, "yyyy-MM-dd") & " " & dtpFin.Text & "' and Comisionista<>''"
             End If
 
             If (rbVendidoProveedor.Checked) Then

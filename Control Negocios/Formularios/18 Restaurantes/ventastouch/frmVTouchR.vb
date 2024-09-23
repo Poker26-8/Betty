@@ -1395,17 +1395,25 @@ deku:
             Y += 15
             e.Graphics.DrawString("Cliente: " & lblCliente.Text, fuente_b, Brushes.Black, 1, Y)
             Y += 15
+
+            e.Graphics.DrawString("Dirección", fuente_b, Brushes.Black, 1, Y)
+            Y += 15
+
+            Dim caracteresPorLinea2 As Integer = 42
+            Dim texto2 As String = lblDireccion.Text
+            Dim inicio2 As Integer = 0
+            Dim longitudTexto2 As Integer = texto2.Length
+
+            While inicio2 < longitudTexto2
+                Dim longitudBloque2 As Integer = Math.Min(caracteresPorLinea2, longitudTexto2 - inicio2)
+                Dim bloque2 As String = texto2.Substring(inicio2, longitudBloque2)
+                e.Graphics.DrawString(bloque2, New Font("Arial", 9, FontStyle.Regular), Brushes.Black, 1, Y)
+                Y += 13
+                inicio2 += caracteresPorLinea2
+            End While
+
         End If
 
-        Do While Trim(lblDireccion.Text) <> ""
-            lblDireccion.Text = Mid(lblDireccion.Text, zu, 38)
-            If Trim(lblDireccion.Text) <> "" Then
-                e.Graphics.DrawString("Direccion: " & lblDireccion.Text, fuente_b, Brushes.Black, 1, Y)
-                Y += 12
-            End If
-            zu = zu + 38
-        Loop
-        Y += 7
         e.Graphics.DrawString("--------------------------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
         Y += 15
         e.Graphics.DrawString("N O T A   D E   V E N T A", fuente_b, Brushes.Black, 135, Y, centro)

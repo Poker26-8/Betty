@@ -2441,14 +2441,14 @@ doorcita:
                             MyIdCliente = rd1("Id").ToString
                             lblNumCliente.Text = MyIdCliente
                             txtcredito.Text = FormatNumber(rd1("Credito").ToString, 4)
-                            cbocomisionista.Text = rd1("Comisionista").ToString
+                            'cbocomisionista.Text = rd1("Comisionista").ToString
                             txttel.Text = rd1("Telefono").ToString
                             lblcorreocli.Text = rd1("Correo").ToString
-                            If Trim(cbocomisionista.Text) <> "" Then
-                                cbocomisionista.Enabled = True
-                            Else
-                                cbocomisionista.Enabled = False
-                            End If
+                            'If Trim(cbocomisionista.Text) <> "" Then
+                            '    cbocomisionista.Enabled = True
+                            'Else
+                            '    cbocomisionista.Enabled = False
+                            'End If
 
                             txtafavor.Text = FormatNumber(rd1("SaldoFavor").ToString(), 4)
 
@@ -2609,16 +2609,16 @@ doorcita:
                         MyIdCliente = rd1("Id").ToString
                         lblNumCliente.Text = MyIdCliente
                         txtcredito.Text = FormatNumber(rd1("Credito").ToString, 4)
-                        cbocomisionista.Text = rd1("Comisionista").ToString
+                        ' cbocomisionista.Text = rd1("Comisionista").ToString
                         txttel.Text = rd1("Telefono").ToString
                         lblcorreocli.Text = rd1("Correo").ToString
                         txtObservaciones.Text = rd1("Observaciones").ToString
 
-                        If Trim(cbocomisionista.Text) <> "" Then
-                            cbocomisionista.Enabled = False
-                        Else
-                            cbocomisionista.Enabled = True
-                        End If
+                        'If Trim(cbocomisionista.Text) <> "" Then
+                        '    cbocomisionista.Enabled = False
+                        'Else
+                        '    cbocomisionista.Enabled = True
+                        'End If
 
                         Dim dire(9) As String
                         Dim direccion As String = ""
@@ -7382,13 +7382,13 @@ Door:
                         MyIdCliente = rd4("Id").ToString
                         lblNumCliente.Text = MyIdCliente
                         txtcredito.Text = FormatNumber(rd4("Credito").ToString, 4)
-                        cbocomisionista.Text = rd4("Comisionista").ToString
+                        'cbocomisionista.Text = rd4("Comisionista").ToString
                         ' txttel.Text = rd4("Telefono").ToString
-                        If Trim(cbocomisionista.Text) <> "" Then
-                            cbocomisionista.Enabled = True
-                        Else
-                            cbocomisionista.Enabled = False
-                        End If
+                        'If Trim(cbocomisionista.Text) <> "" Then
+                        '    cbocomisionista.Enabled = True
+                        'Else
+                        '    cbocomisionista.Enabled = False
+                        'End If
 
                         txtafavor.Text = FormatNumber(rd4("SaldoFavor").ToString(), 4)
 
