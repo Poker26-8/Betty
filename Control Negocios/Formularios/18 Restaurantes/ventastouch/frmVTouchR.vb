@@ -1314,7 +1314,7 @@ deku:
             End If
             If tLogo = "CUAD" Then
                 e.Graphics.DrawImage(Logotipo, 80, 0, 120, 120)
-                Y += 12
+                Y += 120
             End If
             If tLogo = "RECT" Then
                 e.Graphics.DrawImage(Logotipo, 30, 0, 240, 110)
@@ -4620,7 +4620,7 @@ Door:
                 While inicio2 < longitudTexto2
                     Dim longitudBloque2 As Integer = Math.Min(caracteresPorLinea2, longitudTexto2 - inicio2)
                     Dim bloque2 As String = texto2.Substring(inicio2, longitudBloque2)
-                    e.Graphics.DrawString(bloque2, New Font("Arial", 10, FontStyle.Regular), Brushes.Black, 1, Y)
+                    e.Graphics.DrawString(bloque2, New Font("Arial", 10, FontStyle.Regular), Brushes.Black, 20, Y)
                     Y += 13
                     inicio2 += caracteresPorLinea2
                 End While

@@ -424,7 +424,7 @@
 
                         sumasiniva = 0
                         cmd2 = cnn2.CreateCommand
-                        cmd2.CommandText = "SELECT * FROM ventasdetalle WHERE FechaCompleta='" & Format(dtpFecha.Value, "yyyy-MM-dd") & " " & Format(dtpHoraIni.Value, "HH:mm:ss") & "' AND '" & Format(dtpFechaFin.Value, "yyyy-MM-dd") & " " & Format(dtpHoraFin.Value, "yyyy-MM-dd") & "' AND Folio=" & folio & ""
+                        cmd2.CommandText = "SELECT Grupo,TotalSinIVA,Total FROM ventasdetalle WHERE FechaCompleta='" & Format(dtpFecha.Value, "yyyy-MM-dd") & " " & Format(dtpHoraIni.Value, "HH:mm:ss") & "' AND '" & Format(dtpFechaFin.Value, "yyyy-MM-dd") & " " & Format(dtpHoraFin.Value, "HH:mm:ss") & "' AND Folio=" & folio & ""
                         rd2 = cmd2.ExecuteReader
                         If rd2.HasRows Then
                             If rd2.Read Then
@@ -466,9 +466,6 @@
                 e.Graphics.DrawString("* Con Impuesto", fuente_b, Brushes.Black, 100, Y)
                 Y += 15
             End If
-
-
-
 
 
             e.Graphics.DrawString("-----------------------------------------------------", fuente_b, Brushes.Black, 1, Y)

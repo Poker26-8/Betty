@@ -37,10 +37,10 @@ Partial Class frmCorte3
         Me.cboCajero = New System.Windows.Forms.ComboBox()
         Me.btnMesa = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.dtpHoraIni = New System.Windows.Forms.DateTimePicker()
         Me.dtpHoraFin = New System.Windows.Forms.DateTimePicker()
         Me.dtpFechaFin = New System.Windows.Forms.DateTimePicker()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.dtpHoraIni = New System.Windows.Forms.DateTimePicker()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -176,16 +176,6 @@ Partial Class frmCorte3
         Me.Panel1.Size = New System.Drawing.Size(576, 118)
         Me.Panel1.TabIndex = 0
         '
-        'dtpHoraIni
-        '
-        Me.dtpHoraIni.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpHoraIni.Format = System.Windows.Forms.DateTimePickerFormat.Time
-        Me.dtpHoraIni.Location = New System.Drawing.Point(217, 5)
-        Me.dtpHoraIni.Name = "dtpHoraIni"
-        Me.dtpHoraIni.ShowUpDown = True
-        Me.dtpHoraIni.Size = New System.Drawing.Size(100, 22)
-        Me.dtpHoraIni.TabIndex = 164
-        '
         'dtpHoraFin
         '
         Me.dtpHoraFin.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -214,6 +204,16 @@ Partial Class frmCorte3
         Me.Label4.TabIndex = 165
         Me.Label4.Text = "Fecha Inicial:"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'dtpHoraIni
+        '
+        Me.dtpHoraIni.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpHoraIni.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.dtpHoraIni.Location = New System.Drawing.Point(217, 5)
+        Me.dtpHoraIni.Name = "dtpHoraIni"
+        Me.dtpHoraIni.ShowUpDown = True
+        Me.dtpHoraIni.Size = New System.Drawing.Size(100, 22)
+        Me.dtpHoraIni.TabIndex = 164
         '
         'frmCorte3
         '

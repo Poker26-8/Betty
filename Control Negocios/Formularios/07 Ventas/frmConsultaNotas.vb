@@ -160,6 +160,7 @@ Public Class frmConsultaNotas
         End If
     End Sub
     Private Sub cbofolio_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cbofolio.SelectedValueChanged
+
         Dim VarArch As String = ""
         Dim VarCliente As Integer = 0
 
@@ -270,12 +271,12 @@ Public Class frmConsultaNotas
                             'txtfecha.Text = FormatDateTime(rd1("FVenta").ToString(), DateFormat.ShortDate)
                             'txthora.Text = FormatDateTime(rd1("HVenta").ToString(), DateFormat.LongTime)
                             lblfechaventa.Text = FormatDateTime(rd1("FVenta").ToString(), DateFormat.ShortDate)
-                                lblhoraventa.Text = FormatDateTime(rd1("HVenta").ToString(), DateFormat.LongTime)
-                            End If
+                            lblhoraventa.Text = FormatDateTime(rd1("HVenta").ToString(), DateFormat.LongTime)
+                        End If
 
 
 
-                            If Not (optcotiz.Checked) And Not (optdevos.Checked) And Not (optPedidos.Checked) Then
+                        If Not (optcotiz.Checked) And Not (optdevos.Checked) And Not (optPedidos.Checked) Then
                             If CDbl(rd1("Devolucion").ToString()) > 0 Then
                                 lbldescuento.Text = "Devolución:"
                                 txtdescuento.Text = FormatNumber(CDbl(txtdescuento.Text) + CDbl(rd1("Devolucion").ToString()), 2)
@@ -284,24 +285,24 @@ Public Class frmConsultaNotas
                             End If
                         End If
                         txtdireccion.Text = rd1("Direccion").ToString()
-                            txtvendedor.Text = rd1("Usuario").ToString()
-                            txtacuenta.Text = FormatNumber(IIf(rd1("ACuenta").ToString() = "", 0, rd1("ACuenta").ToString()), 2)
-                            txtresta.Text = FormatNumber(IIf(rd1("Resta").ToString() = "", 0, rd1("Resta").ToString()), 2)
+                        txtvendedor.Text = rd1("Usuario").ToString()
+                        txtacuenta.Text = FormatNumber(IIf(rd1("ACuenta").ToString() = "", 0, rd1("ACuenta").ToString()), 2)
+                        txtresta.Text = FormatNumber(IIf(rd1("Resta").ToString() = "", 0, rd1("Resta").ToString()), 2)
                         '  txttotal.Text = FormatNumber(IIf(rd1("Totales").ToString() = "", 0, rd1("Totales").ToString()) - CDbl(txtacuenta.Text), 2)
                         txttotal.Text = FormatNumber(IIf(rd1("Totales").ToString() = "", 0, rd1("Totales").ToString()), 2)
                         txtComentario.Text = rd1("Comentario").ToString
 
                         If (optcobrar.Checked) Then
-                                txtrestaabono.Text = FormatNumber(IIf(rd1("Resta").ToString() = "", 0, rd1("Resta").ToString()), 2)
-                            End If
-                            cnn2.Close() : cnn2.Open()
-                            cmd2 = cnn2.CreateCommand
-                            If (optpagadas.Checked) Or (optnotas.Checked) Or (optcobrar.Checked) Or (optanceladas.Checked) Then cmd2.CommandText = "select * from VentasDetalle where Folio=" & MYFOLIO
+                            txtrestaabono.Text = FormatNumber(IIf(rd1("Resta").ToString() = "", 0, rd1("Resta").ToString()), 2)
+                        End If
+                        cnn2.Close() : cnn2.Open()
+                        cmd2 = cnn2.CreateCommand
+                        If (optpagadas.Checked) Or (optnotas.Checked) Or (optcobrar.Checked) Or (optanceladas.Checked) Then cmd2.CommandText = "select * from VentasDetalle where Folio=" & MYFOLIO
                         If (optcotiz.Checked) Then cmd2.CommandText = "select * from CotPedDet where Folio=" & MYFOLIO
                         If (optPedidos.Checked) Then cmd2.CommandText = "SELECT * FROM pedidosvendet WHERE Folio=" & MYFOLIO
                         If (optdevos.Checked) Then cmd2.CommandText = "select * from Devoluciones where Folio=" & MYFOLIO
-                            rd2 = cmd2.ExecuteReader
-                            Do While rd2.Read
+                        rd2 = cmd2.ExecuteReader
+                        Do While rd2.Read
                             If rd2.HasRows Then
                                 codigo = rd2("Codigo").ToString()
                                 nombre = rd2("Nombre").ToString()
@@ -335,16 +336,16 @@ Public Class frmConsultaNotas
                                 End If
                             End If
                         Loop
-                            rd2.Close() : cnn2.Close()
-                            For t As Integer = 0 To grdcaptura.Rows.Count - 1
-                                If CStr(grdcaptura.Rows(t).Cells(0).Value.ToString) = "" Then
-                                    grdcaptura.Rows(t).DefaultCellStyle.ForeColor = Color.DarkOrange
-                                    grdcaptura.Rows(t).DefaultCellStyle.SelectionBackColor = Color.Pink
-                                    grdcaptura.Rows(t).DefaultCellStyle.SelectionForeColor = Color.Black
-                                End If
-                            Next
-                        End If
+                        rd2.Close() : cnn2.Close()
+                        For t As Integer = 0 To grdcaptura.Rows.Count - 1
+                            If CStr(grdcaptura.Rows(t).Cells(0).Value.ToString) = "" Then
+                                grdcaptura.Rows(t).DefaultCellStyle.ForeColor = Color.DarkOrange
+                                grdcaptura.Rows(t).DefaultCellStyle.SelectionBackColor = Color.Pink
+                                grdcaptura.Rows(t).DefaultCellStyle.SelectionForeColor = Color.Black
+                            End If
+                        Next
                     End If
+                End If
                 rd1.Close()
                 cnn1.Close()
                 cnn2.Close()

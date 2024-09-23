@@ -829,6 +829,7 @@ Partial Class frmProductosS
         Me.btn_tienda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.btn_tienda.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_tienda.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_tienda.Image = CType(resources.GetObject("btn_tienda.Image"), System.Drawing.Image)
         Me.btn_tienda.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btn_tienda.Location = New System.Drawing.Point(373, 296)
         Me.btn_tienda.Name = "btn_tienda"

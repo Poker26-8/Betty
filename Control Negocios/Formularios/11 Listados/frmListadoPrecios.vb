@@ -3898,6 +3898,10 @@ Public Class frmListadoPrecios
         End If
         cnn2.Close()
         MsgBox("Datos importados correctamente.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+        lblprod.Text = ""
+        lblprod.Visible = False
+        ProgressBar1.Visible = False
+        ProgressBar1.Value = 0
     End Sub
 
 End Class
