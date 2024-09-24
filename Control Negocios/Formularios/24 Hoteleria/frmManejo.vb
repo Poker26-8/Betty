@@ -36,6 +36,7 @@ Public Class frmManejo
                             If rd2.Read Then
                                 txtpass.Text = rd2(0).ToString
                                 lblusuario.Text = rd2(1).ToString
+                                lblidusuario.Text = id_usu_log
                             End If
                         End If
                         rd2.Close()

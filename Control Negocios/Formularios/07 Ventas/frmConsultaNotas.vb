@@ -1836,7 +1836,7 @@ Public Class frmConsultaNotas
     Private Sub btnPago_Click(sender As System.Object, e As System.EventArgs) Handles btnPago.Click
         If cbotipo.Text = "" Then MsgBox("Falta el tipo de pago", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbotipo.Focus().Equals(True) : Exit Sub
         If cbobanco.Text = "" Then MsgBox("Falta el banco", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbobanco.Focus().Equals(True) : Exit Sub
-        If txtnumero.Text = "" Then MsgBox("Falta el numero de referencia", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : txtnumero.Focus().Equals(True) : Exit Sub
+        ' If txtnumero.Text = "" Then MsgBox("Falta el numero de referencia", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : txtnumero.Focus().Equals(True) : Exit Sub
         If txtmonto.Text = "" Or CDbl(txtmonto.Text) = 0 Then MsgBox("Ingresa un monto válido", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : txtmonto.Focus().Equals(True) : Exit Sub
 
         grdpagos.Rows.Add(cbotipo.Text, cbobanco.Text, txtnumero.Text, FormatNumber(txtmonto.Text, 2), FormatDateTime(dtpfecha.Value, DateFormat.ShortDate), "", cboCunetaRep.Text, txtBancoRep.Text)
