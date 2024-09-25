@@ -67,6 +67,8 @@ Partial Class frmPediatria
         Me.barsube = New System.Windows.Forms.ProgressBar()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.btnExportar = New System.Windows.Forms.Button()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.txtCorporal = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.gbxMotivo.SuspendLayout()
@@ -77,6 +79,8 @@ Partial Class frmPediatria
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.txtCorporal)
+        Me.GroupBox1.Controls.Add(Me.Label15)
         Me.GroupBox1.Controls.Add(Me.dtpAlergia)
         Me.GroupBox1.Controls.Add(Me.dtpNacimiento)
         Me.GroupBox1.Controls.Add(Me.Label6)
@@ -95,7 +99,7 @@ Partial Class frmPediatria
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(445, 190)
+        Me.GroupBox1.Size = New System.Drawing.Size(445, 233)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Paciente"
@@ -104,24 +108,24 @@ Partial Class frmPediatria
         '
         Me.dtpAlergia.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpAlergia.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpAlergia.Location = New System.Drawing.Point(115, 156)
+        Me.dtpAlergia.Location = New System.Drawing.Point(115, 189)
         Me.dtpAlergia.Name = "dtpAlergia"
-        Me.dtpAlergia.Size = New System.Drawing.Size(146, 26)
+        Me.dtpAlergia.Size = New System.Drawing.Size(142, 26)
         Me.dtpAlergia.TabIndex = 258
         '
         'dtpNacimiento
         '
         Me.dtpNacimiento.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpNacimiento.Location = New System.Drawing.Point(115, 124)
+        Me.dtpNacimiento.Location = New System.Drawing.Point(115, 157)
         Me.dtpNacimiento.Name = "dtpNacimiento"
-        Me.dtpNacimiento.Size = New System.Drawing.Size(146, 26)
+        Me.dtpNacimiento.Size = New System.Drawing.Size(142, 26)
         Me.dtpNacimiento.TabIndex = 257
         '
         'Label6
         '
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(6, 156)
+        Me.Label6.Location = New System.Drawing.Point(6, 189)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(103, 26)
         Me.Label6.TabIndex = 256
@@ -131,7 +135,7 @@ Partial Class frmPediatria
         'Label5
         '
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(6, 124)
+        Me.Label5.Location = New System.Drawing.Point(6, 157)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(116, 26)
         Me.Label5.TabIndex = 255
@@ -143,7 +147,7 @@ Partial Class frmPediatria
         Me.cboMedida.Font = New System.Drawing.Font("Arial Rounded MT Bold", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboMedida.FormattingEnabled = True
         Me.cboMedida.Items.AddRange(New Object() {"°C", "°F"})
-        Me.cboMedida.Location = New System.Drawing.Point(224, 97)
+        Me.cboMedida.Location = New System.Drawing.Point(221, 129)
         Me.cboMedida.Name = "cboMedida"
         Me.cboMedida.Size = New System.Drawing.Size(37, 22)
         Me.cboMedida.TabIndex = 254
@@ -153,7 +157,7 @@ Partial Class frmPediatria
         '
         Me.txtTemperatura.BackColor = System.Drawing.Color.White
         Me.txtTemperatura.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTemperatura.Location = New System.Drawing.Point(84, 92)
+        Me.txtTemperatura.Location = New System.Drawing.Point(84, 124)
         Me.txtTemperatura.Name = "txtTemperatura"
         Me.txtTemperatura.Size = New System.Drawing.Size(134, 26)
         Me.txtTemperatura.TabIndex = 253
@@ -161,7 +165,7 @@ Partial Class frmPediatria
         'Label4
         '
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(6, 92)
+        Me.Label4.Location = New System.Drawing.Point(3, 124)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(72, 26)
         Me.Label4.TabIndex = 252
@@ -254,7 +258,7 @@ Partial Class frmPediatria
         Me.GroupBox4.Controls.Add(Me.txtAlergias)
         Me.GroupBox4.Font = New System.Drawing.Font("Arial Rounded MT Bold", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox4.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox4.Location = New System.Drawing.Point(3, 199)
+        Me.GroupBox4.Location = New System.Drawing.Point(3, 245)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(445, 166)
         Me.GroupBox4.TabIndex = 244
@@ -276,7 +280,7 @@ Partial Class frmPediatria
         Me.gbxMotivo.Controls.Add(Me.txtMotivo)
         Me.gbxMotivo.Font = New System.Drawing.Font("Arial Rounded MT Bold", 12.0!)
         Me.gbxMotivo.ForeColor = System.Drawing.Color.Black
-        Me.gbxMotivo.Location = New System.Drawing.Point(3, 371)
+        Me.gbxMotivo.Location = New System.Drawing.Point(3, 417)
         Me.gbxMotivo.Name = "gbxMotivo"
         Me.gbxMotivo.Size = New System.Drawing.Size(445, 174)
         Me.gbxMotivo.TabIndex = 245
@@ -562,12 +566,31 @@ Partial Class frmPediatria
         Me.btnExportar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnExportar.UseVisualStyleBackColor = True
         '
+        'Label15
+        '
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(6, 90)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(72, 26)
+        Me.Label15.TabIndex = 259
+        Me.Label15.Text = "m2SC:"
+        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtCorporal
+        '
+        Me.txtCorporal.BackColor = System.Drawing.Color.White
+        Me.txtCorporal.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCorporal.Location = New System.Drawing.Point(84, 92)
+        Me.txtCorporal.Name = "txtCorporal"
+        Me.txtCorporal.Size = New System.Drawing.Size(134, 26)
+        Me.txtCorporal.TabIndex = 260
+        '
         'frmPediatria
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1041, 550)
+        Me.ClientSize = New System.Drawing.Size(1041, 600)
         Me.Controls.Add(Me.btnLimpiar)
         Me.Controls.Add(Me.btnSalir)
         Me.Controls.Add(Me.btnSave)
@@ -639,4 +662,6 @@ Partial Class frmPediatria
     Friend WithEvents barsube As ProgressBar
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents btnExportar As Button
+    Friend WithEvents txtCorporal As TextBox
+    Friend WithEvents Label15 As Label
 End Class

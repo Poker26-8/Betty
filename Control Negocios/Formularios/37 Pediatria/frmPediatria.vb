@@ -80,9 +80,26 @@ Public Class frmPediatria
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
             If IsNumeric(txtPeso.Text) Then
-                txtTemperatura.Focus.Equals(True)
+                Dim PESO As Double = 0
+                Dim RESULTADO As Double = 0
+                Dim MSC As Double = 0
+
+                Dim DIV As Double = 0
+
+                PESO = txtPeso.Text
+                If PESO > 10 Then
+                    RESULTADO = PESO * (4 + 7)
+                    DIV = (PESO + 90)
+                    MSC = RESULTADO / DIV
+                Else
+                    RESULTADO = PESO * (4 + 9)
+                    DIV = 100
+                    MSC = RESULTADO / DIV
+                End If
+                txtCorporal.Focus.Equals(True)
+                txtCorporal.Text = FormatNumber(MSC, 2)
             End If
-        End If
+            End If
     End Sub
 
     Private Sub txtTemperatura_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtTemperatura.KeyPress
@@ -384,7 +401,7 @@ Public Class frmPediatria
 
                     cnn2.Close() : cnn2.Open()
                     cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "INSERT INTO hisclinica(Medico,Fecha,Hora,Paciente,Urgencia,Tutor,Sexo,FNacimiento,Edad,Peso,Alergias,Temperatura,MotivoConsulta) VALUES('" & cboMedico.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & cboCliente.Text & "','" & cboUrgencia.Text & "','" & txtTutor.Text & "'," & sex & ",'" & Format(dtpNacimiento.Value, "yyyy-MM-dd") & "','" & EDAD & "','" & txtPeso.Text & "','" & alergias & "','" & txtTemperatura.Text & "','" & motivo & "')"
+                    cmd2.CommandText = "INSERT INTO hisclinica(Medico,Fecha,Hora,Paciente,Urgencia,Tutor,Sexo,FNacimiento,Edad,Peso,Alergias,Temperatura,MotivoConsulta,MSC) VALUES('" & cboMedico.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & cboCliente.Text & "','" & cboUrgencia.Text & "','" & txtTutor.Text & "'," & sex & ",'" & Format(dtpNacimiento.Value, "yyyy-MM-dd") & "','" & EDAD & "','" & txtPeso.Text & "','" & alergias & "','" & txtTemperatura.Text & "','" & motivo & "'," & txtCorporal.Text & ")"
                     cmd2.ExecuteNonQuery()
                     cnn2.Close()
                 End If
@@ -395,7 +412,7 @@ Public Class frmPediatria
                 cmd2.ExecuteNonQuery()
 
                 cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "INSERT INTO hisclinica(Medico,Fecha,Hora,Paciente,Urgencia,Tutor,Sexo,FNacimiento,Edad,Peso,Alergias,Temperatura,MotivoConsulta) VALUES('" & cboMedico.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & cboCliente.Text & "','" & cboUrgencia.Text & "','" & txtTutor.Text & "'," & sex & ",'" & Format(dtpNacimiento.Value, "yyyy-MM-dd") & "','" & EDAD & "','" & txtPeso.Text & "','" & alergias & "','" & txtTemperatura.Text & "','" & motivo & "')"
+                cmd2.CommandText = "INSERT INTO hisclinica(Medico,Fecha,Hora,Paciente,Urgencia,Tutor,Sexo,FNacimiento,Edad,Peso,Alergias,Temperatura,MotivoConsulta,MSC) VALUES('" & cboMedico.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & cboCliente.Text & "','" & cboUrgencia.Text & "','" & txtTutor.Text & "'," & sex & ",'" & Format(dtpNacimiento.Value, "yyyy-MM-dd") & "','" & EDAD & "','" & txtPeso.Text & "','" & alergias & "','" & txtTemperatura.Text & "','" & motivo & "'," & txtCorporal.Text & ")"
                 If cmd2.ExecuteNonQuery() Then
                     MsgBox("Cita agregada correctamente", vbInformation + vbOKOnly, titulocentral)
                     btnLimpiar.PerformClick()
@@ -411,5 +428,11 @@ Public Class frmPediatria
             MessageBox.Show(ex.ToString)
             cnn1.Close()
         End Try
+    End Sub
+
+    Private Sub txtCorporal_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCorporal.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            txtTemperatura.Focus.Equals(True)
+        End If
     End Sub
 End Class

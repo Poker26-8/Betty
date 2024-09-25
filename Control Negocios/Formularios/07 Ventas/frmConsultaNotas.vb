@@ -2562,9 +2562,9 @@ Public Class frmConsultaNotas
                     Y += 13.5
                 Next
             End If
-            If CDbl(txtresta.Text) > 0 Then
+            If CDbl(txtrestaabono.Text) > 0 Then
                 e.Graphics.DrawString("Resta:", fuente_prods, Brushes.Black, 1, Y)
-                e.Graphics.DrawString(simbolo & FormatNumber(CDec(txtresta.Text) - txtefectivo.Text, 2), fuente_prods, Brushes.Black, 285, Y, sf)
+                e.Graphics.DrawString(simbolo & FormatNumber(CDec(txtrestaabono.Text), 2), fuente_prods, Brushes.Black, 285, Y, sf)
                 Y += 13.5
             End If
 

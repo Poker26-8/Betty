@@ -169,7 +169,7 @@ Public Class frmTraspSalida
 
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
-                "select distinct Nombre from Productos where Departamento<>'SERVICIOS'"
+                "select distinct Nombre from Productos where Departamento<>'SERVICIOS' ORDER BY Nombre"
             rd1 = cmd1.ExecuteReader
             Do While rd1.Read
                 If rd1.HasRows Then cbodesc.Items.Add(
@@ -246,7 +246,7 @@ Public Class frmTraspSalida
 
                     cmd1 = cnn1.CreateCommand
                     cmd1.CommandText =
-                        "select Codigo,UVenta,Nombre,PrecioCompra from Productos where Codigo='" & Strings.Left(cbocodigo.Text, 6) & "'"
+                        "select Codigo,UVenta,Nombre,PrecioCompra from Productos where Codigo='" & cbocodigo.Text & "'"
                     rd1 = cmd1.ExecuteReader
                     If rd1.HasRows Then
                         If rd1.Read Then

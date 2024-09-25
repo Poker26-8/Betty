@@ -40,7 +40,8 @@
                                                   `Saturacion` varchar(100) NOT NULL DEFAULT '0',
                                                   `MotivoConsulta` text NOT NULL,
                                                   `Folio` int(11) NOT NULL DEFAULT '0',
-                                                  `Estado` int(1) NOT NULL DEFAULT '0'
+                                                  `Estado` int(1) NOT NULL DEFAULT '0',
+                                                  `MSC` double NOT NULL DEFAULT '0'
                                                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
     'tallerd
     Public vartablatallerd As String = "CREATE TABLE `tallerd` (

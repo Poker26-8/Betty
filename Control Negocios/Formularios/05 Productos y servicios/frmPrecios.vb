@@ -224,7 +224,6 @@
                 Exit Sub
             Else
                 cnn1.Close() : cnn1.Open()
-
                 cmd1 = cnn1.CreateCommand
                 If Len(cboCodigo.Text) > 0 Then
                     cmd1.CommandText =
@@ -502,26 +501,26 @@
     Private Sub CboDescripcion_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles CboDescripcion.SelectedValueChanged
         Dim IVA As Double = 0
         Try
-            cnn1.Close()
-            cnn1.Open()
+            cnn3.Close()
+            cnn3.Open()
 
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
+            cmd3 = cnn3.CreateCommand
+            cmd3.CommandText =
                 "select Codigo,IVA from Productos where Nombre='" & CboDescripcion.Text & "'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    cboCodigo.Text = rd1("Codigo").ToString
-                    IVA = rd1("IVA").ToString
+            rd3 = cmd3.ExecuteReader
+            If rd3.HasRows Then
+                If rd3.Read Then
+                    cboCodigo.Text = rd3("Codigo").ToString
+                    IVA = rd3("IVA").ToString
                     TxtPCI.Text = CDec(IIf(TxtPCI.Text = "", "0", TxtPCI.Text)) * (1 + IVA)
                     TxtPCI.Text = FormatNumber(TxtPCI.Text, 2)
                 End If
             End If
-            rd1.Close()
-            cnn1.Close()
+            rd3.Close()
+            cnn3.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn3.Close()
         End Try
     End Sub
 

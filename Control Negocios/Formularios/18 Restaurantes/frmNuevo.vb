@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports ClosedXML.Excel.XLPredefinedFormat
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Public Class frmNuevo
@@ -6,7 +7,10 @@ Public Class frmNuevo
     Friend WithEvents btnMesa As System.Windows.Forms.Button
     Dim btnaccion = New DataGridViewButtonColumn()
     Dim btnaccion2 = New DataGridViewTextBoxCell()
-    Dim rowIndex As Integer = 0 ' 
+    Dim rowIndex As Integer = 0
+
+    Dim numcompleto As String = ""
+
     Private Sub frmNuevo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
@@ -63,6 +67,75 @@ Public Class frmNuevo
         Next
         cnn1.Close()
         cnn2.Close()
+
+    End Sub
+
+    Private Sub ComboBox1_DropDown(sender As Object, e As EventArgs) Handles ComboBox1.DropDown
+        Try
+            ComboBox1.Items.Clear()
+
+            cnn5.Close() : cnn5.Open()
+            cmd5 = cnn5.CreateCommand
+            cmd5.CommandText = "SELECT DISTINCT Codigo FROM productos WHERE Codigo<>'' ORDER BY Codigo"
+            rd5 = cmd5.ExecuteReader
+            Do While rd5.Read
+                If rd5.HasRows Then
+                    ComboBox1.Items.Add(rd5(0).ToString)
+                End If
+            Loop
+            rd5.Close()
+            cnn5.Close()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn5.Close()
+        End Try
+    End Sub
+
+    Private Sub ComboBox1_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedValueChanged
+        Try
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT CodBarra FROM productos WHERE Codigo='" & ComboBox1.Text & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    txtbarras.Text = rd1(0).ToString
+                End If
+            End If
+            rd1.Close()
+            cnn1.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+
+
+        Dim peso As String = txtpeso.Text
+        Dim numeroSinPunto As String = peso.ToString().Replace(".", "")
+
+        Dim resultado As String = ""
+        Dim barras As String = txtbarras.Text
+
+        If barras.Length = 2 Then
+            resultado = "0" & barras
+        Else
+            resultado = barras
+        End If
+
+        numcompleto = txtInicial.Text & txtnumfijo.Text & resultado & txtfijo.Text & numeroSinPunto & txtalazar.Text
+        txtticket.Text = numcompleto
+
+        '55200010200295520001060030572000038005501
+
+        'hay que cortar los primeros 2 digitos
+
+        Dim primeros2num As String = txtconvertir.Text
+
 
     End Sub
 End Class

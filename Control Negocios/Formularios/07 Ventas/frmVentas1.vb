@@ -15198,6 +15198,9 @@ ecomoda:
     Private Sub Button17_Click(sender As Object, e As EventArgs) Handles Button17.Click
         frmRepExistenciaSincronizador.Show()
         frmRepExistenciaSincronizador.BringToFront()
+
+        frmNuevo.BringToFront()
+        frmNuevo.Show()
         'frmOrdenTrabajo.Show()
         'frmOrdenTrabajo.BringToFront()
     End Sub
