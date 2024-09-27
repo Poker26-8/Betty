@@ -106,7 +106,7 @@ Public Class frmPediatria
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
             If IsNumeric(txtTemperatura.Text) Then
-                dtpNacimiento.Focus.Equals(True)
+                txtTA.Focus.Equals(True)
             End If
         End If
     End Sub
@@ -472,6 +472,30 @@ Public Class frmPediatria
     Private Sub txtCorporal_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCorporal.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             txtTemperatura.Focus.Equals(True)
+        End If
+    End Sub
+
+    Private Sub txtTA_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtTA.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            txtFC.Focus.Equals(True)
+        End If
+    End Sub
+
+    Private Sub txtFC_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFC.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            txtFR.Focus.Equals(True)
+        End If
+    End Sub
+
+    Private Sub txtFR_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFR.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            txtSAT.Focus.Equals(True)
+        End If
+    End Sub
+
+    Private Sub txtSAT_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtSAT.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            dtpNacimiento.Focus.Equals(True)
         End If
     End Sub
 End Class

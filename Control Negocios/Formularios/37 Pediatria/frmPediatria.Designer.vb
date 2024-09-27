@@ -24,6 +24,16 @@ Partial Class frmPediatria
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPediatria))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtSAT = New System.Windows.Forms.TextBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.txtFR = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.txtFC = New System.Windows.Forms.TextBox()
+        Me.txtTA = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.txtEdad = New System.Windows.Forms.TextBox()
         Me.txtCorporal = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.dtpAlergia = New System.Windows.Forms.DateTimePicker()
@@ -69,16 +79,6 @@ Partial Class frmPediatria
         Me.barsube = New System.Windows.Forms.ProgressBar()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.btnExportar = New System.Windows.Forms.Button()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.txtEdad = New System.Windows.Forms.TextBox()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.txtTA = New System.Windows.Forms.TextBox()
-        Me.txtFC = New System.Windows.Forms.TextBox()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.txtFR = New System.Windows.Forms.TextBox()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.txtSAT = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.gbxMotivo.SuspendLayout()
@@ -123,6 +123,101 @@ Partial Class frmPediatria
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Paciente"
+        '
+        'txtSAT
+        '
+        Me.txtSAT.BackColor = System.Drawing.Color.White
+        Me.txtSAT.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSAT.Location = New System.Drawing.Point(305, 188)
+        Me.txtSAT.Name = "txtSAT"
+        Me.txtSAT.Size = New System.Drawing.Size(134, 26)
+        Me.txtSAT.TabIndex = 270
+        '
+        'Label20
+        '
+        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(223, 188)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(78, 26)
+        Me.Label20.TabIndex = 269
+        Me.Label20.Text = "SAT. O₂:"
+        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label19
+        '
+        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.Location = New System.Drawing.Point(3, 188)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(78, 26)
+        Me.Label19.TabIndex = 268
+        Me.Label19.Text = "F.R:"
+        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtFR
+        '
+        Me.txtFR.BackColor = System.Drawing.Color.White
+        Me.txtFR.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFR.Location = New System.Drawing.Point(84, 188)
+        Me.txtFR.Name = "txtFR"
+        Me.txtFR.Size = New System.Drawing.Size(134, 26)
+        Me.txtFR.TabIndex = 267
+        '
+        'Label18
+        '
+        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(224, 156)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(78, 26)
+        Me.Label18.TabIndex = 266
+        Me.Label18.Text = "F.C:"
+        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtFC
+        '
+        Me.txtFC.BackColor = System.Drawing.Color.White
+        Me.txtFC.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFC.Location = New System.Drawing.Point(305, 156)
+        Me.txtFC.Name = "txtFC"
+        Me.txtFC.Size = New System.Drawing.Size(134, 26)
+        Me.txtFC.TabIndex = 265
+        '
+        'txtTA
+        '
+        Me.txtTA.BackColor = System.Drawing.Color.White
+        Me.txtTA.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTA.Location = New System.Drawing.Point(84, 156)
+        Me.txtTA.Name = "txtTA"
+        Me.txtTA.Size = New System.Drawing.Size(134, 26)
+        Me.txtTA.TabIndex = 264
+        '
+        'Label17
+        '
+        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(3, 156)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(78, 26)
+        Me.Label17.TabIndex = 263
+        Me.Label17.Text = "T/A:"
+        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label16
+        '
+        Me.Label16.Font = New System.Drawing.Font("Bahnschrift", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(267, 220)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(54, 26)
+        Me.Label16.TabIndex = 261
+        Me.Label16.Text = "EDAD:"
+        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtEdad
+        '
+        Me.txtEdad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.txtEdad.Font = New System.Drawing.Font("Bahnschrift SemiLight", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEdad.Location = New System.Drawing.Point(327, 220)
+        Me.txtEdad.Name = "txtEdad"
+        Me.txtEdad.Size = New System.Drawing.Size(112, 23)
+        Me.txtEdad.TabIndex = 262
         '
         'txtCorporal
         '
@@ -604,101 +699,6 @@ Partial Class frmPediatria
         Me.btnExportar.Text = "Importar padecimientos"
         Me.btnExportar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnExportar.UseVisualStyleBackColor = True
-        '
-        'Label16
-        '
-        Me.Label16.Font = New System.Drawing.Font("Bahnschrift", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(267, 220)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(54, 26)
-        Me.Label16.TabIndex = 261
-        Me.Label16.Text = "EDAD:"
-        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'txtEdad
-        '
-        Me.txtEdad.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.txtEdad.Font = New System.Drawing.Font("Bahnschrift SemiLight", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEdad.Location = New System.Drawing.Point(327, 220)
-        Me.txtEdad.Name = "txtEdad"
-        Me.txtEdad.Size = New System.Drawing.Size(112, 23)
-        Me.txtEdad.TabIndex = 262
-        '
-        'Label17
-        '
-        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(3, 156)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(78, 26)
-        Me.Label17.TabIndex = 263
-        Me.Label17.Text = "T/A:"
-        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'txtTA
-        '
-        Me.txtTA.BackColor = System.Drawing.Color.White
-        Me.txtTA.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTA.Location = New System.Drawing.Point(84, 156)
-        Me.txtTA.Name = "txtTA"
-        Me.txtTA.Size = New System.Drawing.Size(134, 26)
-        Me.txtTA.TabIndex = 264
-        '
-        'txtFC
-        '
-        Me.txtFC.BackColor = System.Drawing.Color.White
-        Me.txtFC.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFC.Location = New System.Drawing.Point(305, 156)
-        Me.txtFC.Name = "txtFC"
-        Me.txtFC.Size = New System.Drawing.Size(134, 26)
-        Me.txtFC.TabIndex = 265
-        '
-        'Label18
-        '
-        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(224, 156)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(78, 26)
-        Me.Label18.TabIndex = 266
-        Me.Label18.Text = "F.C:"
-        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'txtFR
-        '
-        Me.txtFR.BackColor = System.Drawing.Color.White
-        Me.txtFR.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFR.Location = New System.Drawing.Point(84, 188)
-        Me.txtFR.Name = "txtFR"
-        Me.txtFR.Size = New System.Drawing.Size(134, 26)
-        Me.txtFR.TabIndex = 267
-        '
-        'Label19
-        '
-        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(3, 188)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(78, 26)
-        Me.Label19.TabIndex = 268
-        Me.Label19.Text = "F.R:"
-        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label20
-        '
-        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(223, 188)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(78, 26)
-        Me.Label20.TabIndex = 269
-        Me.Label20.Text = "SAT. O₂:"
-        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'txtSAT
-        '
-        Me.txtSAT.BackColor = System.Drawing.Color.White
-        Me.txtSAT.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSAT.Location = New System.Drawing.Point(305, 188)
-        Me.txtSAT.Name = "txtSAT"
-        Me.txtSAT.Size = New System.Drawing.Size(134, 26)
-        Me.txtSAT.TabIndex = 270
         '
         'frmPediatria
         '
