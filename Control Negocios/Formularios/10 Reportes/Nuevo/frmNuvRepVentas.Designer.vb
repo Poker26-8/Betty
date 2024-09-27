@@ -23,9 +23,9 @@ Partial Class frmNuvRepVentas
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmNuvRepVentas))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel7 = New System.Windows.Forms.Panel()
@@ -62,6 +62,7 @@ Partial Class frmNuvRepVentas
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.rbVVendedorDetalle = New System.Windows.Forms.RadioButton()
         Me.rbTraspasos = New System.Windows.Forms.RadioButton()
         Me.rbVentasTotales = New System.Windows.Forms.RadioButton()
         Me.rbFiscal = New System.Windows.Forms.RadioButton()
@@ -114,7 +115,7 @@ Partial Class frmNuvRepVentas
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1051, 35)
+        Me.Panel1.Size = New System.Drawing.Size(1175, 35)
         Me.Panel1.TabIndex = 0
         '
         'Panel2
@@ -124,7 +125,7 @@ Partial Class frmNuvRepVentas
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel2.Location = New System.Drawing.Point(0, 591)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1051, 166)
+        Me.Panel2.Size = New System.Drawing.Size(1175, 166)
         Me.Panel2.TabIndex = 1
         '
         'Panel7
@@ -152,7 +153,7 @@ Partial Class frmNuvRepVentas
         Me.Panel7.Controls.Add(Me.txtTotal)
         Me.Panel7.Controls.Add(Me.lblTotal)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel7.Location = New System.Drawing.Point(382, 0)
+        Me.Panel7.Location = New System.Drawing.Point(506, 0)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(669, 166)
         Me.Panel7.TabIndex = 17
@@ -389,7 +390,7 @@ Partial Class frmNuvRepVentas
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel6.Location = New System.Drawing.Point(0, 0)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(1051, 166)
+        Me.Panel6.Size = New System.Drawing.Size(1175, 166)
         Me.Panel6.TabIndex = 16
         '
         'Button1
@@ -499,7 +500,7 @@ Partial Class frmNuvRepVentas
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel3.Location = New System.Drawing.Point(0, 35)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1051, 283)
+        Me.Panel3.Size = New System.Drawing.Size(1175, 283)
         Me.Panel3.TabIndex = 2
         '
         'TabControl1
@@ -509,12 +510,13 @@ Partial Class frmNuvRepVentas
         Me.TabControl1.Location = New System.Drawing.Point(3, 6)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(521, 274)
+        Me.TabControl1.Size = New System.Drawing.Size(648, 274)
         Me.TabControl1.TabIndex = 220
         '
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.Color.White
+        Me.TabPage1.Controls.Add(Me.rbVVendedorDetalle)
         Me.TabPage1.Controls.Add(Me.rbTraspasos)
         Me.TabPage1.Controls.Add(Me.rbVentasTotales)
         Me.TabPage1.Controls.Add(Me.rbFiscal)
@@ -535,15 +537,27 @@ Partial Class frmNuvRepVentas
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(513, 248)
+        Me.TabPage1.Size = New System.Drawing.Size(640, 248)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "          Ventas           "
+        '
+        'rbVVendedorDetalle
+        '
+        Me.rbVVendedorDetalle.AutoSize = True
+        Me.rbVVendedorDetalle.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbVVendedorDetalle.Location = New System.Drawing.Point(232, 62)
+        Me.rbVVendedorDetalle.Name = "rbVVendedorDetalle"
+        Me.rbVVendedorDetalle.Size = New System.Drawing.Size(221, 22)
+        Me.rbVVendedorDetalle.TabIndex = 221
+        Me.rbVVendedorDetalle.TabStop = True
+        Me.rbVVendedorDetalle.Text = "Ventas por vendedor (Detalle)"
+        Me.rbVVendedorDetalle.UseVisualStyleBackColor = True
         '
         'rbTraspasos
         '
         Me.rbTraspasos.AutoSize = True
         Me.rbTraspasos.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbTraspasos.Location = New System.Drawing.Point(232, 220)
+        Me.rbTraspasos.Location = New System.Drawing.Point(513, 30)
         Me.rbTraspasos.Name = "rbTraspasos"
         Me.rbTraspasos.Size = New System.Drawing.Size(97, 22)
         Me.rbTraspasos.TabIndex = 220
@@ -567,7 +581,7 @@ Partial Class frmNuvRepVentas
         '
         Me.rbFiscal.AutoSize = True
         Me.rbFiscal.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbFiscal.Location = New System.Drawing.Point(232, 194)
+        Me.rbFiscal.Location = New System.Drawing.Point(512, 6)
         Me.rbFiscal.Name = "rbFiscal"
         Me.rbFiscal.Size = New System.Drawing.Size(122, 22)
         Me.rbFiscal.TabIndex = 219
@@ -624,7 +638,7 @@ Partial Class frmNuvRepVentas
         '
         Me.rbVentasPorcentaje.AutoSize = True
         Me.rbVentasPorcentaje.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbVentasPorcentaje.Location = New System.Drawing.Point(232, 166)
+        Me.rbVentasPorcentaje.Location = New System.Drawing.Point(232, 202)
         Me.rbVentasPorcentaje.Name = "rbVentasPorcentaje"
         Me.rbVentasPorcentaje.Size = New System.Drawing.Size(258, 22)
         Me.rbVentasPorcentaje.TabIndex = 216
@@ -648,7 +662,7 @@ Partial Class frmNuvRepVentas
         '
         Me.rbVentasFormato.AutoSize = True
         Me.rbVentasFormato.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbVentasFormato.Location = New System.Drawing.Point(232, 138)
+        Me.rbVentasFormato.Location = New System.Drawing.Point(233, 174)
         Me.rbVentasFormato.Name = "rbVentasFormato"
         Me.rbVentasFormato.Size = New System.Drawing.Size(153, 22)
         Me.rbVentasFormato.TabIndex = 215
@@ -672,7 +686,7 @@ Partial Class frmNuvRepVentas
         '
         Me.rbVendidoProveedor.AutoSize = True
         Me.rbVendidoProveedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbVendidoProveedor.Location = New System.Drawing.Point(232, 110)
+        Me.rbVendidoProveedor.Location = New System.Drawing.Point(233, 146)
         Me.rbVendidoProveedor.Name = "rbVendidoProveedor"
         Me.rbVendidoProveedor.Size = New System.Drawing.Size(257, 22)
         Me.rbVendidoProveedor.TabIndex = 214
@@ -696,7 +710,7 @@ Partial Class frmNuvRepVentas
         '
         Me.rbProductoVendido.AutoSize = True
         Me.rbProductoVendido.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbProductoVendido.Location = New System.Drawing.Point(232, 83)
+        Me.rbProductoVendido.Location = New System.Drawing.Point(232, 118)
         Me.rbProductoVendido.Name = "rbProductoVendido"
         Me.rbProductoVendido.Size = New System.Drawing.Size(175, 22)
         Me.rbProductoVendido.TabIndex = 213
@@ -720,7 +734,7 @@ Partial Class frmNuvRepVentas
         '
         Me.rbDevoluciones.AutoSize = True
         Me.rbDevoluciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbDevoluciones.Location = New System.Drawing.Point(232, 55)
+        Me.rbDevoluciones.Location = New System.Drawing.Point(232, 90)
         Me.rbDevoluciones.Name = "rbDevoluciones"
         Me.rbDevoluciones.Size = New System.Drawing.Size(116, 22)
         Me.rbDevoluciones.TabIndex = 212
@@ -732,7 +746,7 @@ Partial Class frmNuvRepVentas
         '
         Me.rbVentasVendedor.AutoSize = True
         Me.rbVentasVendedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbVentasVendedor.Location = New System.Drawing.Point(232, 30)
+        Me.rbVentasVendedor.Location = New System.Drawing.Point(232, 34)
         Me.rbVentasVendedor.Name = "rbVentasVendedor"
         Me.rbVentasVendedor.Size = New System.Drawing.Size(162, 22)
         Me.rbVentasVendedor.TabIndex = 211
@@ -747,7 +761,7 @@ Partial Class frmNuvRepVentas
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(513, 248)
+        Me.TabPage2.Size = New System.Drawing.Size(640, 248)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "            Ventas 2             "
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -783,7 +797,7 @@ Partial Class frmNuvRepVentas
         Me.Panel5.Controls.Add(Me.mcHasta)
         Me.Panel5.Controls.Add(Me.dtpFin)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel5.Location = New System.Drawing.Point(533, 0)
+        Me.Panel5.Location = New System.Drawing.Point(657, 0)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(518, 283)
         Me.Panel5.TabIndex = 217
@@ -832,7 +846,7 @@ Partial Class frmNuvRepVentas
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(0, 318)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(1051, 273)
+        Me.Panel4.Size = New System.Drawing.Size(1175, 273)
         Me.Panel4.TabIndex = 3
         '
         'boxcantidad
@@ -843,7 +857,7 @@ Partial Class frmNuvRepVentas
         Me.boxcantidad.Controls.Add(Me.txtcodigo)
         Me.boxcantidad.Controls.Add(Me.txtcantidad)
         Me.boxcantidad.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.boxcantidad.Location = New System.Drawing.Point(418, 102)
+        Me.boxcantidad.Location = New System.Drawing.Point(480, 102)
         Me.boxcantidad.Name = "boxcantidad"
         Me.boxcantidad.Size = New System.Drawing.Size(225, 56)
         Me.boxcantidad.TabIndex = 236
@@ -880,7 +894,7 @@ Partial Class frmNuvRepVentas
         Me.barcarga.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.barcarga.Location = New System.Drawing.Point(0, 277)
         Me.barcarga.Name = "barcarga"
-        Me.barcarga.Size = New System.Drawing.Size(1048, 20)
+        Me.barcarga.Size = New System.Drawing.Size(1172, 20)
         Me.barcarga.TabIndex = 206
         Me.barcarga.Visible = False
         '
@@ -888,33 +902,33 @@ Partial Class frmNuvRepVentas
         '
         Me.grdCaptura.AllowUserToAddRows = False
         Me.grdCaptura.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grdCaptura.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grdCaptura.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
         Me.grdCaptura.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.grdCaptura.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.grdCaptura.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.grdCaptura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.grdCaptura.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.grdCaptura.DefaultCellStyle = DataGridViewCellStyle6
         Me.grdCaptura.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdCaptura.Location = New System.Drawing.Point(0, 0)
         Me.grdCaptura.Name = "grdCaptura"
         Me.grdCaptura.ReadOnly = True
         Me.grdCaptura.RowHeadersVisible = False
-        Me.grdCaptura.Size = New System.Drawing.Size(1051, 273)
+        Me.grdCaptura.Size = New System.Drawing.Size(1175, 273)
         Me.grdCaptura.TabIndex = 0
         '
         'PMasVendido80
@@ -925,7 +939,7 @@ Partial Class frmNuvRepVentas
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1051, 757)
+        Me.ClientSize = New System.Drawing.Size(1175, 757)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
@@ -1022,4 +1036,5 @@ Partial Class frmNuvRepVentas
     Friend WithEvents txtcantidad As TextBox
     Friend WithEvents PMasVendido80 As Printing.PrintDocument
     Friend WithEvents Button1 As Button
+    Friend WithEvents rbVVendedorDetalle As RadioButton
 End Class

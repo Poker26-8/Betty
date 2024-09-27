@@ -838,7 +838,7 @@ Public Class frmProductosS
 
                 codigo = NulCad(DataGridView1.Rows(zef).Cells(0).Value.ToString())
                 If codigo = "" Then Exit For
-                barras = NulCad(DataGridView1.Rows(zef).Cells(1).Value.ToString())
+                barras = DataGridView1.Rows(zef).Cells(1).Value.ToString()
                 nombre = UCase(NulCad(DataGridView1.Rows(zef).Cells(2).Value.ToString()))
                 iva = NulVa(DataGridView1.Rows(zef).Cells(3).Value.ToString())
                 unidad = NulCad(DataGridView1.Rows(zef).Cells(4).Value.ToString())
@@ -882,7 +882,7 @@ Public Class frmProductosS
                 grupo = Trim(Replace(grupo, "'", "''"))
 
 
-                If (Comprueba(codigo, nombre, barras, proveedor)) Then
+                If (Comprueba(codigo, nombre, proveedor)) Then
                     If cnn1.State = 0 Then cnn1.Open()
 
                     cmd1 = cnn1.CreateCommand
@@ -972,7 +972,7 @@ Public Class frmProductosS
         End Try
     End Sub
 
-    Private Function Comprueba(ByVal codigo As String, ByVal nombre As String, ByVal barras As String, ByVal provee As String) As Boolean
+    Private Function Comprueba(ByVal codigo As String, ByVal nombre As String, ByVal provee As String) As Boolean
         Try
             Dim valida As Boolean = True
             cnn2.Close() : cnn2.Open()
@@ -1003,20 +1003,20 @@ Public Class frmProductosS
             End If
             rd2.Close()
 
-            If barras <> "" Then
-                cmd2 = cnn2.CreateCommand
-                cmd2.CommandText =
-                    "select CodBarra from Productos where CodBarra='" & barras & "'"
-                rd2 = cmd2.ExecuteReader
-                If rd2.HasRows Then
-                    If rd2.Read Then
-                        'MsgBox("Ya cuentas con un producto registrado con el código de barras " & barras & ".", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                        valida = False
-                        Exit Function
-                    End If
-                End If
-                rd2.Close()
-            End If
+            'If barras <> "" Then
+            '    cmd2 = cnn2.CreateCommand
+            '    cmd2.CommandText =
+            '        "select CodBarra from Productos where CodBarra='" & barras & "'"
+            '    rd2 = cmd2.ExecuteReader
+            '    If rd2.HasRows Then
+            '        If rd2.Read Then
+            '            'MsgBox("Ya cuentas con un producto registrado con el código de barras " & barras & ".", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+            '            valida = False
+            '            Exit Function
+            '        End If
+            '    End If
+            '    rd2.Close()
+            'End If
 
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText =
@@ -1331,53 +1331,6 @@ Public Class frmProductosS
         Button1.Enabled = True
     End Sub
 
-    Private Function Comprueba(ByVal cod As String, ByVal desc As String, ByVal codbarra As String) As Boolean
-        Dim valida As Boolean = True
-
-        cnn2.Close() : cnn2.Open()
-        cmd2 = cnn2.CreateCommand
-        cmd2.CommandText =
-            "select Codigo from Productos where Codigo='" & cod & "'"
-        rd2 = cmd2.ExecuteReader
-        If rd2.HasRows Then
-            If rd2.Read Then
-                'MsgBox("Ya cuentas con un producto registrado con el código corto " & cod & ".", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                valida = False
-            End If
-        End If
-        rd2.Close()
-
-        If codbarra <> "" Then
-            cmd2 = cnn2.CreateCommand
-            cmd2.CommandText =
-                "select CodBarra from Productos where CodBarra='" & codbarra & "'"
-            rd2 = cmd2.ExecuteReader
-            If rd2.HasRows Then
-                If rd2.Read Then
-                    'MsgBox("Ya cuentas con un producto registrado con el código de barras " & codbarra & ".", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                    valida = False
-                End If
-            End If
-            rd2.Close()
-        End If
-
-        cmd2 = cnn2.CreateCommand
-        cmd2.CommandText =
-            "select Nombre from Productos where Nombre='" & desc & "'"
-        rd2 = cmd2.ExecuteReader
-        If rd2.HasRows Then
-            If rd2.Read Then
-                'MsgBox("Ya cuentas con un producto registrado con el nombre " & desc & ".", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                valida = False
-            End If
-        End If
-        rd2.Close()
-
-        cnn2.Close()
-        Return valida
-
-    End Function
-
 
 
 
@@ -1542,7 +1495,7 @@ Public Class frmProductosS
                     grupo = Trim(Replace(grupo, "'", "''"))
 
 
-                    If (Comprueba(codigo, nombre, barras, proveedor)) Then
+                    If (Comprueba(codigo, nombre, proveedor)) Then
                         If cnn1.State = 0 Then cnn1.Open()
 
                         cmd1 = cnn1.CreateCommand

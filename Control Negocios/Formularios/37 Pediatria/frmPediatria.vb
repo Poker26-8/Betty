@@ -88,11 +88,11 @@ Public Class frmPediatria
 
                 PESO = txtPeso.Text
                 If PESO > 10 Then
-                    RESULTADO = PESO * (4 + 7)
+                    RESULTADO = (PESO * 4 )+ 7
                     DIV = (PESO + 90)
                     MSC = RESULTADO / DIV
                 Else
-                    RESULTADO = PESO * (4 + 9)
+                    RESULTADO = (PESO * 4) + 9
                     DIV = 100
                     MSC = RESULTADO / DIV
                 End If
@@ -113,6 +113,45 @@ Public Class frmPediatria
 
     Private Sub dtpNacimiento_KeyPress(sender As Object, e As KeyPressEventArgs) Handles dtpNacimiento.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim EDAD As String = ""
+            ' Fecha de nacimiento
+            Dim fechaNacimiento As DateTime = dtpNacimiento.Value
+
+            ' Fecha actual
+            Dim fechaActual As DateTime = Date.Now
+
+            ' Cálculo de la edad
+            Dim edadAños As Integer = fechaActual.Year - fechaNacimiento.Year
+            Dim edadMeses As Integer = fechaActual.Month - fechaNacimiento.Month
+            Dim edadDias As Integer = fechaActual.Day - fechaNacimiento.Day
+
+            ' Ajuste si la diferencia en meses o días es negativa
+            If edadMeses < 0 Then
+                edadAños -= 1
+                edadMeses += 12
+            End If
+
+            If edadDias < 0 Then
+                edadMeses -= 1
+
+                ' Obtener el número de días en el mes anterior a la fecha actual
+                Dim mesAnterior As Integer = If(fechaActual.Month = 1, 12, fechaActual.Month - 1)
+                Dim añoAnterior As Integer = If(mesAnterior = 12, fechaActual.Year - 1, fechaActual.Year)
+                Dim díasMesAnterior As Integer = DateTime.DaysInMonth(añoAnterior, mesAnterior)
+
+                edadDias += díasMesAnterior
+            End If
+
+            If edadAños > 0 Then
+                EDAD = edadAños & " Años"
+            ElseIf edadMeses > 0 Then
+                EDAD = edadMeses & " Meses"
+            ElseIf edadDias > 0 Then
+                EDAD = edadDias & " Días"
+            End If
+            txtEdad.Text = EDAD
+
             dtpAlergia.Focus.Equals(True)
         End If
     End Sub
@@ -401,7 +440,7 @@ Public Class frmPediatria
 
                     cnn2.Close() : cnn2.Open()
                     cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "INSERT INTO hisclinica(Medico,Fecha,Hora,Paciente,Urgencia,Tutor,Sexo,FNacimiento,Edad,Peso,Alergias,Temperatura,MotivoConsulta,MSC) VALUES('" & cboMedico.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & cboCliente.Text & "','" & cboUrgencia.Text & "','" & txtTutor.Text & "'," & sex & ",'" & Format(dtpNacimiento.Value, "yyyy-MM-dd") & "','" & EDAD & "','" & txtPeso.Text & "','" & alergias & "','" & txtTemperatura.Text & "','" & motivo & "'," & txtCorporal.Text & ")"
+                    cmd2.CommandText = "INSERT INTO hisclinica(Medico,Fecha,Hora,Paciente,Urgencia,Tutor,Sexo,FNacimiento,Edad,Peso,Alergias,Temperatura,MotivoConsulta,MSC,TA,FC,FR,Saturacion) VALUES('" & cboMedico.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & cboCliente.Text & "','" & cboUrgencia.Text & "','" & txtTutor.Text & "'," & sex & ",'" & Format(dtpNacimiento.Value, "yyyy-MM-dd") & "','" & EDAD & "','" & txtPeso.Text & "','" & alergias & "','" & txtTemperatura.Text & "','" & motivo & "'," & txtCorporal.Text & ",'" & txtTA.Text & "','" & txtFC.Text & "','" & txtFR.Text & "','" & txtSAT.Text & "')"
                     cmd2.ExecuteNonQuery()
                     cnn2.Close()
                 End If
@@ -412,7 +451,7 @@ Public Class frmPediatria
                 cmd2.ExecuteNonQuery()
 
                 cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "INSERT INTO hisclinica(Medico,Fecha,Hora,Paciente,Urgencia,Tutor,Sexo,FNacimiento,Edad,Peso,Alergias,Temperatura,MotivoConsulta,MSC) VALUES('" & cboMedico.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & cboCliente.Text & "','" & cboUrgencia.Text & "','" & txtTutor.Text & "'," & sex & ",'" & Format(dtpNacimiento.Value, "yyyy-MM-dd") & "','" & EDAD & "','" & txtPeso.Text & "','" & alergias & "','" & txtTemperatura.Text & "','" & motivo & "'," & txtCorporal.Text & ")"
+                cmd2.CommandText = "INSERT INTO hisclinica(Medico,Fecha,Hora,Paciente,Urgencia,Tutor,Sexo,FNacimiento,Edad,Peso,Alergias,Temperatura,MotivoConsulta,MSC,TA,FC,FR,Saturacion) VALUES('" & cboMedico.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & cboCliente.Text & "','" & cboUrgencia.Text & "','" & txtTutor.Text & "'," & sex & ",'" & Format(dtpNacimiento.Value, "yyyy-MM-dd") & "','" & EDAD & "','" & txtPeso.Text & "','" & alergias & "','" & txtTemperatura.Text & "','" & motivo & "'," & txtCorporal.Text & ",'" & txtTA.Text & "','" & txtFC.Text & "','" & txtFR.Text & "','" & txtSAT.Text & "')"
                 If cmd2.ExecuteNonQuery() Then
                     MsgBox("Cita agregada correctamente", vbInformation + vbOKOnly, titulocentral)
                     btnLimpiar.PerformClick()
