@@ -5666,4 +5666,5 @@ Public Class frmNuvRepVentas
 
 
     End Sub
+
 End Class
