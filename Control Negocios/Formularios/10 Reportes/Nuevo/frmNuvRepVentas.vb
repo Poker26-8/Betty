@@ -17,6 +17,8 @@ Public Class frmNuvRepVentas
         dtpFin.Text = "23:59:59"
 
         Dim restaura As Integer = DatosRecarga2("Restaurante")
+        Dim parte As Integer = DatosRecarga2("Partes")
+        Dim farmaci As Integer = DatosRecarga2("Farmacia")
 
         If restaura = 1 Then
             rbVMesero.Visible = True
@@ -25,40 +27,20 @@ Public Class frmNuvRepVentas
         End If
 
         Try
-            cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
-                "select NumPart from Formatos where Facturas='Partes'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    If rd1(0).ToString() = 1 Then
-                        Partes = True
-                    Else
-                        Partes = False
-                    End If
-                End If
+            If parte = 1 Then
+                Partes = True
+            Else
+                Partes = False
             End If
-            rd1.Close()
 
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
-                "select NumPart from Formatos where Facturas='Farmacia'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    If rd1(0).ToString() = 1 Then
-                        btnAntibiotico.Visible = True
-                        btnControlado.Visible = True
-                    Else
-                        btnAntibiotico.Visible = False
-                        btnControlado.Visible = False
-                    End If
-                End If
+            If farmaci = 1 Then
+                btnAntibiotico.Visible = True
+                btnControlado.Visible = True
+            Else
+                btnAntibiotico.Visible = False
+                btnControlado.Visible = False
             End If
-            rd1.Close()
 
-            cnn1.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn1.Close()
