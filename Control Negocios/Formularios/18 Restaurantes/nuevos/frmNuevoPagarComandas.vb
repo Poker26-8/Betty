@@ -1980,7 +1980,7 @@ kakaxd:
             nuevoabono = mypago - CDbl(txtPropina.Text)
 
             cmd3 = cnn3.CreateCommand
-            cmd3.CommandText = "INSERT INTO Ventas(IdCliente,Cliente,Direccion,Subtotal,IVA,Totales,Propina,Descuento,Devolucion,ACuenta,Resta,Usuario,FVenta,HVenta,FPago,FCancelado,MontoCance,Status,Comisionista,Facturado,Concepto,N_Traslado,Corte,CorteU,MontoSinDesc,Cargado,FEntrega,Entrega,Comentario,CantidadE,FolMonedero,CodFactura,IP,Formato,TComensales,MntoCortesia,Franquicia,Fecha) VALUES(" & idcliente & ",'" & nombre & "',''," & subtotalventa & "," & totaliva & "," & totalventa & "," & propinaventa & "," & descuentoventa & ",0," & nuevoabono & "," & restaventa & ",'" & lblUsuario.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','','',0,'" & status & "','" & totalcomisiones & "',0,'',0,0,0," & totalventa & ",0,'" & Format(Date.Now, "yyyy-MM-dd") & "',0,'',0,'','" & lic & "','" & dameIP2() & "','TICKET','',0,1,'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "')"
+            cmd3.CommandText = "INSERT INTO Ventas(IdCliente,Cliente,Direccion,Subtotal,IVA,Totales,Propina,Descuento,Devolucion,ACuenta,Resta,Usuario,FVenta,HVenta,FPago,FCancelado,MontoCance,Status,Comisionista,Facturado,Concepto,N_Traslado,Corte,CorteU,MontoSinDesc,Cargado,FEntrega,Entrega,Comentario,CantidadE,FolMonedero,CodFactura,IP,Formato,TComensales,MntoCortesia,Franquicia,Fecha,Mesero) VALUES(" & idcliente & ",'" & nombre & "',''," & subtotalventa & "," & totaliva & "," & totalventa & "," & propinaventa & "," & descuentoventa & ",0," & nuevoabono & "," & restaventa & ",'" & lblUsuario.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','','',0,'" & status & "','" & totalcomisiones & "',0,'',0,0,0," & totalventa & ",0,'" & Format(Date.Now, "yyyy-MM-dd") & "',0,'',0,'','" & lic & "','" & dameIP2() & "','TICKET','',0,1,'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblMesero.Text & "')"
             cmd3.ExecuteNonQuery()
             cnn3.Close()
 
@@ -3425,7 +3425,7 @@ deku:
             cmd1.ExecuteNonQuery()
 
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "INSERT INTO ventas(IdCliente,Cliente,Direccion,Subtotal,IVA,Totales,Propina,Descuento,Devolucion,ACuenta,Resta,Usuario,FVenta,HVenta,MontoSinDesc,FEntrega,Status,Comisionista,Concepto,IP,Formato) VALUES(" & idcli & ",'" & cli & "','',0,0,0,0," & totaleliminar & ",0,0,0,'" & lblUsuario.Text & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & Format(Date.Now, "HH:mm:ss") & "',0,'" & Format(Date.Now, "yyyy-MM-dd") & "','PAGADO','0','CORTESIA','" & dameIP2() & "','TICKET')"
+            cmd1.CommandText = "INSERT INTO ventas(IdCliente,Cliente,Direccion,Subtotal,IVA,Totales,Propina,Descuento,Devolucion,ACuenta,Resta,Usuario,FVenta,HVenta,MontoSinDesc,FEntrega,Status,Comisionista,Concepto,IP,Formato,Mesero) VALUES(" & idcli & ",'" & cli & "','',0,0,0,0," & totaleliminar & ",0,0,0,'" & lblUsuario.Text & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & Format(Date.Now, "HH:mm:ss") & "',0,'" & Format(Date.Now, "yyyy-MM-dd") & "','PAGADO','0','CORTESIA','" & dameIP2() & "','TICKET','" & lblMesero.Text & "')"
             cmd1.ExecuteNonQuery()
             cnn1.Close()
 

@@ -770,7 +770,31 @@ Public Class frmManejo
                                 End If
 
                             ElseIf estado = "Reservacion" Then
-                                btnHabitacionn.BackColor = Color.FromArgb(1, 100, 156)
+                                Dim freservacion As Date = Nothing
+                                Dim freserva As String
+
+
+                                cnn1.Close() : cnn1.Open()
+                                cmd1 = cnn1.CreateCommand
+                                cmd1.CommandText = "SELECT FEntrada FROM detallehotel WHERE Habitacion='" & btnHabitacionn.Text & "'"
+                                rd1 = cmd1.ExecuteReader
+                                If rd1.HasRows Then
+                                    If rd1.Read Then
+                                        freservacion = rd1(0).ToString
+                                        freserva = Format(freservacion, "yyyy-MM-dd")
+
+                                        If Date.Now > freserva Then
+                                            btnHabitacionn.BackColor = Color.FromArgb(1, 100, 156)
+                                        Else
+                                            btnHabitacionn.BackColor = Color.FromArgb(77, 201, 125)
+                                        End If
+
+                                    End If
+                                End If
+                                rd1.Close()
+                                cnn1.Close()
+
+
                             ElseIf estado = "Mantenimiento" Then
                                 btnHabitacionn.BackColor = Color.LightGray
 

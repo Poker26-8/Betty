@@ -770,7 +770,6 @@ Public Class frmCorteCaja
 
         Try
             cnn1.Close() : cnn1.Open()
-
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select Id from CorteUsuario where Usuario='" & cboUsuario.Text & "'and Saldo_Fin=0 and NumCorte=" & txtNumCorte.Text

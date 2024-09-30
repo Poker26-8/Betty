@@ -96,6 +96,7 @@ Partial Class frmNuvRepVentas
         Me.barcarga = New System.Windows.Forms.ProgressBar()
         Me.grdCaptura = New System.Windows.Forms.DataGridView()
         Me.PMasVendido80 = New System.Drawing.Printing.PrintDocument()
+        Me.rbVMesero = New System.Windows.Forms.RadioButton()
         Me.Panel2.SuspendLayout()
         Me.Panel7.SuspendLayout()
         Me.Panel6.SuspendLayout()
@@ -516,6 +517,7 @@ Partial Class frmNuvRepVentas
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.Color.White
+        Me.TabPage1.Controls.Add(Me.rbVMesero)
         Me.TabPage1.Controls.Add(Me.rbVVendedorDetalle)
         Me.TabPage1.Controls.Add(Me.rbTraspasos)
         Me.TabPage1.Controls.Add(Me.rbVentasTotales)
@@ -557,7 +559,7 @@ Partial Class frmNuvRepVentas
         '
         Me.rbTraspasos.AutoSize = True
         Me.rbTraspasos.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbTraspasos.Location = New System.Drawing.Point(513, 30)
+        Me.rbTraspasos.Location = New System.Drawing.Point(482, 30)
         Me.rbTraspasos.Name = "rbTraspasos"
         Me.rbTraspasos.Size = New System.Drawing.Size(97, 22)
         Me.rbTraspasos.TabIndex = 220
@@ -581,7 +583,7 @@ Partial Class frmNuvRepVentas
         '
         Me.rbFiscal.AutoSize = True
         Me.rbFiscal.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbFiscal.Location = New System.Drawing.Point(512, 6)
+        Me.rbFiscal.Location = New System.Drawing.Point(481, 3)
         Me.rbFiscal.Name = "rbFiscal"
         Me.rbFiscal.Size = New System.Drawing.Size(122, 22)
         Me.rbFiscal.TabIndex = 219
@@ -934,6 +936,17 @@ Partial Class frmNuvRepVentas
         'PMasVendido80
         '
         '
+        'rbVMesero
+        '
+        Me.rbVMesero.AutoSize = True
+        Me.rbVMesero.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbVMesero.Location = New System.Drawing.Point(482, 62)
+        Me.rbVMesero.Name = "rbVMesero"
+        Me.rbVMesero.Size = New System.Drawing.Size(152, 22)
+        Me.rbVMesero.TabIndex = 2
+        Me.rbVMesero.Text = "Ventas por mesero"
+        Me.rbVMesero.UseVisualStyleBackColor = True
+        '
         'frmNuvRepVentas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1037,4 +1050,5 @@ Partial Class frmNuvRepVentas
     Friend WithEvents PMasVendido80 As Printing.PrintDocument
     Friend WithEvents Button1 As Button
     Friend WithEvents rbVVendedorDetalle As RadioButton
+    Friend WithEvents rbVMesero As RadioButton
 End Class
