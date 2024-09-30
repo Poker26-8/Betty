@@ -835,6 +835,12 @@
     <Compile Include="Formularios\18 Restaurantes\CorteCaja\frmCorteCaja.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\18 Restaurantes\CorteCaja\frmCorteCajaAnt.Designer.vb">
+      <DependentUpon>frmCorteCajaAnt.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\18 Restaurantes\CorteCaja\frmCorteCajaAnt.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\18 Restaurantes\DividirCuentas\frmDividir.Designer.vb">
       <DependentUpon>frmDividir.vb</DependentUpon>
     </Compile>
@@ -2692,6 +2698,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\18 Restaurantes\CorteCaja\frmCorteCaja.resx">
       <DependentUpon>frmCorteCaja.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\18 Restaurantes\CorteCaja\frmCorteCajaAnt.resx">
+      <DependentUpon>frmCorteCajaAnt.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\18 Restaurantes\DividirCuentas\frmDividir.resx">
       <DependentUpon>frmDividir.vb</DependentUpon>
