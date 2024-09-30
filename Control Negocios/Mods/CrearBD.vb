@@ -16,7 +16,7 @@
                                             ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
     'hisclinica
-    Public vartablahisclinica As String = "CREATE TABLE IF NOT EXIST `hisclinica` (
+    Public vartablahisclinica As String = "CREATE TABLE `hisclinica` (
                                                   `Id` int(11) NOT NULL,
                                                   `Medico` varchar(250) NOT NULL DEFAULT '',
                                                   `Fecha` date NOT NULL,

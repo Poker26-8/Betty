@@ -31,6 +31,7 @@ Partial Class frmAsigna
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.btnIniciarTiempo = New System.Windows.Forms.Button()
+        Me.EntradaBillar58 = New System.Drawing.Printing.PrintDocument()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -114,6 +115,9 @@ Partial Class frmAsigna
         Me.btnIniciarTiempo.Text = "Iniciar Tiempo"
         Me.btnIniciarTiempo.UseVisualStyleBackColor = False
         '
+        'EntradaBillar58
+        '
+        '
         'frmAsigna
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -138,4 +142,5 @@ Partial Class frmAsigna
     Friend WithEvents Label1 As Label
     Friend WithEvents btnSalir As Button
     Friend WithEvents btnIniciarTiempo As Button
+    Friend WithEvents EntradaBillar58 As Printing.PrintDocument
 End Class

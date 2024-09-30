@@ -99,6 +99,16 @@
                                 txtTiempoUso.Text = FormatNumber(VarMinutos, 2)
                                 txtHoras.Text = FormatNumber(varHoras, 2)
 
+                                If ToleBillar > 0 Then
+                                    Dim fechatolerancia As DateTime = Date.Now.AddMinutes(ToleBillar)
+                                    txtHorFin.Text = Format(fechatolerancia, "yyyy/MM/dd HH:mm")
+
+
+
+                                Else
+                                    txtHorFin.Text = Format(Date.Now, "yyyy/MM/dd HH:mm")
+                                End If
+
                                 If CDec(txtTiempoUso.Text) <= CDec(ToleBillar) Then
 
                                     cmd3 = cnn3.CreateCommand

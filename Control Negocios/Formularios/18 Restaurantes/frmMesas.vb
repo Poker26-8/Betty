@@ -570,7 +570,7 @@ Public Class frmMesas
         Try
             If idempleado = 0 Then
                 pmesaNM.Controls.Clear()
-                Exit Sub
+
             End If
 
             Dim tomarcontra As Integer = DatosRecarga2("TomaContra")

@@ -292,6 +292,11 @@
                     EntradaBillar80.Print()
                 End If
 
+                If tamimpre = "58" Then
+                    EntradaBillar58.DefaultPageSettings.PrinterSettings.PrinterName = ruta_impresor
+                    EntradaBillar58.Print()
+                End If
+
             End If
 
             Me.Close()
@@ -306,5 +311,49 @@
             cnn1.Close()
             cnn2.Close()
         End Try
+    End Sub
+
+    Private Sub EntradaBillar58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles EntradaBillar58.PrintPage
+        Dim fuente_r As New Font("Lucida Sans Typewriter", 8, FontStyle.Regular)
+        Dim fuente_b As New Font("Lucida Sans Typewriter", 8, FontStyle.Bold)
+        Dim fuente_c As New Font("Lucida Sans Typewriter", 8, FontStyle.Regular)
+        Dim fuente_p As New Font("Lucida Sans Typewriter", 7, FontStyle.Regular)
+        Dim derecha As New StringFormat With {.Alignment = StringAlignment.Far}
+        Dim centro As New StringFormat With {.Alignment = StringAlignment.Center}
+        Dim hoja As New Pen(Brushes.Black, 1)
+        Dim Y As Double = 0
+
+        Dim foliocoma As Integer = 0
+
+        cnn2.Close() : cnn2.Open()
+        cmd2 = cnn2.CreateCommand
+        cmd2.CommandText = "SELECT MAX(Id) FROM comanda1"
+        rd2 = cmd2.ExecuteReader
+        If rd2.HasRows Then
+            If rd2.Read Then
+                foliocoma = IIf(rd2(0).ToString = "", 0, rd2(0).ToString)
+
+            End If
+        Else
+            foliocoma = "1"
+        End If
+        rd2.Close()
+        cnn2.Close()
+
+        e.Graphics.DrawString("--------------------------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
+        Y += 15
+        e.Graphics.DrawString("Folio: " & foliocoma, fuente_b, Brushes.Black, 1, Y)
+        Y += 20
+        e.Graphics.DrawString("Fecha: ", fuente_b, Brushes.Black, 1, Y)
+        e.Graphics.DrawString(Format(Date.Now, "yyyy/MM/dd"), fuente_b, Brushes.Black, 45, Y)
+        Y += 20
+        e.Graphics.DrawString("Hora de Asignación: ", fuente_b, Brushes.Black, 1, Y)
+        e.Graphics.DrawString(Format(Date.Now, "HH:mm:ss"), fuente_b, Brushes.Black, 120, Y)
+        Y += 20
+        e.Graphics.DrawString("Tiempo de la Mesa: ", fuente_b, Brushes.Black, 1, Y)
+        e.Graphics.DrawString(lblpc.Text, fuente_b, Brushes.Black, 120, Y)
+
+
+        e.HasMorePages = False
     End Sub
 End Class

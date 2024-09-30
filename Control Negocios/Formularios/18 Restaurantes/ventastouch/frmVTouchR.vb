@@ -4374,7 +4374,7 @@ Door:
         cnn4.Close() : cnn4.Open()
 
         cmd3 = cnn3.CreateCommand
-        cmd3.CommandText = "select Cantidad,Nombre,Precio,Total from VentasDetalle where Folio='" & MYFOLIO & "'"
+        cmd3.CommandText = "select Codigo,Cantidad,Nombre,Precio,Total from VentasDetalle where Folio='" & MYFOLIO & "'"
         rd3 = cmd3.ExecuteReader
         Do While rd3.Read
             If rd3.HasRows Then
@@ -4575,7 +4575,7 @@ Door:
         Dim fuente_r As New Font("Lucida Sans Typewriter", 13, FontStyle.Regular)
         Dim fuente_b As New Font("Lucida Sans Typewriter", 10, FontStyle.Bold)
         Dim fuente_c As New Font("Lucida Sans Typewriter", 10, FontStyle.Regular)
-        Dim fuente_p As New Font("Lucida Sans Typewriter", 15, FontStyle.Regular)
+        Dim fuente_p As New Font("Lucida Sans Typewriter", 13, FontStyle.Regular)
         Dim derecha As New StringFormat With {.Alignment = StringAlignment.Far}
         Dim centro As New StringFormat With {.Alignment = StringAlignment.Center}
         Dim hoja As New Pen(Brushes.Black, 1)
@@ -4604,7 +4604,7 @@ Door:
         Y += 15
 
         e.Graphics.DrawString("CANT", fuente_p, Brushes.Black, 1, Y)
-        e.Graphics.DrawString("DESCRIPION", fuente_p, Brushes.Black, 280, Y, derecha)
+        e.Graphics.DrawString("DESCRIPION", fuente_p, Brushes.Black, 240, Y, derecha)
         Y += 20
         e.Graphics.DrawString("--------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
         Y += 15

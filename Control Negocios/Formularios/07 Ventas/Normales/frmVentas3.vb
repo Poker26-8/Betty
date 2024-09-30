@@ -5631,8 +5631,9 @@ kaka:
         txtcomentario.Text = ""
         ordetrabajo = 0
 
-        FunctionVentasAsync()
-        FunctionClinetesAsync()
+        FunctionVentas3Async()
+        'FunctionVentasAsync()
+        'FunctionClinetesAsync()
         Timer1.Start()
     End Sub
 
@@ -9993,7 +9994,7 @@ safo:
 
                         cmd1 = cnn1.CreateCommand
                         cmd1.CommandText =
-                            "insert into AbonoI(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Corte,CorteU,Cargado,MontoSF) values(" & cbonota.Text & "," & lblNumCliente.Text & ",'" & cboNombre.Text & "','CARGO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & Total_devo & ",'',0," & (MySaldo - Resta_ventas) & ",0,'','','" & lblusuario.Text & "',0,0,0,0)"
+                            "insert into AbonoI(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Corte,CorteU,Cargado,MontoSF) values(" & cbonota.Text & "," & lblNumCliente.Text & ",'" & cboNombre.Text & "','CARGO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & Total_devo & ",''," & (MySaldo - Resta_ventas) & ",'EFECTIVO'," & Devuelve & ",'','','" & lblusuario.Text & "',0,0,0,0)"
                         cmd1.ExecuteNonQuery()
                     End If
 
