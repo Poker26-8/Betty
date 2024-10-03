@@ -525,7 +525,14 @@ Public Class frmMesas
 
         If mesapropia = 1 Then
             If simesaspropusuarionm = 1 Then
-                cmd3.CommandText = "SELECT COUNT(Nombre_mesa) FROM Mesa WHERE ubicacion='" & nombreubicacion & "' AND IdEmpleado=" & idempleado & ""
+
+                If esadmin = 1 Then
+                    cmd3.CommandText = "SELECT COUNT(Nombre_mesa) FROM Mesa WHERE ubicacion='" & nombreubicacion & "' "
+                Else
+                    cmd3.CommandText = "SELECT COUNT(Nombre_mesa) FROM Mesa WHERE ubicacion='" & nombreubicacion & "' AND IdEmpleado=" & idempleado & ""
+                End If
+
+
             Else
 
                 If tomacontralog = 1 Then
@@ -1598,7 +1605,7 @@ Public Class frmMesas
 
         Dim id_usu As Integer = 0
         Dim sobrenombre As String = ""
-
+        If txtUsuario.Text = "" Then MsgBox("Ingrese la contraseña para asignar las mesas", vbInformation + vbOKOnly, titulorestaurante) : txtUsuario.Focus.Equals(True) : Exit Sub
         Try
             cnn1.Close() : cnn1.Open()
 

@@ -34,7 +34,7 @@ Public Class frmcortemesero
 
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand
-            cmd5.CommandText = "SELECT DISTINCT Alias FROM usuarios WHERE Alias<>'' AND Puesto='MESERO' ORDER BY Alias"
+            cmd5.CommandText = "SELECT DISTINCT Mesero FROM abonoi WHERE Mesero<>'' ORDER BY Mesero"
             rd5 = cmd5.ExecuteReader
             Do While rd5.Read
                 If rd5.HasRows Then

@@ -135,4 +135,8 @@ Public Class frmRepTraspasos
     Private Sub frmRepTraspasos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
+    Private Sub cboDatos_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboDatos.SelectedValueChanged
+        grdCaptura.Rows.Clear()
+    End Sub
 End Class

@@ -2388,6 +2388,8 @@ Public Class frmNuvRepVentas
         Dim usua As String = ""
         Dim hr As String = ""
 
+        Dim PRECIOCOMPRA As Double = 0
+
         txtPropina.Text = "0.00"
         txtSuma.Text = "0.00"
         txtCosto.Text = "0.00"
@@ -2736,9 +2738,12 @@ Public Class frmNuvRepVentas
             fechanueva = ""
             utilidad = 0
             nuevototal = 0
+            PRECIOCOMPRA = 0
 
             Try
                 cnn1.Close() : cnn1.Open()
+
+
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText = "SELECT Propina,Descuento FROM ventas WHERE Fecha BETWEEN '" & Format(m1, "yyyy-MM-dd") & " " & Format(dtpinicio.Value, "HH:mm:ss") & "' AND '" & Format(m2, "yyyy-MM-dd") & " " & Format(dtpFin.Value, "HH:mm:ss") & "' AND Status<>'CANCELADA' ORDER BY Folio"
                 rd1 = cmd1.ExecuteReader
@@ -2763,12 +2768,26 @@ Public Class frmNuvRepVentas
 
 
                         cnn2.Close() : cnn2.Open()
+                        cnn3.Close() : cnn3.Open()
                         cmd2 = cnn2.CreateCommand
                         cmd2.CommandText = "SELECT Codigo,Nombre,Unidad,Cantidad,CostoVUE,Precio,TotalSinIva,Total,Descto,TotalIEPS,Fecha FROM ventasdetalle WHERE Folio=" & folio
                         rd2 = cmd2.ExecuteReader
                         Do While rd2.Read
                             If rd2.HasRows Then
+
                                 codigo = rd2("Codigo").ToString
+
+                                cmd3 = cnn3.CreateCommand
+                                cmd3.CommandText = "SELECT PrecioCompra FROM productos WHERE Codigo='" & codigo & "'"
+                                rd3 = cmd3.ExecuteReader
+                                If rd3.HasRows Then
+                                    If rd3.Read Then
+                                        PRECIOCOMPRA = rd3(0).ToString
+                                    End If
+                                End If
+                                rd3.Close()
+
+
                                 barras = CB(codigo)
                                 descripcion = rd2("Nombre").ToString
                                 uventa = rd2("Unidad").ToString
@@ -2781,7 +2800,8 @@ Public Class frmNuvRepVentas
                                 ieps = IIf(rd2("TotalIEPS").ToString = "", 0, rd2("TotalIEPS").ToString)
                                 fecha = rd2("Fecha").ToString
                                 fechanueva = Format(fecha, "yyyy-MM-dd")
-                                utilidad = DameUti(folio, codigo, cantidad)
+                                ' utilidad = DameUti(folio, codigo, cantidad)
+                                utilidad = CDec(precio) - CDec(PRECIOCOMPRA)
 
                                 T_Subtotal = T_Subtotal + subtotal
                                 T_Total = T_Total + (total)
