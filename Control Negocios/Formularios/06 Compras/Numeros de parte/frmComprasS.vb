@@ -680,7 +680,7 @@ Public Class frmComprasS
                         Dim multiplo As Double = 0
                         Dim existencia As Double = 0
                         cmd2 = cnn2.CreateCommand : cmd2.CommandText =
-                            "select Nombre,UCompra,Multiplo,Existencia,Precio,Cantidad from Productos where Codigo='" & codigo & "'"
+                            "select Nombre,UCompra,Multiplo,Existencia from Productos where Codigo='" & codigo & "'"
                         rd2 = cmd2.ExecuteReader
                         If rd2.HasRows Then
                             If rd2.Read Then
