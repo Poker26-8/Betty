@@ -769,32 +769,6 @@ Public Class frmManejo
                                     btnHabitacionn.BackgroundImage = Nothing
                                 End If
 
-                            ElseIf estado = "Reservacion" Then
-                                Dim freservacion As Date = Nothing
-                                Dim freserva As String
-
-
-                                cnn1.Close() : cnn1.Open()
-                                cmd1 = cnn1.CreateCommand
-                                cmd1.CommandText = "SELECT FEntrada FROM detallehotel WHERE Habitacion='" & btnHabitacionn.Text & "'"
-                                rd1 = cmd1.ExecuteReader
-                                If rd1.HasRows Then
-                                    If rd1.Read Then
-                                        freservacion = rd1(0).ToString
-                                        freserva = Format(freservacion, "yyyy-MM-dd")
-
-                                        If Date.Now > freserva Then
-                                            btnHabitacionn.BackColor = Color.FromArgb(1, 100, 156)
-                                        Else
-                                            btnHabitacionn.BackColor = Color.FromArgb(77, 201, 125)
-                                        End If
-
-                                    End If
-                                End If
-                                rd1.Close()
-                                cnn1.Close()
-
-
                             ElseIf estado = "Mantenimiento" Then
                                 btnHabitacionn.BackColor = Color.LightGray
 
@@ -833,6 +807,28 @@ Public Class frmManejo
                         End If
                     End If
                     rd4.Close()
+
+                    Dim freservacion As Date = Nothing
+                    Dim freserva As String
+
+                    cmd4 = cnn4.CreateCommand
+                    cmd4.CommandText = "SELECT FEntrada FROM reservaciones WHERE Habitacion='" & btnHabitacionn.Text & "'"
+                    rd4 = cmd4.ExecuteReader
+                    If rd4.HasRows Then
+                        If rd4.Read Then
+                            freservacion = rd4(0).ToString
+                            freserva = Format(freservacion, "yyyy-MM-dd HH:mm:ss")
+
+                            If Date.Now >= freserva Then
+                                btnHabitacionn.BackColor = Color.FromArgb(1, 100, 156)
+                            Else
+                                btnHabitacionn.BackColor = Color.FromArgb(77, 201, 125)
+                            End If
+
+                        End If
+                    End If
+                    rd4.Close()
+
                     cnn4.Close()
                     btnHabitacionn.BackgroundImageLayout = ImageLayout.Zoom
                     pHab.Controls.Add(btnHabitacionn)

@@ -2029,8 +2029,7 @@ Public Class frmConfigs
             cnn1.Close() : cnn1.Open()
 
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
-                 "select Emisor_id,Em_rfc,Em_calle,Em_colonia,Em_NumExterior,Em_NumInterior,Em_CP,Em_Municipio,Em_Estado,Em_Pais,Em_Mail,Em_Tel from,Em_NombreNegocio,Em_Actividad,Em_Expedir,Em_RFiscal DatosNegocio where Em_RazonSocial='" & cborazon_social.Text & "' and (Em_Expedir='FISCAL' or Em_Expedir='SUCURSAL')"
+            cmd1.CommandText = "select Emisor_id,Em_rfc,Em_calle,Em_colonia,Em_NumExterior,Em_NumInterior,Em_CP,Em_Municipio,Em_Estado,Em_Pais,Em_Mail,Em_Tel,Em_NombreNegocio,Em_Actividad,Em_Expedir,Em_RFiscal from DatosNegocio where Em_RazonSocial='" & cborazon_social.Text & "'"
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then

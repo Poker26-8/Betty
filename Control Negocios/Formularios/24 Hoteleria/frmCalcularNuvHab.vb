@@ -158,6 +158,19 @@
 
         Try
 
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT * FROM comandas WHERE Nmesa='" & lblpc.Text & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    MsgBox("Tienes productos por pagar, antes de desocupar la habitación se tiene que cobrar.", vbInformation + vbOKOnly, titulocentral)
+                    Exit Sub
+                End If
+            End If
+            rd1.Close()
+            cnn1.Close()
+
             If MsgBox("¿Se desocupara la habitación, Esta en lo corerecto?", vbInformation + vbYesNo) = vbNo Then
                 Exit Sub
             End If
@@ -192,6 +205,10 @@
                     End If
                 Else
                     cnn3.Close() : cnn3.Open()
+                    cmd3 = cnn3.CreateCommand
+                    cmd3.CommandText = "INSERT INTO comanda1() VALUES()"
+                    cmd3.ExecuteNonQuery()
+
                     cmd3 = cnn3.CreateCommand
                     cmd3.CommandText = "INSERT INTO comandas(Id,NMESA,Codigo,Nombre,Cantidad,UVenta,CostVR,CostVP,CostVUE,Descuento,Precio,Total,PrecioSinIva,TotalSinIVA,Comisionista,Fecha,Comensal,Status,Comentario,GPrint,CUsuario,Total_comensales,Depto,Grupo,EstatusT,Hr,EntregaT) VALUES(" & FOLIOCOMANDA & ",'" & lblpc.Text & "','xc3','Tiempo Habitacion',1,'SER',0,0,0,0," & lblPrecio.Text & "," & totalpagar & "," & lblPrecio.Text & "," & totalpagar & ",'0','" & Format(Date.Now, "yyyy/MM/dd") & "',0,'RESTA','Renta de Habitacion','','',0,'HABITACION','HABITACION',0,'" & HrTiempo & "','" & HrEntrega & "')"
                     cmd3.ExecuteNonQuery()

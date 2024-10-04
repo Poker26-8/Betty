@@ -1212,7 +1212,7 @@ Public Class frmPagarH
 
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
-            cmd2.CommandText = "SELECT UVenta,IVA,Departamento,Grupo,MCD,Multiplo,GPrint,Existencia FROM Productos where Codigo='" & codigop & "'"
+            cmd2.CommandText = "SELECT Codigo,Nombre,UVenta,IVA,Departamento,Grupo,MCD,Multiplo,GPrint,Existencia,PrecioCompra FROM Productos where Codigo='" & codigop & "'"
             rd2 = cmd2.ExecuteReader
             If rd2.HasRows Then
                 If rd2.Read Then
@@ -1331,6 +1331,10 @@ Public Class frmPagarH
                 cmd3 = cnn3.CreateCommand
                 cmd3.CommandText = "DELETE FROM comandas WHERE Codigo='xc3' AND Nombre='Tiempo Habitacion'"
                 cmd3.ExecuteNonQuery()
+
+                cmd3 = cnn3.CreateCommand
+                cmd3.CommandText = "DELETE FROM comandas WHERE Nmesa='" & lblHabitacion.Text & "'"
+                cmd3.ExecuteNonQuery()
                 cnn3.Close()
 
             End If
@@ -1350,7 +1354,7 @@ Public Class frmPagarH
             cmd2.ExecuteNonQuery()
 
             cmd2 = cnn2.CreateCommand
-            cmd2.CommandText = "DELETE FROM comanda1 WHERE Nombre='" & lblHabitacion.Text & "'"
+            cmd2.CommandText = "DELETE FROM comanda1 WHERE Nmesa='" & lblHabitacion.Text & "'"
             cmd2.ExecuteNonQuery()
 
             cmd2 = cnn2.CreateCommand
@@ -1366,9 +1370,6 @@ Public Class frmPagarH
         End If
         rd2.Close()
         cnn2.Close()
-
-
-
 
         'imprimir ticket
 
@@ -1594,6 +1595,9 @@ Public Class frmPagarH
 
             e.Graphics.DrawString("Folio: " & folioventa, fuente_r, Brushes.Black, 270, Y, derecha)
             Y += 23
+            e.Graphics.DrawString("Fecha: " & Format(Date.Now, "yyyy-MM-dd"), fuente_r, Brushes.Black, 1, Y)
+            e.Graphics.DrawString("Hora: " & Format(Date.Now, "HH:mm"), fuente_r, Brushes.Black, 270, Y, derecha)
+            Y += 11
             e.Graphics.DrawString("Fecha Entrada: ", fuente_r, Brushes.Black, 1, Y)
             e.Graphics.DrawString(fechaentra, fuente_r, Brushes.Black, 270, Y, derecha)
             Y += 11

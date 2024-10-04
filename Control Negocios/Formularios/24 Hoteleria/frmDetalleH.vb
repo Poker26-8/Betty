@@ -15,6 +15,29 @@
                 End If
             End If
             rd1.Close()
+
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT * FROM reservaciones WHERE Habitacion='" & lblhabitacion.Text & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+
+                    Dim fechaentrada As Date = rd1("FEntrada").ToString
+                    Dim fentrada As String = Format(fechaentrada, "yyyy-MM-dd")
+                    Dim horaentrada As String = Format(fechaentrada, "HH:mm:ss")
+
+                    If Date.Now > fechaentrada Then
+                        pReservacion.Visible = True
+                        cbocliente.Text = rd1("Cliente").ToString
+                        txttelefono.Text = rd1("Telefono").ToString
+                        dtpEntrada.Value = fentrada
+                        dtphoraentrada.Value = horaentrada
+                    End If
+
+
+                End If
+            End If
+            rd1.Close()
             cnn1.Close()
         Catch ex As Exception
 
@@ -214,30 +237,56 @@
             If cbocliente.Text = "" Then MsgBox("Debe seleccionar un cliente", vbInformation + vbOKOnly, titulohotelriaa) : cbocliente.Focus.Equals(True) : Exit Sub
 
             Try
+                Dim fechacentrada As String = ""
+                Dim fechaentrada As Date = dtpEntrada.Value
+                Dim horaentrada As Date = dtphoraentrada.Value
+
+                Dim fentrada As String = Format(fechaentrada, "yyyy-MM-dd")
+                Dim hentrada As String = Format(horaentrada, "HH:mm:ss")
+
+                fechacentrada = fentrada & " " & hentrada
+
+                Dim fechacsalida As String = ""
+                Dim fechasalida As Date = dtpSalida.Value
+                Dim horasalida As Date = dtphorasalida.Value
+
+                Dim fsalida As String = Format(fechasalida, "yyyy-MM-dd")
+                Dim hsalida As String = Format(horasalida, "HH:mm:ss")
+
+                fechacsalida = fsalida & " " & hsalida
+
 
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "UPDATE habitacion SET Estado='" & ESTADO & "' WHERE N_Habitacion='" & lblhabitacion.Text & "'"
-                cmd1.ExecuteNonQuery()
-
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "SELECT Id FROM detallehotel WHERE Habitacion='" & lblhabitacion.Text & "'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-
-                    End If
-                Else
-                    cnn2.Close() : cnn2.Open()
-                    cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "INSERT INTO detallehotel(Habitacion,Tipo,Estado,Cliente,Telefono,FEntrada,FSalida,Caracteristicas) VALUES('" & lblhabitacion.Text & "','" & lbltipo.Text & "','" & ESTADO & "','" & cbocliente.Text & "','" & txttelefono.Text & "','" & Format(dtpEntrada.Value, "yyyy-MM-dd") & "','" & Format(dtpSalida.Value, "yyyy-MM-dd") & "','" & lblCaracteristicas.Text & "')"
-                    If cmd2.ExecuteNonQuery() Then
-                        MsgBox("Habitación reservada correctamente", vbInformation + vbOKOnly, titulohotelriaa)
-                    End If
-                    cnn2.Close()
+                cmd1.CommandText = "INSERT INTO Reservaciones(Cliente,Telefono,Habitacion,FEntrada,FSalida) VALUES('" & cbocliente.Text & "','" & txttelefono.Text & "','" & lblhabitacion.Text & "','" & fechacentrada & "','" & fechacsalida & "')"
+                If cmd1.ExecuteNonQuery() Then
+                    MsgBox("Habitación reservada correctamente", vbInformation + vbOKOnly, titulohotelriaa)
                 End If
-                rd1.Close()
                 cnn1.Close()
+
+                'cnn1.Close() : cnn1.Open()
+                'cmd1 = cnn1.CreateCommand
+                'cmd1.CommandText = "UPDATE habitacion SET Estado='" & ESTADO & "' WHERE N_Habitacion='" & lblhabitacion.Text & "'"
+                'cmd1.ExecuteNonQuery()
+
+                'cmd1 = cnn1.CreateCommand
+                'cmd1.CommandText = "SELECT Id FROM detallehotel WHERE Habitacion='" & lblhabitacion.Text & "'"
+                'rd1 = cmd1.ExecuteReader
+                'If rd1.HasRows Then
+                '    If rd1.Read Then
+
+                '    End If
+                'Else
+                '    cnn2.Close() : cnn2.Open()
+                '    cmd2 = cnn2.CreateCommand
+                '    cmd2.CommandText = "INSERT INTO detallehotel(Habitacion,Tipo,Estado,Cliente,Telefono,FEntrada,FSalida,Caracteristicas) VALUES('" & lblhabitacion.Text & "','" & lbltipo.Text & "','" & ESTADO & "','" & cbocliente.Text & "','" & txttelefono.Text & "','" & Format(dtpEntrada.Value, "yyyy-MM-dd") & "','" & Format(dtpSalida.Value, "yyyy-MM-dd") & "','" & lblCaracteristicas.Text & "')"
+                '    If cmd2.ExecuteNonQuery() Then
+                '        MsgBox("Habitación reservada correctamente", vbInformation + vbOKOnly, titulohotelriaa)
+                '    End If
+                '    cnn2.Close()
+                'End If
+                'rd1.Close()
+                'cnn1.Close()
 
                 btnLimpiar.PerformClick()
                 Me.Close()
@@ -585,6 +634,14 @@
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
             cboPrecio.Focus.Equals(True)
+        End If
+    End Sub
+
+    Private Sub cboRegistro_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboRegistro.SelectedValueChanged
+        If cboRegistro.Text = "RESERVACION" Then
+            pReservacion.Visible = True
+        Else
+            pReservacion.Visible = False
         End If
     End Sub
 End Class

@@ -42,7 +42,7 @@ Partial Class frmDetalleH
         Me.txttelefono = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.dtpEntrada = New System.Windows.Forms.DateTimePicker()
-        Me.Label8 = New System.Windows.Forms.Label()
+        Me.lbl = New System.Windows.Forms.Label()
         Me.cboRegistro = New System.Windows.Forms.ComboBox()
         Me.cbocliente = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -69,6 +69,11 @@ Partial Class frmDetalleH
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.dtphoraentrada = New System.Windows.Forms.DateTimePicker()
+        Me.dtphorasalida = New System.Windows.Forms.DateTimePicker()
+        Me.lblHoraEntrada = New System.Windows.Forms.Label()
+        Me.lblHoraSalida = New System.Windows.Forms.Label()
+        Me.pReservacion = New System.Windows.Forms.Panel()
         Me.Panel4.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -77,6 +82,7 @@ Partial Class frmDetalleH
         Me.pdesocupar.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
+        Me.pReservacion.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel4
@@ -85,27 +91,23 @@ Partial Class frmDetalleH
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(0, 137)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(850, 136)
+        Me.Panel4.Size = New System.Drawing.Size(850, 135)
         Me.Panel4.TabIndex = 7
         '
         'Panel5
         '
+        Me.Panel5.Controls.Add(Me.pReservacion)
         Me.Panel5.Controls.Add(Me.GroupBox2)
-        Me.Panel5.Controls.Add(Me.GroupBox1)
         Me.Panel5.Controls.Add(Me.txttelefono)
         Me.Panel5.Controls.Add(Me.Label10)
-        Me.Panel5.Controls.Add(Me.dtpEntrada)
-        Me.Panel5.Controls.Add(Me.Label8)
         Me.Panel5.Controls.Add(Me.cboRegistro)
         Me.Panel5.Controls.Add(Me.cbocliente)
         Me.Panel5.Controls.Add(Me.Label7)
         Me.Panel5.Controls.Add(Me.Label5)
-        Me.Panel5.Controls.Add(Me.dtpSalida)
-        Me.Panel5.Controls.Add(Me.Label6)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(0, 0)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(850, 136)
+        Me.Panel5.Size = New System.Drawing.Size(850, 135)
         Me.Panel5.TabIndex = 10
         '
         'GroupBox2
@@ -119,7 +121,7 @@ Partial Class frmDetalleH
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox2.Location = New System.Drawing.Point(13, 55)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(404, 77)
+        Me.GroupBox2.Size = New System.Drawing.Size(404, 73)
         Me.GroupBox2.TabIndex = 12
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Precios"
@@ -128,7 +130,7 @@ Partial Class frmDetalleH
         '
         Me.cboPrecio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboPrecio.FormattingEnabled = True
-        Me.cboPrecio.Location = New System.Drawing.Point(255, 47)
+        Me.cboPrecio.Location = New System.Drawing.Point(252, 41)
         Me.cboPrecio.Name = "cboPrecio"
         Me.cboPrecio.Size = New System.Drawing.Size(141, 24)
         Me.cboPrecio.TabIndex = 5
@@ -136,7 +138,7 @@ Partial Class frmDetalleH
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(252, 26)
+        Me.Label13.Location = New System.Drawing.Point(249, 20)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(51, 18)
         Me.Label13.TabIndex = 4
@@ -144,7 +146,7 @@ Partial Class frmDetalleH
         '
         'txtHoras
         '
-        Me.txtHoras.Location = New System.Drawing.Point(156, 47)
+        Me.txtHoras.Location = New System.Drawing.Point(153, 41)
         Me.txtHoras.Name = "txtHoras"
         Me.txtHoras.Size = New System.Drawing.Size(92, 24)
         Me.txtHoras.TabIndex = 3
@@ -152,7 +154,7 @@ Partial Class frmDetalleH
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(153, 26)
+        Me.Label12.Location = New System.Drawing.Point(150, 20)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(49, 18)
         Me.Label12.TabIndex = 2
@@ -162,7 +164,7 @@ Partial Class frmDetalleH
         '
         Me.cboTipo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboTipo.FormattingEnabled = True
-        Me.cboTipo.Location = New System.Drawing.Point(9, 47)
+        Me.cboTipo.Location = New System.Drawing.Point(6, 41)
         Me.cboTipo.Name = "cboTipo"
         Me.cboTipo.Size = New System.Drawing.Size(141, 24)
         Me.cboTipo.TabIndex = 1
@@ -170,7 +172,7 @@ Partial Class frmDetalleH
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(6, 26)
+        Me.Label4.Location = New System.Drawing.Point(3, 20)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(37, 18)
         Me.Label4.TabIndex = 0
@@ -182,7 +184,7 @@ Partial Class frmDetalleH
         Me.GroupBox1.Controls.Add(Me.lblPrecio)
         Me.GroupBox1.Controls.Add(Me.grdPrecios)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(678, 66)
+        Me.GroupBox1.Location = New System.Drawing.Point(445, 6)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(160, 44)
         Me.GroupBox1.TabIndex = 11
@@ -240,15 +242,16 @@ Partial Class frmDetalleH
         '
         'txttelefono
         '
-        Me.txttelefono.Location = New System.Drawing.Point(620, 3)
+        Me.txttelefono.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txttelefono.Location = New System.Drawing.Point(449, 30)
         Me.txttelefono.Name = "txttelefono"
-        Me.txttelefono.Size = New System.Drawing.Size(224, 20)
+        Me.txttelefono.Size = New System.Drawing.Size(116, 22)
         Me.txttelefono.TabIndex = 9
         '
         'Label10
         '
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(524, 2)
+        Me.Label10.Location = New System.Drawing.Point(362, 29)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(81, 22)
         Me.Label10.TabIndex = 8
@@ -259,19 +262,20 @@ Partial Class frmDetalleH
         '
         Me.dtpEntrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpEntrada.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpEntrada.Location = New System.Drawing.Point(506, 28)
+        Me.dtpEntrada.Location = New System.Drawing.Point(153, 4)
         Me.dtpEntrada.Name = "dtpEntrada"
         Me.dtpEntrada.Size = New System.Drawing.Size(99, 22)
         Me.dtpEntrada.TabIndex = 7
         '
-        'Label8
+        'lbl
         '
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(359, 28)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(141, 20)
-        Me.Label8.TabIndex = 6
-        Me.Label8.Text = "Fecha de Entrada:"
+        Me.lbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl.Location = New System.Drawing.Point(6, 1)
+        Me.lbl.Name = "lbl"
+        Me.lbl.Size = New System.Drawing.Size(141, 22)
+        Me.lbl.TabIndex = 6
+        Me.lbl.Text = "Fecha de Entrada:"
+        Me.lbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'cboRegistro
         '
@@ -279,7 +283,7 @@ Partial Class frmDetalleH
         Me.cboRegistro.Items.AddRange(New Object() {"HOSPEDAR", "RESERVACION", "MANTENIMIENTO", "LIMPIEZA", "VENTILACION"})
         Me.cboRegistro.Location = New System.Drawing.Point(133, 28)
         Me.cboRegistro.Name = "cboRegistro"
-        Me.cboRegistro.Size = New System.Drawing.Size(220, 21)
+        Me.cboRegistro.Size = New System.Drawing.Size(225, 21)
         Me.cboRegistro.TabIndex = 5
         '
         'cbocliente
@@ -287,7 +291,7 @@ Partial Class frmDetalleH
         Me.cbocliente.FormattingEnabled = True
         Me.cbocliente.Location = New System.Drawing.Point(73, 3)
         Me.cbocliente.Name = "cbocliente"
-        Me.cbocliente.Size = New System.Drawing.Size(448, 21)
+        Me.cbocliente.Size = New System.Drawing.Size(492, 21)
         Me.cbocliente.TabIndex = 1
         '
         'Label7
@@ -314,7 +318,7 @@ Partial Class frmDetalleH
         '
         Me.dtpSalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpSalida.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpSalida.Location = New System.Drawing.Point(745, 28)
+        Me.dtpSalida.Location = New System.Drawing.Point(153, 57)
         Me.dtpSalida.Name = "dtpSalida"
         Me.dtpSalida.Size = New System.Drawing.Size(99, 22)
         Me.dtpSalida.TabIndex = 3
@@ -322,16 +326,17 @@ Partial Class frmDetalleH
         'Label6
         '
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(611, 28)
+        Me.Label6.Location = New System.Drawing.Point(6, 57)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(128, 22)
+        Me.Label6.Size = New System.Drawing.Size(141, 22)
         Me.Label6.TabIndex = 2
         Me.Label6.Text = "Fecha de Salida:"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lblidcliented
         '
         Me.lblidcliented.BackColor = System.Drawing.Color.Silver
-        Me.lblidcliented.Location = New System.Drawing.Point(203, 6)
+        Me.lblidcliented.Location = New System.Drawing.Point(492, 54)
         Me.lblidcliented.Name = "lblidcliented"
         Me.lblidcliented.Size = New System.Drawing.Size(113, 23)
         Me.lblidcliented.TabIndex = 93
@@ -545,22 +550,81 @@ Partial Class frmDetalleH
         'Panel3
         '
         Me.Panel3.Controls.Add(Me.btnLimpiar)
+        Me.Panel3.Controls.Add(Me.GroupBox1)
         Me.Panel3.Controls.Add(Me.pdesocupar)
         Me.Panel3.Controls.Add(Me.lblidcliented)
         Me.Panel3.Controls.Add(Me.btnGuardar)
         Me.Panel3.Controls.Add(Me.btnSalir)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel3.Location = New System.Drawing.Point(0, 273)
+        Me.Panel3.Location = New System.Drawing.Point(0, 272)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(850, 80)
         Me.Panel3.TabIndex = 94
+        '
+        'dtphoraentrada
+        '
+        Me.dtphoraentrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtphoraentrada.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.dtphoraentrada.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.dtphoraentrada.Location = New System.Drawing.Point(153, 31)
+        Me.dtphoraentrada.Name = "dtphoraentrada"
+        Me.dtphoraentrada.ShowUpDown = True
+        Me.dtphoraentrada.Size = New System.Drawing.Size(99, 22)
+        Me.dtphoraentrada.TabIndex = 13
+        '
+        'dtphorasalida
+        '
+        Me.dtphorasalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtphorasalida.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.dtphorasalida.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.dtphorasalida.Location = New System.Drawing.Point(153, 85)
+        Me.dtphorasalida.Name = "dtphorasalida"
+        Me.dtphorasalida.ShowUpDown = True
+        Me.dtphorasalida.Size = New System.Drawing.Size(99, 22)
+        Me.dtphorasalida.TabIndex = 14
+        '
+        'lblHoraEntrada
+        '
+        Me.lblHoraEntrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHoraEntrada.Location = New System.Drawing.Point(6, 31)
+        Me.lblHoraEntrada.Name = "lblHoraEntrada"
+        Me.lblHoraEntrada.Size = New System.Drawing.Size(141, 22)
+        Me.lblHoraEntrada.TabIndex = 15
+        Me.lblHoraEntrada.Text = "Hora de Entrada:"
+        Me.lblHoraEntrada.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblHoraSalida
+        '
+        Me.lblHoraSalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHoraSalida.Location = New System.Drawing.Point(6, 85)
+        Me.lblHoraSalida.Name = "lblHoraSalida"
+        Me.lblHoraSalida.Size = New System.Drawing.Size(141, 22)
+        Me.lblHoraSalida.TabIndex = 16
+        Me.lblHoraSalida.Text = "Hora de Salida:"
+        Me.lblHoraSalida.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'pReservacion
+        '
+        Me.pReservacion.Controls.Add(Me.lbl)
+        Me.pReservacion.Controls.Add(Me.lblHoraSalida)
+        Me.pReservacion.Controls.Add(Me.Label6)
+        Me.pReservacion.Controls.Add(Me.lblHoraEntrada)
+        Me.pReservacion.Controls.Add(Me.dtpSalida)
+        Me.pReservacion.Controls.Add(Me.dtphorasalida)
+        Me.pReservacion.Controls.Add(Me.dtpEntrada)
+        Me.pReservacion.Controls.Add(Me.dtphoraentrada)
+        Me.pReservacion.Location = New System.Drawing.Point(588, 4)
+        Me.pReservacion.Name = "pReservacion"
+        Me.pReservacion.Size = New System.Drawing.Size(259, 116)
+        Me.pReservacion.TabIndex = 17
+        Me.pReservacion.Visible = False
         '
         'frmDetalleH
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(850, 353)
+        Me.ClientSize = New System.Drawing.Size(850, 352)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
@@ -580,6 +644,7 @@ Partial Class frmDetalleH
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
+        Me.pReservacion.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -595,7 +660,7 @@ Partial Class frmDetalleH
     Friend WithEvents Label10 As Label
     Friend WithEvents dtpEntrada As DateTimePicker
     Friend WithEvents btnLimpiar As Button
-    Friend WithEvents Label8 As Label
+    Friend WithEvents lbl As Label
     Friend WithEvents btnGuardar As Button
     Friend WithEvents cboRegistro As ComboBox
     Friend WithEvents btnSalir As Button
@@ -630,4 +695,9 @@ Partial Class frmDetalleH
     Friend WithEvents cboTipo As ComboBox
     Friend WithEvents Label4 As Label
     Friend WithEvents cboPrecio As ComboBox
+    Friend WithEvents dtphoraentrada As DateTimePicker
+    Friend WithEvents lblHoraSalida As Label
+    Friend WithEvents lblHoraEntrada As Label
+    Friend WithEvents dtphorasalida As DateTimePicker
+    Friend WithEvents pReservacion As Panel
 End Class
