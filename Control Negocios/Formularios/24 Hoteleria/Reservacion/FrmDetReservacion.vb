@@ -67,7 +67,7 @@
 
         cnn5.Close() : cnn5.Open()
         cmd5 = cnn5.CreateCommand
-        cmd5.CommandText = "SELECT DISTINCT Cliente FROM reservaciones WHERE Cliente<>'' ORDER BY Cliente"
+        cmd5.CommandText = "SELECT DISTINCT Cliente FROM reservaciones WHERE Cliente<>'' AND Habitacion='" & lblHabitacion.Text & "' ORDER BY Cliente"
         rd5 = cmd5.ExecuteReader
         Do While rd5.Read
             If rd5.HasRows Then
@@ -367,5 +367,68 @@
             End Try
 
         End If
+    End Sub
+
+    Private Sub cboFolio_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboFolio.SelectedValueChanged
+        Try
+            cnn1.Close() : cnn1.Open()
+            cnn2.Close() : cnn2.Open()
+
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT * FROM reservaciones WHERE IdCliente=" & cboFolio.Text
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    cboFolio.Text = rd1("IdReservacion").ToString
+                    txttelefono.Text = rd1("Telefono").ToString
+
+
+                    cnn2.Close() : cnn2.Open()
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "SELECT * FROM reservaciones WHERE Habitacion='" & lblHabitacion.Text & "' AND Status=0 AND Cliente='" & cboCLientes.Text & "' AND IdReservacion=" & cboFolio.Text & ""
+                    rd2 = cmd2.ExecuteReader
+                    If rd2.HasRows Then
+                        If rd2.Read Then
+
+                            Dim fechaentrada As Date = rd2("FEntrada").ToString
+                            Dim FECHASALIDA As Date = rd2("FSalida").ToString
+                            Dim fentrada As String = Format(fechaentrada, "yyyy-MM-dd")
+                            Dim horaentrada As String = Format(fechaentrada, "HH:mm:ss")
+                            Dim horasalida As String = Format(FECHASALIDA, "HH:mm:ss")
+
+                            If Date.Now > fechaentrada Then
+                                pReservacion.Visible = True
+                                cboCLientes.Text = rd2("Cliente").ToString
+                                txttelefono.Text = rd2("Telefono").ToString
+                                dtpEntrada.Value = fentrada
+                                dtpSalida.Value = FECHASALIDA
+                                dtphoraentrada.Text = horaentrada
+                                dtphorasalida.Text = horasalida
+
+                                varHoras = DateDiff(DateInterval.Hour, CDate(fechaentrada), FECHASALIDA)
+                                cboTipo.Text = "DIA"
+                                txtHoras.Text = varHoras
+                            Else
+                                MsgBox("Esta reservación aun no esta disponible", vbInformation + vbOKOnly, titulohotelriaa)
+                                btnLimpiar.PerformClick()
+                                cnn1.Close()
+                                cnn2.Close()
+                                Exit Sub
+                            End If
+
+
+                        End If
+                    End If
+                    rd1.Close()
+
+                End If
+            End If
+            rd1.Close()
+            cnn1.Close()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
     End Sub
 End Class
