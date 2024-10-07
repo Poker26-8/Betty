@@ -150,9 +150,18 @@
                     Dim fechanueva As String = ""
                     fechanueva = Format(fechap, "yyyy-MM-dd")
 
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "INSERT INTO otrosgastos(Tipo,Concepto,Folio,Fecha,FormaPago,Monto,Total,Nota,Banco,Referencia,Comentario,CuentaC,BancoC,Usuario,Corte,CorteU) values('" & cbotipo.Text & "','" & cboconcepto.Text & "','" & txtfolio.Text & "','" & Format(dtpfecha.Value, "yyyy/MM/dd") & "','" & formap & "'," & montop & "," & CDbl(montop) & ",'" & txtcomentario.Text & "','" & bancop & "','" & referenciap & "','" & comentariop & "','" & cuentac & "','" & bancocp & "','" & lblusuario.Text & "','0','0')"
-                    cmd1.ExecuteNonQuery()
+                    If formap = "TARJETA" Then
+                        cmd1 = cnn1.CreateCommand
+                        cmd1.CommandText = "INSERT INTO otrosgastos(Tipo,Concepto,Folio,Fecha,FormaPago,Monto,Total,Nota,Banco,Referencia,Comentario,CuentaC,BancoC,Usuario,Corte,CorteU,Tarjeta) values('" & cbotipo.Text & "','" & cboconcepto.Text & "','" & txtfolio.Text & "','" & Format(dtpfecha.Value, "yyyy/MM/dd") & "','" & formap & "'," & montop & "," & CDbl(montop) & ",'" & txtcomentario.Text & "','" & bancop & "','" & referenciap & "','" & comentariop & "','" & cuentac & "','" & bancocp & "','" & lblusuario.Text & "','0','0'," & montop & ")"
+                        cmd1.ExecuteNonQuery()
+                    End If
+
+                    If formap = "TRANSFERENCIA" Then
+                        cmd1 = cnn1.CreateCommand
+                        cmd1.CommandText = "INSERT INTO otrosgastos(Tipo,Concepto,Folio,Fecha,FormaPago,Monto,Total,Nota,Banco,Referencia,Comentario,CuentaC,BancoC,Usuario,Corte,CorteU,Transfe) values('" & cbotipo.Text & "','" & cboconcepto.Text & "','" & txtfolio.Text & "','" & Format(dtpfecha.Value, "yyyy/MM/dd") & "','" & formap & "'," & montop & "," & CDbl(montop) & ",'" & txtcomentario.Text & "','" & bancop & "','" & referenciap & "','" & comentariop & "','" & cuentac & "','" & bancocp & "','" & lblusuario.Text & "','0','0'," & montop & ")"
+                        cmd1.ExecuteNonQuery()
+                    End If
+
 
                     Dim saldocuenta As Double = 0
 
@@ -181,7 +190,7 @@
                 If txtefectivo.Text > 0 Then
                     cmd1 = cnn1.CreateCommand
                     cmd1.CommandText =
-                        "insert into OtrosGastos(Tipo,Concepto,Folio,Fecha,FormaPago,Monto,Total,Nota,Banco,Referencia,Comentario,CuentaC,BancoC,Usuario,Corte,CorteU,Efectivo,Tarjeta,Transfe) values('" & cbotipo.Text & "','" & cboconcepto.Text & "','" & txtfolio.Text & "','" & Format(dtpfecha.Value, "yyyy/MM/dd") & "','EFECTIVO'," & efectivo & "," & efectivo & ",'" & txtcomentario.Text & "','','','','','','" & lblusuario.Text & "','0','0',0,0,0)"
+                        "insert into OtrosGastos(Tipo,Concepto,Folio,Fecha,FormaPago,Monto,Total,Nota,Banco,Referencia,Comentario,CuentaC,BancoC,Usuario,Corte,CorteU,Efectivo,Tarjeta,Transfe) values('" & cbotipo.Text & "','" & cboconcepto.Text & "','" & txtfolio.Text & "','" & Format(dtpfecha.Value, "yyyy/MM/dd") & "','EFECTIVO'," & efectivo & "," & efectivo & ",'" & txtcomentario.Text & "','','','','','','" & lblusuario.Text & "','0','0'," & efectivo & ",0,0)"
                     cmd1.ExecuteNonQuery()
 
                 End If

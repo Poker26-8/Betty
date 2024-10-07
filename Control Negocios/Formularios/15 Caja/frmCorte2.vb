@@ -2731,16 +2731,6 @@ Public Class frmCorte2
                 End If
             End If
             rd2.Close()
-
-            'cmd2 = cnn2.CreateCommand
-            'cmd2.CommandText = "SELECT SUM(Abono) FROM abonoi WHERE FormaPago=''"
-            'rd2 = cmd2.ExecuteReader
-            'If rd2.HasRows Then
-            '    If rd2.Read Then
-
-            '    End If
-            'End If
-            'rd2.Close()
             cnn2.Close()
             'txtEgrEfectivoG.Text = FormatNumber(2)
 
