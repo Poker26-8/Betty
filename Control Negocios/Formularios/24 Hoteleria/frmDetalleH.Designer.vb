@@ -281,7 +281,7 @@ Partial Class frmDetalleH
         Me.txttelefono.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txttelefono.Location = New System.Drawing.Point(449, 30)
         Me.txttelefono.Name = "txttelefono"
-        Me.txttelefono.Size = New System.Drawing.Size(116, 22)
+        Me.txttelefono.Size = New System.Drawing.Size(133, 22)
         Me.txttelefono.TabIndex = 9
         '
         'Label10
@@ -308,7 +308,7 @@ Partial Class frmDetalleH
         Me.cbocliente.FormattingEnabled = True
         Me.cbocliente.Location = New System.Drawing.Point(73, 3)
         Me.cbocliente.Name = "cbocliente"
-        Me.cbocliente.Size = New System.Drawing.Size(492, 21)
+        Me.cbocliente.Size = New System.Drawing.Size(509, 21)
         Me.cbocliente.TabIndex = 1
         '
         'Label7

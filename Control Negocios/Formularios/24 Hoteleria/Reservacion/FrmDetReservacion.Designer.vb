@@ -101,6 +101,7 @@ Partial Class FrmDetReservacion
         'txtcontra
         '
         Me.txtcontra.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtcontra.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtcontra.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtcontra.Location = New System.Drawing.Point(125, 10)
         Me.txtcontra.Name = "txtcontra"
@@ -112,7 +113,7 @@ Partial Class FrmDetReservacion
         'lblusuario
         '
         Me.lblusuario.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblusuario.BackColor = System.Drawing.Color.SteelBlue
+        Me.lblusuario.BackColor = System.Drawing.Color.DeepSkyBlue
         Me.lblusuario.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblusuario.ForeColor = System.Drawing.Color.White
         Me.lblusuario.Location = New System.Drawing.Point(4, 10)
@@ -133,6 +134,7 @@ Partial Class FrmDetReservacion
         '
         'cboCLientes
         '
+        Me.cboCLientes.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.cboCLientes.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboCLientes.FormattingEnabled = True
         Me.cboCLientes.Location = New System.Drawing.Point(89, 158)
@@ -157,8 +159,9 @@ Partial Class FrmDetReservacion
         '
         'lblTipo
         '
-        Me.lblTipo.BackColor = System.Drawing.Color.PaleTurquoise
-        Me.lblTipo.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTipo.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.lblTipo.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTipo.ForeColor = System.Drawing.Color.White
         Me.lblTipo.Location = New System.Drawing.Point(92, 62)
         Me.lblTipo.Name = "lblTipo"
         Me.lblTipo.Size = New System.Drawing.Size(283, 23)
@@ -175,8 +178,9 @@ Partial Class FrmDetReservacion
         '
         'lblCaracteristicas
         '
-        Me.lblCaracteristicas.BackColor = System.Drawing.Color.PaleTurquoise
-        Me.lblCaracteristicas.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCaracteristicas.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.lblCaracteristicas.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCaracteristicas.ForeColor = System.Drawing.Color.White
         Me.lblCaracteristicas.Location = New System.Drawing.Point(381, 18)
         Me.lblCaracteristicas.Name = "lblCaracteristicas"
         Me.lblCaracteristicas.Size = New System.Drawing.Size(356, 79)
@@ -184,8 +188,9 @@ Partial Class FrmDetReservacion
         '
         'lblHabitacion
         '
-        Me.lblHabitacion.BackColor = System.Drawing.Color.PaleTurquoise
-        Me.lblHabitacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHabitacion.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.lblHabitacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHabitacion.ForeColor = System.Drawing.Color.White
         Me.lblHabitacion.Location = New System.Drawing.Point(92, 28)
         Me.lblHabitacion.Name = "lblHabitacion"
         Me.lblHabitacion.Size = New System.Drawing.Size(283, 23)
@@ -254,6 +259,7 @@ Partial Class FrmDetReservacion
         '
         'txtHoras
         '
+        Me.txtHoras.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtHoras.Location = New System.Drawing.Point(161, 41)
         Me.txtHoras.Name = "txtHoras"
         Me.txtHoras.Size = New System.Drawing.Size(150, 24)
@@ -270,6 +276,7 @@ Partial Class FrmDetReservacion
         '
         'cboTipo
         '
+        Me.cboTipo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.cboTipo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboTipo.FormattingEnabled = True
         Me.cboTipo.Location = New System.Drawing.Point(6, 41)
