@@ -2551,8 +2551,6 @@ Door:
 
             If imprime = 1 Then
                 If MessageBox.Show("Desea Imprimir el ticket", "Confirmación", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.OK Then
-                    btnLimpiar.PerformClick() : Exit Sub
-
                     If TamImpre = "80" Then
                         For naruto As Integer = 1 To copias
                             PPVenta80.DefaultPageSettings.PrinterSettings.PrinterName = impresora
@@ -2566,7 +2564,8 @@ Door:
                             PPVenta58.Print()
                         Next
                     End If
-
+                Else
+                    btnLimpiar.PerformClick() : Exit Sub
                 End If
             Else
                 If TamImpre = "80" Then
