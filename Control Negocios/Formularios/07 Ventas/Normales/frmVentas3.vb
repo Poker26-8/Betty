@@ -4454,7 +4454,7 @@ kaka:
         If AscW(e.KeyChar) = Keys.Enter Then
             txtcoment.Visible = False
             If renglon = 0 Then
-                grdcaptura.Rows.Add("", txtcoment.Text, "", "", "", "", "", "", "", "", "", "", "", "")
+                grdcaptura.Rows.Add("", txtcoment.Text, "", "", "", "", "", "", "", "", "", "", "", "", "", "")
             Else
                 grdcaptura.Rows(renglon).Cells(1).Value = txtcoment.Text
             End If
