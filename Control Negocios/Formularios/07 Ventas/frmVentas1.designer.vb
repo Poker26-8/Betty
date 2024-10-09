@@ -466,6 +466,7 @@ Partial Class frmVentas1
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grdcaptura.BackgroundColor = System.Drawing.Color.White
         Me.grdcaptura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdcaptura.ColumnHeadersVisible = False
         Me.grdcaptura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column14, Me.Column20, Me.Column8, Me.Column10, Me.Column11, Me.Column12, Me.Column13, Me.Column26, Me.Column32})
         DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle10.BackColor = System.Drawing.Color.IndianRed
@@ -2799,7 +2800,7 @@ Partial Class frmVentas1
         Me.Column8.Name = "Column8"
         Me.Column8.ReadOnly = True
         Me.Column8.Visible = False
-        Me.Column8.Width = 89
+        Me.Column8.Width = 5
         '
         'Column10
         '
@@ -2842,7 +2843,8 @@ Partial Class frmVentas1
         Me.Column32.HeaderText = "CodUnico"
         Me.Column32.Name = "Column32"
         Me.Column32.ReadOnly = True
-        Me.Column32.Width = 85
+        Me.Column32.Visible = False
+        Me.Column32.Width = 5
         '
         'frmVentas1
         '
