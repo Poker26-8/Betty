@@ -8243,7 +8243,7 @@ kakaxd:
                 Dim preciosiniva As Double = 0
                 Dim preciosindescuento As Double = 0
                 Dim descuentoproducto As Double = 0
-                Dim mypreciodescuento As Double
+                Dim mypreciodescuento As Double = 0
 
 
                 preciosiniva = myprecio / (1 + MyIVA)
