@@ -33,7 +33,7 @@ Public Class frmcofepris
                     End If
                     rd2.Close()
 
-                    fcaduca = rd1("Caducidad").ToString
+                    fcaduca = IIf(rd1("Caducidad").ToString = "", "", rd1("Caducidad").ToString)
                     f = Format(fcaduca, "yyyy-MM-dd")
 
                     grdcaptura.Rows.Add(rd1("Folio").ToString(), rd1("Codigo").ToString(), rd1("Nombre").ToString(), rd1("Cantidad").ToString(), rd1("Existencia").ToString(), "", FormatDateTime(rd1("Fecha").ToString(), DateFormat.ShortDate), rd1("Lote").ToString(), f, rd1("Receta").ToString(), cedula, nombre, direccion)
