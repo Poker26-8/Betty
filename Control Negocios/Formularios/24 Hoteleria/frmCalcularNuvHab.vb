@@ -15,6 +15,8 @@
         Dim precioaumento As Double = 0
         Try
             cnn2.Close() : cnn2.Open()
+            cnn3.Close() : cnn3.Open()
+
             'cmd2 = cnn2.CreateCommand
             'cmd2.CommandText = "SELECT NotasCred FROM formatos WHERE Facturas='SalidaHab'"
             'rd2 = cmd2.ExecuteReader
@@ -85,12 +87,36 @@
 
                     Dim fechasalida As DateTime = fechaentrada.AddHours(horas)
 
-                    If ToleHab > 0 Then
-                        Dim fechatolerancia As DateTime = fechasalida.AddMinutes(ToleHab)
-                        lblsalida.Text = Format(fechatolerancia, "yyyy/MM/dd HH:mm")
+                    Dim fsalidareservacion As Date = Nothing
+                    Dim dsalidare As String
+                    cmd3 = cnn3.CreateCommand
+                    cmd3 = cnn3.CreateCommand
+                    cmd3.CommandText = "SELECT * FROM reservaciones WHERE Habitacion='" & lblpc.Text & "'"
+                    rd3 = cmd3.ExecuteReader
+                    If rd3.HasRows Then
+                        If rd3.Read Then
+                            fsalidareservacion = rd3("FSalida").ToString
+                            dsalidare = Format(fsalidareservacion, "yyyy-MM-dd HH:mm:ss")
+
+                            If ToleHab > 0 Then
+                                Dim fechatolerancia As DateTime = fsalidareservacion.AddMinutes(ToleHab)
+                                lblsalida.Text = Format(fechatolerancia, "yyyy/MM/dd HH:mm")
+                            Else
+                                lblsalida.Text = Format(fsalidareservacion, "yyyy/MM/dd HH:mm")
+                            End If
+
+                        End If
                     Else
-                        lblsalida.Text = Format(fechasalida, "yyyy/MM/dd HH:mm")
+                        If ToleHab > 0 Then
+                            Dim fechatolerancia As DateTime = fechasalida.AddMinutes(ToleHab)
+                            lblsalida.Text = Format(fechatolerancia, "yyyy/MM/dd HH:mm")
+                        Else
+                            lblsalida.Text = Format(fechasalida, "yyyy/MM/dd HH:mm")
+                        End If
                     End If
+                    rd3.Close()
+
+
 
                     'If horas = "24" Then
 
@@ -142,7 +168,7 @@
             End If
             rd2.Close()
             cnn2.Close()
-
+            cnn3.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn2.Close()
@@ -269,11 +295,39 @@
                         cmd3.CommandText = "UPDATE Habitacion SET Estado='Desocupada' WHERE N_Habitacion='" & lblpc.Text & "'"
                         cmd3.ExecuteNonQuery()
                         cnn3.Close()
+
+                        Dim freservacion As Date = Nothing
+                        Dim freserva As String
+
+                        cnn4.Close() : cnn4.Open()
+                        cmd4 = cnn4.CreateCommand
+                        cmd4.CommandText = "SELECT FEntrada FROM reservaciones WHERE Habitacion='" & lblpc.Text & "'"
+                        rd4 = cmd4.ExecuteReader
+                        If rd4.HasRows Then
+                            If rd4.Read Then
+                                freservacion = rd4(0).ToString
+                                freserva = Format(freservacion, "yyyy-MM-dd HH:mm:ss")
+
+                                If Date.Now >= freserva Then
+
+                                    cnn2.Close() : cnn2.Open()
+                                    cmd2 = cnn2.CreateCommand
+                                    cmd2.CommandText = "UPDATE reservaciones SET Status=1 WHERE Habitacion='" & lblpc.Text & "' AND FEntrada='" & freserva & "'"
+                                    cmd2.ExecuteNonQuery()
+                                    cnn2.Close()
+
+                                Else
+                                End If
+
+                            End If
+                        End If
+                        rd4.Close()
+
                     End If
                 End If
                 rd1.Close()
                 cnn1.Close()
-
+                cnn4.Close()
 
             End If
 

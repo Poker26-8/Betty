@@ -812,7 +812,7 @@ Public Class frmManejo
                     Dim freserva As String
 
                     cmd4 = cnn4.CreateCommand
-                    cmd4.CommandText = "SELECT FEntrada FROM reservaciones WHERE Habitacion='" & btnHabitacionn.Text & "'"
+                    cmd4.CommandText = "SELECT FEntrada FROM reservaciones WHERE Habitacion='" & btnHabitacionn.Text & "' AND Status=0"
                     rd4 = cmd4.ExecuteReader
                     If rd4.HasRows Then
                         If rd4.Read Then
@@ -820,7 +820,15 @@ Public Class frmManejo
                             freserva = Format(freservacion, "yyyy-MM-dd HH:mm:ss")
 
                             If Date.Now >= freserva Then
-                                btnHabitacionn.BackColor = Color.FromArgb(1, 100, 156)
+                                If estado = "Ocupada" Then
+                                    btnHabitacionn.BackColor = Color.FromArgb(192, 39, 71)
+                                Else
+                                    btnHabitacionn.BackColor = Color.FromArgb(1, 100, 156)
+                                End If
+
+
+                            ElseIf estado = "Ocupada" Then
+                                btnHabitacionn.BackColor = Color.FromArgb(192, 39, 71)
                             Else
                                 btnHabitacionn.BackColor = Color.FromArgb(77, 201, 125)
                             End If
@@ -890,6 +898,8 @@ Public Class frmManejo
                         If tiempo = 1 Then
 
                             cnn2.Close() : cnn2.Open()
+                            cnn3.Close() : cnn3.Open()
+
                             cmd2 = cnn2.CreateCommand
                             cmd2.CommandText = "SELECT Nombre FROM Asigpc WHERE Nombre='" & txtHabitacion.Text & "'"
                             rd2 = cmd2.ExecuteReader
@@ -919,13 +929,6 @@ Public Class frmManejo
                                         descripcion = rd1("Caracteristicas").ToString
                                         estado = rd1("Estado").ToString
 
-
-                                        frmDetalleH.habitacionn = txtHabitacion.Text
-                                        frmDetalleH.lblhabitacion.Text = txtHabitacion.Text
-                                        frmDetalleH.lbltipo.Text = tipo
-                                        frmDetalleH.lblCaracteristicas.Text = descripcion
-
-
                                         cnn2.Close() : cnn2.Open()
                                         cmd2 = cnn2.CreateCommand
                                         cmd2.CommandText = "SELECT Cliente,Telefono,FEntrada,FSalida FROM detallehotel WHERE Habitacion='" & txtHabitacion.Text & "'"
@@ -942,37 +945,76 @@ Public Class frmManejo
                                                 frmDetalleH.dtpEntrada.Value = entrada
                                                 frmDetalleH.dtpSalida.Value = salida
 
+
                                             End If
                                         End If
                                         rd2.Close()
+
+                                        Dim freservacion As Date = Nothing
+                                        Dim freserva As String
+
+                                        cmd3 = cnn3.CreateCommand
+                                        cmd3.CommandText = "SELECT FEntrada FROM reservaciones WHERE Habitacion='" & txtHabitacion.Text & "' AND Status=0"
+                                        rd3 = cmd3.ExecuteReader
+                                        If rd3.HasRows Then
+                                            If rd3.Read Then
+                                                freservacion = rd3(0).ToString
+                                                freserva = Format(freservacion, "yyyy-MM-dd HH:mm:ss")
+                                                estado = "lol"
+                                                If Date.Now >= freserva Then
+                                                    FrmDetReservacion.lblHabitacion.Text = txtHabitacion.Text
+                                                    FrmDetReservacion.lblTipo.Text = tipo
+                                                    FrmDetReservacion.lblCaracteristicas.Text = descripcion
+                                                    FrmDetReservacion.Show()
+                                                Else
+
+                                                    frmDetalleH.habitacionn = txtHabitacion.Text
+                                                    frmDetalleH.lblhabitacion.Text = txtHabitacion.Text
+                                                    frmDetalleH.lbltipo.Text = tipo
+                                                    frmDetalleH.lblCaracteristicas.Text = descripcion
+                                                    frmDetalleH.Show()
+                                                End If
+
+
+                                            End If
+                                        Else
+                                            frmDetalleH.habitacionn = txtHabitacion.Text
+                                            frmDetalleH.lblhabitacion.Text = txtHabitacion.Text
+                                            frmDetalleH.lbltipo.Text = tipo
+                                            frmDetalleH.lblCaracteristicas.Text = descripcion
+                                            frmDetalleH.Show()
+                                        End If
+                                        rd3.Close()
+
 
                                         If estado = "Desocupada" Then
                                             frmDetalleH.lblEstado.Text = estado
                                             frmDetalleH.lblEstado.BackColor = Color.FromArgb(84, 204, 96)
                                             frmDetalleH.lblEstado.ForeColor = Color.White
+                                            frmDetalleH.Show()
                                         ElseIf estado = "Ocupada" Then
                                             frmDetalleH.lblEstado.Text = estado
                                             frmDetalleH.lblEstado.BackColor = Color.FromArgb(192, 39, 71)
                                             frmDetalleH.lblEstado.ForeColor = Color.White
-                                        ElseIf estado = "Reservacion" Then
-                                            frmDetalleH.lblEstado.Text = estado
-                                            frmDetalleH.lblEstado.BackColor = Color.FromArgb(1, 100, 156)
-                                            frmDetalleH.lblEstado.ForeColor = Color.White
+                                            frmDetalleH.Show()
                                         ElseIf estado = "Mantenimiento" Then
                                             frmDetalleH.lblEstado.Text = estado
                                             frmDetalleH.lblEstado.BackColor = Color.LightGray
                                             frmDetalleH.lblEstado.ForeColor = Color.Black
+                                            frmDetalleH.Show()
                                         ElseIf estado = "Limpieza" Then
                                             frmDetalleH.lblEstado.Text = estado
                                             frmDetalleH.lblEstado.BackColor = Color.Aqua
                                             frmDetalleH.lblEstado.ForeColor = Color.Black
+                                            frmDetalleH.Show()
                                         ElseIf estado = "Ventilacion" Then
                                             frmDetalleH.lblEstado.Text = estado
                                             frmDetalleH.lblEstado.BackColor = Color.Yellow
                                             frmDetalleH.lblEstado.ForeColor = Color.Black
+                                            frmDetalleH.Show()
                                         End If
 
-                                        frmDetalleH.Show()
+
                                         Me.Close()
                                     End If
                                 End If

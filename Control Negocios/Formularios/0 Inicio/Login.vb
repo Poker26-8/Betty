@@ -783,6 +783,10 @@ Public Class Login
                     With odata
                         If .dbOpen(cnnprueba, sTargetprueba, sinfo) Then
 
+                            'reservaciones
+                            .runSp(cnnprueba, vartablareservaciones, sinfo)
+                            .runSp(cnnprueba, VarKeyreservaciones, sinfo)
+                            .runSp(cnnprueba, VarAutoreservaciones, sinfo)
 
                             'hisclinica
                             .runSp(cnnprueba, vartablahisclinica, sinfo)

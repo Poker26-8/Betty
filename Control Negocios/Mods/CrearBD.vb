@@ -1,6 +1,17 @@
 ﻿Module CrearBD
 
-
+    'reservaciones
+    Public vartablareservaciones As String = "CREATE TABLE `reservaciones` (
+                                              `IdReservacion` int(11) NOT NULL,
+                                              `Cliente` varchar(255) DEFAULT '',
+                                              `Telefono` varchar(50) DEFAULT '',
+                                              `Habitacion` varchar(255) DEFAULT '',
+                                              `FEntrada` datetime DEFAULT NULL,
+                                              `FSalida` datetime DEFAULT NULL,
+                                              `Asigno` varchar(70) DEFAULT '',
+                                              `Reservo` varchar(70) DEFAULT '',
+                                              `Status` int(1) DEFAULT '0'
+                                            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
     'prescripcion
     Public VartablaPrescripcion As String = "CREATE TABLE IF NOT EXIST `prescripcion` (
@@ -6934,6 +6945,7 @@
     '/////////////////////////////////////////////////////////////////////////
     'LLAVES PRIMARIAS
     '/////////////////////////////////////////////////////////////////////////
+    Public VarKeyreservaciones As String = "ALTER TABLE `reservaciones`ADD PRIMARY KEY (`IdReservacion`);"
     Public VarKeyPrescripcion As String = "ALTER TABLE `prescripcion`ADD PRIMARY KEY (`Folio`);"
     Public VarKeyhisclinica As String = "ALTER TABLE `hisclinica`ADD PRIMARY KEY (`Id`);"
     Public VarKeytallerd As String = "ALTER TABLE `tallerd` ADD PRIMARY KEY (`Id`);"
@@ -7105,6 +7117,7 @@
     '/////////////////////////////////////////////////////////////////////////
     'AUTOINCREMENTO
     '/////////////////////////////////////////////////////////////////////////
+    Public VarAutoreservaciones As String = "ALTER TABLE `reservaciones`MODIFY `IdReservacion` int(11) NOT NULL AUTO_INCREMENT;"
     Public VarAutoPrescripcion As String = "ALTER TABLE `prescripcion`MODIFY `Folio` int(11) NOT NULL AUTO_INCREMENT;"
     Public VarAutohiscliente As String = "ALTER TABLE `hisclinica`MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
     Public varAutotallerd As String = "ALTER TABLE `tallerd` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"

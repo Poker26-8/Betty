@@ -25,6 +25,15 @@ Partial Class frmDetalleH
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDetalleH))
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.pReservacion = New System.Windows.Forms.Panel()
+        Me.lbl = New System.Windows.Forms.Label()
+        Me.lblHoraSalida = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblHoraEntrada = New System.Windows.Forms.Label()
+        Me.dtpSalida = New System.Windows.Forms.DateTimePicker()
+        Me.dtphorasalida = New System.Windows.Forms.DateTimePicker()
+        Me.dtpEntrada = New System.Windows.Forms.DateTimePicker()
+        Me.dtphoraentrada = New System.Windows.Forms.DateTimePicker()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.cboPrecio = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -32,6 +41,12 @@ Partial Class frmDetalleH
         Me.Label12 = New System.Windows.Forms.Label()
         Me.cboTipo = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.txttelefono = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.cboRegistro = New System.Windows.Forms.ComboBox()
+        Me.cbocliente = New System.Windows.Forms.ComboBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblHoras = New System.Windows.Forms.Label()
         Me.lblPrecio = New System.Windows.Forms.Label()
@@ -39,22 +54,9 @@ Partial Class frmDetalleH
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.txttelefono = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.dtpEntrada = New System.Windows.Forms.DateTimePicker()
-        Me.lbl = New System.Windows.Forms.Label()
-        Me.cboRegistro = New System.Windows.Forms.ComboBox()
-        Me.cbocliente = New System.Windows.Forms.ComboBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.dtpSalida = New System.Windows.Forms.DateTimePicker()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.lblidcliented = New System.Windows.Forms.Label()
         Me.pdesocupar = New System.Windows.Forms.Panel()
         Me.btnDesocupar = New System.Windows.Forms.Button()
-        Me.btnLimpiar = New System.Windows.Forms.Button()
-        Me.btnGuardar = New System.Windows.Forms.Button()
-        Me.btnSalir = New System.Windows.Forms.Button()
         Me.txtcontra = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.lblusuario = New System.Windows.Forms.Label()
@@ -69,20 +71,19 @@ Partial Class frmDetalleH
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.dtphoraentrada = New System.Windows.Forms.DateTimePicker()
-        Me.dtphorasalida = New System.Windows.Forms.DateTimePicker()
-        Me.lblHoraEntrada = New System.Windows.Forms.Label()
-        Me.lblHoraSalida = New System.Windows.Forms.Label()
-        Me.pReservacion = New System.Windows.Forms.Panel()
+        Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.btnGuardar = New System.Windows.Forms.Button()
+        Me.btnSalir = New System.Windows.Forms.Button()
+        Me.PReservacion80 = New System.Drawing.Printing.PrintDocument()
         Me.Panel4.SuspendLayout()
         Me.Panel5.SuspendLayout()
+        Me.pReservacion.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.grdPrecios, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pdesocupar.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        Me.pReservacion.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel4
@@ -110,6 +111,102 @@ Partial Class frmDetalleH
         Me.Panel5.Size = New System.Drawing.Size(850, 135)
         Me.Panel5.TabIndex = 10
         '
+        'pReservacion
+        '
+        Me.pReservacion.Controls.Add(Me.lbl)
+        Me.pReservacion.Controls.Add(Me.lblHoraSalida)
+        Me.pReservacion.Controls.Add(Me.Label6)
+        Me.pReservacion.Controls.Add(Me.lblHoraEntrada)
+        Me.pReservacion.Controls.Add(Me.dtpSalida)
+        Me.pReservacion.Controls.Add(Me.dtphorasalida)
+        Me.pReservacion.Controls.Add(Me.dtpEntrada)
+        Me.pReservacion.Controls.Add(Me.dtphoraentrada)
+        Me.pReservacion.Location = New System.Drawing.Point(588, 4)
+        Me.pReservacion.Name = "pReservacion"
+        Me.pReservacion.Size = New System.Drawing.Size(259, 116)
+        Me.pReservacion.TabIndex = 17
+        Me.pReservacion.Visible = False
+        '
+        'lbl
+        '
+        Me.lbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl.Location = New System.Drawing.Point(6, 1)
+        Me.lbl.Name = "lbl"
+        Me.lbl.Size = New System.Drawing.Size(141, 22)
+        Me.lbl.TabIndex = 6
+        Me.lbl.Text = "Fecha de Entrada:"
+        Me.lbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblHoraSalida
+        '
+        Me.lblHoraSalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHoraSalida.Location = New System.Drawing.Point(6, 85)
+        Me.lblHoraSalida.Name = "lblHoraSalida"
+        Me.lblHoraSalida.Size = New System.Drawing.Size(141, 22)
+        Me.lblHoraSalida.TabIndex = 16
+        Me.lblHoraSalida.Text = "Hora de Salida:"
+        Me.lblHoraSalida.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label6
+        '
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(6, 57)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(141, 22)
+        Me.Label6.TabIndex = 2
+        Me.Label6.Text = "Fecha de Salida:"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblHoraEntrada
+        '
+        Me.lblHoraEntrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHoraEntrada.Location = New System.Drawing.Point(6, 31)
+        Me.lblHoraEntrada.Name = "lblHoraEntrada"
+        Me.lblHoraEntrada.Size = New System.Drawing.Size(141, 22)
+        Me.lblHoraEntrada.TabIndex = 15
+        Me.lblHoraEntrada.Text = "Hora de Entrada:"
+        Me.lblHoraEntrada.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'dtpSalida
+        '
+        Me.dtpSalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpSalida.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpSalida.Location = New System.Drawing.Point(153, 57)
+        Me.dtpSalida.Name = "dtpSalida"
+        Me.dtpSalida.Size = New System.Drawing.Size(99, 22)
+        Me.dtpSalida.TabIndex = 3
+        '
+        'dtphorasalida
+        '
+        Me.dtphorasalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtphorasalida.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.dtphorasalida.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.dtphorasalida.Location = New System.Drawing.Point(153, 85)
+        Me.dtphorasalida.Name = "dtphorasalida"
+        Me.dtphorasalida.ShowUpDown = True
+        Me.dtphorasalida.Size = New System.Drawing.Size(99, 22)
+        Me.dtphorasalida.TabIndex = 14
+        '
+        'dtpEntrada
+        '
+        Me.dtpEntrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpEntrada.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpEntrada.Location = New System.Drawing.Point(153, 4)
+        Me.dtpEntrada.Name = "dtpEntrada"
+        Me.dtpEntrada.Size = New System.Drawing.Size(99, 22)
+        Me.dtpEntrada.TabIndex = 7
+        '
+        'dtphoraentrada
+        '
+        Me.dtphoraentrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtphoraentrada.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.dtphoraentrada.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.dtphoraentrada.Location = New System.Drawing.Point(153, 31)
+        Me.dtphoraentrada.Name = "dtphoraentrada"
+        Me.dtphoraentrada.ShowUpDown = True
+        Me.dtphoraentrada.Size = New System.Drawing.Size(99, 22)
+        Me.dtphoraentrada.TabIndex = 13
+        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.cboPrecio)
@@ -121,7 +218,7 @@ Partial Class frmDetalleH
         Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox2.Location = New System.Drawing.Point(13, 55)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(404, 73)
+        Me.GroupBox2.Size = New System.Drawing.Size(403, 73)
         Me.GroupBox2.TabIndex = 12
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Precios"
@@ -178,68 +275,6 @@ Partial Class frmDetalleH
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "Tipo"
         '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.lblHoras)
-        Me.GroupBox1.Controls.Add(Me.lblPrecio)
-        Me.GroupBox1.Controls.Add(Me.grdPrecios)
-        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(445, 6)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(160, 44)
-        Me.GroupBox1.TabIndex = 11
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Precios de la habitación"
-        Me.GroupBox1.Visible = False
-        '
-        'lblHoras
-        '
-        Me.lblHoras.BackColor = System.Drawing.Color.PaleTurquoise
-        Me.lblHoras.Location = New System.Drawing.Point(313, 55)
-        Me.lblHoras.Name = "lblHoras"
-        Me.lblHoras.Size = New System.Drawing.Size(93, 23)
-        Me.lblHoras.TabIndex = 95
-        '
-        'lblPrecio
-        '
-        Me.lblPrecio.BackColor = System.Drawing.Color.PaleTurquoise
-        Me.lblPrecio.Location = New System.Drawing.Point(313, 19)
-        Me.lblPrecio.Name = "lblPrecio"
-        Me.lblPrecio.Size = New System.Drawing.Size(93, 23)
-        Me.lblPrecio.TabIndex = 94
-        '
-        'grdPrecios
-        '
-        Me.grdPrecios.AllowUserToAddRows = False
-        Me.grdPrecios.AllowUserToDeleteRows = False
-        Me.grdPrecios.BackgroundColor = System.Drawing.Color.White
-        Me.grdPrecios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdPrecios.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column2, Me.Column1})
-        Me.grdPrecios.Location = New System.Drawing.Point(4, 19)
-        Me.grdPrecios.Name = "grdPrecios"
-        Me.grdPrecios.ReadOnly = True
-        Me.grdPrecios.RowHeadersVisible = False
-        Me.grdPrecios.Size = New System.Drawing.Size(303, 145)
-        Me.grdPrecios.TabIndex = 10
-        '
-        'Column3
-        '
-        Me.Column3.HeaderText = "Horas"
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "Precio"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        '
-        'Column1
-        '
-        Me.Column1.HeaderText = "Precio Día"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        '
         'txttelefono
         '
         Me.txttelefono.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -257,25 +292,6 @@ Partial Class frmDetalleH
         Me.Label10.TabIndex = 8
         Me.Label10.Text = "Telefono:"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'dtpEntrada
-        '
-        Me.dtpEntrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpEntrada.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpEntrada.Location = New System.Drawing.Point(153, 4)
-        Me.dtpEntrada.Name = "dtpEntrada"
-        Me.dtpEntrada.Size = New System.Drawing.Size(99, 22)
-        Me.dtpEntrada.TabIndex = 7
-        '
-        'lbl
-        '
-        Me.lbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl.Location = New System.Drawing.Point(6, 1)
-        Me.lbl.Name = "lbl"
-        Me.lbl.Size = New System.Drawing.Size(141, 22)
-        Me.lbl.TabIndex = 6
-        Me.lbl.Text = "Fecha de Entrada:"
-        Me.lbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'cboRegistro
         '
@@ -314,24 +330,68 @@ Partial Class frmDetalleH
         Me.Label5.TabIndex = 0
         Me.Label5.Text = "Cliente:"
         '
-        'dtpSalida
+        'GroupBox1
         '
-        Me.dtpSalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpSalida.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpSalida.Location = New System.Drawing.Point(153, 57)
-        Me.dtpSalida.Name = "dtpSalida"
-        Me.dtpSalida.Size = New System.Drawing.Size(99, 22)
-        Me.dtpSalida.TabIndex = 3
+        Me.GroupBox1.Controls.Add(Me.lblHoras)
+        Me.GroupBox1.Controls.Add(Me.lblPrecio)
+        Me.GroupBox1.Controls.Add(Me.grdPrecios)
+        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Location = New System.Drawing.Point(445, 6)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(160, 44)
+        Me.GroupBox1.TabIndex = 11
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Precios de la habitación"
+        Me.GroupBox1.Visible = False
         '
-        'Label6
+        'lblHoras
         '
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(6, 57)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(141, 22)
-        Me.Label6.TabIndex = 2
-        Me.Label6.Text = "Fecha de Salida:"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblHoras.BackColor = System.Drawing.Color.PaleTurquoise
+        Me.lblHoras.Location = New System.Drawing.Point(313, 55)
+        Me.lblHoras.Name = "lblHoras"
+        Me.lblHoras.Size = New System.Drawing.Size(93, 23)
+        Me.lblHoras.TabIndex = 95
+        '
+        'lblPrecio
+        '
+        Me.lblPrecio.BackColor = System.Drawing.Color.PaleTurquoise
+        Me.lblPrecio.Location = New System.Drawing.Point(-120, 19)
+        Me.lblPrecio.Name = "lblPrecio"
+        Me.lblPrecio.Size = New System.Drawing.Size(91, 23)
+        Me.lblPrecio.TabIndex = 94
+        Me.lblPrecio.Visible = False
+        '
+        'grdPrecios
+        '
+        Me.grdPrecios.AllowUserToAddRows = False
+        Me.grdPrecios.AllowUserToDeleteRows = False
+        Me.grdPrecios.BackgroundColor = System.Drawing.Color.White
+        Me.grdPrecios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdPrecios.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column2, Me.Column1})
+        Me.grdPrecios.Location = New System.Drawing.Point(4, 19)
+        Me.grdPrecios.Name = "grdPrecios"
+        Me.grdPrecios.ReadOnly = True
+        Me.grdPrecios.RowHeadersVisible = False
+        Me.grdPrecios.Size = New System.Drawing.Size(303, 145)
+        Me.grdPrecios.TabIndex = 10
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "Horas"
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "Precio"
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "Precio Día"
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
         '
         'lblidcliented
         '
@@ -361,51 +421,6 @@ Partial Class frmDetalleH
         Me.btnDesocupar.TabIndex = 1
         Me.btnDesocupar.Text = "Desocupar Habitación"
         Me.btnDesocupar.UseVisualStyleBackColor = True
-        '
-        'btnLimpiar
-        '
-        Me.btnLimpiar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnLimpiar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLimpiar.Image = CType(resources.GetObject("btnLimpiar.Image"), System.Drawing.Image)
-        Me.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnLimpiar.Location = New System.Drawing.Point(610, 6)
-        Me.btnLimpiar.Name = "btnLimpiar"
-        Me.btnLimpiar.Size = New System.Drawing.Size(75, 71)
-        Me.btnLimpiar.TabIndex = 2
-        Me.btnLimpiar.Text = "Limpiar"
-        Me.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnLimpiar.UseVisualStyleBackColor = True
-        '
-        'btnGuardar
-        '
-        Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnGuardar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
-        Me.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnGuardar.Location = New System.Drawing.Point(691, 6)
-        Me.btnGuardar.Name = "btnGuardar"
-        Me.btnGuardar.Size = New System.Drawing.Size(75, 71)
-        Me.btnGuardar.TabIndex = 1
-        Me.btnGuardar.Text = "Guardar"
-        Me.btnGuardar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnGuardar.UseVisualStyleBackColor = True
-        '
-        'btnSalir
-        '
-        Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnSalir.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
-        Me.btnSalir.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSalir.Location = New System.Drawing.Point(772, 6)
-        Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(75, 71)
-        Me.btnSalir.TabIndex = 0
-        Me.btnSalir.Text = "Salir"
-        Me.btnSalir.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnSalir.UseVisualStyleBackColor = True
         '
         'txtcontra
         '
@@ -561,63 +576,53 @@ Partial Class frmDetalleH
         Me.Panel3.Size = New System.Drawing.Size(850, 80)
         Me.Panel3.TabIndex = 94
         '
-        'dtphoraentrada
+        'btnLimpiar
         '
-        Me.dtphoraentrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtphoraentrada.Format = System.Windows.Forms.DateTimePickerFormat.Time
-        Me.dtphoraentrada.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.dtphoraentrada.Location = New System.Drawing.Point(153, 31)
-        Me.dtphoraentrada.Name = "dtphoraentrada"
-        Me.dtphoraentrada.ShowUpDown = True
-        Me.dtphoraentrada.Size = New System.Drawing.Size(99, 22)
-        Me.dtphoraentrada.TabIndex = 13
+        Me.btnLimpiar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnLimpiar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLimpiar.Image = CType(resources.GetObject("btnLimpiar.Image"), System.Drawing.Image)
+        Me.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnLimpiar.Location = New System.Drawing.Point(610, 6)
+        Me.btnLimpiar.Name = "btnLimpiar"
+        Me.btnLimpiar.Size = New System.Drawing.Size(75, 71)
+        Me.btnLimpiar.TabIndex = 2
+        Me.btnLimpiar.Text = "Limpiar"
+        Me.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnLimpiar.UseVisualStyleBackColor = True
         '
-        'dtphorasalida
+        'btnGuardar
         '
-        Me.dtphorasalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtphorasalida.Format = System.Windows.Forms.DateTimePickerFormat.Time
-        Me.dtphorasalida.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.dtphorasalida.Location = New System.Drawing.Point(153, 85)
-        Me.dtphorasalida.Name = "dtphorasalida"
-        Me.dtphorasalida.ShowUpDown = True
-        Me.dtphorasalida.Size = New System.Drawing.Size(99, 22)
-        Me.dtphorasalida.TabIndex = 14
+        Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnGuardar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
+        Me.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnGuardar.Location = New System.Drawing.Point(691, 6)
+        Me.btnGuardar.Name = "btnGuardar"
+        Me.btnGuardar.Size = New System.Drawing.Size(75, 71)
+        Me.btnGuardar.TabIndex = 1
+        Me.btnGuardar.Text = "Guardar"
+        Me.btnGuardar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnGuardar.UseVisualStyleBackColor = True
         '
-        'lblHoraEntrada
+        'btnSalir
         '
-        Me.lblHoraEntrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHoraEntrada.Location = New System.Drawing.Point(6, 31)
-        Me.lblHoraEntrada.Name = "lblHoraEntrada"
-        Me.lblHoraEntrada.Size = New System.Drawing.Size(141, 22)
-        Me.lblHoraEntrada.TabIndex = 15
-        Me.lblHoraEntrada.Text = "Hora de Entrada:"
-        Me.lblHoraEntrada.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnSalir.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
+        Me.btnSalir.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnSalir.Location = New System.Drawing.Point(772, 6)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(75, 71)
+        Me.btnSalir.TabIndex = 0
+        Me.btnSalir.Text = "Salir"
+        Me.btnSalir.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnSalir.UseVisualStyleBackColor = True
         '
-        'lblHoraSalida
+        'PReservacion80
         '
-        Me.lblHoraSalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHoraSalida.Location = New System.Drawing.Point(6, 85)
-        Me.lblHoraSalida.Name = "lblHoraSalida"
-        Me.lblHoraSalida.Size = New System.Drawing.Size(141, 22)
-        Me.lblHoraSalida.TabIndex = 16
-        Me.lblHoraSalida.Text = "Hora de Salida:"
-        Me.lblHoraSalida.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'pReservacion
-        '
-        Me.pReservacion.Controls.Add(Me.lbl)
-        Me.pReservacion.Controls.Add(Me.lblHoraSalida)
-        Me.pReservacion.Controls.Add(Me.Label6)
-        Me.pReservacion.Controls.Add(Me.lblHoraEntrada)
-        Me.pReservacion.Controls.Add(Me.dtpSalida)
-        Me.pReservacion.Controls.Add(Me.dtphorasalida)
-        Me.pReservacion.Controls.Add(Me.dtpEntrada)
-        Me.pReservacion.Controls.Add(Me.dtphoraentrada)
-        Me.pReservacion.Location = New System.Drawing.Point(588, 4)
-        Me.pReservacion.Name = "pReservacion"
-        Me.pReservacion.Size = New System.Drawing.Size(259, 116)
-        Me.pReservacion.TabIndex = 17
-        Me.pReservacion.Visible = False
         '
         'frmDetalleH
         '
@@ -636,6 +641,7 @@ Partial Class frmDetalleH
         Me.Panel4.ResumeLayout(False)
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
+        Me.pReservacion.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
@@ -644,7 +650,6 @@ Partial Class frmDetalleH
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
-        Me.pReservacion.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -700,4 +705,5 @@ Partial Class frmDetalleH
     Friend WithEvents lblHoraEntrada As Label
     Friend WithEvents dtphorasalida As DateTimePicker
     Friend WithEvents pReservacion As Panel
+    Friend WithEvents PReservacion80 As Printing.PrintDocument
 End Class
