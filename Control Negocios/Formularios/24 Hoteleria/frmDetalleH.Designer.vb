@@ -75,6 +75,7 @@ Partial Class frmDetalleH
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.PReservacion80 = New System.Drawing.Printing.PrintDocument()
+        Me.PRservacion58 = New System.Drawing.Printing.PrintDocument()
         Me.Panel4.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.pReservacion.SuspendLayout()
@@ -624,6 +625,9 @@ Partial Class frmDetalleH
         'PReservacion80
         '
         '
+        'PRservacion58
+        '
+        '
         'frmDetalleH
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -706,4 +710,5 @@ Partial Class frmDetalleH
     Friend WithEvents dtphorasalida As DateTimePicker
     Friend WithEvents pReservacion As Panel
     Friend WithEvents PReservacion80 As Printing.PrintDocument
+    Friend WithEvents PRservacion58 As Printing.PrintDocument
 End Class

@@ -273,6 +273,11 @@ Public Class frmDetalleH
                     PReservacion80.Print()
                 End If
 
+                If tamim = "58" Then
+                    PRservacion58.DefaultPageSettings.PrinterSettings.PrinterName = impresora
+                    PRservacion58.Print()
+                End If
+
                 btnLimpiar.PerformClick()
                 Me.Close()
                 frmManejo.Show()
@@ -728,6 +733,130 @@ Public Class frmDetalleH
             Y += 11
             e.Graphics.DrawString("Fecha Salida: ", fuente_r, Brushes.Black, 1, Y)
             e.Graphics.DrawString(Format(dtpSalida.Value, "yyyy-MM-dd") & " " & dtphorasalida.Text, fuente_r, Brushes.Black, 270, Y, derecha)
+            Y += 11
+            e.Graphics.DrawString("----------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
+            Y += 15
+
+            Dim caracteresPorLinea2 As Integer = 27
+            Dim texto2 As String = Pie
+            Dim inicio2 As Integer = 0
+            Dim longitudTexto2 As Integer = texto2.Length
+
+            While inicio2 < longitudTexto2
+                Dim longitudBloque2 As Integer = Math.Min(caracteresPorLinea2, longitudTexto2 - inicio2)
+                Dim bloque2 As String = texto2.Substring(inicio2, longitudBloque2)
+                e.Graphics.DrawString(bloque2, New Font("Arial", 10, FontStyle.Regular), Brushes.Black, 1, Y)
+                Y += 13
+                inicio2 += caracteresPorLinea2
+            End While
+            Y += 7
+
+            e.Graphics.DrawString("Lo atendio: " & lblusuario.Text, fuente_r, Brushes.Black, 1, Y)
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn2.Close()
+        End Try
+    End Sub
+
+    Private Sub PRservacion58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PRservacion58.PrintPage
+        Dim tipografia As String = "Lucida Sans Typewriter"
+        Dim fuente_r As New Font("Lucida Sans Typewriter", 8, FontStyle.Regular)
+        Dim fuente_b As New Font("Lucida Sans Typewriter", 8, FontStyle.Bold)
+        Dim fuente_c As New Font("Lucida Sans Typewriter", 8, FontStyle.Regular)
+        Dim fuente_p As New Font("Lucida Sans Typewriter", 7, FontStyle.Regular)
+        Dim derecha As New StringFormat With {.Alignment = StringAlignment.Far}
+        Dim sc As New StringFormat With {.Alignment = StringAlignment.Center}
+        Dim hoja As New Pen(Brushes.Black, 1)
+        Dim Y As Double = 0
+        Dim Logotipo As Drawing.Image = Nothing
+        Dim Pie As String = ""
+
+        Try
+
+            If tLogo <> "SIN" Then
+                If File.Exists(My.Application.Info.DirectoryPath & "\" & nLogo) Then
+                    Logotipo = Drawing.Image.FromFile(My.Application.Info.DirectoryPath & "\" & nLogo)
+
+                    If tLogo = "CUAD" Then
+                        e.Graphics.DrawImage(Logotipo, 45, 5, 110, 110)
+                        Y += 130
+                    End If
+                    If tLogo = "RECT" Then
+                        e.Graphics.DrawImage(Logotipo, 12, 0, 160, 80)
+                        Y += 120
+                    End If
+                End If
+
+            Else
+                Y = 0
+            End If
+            cnn2.Close() : cnn2.Open()
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText =
+                "select Pie1,Cab0,Cab1,Cab2,Cab3,Cab4,Cab5,Cab6 from Ticket"
+            rd2 = cmd2.ExecuteReader
+            If rd2.HasRows Then
+                If rd2.Read Then
+                    Pie = rd2("Pie1").ToString
+                    'Razón social
+                    If rd2("Cab0").ToString() <> "" Then
+                        e.Graphics.DrawString(rd2("Cab0").ToString, New Drawing.Font(tipografia, 8, FontStyle.Bold), Brushes.Black, 90, Y, sc)
+                        Y += 12.5
+                    End If
+                    'RFC
+                    If rd2("Cab1").ToString() <> "" Then
+                        e.Graphics.DrawString(rd2("Cab1").ToString, New Drawing.Font(tipografia, 8, FontStyle.Bold), Brushes.Black, 90, Y, sc)
+                        Y += 12.5
+                    End If
+                    'Calle  N°.
+                    If rd2("Cab2").ToString() <> "" Then
+                        e.Graphics.DrawString(rd2("Cab2").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 90, Y, sc)
+                        Y += 12
+                    End If
+                    'Colonia
+                    If rd2("Cab3").ToString() <> "" Then
+                        e.Graphics.DrawString(rd2("Cab3").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 90, Y, sc)
+                        Y += 12
+                    End If
+                    'Delegación / Municipio - Entidad
+                    If rd2("Cab4").ToString() <> "" Then
+                        e.Graphics.DrawString(rd2("Cab4").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 90, Y, sc)
+                        Y += 12
+                    End If
+                    'Teléfono
+                    If rd2("Cab5").ToString() <> "" Then
+                        e.Graphics.DrawString(rd2("Cab5").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 90, Y, sc)
+                        Y += 12
+                    End If
+                    'Correo
+                    If rd2("Cab6").ToString() <> "" Then
+                        e.Graphics.DrawString(rd2("Cab6").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 90, Y, sc)
+                        Y += 12
+                    End If
+                    Y += 5
+                End If
+            Else
+                Y += 0
+            End If
+            rd2.Close()
+            cnn2.Close()
+
+            e.Graphics.DrawString("----------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
+            Y += 11
+            e.Graphics.DrawString("R E S E R V A C I Ó N", fuente_b, Brushes.Black, 135, Y, sc)
+            Y += 11
+            e.Graphics.DrawString("----------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
+            Y += 15
+            e.Graphics.DrawString("Habitación: " & lblhabitacion.Text, New Font("Arial", 10, FontStyle.Regular), Brushes.Black, 1, Y)
+
+            e.Graphics.DrawString("Folio: " & IDRESERVACION, fuente_r, Brushes.Black, 180, Y, derecha)
+            Y += 23
+            e.Graphics.DrawString("Fecha Entrada: ", fuente_r, Brushes.Black, 1, Y)
+            e.Graphics.DrawString(Format(dtpEntrada.Value, "yyyy-MM-dd") & " " & dtphoraentrada.Text, fuente_r, Brushes.Black, 180, Y, derecha)
+            Y += 11
+            e.Graphics.DrawString("Fecha Salida: ", fuente_r, Brushes.Black, 1, Y)
+            e.Graphics.DrawString(Format(dtpSalida.Value, "yyyy-MM-dd") & " " & dtphorasalida.Text, fuente_r, Brushes.Black, 180, Y, derecha)
             Y += 11
             e.Graphics.DrawString("----------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
             Y += 15
