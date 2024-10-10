@@ -137,7 +137,7 @@ Partial Class FrmDetReservacion
         Me.cboCLientes.FormattingEnabled = True
         Me.cboCLientes.Location = New System.Drawing.Point(89, 158)
         Me.cboCLientes.Name = "cboCLientes"
-        Me.cboCLientes.Size = New System.Drawing.Size(393, 23)
+        Me.cboCLientes.Size = New System.Drawing.Size(471, 23)
         Me.cboCLientes.TabIndex = 2
         '
         'GroupBox1
@@ -438,9 +438,9 @@ Partial Class FrmDetReservacion
         'Label8
         '
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(488, 157)
+        Me.Label8.Location = New System.Drawing.Point(566, 157)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(80, 23)
+        Me.Label8.Size = New System.Drawing.Size(53, 23)
         Me.Label8.TabIndex = 95
         Me.Label8.Text = "Folio:"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -449,9 +449,9 @@ Partial Class FrmDetReservacion
         '
         Me.cboFolio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboFolio.FormattingEnabled = True
-        Me.cboFolio.Location = New System.Drawing.Point(535, 157)
+        Me.cboFolio.Location = New System.Drawing.Point(625, 157)
         Me.cboFolio.Name = "cboFolio"
-        Me.cboFolio.Size = New System.Drawing.Size(202, 23)
+        Me.cboFolio.Size = New System.Drawing.Size(112, 23)
         Me.cboFolio.TabIndex = 96
         '
         'FrmDetReservacion
