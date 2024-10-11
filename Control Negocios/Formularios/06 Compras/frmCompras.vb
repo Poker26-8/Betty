@@ -2926,8 +2926,20 @@ kaka:
             Dim lote As String = grdcaptura.Rows(miku).Cells(8).Value.ToString
 
             e.Graphics.DrawString(codigo, fuente_prods, Brushes.Black, 1, Y)
-            e.Graphics.DrawString(Mid(nombre, 1, 28), fuente_prods, Brushes.Black, 52, Y)
-            Y += 12.5
+
+            Dim caracteresPorLinea2 As Integer = 35
+            Dim texto2 As String = nombre
+            Dim inicio2 As Integer = 0
+            Dim longitudTexto2 As Integer = texto2.Length
+
+            While inicio2 < longitudTexto2
+                Dim longitudBloque2 As Integer = Math.Min(caracteresPorLinea2, longitudTexto2 - inicio2)
+                Dim bloque2 As String = texto2.Substring(inicio2, longitudBloque2)
+                e.Graphics.DrawString(bloque2, New Font("Arial", 9, FontStyle.Regular), Brushes.Black, 55, Y)
+                Y += 13
+                inicio2 += caracteresPorLinea2
+            End While
+
             e.Graphics.DrawString(canti, fuente_prods, Brushes.Black, 50, Y, sf)
             e.Graphics.DrawString("x", fuente_prods, Brushes.Black, 55, Y)
             e.Graphics.DrawString(simbolo & FormatNumber(precio, 1), fuente_prods, Brushes.Black, 180, Y, sf)

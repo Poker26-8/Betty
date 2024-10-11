@@ -6379,8 +6379,8 @@ Door:
                     rd1.Close()
                 End If
             Next
-            TotalIVAPrint = FormatNumber(TotalIVAPrint, 4)
-            MySubtotal = FormatNumber(MySubtotal, 4)
+            TotalIVAPrint = FormatNumber(TotalIVAPrint, 2)
+            MySubtotal = FormatNumber(MySubtotal, 2)
 
             cnn1.Close()
         Catch ex As Exception
@@ -6388,9 +6388,9 @@ Door:
             cnn1.Close()
         End Try
 
-        IVA_Vent = FormatNumber(CDbl(txtPagar.Text) - CDbl(TotalIVAPrint), 4)
-        SubTotal = FormatNumber(TotalIVAPrint, 4)
-        Total_Ve = FormatNumber(CDbl(txtPagar.Text), 4)
+        IVA_Vent = FormatNumber(CDbl(txtPagar.Text) - CDbl(TotalIVAPrint), 2)
+        SubTotal = FormatNumber(TotalIVAPrint, 2)
+        Total_Ve = FormatNumber(CDbl(txtPagar.Text), 2)
 
         FileNta.SetDatabaseLogon("", "jipl22")
         FileNta.DataDefinition.FormulaFields("Folio").Text = "'" & MYFOLIO & "'"
@@ -6608,9 +6608,9 @@ Door:
             cnn1.Close()
         End Try
 
-        IVA_Vent = FormatNumber(CDbl(txtPagar.Text) - CDbl(TotalIVAPrint), 4)
-        SubTotal = FormatNumber(TotalIVAPrint, 4)
-        Total_Ve = FormatNumber(CDbl(txtPagar.Text), 4)
+        IVA_Vent = FormatNumber(CDbl(txtPagar.Text) - CDbl(TotalIVAPrint), 2)
+        SubTotal = FormatNumber(TotalIVAPrint, 2)
+        Total_Ve = FormatNumber(CDbl(txtPagar.Text), 2)
 
         FileNta.SetDatabaseLogon("", "jipl22")
         FileNta.DataDefinition.FormulaFields("Folio").Text = "'" & MYFOLIO & "'"
@@ -6620,20 +6620,20 @@ Door:
         'Pagos
         If DesglosaIVA = "1" Then
             If SubTotal > 0 Then
-                FileNta.DataDefinition.FormulaFields("Subtotal").Text = "'" & FormatNumber(SubTotal, 4) & "'"       'Subtotal
+                FileNta.DataDefinition.FormulaFields("Subtotal").Text = "'" & FormatNumber(SubTotal, 2) & "'"       'Subtotal
             End If
             If IVA_Vent > 0 Then
                 If IVA_Vent > 0 And IVA_Vent <> CDbl(txtPagar.Text) Then
-                    FileNta.DataDefinition.FormulaFields("IVA").Text = "'" & FormatNumber(IVA_Vent, 4) & "'"   'IVA
+                    FileNta.DataDefinition.FormulaFields("IVA").Text = "'" & FormatNumber(IVA_Vent, 2) & "'"   'IVA
                 End If
             End If
         End If
 
         Dim total_des As Double = Total_Ve + CDbl(txtdescuento2.Text)
 
-        FileNta.DataDefinition.FormulaFields("Total").Text = "'" & FormatNumber(Total_Ve, 4) & "'"             'Total
+        FileNta.DataDefinition.FormulaFields("Total").Text = "'" & FormatNumber(Total_Ve, 2) & "'"             'Total
         If CDbl(txtdescuento2.Text) > 0 Then
-            FileNta.DataDefinition.FormulaFields("TTotal").Text = "'" & FormatNumber(total_des, 4) & "'"             'Total
+            FileNta.DataDefinition.FormulaFields("TTotal").Text = "'" & FormatNumber(total_des, 2) & "'"             'Total
             FileNta.DataDefinition.FormulaFields("Descuento").Text = "'" & FormatNumber(txtdescuento2.Text, 4) & "'"             'Total
         End If
 
@@ -9429,38 +9429,38 @@ safo:
         'Pagos
         If DesglosaIVA = "1" Then
             If SubTotal > 0 Then
-                FileNta.DataDefinition.FormulaFields("subtotal").Text = "'" & FormatNumber(SubTotal, 4) & "'"       'Subtotal
+                FileNta.DataDefinition.FormulaFields("subtotal").Text = "'" & FormatNumber(SubTotal, 2) & "'"       'Subtotal
             End If
             If IVA_Vent > 0 Then
                 If IVA_Vent > 0 And IVA_Vent <> CDbl(txtPagar.Text) Then
-                    FileNta.DataDefinition.FormulaFields("iva_vent").Text = "'" & FormatNumber(IVA_Vent, 4) & "'"   'IVA
+                    FileNta.DataDefinition.FormulaFields("iva_vent").Text = "'" & FormatNumber(IVA_Vent, 2) & "'"   'IVA
                 End If
             End If
         End If
-        FileNta.DataDefinition.FormulaFields("total_vent").Text = "'" & FormatNumber(Total_Ve, 4) & "'"             'Total
+        FileNta.DataDefinition.FormulaFields("total_vent").Text = "'" & FormatNumber(Total_Ve, 2) & "'"             'Total
         If CDbl(txtefectivo.Text) > 0 Then
-            FileNta.DataDefinition.FormulaFields("efectivo_vent").Text = "'" & FormatNumber(txtefectivo.Text, 4) & "'"  'Efectivo
+            FileNta.DataDefinition.FormulaFields("efectivo_vent").Text = "'" & FormatNumber(txtefectivo.Text, 2) & "'"  'Efectivo
         End If
         If CDbl(txtdescuento2.Text) > 0 Then
-            FileNta.DataDefinition.FormulaFields("DescuentoV").Text = "'" & FormatNumber(txtdescuento2.Text, 4) & "'"  'Descuento
+            FileNta.DataDefinition.FormulaFields("DescuentoV").Text = "'" & FormatNumber(txtdescuento2.Text, 2) & "'"  'Descuento
         End If
         If CDbl(txtCambio.Text) > 0 Then
-            FileNta.DataDefinition.FormulaFields("cambio_vent").Text = "'" & FormatNumber(txtCambio.Text, 4) & "'"      'Cambio
+            FileNta.DataDefinition.FormulaFields("cambio_vent").Text = "'" & FormatNumber(txtCambio.Text, 2) & "'"      'Cambio
         End If
         If TotTarjeta > 0 Then
-            FileNta.DataDefinition.FormulaFields("tarjeta_vent").Text = "'" & FormatNumber(TotTarjeta, 4) & "'"         'Tarjeta
+            FileNta.DataDefinition.FormulaFields("tarjeta_vent").Text = "'" & FormatNumber(TotTarjeta, 2) & "'"         'Tarjeta
         End If
         If TotTransfe > 0 Then
-            FileNta.DataDefinition.FormulaFields("transferencia_vent").Text = "'" & FormatNumber(TotTransfe, 4) & "'"   'Transferencia
+            FileNta.DataDefinition.FormulaFields("transferencia_vent").Text = "'" & FormatNumber(TotTransfe, 2) & "'"   'Transferencia
         End If
         If TotMonedero > 0 Then
-            FileNta.DataDefinition.FormulaFields("monedero_vent").Text = "'" & FormatNumber(TotMonedero, 4) & "'"       'Monedero
+            FileNta.DataDefinition.FormulaFields("monedero_vent").Text = "'" & FormatNumber(TotMonedero, 2) & "'"       'Monedero
         End If
         If TotOtros > 0 Then
-            FileNta.DataDefinition.FormulaFields("otros_vent").Text = "'" & FormatNumber(txtCambio.Text, 4) & "'"       'Otros
+            FileNta.DataDefinition.FormulaFields("otros_vent").Text = "'" & FormatNumber(txtCambio.Text, 2) & "'"       'Otros
         End If
         If CDbl(txtResta.Text) > 0 Then
-            FileNta.DataDefinition.FormulaFields("resta_vent").Text = "'" & FormatNumber(txtResta.Text, 4) & "'"        'Resta
+            FileNta.DataDefinition.FormulaFields("resta_vent").Text = "'" & FormatNumber(txtResta.Text, 2) & "'"        'Resta
         End If
 
         If Entrega = True Then

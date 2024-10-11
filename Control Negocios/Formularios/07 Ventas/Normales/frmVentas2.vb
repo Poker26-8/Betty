@@ -1775,9 +1775,9 @@ doorcita:
             cnn1.Close()
         End Try
 
-        IVA_Vent = FormatNumber(CDbl(txtPagar.Text) - CDbl(TotalIVAPrint), 4)
-        SubTotal = FormatNumber(TotalIVAPrint, 4)
-        Total_Ve = FormatNumber(CDbl(txtPagar.Text), 4)
+        IVA_Vent = FormatNumber(CDbl(txtPagar.Text) - CDbl(TotalIVAPrint), 2)
+        SubTotal = FormatNumber(TotalIVAPrint, 2)
+        Total_Ve = FormatNumber(CDbl(txtPagar.Text), 2)
 
         FileNta.SetDatabaseLogon("", "jipl22")
         FileNta.DataDefinition.FormulaFields("Folio").Text = "'" & MYFOLIO & "'"
@@ -1986,9 +1986,9 @@ doorcita:
             cnn1.Close()
         End Try
 
-        IVA_Vent = FormatNumber(CDbl(txtPagar.Text) - CDbl(TotalIVAPrint), 4)
-        SubTotal = FormatNumber(TotalIVAPrint, 4)
-        Total_Ve = FormatNumber(CDbl(txtPagar.Text), 4)
+        IVA_Vent = FormatNumber(CDbl(txtPagar.Text) - CDbl(TotalIVAPrint), 2)
+        SubTotal = FormatNumber(TotalIVAPrint, 2)
+        Total_Ve = FormatNumber(CDbl(txtPagar.Text), 2)
 
         Dim TotTarjeta As Double = 0, TotTransfe As Double = 0, TotMonedero As Double = 0, TotOtros As Double = 0
         If grdpago.Rows.Count > 0 Then
@@ -2021,11 +2021,11 @@ doorcita:
         'Pagos
         If DesglosaIVA = "1" Then
             If SubTotal > 0 Then
-                FileNta.DataDefinition.FormulaFields("subtotal").Text = "'" & FormatNumber(SubTotal, 4) & "'"       'Subtotal
+                FileNta.DataDefinition.FormulaFields("subtotal").Text = "'" & FormatNumber(SubTotal, 2) & "'"       'Subtotal
             End If
             If IVA_Vent > 0 Then
                 If IVA_Vent > 0 And IVA_Vent <> CDbl(txtPagar.Text) Then
-                    FileNta.DataDefinition.FormulaFields("iva_vent").Text = "'" & FormatNumber(IVA_Vent, 4) & "'"   'IVA
+                    FileNta.DataDefinition.FormulaFields("iva_vent").Text = "'" & FormatNumber(IVA_Vent, 2) & "'"   'IVA
                 End If
             End If
         End If
@@ -7068,9 +7068,9 @@ Door:
             cnn1.Close()
         End Try
 
-        IVA_Vent = FormatNumber(CDbl(txtPagar.Text) - CDbl(TotalIVAPrint), 4)
-        SubTotal = FormatNumber(TotalIVAPrint, 4)
-        Total_Ve = FormatNumber(CDbl(txtPagar.Text), 4)
+        IVA_Vent = FormatNumber(CDbl(txtPagar.Text) - CDbl(TotalIVAPrint), 2)
+        SubTotal = FormatNumber(TotalIVAPrint, 2)
+        Total_Ve = FormatNumber(CDbl(txtPagar.Text), 2)
 
         FileNta.SetDatabaseLogon("", "jipl22")
         FileNta.DataDefinition.FormulaFields("Folio").Text = "'" & MYFOLIO & "'"
@@ -7080,21 +7080,21 @@ Door:
         'Pagos
         If DesglosaIVA = "1" Then
             If SubTotal > 0 Then
-                FileNta.DataDefinition.FormulaFields("Subtotal").Text = "'" & FormatNumber(SubTotal, 4) & "'"       'Subtotal
+                FileNta.DataDefinition.FormulaFields("Subtotal").Text = "'" & FormatNumber(SubTotal, 2) & "'"       'Subtotal
             End If
             If IVA_Vent > 0 Then
                 If IVA_Vent > 0 And IVA_Vent <> CDbl(txtPagar.Text) Then
-                    FileNta.DataDefinition.FormulaFields("IVA").Text = "'" & FormatNumber(IVA_Vent, 4) & "'"   'IVA
+                    FileNta.DataDefinition.FormulaFields("IVA").Text = "'" & FormatNumber(IVA_Vent, 2) & "'"   'IVA
                 End If
             End If
         End If
 
         Dim total_des As Double = Total_Ve + CDbl(txtdescuento2.Text)
 
-        FileNta.DataDefinition.FormulaFields("Total").Text = "'" & FormatNumber(Total_Ve, 4) & "'"             'Total
+        FileNta.DataDefinition.FormulaFields("Total").Text = "'" & FormatNumber(Total_Ve, 2) & "'"             'Total
         If CDbl(txtdescuento2.Text) > 0 Then
-            FileNta.DataDefinition.FormulaFields("TTotal").Text = "'" & FormatNumber(total_des, 4) & "'"             'Total
-            FileNta.DataDefinition.FormulaFields("Descuento").Text = "'" & FormatNumber(txtdescuento2.Text, 4) & "'"             'Total
+            FileNta.DataDefinition.FormulaFields("TTotal").Text = "'" & FormatNumber(total_des, 2) & "'"             'Total
+            FileNta.DataDefinition.FormulaFields("Descuento").Text = "'" & FormatNumber(txtdescuento2.Text, 2) & "'"             'Total
         End If
 
 

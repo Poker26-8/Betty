@@ -1959,6 +1959,7 @@ Public Class Inicio
     End Sub
 
     Private Sub CapturaPorModeloToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CapturaPorModeloToolStripMenuItem.Click
-
+        frmComprasModelos.BringToFront()
+        frmComprasModelos.Show()
     End Sub
 End Class

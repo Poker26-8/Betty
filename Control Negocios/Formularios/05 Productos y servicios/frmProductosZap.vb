@@ -423,7 +423,7 @@
     Private Sub txtexistencia_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtexistencia.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             If Not IsNumeric(txtexistencia.Text) Then txtexistencia.Text = "" : Exit Sub
-            cbotalla.Focus().Equals(True)
+            cboUnidad.Focus().Equals(True)
         End If
     End Sub
 
@@ -437,7 +437,7 @@
 
     Private Sub UpGrid()
         Try
-            grdcaptura.Rows.Add(txtcodigo.Text, txtbarras.Text, txtnombre.Text, cboarticulo.Text, cbomarca.Text, cbomodelo.Text, cbocolor.Text, cboproveedor.Text, cbodepto.Text, cboubica.Text, cbogenero.Text, cboubica.Text, cboiva.Text, txtpcompra.Text, txtporcentaje.Text, txtpventa.Text, txtexistencia.Text, cbotalla.Text, txtclavesat.Text, txtunidadsat.Text)
+            grdcaptura.Rows.Add(txtcodigo.Text, txtbarras.Text, txtnombre.Text, cboarticulo.Text, cbomarca.Text, cbomodelo.Text, cbocolor.Text, cboproveedor.Text, cbodepto.Text, cboUnidad.Text, cboubica.Text, cbogenero.Text, cbouso.Text, cboiva.Text, txtpcompra.Text, txtporcentaje.Text, txtpventa.Text, txtexistencia.Text, cbotalla.Text, txtclavesat.Text, txtunidadsat.Text)
 
             Dim codigo As Double = txtcodigo.Text
 
@@ -455,11 +455,11 @@
                 txtcodigo.Text = (codigo + 1)
             End If
             txtbarras.Text = ""
-            cboiva.Text = ""
+            cboiva.Text = "0"
             txtpcompra.Text = "0.00"
             txtporcentaje.Text = "0"
             txtpventa.Text = "0.00"
-            txtexistencia.Text = ""
+            txtexistencia.Text = "1"
             cbotalla.Text = ""
             txtclavesat.Text = ""
             txtunidadsat.Text = ""
@@ -488,16 +488,16 @@
                         Dim codigo As String = grdcaptura.Rows(luffy).Cells(0).Value.ToString
                         Dim barras As String = grdcaptura.Rows(luffy).Cells(1).Value.ToString
                         Dim descripcion As String = grdcaptura.Rows(luffy).Cells(2).Value.ToString
-                        'Dim articulo As String = grdcaptura.Rows(luffy).Cells(3).Value.ToString
-                        '  Dim marca As String = grdcaptura.Rows(luffy).Cells(4).Value.ToString
+                        Dim articulo As String = grdcaptura.Rows(luffy).Cells(3).Value.ToString
+                        Dim marca As String = grdcaptura.Rows(luffy).Cells(4).Value.ToString
                         Dim modelo As String = grdcaptura.Rows(luffy).Cells(5).Value.ToString
-                        ' Dim color As String = grdcaptura.Rows(luffy).Cells(6).Value.ToString
+                        Dim color As String = grdcaptura.Rows(luffy).Cells(6).Value.ToString
                         Dim proveedor As String = grdcaptura.Rows(luffy).Cells(7).Value.ToString
                         Dim departamento As String = grdcaptura.Rows(luffy).Cells(8).Value.ToString
                         Dim umedida As String = grdcaptura.Rows(luffy).Cells(9).Value.ToString
                         Dim ubicacion As String = grdcaptura.Rows(luffy).Cells(10).Value.ToString
-                        '  Dim genero As String = grdcaptura.Rows(luffy).Cells(11).Value.ToString
-                        ' Dim uso As String = grdcaptura.Rows(luffy).Cells(12).Value.ToString
+                        Dim genero As String = grdcaptura.Rows(luffy).Cells(11).Value.ToString
+                        Dim uso As String = grdcaptura.Rows(luffy).Cells(12).Value.ToString
                         Dim iva As Double = grdcaptura.Rows(luffy).Cells(13).Value.ToString
                         Dim precompra As Double = grdcaptura.Rows(luffy).Cells(14).Value.ToString
                         Dim utilidad As Double = grdcaptura.Rows(luffy).Cells(15).Value.ToString
@@ -518,7 +518,7 @@
                         Else
 
                             cmd2 = cnn2.CreateCommand
-                            cmd2.CommandText = "INSERT INTO productos(Codigo,CodBarra,Nombre,NombreLargo,ProvPri,ProvEme,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Ubicacion,Min,Max,PrecioCompra,PrecioVenta,PrecioVentaIVA,IVA,Existencia,Porcentaje,ClaveSat,UnidadSat) VALUES('" & codigo & "','" & barras & "','" & descripcion & "','" & descripcion & "','" & proveedor & "','" & talla & "','" & umedida & "','" & umedida & "','" & umedida & "',1,1,'" & departamento & "','" & modelo & "','" & ubicacion & "',1,1," & precompra & "," & preventa & "," & preventa & "," & iva & "," & existencia & "," & utilidad & ",'" & clavesat & "','" & unidadsat & "')"
+                            cmd2.CommandText = "INSERT INTO productos(Codigo,CodBarra,Nombre,NombreLargo,ProvPri,ProvEme,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Ubicacion,Min,Max,PrecioCompra,Almacen3,PrecioVenta,PrecioVentaIVA,IVA,Existencia,Porcentaje,ClaveSat,UnidadSat,Fecha,Articulo,Marca,Color,Genero,Uso,Fecha_Inicial,Fecha_Final,id_tbMoneda) VALUES('" & codigo & "','" & barras & "','" & descripcion & "','" & descripcion & "','" & proveedor & "','" & talla & "','" & umedida & "','" & umedida & "','" & umedida & "',1,1,'" & departamento & "','" & modelo & "','" & ubicacion & "',1,1," & precompra & "," & precompra & "," & preventa & "," & preventa & "," & iva & "," & existencia & "," & utilidad & ",'" & clavesat & "','" & unidadsat & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & articulo & "','" & marca & "','" & color & "','" & genero & "','" & uso & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd") & "',1)"
                             cmd2.ExecuteNonQuery()
 
                         End If
@@ -531,7 +531,7 @@
                 cnn2.Close()
             End If
 
-
+            btnNuevo.PerformClick()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn1.Close()
@@ -568,5 +568,16 @@
         cbotalla.Text = ""
         CheckBox1.Checked = False
         txtregistros.Text = "0"
+
+        grdcaptura.Rows.Clear()
+        cboUnidad.Text = ""
+        cboarticulo.Focused.Equals(True)
+    End Sub
+
+    Private Sub cboUnidad_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboUnidad.KeyPress
+        e.KeyChar = UCase(e.KeyChar)
+        If AscW(e.KeyChar) = Keys.Enter Then
+            cbotalla.Focus().Equals(True)
+        End If
     End Sub
 End Class

@@ -168,14 +168,14 @@ Partial Class frmCompras
         Me.txtpc_tarjeta = New System.Windows.Forms.TextBox()
         Me.Label41 = New System.Windows.Forms.Label()
         Me.txtpc_efectivo = New System.Windows.Forms.TextBox()
+        Me.btnprod = New System.Windows.Forms.Button()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.btnPagar = New System.Windows.Forms.Button()
         Me.btnimportarxml = New System.Windows.Forms.Button()
         Me.btnimportarxls = New System.Windows.Forms.Button()
         Me.btncopia = New System.Windows.Forms.Button()
         Me.btnguardar = New System.Windows.Forms.Button()
         Me.btnnuevo = New System.Windows.Forms.Button()
-        Me.btnprod = New System.Windows.Forms.Button()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         CType(Me.grdcaptura, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -186,6 +186,7 @@ Partial Class frmCompras
         Me.Panel1.SuspendLayout()
         Me.panpago_compra.SuspendLayout()
         Me.boxPago.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -218,7 +219,7 @@ Partial Class frmCompras
         Me.grdcaptura.ReadOnly = True
         Me.grdcaptura.RowHeadersVisible = False
         Me.grdcaptura.RowTemplate.Height = 26
-        Me.grdcaptura.Size = New System.Drawing.Size(836, 310)
+        Me.grdcaptura.Size = New System.Drawing.Size(836, 448)
         Me.grdcaptura.TabIndex = 5
         '
         'Column1
@@ -791,7 +792,7 @@ Partial Class frmCompras
         Me.GroupBox2.Controls.Add(Me.Label25)
         Me.GroupBox2.Controls.Add(Me.txtapagar)
         Me.GroupBox2.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(4, 495)
+        Me.GroupBox2.Location = New System.Drawing.Point(6, 5)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(905, 98)
         Me.GroupBox2.TabIndex = 141
@@ -1280,7 +1281,7 @@ Partial Class frmCompras
         '
         'barraExcel
         '
-        Me.barraExcel.Location = New System.Drawing.Point(7, 470)
+        Me.barraExcel.Location = New System.Drawing.Point(7, 608)
         Me.barraExcel.Name = "barraExcel"
         Me.barraExcel.Size = New System.Drawing.Size(836, 19)
         Me.barraExcel.TabIndex = 181
@@ -1628,6 +1629,28 @@ Partial Class frmCompras
         Me.txtpc_efectivo.Text = "0.00"
         Me.txtpc_efectivo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'btnprod
+        '
+        Me.btnprod.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnprod.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.btnprod.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnprod.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnprod.Location = New System.Drawing.Point(812, 93)
+        Me.btnprod.Name = "btnprod"
+        Me.btnprod.Size = New System.Drawing.Size(99, 36)
+        Me.btnprod.TabIndex = 230
+        Me.btnprod.Text = "Productos"
+        Me.btnprod.UseVisualStyleBackColor = False
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.GroupBox2)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel2.Location = New System.Drawing.Point(0, 633)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(917, 111)
+        Me.Panel2.TabIndex = 88
+        '
         'btnPagar
         '
         Me.btnPagar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
@@ -1721,33 +1744,11 @@ Partial Class frmCompras
         Me.btnnuevo.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnnuevo.UseVisualStyleBackColor = True
         '
-        'btnprod
-        '
-        Me.btnprod.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnprod.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.btnprod.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnprod.Font = New System.Drawing.Font("Segoe UI Semibold", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnprod.Location = New System.Drawing.Point(812, 93)
-        Me.btnprod.Name = "btnprod"
-        Me.btnprod.Size = New System.Drawing.Size(99, 36)
-        Me.btnprod.TabIndex = 230
-        Me.btnprod.Text = "Productos"
-        Me.btnprod.UseVisualStyleBackColor = False
-        '
-        'Panel2
-        '
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel2.Location = New System.Drawing.Point(0, 496)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(917, 111)
-        Me.Panel2.TabIndex = 88
-        '
         'frmCompras
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(917, 607)
-        Me.Controls.Add(Me.GroupBox2)
+        Me.ClientSize = New System.Drawing.Size(917, 744)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.btnprod)
         Me.Controls.Add(Me.panpago_compra)
@@ -1813,6 +1814,7 @@ Partial Class frmCompras
         Me.panpago_compra.PerformLayout()
         Me.boxPago.ResumeLayout(False)
         Me.boxPago.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

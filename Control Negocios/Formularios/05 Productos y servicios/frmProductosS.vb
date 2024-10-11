@@ -532,6 +532,7 @@ Public Class frmProductosS
             rd1.Close() : cnn1.Close()
 
             Dim imagen As New OpenFileDialog
+            picImagen.Image = Nothing
             If (picImagen.Image Is Nothing) Then
             Else
                 picImagen.Image.Dispose()
