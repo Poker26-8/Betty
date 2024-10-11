@@ -23,6 +23,7 @@ Partial Class frmProductosZap
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmProductosZap))
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -30,7 +31,6 @@ Partial Class frmProductosZap
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmProductosZap))
         Me.Label52 = New System.Windows.Forms.Label()
         Me.txtexistencia = New System.Windows.Forms.TextBox()
         Me.Label50 = New System.Windows.Forms.Label()
@@ -68,26 +68,6 @@ Partial Class frmProductosZap
         Me.txtnombre = New System.Windows.Forms.TextBox()
         Me.Label35 = New System.Windows.Forms.Label()
         Me.grdcaptura = New System.Windows.Forms.DataGridView()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column18 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column19 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column20 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.txtcodigo = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -99,6 +79,27 @@ Partial Class frmProductosZap
         Me.Label3 = New System.Windows.Forms.Label()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column21 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column18 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column19 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column20 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.grdcaptura, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -499,7 +500,7 @@ Partial Class frmProductosZap
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grdcaptura.BackgroundColor = System.Drawing.Color.White
         Me.grdcaptura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdcaptura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10, Me.Column11, Me.Column12, Me.Column13, Me.Column14, Me.Column15, Me.Column16, Me.Column17, Me.Column18, Me.Column19, Me.Column20})
+        Me.grdcaptura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column21, Me.Column10, Me.Column11, Me.Column12, Me.Column13, Me.Column14, Me.Column15, Me.Column16, Me.Column17, Me.Column18, Me.Column19, Me.Column20})
         Me.grdcaptura.GridColor = System.Drawing.Color.White
         Me.grdcaptura.Location = New System.Drawing.Point(8, 266)
         Me.grdcaptura.Name = "grdcaptura"
@@ -508,147 +509,6 @@ Partial Class frmProductosZap
         Me.grdcaptura.RowTemplate.Height = 26
         Me.grdcaptura.Size = New System.Drawing.Size(655, 214)
         Me.grdcaptura.TabIndex = 81
-        '
-        'Column1
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Column1.HeaderText = "Codigo"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        Me.Column1.Width = 70
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "Código barras"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        Me.Column2.Width = 120
-        '
-        'Column3
-        '
-        Me.Column3.HeaderText = "Descripción"
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        Me.Column3.Width = 300
-        '
-        'Column4
-        '
-        Me.Column4.HeaderText = "Articulo"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        Me.Column4.Visible = False
-        '
-        'Column5
-        '
-        Me.Column5.HeaderText = "Marca"
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
-        Me.Column5.Visible = False
-        '
-        'Column6
-        '
-        Me.Column6.HeaderText = "Modelo"
-        Me.Column6.Name = "Column6"
-        Me.Column6.ReadOnly = True
-        Me.Column6.Visible = False
-        '
-        'Column7
-        '
-        Me.Column7.HeaderText = "Color"
-        Me.Column7.Name = "Column7"
-        Me.Column7.ReadOnly = True
-        Me.Column7.Visible = False
-        '
-        'Column8
-        '
-        Me.Column8.HeaderText = "Proveedor"
-        Me.Column8.Name = "Column8"
-        Me.Column8.ReadOnly = True
-        '
-        'Column9
-        '
-        Me.Column9.HeaderText = "Departamento"
-        Me.Column9.Name = "Column9"
-        Me.Column9.ReadOnly = True
-        '
-        'Column10
-        '
-        Me.Column10.HeaderText = "Ubicacion"
-        Me.Column10.Name = "Column10"
-        Me.Column10.ReadOnly = True
-        '
-        'Column11
-        '
-        Me.Column11.HeaderText = "Género"
-        Me.Column11.Name = "Column11"
-        Me.Column11.ReadOnly = True
-        '
-        'Column12
-        '
-        Me.Column12.HeaderText = "Uso"
-        Me.Column12.Name = "Column12"
-        Me.Column12.ReadOnly = True
-        '
-        'Column13
-        '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Column13.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Column13.HeaderText = "IVA"
-        Me.Column13.Name = "Column13"
-        Me.Column13.ReadOnly = True
-        '
-        'Column14
-        '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column14.DefaultCellStyle = DataGridViewCellStyle4
-        Me.Column14.HeaderText = "Precio compra"
-        Me.Column14.Name = "Column14"
-        Me.Column14.ReadOnly = True
-        '
-        'Column15
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column15.DefaultCellStyle = DataGridViewCellStyle5
-        Me.Column15.HeaderText = "Utilidad"
-        Me.Column15.Name = "Column15"
-        Me.Column15.ReadOnly = True
-        '
-        'Column16
-        '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column16.DefaultCellStyle = DataGridViewCellStyle6
-        Me.Column16.HeaderText = "Precio venta"
-        Me.Column16.Name = "Column16"
-        Me.Column16.ReadOnly = True
-        '
-        'Column17
-        '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column17.DefaultCellStyle = DataGridViewCellStyle7
-        Me.Column17.HeaderText = "Existencia"
-        Me.Column17.Name = "Column17"
-        Me.Column17.ReadOnly = True
-        '
-        'Column18
-        '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Column18.DefaultCellStyle = DataGridViewCellStyle8
-        Me.Column18.HeaderText = "Talla"
-        Me.Column18.Name = "Column18"
-        Me.Column18.ReadOnly = True
-        '
-        'Column19
-        '
-        Me.Column19.HeaderText = "Clave SAT"
-        Me.Column19.Name = "Column19"
-        Me.Column19.ReadOnly = True
-        '
-        'Column20
-        '
-        Me.Column20.HeaderText = "Unidad SAT"
-        Me.Column20.Name = "Column20"
-        Me.Column20.ReadOnly = True
         '
         'Label14
         '
@@ -782,6 +642,153 @@ Partial Class frmProductosZap
         Me.Button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'Column1
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Column1.HeaderText = "Codigo"
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        Me.Column1.Width = 70
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "Código barras"
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        Me.Column2.Width = 120
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "Descripción"
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
+        Me.Column3.Width = 300
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "Articulo"
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        Me.Column4.Visible = False
+        '
+        'Column5
+        '
+        Me.Column5.HeaderText = "Marca"
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
+        Me.Column5.Visible = False
+        '
+        'Column6
+        '
+        Me.Column6.HeaderText = "Modelo"
+        Me.Column6.Name = "Column6"
+        Me.Column6.ReadOnly = True
+        Me.Column6.Visible = False
+        '
+        'Column7
+        '
+        Me.Column7.HeaderText = "Color"
+        Me.Column7.Name = "Column7"
+        Me.Column7.ReadOnly = True
+        Me.Column7.Visible = False
+        '
+        'Column8
+        '
+        Me.Column8.HeaderText = "Proveedor"
+        Me.Column8.Name = "Column8"
+        Me.Column8.ReadOnly = True
+        '
+        'Column9
+        '
+        Me.Column9.HeaderText = "Departamento"
+        Me.Column9.Name = "Column9"
+        Me.Column9.ReadOnly = True
+        '
+        'Column21
+        '
+        Me.Column21.HeaderText = "UMedida"
+        Me.Column21.Name = "Column21"
+        Me.Column21.ReadOnly = True
+        '
+        'Column10
+        '
+        Me.Column10.HeaderText = "Ubicacion"
+        Me.Column10.Name = "Column10"
+        Me.Column10.ReadOnly = True
+        '
+        'Column11
+        '
+        Me.Column11.HeaderText = "Género"
+        Me.Column11.Name = "Column11"
+        Me.Column11.ReadOnly = True
+        '
+        'Column12
+        '
+        Me.Column12.HeaderText = "Uso"
+        Me.Column12.Name = "Column12"
+        Me.Column12.ReadOnly = True
+        '
+        'Column13
+        '
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Column13.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Column13.HeaderText = "IVA"
+        Me.Column13.Name = "Column13"
+        Me.Column13.ReadOnly = True
+        '
+        'Column14
+        '
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column14.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Column14.HeaderText = "Precio compra"
+        Me.Column14.Name = "Column14"
+        Me.Column14.ReadOnly = True
+        '
+        'Column15
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column15.DefaultCellStyle = DataGridViewCellStyle5
+        Me.Column15.HeaderText = "Utilidad"
+        Me.Column15.Name = "Column15"
+        Me.Column15.ReadOnly = True
+        '
+        'Column16
+        '
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column16.DefaultCellStyle = DataGridViewCellStyle6
+        Me.Column16.HeaderText = "Precio venta"
+        Me.Column16.Name = "Column16"
+        Me.Column16.ReadOnly = True
+        '
+        'Column17
+        '
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column17.DefaultCellStyle = DataGridViewCellStyle7
+        Me.Column17.HeaderText = "Existencia"
+        Me.Column17.Name = "Column17"
+        Me.Column17.ReadOnly = True
+        '
+        'Column18
+        '
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Column18.DefaultCellStyle = DataGridViewCellStyle8
+        Me.Column18.HeaderText = "Talla"
+        Me.Column18.Name = "Column18"
+        Me.Column18.ReadOnly = True
+        '
+        'Column19
+        '
+        Me.Column19.HeaderText = "Clave SAT"
+        Me.Column19.Name = "Column19"
+        Me.Column19.ReadOnly = True
+        '
+        'Column20
+        '
+        Me.Column20.HeaderText = "Unidad SAT"
+        Me.Column20.Name = "Column20"
+        Me.Column20.ReadOnly = True
+        '
         'frmProductosZap
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -894,26 +901,27 @@ Partial Class frmProductosZap
     Friend WithEvents btnNuevo As System.Windows.Forms.Button
     Friend WithEvents txtregistros As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column7 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column8 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column9 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column10 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column11 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column12 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column13 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column14 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column15 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column16 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column17 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column18 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column19 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column20 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
     Friend WithEvents Button1 As Button
+    Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents Column7 As DataGridViewTextBoxColumn
+    Friend WithEvents Column8 As DataGridViewTextBoxColumn
+    Friend WithEvents Column9 As DataGridViewTextBoxColumn
+    Friend WithEvents Column21 As DataGridViewTextBoxColumn
+    Friend WithEvents Column10 As DataGridViewTextBoxColumn
+    Friend WithEvents Column11 As DataGridViewTextBoxColumn
+    Friend WithEvents Column12 As DataGridViewTextBoxColumn
+    Friend WithEvents Column13 As DataGridViewTextBoxColumn
+    Friend WithEvents Column14 As DataGridViewTextBoxColumn
+    Friend WithEvents Column15 As DataGridViewTextBoxColumn
+    Friend WithEvents Column16 As DataGridViewTextBoxColumn
+    Friend WithEvents Column17 As DataGridViewTextBoxColumn
+    Friend WithEvents Column18 As DataGridViewTextBoxColumn
+    Friend WithEvents Column19 As DataGridViewTextBoxColumn
+    Friend WithEvents Column20 As DataGridViewTextBoxColumn
 End Class

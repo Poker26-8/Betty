@@ -473,7 +473,69 @@
     End Sub
 
     Private Sub btnGuardar_Click(sender As System.Object, e As System.EventArgs) Handles btnGuardar.Click
+        Try
+            If txtnombre.Text = "" Then MsgBox("Ingrese la descripción del producto") : txtnombre.Focus.Equals(True) : Exit Sub
 
+
+            If MsgBox("¿Desea guardar los productos?", vbInformation + vbYesNo) = vbYes Then
+
+                If grdcaptura.Rows.Count > 0 Then
+                    cnn1.Close() : cnn1.Open()
+                    cnn2.Close() : cnn2.Open()
+
+                    For luffy As Integer = 0 To grdcaptura.Rows.Count - 1
+
+                        Dim codigo As String = grdcaptura.Rows(luffy).Cells(0).Value.ToString
+                        Dim barras As String = grdcaptura.Rows(luffy).Cells(1).Value.ToString
+                        Dim descripcion As String = grdcaptura.Rows(luffy).Cells(2).Value.ToString
+                        'Dim articulo As String = grdcaptura.Rows(luffy).Cells(3).Value.ToString
+                        '  Dim marca As String = grdcaptura.Rows(luffy).Cells(4).Value.ToString
+                        Dim modelo As String = grdcaptura.Rows(luffy).Cells(5).Value.ToString
+                        ' Dim color As String = grdcaptura.Rows(luffy).Cells(6).Value.ToString
+                        Dim proveedor As String = grdcaptura.Rows(luffy).Cells(7).Value.ToString
+                        Dim departamento As String = grdcaptura.Rows(luffy).Cells(8).Value.ToString
+                        Dim umedida As String = grdcaptura.Rows(luffy).Cells(9).Value.ToString
+                        Dim ubicacion As String = grdcaptura.Rows(luffy).Cells(10).Value.ToString
+                        '  Dim genero As String = grdcaptura.Rows(luffy).Cells(11).Value.ToString
+                        ' Dim uso As String = grdcaptura.Rows(luffy).Cells(12).Value.ToString
+                        Dim iva As Double = grdcaptura.Rows(luffy).Cells(13).Value.ToString
+                        Dim precompra As Double = grdcaptura.Rows(luffy).Cells(14).Value.ToString
+                        Dim utilidad As Double = grdcaptura.Rows(luffy).Cells(15).Value.ToString
+                        Dim preventa As Double = grdcaptura.Rows(luffy).Cells(16).Value.ToString
+                        Dim existencia As Double = grdcaptura.Rows(luffy).Cells(17).Value.ToString
+                        Dim talla As String = grdcaptura.Rows(luffy).Cells(18).Value.ToString
+                        Dim clavesat As String = grdcaptura.Rows(luffy).Cells(19).Value.ToString
+                        Dim unidadsat As String = grdcaptura.Rows(luffy).Cells(20).Value.ToString
+
+
+                        cmd1 = cnn1.CreateCommand
+                        cmd1.CommandText = "SELECT Codigo FROM productos WHERE Codigo='" & codigo & "'"
+                        rd1 = cmd1.ExecuteReader
+                        If rd1.HasRows Then
+                            If rd1.Read Then
+
+                            End If
+                        Else
+
+                            cmd2 = cnn2.CreateCommand
+                            cmd2.CommandText = "INSERT INTO productos(Codigo,CodBarra,Nombre,NombreLargo,ProvPri,ProvEme,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Ubicacion,Min,Max,PrecioCompra,PrecioVenta,PrecioVentaIVA,IVA,Existencia,Porcentaje,ClaveSat,UnidadSat) VALUES('" & codigo & "','" & barras & "','" & descripcion & "','" & descripcion & "','" & proveedor & "','" & talla & "','" & umedida & "','" & umedida & "','" & umedida & "',1,1,'" & departamento & "','" & modelo & "','" & ubicacion & "',1,1," & precompra & "," & preventa & "," & preventa & "," & iva & "," & existencia & "," & utilidad & ",'" & clavesat & "','" & unidadsat & "')"
+                            cmd2.ExecuteNonQuery()
+
+                        End If
+                        rd1.Close()
+
+                    Next
+                    MsgBox("Productos agregados correctamente", vbInformation + vbOKOnly, titulocentral)
+                End If
+                cnn1.Close()
+                cnn2.Close()
+            End If
+
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
     End Sub
 
     Private Sub cboarticulo_LostFocus(sender As Object, e As System.EventArgs) Handles cboarticulo.LostFocus
@@ -482,5 +544,29 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Me.Close()
+    End Sub
+
+    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
+        txtnombre.Text = ""
+        txtbarras.Text = ""
+        cboarticulo.Text = ""
+        cbomarca.Text = ""
+        cbomodelo.Text = ""
+        cbocolor.Text = ""
+        cboproveedor.Text = ""
+        cbodepto.Text = ""
+        cboubica.Text = ""
+        cbogenero.Text = ""
+        cbouso.Text = ""
+        cboiva.Text = "0"
+        txtpcompra.Text = "0.00"
+        txtporcentaje.Text = "0.00"
+        txtpventa.Text = "0.00"
+        txtclavesat.Text = ""
+        txtunidadsat.Text = ""
+        txtexistencia.Text = "0"
+        cbotalla.Text = ""
+        CheckBox1.Checked = False
+        txtregistros.Text = "0"
     End Sub
 End Class
