@@ -494,6 +494,8 @@ Public Class Inicio
     Private Sub Button5_Click(sender As System.Object, e As System.EventArgs) Handles Button5.Click
         frmVentasTouch.Show()
         frmVentasTouch.BringToFront()
+
+        frmNuevo.Show()
     End Sub
 
     Private Sub Button7_Click(sender As System.Object, e As System.EventArgs) Handles Button7.Click
@@ -1954,5 +1956,9 @@ Public Class Inicio
     Private Sub btnPediatra_Click(sender As Object, e As EventArgs) Handles btnPediatra.Click
         frmPediatria.BringToFront()
         frmPediatria.Show()
+    End Sub
+
+    Private Sub CapturaPorModeloToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CapturaPorModeloToolStripMenuItem.Click
+
     End Sub
 End Class

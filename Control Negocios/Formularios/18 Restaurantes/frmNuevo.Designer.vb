@@ -25,42 +25,39 @@ Partial Class frmNuevo
         Me.pmesas = New System.Windows.Forms.Panel()
         Me.psuperior = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.txtconvertir = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtticket = New System.Windows.Forms.TextBox()
+        Me.txtalazar = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtpeso = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtfijo = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.txtbarras = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtnumfijo = New System.Windows.Forms.TextBox()
+        Me.txtInicial = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Colum = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnPdf = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.txtInicial = New System.Windows.Forms.TextBox()
-        Me.txtnumfijo = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtbarras = New System.Windows.Forms.TextBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtfijo = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.txtpeso = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.txtalazar = New System.Windows.Forms.TextBox()
-        Me.txtticket = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        Me.txtconvertir = New System.Windows.Forms.TextBox()
-        Me.Column112 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1xc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pDeptos = New System.Windows.Forms.Panel()
         Me.pmesas.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pmesas
         '
-        Me.pmesas.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.pmesas.Controls.Add(Me.DataGridView2)
+        Me.pmesas.BackColor = System.Drawing.Color.White
+        Me.pmesas.Controls.Add(Me.pDeptos)
         Me.pmesas.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pmesas.Location = New System.Drawing.Point(0, 100)
         Me.pmesas.Name = "pmesas"
@@ -102,6 +99,165 @@ Partial Class frmNuevo
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(483, 540)
         Me.Panel1.TabIndex = 1
+        '
+        'txtconvertir
+        '
+        Me.txtconvertir.Location = New System.Drawing.Point(6, 439)
+        Me.txtconvertir.Name = "txtconvertir"
+        Me.txtconvertir.Size = New System.Drawing.Size(465, 20)
+        Me.txtconvertir.TabIndex = 22
+        Me.txtconvertir.Text = "55200010200295520001060030572000038005501"
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(376, 355)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(95, 55)
+        Me.Button1.TabIndex = 21
+        Me.Button1.Text = "Generar"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(6, 394)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(61, 16)
+        Me.Label8.TabIndex = 20
+        Me.Label8.Text = "N° Ticket"
+        '
+        'txtticket
+        '
+        Me.txtticket.Location = New System.Drawing.Point(6, 413)
+        Me.txtticket.Name = "txtticket"
+        Me.txtticket.Size = New System.Drawing.Size(465, 20)
+        Me.txtticket.TabIndex = 19
+        '
+        'txtalazar
+        '
+        Me.txtalazar.Location = New System.Drawing.Point(112, 369)
+        Me.txtalazar.Name = "txtalazar"
+        Me.txtalazar.Size = New System.Drawing.Size(59, 20)
+        Me.txtalazar.TabIndex = 18
+        Me.txtalazar.Text = "0"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(37, 369)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(72, 16)
+        Me.Label7.TabIndex = 17
+        Me.Label7.Text = "Numalazar"
+        '
+        'txtpeso
+        '
+        Me.txtpeso.Location = New System.Drawing.Point(112, 336)
+        Me.txtpeso.Name = "txtpeso"
+        Me.txtpeso.Size = New System.Drawing.Size(59, 20)
+        Me.txtpeso.TabIndex = 16
+        Me.txtpeso.Text = "0"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(37, 336)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(39, 16)
+        Me.Label6.TabIndex = 15
+        Me.Label6.Text = "Peso"
+        '
+        'txtfijo
+        '
+        Me.txtfijo.Location = New System.Drawing.Point(112, 306)
+        Me.txtfijo.Name = "txtfijo"
+        Me.txtfijo.Size = New System.Drawing.Size(59, 20)
+        Me.txtfijo.TabIndex = 14
+        Me.txtfijo.Text = "0"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(37, 306)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(54, 16)
+        Me.Label5.TabIndex = 13
+        Me.Label5.Text = "numFijo"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(37, 163)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(51, 16)
+        Me.Label4.TabIndex = 12
+        Me.Label4.Text = "Código"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(112, 162)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(100, 21)
+        Me.ComboBox1.TabIndex = 11
+        '
+        'txtbarras
+        '
+        Me.txtbarras.Location = New System.Drawing.Point(112, 273)
+        Me.txtbarras.Name = "txtbarras"
+        Me.txtbarras.Size = New System.Drawing.Size(169, 20)
+        Me.txtbarras.TabIndex = 10
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(37, 273)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(65, 16)
+        Me.Label3.TabIndex = 9
+        Me.Label3.Text = "CodBarra"
+        '
+        'txtnumfijo
+        '
+        Me.txtnumfijo.Location = New System.Drawing.Point(112, 239)
+        Me.txtnumfijo.Name = "txtnumfijo"
+        Me.txtnumfijo.Size = New System.Drawing.Size(59, 20)
+        Me.txtnumfijo.TabIndex = 8
+        Me.txtnumfijo.Text = "2000"
+        '
+        'txtInicial
+        '
+        Me.txtInicial.Location = New System.Drawing.Point(112, 211)
+        Me.txtInicial.Name = "txtInicial"
+        Me.txtInicial.Size = New System.Drawing.Size(59, 20)
+        Me.txtInicial.TabIndex = 7
+        Me.txtInicial.Text = "55"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(37, 239)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(54, 16)
+        Me.Label2.TabIndex = 6
+        Me.Label2.Text = "numFijo"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(37, 212)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(69, 16)
+        Me.Label1.TabIndex = 5
+        Me.Label1.Text = "NumInicial"
         '
         'DataGridView1
         '
@@ -147,188 +303,14 @@ Partial Class frmNuevo
         Me.btnPdf.Text = "TXT"
         Me.btnPdf.UseVisualStyleBackColor = True
         '
-        'Label1
+        'pDeptos
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(37, 212)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(69, 16)
-        Me.Label1.TabIndex = 5
-        Me.Label1.Text = "NumInicial"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(37, 239)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(54, 16)
-        Me.Label2.TabIndex = 6
-        Me.Label2.Text = "numFijo"
-        '
-        'txtInicial
-        '
-        Me.txtInicial.Location = New System.Drawing.Point(112, 211)
-        Me.txtInicial.Name = "txtInicial"
-        Me.txtInicial.Size = New System.Drawing.Size(59, 20)
-        Me.txtInicial.TabIndex = 7
-        Me.txtInicial.Text = "55"
-        '
-        'txtnumfijo
-        '
-        Me.txtnumfijo.Location = New System.Drawing.Point(112, 239)
-        Me.txtnumfijo.Name = "txtnumfijo"
-        Me.txtnumfijo.Size = New System.Drawing.Size(59, 20)
-        Me.txtnumfijo.TabIndex = 8
-        Me.txtnumfijo.Text = "2000"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(37, 273)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(65, 16)
-        Me.Label3.TabIndex = 9
-        Me.Label3.Text = "CodBarra"
-        '
-        'txtbarras
-        '
-        Me.txtbarras.Location = New System.Drawing.Point(112, 273)
-        Me.txtbarras.Name = "txtbarras"
-        Me.txtbarras.Size = New System.Drawing.Size(169, 20)
-        Me.txtbarras.TabIndex = 10
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(112, 162)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(100, 21)
-        Me.ComboBox1.TabIndex = 11
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(37, 163)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(51, 16)
-        Me.Label4.TabIndex = 12
-        Me.Label4.Text = "Código"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(37, 306)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(54, 16)
-        Me.Label5.TabIndex = 13
-        Me.Label5.Text = "numFijo"
-        '
-        'txtfijo
-        '
-        Me.txtfijo.Location = New System.Drawing.Point(112, 306)
-        Me.txtfijo.Name = "txtfijo"
-        Me.txtfijo.Size = New System.Drawing.Size(59, 20)
-        Me.txtfijo.TabIndex = 14
-        Me.txtfijo.Text = "0"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(37, 336)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(39, 16)
-        Me.Label6.TabIndex = 15
-        Me.Label6.Text = "Peso"
-        '
-        'txtpeso
-        '
-        Me.txtpeso.Location = New System.Drawing.Point(112, 336)
-        Me.txtpeso.Name = "txtpeso"
-        Me.txtpeso.Size = New System.Drawing.Size(59, 20)
-        Me.txtpeso.TabIndex = 16
-        Me.txtpeso.Text = "0"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(37, 369)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(72, 16)
-        Me.Label7.TabIndex = 17
-        Me.Label7.Text = "Numalazar"
-        '
-        'txtalazar
-        '
-        Me.txtalazar.Location = New System.Drawing.Point(112, 369)
-        Me.txtalazar.Name = "txtalazar"
-        Me.txtalazar.Size = New System.Drawing.Size(59, 20)
-        Me.txtalazar.TabIndex = 18
-        Me.txtalazar.Text = "0"
-        '
-        'txtticket
-        '
-        Me.txtticket.Location = New System.Drawing.Point(6, 413)
-        Me.txtticket.Name = "txtticket"
-        Me.txtticket.Size = New System.Drawing.Size(465, 20)
-        Me.txtticket.TabIndex = 19
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(6, 394)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(61, 16)
-        Me.Label8.TabIndex = 20
-        Me.Label8.Text = "N° Ticket"
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(376, 355)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(95, 55)
-        Me.Button1.TabIndex = 21
-        Me.Button1.Text = "Generar"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'DataGridView2
-        '
-        Me.DataGridView2.AllowUserToAddRows = False
-        Me.DataGridView2.AllowUserToDeleteRows = False
-        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column112, Me.Column1xc})
-        Me.DataGridView2.Location = New System.Drawing.Point(3, 355)
-        Me.DataGridView2.Name = "DataGridView2"
-        Me.DataGridView2.ReadOnly = True
-        Me.DataGridView2.Size = New System.Drawing.Size(431, 150)
-        Me.DataGridView2.TabIndex = 5
-        '
-        'txtconvertir
-        '
-        Me.txtconvertir.Location = New System.Drawing.Point(6, 439)
-        Me.txtconvertir.Name = "txtconvertir"
-        Me.txtconvertir.Size = New System.Drawing.Size(465, 20)
-        Me.txtconvertir.TabIndex = 22
-        Me.txtconvertir.Text = "55200010200295520001060030572000038005501"
-        '
-        'Column112
-        '
-        Me.Column112.HeaderText = "Codigo"
-        Me.Column112.Name = "Column112"
-        Me.Column112.ReadOnly = True
-        '
-        'Column1xc
-        '
-        Me.Column1xc.HeaderText = "Peso"
-        Me.Column1xc.Name = "Column1xc"
-        Me.Column1xc.ReadOnly = True
+        Me.pDeptos.AutoScroll = True
+        Me.pDeptos.BackColor = System.Drawing.Color.DodgerBlue
+        Me.pDeptos.Location = New System.Drawing.Point(12, 6)
+        Me.pDeptos.Name = "pDeptos"
+        Me.pDeptos.Size = New System.Drawing.Size(174, 466)
+        Me.pDeptos.TabIndex = 0
         '
         'frmNuevo
         '
@@ -346,7 +328,6 @@ Partial Class frmNuevo
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -379,11 +360,9 @@ Partial Class frmNuevo
     Friend WithEvents Label8 As Label
     Friend WithEvents txtticket As TextBox
     Friend WithEvents Button1 As Button
-    Friend WithEvents DataGridView2 As DataGridView
     Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
-    Friend WithEvents Column112 As DataGridViewTextBoxColumn
-    Friend WithEvents Column1xc As DataGridViewTextBoxColumn
     Friend WithEvents txtconvertir As TextBox
+    Friend WithEvents pDeptos As Panel
 End Class

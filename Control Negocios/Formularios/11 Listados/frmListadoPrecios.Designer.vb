@@ -49,6 +49,10 @@ Partial Class frmListadoPrecios
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
         Me.GroupBox1.SuspendLayout()
         CType(Me.grdcaptura, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
@@ -57,6 +61,7 @@ Partial Class frmListadoPrecios
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -80,7 +85,7 @@ Partial Class frmListadoPrecios
         Me.GroupBox1.Controls.Add(Me.optproveedores)
         Me.GroupBox1.Location = New System.Drawing.Point(10, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(215, 113)
+        Me.GroupBox1.Size = New System.Drawing.Size(160, 113)
         Me.GroupBox1.TabIndex = 231
         Me.GroupBox1.TabStop = False
         '
@@ -132,7 +137,7 @@ Partial Class frmListadoPrecios
         '
         Me.cbofiltro.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbofiltro.FormattingEnabled = True
-        Me.cbofiltro.Location = New System.Drawing.Point(266, 83)
+        Me.cbofiltro.Location = New System.Drawing.Point(299, 83)
         Me.cbofiltro.Name = "cbofiltro"
         Me.cbofiltro.Size = New System.Drawing.Size(248, 25)
         Me.cbofiltro.TabIndex = 238
@@ -195,7 +200,7 @@ Partial Class frmListadoPrecios
         '
         Me.GroupBox3.Controls.Add(Me.Label3)
         Me.GroupBox3.Controls.Add(Me.txtCod)
-        Me.GroupBox3.Location = New System.Drawing.Point(266, 7)
+        Me.GroupBox3.Location = New System.Drawing.Point(299, 7)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(104, 66)
         Me.GroupBox3.TabIndex = 243
@@ -287,6 +292,7 @@ Partial Class frmListadoPrecios
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.GroupBox2)
         Me.Panel1.Controls.Add(Me.DataGridView1)
         Me.Panel1.Controls.Add(Me.Button2)
         Me.Panel1.Controls.Add(Me.Button1)
@@ -367,6 +373,51 @@ Partial Class frmListadoPrecios
         Me.Panel3.Size = New System.Drawing.Size(947, 384)
         Me.Panel3.TabIndex = 253
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.RadioButton3)
+        Me.GroupBox2.Controls.Add(Me.RadioButton2)
+        Me.GroupBox2.Controls.Add(Me.RadioButton1)
+        Me.GroupBox2.Location = New System.Drawing.Point(176, 0)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(117, 108)
+        Me.GroupBox2.TabIndex = 251
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Precios"
+        '
+        'RadioButton1
+        '
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Location = New System.Drawing.Point(6, 22)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(49, 19)
+        Me.RadioButton1.TabIndex = 58
+        Me.RadioButton1.TabStop = True
+        Me.RadioButton1.Text = "Lista"
+        Me.RadioButton1.UseVisualStyleBackColor = True
+        '
+        'RadioButton2
+        '
+        Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Location = New System.Drawing.Point(6, 47)
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.Size = New System.Drawing.Size(72, 19)
+        Me.RadioButton2.TabIndex = 59
+        Me.RadioButton2.TabStop = True
+        Me.RadioButton2.Text = "Mayoreo"
+        Me.RadioButton2.UseVisualStyleBackColor = True
+        '
+        'RadioButton3
+        '
+        Me.RadioButton3.AutoSize = True
+        Me.RadioButton3.Location = New System.Drawing.Point(6, 73)
+        Me.RadioButton3.Name = "RadioButton3"
+        Me.RadioButton3.Size = New System.Drawing.Size(67, 19)
+        Me.RadioButton3.TabIndex = 60
+        Me.RadioButton3.TabStop = True
+        Me.RadioButton3.Text = "Especial"
+        Me.RadioButton3.UseVisualStyleBackColor = True
+        '
         'frmListadoPrecios
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -394,6 +445,8 @@ Partial Class frmListadoPrecios
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -422,4 +475,8 @@ Partial Class frmListadoPrecios
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents RadioButton3 As RadioButton
+    Friend WithEvents RadioButton2 As RadioButton
+    Friend WithEvents RadioButton1 As RadioButton
 End Class

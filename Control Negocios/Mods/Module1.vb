@@ -376,7 +376,7 @@ Module Module1
         sTargett = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & My.Application.Info.DirectoryPath & "\CIAS.mdb;"
         sSQL = "select base,Servidor from Server"
         With oData
-            If .dbOpen(cnn, sTarget, sinfo) Then
+            If .dbOpen(cnn, sTargett, sinfo) Then
                 If .getDr(cnn, dr, sSQL, sinfo) Then
                     varnumbase = dr(0).ToString
                     varrutabase = dr(1).ToString

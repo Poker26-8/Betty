@@ -122,6 +122,8 @@ Public Class frmLoad
         ProgressBar1.Value = ProgressBar1.Value + 1
         My.Application.DoEvents()
         Dim bodegas As Integer = DatosRecarga2("Bodegas")
+        Dim papos As Integer = DatosRecarga2("Papos")
+
         ProgressBar1.Value = ProgressBar1.Value + 1
         My.Application.DoEvents()
 
@@ -142,6 +144,7 @@ Public Class frmLoad
         Else
             Inicio.btnDentista.Visible = False
         End If
+
         If VentasRuta = 1 Then
             If Inicio.perRuta = 0 Then
                 Inicio.MenuVentasRuta.Enabled = False
@@ -260,9 +263,14 @@ Public Class frmLoad
         ProgressBar1.Value = ProgressBar1.Value + 1
         My.Application.DoEvents()
 
+
+        If papos = 1 Then
+            Inicio.ZapateríaToolStripMenuItem.Visible = True
+            Inicio.pZapatería.Visible = True
+        End If
+
         If partes = 1 Then
             Inicio.pVentasT.Visible = False
-            Inicio.ZapateríaToolStripMenuItem.Visible = False
             Inicio.pMod_Precios.Visible = False
             Inicio.pMod_Produccion.Visible = False
             Inicio.Button5.Visible = False

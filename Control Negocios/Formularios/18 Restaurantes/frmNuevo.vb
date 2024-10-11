@@ -1,5 +1,7 @@
 ﻿Imports System.IO
+Imports System.Runtime.InteropServices
 Imports ClosedXML.Excel.XLPredefinedFormat
+Imports Core.DAL.DE
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Public Class frmNuevo
@@ -10,10 +12,62 @@ Public Class frmNuevo
     Dim rowIndex As Integer = 0
 
     Dim numcompleto As String = ""
+    Friend WithEvents btnDepto As System.Windows.Forms.Button
+    Dim TotDeptos As Integer = 0
+
+
+    ' Define constantes para el ancho del scroll
+    Private Const SB_THUMBPOSITION As Integer = 4
+    Private Const SB_VERT As Integer = 1
+
+
 
     Private Sub frmNuevo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+
+        Departamentos()
+
+        ' Cambiar el ancho del scroll del Panel1 a 30 píxeles
+        ChangeScrollBarWidth(pDeptos, 30)
+
     End Sub
+
+    ' DLL para cambiar el ancho del scroll
+    <DllImport("user32.dll", CharSet:=CharSet.Auto)>
+    Public Shared Function SetScrollInfo(hWnd As IntPtr, nBar As Integer, ByRef lpsi As SCROLLINFO, bRepaint As Boolean) As Integer
+    End Function
+
+    ' Estructura para modificar la barra de scroll
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure SCROLLINFO
+        Public cbSize As UInteger
+        Public fMask As UInteger
+        Public nMin As Integer
+        Public nMax As Integer
+        Public nPage As UInteger
+        Public nPos As Integer
+        Public nTrackPos As Integer
+    End Structure
+
+    ' Cambiar el ancho del scroll
+    Private Sub ChangeScrollBarWidth(ByVal panel As Panel, ByVal width As Integer)
+        Dim si As New SCROLLINFO()
+        si.cbSize = CUInt(Marshal.SizeOf(si))
+        si.fMask = &H1 Or &H2 ' SIF_RANGE y SIF_PAGE
+        si.nMin = 0
+        si.nMax = panel.VerticalScroll.Maximum
+        si.nPage = CUInt(panel.ClientSize.Height)
+
+        ' Asignar nuevo ancho de scroll
+        SetScrollInfo(panel.Handle, SB_VERT, si, True)
+
+        ' Cambiar el tamaño de la barra
+        panel.VerticalScroll.SmallChange = width
+    End Sub
+
+
+
+
 
     Private Sub btnPdf_Click(sender As Object, e As EventArgs) Handles btnPdf.Click
 
@@ -137,5 +191,60 @@ Public Class frmNuevo
         Dim primeros2num As String = txtconvertir.Text
 
 
+    End Sub
+
+    Private Sub Departamentos()
+        Dim deptos As Integer = 0
+        Try
+
+            cnn1.Close() : cnn1.Open()
+
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText =
+                "select distinct Departamento from Productos where Departamento<>'' order by Departamento"
+            rd1 = cmd1.ExecuteReader
+            Do While rd1.Read
+                If rd1.HasRows Then
+                    Dim departamento As String = rd1(0).ToString
+                    btnDepto = New Button
+                    btnDepto.Text = departamento
+                    btnDepto.Name = "btnDepto(" & deptos & ")"
+                    btnDepto.Left = 0
+                    btnDepto.Height = 55
+                    If TotDeptos <= 10 Then
+                        btnDepto.Width = pDeptos.Width
+                    Else
+                        btnDepto.Width = pDeptos.Width - 17
+                    End If
+                    btnDepto.Top = (deptos) * (btnDepto.Height + 0.5)
+                    btnDepto.BackColor = pDeptos.BackColor
+                    btnDepto.FlatStyle = FlatStyle.Flat
+                    btnDepto.Font = New Font("Segoe UI", 10, FontStyle.Bold)
+                    btnDepto.FlatAppearance.BorderSize = 0
+                    AddHandler btnDepto.Click, AddressOf btnDepto_Click
+                    pDeptos.Controls.Add(btnDepto)
+                    If deptos = 0 Then
+                        ' Grupos(departamento)
+                    End If
+                    deptos += 1
+                End If
+            Loop
+            rd1.Close() : cnn1.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
+    End Sub
+
+    Private Sub btnDepto_Click(sender As Object, e As EventArgs)
+        Dim btnDepartamento As Button = CType(sender, Button)
+        btnDepartamento.Font.Bold.Equals(True)
+        ' pGrupos.Controls.Clear()
+        ' pProductos.Controls.Clear()
+        If cnn2.State = 1 Then
+            cnn2.Close()
+        End If
+        ' CantidadProd = 0
+        ' Grupos(btnDepartamento.Text)
     End Sub
 End Class

@@ -5456,9 +5456,7 @@ Public Class frmNuvRepVentas
         End Try
     End Sub
 
-    Private Sub grdCaptura_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles grdCaptura.CellContentClick
 
-    End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         frmRepMac.BringToFront()
