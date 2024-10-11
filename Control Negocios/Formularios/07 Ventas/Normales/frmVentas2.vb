@@ -2937,7 +2937,7 @@ doorcita:
 
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
-                    "select IdCliente,Cliente from Ventas where Folio=" & cbonota.Text
+                    "select IdCliente,Cliente from Ventas where Status<>'CANCELADA' AND Folio=" & cbonota.Text
                 rd1 = cmd1.ExecuteReader
                 If rd1.HasRows Then
                     If rd1.Read Then
@@ -2953,6 +2953,7 @@ doorcita:
                     btnnuevo.PerformClick()
                     rd1.Close() : cnn1.Close()
                     btndevo.Focus().Equals(True)
+                    cbonota.Text = ""
                     Exit Sub
                 End If
                 rd1.Close()

@@ -2174,7 +2174,7 @@ kak:
 
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
-                    "select IdCliente,Cliente from Ventas where Folio=" & cbonota.Text
+                    "select IdCliente,Cliente FROM Ventas where Status<>'CANELADA' AND Folio=" & cbonota.Text
                 rd1 = cmd1.ExecuteReader
                 If rd1.HasRows Then
                     If rd1.Read Then
