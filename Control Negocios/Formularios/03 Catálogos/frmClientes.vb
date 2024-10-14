@@ -5,10 +5,10 @@ Public Class frmClientes
     Private Sub Info_Click(sender As System.Object, e As System.EventArgs) Handles Info.Click
         If Info.Text = "> Más información" Then
             Info.Text = "v Menos información"
-            Me.Size = New Size(894, 433)
+            Me.Size = New Size(894, 462)
         Else
             Info.Text = "> Más información"
-            Me.Size = New Size(894, 299)
+            Me.Size = New Size(894, 319)
         End If
     End Sub
 
@@ -970,5 +970,26 @@ Public Class frmClientes
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles btnMsj.Click
         frmClientesW.Show()
         frmClientesW.BringToFront()
+    End Sub
+
+    Private Sub cboCFDI_DropDown(sender As Object, e As EventArgs) Handles cboCFDI.DropDown
+        Try
+            cboCFDI.Items.Clear()
+            cnn5.Close() : cnn5.Open()
+            cmd5 = cnn5.CreateCommand
+            cmd5.CommandText = "SELECT DISTINCT Descripcion FROM usocomprocfdisat WHERE Descripcion<>'' ORDER BY Descripcion"
+            rd5 = cmd5.ExecuteReader
+            Do While rd5.Read
+                If rd5.HasRows Then
+                    cboCFDI.Items.Add(rd5(0).ToString)
+                End If
+            Loop
+            rd5.Close()
+            cnn5.Close()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn5.Close()
+        End Try
     End Sub
 End Class

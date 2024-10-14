@@ -1109,6 +1109,8 @@ Partial Class frmCompras
         Me.GroupBox3.Controls.Add(Me.txtmonto)
         Me.GroupBox3.Controls.Add(Me.dtppago)
         Me.GroupBox3.Controls.Add(Me.Label39)
+        Me.GroupBox3.Controls.Add(Me.btnPagar)
+        Me.GroupBox3.Controls.Add(Me.btnimportarxml)
         Me.GroupBox3.Controls.Add(Me.Label38)
         Me.GroupBox3.Controls.Add(Me.cbobanco)
         Me.GroupBox3.Controls.Add(Me.txtrefe)
@@ -1117,10 +1119,9 @@ Partial Class frmCompras
         Me.GroupBox3.Controls.Add(Me.Label36)
         Me.GroupBox3.Controls.Add(Me.grdPagos)
         Me.GroupBox3.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.Location = New System.Drawing.Point(915, 404)
-        Me.GroupBox3.MinimumSize = New System.Drawing.Size(278, 126)
+        Me.GroupBox3.Location = New System.Drawing.Point(1019, 571)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(278, 126)
+        Me.GroupBox3.Size = New System.Drawing.Size(85, 56)
         Me.GroupBox3.TabIndex = 145
         Me.GroupBox3.TabStop = False
         '
@@ -1658,7 +1659,7 @@ Partial Class frmCompras
         Me.btnPagar.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPagar.Image = CType(resources.GetObject("btnPagar.Image"), System.Drawing.Image)
         Me.btnPagar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnPagar.Location = New System.Drawing.Point(922, 495)
+        Me.btnPagar.Location = New System.Drawing.Point(6, 37)
         Me.btnPagar.Name = "btnPagar"
         Me.btnPagar.Size = New System.Drawing.Size(61, 69)
         Me.btnPagar.TabIndex = 228
@@ -1673,7 +1674,7 @@ Partial Class frmCompras
         Me.btnimportarxml.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnimportarxml.Image = CType(resources.GetObject("btnimportarxml.Image"), System.Drawing.Image)
         Me.btnimportarxml.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnimportarxml.Location = New System.Drawing.Point(849, 428)
+        Me.btnimportarxml.Location = New System.Drawing.Point(18, 15)
         Me.btnimportarxml.Name = "btnimportarxml"
         Me.btnimportarxml.Size = New System.Drawing.Size(61, 61)
         Me.btnimportarxml.TabIndex = 184
@@ -1752,9 +1753,7 @@ Partial Class frmCompras
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.btnprod)
         Me.Controls.Add(Me.panpago_compra)
-        Me.Controls.Add(Me.btnPagar)
         Me.Controls.Add(Me.lblusuario)
-        Me.Controls.Add(Me.btnimportarxml)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.GroupBox3)

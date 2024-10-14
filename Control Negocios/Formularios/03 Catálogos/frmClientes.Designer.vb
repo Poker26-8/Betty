@@ -82,6 +82,8 @@ Partial Class frmClientes
         Me.txtreferencia = New System.Windows.Forms.TextBox()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.txtNumCliente = New System.Windows.Forms.TextBox()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.cboCFDI = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -186,7 +188,7 @@ Partial Class frmClientes
         '
         Me.chkSusp.AutoSize = True
         Me.chkSusp.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkSusp.Location = New System.Drawing.Point(8, 179)
+        Me.chkSusp.Location = New System.Drawing.Point(8, 208)
         Me.chkSusp.Name = "chkSusp"
         Me.chkSusp.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.chkSusp.Size = New System.Drawing.Size(113, 19)
@@ -242,7 +244,7 @@ Partial Class frmClientes
         Me.btnDomicilios.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnDomicilios.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDomicilios.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDomicilios.Location = New System.Drawing.Point(606, 173)
+        Me.btnDomicilios.Location = New System.Drawing.Point(606, 202)
         Me.btnDomicilios.Name = "btnDomicilios"
         Me.btnDomicilios.Size = New System.Drawing.Size(70, 63)
         Me.btnDomicilios.TabIndex = 31
@@ -256,7 +258,7 @@ Partial Class frmClientes
         Me.btnEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEliminar.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEliminar.Location = New System.Drawing.Point(681, 173)
+        Me.btnEliminar.Location = New System.Drawing.Point(681, 202)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(60, 63)
         Me.btnEliminar.TabIndex = 30
@@ -271,7 +273,7 @@ Partial Class frmClientes
         Me.btnGuardar.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
         Me.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnGuardar.Location = New System.Drawing.Point(746, 173)
+        Me.btnGuardar.Location = New System.Drawing.Point(746, 202)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(60, 63)
         Me.btnGuardar.TabIndex = 29
@@ -285,7 +287,7 @@ Partial Class frmClientes
         Me.btnNuveo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnNuveo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNuveo.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNuveo.Location = New System.Drawing.Point(811, 173)
+        Me.btnNuveo.Location = New System.Drawing.Point(811, 202)
         Me.btnNuveo.Name = "btnNuveo"
         Me.btnNuveo.Size = New System.Drawing.Size(60, 63)
         Me.btnNuveo.TabIndex = 28
@@ -337,7 +339,7 @@ Partial Class frmClientes
         '
         Me.Info.AutoSize = True
         Me.Info.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Info.Location = New System.Drawing.Point(8, 225)
+        Me.Info.Location = New System.Drawing.Point(8, 254)
         Me.Info.Name = "Info"
         Me.Info.Size = New System.Drawing.Size(104, 13)
         Me.Info.TabIndex = 36
@@ -348,7 +350,7 @@ Partial Class frmClientes
         Me.txtCorreo.BackColor = System.Drawing.Color.White
         Me.txtCorreo.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower
         Me.txtCorreo.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCorreo.Location = New System.Drawing.Point(76, 199)
+        Me.txtCorreo.Location = New System.Drawing.Point(76, 228)
         Me.txtCorreo.Name = "txtCorreo"
         Me.txtCorreo.Size = New System.Drawing.Size(237, 23)
         Me.txtCorreo.TabIndex = 37
@@ -358,7 +360,7 @@ Partial Class frmClientes
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(8, 202)
+        Me.Label10.Location = New System.Drawing.Point(8, 231)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(51, 15)
         Me.Label10.TabIndex = 38
@@ -383,7 +385,7 @@ Partial Class frmClientes
         Me.GroupBox1.Controls.Add(Me.txtColonia)
         Me.GroupBox1.Controls.Add(Me.txtCalle)
         Me.GroupBox1.Controls.Add(Me.Label12)
-        Me.GroupBox1.Location = New System.Drawing.Point(10, 248)
+        Me.GroupBox1.Location = New System.Drawing.Point(4, 273)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(868, 143)
         Me.GroupBox1.TabIndex = 39
@@ -543,7 +545,7 @@ Partial Class frmClientes
         '
         'barsube
         '
-        Me.barsube.Location = New System.Drawing.Point(247, 224)
+        Me.barsube.Location = New System.Drawing.Point(247, 253)
         Me.barsube.Name = "barsube"
         Me.barsube.Size = New System.Drawing.Size(66, 14)
         Me.barsube.TabIndex = 221
@@ -595,7 +597,7 @@ Partial Class frmClientes
         Me.btnmigra.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnmigra.Image = CType(resources.GetObject("btnmigra.Image"), System.Drawing.Image)
         Me.btnmigra.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnmigra.Location = New System.Drawing.Point(386, 173)
+        Me.btnmigra.Location = New System.Drawing.Point(386, 202)
         Me.btnmigra.Name = "btnmigra"
         Me.btnmigra.Size = New System.Drawing.Size(70, 63)
         Me.btnmigra.TabIndex = 48
@@ -610,7 +612,7 @@ Partial Class frmClientes
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button1.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(541, 173)
+        Me.Button1.Location = New System.Drawing.Point(541, 202)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(60, 63)
         Me.Button1.TabIndex = 216
@@ -623,7 +625,7 @@ Partial Class frmClientes
         Me.Label20.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.Label20.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label20.ForeColor = System.Drawing.Color.White
-        Me.Label20.Location = New System.Drawing.Point(127, 177)
+        Me.Label20.Location = New System.Drawing.Point(127, 206)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(186, 19)
         Me.Label20.TabIndex = 217
@@ -645,7 +647,7 @@ Partial Class frmClientes
         Me.Button2.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
         Me.Button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button2.Location = New System.Drawing.Point(316, 173)
+        Me.Button2.Location = New System.Drawing.Point(316, 202)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(66, 63)
         Me.Button2.TabIndex = 222
@@ -661,7 +663,7 @@ Partial Class frmClientes
         Me.btnMsj.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMsj.Image = CType(resources.GetObject("btnMsj.Image"), System.Drawing.Image)
         Me.btnMsj.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnMsj.Location = New System.Drawing.Point(460, 173)
+        Me.btnMsj.Location = New System.Drawing.Point(460, 202)
         Me.btnMsj.Name = "btnMsj"
         Me.btnMsj.Size = New System.Drawing.Size(78, 63)
         Me.btnMsj.TabIndex = 223
@@ -709,11 +711,33 @@ Partial Class frmClientes
         Me.txtNumCliente.Size = New System.Drawing.Size(141, 23)
         Me.txtNumCliente.TabIndex = 227
         '
+        'Label23
+        '
+        Me.Label23.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.Location = New System.Drawing.Point(8, 177)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(89, 23)
+        Me.Label23.TabIndex = 228
+        Me.Label23.Text = "Uso Cfdi:"
+        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'cboCFDI
+        '
+        Me.cboCFDI.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.cboCFDI.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboCFDI.FormattingEnabled = True
+        Me.cboCFDI.Location = New System.Drawing.Point(103, 173)
+        Me.cboCFDI.Name = "cboCFDI"
+        Me.cboCFDI.Size = New System.Drawing.Size(768, 23)
+        Me.cboCFDI.TabIndex = 229
+        '
         'frmClientes
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(878, 251)
+        Me.ClientSize = New System.Drawing.Size(878, 272)
+        Me.Controls.Add(Me.cboCFDI)
+        Me.Controls.Add(Me.Label23)
         Me.Controls.Add(Me.txtNumCliente)
         Me.Controls.Add(Me.Label22)
         Me.Controls.Add(Me.Label21)
@@ -827,4 +851,6 @@ Partial Class frmClientes
     Friend WithEvents txtreferencia As TextBox
     Friend WithEvents Label22 As Label
     Friend WithEvents txtNumCliente As TextBox
+    Friend WithEvents Label23 As Label
+    Friend WithEvents cboCFDI As ComboBox
 End Class

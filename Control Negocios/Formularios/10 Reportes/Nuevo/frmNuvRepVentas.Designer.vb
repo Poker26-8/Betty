@@ -501,7 +501,7 @@ Partial Class frmNuvRepVentas
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel3.Location = New System.Drawing.Point(0, 35)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1175, 265)
+        Me.Panel3.Size = New System.Drawing.Size(1175, 259)
         Me.Panel3.TabIndex = 2
         '
         'TabControl1
@@ -511,7 +511,7 @@ Partial Class frmNuvRepVentas
         Me.TabControl1.Location = New System.Drawing.Point(3, 6)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(648, 274)
+        Me.TabControl1.Size = New System.Drawing.Size(648, 253)
         Me.TabControl1.TabIndex = 220
         '
         'TabPage1
@@ -539,7 +539,7 @@ Partial Class frmNuvRepVentas
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(640, 248)
+        Me.TabPage1.Size = New System.Drawing.Size(640, 227)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "          Ventas           "
         '
@@ -627,7 +627,7 @@ Partial Class frmNuvRepVentas
         '
         Me.rbVentasClientes.AutoSize = True
         Me.rbVentasClientes.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbVentasClientes.Location = New System.Drawing.Point(6, 55)
+        Me.rbVentasClientes.Location = New System.Drawing.Point(6, 56)
         Me.rbVentasClientes.Name = "rbVentasClientes"
         Me.rbVentasClientes.Size = New System.Drawing.Size(143, 22)
         Me.rbVentasClientes.TabIndex = 2
@@ -639,7 +639,7 @@ Partial Class frmNuvRepVentas
         '
         Me.rbVentasCliDetalle.AutoSize = True
         Me.rbVentasCliDetalle.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbVentasCliDetalle.Location = New System.Drawing.Point(6, 83)
+        Me.rbVentasCliDetalle.Location = New System.Drawing.Point(6, 82)
         Me.rbVentasCliDetalle.Name = "rbVentasCliDetalle"
         Me.rbVentasCliDetalle.Size = New System.Drawing.Size(202, 22)
         Me.rbVentasCliDetalle.TabIndex = 3
@@ -812,7 +812,7 @@ Partial Class frmNuvRepVentas
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Right
         Me.Panel5.Location = New System.Drawing.Point(657, 0)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(518, 265)
+        Me.Panel5.Size = New System.Drawing.Size(518, 259)
         Me.Panel5.TabIndex = 217
         '
         'dtpinicio
@@ -857,9 +857,9 @@ Partial Class frmNuvRepVentas
         Me.Panel4.Controls.Add(Me.barcarga)
         Me.Panel4.Controls.Add(Me.grdCaptura)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(0, 300)
+        Me.Panel4.Location = New System.Drawing.Point(0, 294)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(1175, 348)
+        Me.Panel4.Size = New System.Drawing.Size(1175, 354)
         Me.Panel4.TabIndex = 3
         '
         'boxcantidad
@@ -870,7 +870,7 @@ Partial Class frmNuvRepVentas
         Me.boxcantidad.Controls.Add(Me.txtcodigo)
         Me.boxcantidad.Controls.Add(Me.txtcantidad)
         Me.boxcantidad.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.boxcantidad.Location = New System.Drawing.Point(480, 140)
+        Me.boxcantidad.Location = New System.Drawing.Point(480, 143)
         Me.boxcantidad.Name = "boxcantidad"
         Me.boxcantidad.Size = New System.Drawing.Size(225, 56)
         Me.boxcantidad.TabIndex = 236
@@ -905,7 +905,7 @@ Partial Class frmNuvRepVentas
         'barcarga
         '
         Me.barcarga.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.barcarga.Location = New System.Drawing.Point(0, 315)
+        Me.barcarga.Location = New System.Drawing.Point(0, 328)
         Me.barcarga.Name = "barcarga"
         Me.barcarga.Size = New System.Drawing.Size(1172, 20)
         Me.barcarga.TabIndex = 206
@@ -941,7 +941,7 @@ Partial Class frmNuvRepVentas
         Me.grdCaptura.Name = "grdCaptura"
         Me.grdCaptura.ReadOnly = True
         Me.grdCaptura.RowHeadersVisible = False
-        Me.grdCaptura.Size = New System.Drawing.Size(1175, 348)
+        Me.grdCaptura.Size = New System.Drawing.Size(1175, 354)
         Me.grdCaptura.TabIndex = 0
         '
         'PMasVendido80

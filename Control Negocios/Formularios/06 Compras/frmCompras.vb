@@ -5247,32 +5247,12 @@ quepasowey:
         cbotpago.Items.Add("OTRO")
     End Sub
 
-    Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles Button3.Click
-
-    End Sub
-
     Private Sub UnicoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles UnicoToolStripMenuItem.Click
         Dim index As Integer = grdcaptura.CurrentRow.Index
 
         If MsgBox("Asignar este producto como único lo va a dejar con existencia '1' y se eliminará del catálogo al momento de venderse. ¿Desea continuar?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
             grdcaptura(10, index).Value = "1"
         End If
-    End Sub
-
-    Private Sub cbopedido_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbopedido.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub dtpfecha_ValueChanged(sender As System.Object, e As System.EventArgs) Handles dtpfecha.ValueChanged
-
-    End Sub
-
-    Private Sub Label14_Click(sender As System.Object, e As System.EventArgs) Handles Label14.Click
-
-    End Sub
-
-    Private Sub Label31_Click(sender As System.Object, e As System.EventArgs) Handles Label31.Click
-
     End Sub
 
     Private Sub btnPagar_Click(sender As System.Object, e As System.EventArgs) Handles btnPagar.Click
