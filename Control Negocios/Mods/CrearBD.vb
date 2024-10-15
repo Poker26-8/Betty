@@ -1,5 +1,30 @@
 ﻿Module CrearBD
 
+
+    'comprasentalla 
+    Public vartablacomprasentalla As String = "CREATE TABLE `comprasentalla` (
+                                                      `Id` int(11) NOT NULL,
+                                                      `Id_Compra` int(11) NOT NULL DEFAULT '0',
+                                                      `Proveedor` varchar(255) NOT NULL DEFAULT '',
+                                                      `NumRemision` varchar(40) NOT NULL DEFAULT '',
+                                                      `NumFactura` varchar(40) NOT NULL DEFAULT '',
+                                                      `Codigo` varchar(40) NOT NULL DEFAULT '',
+                                                      `Nombre` varchar(255) NOT NULL DEFAULT '',
+                                                      `UCompra` varchar(40) NOT NULL DEFAULT '',
+                                                      `PrecioVenta` double NOT NULL DEFAULT '0',
+                                                      `Cantidad` double NOT NULL DEFAULT '0',
+                                                      `Precio` double NOT NULL DEFAULT '0',
+                                                      `Total` double NOT NULL DEFAULT '0',
+                                                      `Fecha` date NOT NULL,
+                                                      `FechaNC` date NOT NULL,
+                                                      `Grupo` varchar(100) NOT NULL DEFAULT '',
+                                                      `Depto` varchar(100) NOT NULL DEFAULT '',
+                                                      `Modelo` varchar(100) NOT NULL DEFAULT '',
+                                                      `Modif` varchar(100) NOT NULL DEFAULT '',
+                                                      `Entalle` int(1) NOT NULL DEFAULT '0',
+                                                      `Status` varchar(70) DEFAULT ''
+                                                    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+
     'reservaciones
     Public vartablareservaciones As String = "CREATE TABLE `reservaciones` (
                                               `IdReservacion` int(11) NOT NULL,
@@ -1449,7 +1474,11 @@
                                       `Caducidad` varchar(50) NOT NULL DEFAULT '',
                                       `Lote` varchar(100) NOT NULL DEFAULT '',
                                       `FolioRep` int(11) NOT NULL DEFAULT '0',
-                                      `NotaCred` varchar(80) NOT NULL DEFAULT ''
+                                      `NotaCred` varchar(80) NOT NULL DEFAULT '',
+                                      `Serie` varchar(80) NOT NULL DEFAULT '',
+                                      `Modelo` varchar(70) NOT NULL DEFAULT '',
+                                      `CANTIDAD_MODIFICADA` varchar(70) NOT NULL DEFAULT '',
+                                      `Entallado` int(11) NOT NULL DEFAULT '0'
                                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
 
@@ -6947,6 +6976,7 @@
     '/////////////////////////////////////////////////////////////////////////
     'LLAVES PRIMARIAS
     '/////////////////////////////////////////////////////////////////////////
+    Public VarKeycomprasentalla As String = "ALTER TABLE `comprasentalla`ADD PRIMARY KEY (`Id`);"
     Public VarKeyreservaciones As String = "ALTER TABLE `reservaciones`ADD PRIMARY KEY (`IdReservacion`);"
     Public VarKeyPrescripcion As String = "ALTER TABLE `prescripcion`ADD PRIMARY KEY (`Folio`);"
     Public VarKeyhisclinica As String = "ALTER TABLE `hisclinica`ADD PRIMARY KEY (`Id`);"
@@ -7119,6 +7149,7 @@
     '/////////////////////////////////////////////////////////////////////////
     'AUTOINCREMENTO
     '/////////////////////////////////////////////////////////////////////////
+    Public VarAutocomprasentalla As String = "ALTER TABLE `comprasentalla`MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
     Public VarAutoreservaciones As String = "ALTER TABLE `reservaciones`MODIFY `IdReservacion` int(11) NOT NULL AUTO_INCREMENT;"
     Public VarAutoPrescripcion As String = "ALTER TABLE `prescripcion`MODIFY `Folio` int(11) NOT NULL AUTO_INCREMENT;"
     Public VarAutohiscliente As String = "ALTER TABLE `hisclinica`MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
