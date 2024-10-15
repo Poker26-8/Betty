@@ -6236,4 +6236,8 @@ quepasowey:
     Private Sub txtlote_TextChanged(sender As Object, e As EventArgs) Handles txtlote.TextChanged
 
     End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+    End Sub
 End Class

@@ -119,6 +119,8 @@ Partial Class frmCompras
         Me.txtmonto = New System.Windows.Forms.TextBox()
         Me.dtppago = New System.Windows.Forms.DateTimePicker()
         Me.Label39 = New System.Windows.Forms.Label()
+        Me.btnPagar = New System.Windows.Forms.Button()
+        Me.btnimportarxml = New System.Windows.Forms.Button()
         Me.Label38 = New System.Windows.Forms.Label()
         Me.cbobanco = New System.Windows.Forms.ComboBox()
         Me.txtrefe = New System.Windows.Forms.TextBox()
@@ -170,8 +172,6 @@ Partial Class frmCompras
         Me.txtpc_efectivo = New System.Windows.Forms.TextBox()
         Me.btnprod = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.btnPagar = New System.Windows.Forms.Button()
-        Me.btnimportarxml = New System.Windows.Forms.Button()
         Me.btnimportarxls = New System.Windows.Forms.Button()
         Me.btncopia = New System.Windows.Forms.Button()
         Me.btnguardar = New System.Windows.Forms.Button()
@@ -1162,6 +1162,36 @@ Partial Class frmCompras
         Me.Label39.TabIndex = 149
         Me.Label39.Text = "Fecha:"
         '
+        'btnPagar
+        '
+        Me.btnPagar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPagar.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPagar.Image = CType(resources.GetObject("btnPagar.Image"), System.Drawing.Image)
+        Me.btnPagar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnPagar.Location = New System.Drawing.Point(6, 37)
+        Me.btnPagar.Name = "btnPagar"
+        Me.btnPagar.Size = New System.Drawing.Size(61, 69)
+        Me.btnPagar.TabIndex = 228
+        Me.btnPagar.Text = "Pagar compra"
+        Me.btnPagar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnPagar.UseVisualStyleBackColor = True
+        '
+        'btnimportarxml
+        '
+        Me.btnimportarxml.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnimportarxml.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnimportarxml.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnimportarxml.Image = CType(resources.GetObject("btnimportarxml.Image"), System.Drawing.Image)
+        Me.btnimportarxml.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnimportarxml.Location = New System.Drawing.Point(18, 15)
+        Me.btnimportarxml.Name = "btnimportarxml"
+        Me.btnimportarxml.Size = New System.Drawing.Size(61, 61)
+        Me.btnimportarxml.TabIndex = 184
+        Me.btnimportarxml.Text = "Importar"
+        Me.btnimportarxml.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnimportarxml.UseVisualStyleBackColor = True
+        '
         'Label38
         '
         Me.Label38.AutoSize = True
@@ -1651,36 +1681,6 @@ Partial Class frmCompras
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(917, 111)
         Me.Panel2.TabIndex = 88
-        '
-        'btnPagar
-        '
-        Me.btnPagar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPagar.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPagar.Image = CType(resources.GetObject("btnPagar.Image"), System.Drawing.Image)
-        Me.btnPagar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnPagar.Location = New System.Drawing.Point(6, 37)
-        Me.btnPagar.Name = "btnPagar"
-        Me.btnPagar.Size = New System.Drawing.Size(61, 69)
-        Me.btnPagar.TabIndex = 228
-        Me.btnPagar.Text = "Pagar compra"
-        Me.btnPagar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnPagar.UseVisualStyleBackColor = True
-        '
-        'btnimportarxml
-        '
-        Me.btnimportarxml.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.btnimportarxml.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnimportarxml.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnimportarxml.Image = CType(resources.GetObject("btnimportarxml.Image"), System.Drawing.Image)
-        Me.btnimportarxml.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnimportarxml.Location = New System.Drawing.Point(18, 15)
-        Me.btnimportarxml.Name = "btnimportarxml"
-        Me.btnimportarxml.Size = New System.Drawing.Size(61, 61)
-        Me.btnimportarxml.TabIndex = 184
-        Me.btnimportarxml.Text = "Importar"
-        Me.btnimportarxml.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnimportarxml.UseVisualStyleBackColor = True
         '
         'btnimportarxls
         '

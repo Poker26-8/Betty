@@ -175,6 +175,8 @@ Public Class frmPagarH
         txtdescuento1.Text = "0"
         txtMontoP.Text = "0.00"
         btnPagar.Enabled = True
+        grdpago.Rows.Clear()
+        btnPagos.Enabled = False
     End Sub
 
     Private Sub txtdescuento1_Click(sender As Object, e As EventArgs) Handles txtdescuento1.Click
@@ -491,6 +493,10 @@ Public Class frmPagarH
     Private Sub cbotpago_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbotpago.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            If cbotpago.Text <> "" Then
+                btnPagos.Enabled = True
+            End If
             cbobanco.Focus.Equals(True)
         End If
     End Sub
@@ -1436,6 +1442,11 @@ Public Class frmPagarH
             End If
             rd1.Close()
 
+            If impresoraventa = "" Then
+                MsgBox("Impresora no configurada", vbInformation + vbOKOnly, titulorestaurante)
+                GoTo deku
+            End If
+
             If tamimpre = "80" Then
 
                 For sasuke = 1 To copias
@@ -1452,6 +1463,7 @@ Public Class frmPagarH
                 Next
 
             End If
+deku:
 
         End If
         cnn1.Close()

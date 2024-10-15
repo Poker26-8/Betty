@@ -1962,4 +1962,9 @@ Public Class Inicio
         frmComprasModelos.BringToFront()
         frmComprasModelos.Show()
     End Sub
+
+    Private Sub EntallarComprasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EntallarComprasToolStripMenuItem.Click
+        frmEntalla.BringToFront()
+        frmEntalla.Show()
+    End Sub
 End Class

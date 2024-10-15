@@ -764,21 +764,21 @@ Module Module1
     Public Function TamImpre()
         Try
             Dim tam As Integer = 0
-            cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT NotasCred FROM formatos WHERE Facturas='TamImpre'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    tam = rd1(0).ToString
+            cnn5.Close() : cnn5.Open()
+            cmd5 = cnn5.CreateCommand
+            cmd5.CommandText = "SELECT NotasCred FROM formatos WHERE Facturas='TamImpre'"
+            rd5 = cmd5.ExecuteReader
+            If rd5.HasRows Then
+                If rd5.Read Then
+                    tam = rd5(0).ToString
                 End If
             End If
-            rd1.Close()
-            cnn1.Close()
+            rd5.Close()
+            cnn5.Close()
             Return tam
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn5.Close()
         End Try
     End Function
 

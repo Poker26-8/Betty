@@ -631,6 +631,12 @@
     <Compile Include="Formularios\06 Compras\Zapaterias\frmComprasModelos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\06 Compras\Zapaterias\frmEntalla.Designer.vb">
+      <DependentUpon>frmEntalla.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\06 Compras\Zapaterias\frmEntalla.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\07 Ventas\Autoservicio\frmAutoservicio.Designer.vb">
       <DependentUpon>frmAutoservicio.vb</DependentUpon>
     </Compile>
@@ -2616,6 +2622,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\06 Compras\Zapaterias\frmComprasModelos.resx">
       <DependentUpon>frmComprasModelos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\06 Compras\Zapaterias\frmEntalla.resx">
+      <DependentUpon>frmEntalla.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\07 Ventas\Autoservicio\frmAutoservicio.resx">
       <DependentUpon>frmAutoservicio.vb</DependentUpon>
