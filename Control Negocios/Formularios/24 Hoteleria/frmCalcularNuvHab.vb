@@ -49,13 +49,14 @@
             rd2.Close()
 
             cmd2 = cnn2.CreateCommand
-            cmd2.CommandText = "SELECT Horas,Precio FROM detallehotel WHERE Habitacion='" & lblpc.Text & "' AND Status='PAGADO'"
+            cmd2.CommandText = "SELECT Horas,Precio,Cliente FROM detallehotel WHERE Habitacion='" & lblpc.Text & "' AND Status='PAGADO'"
             rd2 = cmd2.ExecuteReader
             If rd2.HasRows Then
                 If rd2.Read Then
                     lblHoras.Text = rd2(0).ToString
                     lblPrecio.Text = rd2(1).ToString
                     lblAnticipo.Text = rd2(1).ToString
+                    lblCliente.Text = rd2(2).ToString
                 End If
             End If
             rd2.Close()
@@ -91,7 +92,7 @@
                     Dim dsalidare As String
                     cmd3 = cnn3.CreateCommand
                     cmd3 = cnn3.CreateCommand
-                    cmd3.CommandText = "SELECT * FROM reservaciones WHERE Habitacion='" & lblpc.Text & "'"
+                    cmd3.CommandText = "SELECT * FROM reservaciones WHERE Habitacion='" & lblpc.Text & "' AND Status=0"
                     rd3 = cmd3.ExecuteReader
                     If rd3.HasRows Then
                         If rd3.Read Then

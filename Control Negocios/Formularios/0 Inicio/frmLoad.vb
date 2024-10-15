@@ -433,7 +433,6 @@ Public Class frmLoad
     End Sub
 
     Public Sub verif()
-        'mesero
         'msc
         Try
             cnn1.Close()

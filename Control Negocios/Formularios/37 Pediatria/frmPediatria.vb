@@ -447,7 +447,7 @@ Public Class frmPediatria
 
                     cnn2.Close() : cnn2.Open()
                     cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "INSERT INTO hisclinica(Medico,Fecha,Hora,Paciente,Urgencia,Tutor,Sexo,FNacimiento,Edad,Peso,Alergias,Temperatura,MotivoConsulta,MSC,TA,FC,FR,Saturacion,mama,papa) VALUES('" & cboMedico.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & cboCliente.Text & "','" & cboUrgencia.Text & "','" & txtTutor.Text & "'," & sex & ",'" & Format(dtpNacimiento.Value, "yyyy-MM-dd") & "','" & EDAD & "','" & txtPeso.Text & "','" & alergias & "','" & txtTemperatura.Text & "','" & motivo & "'," & txtCorporal.Text & ",'" & txtTA.Text & "','" & txtFC.Text & "','" & txtFR.Text & "','" & txtSAT.Text & "','" & txtPapa.Text & "','" & txtMama.Text & "')"
+                    cmd2.CommandText = "INSERT INTO hisclinica(Medico,Fecha,Hora,Paciente,Urgencia,Tutor,Sexo,FNacimiento,Edad,Peso,Alergias,Temperatura,MotivoConsulta,MSC,TA,FC,FR,Saturacion,mama,papa,AntMedicos,ExpFisica,Laboratorio,AntFami) VALUES('" & cboMedico.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & cboCliente.Text & "','" & cboUrgencia.Text & "','" & txtTutor.Text & "'," & sex & ",'" & Format(dtpNacimiento.Value, "yyyy-MM-dd") & "','" & EDAD & "','" & txtPeso.Text & "','" & alergias & "','" & txtTemperatura.Text & "','" & motivo & "'," & txtCorporal.Text & ",'" & txtTA.Text & "','" & txtFC.Text & "','" & txtFR.Text & "','" & txtSAT.Text & "','" & txtPapa.Text & "','" & txtMama.Text & "','','','','')"
                     cmd2.ExecuteNonQuery()
                     cnn2.Close()
                 End If
@@ -458,7 +458,7 @@ Public Class frmPediatria
                 cmd2.ExecuteNonQuery()
 
                 cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "INSERT INTO hisclinica(Medico,Fecha,Hora,Paciente,Urgencia,Tutor,Sexo,FNacimiento,Edad,Peso,Alergias,Temperatura,MotivoConsulta,MSC,TA,FC,FR,Saturacion,mama,papa) VALUES('" & cboMedico.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & cboCliente.Text & "','" & cboUrgencia.Text & "','" & txtTutor.Text & "'," & sex & ",'" & Format(dtpNacimiento.Value, "yyyy-MM-dd") & "','" & EDAD & "','" & txtPeso.Text & "','" & alergias & "','" & txtTemperatura.Text & "','" & motivo & "'," & txtCorporal.Text & ",'" & txtTA.Text & "','" & txtFC.Text & "','" & txtFR.Text & "','" & txtSAT.Text & "','" & txtMama.Text & "','" & txtPapa.Text & "')"
+                cmd2.CommandText = "INSERT INTO hisclinica(Medico,Fecha,Hora,Paciente,Urgencia,Tutor,Sexo,FNacimiento,Edad,Peso,Alergias,Temperatura,MotivoConsulta,MSC,TA,FC,FR,Saturacion,mama,papa,AntMedicos,ExpFisica,Laboratorio,AntFami) VALUES('" & cboMedico.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & cboCliente.Text & "','" & cboUrgencia.Text & "','" & txtTutor.Text & "'," & sex & ",'" & Format(dtpNacimiento.Value, "yyyy-MM-dd") & "','" & EDAD & "','" & txtPeso.Text & "','" & alergias & "','" & txtTemperatura.Text & "','" & motivo & "'," & txtCorporal.Text & ",'" & txtTA.Text & "','" & txtFC.Text & "','" & txtFR.Text & "','" & txtSAT.Text & "','" & txtMama.Text & "','" & txtPapa.Text & "','','','','')"
                 If cmd2.ExecuteNonQuery() Then
                     MsgBox("Cita agregada correctamente", vbInformation + vbOKOnly, titulocentral)
                     btnLimpiar.PerformClick()
@@ -503,6 +503,12 @@ Public Class frmPediatria
     Private Sub txtSAT_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtSAT.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             dtpNacimiento.Focus.Equals(True)
+        End If
+    End Sub
+
+    Private Sub cbxFem_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbxFem.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            txtTemperatura.Focus.Equals(True)
         End If
     End Sub
 End Class

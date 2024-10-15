@@ -34,7 +34,7 @@ Partial Class frmDetalleH
         Me.dtphorasalida = New System.Windows.Forms.DateTimePicker()
         Me.dtpEntrada = New System.Windows.Forms.DateTimePicker()
         Me.dtphoraentrada = New System.Windows.Forms.DateTimePicker()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.gprecios = New System.Windows.Forms.GroupBox()
         Me.cboPrecio = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.txtHoras = New System.Windows.Forms.TextBox()
@@ -79,7 +79,7 @@ Partial Class frmDetalleH
         Me.Panel4.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.pReservacion.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
+        Me.gprecios.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.grdPrecios, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pdesocupar.SuspendLayout()
@@ -99,7 +99,7 @@ Partial Class frmDetalleH
         'Panel5
         '
         Me.Panel5.Controls.Add(Me.pReservacion)
-        Me.Panel5.Controls.Add(Me.GroupBox2)
+        Me.Panel5.Controls.Add(Me.gprecios)
         Me.Panel5.Controls.Add(Me.txttelefono)
         Me.Panel5.Controls.Add(Me.Label10)
         Me.Panel5.Controls.Add(Me.cboRegistro)
@@ -208,21 +208,21 @@ Partial Class frmDetalleH
         Me.dtphoraentrada.Size = New System.Drawing.Size(99, 22)
         Me.dtphoraentrada.TabIndex = 13
         '
-        'GroupBox2
+        'gprecios
         '
-        Me.GroupBox2.Controls.Add(Me.cboPrecio)
-        Me.GroupBox2.Controls.Add(Me.Label13)
-        Me.GroupBox2.Controls.Add(Me.txtHoras)
-        Me.GroupBox2.Controls.Add(Me.Label12)
-        Me.GroupBox2.Controls.Add(Me.cboTipo)
-        Me.GroupBox2.Controls.Add(Me.Label4)
-        Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(13, 55)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(403, 73)
-        Me.GroupBox2.TabIndex = 12
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Precios"
+        Me.gprecios.Controls.Add(Me.cboPrecio)
+        Me.gprecios.Controls.Add(Me.Label13)
+        Me.gprecios.Controls.Add(Me.txtHoras)
+        Me.gprecios.Controls.Add(Me.Label12)
+        Me.gprecios.Controls.Add(Me.cboTipo)
+        Me.gprecios.Controls.Add(Me.Label4)
+        Me.gprecios.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gprecios.Location = New System.Drawing.Point(13, 55)
+        Me.gprecios.Name = "gprecios"
+        Me.gprecios.Size = New System.Drawing.Size(403, 73)
+        Me.gprecios.TabIndex = 12
+        Me.gprecios.TabStop = False
+        Me.gprecios.Text = "Precios"
         '
         'cboPrecio
         '
@@ -646,8 +646,8 @@ Partial Class frmDetalleH
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
         Me.pReservacion.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.gprecios.ResumeLayout(False)
+        Me.gprecios.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         CType(Me.grdPrecios, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pdesocupar.ResumeLayout(False)
@@ -697,7 +697,7 @@ Partial Class frmDetalleH
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents gprecios As GroupBox
     Friend WithEvents Label13 As Label
     Friend WithEvents txtHoras As TextBox
     Friend WithEvents Label12 As Label

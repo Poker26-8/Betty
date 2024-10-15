@@ -630,8 +630,10 @@ Public Class frmDetalleH
     Private Sub cboRegistro_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboRegistro.SelectedValueChanged
         If cboRegistro.Text = "RESERVACION" Then
             pReservacion.Visible = True
+            gprecios.Visible = False
         Else
             pReservacion.Visible = False
+            gprecios.Visible = True
         End If
     End Sub
 

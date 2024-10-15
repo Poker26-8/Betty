@@ -46,6 +46,7 @@ Partial Class frmCalcularNuvHab
         Me.Label9 = New System.Windows.Forms.Label()
         Me.lblAnticipo = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.lblCliente = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Panel1
@@ -80,9 +81,9 @@ Partial Class frmCalcularNuvHab
         'Label7
         '
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(4, 97)
+        Me.Label7.Location = New System.Drawing.Point(3, 150)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(147, 23)
+        Me.Label7.Size = New System.Drawing.Size(143, 23)
         Me.Label7.TabIndex = 69
         Me.Label7.Text = "Hora Entrada:"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -90,7 +91,7 @@ Partial Class frmCalcularNuvHab
         'Label2
         '
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(4, 126)
+        Me.Label2.Location = New System.Drawing.Point(-1, 179)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(147, 23)
         Me.Label2.TabIndex = 67
@@ -100,7 +101,7 @@ Partial Class frmCalcularNuvHab
         'Label3
         '
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(8, 190)
+        Me.Label3.Location = New System.Drawing.Point(3, 243)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(72, 23)
         Me.Label3.TabIndex = 71
@@ -110,7 +111,7 @@ Partial Class frmCalcularNuvHab
         'Label4
         '
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(184, 191)
+        Me.Label4.Location = New System.Drawing.Point(179, 244)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(67, 23)
         Me.Label4.TabIndex = 73
@@ -120,7 +121,7 @@ Partial Class frmCalcularNuvHab
         'Label5
         '
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(13, 222)
+        Me.Label5.Location = New System.Drawing.Point(8, 275)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(142, 23)
         Me.Label5.TabIndex = 75
@@ -130,9 +131,9 @@ Partial Class frmCalcularNuvHab
         'Label6
         '
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(0, 293)
+        Me.Label6.Location = New System.Drawing.Point(3, 346)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(155, 23)
+        Me.Label6.Size = New System.Drawing.Size(147, 23)
         Me.Label6.TabIndex = 77
         Me.Label6.Text = "Total a Pagar: $"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -144,7 +145,7 @@ Partial Class frmCalcularNuvHab
         Me.btnSalir.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
         Me.btnSalir.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSalir.Location = New System.Drawing.Point(270, 327)
+        Me.btnSalir.Location = New System.Drawing.Point(270, 380)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(75, 62)
         Me.btnSalir.TabIndex = 79
@@ -157,7 +158,7 @@ Partial Class frmCalcularNuvHab
         Me.btnDesocupar.BackColor = System.Drawing.Color.White
         Me.btnDesocupar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnDesocupar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDesocupar.Location = New System.Drawing.Point(114, 327)
+        Me.btnDesocupar.Location = New System.Drawing.Point(109, 380)
         Me.btnDesocupar.Name = "btnDesocupar"
         Me.btnDesocupar.Size = New System.Drawing.Size(151, 62)
         Me.btnDesocupar.TabIndex = 80
@@ -168,9 +169,9 @@ Partial Class frmCalcularNuvHab
         '
         Me.lblPagar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblPagar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPagar.Location = New System.Drawing.Point(161, 291)
+        Me.lblPagar.Location = New System.Drawing.Point(156, 344)
         Me.lblPagar.Name = "lblPagar"
-        Me.lblPagar.Size = New System.Drawing.Size(184, 23)
+        Me.lblPagar.Size = New System.Drawing.Size(189, 23)
         Me.lblPagar.TabIndex = 81
         Me.lblPagar.Text = "Label8"
         Me.lblPagar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -179,9 +180,9 @@ Partial Class frmCalcularNuvHab
         '
         Me.lbltiempouso.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbltiempouso.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbltiempouso.Location = New System.Drawing.Point(161, 221)
+        Me.lbltiempouso.Location = New System.Drawing.Point(156, 274)
         Me.lbltiempouso.Name = "lbltiempouso"
-        Me.lbltiempouso.Size = New System.Drawing.Size(184, 23)
+        Me.lbltiempouso.Size = New System.Drawing.Size(189, 23)
         Me.lbltiempouso.TabIndex = 82
         Me.lbltiempouso.Text = "Label8"
         Me.lbltiempouso.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -190,9 +191,9 @@ Partial Class frmCalcularNuvHab
         '
         Me.lblPrecio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblPrecio.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPrecio.Location = New System.Drawing.Point(245, 191)
+        Me.lblPrecio.Location = New System.Drawing.Point(240, 244)
         Me.lblPrecio.Name = "lblPrecio"
-        Me.lblPrecio.Size = New System.Drawing.Size(100, 23)
+        Me.lblPrecio.Size = New System.Drawing.Size(105, 23)
         Me.lblPrecio.TabIndex = 83
         Me.lblPrecio.Text = "Label8"
         Me.lblPrecio.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -201,7 +202,7 @@ Partial Class frmCalcularNuvHab
         '
         Me.lblHoras.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblHoras.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHoras.Location = New System.Drawing.Point(69, 191)
+        Me.lblHoras.Location = New System.Drawing.Point(64, 244)
         Me.lblHoras.Name = "lblHoras"
         Me.lblHoras.Size = New System.Drawing.Size(109, 23)
         Me.lblHoras.TabIndex = 84
@@ -212,9 +213,9 @@ Partial Class frmCalcularNuvHab
         '
         Me.lblHorFin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblHorFin.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHorFin.Location = New System.Drawing.Point(161, 126)
+        Me.lblHorFin.Location = New System.Drawing.Point(156, 179)
         Me.lblHorFin.Name = "lblHorFin"
-        Me.lblHorFin.Size = New System.Drawing.Size(184, 23)
+        Me.lblHorFin.Size = New System.Drawing.Size(189, 23)
         Me.lblHorFin.TabIndex = 85
         Me.lblHorFin.Text = "Label8"
         Me.lblHorFin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -223,9 +224,9 @@ Partial Class frmCalcularNuvHab
         '
         Me.lblHorIni.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblHorIni.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHorIni.Location = New System.Drawing.Point(161, 97)
+        Me.lblHorIni.Location = New System.Drawing.Point(156, 150)
         Me.lblHorIni.Name = "lblHorIni"
-        Me.lblHorIni.Size = New System.Drawing.Size(184, 23)
+        Me.lblHorIni.Size = New System.Drawing.Size(189, 23)
         Me.lblHorIni.TabIndex = 87
         Me.lblHorIni.Text = "Label8"
         Me.lblHorIni.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -234,9 +235,9 @@ Partial Class frmCalcularNuvHab
         '
         Me.lblsalida.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblsalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblsalida.Location = New System.Drawing.Point(161, 158)
+        Me.lblsalida.Location = New System.Drawing.Point(156, 211)
         Me.lblsalida.Name = "lblsalida"
-        Me.lblsalida.Size = New System.Drawing.Size(184, 23)
+        Me.lblsalida.Size = New System.Drawing.Size(189, 23)
         Me.lblsalida.TabIndex = 89
         Me.lblsalida.Text = "Label8"
         Me.lblsalida.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -244,7 +245,7 @@ Partial Class frmCalcularNuvHab
         'Label9
         '
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(4, 158)
+        Me.Label9.Location = New System.Drawing.Point(-1, 211)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(147, 23)
         Me.Label9.TabIndex = 88
@@ -255,9 +256,9 @@ Partial Class frmCalcularNuvHab
         '
         Me.lblAnticipo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblAnticipo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAnticipo.Location = New System.Drawing.Point(161, 256)
+        Me.lblAnticipo.Location = New System.Drawing.Point(156, 309)
         Me.lblAnticipo.Name = "lblAnticipo"
-        Me.lblAnticipo.Size = New System.Drawing.Size(184, 23)
+        Me.lblAnticipo.Size = New System.Drawing.Size(189, 23)
         Me.lblAnticipo.TabIndex = 91
         Me.lblAnticipo.Text = "Label8"
         Me.lblAnticipo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -265,19 +266,30 @@ Partial Class frmCalcularNuvHab
         'Label10
         '
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(0, 258)
+        Me.Label10.Location = New System.Drawing.Point(-5, 311)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(155, 23)
         Me.Label10.TabIndex = 90
         Me.Label10.Text = "Anticipo: $"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'lblCliente
+        '
+        Me.lblCliente.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.lblCliente.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCliente.Location = New System.Drawing.Point(3, 96)
+        Me.lblCliente.Name = "lblCliente"
+        Me.lblCliente.Size = New System.Drawing.Size(342, 44)
+        Me.lblCliente.TabIndex = 92
+        Me.lblCliente.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'frmCalcularNuvHab
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(352, 399)
+        Me.ClientSize = New System.Drawing.Size(352, 447)
+        Me.Controls.Add(Me.lblCliente)
         Me.Controls.Add(Me.lblAnticipo)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.lblsalida)
@@ -333,4 +345,5 @@ Partial Class frmCalcularNuvHab
     Friend WithEvents Label9 As Label
     Friend WithEvents lblAnticipo As Label
     Friend WithEvents Label10 As Label
+    Friend WithEvents lblCliente As Label
 End Class
