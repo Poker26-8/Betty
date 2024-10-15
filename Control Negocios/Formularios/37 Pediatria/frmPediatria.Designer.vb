@@ -464,7 +464,7 @@ Partial Class frmPediatria
         '
         'txtT
         '
-        Me.txtT.BackColor = System.Drawing.Color.White
+        Me.txtT.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtT.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtT.Location = New System.Drawing.Point(435, 97)
         Me.txtT.Name = "txtT"
@@ -473,7 +473,7 @@ Partial Class frmPediatria
         '
         'txtTelP
         '
-        Me.txtTelP.BackColor = System.Drawing.Color.White
+        Me.txtTelP.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtTelP.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTelP.Location = New System.Drawing.Point(435, 62)
         Me.txtTelP.Name = "txtTelP"
@@ -492,7 +492,7 @@ Partial Class frmPediatria
         '
         'txtTelM
         '
-        Me.txtTelM.BackColor = System.Drawing.Color.White
+        Me.txtTelM.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtTelM.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTelM.Location = New System.Drawing.Point(435, 27)
         Me.txtTelM.Name = "txtTelM"
@@ -511,7 +511,7 @@ Partial Class frmPediatria
         '
         'txtTutor
         '
-        Me.txtTutor.BackColor = System.Drawing.Color.White
+        Me.txtTutor.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtTutor.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTutor.Location = New System.Drawing.Point(63, 96)
         Me.txtTutor.Name = "txtTutor"
@@ -530,7 +530,7 @@ Partial Class frmPediatria
         '
         'txtPapa
         '
-        Me.txtPapa.BackColor = System.Drawing.Color.White
+        Me.txtPapa.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtPapa.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPapa.Location = New System.Drawing.Point(63, 62)
         Me.txtPapa.Name = "txtPapa"
@@ -549,7 +549,7 @@ Partial Class frmPediatria
         '
         'txtMama
         '
-        Me.txtMama.BackColor = System.Drawing.Color.White
+        Me.txtMama.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtMama.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtMama.Location = New System.Drawing.Point(63, 28)
         Me.txtMama.Name = "txtMama"
