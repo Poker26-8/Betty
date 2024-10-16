@@ -39,7 +39,7 @@ Partial Class frmPermisosRestaurant
         Me.btnguardartolerancia = New System.Windows.Forms.Button()
         Me.txttolerancia = New System.Windows.Forms.TextBox()
         Me.GroupBox19 = New System.Windows.Forms.GroupBox()
-        Me.chkCuartos = New System.Windows.Forms.CheckBox()
+        Me.rbcuartos = New System.Windows.Forms.RadioButton()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.rbminuto = New System.Windows.Forms.RadioButton()
         Me.rbhora = New System.Windows.Forms.RadioButton()
@@ -269,7 +269,7 @@ Partial Class frmPermisosRestaurant
         '
         'GroupBox19
         '
-        Me.GroupBox19.Controls.Add(Me.chkCuartos)
+        Me.GroupBox19.Controls.Add(Me.rbcuartos)
         Me.GroupBox19.Controls.Add(Me.Label5)
         Me.GroupBox19.Controls.Add(Me.rbminuto)
         Me.GroupBox19.Controls.Add(Me.rbhora)
@@ -281,21 +281,21 @@ Partial Class frmPermisosRestaurant
         Me.GroupBox19.TabStop = False
         Me.GroupBox19.Text = "Tipo de cobro billar"
         '
-        'chkCuartos
+        'rbcuartos
         '
-        Me.chkCuartos.AutoSize = True
-        Me.chkCuartos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkCuartos.Location = New System.Drawing.Point(11, 85)
-        Me.chkCuartos.Name = "chkCuartos"
-        Me.chkCuartos.Size = New System.Drawing.Size(186, 20)
-        Me.chkCuartos.TabIndex = 238
-        Me.chkCuartos.Text = "Cobrar por cuartos de hora"
-        Me.chkCuartos.UseVisualStyleBackColor = True
+        Me.rbcuartos.AutoSize = True
+        Me.rbcuartos.Location = New System.Drawing.Point(104, 19)
+        Me.rbcuartos.Name = "rbcuartos"
+        Me.rbcuartos.Size = New System.Drawing.Size(86, 25)
+        Me.rbcuartos.TabIndex = 239
+        Me.rbcuartos.TabStop = True
+        Me.rbcuartos.Text = "Cuartos"
+        Me.rbcuartos.UseVisualStyleBackColor = True
         '
         'Label5
         '
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(8, 42)
+        Me.Label5.Location = New System.Drawing.Point(8, 47)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(281, 41)
         Me.Label5.TabIndex = 2
@@ -305,7 +305,7 @@ Partial Class frmPermisosRestaurant
         'rbminuto
         '
         Me.rbminuto.AutoSize = True
-        Me.rbminuto.Location = New System.Drawing.Point(160, 19)
+        Me.rbminuto.Location = New System.Drawing.Point(203, 19)
         Me.rbminuto.Name = "rbminuto"
         Me.rbminuto.Size = New System.Drawing.Size(84, 25)
         Me.rbminuto.TabIndex = 1
@@ -935,7 +935,6 @@ Partial Class frmPermisosRestaurant
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents rbNM As RadioButton
     Friend WithEvents rbM As RadioButton
-    Friend WithEvents chkCuartos As CheckBox
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents Label9 As Label
@@ -956,4 +955,5 @@ Partial Class frmPermisosRestaurant
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Button1 As Button
     Friend WithEvents cbCobroSimplificado As CheckBox
+    Friend WithEvents rbcuartos As RadioButton
 End Class

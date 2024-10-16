@@ -23,8 +23,8 @@
 
         Dim ToleBillar As String = ""
 
-        Dim cuartos As Integer = 0
-        cuartos = DatosRecarga("Cuartos")
+        Dim cuartos As String = ""
+        cuartos = DatosRecarga("TipoCobroBillar")
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -73,28 +73,7 @@
                                 Dim varope1 As Double = CDec(varHoras * 60)
                                 Dim varopeminutos As Double = VarMinutos - varope1
 
-                                If cuartos = 1 Then
-                                    varopeminutos = CDec(varopeminutos / 15)
 
-                                    Dim bandera As Integer = 0
-                                    Dim vartemporal As String = ""
-                                    For ii = 1 To Len(varopeminutos)
-                                        If bandera = 1 Then
-                                            If CDec(Mid(varopeminutos, ii, 2)) > 0 Then
-                                                varopeminutos = CDec(vartemporal) + 1
-                                            Else
-                                                varopeminutos = CDec(vartemporal)
-                                            End If
-                                            Exit For
-                                        End If
-
-                                        If "." = CStr(Mid(varopeminutos, ii, 1)) Then
-                                            bandera = 1
-                                        Else
-                                            vartemporal = vartemporal & Mid(varopeminutos, ii, 1)
-                                        End If
-                                    Next
-                                End If
 
                                 txtTiempoUso.Text = FormatNumber(VarMinutos, 2)
                                 txtHoras.Text = FormatNumber(varHoras, 2)
@@ -188,6 +167,31 @@
                             End If
                         End If
                         rd2.Close()
+                    ElseIf rd1(0).ToString = "CUARTOS" Then
+
+                        Dim varope1 As Double = CDec(varHoras * 60)
+                        Dim varopeminutos As Double = VarMinutos - varope1
+                        varopeminutos = CDec(varopeminutos / 15)
+
+                        Dim bandera As Integer = 0
+                        Dim vartemporal As String = ""
+                        For ii = 1 To Len(varopeminutos)
+                            If bandera = 1 Then
+                                If CDec(Mid(varopeminutos, ii, 2)) > 0 Then
+                                    varopeminutos = CDec(vartemporal) + 1
+                                Else
+                                    varopeminutos = CDec(vartemporal)
+                                End If
+                                Exit For
+                            End If
+
+                            If "." = CStr(Mid(varopeminutos, ii, 1)) Then
+                                bandera = 1
+                            Else
+                                vartemporal = vartemporal & Mid(varopeminutos, ii, 1)
+                            End If
+                        Next
+
 
                     Else
 

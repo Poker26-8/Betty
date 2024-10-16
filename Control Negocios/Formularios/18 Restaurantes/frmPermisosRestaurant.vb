@@ -50,14 +50,6 @@
                 cbMesasPropias.Checked = False
             End If
 
-            Dim cuartos As String = DatosRecarga("Cuartos")
-            If cuartos = 1 Then
-                chkCuartos.Checked = True
-            Else
-                chkCuartos.Checked = False
-            End If
-
-
             Dim copa As Integer = DatosRecarga2("Copa")
             If copa = 1 Then
                 cbCopas.Checked = True
@@ -70,6 +62,8 @@
                 rbhora.Checked = True
             ElseIf TIPOCOBRO = "MINUTO" Then
                 rbminuto.Checked = True
+            ElseIf TIPOCOBRO = "CUARTOS" Then
+                rbcuartos.Checked = True
             End If
 
             Dim sinnumcomensal As String = DatosRecarga("SinNumCoemensal")
@@ -470,7 +464,29 @@
                 End If
                 rd1.Close()
                 cnn1.Close()
+            ElseIf (rbcuartos.Checked) Then
 
+                cnn1.Close() : cnn1.Open()
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "SELECT Facturas FROM Formatos WHERE Facturas='TipoCobroBillar'"
+                rd1 = cmd1.ExecuteReader
+                If rd1.HasRows Then
+                    If rd1.Read Then
+                        cnn2.Close() : cnn2.Open()
+                        cmd2 = cnn2.CreateCommand
+                        cmd2.CommandText = "UPDATE Formatos SET NotasCred='CUARTOS' WHERE Facturas='TipoCobroBillar'"
+                        cmd2.ExecuteNonQuery()
+                        cnn2.Close()
+                    End If
+                Else
+                    cnn2.Close() : cnn2.Open()
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "Insert INTO Formatos(Facturas,NotasCred,NumPart) VALUES('TipoCobroBillar','CUARTOS','0')"
+                    cmd2.ExecuteNonQuery()
+                    cnn2.Close()
+                End If
+                rd1.Close()
+                cnn1.Close()
             End If
 
 
@@ -689,25 +705,7 @@
         CambiodeMesa()
     End Sub
 
-    Private Sub chkCuartos_CheckedChanged(sender As Object, e As EventArgs) Handles chkCuartos.CheckedChanged
-        Try
-            If (chkCuartos.Checked) Then
-                cnn1.Close() : cnn1.Open()
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "UPDATE Formatos SET NotasCred='1',NumPart='0' WHERE Facturas='Cuartos'"
-                cmd1.ExecuteNonQuery()
-                cnn1.Close()
-            Else
-                cnn1.Close() : cnn1.Open()
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "UPDATE Formatos SET NotasCred='0',NumPart='0' WHERE Facturas='Cuartos'"
-                cmd1.ExecuteNonQuery()
-                cnn1.Close()
-            End If
-        Catch ex As Exception
 
-        End Try
-    End Sub
 
     Private Sub cboMesa_DropDown(sender As Object, e As EventArgs) Handles cboMesa.DropDown
         Try
@@ -1001,5 +999,9 @@
             MessageBox.Show(ex.ToString)
             cnn1.Close()
         End Try
+    End Sub
+
+    Private Sub RadioButton1_Click(sender As Object, e As EventArgs) Handles rbcuartos.Click
+        CambioTipoBillar()
     End Sub
 End Class
