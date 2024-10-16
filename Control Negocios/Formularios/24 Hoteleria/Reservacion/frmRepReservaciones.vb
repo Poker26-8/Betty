@@ -92,7 +92,8 @@
 
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
         Try
-
+            Dim m1 As Date = dtpdesde.SelectionStart.ToShortDateString
+            Dim m2 As Date = dtphasta.SelectionStart.ToShortDateString
 
             Dim estado As String = ""
             Dim fentrada As Date = Nothing
@@ -103,7 +104,7 @@
             If (rbClientes.Checked) Then
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "SELECT * FROM reservaciones WHERE Cliente='" & cboFiltro.Text & "'"
+                cmd1.CommandText = "SELECT * FROM reservaciones WHERE Cliente='" & cboFiltro.Text & "' AND FEntrada BETWEEN '" & Format(m1, "yyyy-MM-dd") & " " & "00:00:00" & "' AND '" & Format(m2, "yyyy-MM-dd") & " " & "23:59:59" & "'"
                 rd1 = cmd1.ExecuteReader
                 Do While rd1.Read
                     If rd1.HasRows Then

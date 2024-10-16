@@ -240,14 +240,21 @@
                 If Not IsNumeric(txtfisica.Text) Then txtfisica.Text = "" : Exit Sub
                 If Not IsNumeric(txtsistema.Text) Then txtsistema.Text = "" : Exit Sub
 
+                Dim sistema As Double = txtsistema.Text
+                Dim fisica As Double = txtfisica.Text
+
                 Dim str As String = ""
                 Dim diferencia As Double = 0
                 str = Mid(txtfisica.Text, 1, 1)
                 If str <> "-" Then
                     txtfisica.Text = Trim(Replace(txtfisica.Text, "-", ""))
                 End If
-                diferencia = CDbl(IIf(txtfisica.Text = "", 0, txtfisica.Text)) - CDbl(IIf(txtsistema.Text = "", 0, txtsistema.Text))
-                'diferencia = CDbl(IIf(txtsistema.Text = "", 0, txtsistema.Text)) - CDbl(IIf(txtfisica.Text = "", 0, txtfisica.Text))
+
+                If sistema < 0 Then
+                    diferencia = CDbl(IIf(sistema = 0, 0, sistema)) + CDbl(IIf(fisica = 0, 0, fisica))
+                Else
+                    diferencia = CDbl(IIf(fisica = 0, 0, fisica)) - CDbl(IIf(sistema = 0, 0, sistema))
+                End If
                 txtdiferencia.Text = diferencia
             End If
         End If
@@ -406,6 +413,7 @@
         txtdiferencia.Text = ""
         chkmerma.Checked = False
         btnlimpia_lote.PerformClick()
+        cbodesc.Focus.Equals(True)
     End Sub
 
     Private Sub grdcaptura_CellDoubleClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdcaptura.CellDoubleClick

@@ -2680,18 +2680,24 @@ Public Class frmNuvRepVentas
                         End If
                         rd2.Close()
 
+                        If status = "PAGADO" Then
+                            formapago = formapago
+                        Else
+                            formapago = ""
+                        End If
+
                         grdCaptura.Rows.Add(folio, cliente, subtotal, Iva, total, propina, descuento, devolucion, acuenta, resta, ieps, formapago, status, fechanueva, facturado)
 
-                        T_Subtotal = T_Subtotal + subtotal
-                        T_IVA = T_IVA + Iva
-                        T_Total = T_Total + total
-                        T_Propina = T_Propina + propina
-                        T_Descuento = T_Descuento + descuento
-                        T_ACuenta = T_ACuenta + acuenta
-                        T_Resta = T_Resta + resta
-                        T_IEPS = T_IEPS + ieps
+                            T_Subtotal = T_Subtotal + subtotal
+                            T_IVA = T_IVA + Iva
+                            T_Total = T_Total + total
+                            T_Propina = T_Propina + propina
+                            T_Descuento = T_Descuento + descuento
+                            T_ACuenta = T_ACuenta + acuenta
+                            T_Resta = T_Resta + resta
+                            T_IEPS = T_IEPS + ieps
 
-                    End If
+                        End If
                 Loop
                 rd1.Close()
                 cnn1.Close()
