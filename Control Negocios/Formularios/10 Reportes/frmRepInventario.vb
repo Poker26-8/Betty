@@ -2800,6 +2800,7 @@ quepaso_wey:
             cbofiltro.Text = ""
             cbofiltro.Items.Clear()
             cbofiltro.Enabled = True
+            cbofiltro.Visible = False
             boxcaduca.Enabled = False
             txtCompraTot.Text = "0.00"
             txtVentaTot.Text = "0.00"

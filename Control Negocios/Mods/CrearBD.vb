@@ -44,6 +44,7 @@
                                               `Id` int(11) NOT NULL DEFAULT '0',
                                               `Paciente` varchar(250) NOT NULL DEFAULT '',
                                               `Fecha` date NOT NULL,
+                                              `Hora` time NOT NULL,
                                               `Codigo` varchar(50) NOT NULL DEFAULT '',
                                               `Medicamento` varchar(250) NOT NULL DEFAULT '',
                                               `Lote` varchar(100) NOT NULL DEFAULT '',
@@ -79,7 +80,11 @@
                                                   `FR` varchar(50) NOT NULL DEFAULT '',
                                                   `Saturacion` varchar(100) NOT NULL DEFAULT '0',
                                                   `mama` varchar(255) DEFAULT '',
-                                                  `papa` varchar(255) DEFAULT ''
+                                                  `papa` varchar(255) DEFAULT '',
+                                                  `AntMedicos` text NOT NULL,
+                                                  `ExpFisica` text NOT NULL,
+                                                  `Laboratorio` text NOT NULL,
+                                                  `AntFami` text NOT NULL
                                                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
     'tallerd
     Public vartablatallerd As String = "CREATE TABLE `tallerd` (
