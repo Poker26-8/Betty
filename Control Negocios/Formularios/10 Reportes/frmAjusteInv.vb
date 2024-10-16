@@ -226,7 +226,7 @@
     End Sub
 
     Private Sub txtfisica_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtfisica.KeyPress
-        If Not IsNumeric(txtfisica.Text) Then txtfisica.Text = ""
+        'If Not IsNumeric(txtfisica.Text) Then txtfisica.Text = ""
         If AscW(e.KeyChar) = Keys.Enter Then
             If txtfisica.Text <> "" Then
                 btnGuardar.Focus().Equals(True)
@@ -251,9 +251,20 @@
                 End If
 
                 If sistema < 0 Then
-                    diferencia = CDbl(IIf(sistema = 0, 0, sistema)) + CDbl(IIf(fisica = 0, 0, fisica))
+                    If fisica < 0 Then
+                        diferencia = CDbl(IIf(sistema = 0, 0, sistema)) - CDbl(IIf(fisica = 0, 0, fisica))
+                    Else
+                        diferencia = CDbl(IIf(sistema = 0, 0, sistema)) + CDbl(IIf(fisica = 0, 0, fisica))
+                    End If
+
+
                 Else
-                    diferencia = CDbl(IIf(fisica = 0, 0, fisica)) - CDbl(IIf(sistema = 0, 0, sistema))
+                    If fisica < 0 Then
+                        diferencia = CDbl(IIf(fisica = 0, 0, fisica)) + CDbl(IIf(sistema = 0, 0, sistema))
+                    Else
+                        diferencia = CDbl(IIf(fisica = 0, 0, fisica)) - CDbl(IIf(sistema = 0, 0, sistema))
+                    End If
+
                 End If
                 txtdiferencia.Text = diferencia
             End If

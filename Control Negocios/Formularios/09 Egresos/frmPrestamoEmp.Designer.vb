@@ -771,6 +771,7 @@ Partial Class frmPrestamoEmp
         '
         'cbotpago
         '
+        Me.cbotpago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbotpago.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbotpago.FormattingEnabled = True
         Me.cbotpago.Location = New System.Drawing.Point(93, 354)

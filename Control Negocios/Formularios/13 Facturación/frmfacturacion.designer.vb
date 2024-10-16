@@ -4091,7 +4091,7 @@ Partial Class frmfacturacion
         Me.GroupBox9.Controls.Add(Me.TabControl1)
         Me.GroupBox9.Location = New System.Drawing.Point(4, 83)
         Me.GroupBox9.Name = "GroupBox9"
-        Me.GroupBox9.Size = New System.Drawing.Size(979, 597)
+        Me.GroupBox9.Size = New System.Drawing.Size(987, 597)
         Me.GroupBox9.TabIndex = 89
         Me.GroupBox9.TabStop = False
         Me.GroupBox9.Text = "Datos para el Complemento Carta Porte"
