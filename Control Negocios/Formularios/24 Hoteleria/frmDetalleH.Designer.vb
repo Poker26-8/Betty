@@ -76,6 +76,7 @@ Partial Class frmDetalleH
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.PReservacion80 = New System.Drawing.Printing.PrintDocument()
         Me.PRservacion58 = New System.Drawing.Printing.PrintDocument()
+        Me.btnAbonos = New System.Windows.Forms.Button()
         Me.Panel4.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.pReservacion.SuspendLayout()
@@ -98,6 +99,7 @@ Partial Class frmDetalleH
         '
         'Panel5
         '
+        Me.Panel5.Controls.Add(Me.btnAbonos)
         Me.Panel5.Controls.Add(Me.pReservacion)
         Me.Panel5.Controls.Add(Me.gprecios)
         Me.Panel5.Controls.Add(Me.txttelefono)
@@ -628,6 +630,19 @@ Partial Class frmDetalleH
         'PRservacion58
         '
         '
+        'btnAbonos
+        '
+        Me.btnAbonos.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnAbonos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAbonos.Location = New System.Drawing.Point(500, 58)
+        Me.btnAbonos.Name = "btnAbonos"
+        Me.btnAbonos.Size = New System.Drawing.Size(82, 70)
+        Me.btnAbonos.TabIndex = 18
+        Me.btnAbonos.Text = "Abonos"
+        Me.btnAbonos.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnAbonos.UseVisualStyleBackColor = True
+        Me.btnAbonos.Visible = False
+        '
         'frmDetalleH
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -711,4 +726,5 @@ Partial Class frmDetalleH
     Friend WithEvents pReservacion As Panel
     Friend WithEvents PReservacion80 As Printing.PrintDocument
     Friend WithEvents PRservacion58 As Printing.PrintDocument
+    Friend WithEvents btnAbonos As Button
 End Class

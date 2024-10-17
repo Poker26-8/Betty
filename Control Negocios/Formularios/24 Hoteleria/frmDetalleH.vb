@@ -630,9 +630,11 @@ Public Class frmDetalleH
     Private Sub cboRegistro_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboRegistro.SelectedValueChanged
         If cboRegistro.Text = "RESERVACION" Then
             pReservacion.Visible = True
+            ' btnAbonos.Visible = True
             gprecios.Visible = False
         Else
             pReservacion.Visible = False
+            btnAbonos.Visible = False
             gprecios.Visible = True
         End If
     End Sub
@@ -883,5 +885,10 @@ Public Class frmDetalleH
             MessageBox.Show(ex.ToString)
             cnn2.Close()
         End Try
+    End Sub
+
+    Private Sub btnAbonos_Click(sender As Object, e As EventArgs) Handles btnAbonos.Click
+        frmAnticipoProv.BringToFront()
+        frmAnticipoProv.Show()
     End Sub
 End Class
