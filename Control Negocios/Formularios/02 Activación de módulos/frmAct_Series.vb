@@ -1,4 +1,5 @@
 ﻿Public Class frmAct_Series
+    Dim act As Integer = 0
     Private Sub frmAct_Series_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Label5.Text = Mid(SerialNumber(), 1, 7)
         SFormatos("Series", "")
@@ -86,5 +87,13 @@
             End If
         End If
 
+    End Sub
+
+    Private Sub txtcontra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcontra.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            btnDesactivar.Focus.Equals(True)
+        Else
+            Button1.Focus.Equals(True)
+        End If
     End Sub
 End Class

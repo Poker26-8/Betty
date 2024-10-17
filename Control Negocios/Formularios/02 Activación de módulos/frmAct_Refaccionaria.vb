@@ -1,7 +1,11 @@
 ﻿Public Class frmAct_Refaccionaria
+
+    Dim act As Integer = 0
+
     Private Sub frmAct_Refaccionaria_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Label5.Text = Mid(SerialNumber(), 1, 7)
         SFormatos("Refaccionaria", "")
+        act = DatosRecarga2("Refaccionaria")
 
         Dim REFA As Integer = 0
         Try
@@ -93,5 +97,17 @@
             End If
 
         End If
+    End Sub
+
+    Private Sub txtcontra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcontra.KeyPress
+
+        If AscW(e.KeyChar) = Keys.Enter Then
+            If act = 1 Then
+                btndesactivar.Focus.Equals(True)
+            Else
+                Button1.Focus.Equals(True)
+            End If
+        End If
+
     End Sub
 End Class

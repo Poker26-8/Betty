@@ -1,4 +1,6 @@
 ﻿Public Class frmAct_Farmacia
+    Dim act As Integer = 0
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If MsgBox("¿Deseas activar el módulo de farmacia?", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") = vbOK Then
 
@@ -58,6 +60,8 @@
     Private Sub frmAct_Farmacia_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SFormatos("Farmacia", "")
 
+        act = DatosRecarga2("Farmacia")
+
         Dim resta As Integer = 0
         Try
             cnn1.Close() : cnn1.Open()
@@ -83,5 +87,15 @@
             MessageBox.Show(ex.ToString)
             cnn1.Close()
         End Try
+    End Sub
+
+    Private Sub txtcontra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcontra.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            If act = 1 Then
+                btnDesactivar.Focus.Equals(True)
+            Else
+                Button1.Focus.Equals(True)
+            End If
+        End If
     End Sub
 End Class

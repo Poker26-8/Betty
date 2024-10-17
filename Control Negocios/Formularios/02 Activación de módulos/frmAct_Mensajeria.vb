@@ -1,4 +1,7 @@
 ﻿Public Class frmAct_Mensajeria
+
+    Dim act As Integer = 0
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnConfigurar.Click
         frmConfiM.Show()
     End Sub
@@ -8,6 +11,7 @@
         Label5.Text = Mid(SerialNumber(), 1, 7)
         SFormatos("Mensajeria", "")
 
+        act = DatosRecarga2("Mensajeria")
         Dim mensa As Integer = 0
 
         Try

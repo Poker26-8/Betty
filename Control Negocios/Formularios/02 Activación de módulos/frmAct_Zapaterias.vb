@@ -1,7 +1,9 @@
 ﻿Public Class frmAct_Zapaterias
+    Dim act As Integer = 0
     Private Sub frmAct_Zapaterias_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Label5.Text = Mid(SerialNumber(), 1, 7)
         SFormatos("Papos", "")
+        act = DatosRecarga2("Papos")
 
         Dim resta As Integer = 0
         Try
@@ -61,7 +63,13 @@
 
     Private Sub txtcontra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcontra.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
-            Button1.Focus().Equals(True)
+
+            If act = 1 Then
+                btnDesactivar.Focus.Equals(True)
+            Else
+                Button1.Focus().Equals(True)
+            End If
+
         End If
     End Sub
 

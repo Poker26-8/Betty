@@ -1,4 +1,6 @@
 ﻿Public Class frmAct_MovCuenta
+    Dim act As Integer = 0
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         If MsgBox("¿Deseas activar el módulo de mov cuenta?", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") = vbOK Then
@@ -34,6 +36,8 @@
 
         Label5.Text = Mid(SerialNumber(), 1, 7)
         SFormatos("Mov_Cuenta", "")
+
+        act = DatosRecarga2("Mov_Cuenta")
 
         Dim resta As Integer = 0
         Try
@@ -87,6 +91,16 @@
             Else
                 MsgBox("La clave de activación no es correcta.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
                 txtcontra.SelectAll() : Exit Sub
+            End If
+        End If
+    End Sub
+
+    Private Sub txtcontra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcontra.KeyPress
+        If Asc(e.KeyChar) = Keys.Enter Then
+            If act = 1 Then
+                btnDesactivar.Focus.Equals(True)
+            Else
+                Button1.Focus.Equals(True)
             End If
         End If
     End Sub

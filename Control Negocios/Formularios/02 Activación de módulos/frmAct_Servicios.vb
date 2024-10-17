@@ -1,6 +1,9 @@
 ﻿Public Class frmAct_Servicios
+
+    Dim act As Integer = 0
     Private Sub frmAct_Servicios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SFormatos("Control_Servicios", "")
+        act = DatosRecarga2("Control_Servicios")
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -59,5 +62,15 @@
             End If
         End If
 
+    End Sub
+
+    Private Sub txtcontra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcontra.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            If act = 1 Then
+                btnDesactivar.Focus.Equals(True)
+            Else
+                Button1.Focus.Equals(True)
+            End If
+        End If
     End Sub
 End Class

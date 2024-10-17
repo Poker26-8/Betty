@@ -1,4 +1,5 @@
 ﻿Public Class frmAct_produccionPro
+    Dim act As Integer = 0
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If MsgBox("¿Deseas activar el módulo de produccion?", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") = vbOK Then
 
@@ -31,6 +32,7 @@
     Private Sub frmAct_produccionPro_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Label5.Text = Mid(SerialNumber(), 1, 7)
         SFormatos("ProduccionPro", "")
+        act = DatosRecarga2("ProduccionPro")
 
         Dim resta As Integer = 0
         Try
@@ -83,6 +85,16 @@
             Else
                 MsgBox("La clave de activación no es correcta.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
                 txtcontra.SelectAll() : Exit Sub
+            End If
+        End If
+    End Sub
+
+    Private Sub txtcontra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcontra.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            If act = 1 Then
+                btnDesactivar.Focus.Equals(True)
+            Else
+                Button1.Focus.Equals(True)
             End If
         End If
     End Sub

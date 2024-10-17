@@ -1,8 +1,12 @@
 ﻿Public Class frmAct_Precios
+
+    Dim act As Integer = 0
+
     Private Sub frmAct_Precios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Label5.Text = Mid(SerialNumber(), 1, 7)
         SFormatos("Mod_Comp", "")
 
+        act = DatosRecarga2("Mod_Comp")
         Dim resta As Integer = 0
         Try
             cnn1.Close() : cnn1.Open()
@@ -83,6 +87,16 @@
             Else
                 MsgBox("La clave de activación no es correcta.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
                 txtcontra.SelectAll() : Exit Sub
+            End If
+        End If
+    End Sub
+
+    Private Sub txtcontra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcontra.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            If act = 1 Then
+                btnDesactivar.Focus.Equals(True)
+            Else
+                Button1.Focus.Equals(True)
             End If
         End If
     End Sub
