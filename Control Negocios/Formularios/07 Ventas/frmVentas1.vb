@@ -4448,7 +4448,8 @@ kaka:
             If renglon = 0 Then
                 grdcaptura.Rows.Add("", txtcoment.Text, "", "", "", "", "", "", "", "", "", "", "", "", "", "")
             Else
-                grdcaptura.Rows(renglon).Cells(1).Value = txtcoment.Text
+                txtcoment.Visible = False
+                'grdcaptura.Rows(renglon).Cells(1).Value = txtcoment.Text
             End If
             For t As Integer = 0 To grdcaptura.Rows.Count - 1
                 If CStr(grdcaptura.Rows(t).Cells(0).Value.ToString) = "" Then
@@ -4731,6 +4732,7 @@ kaka:
                 txtcoment.Visible = True
                 txtcoment.Text = grdcaptura.Rows(index).Cells(1).Value.ToString
                 txtcoment.Focus().Equals(True)
+                grdcaptura.Rows.Remove(grdcaptura.Rows(index))
                 Exit Sub
             End If
 
@@ -8285,7 +8287,7 @@ kakaxd:
 
 Door:
 
-                If grdcaptura.Rows(R).Cells(15).Value.ToString() <> "" Then
+                If grdcaptura.Rows(R).Cells(15).Value() <> "" Then
                     Dim codunico As String = grdcaptura.Rows(R).Cells(15).Value.ToString()
                     Dim mycodd As String = mycode
 
@@ -8931,7 +8933,7 @@ Door:
 
         cnn2.Close() : cnn2.Open()
         For luffy As Integer = 0 To grdcaptura.Rows.Count - 1
-            cunico = grdcaptura.Rows(luffy).Cells(15).Value.ToString
+            cunico = IIf(grdcaptura.Rows(luffy).Cells(15).Value = "", "", grdcaptura.Rows(luffy).Cells(15).Value)
 
             If cunico = "" Then
 

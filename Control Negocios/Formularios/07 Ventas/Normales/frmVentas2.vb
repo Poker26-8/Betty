@@ -5187,7 +5187,8 @@ kaka:
             If renglon = 0 Then
                 grdcaptura.Rows.Add("", txtcoment.Text, "", "", "", "", "", "", "", "", "", "", "", "", "", "")
             Else
-                grdcaptura.Rows(renglon).Cells(1).Value = txtcoment.Text
+                txtcoment.Visible = False
+                'grdcaptura.Rows(renglon).Cells(1).Value = txtcoment.Text
             End If
             For t As Integer = 0 To grdcaptura.Rows.Count - 1
                 If CStr(grdcaptura.Rows(t).Cells(0).Value.ToString) = "" Then
@@ -5467,6 +5468,7 @@ kaka:
                 renglon = grdcaptura.CurrentRow.Index
                 txtcoment.Visible = True
                 txtcoment.Text = grdcaptura.Rows(index).Cells(1).Value.ToString
+                grdcaptura.Rows.Remove(grdcaptura.Rows(index))
                 txtcoment.Focus().Equals(True)
                 Exit Sub
             End If

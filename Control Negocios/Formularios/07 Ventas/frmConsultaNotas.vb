@@ -915,7 +915,7 @@ Public Class frmConsultaNotas
                             'Total
                             .grdcaptura(5, degm).Value = FormatNumber(grdcaptura(5, degm).Value.ToString(), 4)
                             'codunico
-                            .grdcaptura(15, degm).Value = grdcaptura(8, degm).Value.ToString()
+                            .grdcaptura(15, degm).Value = IIf(grdcaptura(8, degm).Value.ToString = "", "", grdcaptura(8, degm).Value.ToString)
 
                             cmd1 = cnn1.CreateCommand
                             cmd1.CommandText =
