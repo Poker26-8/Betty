@@ -94,6 +94,8 @@ Partial Class frmComprasModelos
         Me.btnGuardar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.txtExistencia = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -120,16 +122,6 @@ Partial Class frmComprasModelos
         Me.Label41 = New System.Windows.Forms.Label()
         Me.txtpc_efectivo = New System.Windows.Forms.TextBox()
         Me.grdCaptura = New System.Windows.Forms.DataGridView()
-        Me.lblvalor = New System.Windows.Forms.Label()
-        Me.lblmoneda = New System.Windows.Forms.Label()
-        Me.Label34 = New System.Windows.Forms.Label()
-        Me.Label33 = New System.Windows.Forms.Label()
-        Me.pTicket80 = New System.Drawing.Printing.PrintDocument()
-        Me.pTicket58 = New System.Drawing.Printing.PrintDocument()
-        Me.pCancela80 = New System.Drawing.Printing.PrintDocument()
-        Me.pCancela58 = New System.Drawing.Printing.PrintDocument()
-        Me.pCancelaMC = New System.Drawing.Printing.PrintDocument()
-        Me.pCancelaCarta = New System.Drawing.Printing.PrintDocument()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -141,8 +133,16 @@ Partial Class frmComprasModelos
         Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtExistencia = New System.Windows.Forms.TextBox()
+        Me.lblvalor = New System.Windows.Forms.Label()
+        Me.lblmoneda = New System.Windows.Forms.Label()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.pTicket80 = New System.Drawing.Printing.PrintDocument()
+        Me.pTicket58 = New System.Drawing.Printing.PrintDocument()
+        Me.pCancela80 = New System.Drawing.Printing.PrintDocument()
+        Me.pCancela58 = New System.Drawing.Printing.PrintDocument()
+        Me.pCancelaMC = New System.Drawing.Printing.PrintDocument()
+        Me.pCancelaCarta = New System.Drawing.Printing.PrintDocument()
         Me.Panel.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -928,6 +928,7 @@ Partial Class frmComprasModelos
         Me.btnCopia.Text = "Copias"
         Me.btnCopia.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnCopia.UseVisualStyleBackColor = True
+        Me.btnCopia.Visible = False
         '
         'btnSalir
         '
@@ -994,6 +995,29 @@ Partial Class frmComprasModelos
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(893, 50)
         Me.Panel4.TabIndex = 92
+        '
+        'txtExistencia
+        '
+        Me.txtExistencia.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtExistencia.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtExistencia.Location = New System.Drawing.Point(801, 23)
+        Me.txtExistencia.Name = "txtExistencia"
+        Me.txtExistencia.Size = New System.Drawing.Size(92, 23)
+        Me.txtExistencia.TabIndex = 90
+        Me.txtExistencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label9
+        '
+        Me.Label9.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.Color.White
+        Me.Label9.Location = New System.Drawing.Point(801, 3)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(92, 21)
+        Me.Label9.TabIndex = 89
+        Me.Label9.Text = "Exis."
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Panel5
         '
@@ -1324,58 +1348,6 @@ Partial Class frmComprasModelos
         Me.grdCaptura.Size = New System.Drawing.Size(893, 433)
         Me.grdCaptura.TabIndex = 0
         '
-        'lblvalor
-        '
-        Me.lblvalor.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.lblvalor.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblvalor.ForeColor = System.Drawing.Color.White
-        Me.lblvalor.Location = New System.Drawing.Point(79, 14)
-        Me.lblvalor.Name = "lblvalor"
-        Me.lblvalor.Size = New System.Drawing.Size(92, 17)
-        Me.lblvalor.TabIndex = 151
-        Me.lblvalor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lblmoneda
-        '
-        Me.lblmoneda.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.lblmoneda.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblmoneda.ForeColor = System.Drawing.Color.White
-        Me.lblmoneda.Location = New System.Drawing.Point(79, 0)
-        Me.lblmoneda.Name = "lblmoneda"
-        Me.lblmoneda.Size = New System.Drawing.Size(92, 17)
-        Me.lblmoneda.TabIndex = 150
-        Me.lblmoneda.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label34
-        '
-        Me.Label34.AutoSize = True
-        Me.Label34.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.Label34.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label34.ForeColor = System.Drawing.Color.White
-        Me.Label34.Location = New System.Drawing.Point(2, 16)
-        Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(36, 13)
-        Me.Label34.TabIndex = 149
-        Me.Label34.Text = "Valor:"
-        '
-        'Label33
-        '
-        Me.Label33.AutoSize = True
-        Me.Label33.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.Label33.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label33.ForeColor = System.Drawing.Color.White
-        Me.Label33.Location = New System.Drawing.Point(2, 2)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(56, 13)
-        Me.Label33.TabIndex = 148
-        Me.Label33.Text = "Costo en:"
-        '
-        'pTicket80
-        '
-        '
-        'pTicket58
-        '
-        '
         'Column1
         '
         Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
@@ -1436,7 +1408,6 @@ Partial Class frmComprasModelos
         Me.Column8.Name = "Column8"
         Me.Column8.ReadOnly = True
         Me.Column8.Visible = False
-        Me.Column8.Width = 51
         '
         'Column10
         '
@@ -1445,7 +1416,6 @@ Partial Class frmComprasModelos
         Me.Column10.Name = "Column10"
         Me.Column10.ReadOnly = True
         Me.Column10.Visible = False
-        Me.Column10.Width = 79
         '
         'Column11
         '
@@ -1454,7 +1424,6 @@ Partial Class frmComprasModelos
         Me.Column11.Name = "Column11"
         Me.Column11.ReadOnly = True
         Me.Column11.Visible = False
-        Me.Column11.Width = 79
         '
         'Column12
         '
@@ -1463,30 +1432,58 @@ Partial Class frmComprasModelos
         Me.Column12.Name = "Column12"
         Me.Column12.ReadOnly = True
         Me.Column12.Visible = False
-        Me.Column12.Width = 79
         '
-        'Label9
+        'lblvalor
         '
-        Me.Label9.BackColor = System.Drawing.SystemColors.HotTrack
-        Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.ForeColor = System.Drawing.Color.White
-        Me.Label9.Location = New System.Drawing.Point(801, 3)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(92, 21)
-        Me.Label9.TabIndex = 89
-        Me.Label9.Text = "Exis."
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblvalor.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.lblvalor.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblvalor.ForeColor = System.Drawing.Color.White
+        Me.lblvalor.Location = New System.Drawing.Point(79, 14)
+        Me.lblvalor.Name = "lblvalor"
+        Me.lblvalor.Size = New System.Drawing.Size(92, 17)
+        Me.lblvalor.TabIndex = 151
+        Me.lblvalor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'txtExistencia
+        'lblmoneda
         '
-        Me.txtExistencia.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-        Me.txtExistencia.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtExistencia.Location = New System.Drawing.Point(801, 23)
-        Me.txtExistencia.Name = "txtExistencia"
-        Me.txtExistencia.Size = New System.Drawing.Size(92, 23)
-        Me.txtExistencia.TabIndex = 90
-        Me.txtExistencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.lblmoneda.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.lblmoneda.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblmoneda.ForeColor = System.Drawing.Color.White
+        Me.lblmoneda.Location = New System.Drawing.Point(79, 0)
+        Me.lblmoneda.Name = "lblmoneda"
+        Me.lblmoneda.Size = New System.Drawing.Size(92, 17)
+        Me.lblmoneda.TabIndex = 150
+        Me.lblmoneda.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.Label34.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label34.ForeColor = System.Drawing.Color.White
+        Me.Label34.Location = New System.Drawing.Point(2, 16)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(36, 13)
+        Me.Label34.TabIndex = 149
+        Me.Label34.Text = "Valor:"
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.Label33.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label33.ForeColor = System.Drawing.Color.White
+        Me.Label33.Location = New System.Drawing.Point(2, 2)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(56, 13)
+        Me.Label33.TabIndex = 148
+        Me.Label33.Text = "Costo en:"
+        '
+        'pTicket80
+        '
+        '
+        'pTicket58
+        '
         '
         'frmComprasModelos
         '

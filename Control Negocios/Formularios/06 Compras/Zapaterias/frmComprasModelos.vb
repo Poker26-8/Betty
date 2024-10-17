@@ -3036,4 +3036,7 @@ kakita:
         Exit Sub
     End Sub
 
+    Private Sub btnCopia_Click(sender As Object, e As EventArgs) Handles btnCopia.Click
+
+    End Sub
 End Class

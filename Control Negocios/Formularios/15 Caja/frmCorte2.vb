@@ -2638,6 +2638,16 @@ Public Class frmCorte2
             End If
             rd2.Close()
 
+            Dim egresoscomprasefectivo As Double = 0
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText = "SELECT SUM(Efectivo) FROM abonoe WHERE Concepto='ABONO' AND Fecha='" & Format(dtpFecha.Value, "yyyy-MM-dd") & "'"
+            rd2 = cmd2.ExecuteReader
+            If rd2.HasRows Then
+                If rd2.Read Then
+                    egresoscomprasefectivo = CDec(egresoscomprasefectivo) + CDec(IIf(rd2(0).ToString = "", "0.00", rd2(0).ToString))
+                End If
+            End If
+            rd2.Close()
             Dim egrEfectivodevo As Double = 0
 
             cmd2 = cnn2.CreateCommand
@@ -2649,8 +2659,7 @@ Public Class frmCorte2
                 End If
             End If
             rd2.Close()
-            txtEgrEfectivoG.Text = FormatNumber(CDbl(EgrEfectivo + egrEfectivodevo), 2)
-
+            txtEgrEfectivoG.Text = FormatNumber(CDbl(EgrEfectivo + egrEfectivodevo + egresoscomprasefectivo), 2)
 
             Dim EgrTarjeta As String = "0"
             Dim EgrTran As String = "0"

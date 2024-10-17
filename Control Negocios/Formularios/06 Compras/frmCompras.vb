@@ -5620,13 +5620,26 @@ quepasowey:
                 End If
                 rd1.Close()
 
+
+                Dim tipopago As String = ""
+
+                If txtefectivo.Text > 0 Then
+                    tipopago = "EFECTIVO"
+                ElseIf txtpc_tarjeta.Text > 0 Then
+                    tipopago = "TARJETA"
+                ElseIf txtpc_transfe.Text > 0 Then
+                    tipopago = "TRANSFERENCIA"
+                ElseIf txtpc_otro.Text > 0 Then
+                    tipopago = "OTRO"
+                End If
+
                 tarjeta = txtpc_tarjeta.Text
                 transfe = txtpc_transfe.Text
                 otro = txtpc_otro.Text
 
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
-                        "insert into AbonoE(NumRemision,NumFactura,NumPedido,IdProv,Proveedor,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,Efectivo,Tarjeta,Transfe,Otro,Banco,Referencia,Usuario,Corte,CorteU,Cargado) values('" & cboremision.Text & "','" & cbofactura.Text & "','" & cbopedido.Text & "'," & MyID & ",'" & cboproveedor.Text & "','ABONO','" & Format(dtpfecha.Value, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & MyACuenta & "," & MySaldo & "," & efectivo & "," & tarjeta & "," & transfe & "," & otro & ",'','','" & alias_compras & "',0,0,0)"
+                        "insert into AbonoE(NumRemision,NumFactura,NumPedido,IdProv,Proveedor,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Efectivo,Tarjeta,Transfe,Otro,Banco,Referencia,Usuario,Corte,CorteU,Cargado) values('" & cboremision.Text & "','" & cbofactura.Text & "','" & cbopedido.Text & "'," & MyID & ",'" & cboproveedor.Text & "','ABONO','" & Format(dtpfecha.Value, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & MyACuenta & ",'" & tipopago & "'," & MyACuenta & "," & MySaldo & "," & efectivo & "," & tarjeta & "," & transfe & "," & otro & ",'','','" & alias_compras & "',0,0,0)"
                 cmd1.ExecuteNonQuery()
             End If
         Else
