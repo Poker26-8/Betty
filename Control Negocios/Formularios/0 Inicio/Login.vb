@@ -783,6 +783,21 @@ Public Class Login
                     With odata
                         If .dbOpen(cnnprueba, sTargetprueba, sinfo) Then
 
+                            'movimeinto
+                            .runSp(cnnprueba, vartablamovimientos, sinfo)
+                            .runSp(cnnprueba, VarKeymovimiento, sinfo)
+                            .runSp(cnnprueba, VarAutomovimiento, sinfo)
+
+                            'autoriza
+                            .runSp(cnnprueba, vartablaautoriza, sinfo)
+                            .runSp(cnnprueba, VarKeyautoriza, sinfo)
+                            .runSp(cnnprueba, VarAutoautoriza, sinfo)
+
+                            'bodegas
+                            .runSp(cnnprueba, vartablabodegas, sinfo)
+                            .runSp(cnnprueba, VarKeybodegas, sinfo)
+                            .runSp(cnnprueba, VarAutobodegas, sinfo)
+
                             'comprasnetalla 
                             .runSp(cnnprueba, vartablacomprasentalla, sinfo)
                             .runSp(cnnprueba, VarKeycomprasentalla, sinfo)

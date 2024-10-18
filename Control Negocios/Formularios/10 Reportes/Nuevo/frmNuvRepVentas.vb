@@ -4487,10 +4487,26 @@ Public Class frmNuvRepVentas
                     For colIndex As Integer = 0 To dgv.Columns.Count - 1
                         Dim cellValue As Object = dgv.Rows(rowIndex).Cells(colIndex).Value
                         Dim cellValueString As String = If(cellValue Is Nothing, String.Empty, cellValue.ToString())
-                        worksheet.Cell(rowIndex + 2, colIndex + 1).Value = cellValueString
                         Dim cell As IXLCell = worksheet.Cell(rowIndex + 2, colIndex + 1)
+
+                        worksheet.Cell(rowIndex + 2, colIndex + 1).Value = cellValueString
+
                         cell.Value = cellValueString
-                        cell.Style.NumberFormat.Format = "@"
+
+
+                        If worksheet.Cell(rowIndex + 2, colIndex + 1).Value = cellValueString Then
+                            Dim number As Double
+                            If Double.TryParse(cellValueString, number) Then
+                                cell.Value = number
+                                cell.Style.NumberFormat.Format = "0"
+                            Else
+                                cell.Style.NumberFormat.Format = "@"
+                            End If
+
+                        Else
+                            cell.Style.NumberFormat.Format = "@"
+                        End If
+
                     Next
                     voy = voy + 1
                     My.Application.DoEvents()

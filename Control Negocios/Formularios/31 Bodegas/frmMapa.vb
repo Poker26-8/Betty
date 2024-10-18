@@ -21,6 +21,7 @@ Public Class frmMapa
         AddHandler tim.Tick, AddressOf Timer_Tick
         tim.Start()
 
+        btnnueva.Visible = True
         Crea_Plantas()
         primerBoton()
 
