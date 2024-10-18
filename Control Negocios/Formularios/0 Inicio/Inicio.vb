@@ -495,7 +495,7 @@ Public Class Inicio
         frmVentasTouch.Show()
         frmVentasTouch.BringToFront()
 
-        frmNuevo.Show()
+        'frmNuevo.Show()
     End Sub
 
     Private Sub Button7_Click(sender As System.Object, e As System.EventArgs) Handles Button7.Click

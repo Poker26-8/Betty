@@ -10,7 +10,12 @@ Public Class frmDetalleH
     Dim nLogo As String = ""
     Dim IDRESERVACION As Integer = 0
 
+    Dim fsalida As String = ""
+    Dim fentrada As String = ""
     Private Sub frmDetalleH_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        dtphoraentrada.Text = "00:00:00"
+        dtphorasalida.Text = "23:59:59"
 
         tLogo = DatosRecarga("TipoLogo")
         nLogo = DatosRecarga("LogoG")
@@ -228,7 +233,7 @@ Public Class frmDetalleH
                 Dim fechaentrada As Date = dtpEntrada.Value
                 Dim horaentrada As Date = dtphoraentrada.Value
 
-                Dim fentrada As String = Format(fechaentrada, "yyyy-MM-dd")
+                fentrada = Format(fechaentrada, "yyyy-MM-dd")
                 Dim hentrada As String = Format(horaentrada, "HH:mm:ss")
 
                 fechacentrada = fentrada & " " & hentrada
@@ -237,7 +242,7 @@ Public Class frmDetalleH
                 Dim fechasalida As Date = dtpSalida.Value
                 Dim horasalida As Date = dtphorasalida.Value
 
-                Dim fsalida As String = Format(fechasalida, "yyyy-MM-dd")
+                fsalida = Format(fechasalida, "yyyy-MM-dd")
                 Dim hsalida As String = Format(horasalida, "HH:mm:ss")
 
                 fechacsalida = fsalida & " " & hsalida
@@ -276,6 +281,18 @@ Public Class frmDetalleH
                 If tamim = "58" Then
                     PRservacion58.DefaultPageSettings.PrinterSettings.PrinterName = impresora
                     PRservacion58.Print()
+                End If
+
+                If MsgBox("¿Deseas realizar algun abono?", vbInformation + vbOKCancel, titulohotelriaa) = vbOK Then
+
+
+                    frmAnticiposReservaciones.lblHabitacion.Text = lblhabitacion.Text
+                    frmAnticiposReservaciones.cboClIente.Text = cbocliente.Text
+                    frmAnticiposReservaciones.lblEntrada.Text = fentrada
+                    frmAnticiposReservaciones.lblSalida.Text = fsalida
+
+                    frmAnticiposReservaciones.BringToFront()
+                    frmAnticiposReservaciones.Show()
                 End If
 
                 btnLimpiar.PerformClick()
@@ -630,7 +647,7 @@ Public Class frmDetalleH
     Private Sub cboRegistro_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboRegistro.SelectedValueChanged
         If cboRegistro.Text = "RESERVACION" Then
             pReservacion.Visible = True
-            ' btnAbonos.Visible = True
+            btnAbonos.Visible = True
             gprecios.Visible = False
         Else
             pReservacion.Visible = False
@@ -888,7 +905,7 @@ Public Class frmDetalleH
     End Sub
 
     Private Sub btnAbonos_Click(sender As Object, e As EventArgs) Handles btnAbonos.Click
-        frmAnticipoProv.BringToFront()
-        frmAnticipoProv.Show()
+        frmAnticiposReservaciones.BringToFront()
+        frmAnticiposReservaciones.Show()
     End Sub
 End Class

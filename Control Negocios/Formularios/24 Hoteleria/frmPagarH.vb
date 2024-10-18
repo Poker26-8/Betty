@@ -709,7 +709,7 @@ Public Class frmPagarH
 
         If mypago < txtTotal.Text Then
             MsgBox("Debe cerrar la cuenta!.", vbInformation + vbOKOnly, titulohotelriaa)
-            btnPagar.Enabled = True
+            btnCobrar.Enabled = True
             Exit Sub
         End If
 
