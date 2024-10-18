@@ -1360,7 +1360,7 @@ Public Class frmPagarH
             cmd2.ExecuteNonQuery()
 
             cmd2 = cnn2.CreateCommand
-            cmd2.CommandText = "DELETE FROM comanda1 WHERE Nmesa='" & lblHabitacion.Text & "'"
+            cmd2.CommandText = "DELETE FROM comanda1 WHERE Nombre='" & lblHabitacion.Text & "'"
             cmd2.ExecuteNonQuery()
 
             cmd2 = cnn2.CreateCommand

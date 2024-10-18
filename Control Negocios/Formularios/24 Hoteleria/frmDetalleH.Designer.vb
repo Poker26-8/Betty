@@ -25,6 +25,7 @@ Partial Class frmDetalleH
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDetalleH))
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.btnAbonos = New System.Windows.Forms.Button()
         Me.pReservacion = New System.Windows.Forms.Panel()
         Me.lbl = New System.Windows.Forms.Label()
         Me.lblHoraSalida = New System.Windows.Forms.Label()
@@ -76,7 +77,6 @@ Partial Class frmDetalleH
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.PReservacion80 = New System.Drawing.Printing.PrintDocument()
         Me.PRservacion58 = New System.Drawing.Printing.PrintDocument()
-        Me.btnAbonos = New System.Windows.Forms.Button()
         Me.Panel4.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.pReservacion.SuspendLayout()
@@ -113,6 +113,19 @@ Partial Class frmDetalleH
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(850, 135)
         Me.Panel5.TabIndex = 10
+        '
+        'btnAbonos
+        '
+        Me.btnAbonos.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnAbonos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAbonos.Location = New System.Drawing.Point(500, 58)
+        Me.btnAbonos.Name = "btnAbonos"
+        Me.btnAbonos.Size = New System.Drawing.Size(82, 70)
+        Me.btnAbonos.TabIndex = 18
+        Me.btnAbonos.Text = "Abonos"
+        Me.btnAbonos.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnAbonos.UseVisualStyleBackColor = True
+        Me.btnAbonos.Visible = False
         '
         'pReservacion
         '
@@ -629,19 +642,6 @@ Partial Class frmDetalleH
         '
         'PRservacion58
         '
-        '
-        'btnAbonos
-        '
-        Me.btnAbonos.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnAbonos.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAbonos.Location = New System.Drawing.Point(500, 58)
-        Me.btnAbonos.Name = "btnAbonos"
-        Me.btnAbonos.Size = New System.Drawing.Size(82, 70)
-        Me.btnAbonos.TabIndex = 18
-        Me.btnAbonos.Text = "Abonos"
-        Me.btnAbonos.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnAbonos.UseVisualStyleBackColor = True
-        Me.btnAbonos.Visible = False
         '
         'frmDetalleH
         '

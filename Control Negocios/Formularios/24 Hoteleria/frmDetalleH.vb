@@ -282,10 +282,25 @@ Public Class frmDetalleH
                     PRservacion58.DefaultPageSettings.PrinterSettings.PrinterName = impresora
                     PRservacion58.Print()
                 End If
+                frmManejo.Show()
+                frmManejo.pUbicaciones.Controls.Clear()
+                frmManejo.TRAERUBICACION()
 
                 If MsgBox("¿Deseas realizar algun abono?", vbInformation + vbOKCancel, titulohotelriaa) = vbOK Then
 
+                    cnn1.Close() : cnn1.Open()
+                    cmd1 = cnn1.CreateCommand
+                    cmd1.CommandText = "SELECT MAX(IdReservacion) FROM reservaciones"
+                    rd1 = cmd1.ExecuteReader
+                    If rd1.HasRows Then
+                        If rd1.Read Then
+                            frmAnticiposReservaciones.cboFolio.Text = rd1(0).ToString
 
+                        End If
+                    End If
+                    rd1.Close()
+                    cnn1.Close()
+                    frmAnticiposReservaciones.cboFolio_SelectedValueChanged(frmAnticiposReservaciones.cboFolio, New EventArgs())
                     frmAnticiposReservaciones.lblHabitacion.Text = lblhabitacion.Text
                     frmAnticiposReservaciones.cboClIente.Text = cbocliente.Text
                     frmAnticiposReservaciones.lblEntrada.Text = fentrada
@@ -293,13 +308,12 @@ Public Class frmDetalleH
 
                     frmAnticiposReservaciones.BringToFront()
                     frmAnticiposReservaciones.Show()
+
                 End If
 
                 btnLimpiar.PerformClick()
                 Me.Close()
-                frmManejo.Show()
-                frmManejo.pUbicaciones.Controls.Clear()
-                frmManejo.TRAERUBICACION()
+
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
                 cnn1.Close()
@@ -406,14 +420,14 @@ Public Class frmDetalleH
     Private Sub cbocliente_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbocliente.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
-            txttelefono.Focus.Equals(True)
+            cboRegistro.Focus.Equals(True)
         End If
     End Sub
 
     Private Sub cboRegistro_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboRegistro.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
-            dtpEntrada.Focus.Equals(True)
+            txttelefono.Focus.Equals(True)
         End If
     End Sub
 
@@ -475,7 +489,7 @@ Public Class frmDetalleH
 
     Private Sub txttelefono_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txttelefono.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
-            cboRegistro.Focus.Equals(True)
+            cboTipo.Focus.Equals(True)
         End If
     End Sub
 
@@ -749,6 +763,9 @@ Public Class frmDetalleH
 
             e.Graphics.DrawString("Folio: " & IDRESERVACION, fuente_r, Brushes.Black, 270, Y, derecha)
             Y += 23
+            e.Graphics.DrawString("Cliente: " & cbocliente.Text, fuente_r, Brushes.Black, 1, Y)
+            Y += 23
+
             e.Graphics.DrawString("Fecha Entrada: ", fuente_r, Brushes.Black, 1, Y)
             e.Graphics.DrawString(Format(dtpEntrada.Value, "yyyy-MM-dd") & " " & dtphoraentrada.Text, fuente_r, Brushes.Black, 270, Y, derecha)
             Y += 11
@@ -758,7 +775,7 @@ Public Class frmDetalleH
             e.Graphics.DrawString("----------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
             Y += 15
 
-            Dim caracteresPorLinea2 As Integer = 27
+            Dim caracteresPorLinea2 As Integer = 37
             Dim texto2 As String = Pie
             Dim inicio2 As Integer = 0
             Dim longitudTexto2 As Integer = texto2.Length
@@ -907,5 +924,11 @@ Public Class frmDetalleH
     Private Sub btnAbonos_Click(sender As Object, e As EventArgs) Handles btnAbonos.Click
         frmAnticiposReservaciones.BringToFront()
         frmAnticiposReservaciones.Show()
+    End Sub
+
+    Private Sub cboPrecio_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboPrecio.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            btnGuardar.Focus.Equals(True)
+        End If
     End Sub
 End Class

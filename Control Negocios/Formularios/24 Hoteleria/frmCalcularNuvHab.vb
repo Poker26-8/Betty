@@ -240,17 +240,21 @@
                     cmd3.CommandText = "INSERT INTO comandas(Id,NMESA,Codigo,Nombre,Cantidad,UVenta,CostVR,CostVP,CostVUE,Descuento,Precio,Total,PrecioSinIva,TotalSinIVA,Comisionista,Fecha,Comensal,Status,Comentario,GPrint,CUsuario,Total_comensales,Depto,Grupo,EstatusT,Hr,EntregaT) VALUES(" & FOLIOCOMANDA & ",'" & lblpc.Text & "','xc3','Tiempo Habitacion',1,'SER',0,0,0,0," & lblPrecio.Text & "," & totalpagar & "," & lblPrecio.Text & "," & totalpagar & ",'0','" & Format(Date.Now, "yyyy/MM/dd") & "',0,'RESTA','Renta de Habitacion','','',0,'HABITACION','HABITACION',0,'" & HrTiempo & "','" & HrEntrega & "')"
                     cmd3.ExecuteNonQuery()
 
-                    cmd3 = cnn3.CreateCommand
-                    cmd3.CommandText = "DELETE FROM AsigPC WHERE Nombre='" & lblpc.Text & "'"
-                    cmd3.ExecuteNonQuery()
+                    If lblPagar.Text > 0 Then
+                    Else
+                        cmd3 = cnn3.CreateCommand
+                        cmd3.CommandText = "DELETE FROM AsigPC WHERE Nombre='" & lblpc.Text & "'"
+                        cmd3.ExecuteNonQuery()
 
-                    cmd3 = cnn3.CreateCommand
-                    cmd3.CommandText = "DELETE FROM detallehotel WHERE Habitacion='" & lblpc.Text & "'"
-                    cmd3.ExecuteNonQuery()
+                        cmd3 = cnn3.CreateCommand
+                        cmd3.CommandText = "DELETE FROM detallehotel WHERE Habitacion='" & lblpc.Text & "'"
+                        cmd3.ExecuteNonQuery()
 
-                    cmd3 = cnn3.CreateCommand
-                    cmd3.CommandText = "DELETE FROM comanda1 WHERE Nombre='" & lblpc.Text & "'"
-                    cmd3.ExecuteNonQuery()
+                        cmd3 = cnn3.CreateCommand
+                        cmd3.CommandText = "DELETE FROM comanda1 WHERE Nombre='" & lblpc.Text & "'"
+                        cmd3.ExecuteNonQuery()
+                    End If
+
                     cnn3.Close()
                 End If
                 rd1.Close()

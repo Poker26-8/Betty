@@ -67,7 +67,7 @@
 
         cnn5.Close() : cnn5.Open()
         cmd5 = cnn5.CreateCommand
-        cmd5.CommandText = "SELECT DISTINCT Cliente FROM reservaciones WHERE Cliente<>'' AND Habitacion='" & lblHabitacion.Text & "' ORDER BY Cliente"
+        cmd5.CommandText = "SELECT DISTINCT Cliente FROM reservaciones WHERE Cliente<>'' AND Habitacion='" & lblHabitacion.Text & "' AND Status=0 ORDER BY Cliente"
         rd5 = cmd5.ExecuteReader
         Do While rd5.Read
             If rd5.HasRows Then

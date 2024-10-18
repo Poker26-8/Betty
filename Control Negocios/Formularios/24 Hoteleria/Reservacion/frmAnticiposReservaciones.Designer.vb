@@ -68,6 +68,9 @@ Partial Class frmAnticiposReservaciones
         Me.txtCambio = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.btnLimpiar = New System.Windows.Forms.Button()
+        Me.PReservacion80 = New System.Drawing.Printing.PrintDocument()
+        Me.lblAnticipo = New System.Windows.Forms.Label()
+        Me.txtAnticipo = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.pReservacion.SuspendLayout()
@@ -108,6 +111,8 @@ Partial Class frmAnticiposReservaciones
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.txtAnticipo)
+        Me.Panel1.Controls.Add(Me.lblAnticipo)
         Me.Panel1.Controls.Add(Me.txtCambio)
         Me.Panel1.Controls.Add(Me.Label16)
         Me.Panel1.Controls.Add(Me.Label6)
@@ -581,6 +586,33 @@ Partial Class frmAnticiposReservaciones
         Me.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnLimpiar.UseVisualStyleBackColor = True
         '
+        'PReservacion80
+        '
+        '
+        'lblAnticipo
+        '
+        Me.lblAnticipo.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAnticipo.Location = New System.Drawing.Point(238, 74)
+        Me.lblAnticipo.Name = "lblAnticipo"
+        Me.lblAnticipo.Size = New System.Drawing.Size(80, 29)
+        Me.lblAnticipo.TabIndex = 29
+        Me.lblAnticipo.Text = "Anticipo:"
+        Me.lblAnticipo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtAnticipo
+        '
+        Me.txtAnticipo.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.txtAnticipo.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAnticipo.ForeColor = System.Drawing.Color.White
+        Me.txtAnticipo.Location = New System.Drawing.Point(328, 74)
+        Me.txtAnticipo.Name = "txtAnticipo"
+        Me.txtAnticipo.ReadOnly = True
+        Me.txtAnticipo.Size = New System.Drawing.Size(117, 29)
+        Me.txtAnticipo.TabIndex = 30
+        Me.txtAnticipo.Text = "0.00"
+        Me.txtAnticipo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtAnticipo.Visible = False
+        '
         'frmAnticiposReservaciones
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -658,4 +690,7 @@ Partial Class frmAnticiposReservaciones
     Friend WithEvents txtCambio As TextBox
     Friend WithEvents Label16 As Label
     Friend WithEvents btnLimpiar As Button
+    Friend WithEvents PReservacion80 As Printing.PrintDocument
+    Friend WithEvents txtAnticipo As TextBox
+    Friend WithEvents lblAnticipo As Label
 End Class

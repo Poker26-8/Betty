@@ -1,4 +1,6 @@
-﻿Public Class frmAnticiposReservaciones
+﻿Imports DocumentFormat.OpenXml.Drawing.Charts
+
+Public Class frmAnticiposReservaciones
 
     Dim fentrada As String = ""
     Dim fechae As Date = Nothing
@@ -6,8 +8,9 @@
     Dim fechas As Date = Nothing
     Dim cadenafact As String = ""
 
+    Dim simbolo As String = ""
     Private Sub frmAnticiposReservaciones_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        simbolo = DatosRecarga("Simbolo")
     End Sub
 
     Private Sub cboFolio_DropDown(sender As Object, e As EventArgs) Handles cboFolio.DropDown
@@ -89,14 +92,31 @@
         End Try
     End Sub
 
-    Private Sub cboFolio_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboFolio.SelectedValueChanged
+    Public Sub cboFolio_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboFolio.SelectedValueChanged
         Try
             Dim simon As Integer = 0
             Dim varhoras As Integer = 0
-
+            Dim saldo As Double = 0
+            Dim anticipo As Double = 0
             cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
 
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT Saldo FROM abonoi WHERE Id=(select max(Id) from abonoi WHERE Comentario='" & cboFolio.Text & "' )"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    saldo = IIf(rd1(0).ToString = "", 0, rd1(0).ToString)
+                End If
+            End If
+            rd1.Close()
+
+            If saldo > 0 Then
+                txtResta.Text = FormatNumber(saldo, 2)
+            End If
+
+
+
+            cmd1 = cnn1.CreateCommand
             If cboClIente.Text = "" Then
                 cmd1.CommandText = "SELECT * FROM reservaciones WHERE IdReservacion=" & cboFolio.Text & ""
                 simon = 0
@@ -109,6 +129,8 @@
                 If rd1.Read Then
                     If simon = 0 Then
                         cboClIente.Text = rd1("Cliente").ToString
+                    Else
+                        cboFolio.Text = rd1("IdReservacion").ToString
                     End If
                     lblHabitacion.Text = rd1("Habitacion").ToString
 
@@ -120,12 +142,34 @@
                     fsalida = Format(fechas, "yyyy-MM-dd")
                     lblSalida.Text = fsalida
 
+                    cboTipo.Text = rd1("Tipo").ToString
+                    cboPrecio.Text = rd1("Precio").ToString
+
                     varhoras = DateDiff(DateInterval.Hour, CDate(fechae), fechas)
                     txtHoras.Text = varhoras
                     cboTipo.Focus.Equals(True)
                 End If
             End If
             rd1.Close()
+
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT SUM(Abono) FROM abonoi WHERE Comentario='" & cboFolio.Text & "' AND Cliente='" & cboClIente.Text & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    anticipo = rd1(0).ToString
+                End If
+            End If
+            rd1.Close()
+
+            If anticipo > 0 Then
+                txtAnticipo.Text = FormatNumber(anticipo, 2)
+                lblAnticipo.Visible = True
+                txtAnticipo.Visible = True
+            Else
+                lblAnticipo.Visible = False
+                txtAnticipo.Visible = False
+            End If
             cnn1.Close()
 
         Catch ex As Exception
@@ -510,7 +554,7 @@
                 rd1.Close()
 
                 cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "INSERT INTO abonoi(NumFolio,IdCliente,Cliente,Concepto,fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Descuento,MontoSF,Comentario) VALUES(" & myfolio & "," & idcliente & ",'" & cboClIente.Text & "','NOTA VENTA','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & saldo & ",0," & saldo & ",'',0,'','','" & lblUsuario.Text & "'," & mydescuento & ",0,'')"
+                cmd1.CommandText = "INSERT INTO abonoi(NumFolio,IdCliente,Cliente,Concepto,fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Descuento,MontoSF,Comentario) VALUES(" & myfolio & "," & idcliente & ",'" & cboClIente.Text & "','NOTA VENTA','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & saldo & ",0," & saldo & ",'',0,'','','" & lblUsuario.Text & "'," & mydescuento & ",0,'" & cboFolio.Text & "')"
                 cmd1.ExecuteNonQuery()
 
                 If efectivo > 0 Then
@@ -528,7 +572,7 @@
 
 
                     cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "INSERT INTO abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Comentario,Comisiones) VALUES(" & myfolio & "," & idcliente & ",'" & cboClIente.Text & "','ABONO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & efectivo & "," & saldo & ",'EFECTIVO'," & efectivo & ",'','','" & lblUsuario.Text & "','RESERVACION',0)"
+                    cmd1.CommandText = "INSERT INTO abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Comentario,Comisiones) VALUES(" & myfolio & "," & idcliente & ",'" & cboClIente.Text & "','ABONO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & efectivo & "," & saldo & ",'EFECTIVO'," & efectivo & ",'','','" & lblUsuario.Text & "','" & cboFolio.Text & "',0)"
                     cmd1.ExecuteNonQuery()
                 End If
 
@@ -547,7 +591,7 @@
 
 
                     cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "INSERT INTO abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Comentario,Comisiones) VALUES(" & myfolio & "," & idcliente & ",'" & cboClIente.Text & "','ABONO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & tarjeta & "," & saldo & ",'TARJETA'," & tarjeta & ",'','','" & lblUsuario.Text & "','RESERVACION',0)"
+                    cmd1.CommandText = "INSERT INTO abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Comentario,Comisiones) VALUES(" & myfolio & "," & idcliente & ",'" & cboClIente.Text & "','ABONO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & tarjeta & "," & saldo & ",'TARJETA'," & tarjeta & ",'','','" & lblUsuario.Text & "','" & cboFolio.Text & "',0)"
                     cmd1.ExecuteNonQuery()
 
 
@@ -568,7 +612,7 @@
                     rd1.Close()
 
                     cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "INSERT INTO abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Comentario,Comisiones) VALUES(" & myfolio & "," & idcliente & ",'" & cboClIente.Text & "','ABONO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & transaferencia & "," & saldo & ",'TRANSFERENCIA'," & transaferencia & ",'','','" & lblUsuario.Text & "','RESERVACION',0)"
+                    cmd1.CommandText = "INSERT INTO abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Comentario,Comisiones) VALUES(" & myfolio & "," & idcliente & ",'" & cboClIente.Text & "','ABONO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & transaferencia & "," & saldo & ",'TRANSFERENCIA'," & transaferencia & ",'','','" & lblUsuario.Text & "','" & cboFolio.Text & "',0)"
                     cmd1.ExecuteNonQuery()
                 End If
 
@@ -585,23 +629,40 @@
                         saldo = FormatNumber(txtTotalVenta.Text, 2)
                     End If
                     rd1.Close()
-
                     cmd1 = cnn1.CreateCommand
-                        cmd1.CommandText = "INSERT INTO abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Comentario,Comisiones) VALUES(" & myfolio & "," & idcliente & ",'" & cboClIente.Text & "','ABONO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & otro & "," & saldo & ",'OTRO'," & otro & ",'','','" & lblUsuario.Text & "','RESERVACION',0)"
-                        cmd1.ExecuteNonQuery()
+                    cmd1.CommandText = "INSERT INTO abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Comentario,Comisiones) VALUES(" & myfolio & "," & idcliente & ",'" & cboClIente.Text & "','ABONO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & otro & "," & saldo & ",'OTRO'," & otro & ",'','','" & lblUsuario.Text & "','" & cboFolio.Text & "',0)"
+                    cmd1.ExecuteNonQuery()
 
 
                 End If
+                cnn1.Close()
 
                 cnn2.Close() : cnn2.Open()
                 cmd2 = cnn2.CreateCommand
                 cmd2.CommandText =
             "insert into VentasDetalle(Folio,Codigo,Nombre,Unidad,Cantidad,CostoVP,CostoVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,FechaCompleta,Comisionista,Facturado,Depto,Grupo,CostVR,Descto,VDCosteo,TotalIEPS,TasaIEPS,Caducidad,Lote,CantidadE,Promo_Monedero,Unico,Descuento,Gprint,CodUnico) values(" & myfolio & ",'xc3','Tiempo Habitacion','PZA',1,0,0," & mysubtotal & "," & mytotalventa & "," & mysubtotal & "," & mytotalventa & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','0','0','HABITACION','HABITACION','0',0,0,0,0,'','',0,0,0," & mydescuento & ",'','')"
                 cmd2.ExecuteNonQuery()
+
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "UPDATE reservaciones SET Tipo='" & cboTipo.Text & "', Precio=" & cboPrecio.Text & " WHERE IdReservacion=" & cboFolio.Text & " AND Cliente='" & cboClIente.Text & "'"
+                cmd2.ExecuteNonQuery()
                 cnn2.Close()
 
-                cnn1.Close()
+                Dim timpresora As Integer = TamImpre()
+                Dim impresora As String = ImpresoraImprimir()
+
+                If impresora = "" Then
+                    MsgBox("La impresora no esta configurada.", vbInformation + vbOKOnly, titulohotelriaa)
+                    GoTo deku
                 End If
+
+                If timpresora = "80" Then
+                    PReservacion80.DefaultPageSettings.PrinterSettings.PrinterName = impresora
+                    PReservacion80.Print()
+                End If
+deku:
+                btnLimpiar.PerformClick()
+            End If
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn1.Close()
@@ -625,6 +686,252 @@
     End Sub
 
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        txtEfectivo.Text = "0.00"
+        txtTarjeta.Text = "0.00"
+        txtTransfe.Text = "0.00"
+        txtOtro.Text = "0.00"
+        txtDescuento.Text = "0.00"
+        txtCambio.Text = "0.00"
+        txtResta.Text = "0.00"
+        txtCambio.Text = "0.00"
+        txtTotalVenta.Text = "0.00"
+        txtSubtotal.Text = "0.00"
+        txtAnticipo.Text = "0.00"
+        cboTipo.Text = ""
+        txtHoras.Text = ""
+        cboPrecio.Text = ""
+        lblEntrada.Text = ""
+        lblSalida.Text = ""
+        cboClIente.Text = ""
+        lblHabitacion.Text = ""
+        cboFolio.Text = ""
 
+        lblAnticipo.Visible = False
+        txtAnticipo.Visible = False
+    End Sub
+
+    Private Sub PReservacion80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PReservacion80.PrintPage
+
+        Dim tipografia As String = "Lucida Sans Typewriter"
+        Dim fuente_r As New Font("Lucida Sans Typewriter", 8, FontStyle.Regular)
+        Dim fuente_b As New Font("Lucida Sans Typewriter", 8, FontStyle.Bold)
+        Dim fuente_c As New Font("Lucida Sans Typewriter", 8, FontStyle.Regular)
+        Dim fuente_p As New Font("Lucida Sans Typewriter", 7, FontStyle.Regular)
+        Dim derecha As New StringFormat With {.Alignment = StringAlignment.Far}
+        Dim sc As New StringFormat With {.Alignment = StringAlignment.Center}
+        Dim hoja As New Pen(Brushes.Black, 1)
+        Dim Y As Double = 0
+        Dim Logotipo As Drawing.Image = Nothing
+        Dim Pie As String = ""
+
+        cnn1.Close() : cnn1.Open()
+        cmd1 = cnn1.CreateCommand
+        cmd1.CommandText =
+            "select Pie1,Pagare,Cab0,Cab1,Cab2,Cab3,Cab4,Cab5,Cab6 from Ticket"
+        rd1 = cmd1.ExecuteReader
+        If rd1.HasRows Then
+            If rd1.Read Then
+                pie = rd1("Pie1").ToString
+
+                'Razón social
+                If rd1("Cab0").ToString() <> "" Then
+                    e.Graphics.DrawString(rd1("Cab0").ToString, New Drawing.Font(tipografia, 8, FontStyle.Bold), Brushes.Black, 140, Y, sc)
+                    Y += 12.5
+                End If
+                'RFC
+                If rd1("Cab1").ToString() <> "" Then
+                    e.Graphics.DrawString(rd1("Cab1").ToString, New Drawing.Font(tipografia, 8, FontStyle.Bold), Brushes.Black, 140, Y, sc)
+                    Y += 12.5
+                End If
+                'Calle  N°.
+                If rd1("Cab2").ToString() <> "" Then
+                    e.Graphics.DrawString(rd1("Cab2").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
+                    Y += 12
+                End If
+                'Colonia
+                If rd1("Cab3").ToString() <> "" Then
+                    e.Graphics.DrawString(rd1("Cab3").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
+                    Y += 12
+                End If
+                'Delegación / Municipio - Entidad
+                If rd1("Cab4").ToString() <> "" Then
+                    e.Graphics.DrawString(rd1("Cab4").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
+                    Y += 12
+                End If
+                'Teléfono
+                If rd1("Cab5").ToString() <> "" Then
+                    e.Graphics.DrawString(rd1("Cab5").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
+                    Y += 12
+                End If
+                'Correo
+                If rd1("Cab6").ToString() <> "" Then
+                    e.Graphics.DrawString(rd1("Cab6").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
+                    Y += 12
+                End If
+                Y += 3
+            End If
+        Else
+            Y += 0
+        End If
+        rd1.Close()
+        cnn1.Close()
+
+
+        '[1]. Datos de la venta
+        e.Graphics.DrawString("-----------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
+        Y += 15
+        e.Graphics.DrawString("R E S E R V A C I Ó N", New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 140, Y, sc)
+        Y += 17
+        e.Graphics.DrawString("-----------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
+        Y += 18
+
+        e.Graphics.DrawString("Folio: " & cboFolio.Text, fuente_r, Brushes.Black, 270, Y, derecha)
+        Y += 23
+        e.Graphics.DrawString("Fecha: " & Format(Date.Now, "yyyy-MM-dd"), fuente_r, Brushes.Black, 1, Y)
+        e.Graphics.DrawString("Hora: " & Format(Date.Now, "HH:mm"), fuente_r, Brushes.Black, 270, Y, derecha)
+        Y += 11
+
+        If cboClIente.Text <> "" Then
+            e.Graphics.DrawString("-----------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
+            Y += 12
+            e.Graphics.DrawString("C L I E N T E", New Drawing.Font(tipografia, 10, FontStyle.Bold), Brushes.Black, 140, Y, sc)
+            Y += 7.5
+            e.Graphics.DrawString("-----------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
+            Y += 15
+
+            Dim caracteresPorLinea2 As Integer = 35
+            Dim texto2 As String = cboClIente.Text
+            Dim inicio2 As Integer = 0
+            Dim longitudTexto2 As Integer = texto2.Length
+
+            While inicio2 < longitudTexto2
+                Dim longitudBloque2 As Integer = Math.Min(caracteresPorLinea2, longitudTexto2 - inicio2)
+                Dim bloque2 As String = texto2.Substring(inicio2, longitudBloque2)
+                e.Graphics.DrawString(bloque2, New Font("Arial", 9, FontStyle.Regular), Brushes.Black, 1, Y)
+                Y += 13
+                inicio2 += caracteresPorLinea2
+            End While
+            Y += 5
+            e.Graphics.DrawString("-----------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
+            Y += 12
+        End If
+
+        e.Graphics.DrawString("CANT", fuente_b, Brushes.Black, 1, Y)
+        e.Graphics.DrawString("DESCRIPION", fuente_b, Brushes.Black, 35, Y)
+        e.Graphics.DrawString("PRECIO", fuente_b, Brushes.Black, 215, Y, derecha)
+        e.Graphics.DrawString("IMPORTE", fuente_b, Brushes.Black, 280, Y, derecha)
+        Y += 20
+
+        e.Graphics.DrawString("1", fuente_p, Brushes.Black, 1, Y)
+
+        Dim caracteresPorLinea4 As Integer = 27
+        Dim texto4 As String = "Tiempo Habitación"
+        Dim inicio4 As Integer = 0
+        Dim longitudTexto4 As Integer = texto4.Length
+
+        While inicio4 < longitudTexto4
+            Dim longitudBloque4 As Integer = Math.Min(caracteresPorLinea4, longitudTexto4 - inicio4)
+            Dim bloque4 As String = texto4.Substring(inicio4, longitudBloque4)
+            e.Graphics.DrawString(bloque4, New Font("Arial", 10, FontStyle.Regular), Brushes.Black, 30, Y)
+            Y += 13
+            inicio4 += caracteresPorLinea4
+        End While
+        Y += 15
+        e.Graphics.DrawString(simbolo & " " & FormatNumber(txtTotalVenta.Text, 2), fuente_p, Brushes.Black, 205, Y, derecha)
+        e.Graphics.DrawString(simbolo & " " & FormatNumber(txtTotalVenta.Text, 2), fuente_p, Brushes.Black, 270, Y, derecha)
+        Y += 12
+
+        e.Graphics.DrawString("-----------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
+        Y += 18
+
+        e.Graphics.DrawString("Cantidad de articulos: " & "1", fuente_r, Brushes.Black, 1, Y)
+        Y += 25
+
+        e.Graphics.DrawString("SUBTOTAL: ", fuente_b, Brushes.Black, 1, Y)
+        e.Graphics.DrawString(simbolo & " " & FormatNumber(txtSubtotal.Text, 2), fuente_b, Brushes.Black, 280, Y, derecha)
+        Y += 20
+
+        If txtDescuento.Text > 0 Then
+            e.Graphics.DrawString("DESCUENTO: ", fuente_b, Brushes.Black, 1, Y)
+            e.Graphics.DrawString(simbolo & " " & FormatNumber(txtDescuento.Text, 2), fuente_b, Brushes.Black, 280, Y, derecha)
+            Y += 20
+        End If
+
+        e.Graphics.DrawString("TOTAL A PAGAR: ", fuente_b, Brushes.Black, 1, Y)
+        e.Graphics.DrawString(simbolo & " " & FormatNumber(txtTotalVenta.Text, 2), fuente_b, Brushes.Black, 280, Y, derecha)
+        Y += 20
+
+        If CDec(txtEfectivo.Text) Then
+            e.Graphics.DrawString("EFECTIVO", fuente_b, Brushes.Black, 1, Y)
+            e.Graphics.DrawString(simbolo & " " & FormatNumber(txtEfectivo.Text, 2), fuente_b, Brushes.Black, 280, Y, derecha)
+            Y += 20
+        End If
+
+        If CDec(txtTarjeta.Text) Then
+            e.Graphics.DrawString("EFECTIVO", fuente_b, Brushes.Black, 1, Y)
+            e.Graphics.DrawString(simbolo & " " & FormatNumber(txtTarjeta.Text, 2), fuente_b, Brushes.Black, 280, Y, derecha)
+            Y += 20
+        End If
+
+        If CDec(txtTransfe.Text) Then
+            e.Graphics.DrawString("EFECTIVO", fuente_b, Brushes.Black, 1, Y)
+            e.Graphics.DrawString(simbolo & " " & FormatNumber(txtTransfe.Text, 2), fuente_b, Brushes.Black, 280, Y, derecha)
+            Y += 20
+        End If
+
+        If CDec(txtOtro.Text) Then
+            e.Graphics.DrawString("EFECTIVO", fuente_b, Brushes.Black, 1, Y)
+            e.Graphics.DrawString(simbolo & " " & FormatNumber(txtOtro.Text, 2), fuente_b, Brushes.Black, 280, Y, derecha)
+            Y += 20
+        End If
+
+        If CDec(txtResta.Text) <> 0 Then
+            e.Graphics.DrawString("RESTA: ", fuente_b, Brushes.Black, 1, Y)
+            e.Graphics.DrawString(simbolo & " " & FormatNumber(txtResta.Text, 2), fuente_b, Brushes.Black, 280, Y, derecha)
+            Y += 20
+        End If
+
+        If CDec(txtCambio.Text) <> 0 Then
+            e.Graphics.DrawString("CAMBIO: ", fuente_b, Brushes.Black, 1, Y)
+            e.Graphics.DrawString(simbolo & " " & FormatNumber(txtCambio.Text, 2), fuente_b, Brushes.Black, 280, Y, derecha)
+            Y += 10
+        End If
+        Y += 15
+
+        Dim cantidadLetra As String = ""
+        cantidadLetra = convLetras(txtTotalVenta.Text)
+
+        Dim caracteresPorLinea As Integer = 37
+        Dim texto As String = cantidadLetra
+        Dim inicio As Integer = 0
+        Dim longitudTexto As Integer = texto.Length
+
+        While inicio < longitudTexto
+            Dim longitudBloque As Integer = Math.Min(caracteresPorLinea, longitudTexto - inicio)
+            Dim bloque As String = texto.Substring(inicio, longitudBloque)
+            e.Graphics.DrawString(bloque, New Font("Arial", 9, FontStyle.Regular), Brushes.Black, 1, Y)
+            Y += 13
+            inicio += caracteresPorLinea
+        End While
+        Y += 5
+
+        Dim caracteresPorLinea3 As Integer = 37
+        Dim texto3 As String = Pie
+        Dim inicio3 As Integer = 0
+        Dim longitudTexto3 As Integer = texto3.Length
+
+        While inicio3 < longitudTexto3
+            Dim longitudBloque3 As Integer = Math.Min(caracteresPorLinea3, longitudTexto3 - inicio3)
+            Dim bloque3 As String = texto3.Substring(inicio3, longitudBloque3)
+            e.Graphics.DrawString(bloque3, New Font("Arial", 9, FontStyle.Regular), Brushes.Black, 1, Y)
+            Y += 13
+            inicio3 += caracteresPorLinea3
+        End While
+        Y += 5
+
+        e.Graphics.DrawString("Lo atendio: " & lblUsuario.Text, fuente_r, Brushes.Black, 1, Y)
+        Y += 20
+
+        e.HasMorePages = False
     End Sub
 End Class
