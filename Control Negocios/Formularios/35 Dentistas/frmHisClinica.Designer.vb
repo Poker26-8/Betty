@@ -56,6 +56,7 @@ Partial Class frmHisClinica
         Me.txtEfectivo = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnIncapacidad = New System.Windows.Forms.Button()
@@ -123,7 +124,6 @@ Partial Class frmHisClinica
         Me.btnd17 = New System.Windows.Forms.Button()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.btnd1 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.grdCaptura, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -474,6 +474,20 @@ Partial Class frmHisClinica
         Me.Panel4.Size = New System.Drawing.Size(263, 272)
         Me.Panel4.TabIndex = 23
         '
+        'Button3
+        '
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
+        Me.Button3.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.Button3.Location = New System.Drawing.Point(189, 187)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(71, 77)
+        Me.Button3.TabIndex = 87
+        Me.Button3.Text = "Salir"
+        Me.Button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'Button2
         '
         Me.Button2.BackColor = System.Drawing.Color.Yellow
@@ -507,7 +521,7 @@ Partial Class frmHisClinica
         Me.btnIncapacidad.Name = "btnIncapacidad"
         Me.btnIncapacidad.Size = New System.Drawing.Size(257, 40)
         Me.btnIncapacidad.TabIndex = 3
-        Me.btnIncapacidad.Text = "INCAPACIDAD MEDICA"
+        Me.btnIncapacidad.Text = "REPORTE DE CITAS"
         Me.btnIncapacidad.UseVisualStyleBackColor = False
         '
         'btnPagar
@@ -1190,20 +1204,6 @@ Partial Class frmHisClinica
         Me.btnd1.Size = New System.Drawing.Size(44, 70)
         Me.btnd1.TabIndex = 82
         Me.btnd1.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button3.Location = New System.Drawing.Point(189, 187)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(71, 77)
-        Me.Button3.TabIndex = 87
-        Me.Button3.Text = "Salir"
-        Me.Button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button3.UseVisualStyleBackColor = True
         '
         'frmHisClinica
         '

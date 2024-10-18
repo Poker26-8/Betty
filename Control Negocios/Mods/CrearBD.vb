@@ -1,5 +1,41 @@
 ﻿Module CrearBD
 
+    Public vartablamovimientos As String = "CREATE TABLE `movimientos` (
+                                              `Id` int(11) NOT NULL,
+                                              `Id_Bodega` int(11) DEFAULT '0',
+                                              `Nombre_Bodega` varchar(150) DEFAULT '',
+                                              `Movimiento` varchar(150) DEFAULT '',
+                                              `Fecha` date DEFAULT NULL,
+                                              `Hora` time DEFAULT NULL,
+                                              `FechaC` datetime DEFAULT NULL,
+                                              `Id_Cliente` int(11) DEFAULT '0',
+                                              `Nombre` varchar(255) DEFAULT '',
+                                              `Usuario` varchar(100) DEFAULT '',
+                                              `Estado` int(1) DEFAULT '0'
+                                            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+
+    Public vartablaautoriza As String = "CREATE TABLE `autoriza` (
+                                          `Id` int(11) NOT NULL,
+                                          `Id_Bodega` int(11) NOT NULL DEFAULT '0',
+                                          `Nombre` varchar(255) NOT NULL DEFAULT '',
+                                          `Tel` varchar(20) NOT NULL DEFAULT '',
+                                          `Correo` varchar(255) NOT NULL DEFAULT ''
+                                        ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+
+    'bodegas
+    Public vartablabodegas As String = "CREATE TABLE `bodegas` (
+                                          `Id` int(11) NOT NULL,
+                                          `Nombre` varchar(255) DEFAULT '',
+                                          `Ubicacion` varchar(255) DEFAULT '',
+                                          `Dimensiones` varchar(255) DEFAULT '',
+                                          `Id_Cliente` int(11) DEFAULT '0',
+                                          `Cliente` varchar(255) DEFAULT '',
+                                          `Estado` int(11) DEFAULT '0',
+                                          `Precio` double DEFAULT '0',
+                                          `Inicio` date DEFAULT NULL,
+                                          `Periodo` varchar(100) DEFAULT '',
+                                          `Siguiente` date DEFAULT NULL
+                                        ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
     'comprasentalla 
     Public vartablacomprasentalla As String = "CREATE TABLE `comprasentalla` (
@@ -832,7 +868,9 @@
                                           `Version` varchar(50) DEFAULT '',
                                           `StatusT` int(11) DEFAULT '0',
                                           `Cliente` varchar(255) DEFAULT '',
-                                          `NEconomico` varchar(100) DEFAULT ''
+                                          `NEconomico` varchar(100) DEFAULT '',
+                                          `Ano` INT DEFAULT NOT NULL'',
+                                          `Observaciones` TEXT
                                         ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
     Public vartablavehiculo2 As String = "CREATE TABLE `vehiculo2` (
@@ -6981,6 +7019,9 @@
     '/////////////////////////////////////////////////////////////////////////
     'LLAVES PRIMARIAS
     '/////////////////////////////////////////////////////////////////////////
+    Public VarKeymovimiento As String = "ALTER TABLE `movimientos` ADD PRIMARY KEY (`Id`);"
+    Public VarKeyautoriza As String = "ALTER TABLE `autoriza`ADD PRIMARY KEY (`Id`);"
+    Public VarKeybodegas As String = "ALTER TABLE `bodegas` ADD PRIMARY KEY (`Id`);"
     Public VarKeycomprasentalla As String = "ALTER TABLE `comprasentalla`ADD PRIMARY KEY (`Id`);"
     Public VarKeyreservaciones As String = "ALTER TABLE `reservaciones`ADD PRIMARY KEY (`IdReservacion`);"
     Public VarKeyPrescripcion As String = "ALTER TABLE `prescripcion`ADD PRIMARY KEY (`Folio`);"
@@ -7154,10 +7195,13 @@
     '/////////////////////////////////////////////////////////////////////////
     'AUTOINCREMENTO
     '/////////////////////////////////////////////////////////////////////////
-    Public VarAutocomprasentalla As String = "ALTER TABLE `comprasentalla`MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
-    Public VarAutoreservaciones As String = "ALTER TABLE `reservaciones`MODIFY `IdReservacion` int(11) NOT NULL AUTO_INCREMENT;"
-    Public VarAutoPrescripcion As String = "ALTER TABLE `prescripcion`MODIFY `Folio` int(11) NOT NULL AUTO_INCREMENT;"
-    Public VarAutohiscliente As String = "ALTER TABLE `hisclinica`MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
+    Public VarAutomovimiento As String = "ALTER TABLE `movimientos` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
+    Public VarAutoautoriza As String = "ALTER TABLE `autoriza` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
+    Public VarAutobodegas As String = "ALTER TABLE `bodegas` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
+    Public VarAutocomprasentalla As String = "ALTER TABLE `comprasentalla` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
+    Public VarAutoreservaciones As String = "ALTER TABLE `reservaciones` MODIFY `IdReservacion` int(11) NOT NULL AUTO_INCREMENT;"
+    Public VarAutoPrescripcion As String = "ALTER TABLE `prescripcion` MODIFY `Folio` int(11) NOT NULL AUTO_INCREMENT;"
+    Public VarAutohiscliente As String = "ALTER TABLE `hisclinica` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
     Public varAutotallerd As String = "ALTER TABLE `tallerd` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
     Public varAutodispositivos As String = "ALTER TABLE `dispositivos` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
     Public varAutoaccesorios As String = "ALTER TABLE `accesorios` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
