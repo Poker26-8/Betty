@@ -23,9 +23,9 @@ Partial Class frmNuvRepVentas
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmNuvRepVentas))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel7 = New System.Windows.Forms.Panel()
@@ -97,6 +97,8 @@ Partial Class frmNuvRepVentas
         Me.barcarga = New System.Windows.Forms.ProgressBar()
         Me.grdCaptura = New System.Windows.Forms.DataGridView()
         Me.PMasVendido80 = New System.Drawing.Printing.PrintDocument()
+        Me.rbVentasComisionista = New System.Windows.Forms.RadioButton()
+        Me.rbComisionistaDetalle = New System.Windows.Forms.RadioButton()
         Me.Panel2.SuspendLayout()
         Me.Panel7.SuspendLayout()
         Me.Panel6.SuspendLayout()
@@ -517,7 +519,8 @@ Partial Class frmNuvRepVentas
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.Color.White
-        Me.TabPage1.Controls.Add(Me.rbVMesero)
+        Me.TabPage1.Controls.Add(Me.rbComisionistaDetalle)
+        Me.TabPage1.Controls.Add(Me.rbVentasComisionista)
         Me.TabPage1.Controls.Add(Me.rbVVendedorDetalle)
         Me.TabPage1.Controls.Add(Me.rbTraspasos)
         Me.TabPage1.Controls.Add(Me.rbVentasTotales)
@@ -547,7 +550,7 @@ Partial Class frmNuvRepVentas
         '
         Me.rbVMesero.AutoSize = True
         Me.rbVMesero.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbVMesero.Location = New System.Drawing.Point(482, 62)
+        Me.rbVMesero.Location = New System.Drawing.Point(10, 67)
         Me.rbVMesero.Name = "rbVMesero"
         Me.rbVMesero.Size = New System.Drawing.Size(152, 22)
         Me.rbVMesero.TabIndex = 2
@@ -675,7 +678,7 @@ Partial Class frmNuvRepVentas
         '
         Me.rbVentasFormato.AutoSize = True
         Me.rbVentasFormato.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbVentasFormato.Location = New System.Drawing.Point(233, 174)
+        Me.rbVentasFormato.Location = New System.Drawing.Point(481, 90)
         Me.rbVentasFormato.Name = "rbVentasFormato"
         Me.rbVentasFormato.Size = New System.Drawing.Size(153, 22)
         Me.rbVentasFormato.TabIndex = 215
@@ -699,7 +702,7 @@ Partial Class frmNuvRepVentas
         '
         Me.rbVendidoProveedor.AutoSize = True
         Me.rbVendidoProveedor.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbVendidoProveedor.Location = New System.Drawing.Point(233, 146)
+        Me.rbVendidoProveedor.Location = New System.Drawing.Point(232, 174)
         Me.rbVendidoProveedor.Name = "rbVendidoProveedor"
         Me.rbVendidoProveedor.Size = New System.Drawing.Size(257, 22)
         Me.rbVendidoProveedor.TabIndex = 214
@@ -723,7 +726,7 @@ Partial Class frmNuvRepVentas
         '
         Me.rbProductoVendido.AutoSize = True
         Me.rbProductoVendido.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbProductoVendido.Location = New System.Drawing.Point(232, 118)
+        Me.rbProductoVendido.Location = New System.Drawing.Point(232, 146)
         Me.rbProductoVendido.Name = "rbProductoVendido"
         Me.rbProductoVendido.Size = New System.Drawing.Size(175, 22)
         Me.rbProductoVendido.TabIndex = 213
@@ -747,7 +750,7 @@ Partial Class frmNuvRepVentas
         '
         Me.rbDevoluciones.AutoSize = True
         Me.rbDevoluciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbDevoluciones.Location = New System.Drawing.Point(232, 90)
+        Me.rbDevoluciones.Location = New System.Drawing.Point(482, 62)
         Me.rbDevoluciones.Name = "rbDevoluciones"
         Me.rbDevoluciones.Size = New System.Drawing.Size(116, 22)
         Me.rbDevoluciones.TabIndex = 212
@@ -770,11 +773,12 @@ Partial Class frmNuvRepVentas
         'TabPage2
         '
         Me.TabPage2.Controls.Add(Me.rbCortesias)
+        Me.TabPage2.Controls.Add(Me.rbVMesero)
         Me.TabPage2.Controls.Add(Me.rbComandasCance)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(640, 248)
+        Me.TabPage2.Size = New System.Drawing.Size(640, 227)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "            Ventas 2             "
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -915,27 +919,27 @@ Partial Class frmNuvRepVentas
         '
         Me.grdCaptura.AllowUserToAddRows = False
         Me.grdCaptura.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grdCaptura.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.grdCaptura.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
         Me.grdCaptura.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.grdCaptura.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.grdCaptura.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.grdCaptura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.grdCaptura.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.grdCaptura.DefaultCellStyle = DataGridViewCellStyle6
         Me.grdCaptura.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdCaptura.Location = New System.Drawing.Point(0, 0)
         Me.grdCaptura.Name = "grdCaptura"
@@ -946,6 +950,29 @@ Partial Class frmNuvRepVentas
         '
         'PMasVendido80
         '
+        '
+        'rbVentasComisionista
+        '
+        Me.rbVentasComisionista.AutoSize = True
+        Me.rbVentasComisionista.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbVentasComisionista.Location = New System.Drawing.Point(232, 90)
+        Me.rbVentasComisionista.Name = "rbVentasComisionista"
+        Me.rbVentasComisionista.Size = New System.Drawing.Size(185, 22)
+        Me.rbVentasComisionista.TabIndex = 222
+        Me.rbVentasComisionista.Text = "Ventas por comisionista"
+        Me.rbVentasComisionista.UseVisualStyleBackColor = True
+        '
+        'rbComisionistaDetalle
+        '
+        Me.rbComisionistaDetalle.AutoSize = True
+        Me.rbComisionistaDetalle.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbComisionistaDetalle.Location = New System.Drawing.Point(232, 118)
+        Me.rbComisionistaDetalle.Name = "rbComisionistaDetalle"
+        Me.rbComisionistaDetalle.Size = New System.Drawing.Size(244, 22)
+        Me.rbComisionistaDetalle.TabIndex = 223
+        Me.rbComisionistaDetalle.TabStop = True
+        Me.rbComisionistaDetalle.Text = "Ventas por comisionista (Detalle)"
+        Me.rbComisionistaDetalle.UseVisualStyleBackColor = True
         '
         'frmNuvRepVentas
         '
@@ -1051,4 +1078,6 @@ Partial Class frmNuvRepVentas
     Friend WithEvents Button1 As Button
     Friend WithEvents rbVVendedorDetalle As RadioButton
     Friend WithEvents rbVMesero As RadioButton
+    Friend WithEvents rbVentasComisionista As RadioButton
+    Friend WithEvents rbComisionistaDetalle As RadioButton
 End Class
