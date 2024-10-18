@@ -79,6 +79,7 @@ Partial Class frmRegistroBodega
         'Label1
         '
         Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(124, Byte), Integer))
+        Me.Label1.ForeColor = System.Drawing.Color.White
         Me.Label1.Location = New System.Drawing.Point(2, 35)
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
@@ -233,9 +234,9 @@ Partial Class frmRegistroBodega
         '
         'lbltamaño
         '
-        Me.lbltamaño.BackColor = System.Drawing.Color.PaleTurquoise
+        Me.lbltamaño.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(124, Byte), Integer))
         Me.lbltamaño.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbltamaño.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lbltamaño.ForeColor = System.Drawing.Color.White
         Me.lbltamaño.Location = New System.Drawing.Point(124, 64)
         Me.lbltamaño.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lbltamaño.Name = "lbltamaño"
@@ -256,9 +257,9 @@ Partial Class frmRegistroBodega
         '
         'lblubicacion
         '
-        Me.lblubicacion.BackColor = System.Drawing.Color.PaleTurquoise
+        Me.lblubicacion.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(124, Byte), Integer))
         Me.lblubicacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblubicacion.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblubicacion.ForeColor = System.Drawing.Color.White
         Me.lblubicacion.Location = New System.Drawing.Point(124, 35)
         Me.lblubicacion.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblubicacion.Name = "lblubicacion"
@@ -279,9 +280,9 @@ Partial Class frmRegistroBodega
         '
         'lblbodega
         '
-        Me.lblbodega.BackColor = System.Drawing.Color.PaleTurquoise
+        Me.lblbodega.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(44, Byte), Integer), CType(CType(124, Byte), Integer))
         Me.lblbodega.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblbodega.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lblbodega.ForeColor = System.Drawing.Color.White
         Me.lblbodega.Location = New System.Drawing.Point(124, 6)
         Me.lblbodega.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblbodega.Name = "lblbodega"
