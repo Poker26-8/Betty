@@ -108,7 +108,7 @@ Module ModGral
                     siono = rd5("NumPart").ToString
                 End If
             Else
-                siono = ""
+                siono = 0
             End If
             'If siono = 0 Then
             '    respuesta = ""

@@ -22,6 +22,7 @@ Partial Class frmPermisosRestaurant
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPermisosRestaurant))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -39,6 +40,7 @@ Partial Class frmPermisosRestaurant
         Me.btnguardartolerancia = New System.Windows.Forms.Button()
         Me.txttolerancia = New System.Windows.Forms.TextBox()
         Me.GroupBox19 = New System.Windows.Forms.GroupBox()
+        Me.rbMediaHora5Min = New System.Windows.Forms.RadioButton()
         Me.rbcuartos = New System.Windows.Forms.RadioButton()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.rbminuto = New System.Windows.Forms.RadioButton()
@@ -88,6 +90,8 @@ Partial Class frmPermisosRestaurant
         Me.Label4 = New System.Windows.Forms.Label()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.chkPantallaExtras = New System.Windows.Forms.CheckBox()
         Me.GroupBox7.SuspendLayout()
         Me.GroupBox19.SuspendLayout()
         Me.GroupBox20.SuspendLayout()
@@ -269,6 +273,7 @@ Partial Class frmPermisosRestaurant
         '
         'GroupBox19
         '
+        Me.GroupBox19.Controls.Add(Me.rbMediaHora5Min)
         Me.GroupBox19.Controls.Add(Me.rbcuartos)
         Me.GroupBox19.Controls.Add(Me.Label5)
         Me.GroupBox19.Controls.Add(Me.rbminuto)
@@ -280,6 +285,20 @@ Partial Class frmPermisosRestaurant
         Me.GroupBox19.TabIndex = 237
         Me.GroupBox19.TabStop = False
         Me.GroupBox19.Text = "Tipo de cobro billar"
+        '
+        'rbMediaHora5Min
+        '
+        Me.rbMediaHora5Min.AutoSize = True
+        Me.rbMediaHora5Min.Location = New System.Drawing.Point(26, 88)
+        Me.rbMediaHora5Min.Name = "rbMediaHora5Min"
+        Me.rbMediaHora5Min.Size = New System.Drawing.Size(248, 25)
+        Me.rbMediaHora5Min.TabIndex = 240
+        Me.rbMediaHora5Min.TabStop = True
+        Me.rbMediaHora5Min.Text = "Media hora y cada 5 minutos"
+        Me.ToolTip1.SetToolTip(Me.rbMediaHora5Min, "Esta configuración funciona para cobrar los primeros 30 minutos de billar de mane" &
+        "ra obligatoria " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "y posteriormente cobrar cada 5 minutos la parte proporcional " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) &
+        "del precio")
+        Me.rbMediaHora5Min.UseVisualStyleBackColor = True
         '
         'rbcuartos
         '
@@ -480,6 +499,7 @@ Partial Class frmPermisosRestaurant
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.chkPantallaExtras)
         Me.GroupBox4.Controls.Add(Me.cbCobroSimplificado)
         Me.GroupBox4.Controls.Add(Me.cbCobroExacto)
         Me.GroupBox4.Controls.Add(Me.cbSeparadas)
@@ -849,6 +869,17 @@ Partial Class frmPermisosRestaurant
         Me.Panel1.Size = New System.Drawing.Size(1032, 66)
         Me.Panel1.TabIndex = 250
         '
+        'chkPantallaExtras
+        '
+        Me.chkPantallaExtras.AutoSize = True
+        Me.chkPantallaExtras.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkPantallaExtras.Location = New System.Drawing.Point(6, 138)
+        Me.chkPantallaExtras.Name = "chkPantallaExtras"
+        Me.chkPantallaExtras.Size = New System.Drawing.Size(115, 20)
+        Me.chkPantallaExtras.TabIndex = 249
+        Me.chkPantallaExtras.Text = "Pantalla Extras"
+        Me.chkPantallaExtras.UseVisualStyleBackColor = True
+        '
         'frmPermisosRestaurant
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -956,4 +987,7 @@ Partial Class frmPermisosRestaurant
     Friend WithEvents Button1 As Button
     Friend WithEvents cbCobroSimplificado As CheckBox
     Friend WithEvents rbcuartos As RadioButton
+    Friend WithEvents rbMediaHora5Min As RadioButton
+    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents chkPantallaExtras As CheckBox
 End Class

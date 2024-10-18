@@ -94,8 +94,6 @@ Public Class frmVTouchR
 
     Private Sub TFolio_Tick(sender As Object, e As EventArgs) Handles TFolio.Tick
 
-
-
         TFolio.Stop()
 
         TFolio.Interval = 5000
@@ -324,6 +322,14 @@ Public Class frmVTouchR
 
         cantidad = 1
         ObtenerProducto(CodigoProducto)
+
+        Dim pantallaexcel As Integer = DatosRecarga2("PantallaExtras")
+        If pantallaexcel = 1 Then
+            frmPantallaExtras.Show()
+            frmPantallaExtras.BringToFront()
+            frmPantallaExtras.Extras(CodigoProducto)
+        End If
+
 nopaso:
     End Sub
 

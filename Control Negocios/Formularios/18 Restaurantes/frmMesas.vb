@@ -1742,7 +1742,92 @@ Public Class frmMesas
     End Function
 
 
+    Public Sub FUNCION_DEL_BOTON(ByVal VARNOMBREMESA As String)
 
+        foco = "USU"
+        lbltotalmesa.Text = "0.00"
+
+        Dim totalcomanda As Double = 0
+
+        Dim total_billar As Double = 0
+
+        Dim totalc As Double = 0
+        frmNuevoPagar.Close()
+        frmNuevoPagarSencillo.Close()
+
+        frmCalcula.Close()
+
+        Try
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT Total FROM Comandas WHERE Nmesa='" & VARNOMBREMESA & "'"
+            rd1 = cmd1.ExecuteReader
+            Do While rd1.Read
+                If rd1.HasRows Then
+                    totalc = rd1(0).ToString
+
+                    totalcomanda = CDbl(totalcomanda) + totalc
+                End If
+            Loop
+            rd1.Close()
+
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT Total FROM Comandas WHERE Nmesa='" & VARNOMBREMESA & "' and Codigo='xc3'"
+            rd1 = cmd1.ExecuteReader
+            Do While rd1.Read
+                If rd1.HasRows Then
+                    total_billar = rd1(0).ToString()
+                Else
+                    total_billar = 0
+                End If
+            Loop
+            rd1.Close()
+
+            lbltotalmesa.Text = FormatNumber(totalcomanda, 2)
+
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT TComensales FROM Comanda1 WHERE Nombre='" & VARNOMBREMESA & "' ORDER BY Id desc"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    txtNComensales.Text = rd1(0).ToString
+                Else
+                    txtNComensales.Text = "1"
+                End If
+            Else
+                txtNComensales.Text = "1"
+            End If
+            rd1.Close()
+            cnn1.Close()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
+
+        txtMesa.Text = VARNOMBREMESA
+
+        Try
+
+            NOMBREMESA = VARNOMBREMESA
+
+            If txtNComensales.Text = "" And txtNComensales.Visible = True Then
+                txtNComensales.Focus().Equals(True)
+            Else
+                txtUsuario.Focus().Equals(True)
+            End If
+
+            btncobro.Enabled = True
+            btnconsulta.Enabled = True
+
+
+            rd1.Close()
+            cnn1.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString())
+            cnn1.Close()
+        End Try
+    End Sub
 
 
 

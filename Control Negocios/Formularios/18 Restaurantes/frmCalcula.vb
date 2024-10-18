@@ -192,6 +192,119 @@
                             End If
                         Next
 
+                    ElseIf rd1(0).ToString = "MEDIAHORA5MIN" Then
+
+                        cmd2 = cnn2.CreateCommand
+                        cmd2.CommandText = "SELECT HorEnt FROM AsigPC WHERE Nombre='" & lblpc.Text & "'"
+                        rd2 = cmd2.ExecuteReader
+                        If rd2.HasRows Then
+                            If rd2.Read Then
+
+                                Dim fechaentrada As Date = Nothing
+                                fechaentrada = rd2("HorEnt").ToString
+                                txtHorIni.Text = Format(fechaentrada, "yyyy/MM/dd HH:mm")
+
+                                txtHorFin.Text = Format(Date.Now, "HH:mm")
+                                txtHorFin.Text = Format(Date.Now, "yyyy/MM/dd HH:mm")
+
+                                vardias = DateDiff(DateInterval.Day, CDate(txtHorIni.Text), CDate(txtHorFin.Text))
+                                varHoras = DateDiff(DateInterval.Hour, CDate(txtHorIni.Text), CDate(txtHorFin.Text)) 'las horas entre las fechas
+                                VarMinutos = DateDiff(DateInterval.Minute, CDate(txtHorIni.Text), CDate(txtHorFin.Text)) 'los minutos entre las horas
+
+                                Dim ope1 As Double = CDec(vardias) * 24
+                                Dim ope2 As Double = CDec(varHoras) * 60
+
+                                varHoras = varHoras - ope1
+                                VarMinutos = VarMinutos - ope2
+
+                                Dim minutosfinal As Double = CDec(ope2 + VarMinutos)
+
+                                txtTiempoUso.Text = FormatNumber(minutosfinal, 2)
+                                txtHoras.Text = FormatNumber(varHoras, 2)
+
+                                If CDec(txtTiempoUso.Text) <= CDec(ToleBillar) Then
+                                    cmd3 = cnn3.CreateCommand
+                                    cmd3.CommandText = "SELECT Precio FROM Mesa WHERE Nombre_mesa='" & lblpc.Text & "'"
+                                    rd3 = cmd3.ExecuteReader
+                                    If rd3.HasRows Then
+                                        If rd3.Read Then
+                                            txtPrecioHora.Text = FormatNumber(rd3("Precio").ToString, 2)
+                                            txtTotalPag.Text = "0.00"
+                                        End If
+                                    End If
+                                    rd3.Close()
+                                Else
+                                    cmd3 = cnn3.CreateCommand
+                                    cmd3.CommandText = "SELECT Precio FROM Mesa WHERE Nombre_mesa='" & lblpc.Text & "'"
+                                    rd3 = cmd3.ExecuteReader
+                                    If rd3.HasRows Then
+                                        If rd3.Read Then
+
+                                            txtPrecioHora.Text = FormatNumber(rd3("Precio").ToString, 2)
+                                            If minutosfinal > 30 Then
+                                                ' Obtener el último dígito
+                                                Dim ultimoDigito As Integer = CInt(minutosfinal Mod 10)
+                                                ' Clasificar según el último dígito
+                                                Select Case ultimoDigito
+                                                    Case 1, 6
+                                                        minutosfinal = minutosfinal - 1
+                                                    Case 2, 7
+                                                        minutosfinal = minutosfinal - 2
+                                                    Case 3, 8
+                                                        minutosfinal = minutosfinal + 2
+                                                    Case 4, 9
+                                                        minutosfinal = minutosfinal + 1
+                                                    Case 0, 5
+
+                                                End Select
+                                                txtTotalPag.Text = txtPrecioHora.Text * minutosfinal
+                                                txtTotalPag.Text = txtTotalPag.Text / 60
+                                            Else
+                                                txtTotalPag.Text = rd3("Precio").ToString / 2
+                                            End If
+
+
+                                            'txtTotalPag.Text = rd3("Precio").ToString * txtTiempoUso.Text
+                                            'txtTotalPag.Text = txtTotalPag.Text / 60
+                                            txtTotalPag.Text = FormatNumber(txtTotalPag.Text, 2)
+                                            txtHoras.Text = varhora
+                                            txtHoras.Text = FormatNumber(txtHoras.Text)
+
+                                            xd = txtHoras.Text
+                                            strXd = ""
+                                            entVar = ""
+                                            vandXD = 0
+
+                                            For xd1 = 1 To Len(xd)
+                                                If vandXD = 1 Then
+                                                    strXd = strXd & CStr(Mid(xd, xd1, 1))
+                                                Else
+                                                    entVar = entVar & CStr(Mid(xd, xd1, 1))
+                                                End If
+
+                                                If CStr(Mid(xd, xd1, 1)) = "." Then
+                                                    vandXD = 1
+                                                End If
+
+                                            Next xd1
+
+                                            If strXd > 60 Then
+                                                VarNum = "." & strXd
+                                                VarNum = VarNum * 60 / 1
+                                                VarNum = Mid(FormatNumber(VarNum), 1, 2)
+                                                txtHoras.Text = entVar / VarNum
+                                            Else
+                                                txtHoras.Text = entVar & strXd
+                                            End If
+
+                                        End If
+                                    End If
+                                    rd3.Close()
+                                End If
+
+                            End If
+                        End If
+                        rd2.Close()
 
                     Else
 
@@ -384,7 +497,6 @@
                 rd1.Close()
                 cnn1.Close()
 
-
                 If tamimpre = "80" Then
                     BillarCobro80.DefaultPageSettings.PrinterSettings.PrinterName = ruta_impresor
                     BillarCobro80.Print()
@@ -394,8 +506,13 @@
                 End If
             End If
 
-            Hide()
+            Dim TIPOCOBRO As String = DatosRecarga("TipoCobroBillar")
+            If TIPOCOBRO = "MEDIAHORA5MIN" Then
+                frmMesas.FUNCION_DEL_BOTON(lblpc.Text)
+                frmMesas.btncobro.PerformClick()
+            End If
 
+            Hide()
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
@@ -456,7 +573,12 @@
         e.Graphics.DrawString(txtHorFin.Text, fuente_c, Brushes.Black, 270, Y, derecha)
         Y += 20
         e.Graphics.DrawString("Tiempo:", fuente_b, Brushes.Black, 1, Y)
-        e.Graphics.DrawString(txtHoras.Text & " hrs.", fuente_c, Brushes.Black, 270, Y, derecha)
+        If CInt(txtHoras.Text) > 0 Then
+            e.Graphics.DrawString(txtHoras.Text & " hrs.", fuente_c, Brushes.Black, 270, Y, derecha)
+        Else
+            e.Graphics.DrawString(txtTiempoUso.Text & " min.", fuente_c, Brushes.Black, 270, Y, derecha)
+        End If
+
         Y += 20
         e.Graphics.DrawString("Precio por Hora: ", fuente_b, Brushes.Black, 1, Y)
         e.Graphics.DrawString(FormatNumber(txtPrecioHora.Text, 2), fuente_c, Brushes.Black, 270, Y, derecha)

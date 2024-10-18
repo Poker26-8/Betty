@@ -23,6 +23,13 @@
             rd2.Close()
             cnn2.Close()
 
+            Dim pantallaexcel As Integer = DatosRecarga2("PantallaExtras")
+            If pantallaexcel = 1 Then
+                chkPantallaExtras.Checked = True
+            Else
+                chkPantallaExtras.Checked = False
+            End If
+
             Dim propina As String = DatosRecarga("Propina")
             txtPorcentage.Text = propina
 
@@ -64,6 +71,8 @@
                 rbminuto.Checked = True
             ElseIf TIPOCOBRO = "CUARTOS" Then
                 rbcuartos.Checked = True
+            ElseIf TIPOCOBRO = "MEDIAHORA5MIN" Then
+                rbMediaHora5Min.Checked = True
             End If
 
             Dim sinnumcomensal As String = DatosRecarga("SinNumCoemensal")
@@ -482,6 +491,29 @@
                     cnn2.Close() : cnn2.Open()
                     cmd2 = cnn2.CreateCommand
                     cmd2.CommandText = "Insert INTO Formatos(Facturas,NotasCred,NumPart) VALUES('TipoCobroBillar','CUARTOS','0')"
+                    cmd2.ExecuteNonQuery()
+                    cnn2.Close()
+                End If
+                rd1.Close()
+                cnn1.Close()
+            ElseIf (rbMediaHora5Min.Checked) Then
+
+                cnn1.Close() : cnn1.Open()
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "SELECT Facturas FROM Formatos WHERE Facturas='TipoCobroBillar'"
+                rd1 = cmd1.ExecuteReader
+                If rd1.HasRows Then
+                    If rd1.Read Then
+                        cnn2.Close() : cnn2.Open()
+                        cmd2 = cnn2.CreateCommand
+                        cmd2.CommandText = "UPDATE Formatos SET NotasCred='MEDIAHORA5MIN' WHERE Facturas='TipoCobroBillar'"
+                        cmd2.ExecuteNonQuery()
+                        cnn2.Close()
+                    End If
+                Else
+                    cnn2.Close() : cnn2.Open()
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "Insert INTO Formatos(Facturas,NotasCred,NumPart) VALUES('TipoCobroBillar','MEDIAHORA5MIN','0')"
                     cmd2.ExecuteNonQuery()
                     cnn2.Close()
                 End If
@@ -1003,5 +1035,69 @@
 
     Private Sub RadioButton1_Click(sender As Object, e As EventArgs) Handles rbcuartos.Click
         CambioTipoBillar()
+    End Sub
+
+    Private Sub rbMediaHora5Min_Click(sender As Object, e As EventArgs) Handles rbMediaHora5Min.Click
+        CambioTipoBillar()
+    End Sub
+
+    Private Sub chkPantallaExtras_CheckedChanged(sender As Object, e As EventArgs) Handles chkPantallaExtras.CheckedChanged
+        Try
+
+            If (chkPantallaExtras.Checked) Then
+
+                cnn1.Close() : cnn1.Open()
+                cnn2.Close() : cnn2.Open()
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "select Facturas,NotasCred,NumPart from Formatos where Facturas='PantallaExtras'"
+                rd1 = cmd1.ExecuteReader
+                If rd1.HasRows Then
+                    If rd1.Read Then
+                        cmd2 = cnn2.CreateCommand
+                        cmd2.CommandText = "UPDATE Formatos SET NotasCred='1',NumPart='1' WHERE Facturas='PantallaExtras'"
+                        If cmd2.ExecuteNonQuery() Then
+                            'MsgBox("Configuracion Actualizada correctamente", vbInformation + vbOKOnly, titulomensajes)
+                        End If
+                    End If
+                Else
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "insert into Formatos(Facturas,NotasCred,NumPart) values('PantallaExtras','1','1')"
+                    If cmd2.ExecuteNonQuery() Then
+                        'MsgBox("Configuracion Guardada correctamente", vbInformation + vbOKOnly, titulomensajes)
+                    End If
+                End If
+                rd1.Close()
+                cnn1.Close()
+
+            Else
+
+                cnn1.Close() : cnn1.Open()
+                cnn2.Close() : cnn2.Open()
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "select Facturas,NotasCred,NumPart from Formatos where Facturas='PantallaExtras'"
+                rd1 = cmd1.ExecuteReader
+                If rd1.HasRows Then
+                    If rd1.Read Then
+                        cmd2 = cnn2.CreateCommand
+                        cmd2.CommandText = "UPDATE Formatos SET NotasCred='0',NumPart='0' WHERE Facturas='PantallaExtras'"
+                        If cmd2.ExecuteNonQuery() Then
+                            'MsgBox("Configuracion Actualizada correctamente", vbInformation + vbOKOnly, titulomensajes)
+                        End If
+                    End If
+                Else
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "insert into Formatos(Facturas,NotasCred,NumPart) values('PantallaExtras','0','0')"
+                    If cmd2.ExecuteNonQuery() Then
+                        'MsgBox("Configuracion Guardada correctamente", vbInformation + vbOKOnly, titulomensajes)
+                    End If
+                End If
+                rd1.Close()
+                cnn1.Close()
+
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
     End Sub
 End Class
