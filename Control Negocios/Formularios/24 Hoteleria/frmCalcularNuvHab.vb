@@ -13,6 +13,8 @@
         Dim salidahotel As DateTime = Nothing
         Dim salidahotel2 As String = ""
         Dim precioaumento As Double = 0
+        Dim saldocliente As Double = 0
+        Dim precioprimero As Double = 0
         Try
             cnn2.Close() : cnn2.Open()
             cnn3.Close() : cnn3.Open()
@@ -27,6 +29,16 @@
             '    End If
             'End If
             'rd2.Close()
+            'cmd2 = cnn2.CreateCommand
+            'cmd2.CommandText = "Select SUM(Abono) FROM abonoi  WHERE Cliente='" & lblCliente.Text & "'"
+            'rd2 = cmd2.ExecuteReader
+            'If rd2.HasRows Then
+            '    If rd2.Read Then
+            '        saldocliente = IIf(rd2(0).ToString = "", 0, rd2(0).ToString)
+            '    End If
+            'End If
+            'rd2.Close()
+
 
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText = "SELECT NotasCred FROM formatos WHERE Facturas='PrecioDia'"
@@ -56,6 +68,7 @@
                     lblHoras.Text = rd2(0).ToString
                     lblPrecio.Text = rd2(1).ToString
                     lblAnticipo.Text = rd2(1).ToString
+                    precioprimero = rd2(1).ToString
                     lblCliente.Text = rd2(2).ToString
                 End If
             End If
@@ -117,31 +130,8 @@
                     End If
                     rd3.Close()
 
+                    'lblAnticipo.Text = FormatNumber(saldocliente, 2)
 
-
-                    'If horas = "24" Then
-
-                    '    If salidahotel2 <> "" Then
-                    '        lblsalida.Text = ""
-                    '        Dim fechasalidadia As DateTime = fechaentrada.AddHours(horas)
-                    '        Dim fechasalidactole As DateTime = salidahotel.AddMinutes(ToleHab)
-                    '        Dim TIEMPOSALIDA As String = Format(fechasalidactole, "HH:mm")
-                    '        Dim fechasalidadia2 As String = Format(fechasalidadia, "yyyy/MM/dd")
-                    '        lblsalida.Text = fechasalidadia2 & " " & TIEMPOSALIDA
-
-                    '        Dim fechSalida As DateTime = DateTime.ParseExact(lblsalida.Text, "yyyy/MM/dd HH:mm", System.Globalization.CultureInfo.InvariantCulture)
-                    '        Dim fechEntrada As DateTime = DateTime.ParseExact(lblHorIni.Text, "yyyy/MM/dd HH:mm", System.Globalization.CultureInfo.InvariantCulture)
-
-                    '        If fechSalida > fechEntrada Then
-                    '            MsgBox("se acabo el tiempó")
-                    '            lblPagar.Text = CDec(lblPrecio.Text) + CDbl(precioaumento) - CDbl(lblAnticipo.Text)
-                    '        Else
-                    '            lblPagar.Text = CDbl(lblPrecio.Text) - CDbl(lblAnticipo.Text)
-                    '        End If
-
-                    '    End If
-
-                    'Else
                     If lblHorFin.Text >= lblsalida.Text Then
                             MsgBox("El tiempo de renta de la habitación termino.", vbInformation + vbOKOnly, titulohotelriaa)
                             lblPagar.Text = CDbl(lblPrecio.Text)
@@ -164,6 +154,7 @@
                     End If
                     '  End If
 
+                    ' lblResta.Text = FormatNumber((CDbl(lblPagar.Text) + CDbl(precioprimero)) - CDbl(lblAnticipo.Text), 2)
 
                 End If
             End If
@@ -232,9 +223,9 @@
                     End If
                 Else
                     cnn3.Close() : cnn3.Open()
-                    cmd3 = cnn3.CreateCommand
-                    cmd3.CommandText = "INSERT INTO comanda1() VALUES()"
-                    cmd3.ExecuteNonQuery()
+                    'cmd3 = cnn3.CreateCommand
+                    'cmd3.CommandText = "INSERT INTO Comanda1(IdCliente,Nombre,Direccion,Usuario,FVenta,HVenta,FPago,FCancelado,Status,Comisionista,TComensales) VALUES(0,'" & lblpc.Text & "','','" & lblpc.Text & "','" & Format(Date.Now, "yyyyy-MM-dd") & "','" & Format(Date.Now, "yyyyy-MM-dd HH:mm:ss") & "','','','','',0)"
+                    'cmd3.ExecuteNonQuery()
 
                     cmd3 = cnn3.CreateCommand
                     cmd3.CommandText = "INSERT INTO comandas(Id,NMESA,Codigo,Nombre,Cantidad,UVenta,CostVR,CostVP,CostVUE,Descuento,Precio,Total,PrecioSinIva,TotalSinIVA,Comisionista,Fecha,Comensal,Status,Comentario,GPrint,CUsuario,Total_comensales,Depto,Grupo,EstatusT,Hr,EntregaT) VALUES(" & FOLIOCOMANDA & ",'" & lblpc.Text & "','xc3','Tiempo Habitacion',1,'SER',0,0,0,0," & lblPrecio.Text & "," & totalpagar & "," & lblPrecio.Text & "," & totalpagar & ",'0','" & Format(Date.Now, "yyyy/MM/dd") & "',0,'RESTA','Renta de Habitacion','','',0,'HABITACION','HABITACION',0,'" & HrTiempo & "','" & HrEntrega & "')"
@@ -242,6 +233,8 @@
 
                     If lblPagar.Text > 0 Then
                     Else
+
+
                         cmd3 = cnn3.CreateCommand
                         cmd3.CommandText = "DELETE FROM AsigPC WHERE Nombre='" & lblpc.Text & "'"
                         cmd3.ExecuteNonQuery()
@@ -253,8 +246,8 @@
                         cmd3 = cnn3.CreateCommand
                         cmd3.CommandText = "DELETE FROM comanda1 WHERE Nombre='" & lblpc.Text & "'"
                         cmd3.ExecuteNonQuery()
-                    End If
 
+                    End If
                     cnn3.Close()
                 End If
                 rd1.Close()

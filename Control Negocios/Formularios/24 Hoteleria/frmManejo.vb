@@ -879,13 +879,27 @@ Public Class frmManejo
 
                         btnPagar.Enabled = True
 
+                        Dim clio As String = ""
                         cnn1.Close() : cnn1.Open()
+
                         cmd1 = cnn1.CreateCommand
+                        cmd1.CommandText = "SELECT Cliente FROM detallehotel WHERE Habitacion='" & txtHabitacion.Text & "'"
+                        rd1 = cmd1.ExecuteReader
+                        If rd1.HasRows Then
+                            If rd1.Read Then
+                                clio = rd1(0).ToString
+                            End If
+                        End If
+                        rd1.Close()
+
+
+
                         cmd1 = cnn1.CreateCommand
                         cmd1.CommandText = "SELECT Nombre FROM asigpc WHERE Nombre='" & txtHabitacion.Text & "'"
                         rd1 = cmd1.ExecuteReader
                         If rd1.HasRows Then
                             If rd1.Read Then
+                                frmCalcularNuvHab.lblCliente.Text = clio
                                 frmCalcularNuvHab.lblpc.Text = txtHabitacion.Text
                                 frmCalcularNuvHab.Show()
                             End If

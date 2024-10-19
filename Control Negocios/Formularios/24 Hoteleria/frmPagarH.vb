@@ -811,7 +811,7 @@ Public Class frmPagarH
 
         If lblCliente.Text = "" Then
             If (lblTipoVenta.Text = "MOSTRADOR" And txtResta.Text <> 0) Then
-                MsgBox("Debes liquidar el total de la venta para continuar." & vbNewLine & "De la contrario selecciona un cliente con crédito disponible.", vbInformation + vbOKOnly, titulohotelriaa)
+                MsgBox("Ingrese el cliente." & vbNewLine & "De la contrario selecciona un cliente con crédito disponible.", vbInformation + vbOKOnly, titulohotelriaa)
                 Exit Sub
             End If
 
