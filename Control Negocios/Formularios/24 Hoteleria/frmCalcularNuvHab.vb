@@ -223,19 +223,8 @@
                     End If
                 Else
                     cnn3.Close() : cnn3.Open()
-                    'cmd3 = cnn3.CreateCommand
-                    'cmd3.CommandText = "INSERT INTO Comanda1(IdCliente,Nombre,Direccion,Usuario,FVenta,HVenta,FPago,FCancelado,Status,Comisionista,TComensales) VALUES(0,'" & lblpc.Text & "','','" & lblpc.Text & "','" & Format(Date.Now, "yyyyy-MM-dd") & "','" & Format(Date.Now, "yyyyy-MM-dd HH:mm:ss") & "','','','','',0)"
-                    'cmd3.ExecuteNonQuery()
 
                     cmd3 = cnn3.CreateCommand
-                    cmd3.CommandText = "INSERT INTO comandas(Id,NMESA,Codigo,Nombre,Cantidad,UVenta,CostVR,CostVP,CostVUE,Descuento,Precio,Total,PrecioSinIva,TotalSinIVA,Comisionista,Fecha,Comensal,Status,Comentario,GPrint,CUsuario,Total_comensales,Depto,Grupo,EstatusT,Hr,EntregaT) VALUES(" & FOLIOCOMANDA & ",'" & lblpc.Text & "','xc3','Tiempo Habitacion',1,'SER',0,0,0,0," & lblPrecio.Text & "," & totalpagar & "," & lblPrecio.Text & "," & totalpagar & ",'0','" & Format(Date.Now, "yyyy/MM/dd") & "',0,'RESTA','Renta de Habitacion','','',0,'HABITACION','HABITACION',0,'" & HrTiempo & "','" & HrEntrega & "')"
-                    cmd3.ExecuteNonQuery()
-
-                    If lblPagar.Text > 0 Then
-                    Else
-
-
-                        cmd3 = cnn3.CreateCommand
                         cmd3.CommandText = "DELETE FROM AsigPC WHERE Nombre='" & lblpc.Text & "'"
                         cmd3.ExecuteNonQuery()
 
@@ -245,9 +234,16 @@
 
                         cmd3 = cnn3.CreateCommand
                         cmd3.CommandText = "DELETE FROM comanda1 WHERE Nombre='" & lblpc.Text & "'"
-                        cmd3.ExecuteNonQuery()
+                    cmd3.ExecuteNonQuery()
 
-                    End If
+                    cmd3 = cnn3.CreateCommand
+                    cmd3.CommandText = "INSERT INTO detallehotel(Habitacion,Cliente,FEntrada,FSalida) VALUES('" & lblpc.Text & "','" & lblCliente.Text & "','" & Format(Date.Now, "yyyy/MM/dd HH:mm:ss") & "','" & Format(Date.Now, "yyyy/MM/dd") & "')"
+                    cmd3.ExecuteNonQuery()
+
+                    cmd3 = cnn3.CreateCommand
+                    cmd3.CommandText = "INSERT INTO comandas(Id,NMESA,Codigo,Nombre,Cantidad,UVenta,CostVR,CostVP,CostVUE,Descuento,Precio,Total,PrecioSinIva,TotalSinIVA,Comisionista,Fecha,Comensal,Status,Comentario,GPrint,CUsuario,Total_comensales,Depto,Grupo,EstatusT,Hr,EntregaT) VALUES(" & FOLIOCOMANDA & ",'" & lblpc.Text & "','xc3','Tiempo Habitacion',1,'SER',0,0,0,0," & lblPrecio.Text & "," & totalpagar & "," & lblPrecio.Text & "," & totalpagar & ",'0','" & Format(Date.Now, "yyyy/MM/dd") & "',0,'RESTA','Renta de Habitacion','','',0,'HABITACION','HABITACION',0,'" & HrTiempo & "','" & HrEntrega & "')"
+                    cmd3.ExecuteNonQuery()
+
                     cnn3.Close()
                 End If
                 rd1.Close()

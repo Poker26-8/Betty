@@ -892,6 +892,15 @@ Public Class frmManejo
                         End If
                         rd1.Close()
 
+                        cmd1 = cnn1.CreateCommand
+                        cmd1.CommandText = "SELECT Nmesa FROM comandas WHERE Nmesa='" & txtHabitacion.Text & "'"
+                        rd1 = cmd1.ExecuteReader
+                        If rd1.HasRows Then
+                            If rd1.Read Then
+                                MsgBox("Tienes productos por pagar, antes de desocupar la habitación se tiene que cobrar.", vbInformation + vbOKOnly, titulohotelriaa)
+                            End If
+                        End If
+                        rd1.Close()
 
 
                         cmd1 = cnn1.CreateCommand
