@@ -24,6 +24,9 @@ Public Class frmPagarH
     Dim tLogo As String = ""
     Dim DesglosaIVA As String = ""
     Dim facLinea As Integer = 0
+
+    Public pasoadeudo As Integer = 0
+
     Private Sub frmPagarH_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
@@ -84,9 +87,13 @@ Public Class frmPagarH
 )
                     total = total + CDbl(rd2("total").ToString)
 
+                    If rd2("Codigo").ToString = "xc3" Then
+                        pasoadeudo = 0
+                    End If
                 End If
             Loop
             rd2.Close()
+
 
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText = "SELECT Cliente FROM detallehotel WHERE Habitacion='" & lblHabitacion.Text & "'"
@@ -1341,8 +1348,18 @@ Public Class frmPagarH
                 cmd3 = cnn3.CreateCommand
                 cmd3.CommandText = "DELETE FROM comandas WHERE Nmesa='" & lblHabitacion.Text & "'"
                 cmd3.ExecuteNonQuery()
-                cnn3.Close()
 
+                If pasoadeudo = 1 Then
+                    cmd3 = cnn3.CreateCommand
+                    cmd3.CommandText = "UPDATE habitacion SET Estado='Desocupada' WHERE N_Habitacion='" & lblHabitacion.Text & "'"
+                    cmd3.ExecuteNonQuery()
+
+                    cmd3 = cnn3.CreateCommand
+                    cmd3.CommandText = "DELETE FROM detallehotel WHERE Habitacion='" & lblHabitacion.Text & "'"
+                    cmd3.ExecuteNonQuery()
+                End If
+
+                cnn3.Close()
             End If
         Else
 
