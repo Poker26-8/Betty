@@ -1326,6 +1326,8 @@
             Dim SUMAEFECTIVO As Double = 0
             Dim SUMAFORMAS As Double = 0
 
+            Dim folioventa As Integer = 0
+
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText = "SELECT Id FROM cortecaja WHERE Fecha='" & Format(dtpFecha.Value, "yyyy-MM-dd") & "'"
@@ -1348,7 +1350,7 @@
             e.Graphics.DrawString("Folio:" & folio, fuente_b, Brushes.Black, 1, Y)
             Y += 15
             e.Graphics.DrawString("Fecha:" & Format(dtpFecha.Value, "yyyy-MM-dd"), fuente_b, Brushes.Black, 1, Y)
-            e.Graphics.DrawString("Hora:" & Format(Date.Now, "HH:mm:ss"), fuente_b, Brushes.Black, 270, Y, derecha)
+            e.Graphics.DrawString("Hora:" & Format(dtpHoraIni.Value, "HH:mm:ss"), fuente_b, Brushes.Black, 270, Y, derecha)
             Y += 15
             e.Graphics.DrawString("Fecha:" & Format(dtpFechaFin.Value, "yyyy-MM-dd"), fuente_b, Brushes.Black, 1, Y)
             e.Graphics.DrawString("Hora:" & Format(dtpHoraFin.Value, "HH:mm:ss"), fuente_b, Brushes.Black, 270, Y, derecha)
@@ -1364,20 +1366,35 @@
             Y += 11
 
             cnn1.Close() : cnn1.Open()
+            cnn2.Close() : cnn2.Open()
+
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT NumFolio,Cliente,Abono FROM abonoi WHERE FechaCompleta BETWEEN '" & Format(dtpFecha.Value, "yyyy-MM-dd") & " " & Format(dtpHoraIni.Value, "HH:mm:ss") & "' AND '" & Format(dtpFechaFin.Value, "yyyy-MM-dd") & " " & Format(dtpHoraFin.Value, "HH:mm:ss") & "' AND Concepto='ABONO'"
+            cmd1.CommandText = "SELECT DISTINCT NumFolio FROM abonoi WHERE FechaCompleta BETWEEN '" & Format(dtpFecha.Value, "yyyy-MM-dd") & " " & Format(dtpHoraIni.Value, "HH:mm:ss") & "' AND '" & Format(dtpFechaFin.Value, "yyyy-MM-dd") & " " & Format(dtpHoraFin.Value, "HH:mm:ss") & "'"
             rd1 = cmd1.ExecuteReader
             Do While rd1.Read
                 If rd1.HasRows Then
+                    folioventa = rd1(0).ToString
 
-                    e.Graphics.DrawString(rd1(0).ToString, fuente_b, Brushes.Black, 1, Y)
-                    e.Graphics.DrawString(rd1(1).ToString, fuente_b, Brushes.Black, 100, Y, derecha)
-                    e.Graphics.DrawString(FormatNumber(rd1(2).ToString, 2), fuente_b, Brushes.Black, 270, Y, derecha)
-                    Y += 20
-                    suma = suma + rd1(2).ToString
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "SELECT Cliente,SUM(Abono),NumFolio FROM abonoi WHERE FechaCompleta BETWEEN '" & Format(dtpFecha.Value, "yyyy-MM-dd") & " " & Format(dtpHoraIni.Value, "HH:mm:ss") & "' AND '" & Format(dtpFechaFin.Value, "yyyy-MM-dd") & " " & Format(dtpHoraFin.Value, "HH:mm:ss") & "' AND Concepto='ABONO' AND numFolio=" & folioventa & " GROUP BY NumFolio"
+                    rd2 = cmd2.ExecuteReader
+                    If rd2.HasRows Then
+                        If rd2.Read Then
+
+                            e.Graphics.DrawString(folioventa, fuente_b, Brushes.Black, 1, Y)
+                            e.Graphics.DrawString(rd2(0).ToString, fuente_b, Brushes.Black, 100, Y, derecha)
+                            e.Graphics.DrawString(FormatNumber(rd2(1).ToString, 2), fuente_b, Brushes.Black, 270, Y, derecha)
+                            Y += 20
+                            suma = suma + rd2(1).ToString
+                        End If
+                    End If
+                    rd2.Close()
+
                 End If
             Loop
             rd1.Close()
+            cnn2.Close()
+
 
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "SELECT SUM(Abono) FROM abonoi WHERE Concepto='ABONO' AND FormaPago='EFECTIVO' AND FechaCompleta BETWEEN'" & Format(dtpFecha.Value, "yyyy-MM-dd") & " " & Format(dtpHoraIni.Value, "HH:mm:ss") & "' AND '" & Format(dtpFechaFin.Value, "yyyy-MM-dd") & " " & Format(dtpHoraFin.Value, "HH:mm:ss") & "'"
