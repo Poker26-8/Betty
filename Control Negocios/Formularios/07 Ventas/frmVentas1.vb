@@ -9867,7 +9867,7 @@ safo:
 
                 If Resta_ventas > 0 Then
                     If Resta_ventas >= Total_devo Then
-                        MsgBox("La devolución afectará al total restante de la venta, por lo tanto no habrá movimiento de efectivo en caja.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                        MsgBox("La devolución afectará al total restante de la venta, por lo tanto no habrá movimiento de efectivo en caja.", vbInformation + vbOKOnly, titulocentral)
                         TipoDevolucion = 1
                         SalenDevos = 0
                         Nuevo_resta = Resta_ventas - Total_devo
