@@ -202,6 +202,7 @@ Partial Class frmManejo
         Me.btnHabitaciony.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnHabitaciony.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnHabitaciony.Image = CType(resources.GetObject("btnHabitaciony.Image"), System.Drawing.Image)
+        Me.btnHabitaciony.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btnHabitaciony.Location = New System.Drawing.Point(6, 12)
         Me.btnHabitaciony.Name = "btnHabitaciony"
         Me.btnHabitaciony.Size = New System.Drawing.Size(97, 80)
