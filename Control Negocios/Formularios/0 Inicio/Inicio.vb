@@ -270,8 +270,7 @@ Public Class Inicio
                         cnn3.Close() : cnn3.Open()
 
                         cmd3 = cnn3.CreateCommand
-                        cmd3.CommandText =
-                            "update Parametros set Evaluo=1"
+                        cmd3.CommandText = "update Parametros set Evaluo=1"
                         cmd3.ExecuteNonQuery()
 
                         cnn3.Close()

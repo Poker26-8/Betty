@@ -49,6 +49,7 @@ Partial Class frmDetalleH
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblPrecios = New System.Windows.Forms.Label()
         Me.lblHoras = New System.Windows.Forms.Label()
         Me.lblPrecio = New System.Windows.Forms.Label()
         Me.grdPrecios = New System.Windows.Forms.DataGridView()
@@ -348,22 +349,31 @@ Partial Class frmDetalleH
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.lblPrecios)
         Me.GroupBox1.Controls.Add(Me.lblHoras)
         Me.GroupBox1.Controls.Add(Me.lblPrecio)
         Me.GroupBox1.Controls.Add(Me.grdPrecios)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(445, 6)
+        Me.GroupBox1.Location = New System.Drawing.Point(296, 16)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(160, 44)
+        Me.GroupBox1.Size = New System.Drawing.Size(308, 45)
         Me.GroupBox1.TabIndex = 11
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Precios de la habitación"
         Me.GroupBox1.Visible = False
         '
+        'lblPrecios
+        '
+        Me.lblPrecios.BackColor = System.Drawing.Color.PaleTurquoise
+        Me.lblPrecios.Location = New System.Drawing.Point(304, 94)
+        Me.lblPrecios.Name = "lblPrecios"
+        Me.lblPrecios.Size = New System.Drawing.Size(93, 23)
+        Me.lblPrecios.TabIndex = 96
+        '
         'lblHoras
         '
         Me.lblHoras.BackColor = System.Drawing.Color.PaleTurquoise
-        Me.lblHoras.Location = New System.Drawing.Point(313, 55)
+        Me.lblHoras.Location = New System.Drawing.Point(304, 59)
         Me.lblHoras.Name = "lblHoras"
         Me.lblHoras.Size = New System.Drawing.Size(93, 23)
         Me.lblHoras.TabIndex = 95
@@ -388,7 +398,7 @@ Partial Class frmDetalleH
         Me.grdPrecios.Name = "grdPrecios"
         Me.grdPrecios.ReadOnly = True
         Me.grdPrecios.RowHeadersVisible = False
-        Me.grdPrecios.Size = New System.Drawing.Size(303, 145)
+        Me.grdPrecios.Size = New System.Drawing.Size(294, 145)
         Me.grdPrecios.TabIndex = 10
         '
         'Column3
@@ -589,7 +599,7 @@ Partial Class frmDetalleH
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel3.Location = New System.Drawing.Point(0, 272)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(850, 80)
+        Me.Panel3.Size = New System.Drawing.Size(850, 83)
         Me.Panel3.TabIndex = 94
         '
         'btnLimpiar
@@ -648,7 +658,7 @@ Partial Class frmDetalleH
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(850, 352)
+        Me.ClientSize = New System.Drawing.Size(850, 355)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
@@ -727,4 +737,5 @@ Partial Class frmDetalleH
     Friend WithEvents PReservacion80 As Printing.PrintDocument
     Friend WithEvents PRservacion58 As Printing.PrintDocument
     Friend WithEvents btnAbonos As Button
+    Friend WithEvents lblPrecios As Label
 End Class
