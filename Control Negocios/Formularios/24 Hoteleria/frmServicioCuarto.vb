@@ -80,8 +80,8 @@ Public Class frmServicioCuarto
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "select distinct Departamento from Productos where Departamento<>'INSUMO' AND Departamento<>'EXTRAS' order by Departamento"
             rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
+            Do While rd1.Read
+                If rd1.HasRows Then
                     Dim departamento As String = rd1("Departamento").ToString
 
                     btnDeptoH = New Button
@@ -107,7 +107,8 @@ Public Class frmServicioCuarto
                     End If
                     deptosh += 1
                 End If
-            End If
+            Loop
+
             rd1.Close()
             cnn1.Close()
         Catch ex As Exception

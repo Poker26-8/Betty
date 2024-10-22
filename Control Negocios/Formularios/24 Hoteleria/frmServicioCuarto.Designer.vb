@@ -23,7 +23,7 @@ Partial Class frmServicioCuarto
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmServicioCuarto))
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.grdCaptura = New System.Windows.Forms.DataGridView()
@@ -122,14 +122,14 @@ Partial Class frmServicioCuarto
         Me.grdCaptura.BackgroundColor = System.Drawing.Color.White
         Me.grdCaptura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grdCaptura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column9})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.grdCaptura.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.grdCaptura.DefaultCellStyle = DataGridViewCellStyle3
         Me.grdCaptura.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdCaptura.Location = New System.Drawing.Point(0, 122)
         Me.grdCaptura.Name = "grdCaptura"
@@ -626,20 +626,22 @@ Partial Class frmServicioCuarto
         '
         'pdepa
         '
+        Me.pdepa.AutoScroll = True
         Me.pdepa.BackColor = System.Drawing.Color.LightSeaGreen
         Me.pdepa.Dock = System.Windows.Forms.DockStyle.Left
         Me.pdepa.Location = New System.Drawing.Point(0, 100)
         Me.pdepa.Name = "pdepa"
-        Me.pdepa.Size = New System.Drawing.Size(113, 565)
+        Me.pdepa.Size = New System.Drawing.Size(127, 565)
         Me.pdepa.TabIndex = 68
         '
         'PGrupo
         '
+        Me.PGrupo.AutoScroll = True
         Me.PGrupo.BackColor = System.Drawing.Color.PaleTurquoise
         Me.PGrupo.Dock = System.Windows.Forms.DockStyle.Left
-        Me.PGrupo.Location = New System.Drawing.Point(113, 100)
+        Me.PGrupo.Location = New System.Drawing.Point(127, 100)
         Me.PGrupo.Name = "PGrupo"
-        Me.PGrupo.Size = New System.Drawing.Size(113, 565)
+        Me.PGrupo.Size = New System.Drawing.Size(127, 565)
         Me.PGrupo.TabIndex = 69
         '
         'pproductos
@@ -647,9 +649,9 @@ Partial Class frmServicioCuarto
         Me.pproductos.BackColor = System.Drawing.Color.White
         Me.pproductos.Controls.Add(Me.PTeclado)
         Me.pproductos.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pproductos.Location = New System.Drawing.Point(226, 100)
+        Me.pproductos.Location = New System.Drawing.Point(254, 100)
         Me.pproductos.Name = "pproductos"
-        Me.pproductos.Size = New System.Drawing.Size(662, 565)
+        Me.pproductos.Size = New System.Drawing.Size(634, 565)
         Me.pproductos.TabIndex = 70
         '
         'PTeclado
