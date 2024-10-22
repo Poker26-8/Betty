@@ -423,8 +423,8 @@ Partial Class frmDetalleH
         Me.pdesocupar.Controls.Add(Me.btnDesocupar)
         Me.pdesocupar.Location = New System.Drawing.Point(3, 6)
         Me.pdesocupar.Name = "pdesocupar"
-        Me.pdesocupar.Size = New System.Drawing.Size(194, 47)
-        Me.pdesocupar.TabIndex = 92
+        Me.pdesocupar.Size = New System.Drawing.Size(187, 55)
+        Me.pdesocupar.TabIndex = 90
         Me.pdesocupar.Visible = False
         '
         'btnDesocupar
@@ -433,7 +433,7 @@ Partial Class frmDetalleH
         Me.btnDesocupar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDesocupar.Location = New System.Drawing.Point(3, 12)
         Me.btnDesocupar.Name = "btnDesocupar"
-        Me.btnDesocupar.Size = New System.Drawing.Size(176, 23)
+        Me.btnDesocupar.Size = New System.Drawing.Size(176, 32)
         Me.btnDesocupar.TabIndex = 1
         Me.btnDesocupar.Text = "Desocupar Habitación"
         Me.btnDesocupar.UseVisualStyleBackColor = True

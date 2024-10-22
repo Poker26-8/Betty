@@ -246,9 +246,9 @@ Partial Class frmManejo
         '
         Me.Panel2.Controls.Add(Me.pcontra)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel2.Location = New System.Drawing.Point(1136, 100)
+        Me.Panel2.Location = New System.Drawing.Point(1110, 100)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(193, 726)
+        Me.Panel2.Size = New System.Drawing.Size(219, 726)
         Me.Panel2.TabIndex = 1
         '
         'pcontra
@@ -284,25 +284,25 @@ Partial Class frmManejo
         Me.pcontra.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pcontra.Location = New System.Drawing.Point(0, 0)
         Me.pcontra.Name = "pcontra"
-        Me.pcontra.Size = New System.Drawing.Size(193, 726)
+        Me.pcontra.Size = New System.Drawing.Size(219, 726)
         Me.pcontra.TabIndex = 3
         '
         'Label10
         '
-        Me.Label10.AutoSize = True
         Me.Label10.BackColor = System.Drawing.Color.Violet
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.ForeColor = System.Drawing.Color.Black
-        Me.Label10.Location = New System.Drawing.Point(6, 383)
+        Me.Label10.Location = New System.Drawing.Point(6, 438)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(91, 20)
+        Me.Label10.Size = New System.Drawing.Size(97, 20)
         Me.Label10.TabIndex = 122
         Me.Label10.Text = "Finalizada"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblidusuario
         '
         Me.lblidusuario.BackColor = System.Drawing.Color.Silver
-        Me.lblidusuario.Location = New System.Drawing.Point(15, 574)
+        Me.lblidusuario.Location = New System.Drawing.Point(9, 601)
         Me.lblidusuario.Name = "lblidusuario"
         Me.lblidusuario.Size = New System.Drawing.Size(85, 20)
         Me.lblidusuario.TabIndex = 121
@@ -310,27 +310,27 @@ Partial Class frmManejo
         '
         'Label9
         '
-        Me.Label9.AutoSize = True
         Me.Label9.BackColor = System.Drawing.Color.Yellow
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.Color.Black
-        Me.Label9.Location = New System.Drawing.Point(6, 476)
+        Me.Label9.Location = New System.Drawing.Point(109, 469)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(98, 20)
         Me.Label9.TabIndex = 120
         Me.Label9.Text = "Ventilación"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label8
         '
-        Me.Label8.AutoSize = True
         Me.Label8.BackColor = System.Drawing.Color.Aqua
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.ForeColor = System.Drawing.Color.Black
-        Me.Label8.Location = New System.Drawing.Point(104, 383)
+        Me.Label8.Location = New System.Drawing.Point(109, 438)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(80, 20)
+        Me.Label8.Size = New System.Drawing.Size(98, 20)
         Me.Label8.TabIndex = 119
         Me.Label8.Text = "Limpieza"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label7
         '
@@ -338,7 +338,7 @@ Partial Class frmManejo
         Me.Label7.BackColor = System.Drawing.Color.Silver
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.Black
-        Me.Label7.Location = New System.Drawing.Point(6, 446)
+        Me.Label7.Location = New System.Drawing.Point(6, 501)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(127, 20)
         Me.Label7.TabIndex = 118
@@ -347,7 +347,7 @@ Partial Class frmManejo
         'lblidcliente
         '
         Me.lblidcliente.BackColor = System.Drawing.Color.LightGray
-        Me.lblidcliente.Location = New System.Drawing.Point(15, 542)
+        Me.lblidcliente.Location = New System.Drawing.Point(9, 569)
         Me.lblidcliente.Name = "lblidcliente"
         Me.lblidcliente.Size = New System.Drawing.Size(100, 23)
         Me.lblidcliente.TabIndex = 117
@@ -356,7 +356,7 @@ Partial Class frmManejo
         'lblcliente
         '
         Me.lblcliente.BackColor = System.Drawing.Color.LightGray
-        Me.lblcliente.Location = New System.Drawing.Point(13, 510)
+        Me.lblcliente.Location = New System.Drawing.Point(7, 537)
         Me.lblcliente.Name = "lblcliente"
         Me.lblcliente.Size = New System.Drawing.Size(180, 23)
         Me.lblcliente.TabIndex = 116
@@ -364,39 +364,39 @@ Partial Class frmManejo
         '
         'Label6
         '
-        Me.Label6.AutoSize = True
         Me.Label6.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(100, Byte), Integer), CType(CType(156, Byte), Integer))
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.White
-        Me.Label6.Location = New System.Drawing.Point(6, 414)
+        Me.Label6.Location = New System.Drawing.Point(6, 469)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(95, 20)
+        Me.Label6.Size = New System.Drawing.Size(97, 20)
         Me.Label6.TabIndex = 115
         Me.Label6.Text = "Reservada"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label5
         '
-        Me.Label5.AutoSize = True
         Me.Label5.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(39, Byte), Integer), CType(CType(71, Byte), Integer))
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.White
-        Me.Label5.Location = New System.Drawing.Point(104, 353)
+        Me.Label5.Location = New System.Drawing.Point(109, 408)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(81, 20)
+        Me.Label5.Size = New System.Drawing.Size(98, 20)
         Me.Label5.TabIndex = 114
         Me.Label5.Text = "Ocupada"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label1
         '
-        Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(84, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(96, Byte), Integer))
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Black
-        Me.Label1.Location = New System.Drawing.Point(6, 353)
+        Me.Label1.Location = New System.Drawing.Point(6, 408)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(93, 20)
+        Me.Label1.Size = New System.Drawing.Size(97, 20)
         Me.Label1.TabIndex = 113
         Me.Label1.Text = "Disponible"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblusuario
         '
@@ -405,9 +405,9 @@ Partial Class frmManejo
         Me.lblusuario.BackColor = System.Drawing.Color.SteelBlue
         Me.lblusuario.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblusuario.ForeColor = System.Drawing.Color.White
-        Me.lblusuario.Location = New System.Drawing.Point(6, 318)
+        Me.lblusuario.Location = New System.Drawing.Point(7, 372)
         Me.lblusuario.Name = "lblusuario"
-        Me.lblusuario.Size = New System.Drawing.Size(179, 24)
+        Me.lblusuario.Size = New System.Drawing.Size(209, 24)
         Me.lblusuario.TabIndex = 112
         Me.lblusuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -415,9 +415,9 @@ Partial Class frmManejo
         '
         Me.Label4.BackColor = System.Drawing.Color.PaleTurquoise
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(6, 295)
+        Me.Label4.Location = New System.Drawing.Point(7, 349)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(180, 23)
+        Me.Label4.Size = New System.Drawing.Size(209, 23)
         Me.Label4.TabIndex = 111
         Me.Label4.Text = "USUARIO"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -427,9 +427,9 @@ Partial Class frmManejo
         Me.btnok.BackColor = System.Drawing.Color.White
         Me.btnok.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnok.Font = New System.Drawing.Font("Segoe UI Emoji", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnok.Location = New System.Drawing.Point(130, 252)
+        Me.btnok.Location = New System.Drawing.Point(150, 293)
         Me.btnok.Name = "btnok"
-        Me.btnok.Size = New System.Drawing.Size(56, 40)
+        Me.btnok.Size = New System.Drawing.Size(66, 53)
         Me.btnok.TabIndex = 110
         Me.btnok.Text = "INTRO"
         Me.btnok.UseVisualStyleBackColor = False
@@ -439,9 +439,9 @@ Partial Class frmManejo
         Me.btn0.BackColor = System.Drawing.Color.White
         Me.btn0.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btn0.Font = New System.Drawing.Font("Segoe UI Emoji", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn0.Location = New System.Drawing.Point(68, 252)
+        Me.btn0.Location = New System.Drawing.Point(79, 293)
         Me.btn0.Name = "btn0"
-        Me.btn0.Size = New System.Drawing.Size(56, 40)
+        Me.btn0.Size = New System.Drawing.Size(66, 53)
         Me.btn0.TabIndex = 109
         Me.btn0.Text = "0"
         Me.btn0.UseVisualStyleBackColor = False
@@ -451,9 +451,9 @@ Partial Class frmManejo
         Me.btnborra.BackColor = System.Drawing.Color.White
         Me.btnborra.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnborra.Font = New System.Drawing.Font("Segoe UI Emoji", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnborra.Location = New System.Drawing.Point(6, 252)
+        Me.btnborra.Location = New System.Drawing.Point(7, 293)
         Me.btnborra.Name = "btnborra"
-        Me.btnborra.Size = New System.Drawing.Size(56, 40)
+        Me.btnborra.Size = New System.Drawing.Size(66, 53)
         Me.btnborra.TabIndex = 108
         Me.btnborra.Text = "RETRO"
         Me.btnborra.UseVisualStyleBackColor = False
@@ -463,9 +463,9 @@ Partial Class frmManejo
         Me.btn9.BackColor = System.Drawing.Color.White
         Me.btn9.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btn9.Font = New System.Drawing.Font("Segoe UI Emoji", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn9.Location = New System.Drawing.Point(128, 116)
+        Me.btn9.Location = New System.Drawing.Point(150, 117)
         Me.btn9.Name = "btn9"
-        Me.btn9.Size = New System.Drawing.Size(58, 40)
+        Me.btn9.Size = New System.Drawing.Size(66, 53)
         Me.btn9.TabIndex = 107
         Me.btn9.Text = "9"
         Me.btn9.UseVisualStyleBackColor = False
@@ -475,9 +475,9 @@ Partial Class frmManejo
         Me.btn8.BackColor = System.Drawing.Color.White
         Me.btn8.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btn8.Font = New System.Drawing.Font("Segoe UI Emoji", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn8.Location = New System.Drawing.Point(67, 116)
+        Me.btn8.Location = New System.Drawing.Point(78, 117)
         Me.btn8.Name = "btn8"
-        Me.btn8.Size = New System.Drawing.Size(56, 40)
+        Me.btn8.Size = New System.Drawing.Size(66, 53)
         Me.btn8.TabIndex = 106
         Me.btn8.Text = "8"
         Me.btn8.UseVisualStyleBackColor = False
@@ -489,7 +489,7 @@ Partial Class frmManejo
         Me.btn7.Font = New System.Drawing.Font("Segoe UI Emoji", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn7.Location = New System.Drawing.Point(6, 117)
         Me.btn7.Name = "btn7"
-        Me.btn7.Size = New System.Drawing.Size(56, 40)
+        Me.btn7.Size = New System.Drawing.Size(66, 53)
         Me.btn7.TabIndex = 105
         Me.btn7.Text = "7"
         Me.btn7.UseVisualStyleBackColor = False
@@ -499,9 +499,9 @@ Partial Class frmManejo
         Me.btn6.BackColor = System.Drawing.Color.White
         Me.btn6.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btn6.Font = New System.Drawing.Font("Segoe UI Emoji", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn6.Location = New System.Drawing.Point(130, 162)
+        Me.btn6.Location = New System.Drawing.Point(150, 175)
         Me.btn6.Name = "btn6"
-        Me.btn6.Size = New System.Drawing.Size(56, 40)
+        Me.btn6.Size = New System.Drawing.Size(66, 53)
         Me.btn6.TabIndex = 104
         Me.btn6.Text = "6"
         Me.btn6.UseVisualStyleBackColor = False
@@ -511,9 +511,9 @@ Partial Class frmManejo
         Me.btn5.BackColor = System.Drawing.Color.White
         Me.btn5.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btn5.Font = New System.Drawing.Font("Segoe UI Emoji", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn5.Location = New System.Drawing.Point(68, 162)
+        Me.btn5.Location = New System.Drawing.Point(79, 175)
         Me.btn5.Name = "btn5"
-        Me.btn5.Size = New System.Drawing.Size(56, 40)
+        Me.btn5.Size = New System.Drawing.Size(66, 53)
         Me.btn5.TabIndex = 103
         Me.btn5.Text = "5"
         Me.btn5.UseVisualStyleBackColor = False
@@ -523,9 +523,9 @@ Partial Class frmManejo
         Me.btn4.BackColor = System.Drawing.Color.White
         Me.btn4.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btn4.Font = New System.Drawing.Font("Segoe UI Emoji", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn4.Location = New System.Drawing.Point(6, 162)
+        Me.btn4.Location = New System.Drawing.Point(7, 175)
         Me.btn4.Name = "btn4"
-        Me.btn4.Size = New System.Drawing.Size(56, 40)
+        Me.btn4.Size = New System.Drawing.Size(66, 53)
         Me.btn4.TabIndex = 102
         Me.btn4.Text = "4"
         Me.btn4.UseVisualStyleBackColor = False
@@ -535,9 +535,9 @@ Partial Class frmManejo
         Me.btn3.BackColor = System.Drawing.Color.White
         Me.btn3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btn3.Font = New System.Drawing.Font("Segoe UI Emoji", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn3.Location = New System.Drawing.Point(130, 208)
+        Me.btn3.Location = New System.Drawing.Point(150, 234)
         Me.btn3.Name = "btn3"
-        Me.btn3.Size = New System.Drawing.Size(56, 40)
+        Me.btn3.Size = New System.Drawing.Size(66, 53)
         Me.btn3.TabIndex = 101
         Me.btn3.Text = "3"
         Me.btn3.UseVisualStyleBackColor = False
@@ -547,9 +547,9 @@ Partial Class frmManejo
         Me.btn2.BackColor = System.Drawing.Color.White
         Me.btn2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btn2.Font = New System.Drawing.Font("Segoe UI Emoji", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn2.Location = New System.Drawing.Point(68, 208)
+        Me.btn2.Location = New System.Drawing.Point(79, 234)
         Me.btn2.Name = "btn2"
-        Me.btn2.Size = New System.Drawing.Size(56, 40)
+        Me.btn2.Size = New System.Drawing.Size(66, 53)
         Me.btn2.TabIndex = 100
         Me.btn2.Text = "2"
         Me.btn2.UseVisualStyleBackColor = False
@@ -559,9 +559,9 @@ Partial Class frmManejo
         Me.btn1.BackColor = System.Drawing.Color.White
         Me.btn1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btn1.Font = New System.Drawing.Font("Segoe UI Emoji", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn1.Location = New System.Drawing.Point(6, 208)
+        Me.btn1.Location = New System.Drawing.Point(7, 234)
         Me.btn1.Name = "btn1"
-        Me.btn1.Size = New System.Drawing.Size(56, 40)
+        Me.btn1.Size = New System.Drawing.Size(66, 53)
         Me.btn1.TabIndex = 99
         Me.btn1.Text = "1"
         Me.btn1.UseVisualStyleBackColor = False
@@ -571,7 +571,7 @@ Partial Class frmManejo
         Me.txtpass.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtpass.Location = New System.Drawing.Point(6, 89)
         Me.txtpass.Name = "txtpass"
-        Me.txtpass.Size = New System.Drawing.Size(180, 22)
+        Me.txtpass.Size = New System.Drawing.Size(210, 22)
         Me.txtpass.TabIndex = 88
         Me.txtpass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtpass.UseSystemPasswordChar = True
@@ -582,7 +582,7 @@ Partial Class frmManejo
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(6, 63)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(180, 23)
+        Me.Label3.Size = New System.Drawing.Size(210, 23)
         Me.Label3.TabIndex = 87
         Me.Label3.Text = "CLAVE DE USUARIO"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -593,7 +593,7 @@ Partial Class frmManejo
         Me.txtHabitacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtHabitacion.Location = New System.Drawing.Point(6, 38)
         Me.txtHabitacion.Name = "txtHabitacion"
-        Me.txtHabitacion.Size = New System.Drawing.Size(180, 22)
+        Me.txtHabitacion.Size = New System.Drawing.Size(210, 22)
         Me.txtHabitacion.TabIndex = 86
         Me.txtHabitacion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -603,7 +603,7 @@ Partial Class frmManejo
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(6, 12)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(180, 23)
+        Me.Label2.Size = New System.Drawing.Size(210, 23)
         Me.Label2.TabIndex = 85
         Me.Label2.Text = "N° HABITACIÓN"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -614,7 +614,7 @@ Partial Class frmManejo
         Me.pHab.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pHab.Location = New System.Drawing.Point(0, 100)
         Me.pHab.Name = "pHab"
-        Me.pHab.Size = New System.Drawing.Size(1136, 726)
+        Me.pHab.Size = New System.Drawing.Size(1110, 726)
         Me.pHab.TabIndex = 4
         '
         'frmManejo

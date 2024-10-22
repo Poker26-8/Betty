@@ -36,7 +36,7 @@ Partial Class frmMenuHabitaciones
         Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
         Me.Button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button2.Location = New System.Drawing.Point(184, 12)
+        Me.Button2.Location = New System.Drawing.Point(346, 12)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(155, 64)
         Me.Button2.TabIndex = 7
@@ -82,7 +82,7 @@ Partial Class frmMenuHabitaciones
         Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
         Me.Button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button4.Location = New System.Drawing.Point(345, 12)
+        Me.Button4.Location = New System.Drawing.Point(184, 12)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(155, 64)
         Me.Button4.TabIndex = 8
