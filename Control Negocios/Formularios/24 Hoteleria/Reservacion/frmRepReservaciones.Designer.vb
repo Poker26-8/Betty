@@ -23,18 +23,20 @@ Partial Class frmRepReservaciones
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmRepReservaciones))
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.dtphasta = New System.Windows.Forms.MonthCalendar()
-        Me.dtpdesde = New System.Windows.Forms.MonthCalendar()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cboFiltro = New System.Windows.Forms.ComboBox()
         Me.btnExportar = New System.Windows.Forms.Button()
         Me.btnReporte = New System.Windows.Forms.Button()
-        Me.rbTodos = New System.Windows.Forms.RadioButton()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.rbClientes = New System.Windows.Forms.RadioButton()
-        Me.cboFiltro = New System.Windows.Forms.ComboBox()
+        Me.rbTodos = New System.Windows.Forms.RadioButton()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.dtpdesde = New System.Windows.Forms.MonthCalendar()
+        Me.dtphasta = New System.Windows.Forms.MonthCalendar()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.grdCaptura = New System.Windows.Forms.DataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -67,53 +69,15 @@ Partial Class frmRepReservaciones
         Me.Panel1.Size = New System.Drawing.Size(1068, 197)
         Me.Panel1.TabIndex = 0
         '
-        'dtphasta
+        'cboFiltro
         '
-        Me.dtphasta.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dtphasta.Location = New System.Drawing.Point(811, 29)
-        Me.dtphasta.Name = "dtphasta"
-        Me.dtphasta.TabIndex = 0
-        '
-        'dtpdesde
-        '
-        Me.dtpdesde.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dtpdesde.Location = New System.Drawing.Point(557, 29)
-        Me.dtpdesde.Name = "dtpdesde"
-        Me.dtpdesde.TabIndex = 1
-        '
-        'Label1
-        '
-        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(554, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(56, 18)
-        Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Desde"
-        '
-        'Label2
-        '
-        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(808, 9)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(52, 18)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Hasta"
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.rbClientes)
-        Me.GroupBox1.Controls.Add(Me.rbTodos)
-        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 9)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(294, 152)
-        Me.GroupBox1.TabIndex = 4
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Opciones"
+        Me.cboFiltro.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboFiltro.FormattingEnabled = True
+        Me.cboFiltro.Location = New System.Drawing.Point(12, 167)
+        Me.cboFiltro.Name = "cboFiltro"
+        Me.cboFiltro.Size = New System.Drawing.Size(294, 24)
+        Me.cboFiltro.TabIndex = 7
+        Me.cboFiltro.Visible = False
         '
         'btnExportar
         '
@@ -143,17 +107,17 @@ Partial Class frmRepReservaciones
         Me.btnReporte.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnReporte.UseVisualStyleBackColor = True
         '
-        'rbTodos
+        'GroupBox1
         '
-        Me.rbTodos.AutoSize = True
-        Me.rbTodos.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbTodos.Location = New System.Drawing.Point(6, 58)
-        Me.rbTodos.Name = "rbTodos"
-        Me.rbTodos.Size = New System.Drawing.Size(89, 22)
-        Me.rbTodos.TabIndex = 0
-        Me.rbTodos.TabStop = True
-        Me.rbTodos.Text = "Ver todas"
-        Me.rbTodos.UseVisualStyleBackColor = True
+        Me.GroupBox1.Controls.Add(Me.rbClientes)
+        Me.GroupBox1.Controls.Add(Me.rbTodos)
+        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 9)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(294, 152)
+        Me.GroupBox1.TabIndex = 4
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Opciones"
         '
         'rbClientes
         '
@@ -167,15 +131,53 @@ Partial Class frmRepReservaciones
         Me.rbClientes.Text = "Clientes"
         Me.rbClientes.UseVisualStyleBackColor = True
         '
-        'cboFiltro
+        'rbTodos
         '
-        Me.cboFiltro.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboFiltro.FormattingEnabled = True
-        Me.cboFiltro.Location = New System.Drawing.Point(12, 167)
-        Me.cboFiltro.Name = "cboFiltro"
-        Me.cboFiltro.Size = New System.Drawing.Size(294, 24)
-        Me.cboFiltro.TabIndex = 7
-        Me.cboFiltro.Visible = False
+        Me.rbTodos.AutoSize = True
+        Me.rbTodos.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbTodos.Location = New System.Drawing.Point(6, 58)
+        Me.rbTodos.Name = "rbTodos"
+        Me.rbTodos.Size = New System.Drawing.Size(89, 22)
+        Me.rbTodos.TabIndex = 0
+        Me.rbTodos.TabStop = True
+        Me.rbTodos.Text = "Ver todas"
+        Me.rbTodos.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(808, 9)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(52, 18)
+        Me.Label2.TabIndex = 3
+        Me.Label2.Text = "Hasta"
+        '
+        'Label1
+        '
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(554, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(56, 18)
+        Me.Label1.TabIndex = 2
+        Me.Label1.Text = "Desde"
+        '
+        'dtpdesde
+        '
+        Me.dtpdesde.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dtpdesde.Location = New System.Drawing.Point(557, 29)
+        Me.dtpdesde.Name = "dtpdesde"
+        Me.dtpdesde.TabIndex = 1
+        '
+        'dtphasta
+        '
+        Me.dtphasta.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dtphasta.Location = New System.Drawing.Point(811, 29)
+        Me.dtphasta.Name = "dtphasta"
+        Me.dtphasta.TabIndex = 0
         '
         'Panel3
         '
@@ -191,14 +193,14 @@ Partial Class frmRepReservaciones
         Me.grdCaptura.AllowUserToAddRows = False
         Me.grdCaptura.AllowUserToDeleteRows = False
         Me.grdCaptura.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.grdCaptura.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.grdCaptura.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.grdCaptura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grdCaptura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8})
         Me.grdCaptura.Dock = System.Windows.Forms.DockStyle.Fill
@@ -235,6 +237,8 @@ Partial Class frmRepReservaciones
         'Column4
         '
         Me.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Column4.DefaultCellStyle = DataGridViewCellStyle2
         Me.Column4.HeaderText = "Fec.Entrada"
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
@@ -243,6 +247,8 @@ Partial Class frmRepReservaciones
         'Column5
         '
         Me.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle3
         Me.Column5.HeaderText = "Fec.Salida"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
