@@ -78,7 +78,7 @@
                                             ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
     'prescripcion
-    Public VartablaPrescripcion As String = "CREATE TABLE IF NOT EXIST `prescripcion` (
+    Public VartablaPrescripcion As String = "CREATE TABLE `prescripcion` (
                                               `Folio` int(11) NOT NULL,
                                               `Id` int(11) NOT NULL DEFAULT '0',
                                               `Paciente` varchar(250) NOT NULL DEFAULT '',
