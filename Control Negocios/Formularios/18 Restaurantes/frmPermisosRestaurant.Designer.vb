@@ -59,6 +59,7 @@ Partial Class frmPermisosRestaurant
         Me.cbJuntar = New System.Windows.Forms.CheckBox()
         Me.cbCortesia = New System.Windows.Forms.CheckBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.chkPantallaExtras = New System.Windows.Forms.CheckBox()
         Me.cbCobroSimplificado = New System.Windows.Forms.CheckBox()
         Me.cbCobroExacto = New System.Windows.Forms.CheckBox()
         Me.cbSeparadas = New System.Windows.Forms.CheckBox()
@@ -91,7 +92,6 @@ Partial Class frmPermisosRestaurant
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.chkPantallaExtras = New System.Windows.Forms.CheckBox()
         Me.GroupBox7.SuspendLayout()
         Me.GroupBox19.SuspendLayout()
         Me.GroupBox20.SuspendLayout()
@@ -515,6 +515,17 @@ Partial Class frmPermisosRestaurant
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Permisos Generales"
         '
+        'chkPantallaExtras
+        '
+        Me.chkPantallaExtras.AutoSize = True
+        Me.chkPantallaExtras.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkPantallaExtras.Location = New System.Drawing.Point(6, 138)
+        Me.chkPantallaExtras.Name = "chkPantallaExtras"
+        Me.chkPantallaExtras.Size = New System.Drawing.Size(115, 20)
+        Me.chkPantallaExtras.TabIndex = 249
+        Me.chkPantallaExtras.Text = "Pantalla Extras"
+        Me.chkPantallaExtras.UseVisualStyleBackColor = True
+        '
         'cbCobroSimplificado
         '
         Me.cbCobroSimplificado.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -868,17 +879,6 @@ Partial Class frmPermisosRestaurant
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1032, 66)
         Me.Panel1.TabIndex = 250
-        '
-        'chkPantallaExtras
-        '
-        Me.chkPantallaExtras.AutoSize = True
-        Me.chkPantallaExtras.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkPantallaExtras.Location = New System.Drawing.Point(6, 138)
-        Me.chkPantallaExtras.Name = "chkPantallaExtras"
-        Me.chkPantallaExtras.Size = New System.Drawing.Size(115, 20)
-        Me.chkPantallaExtras.TabIndex = 249
-        Me.chkPantallaExtras.Text = "Pantalla Extras"
-        Me.chkPantallaExtras.UseVisualStyleBackColor = True
         '
         'frmPermisosRestaurant
         '

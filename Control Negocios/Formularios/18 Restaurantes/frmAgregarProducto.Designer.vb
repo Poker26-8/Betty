@@ -514,7 +514,7 @@ Partial Class frmAgregarProducto
         Me.pExtras.Padding = New System.Windows.Forms.Padding(3)
         Me.pExtras.Size = New System.Drawing.Size(321, 234)
         Me.pExtras.TabIndex = 1
-        Me.pExtras.Text = "    Extras    "
+        Me.pExtras.Text = "      Extras      "
         '
         'pPromociones
         '
@@ -524,7 +524,7 @@ Partial Class frmAgregarProducto
         Me.pPromociones.Padding = New System.Windows.Forms.Padding(3)
         Me.pPromociones.Size = New System.Drawing.Size(321, 234)
         Me.pPromociones.TabIndex = 2
-        Me.pPromociones.Text = " Promoción "
+        Me.pPromociones.Text = "    Promoción    "
         '
         'Panel7
         '
