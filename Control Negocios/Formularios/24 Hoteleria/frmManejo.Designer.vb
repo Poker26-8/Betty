@@ -579,7 +579,7 @@ Partial Class frmManejo
         'Label3
         '
         Me.Label3.BackColor = System.Drawing.Color.PaleTurquoise
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(6, 63)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(210, 23)
@@ -600,7 +600,7 @@ Partial Class frmManejo
         'Label2
         '
         Me.Label2.BackColor = System.Drawing.Color.PaleTurquoise
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(6, 12)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(210, 23)
