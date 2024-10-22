@@ -87,9 +87,7 @@ Public Class frmPagarH
 )
                     total = total + CDbl(rd2("total").ToString)
 
-                    If rd2("Codigo").ToString = "xc3" Then
-                        pasoadeudo = 0
-                    End If
+
                 End If
             Loop
             rd2.Close()

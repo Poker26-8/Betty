@@ -1324,7 +1324,7 @@ Public Class frmManejo
 
                     If realizarventas = 1 Then
 
-
+                        frmPagarH.pasoadeudo = 1
                         frmPagarH.lblAtendio.Text = lblusuario.Text
                         frmPagarH.lblHabitacion.Text = txtHabitacion.Text
                         frmPagarH.lblNumCliente.Text = lblidcliente.Text

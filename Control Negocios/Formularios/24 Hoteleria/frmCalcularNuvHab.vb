@@ -182,10 +182,14 @@
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then
-                    MsgBox("Tienes productos por pagar, antes de desocupar la habitación se tiene que cobrar.", vbInformation + vbOKOnly, titulocentral)
-                    Exit Sub
+
+                    If lblPagar.Text > 0 Then
+                    Else
+                        MsgBox("Tienes productos por pagar, antes de desocupar la habitación se tiene que cobrar.", vbInformation + vbOKOnly, titulocentral)
+                        Exit Sub
+                    End If
                 End If
-            End If
+                End If
             rd1.Close()
             cnn1.Close()
 
