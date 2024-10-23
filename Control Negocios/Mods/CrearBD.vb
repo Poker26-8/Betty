@@ -103,6 +103,7 @@
                                                   `Peso` varchar(100) NOT NULL DEFAULT '',
                                                   `Talla` varchar(100) NOT NULL DEFAULT '',
                                                   `Alergias` varchar(250) NOT NULL DEFAULT '',
+                                                  `FAlergia` varchar(50) NOT NULL DEFAULT '',
                                                   `Embarazo` int(1) NOT NULL DEFAULT '0',
                                                   `Glucosa` varchar(100) NOT NULL DEFAULT '',
                                                   `Temperatura` varchar(100) NOT NULL DEFAULT '',

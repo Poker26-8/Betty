@@ -24,6 +24,8 @@ Partial Class frmPediatria
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPediatria))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.txtFAlergia = New System.Windows.Forms.TextBox()
         Me.txtSAT = New System.Windows.Forms.TextBox()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -36,7 +38,6 @@ Partial Class frmPediatria
         Me.txtEdad = New System.Windows.Forms.TextBox()
         Me.txtCorporal = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.dtpAlergia = New System.Windows.Forms.DateTimePicker()
         Me.dtpNacimiento = New System.Windows.Forms.DateTimePicker()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -89,6 +90,8 @@ Partial Class frmPediatria
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label21)
+        Me.GroupBox1.Controls.Add(Me.txtFAlergia)
         Me.GroupBox1.Controls.Add(Me.txtSAT)
         Me.GroupBox1.Controls.Add(Me.Label20)
         Me.GroupBox1.Controls.Add(Me.Label19)
@@ -101,7 +104,6 @@ Partial Class frmPediatria
         Me.GroupBox1.Controls.Add(Me.txtEdad)
         Me.GroupBox1.Controls.Add(Me.txtCorporal)
         Me.GroupBox1.Controls.Add(Me.Label15)
-        Me.GroupBox1.Controls.Add(Me.dtpAlergia)
         Me.GroupBox1.Controls.Add(Me.dtpNacimiento)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label5)
@@ -123,6 +125,25 @@ Partial Class frmPediatria
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Paciente"
+        '
+        'Label21
+        '
+        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.Location = New System.Drawing.Point(263, 252)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(88, 23)
+        Me.Label21.TabIndex = 272
+        Me.Label21.Text = "dd-MM-yyyy"
+        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtFAlergia
+        '
+        Me.txtFAlergia.BackColor = System.Drawing.Color.White
+        Me.txtFAlergia.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFAlergia.Location = New System.Drawing.Point(115, 250)
+        Me.txtFAlergia.Name = "txtFAlergia"
+        Me.txtFAlergia.Size = New System.Drawing.Size(142, 26)
+        Me.txtFAlergia.TabIndex = 271
         '
         'txtSAT
         '
@@ -237,15 +258,6 @@ Partial Class frmPediatria
         Me.Label15.TabIndex = 259
         Me.Label15.Text = "M2SC:"
         Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'dtpAlergia
-        '
-        Me.dtpAlergia.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpAlergia.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpAlergia.Location = New System.Drawing.Point(115, 252)
-        Me.dtpAlergia.Name = "dtpAlergia"
-        Me.dtpAlergia.Size = New System.Drawing.Size(142, 26)
-        Me.dtpAlergia.TabIndex = 258
         '
         'dtpNacimiento
         '
@@ -739,7 +751,6 @@ Partial Class frmPediatria
     Friend WithEvents Label2 As Label
     Friend WithEvents cboCliente As ComboBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents dtpAlergia As DateTimePicker
     Friend WithEvents dtpNacimiento As DateTimePicker
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
@@ -789,4 +800,6 @@ Partial Class frmPediatria
     Friend WithEvents txtFR As TextBox
     Friend WithEvents Label18 As Label
     Friend WithEvents txtFC As TextBox
+    Friend WithEvents Label21 As Label
+    Friend WithEvents txtFAlergia As TextBox
 End Class
