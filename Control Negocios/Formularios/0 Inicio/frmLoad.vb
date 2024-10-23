@@ -1,4 +1,5 @@
-﻿Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Button
+﻿Imports System.Data.OleDb
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Button
 Imports Core.DAL.DE
 Imports MySql.Data
 Imports Org.BouncyCastle.Asn1.Tsp
@@ -400,6 +401,56 @@ Public Class frmLoad
 
         ProgressBar1.Value = ProgressBar1.Value + 1
         My.Application.DoEvents()
+
+        Dim cnn As OleDbConnection = New OleDbConnection
+        Dim sSQL As String = ""
+        Dim sinfo As String = ""
+        Dim oData As New ToolKitSQL.oledbdata
+        Dim dr As DataRow
+        sTarget = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & My.Application.Info.DirectoryPath & "\CIAS.mdb;"
+        sSQL = "select base,Servidor from Server"
+        With oData
+            If .dbOpen(cnn, sTarget, sinfo) Then
+                If .getDr(cnn, dr, sSQL, sinfo) Then
+                    varrutabase = dr(1).ToString
+                    If varrutabase = "" Then
+                        sTarget = "server=" & dameIP2() & ";uid=Delsscom;password=jipl22;database=cn" & baseseleccionada & ";persist security info=false;connect timeout=300"
+                        sTargetlocal = "server=" & dameIP2() & ";uid=Delsscom;password=jipl22;database=cn" & baseseleccionada & ";persist security info=false;connect timeout=300"
+                    Else
+                        sTarget = "server=" & varrutabase & ";uid=Delsscom;password=jipl22;database=cn" & baseseleccionada & ";persist security info=false;connect timeout=300"
+                        sTargetlocal = "server=" & varrutabase & ";uid=Delsscom;password=jipl22;database=cn" & baseseleccionada & ";persist security info=false;connect timeout=300"
+                    End If
+                End If
+                cnn.Close()
+            End If
+        End With
+
+
+        sinfo = ""
+        Dim dt As New DataTable
+        Dim odata1 As New ToolKitSQL.myssql
+        If odata1.dbOpen(cnn1, sTarget, sinfo) Then
+            If odata1.getDt(cnn1, dt, "select IdNube from traslados", sinfo) Then
+            Else
+                If sinfo <> "" Then
+                    odata1.runSp(cnn1, "ALTER TABLE traslados ADD COLUMN IdNube Integer DEFAULT 0", sinfo)
+                    odata1.runSp(cnn1, "update traslados set IdNube = 1", sinfo)
+                    sinfo = ""
+                End If
+            End If
+
+            If odata1.getDt(cnn1, dt, "select IdNube, IdNubeActu from trasladosdet", sinfo) Then
+            Else
+                If sinfo <> "" Then
+                    odata1.runSp(cnn1, "ALTER TABLE trasladosdet ADD COLUMN IdNube Integer DEFAULT 0", sinfo)
+                    odata1.runSp(cnn1, "ALTER TABLE trasladosdet ADD COLUMN IdNubeActu Integer DEFAULT 0", sinfo)
+                    odata1.runSp(cnn1, "update trasladosdet set IdNube = 1, IdNubeActu = 1 ", sinfo)
+                    sinfo = ""
+                End If
+            End If
+
+            cnn1.Close()
+        End If
 
         ''Validación de la aditoria
 

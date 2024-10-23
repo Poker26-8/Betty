@@ -24,12 +24,12 @@ Partial Class frmCardex
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCardex))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.mCalendar2 = New System.Windows.Forms.MonthCalendar()
         Me.mCalendar1 = New System.Windows.Forms.MonthCalendar()
@@ -54,8 +54,11 @@ Partial Class frmCardex
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cboCodigo = New System.Windows.Forms.ComboBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lblExisDeriv = New System.Windows.Forms.Label()
         CType(Me.grdcaptura, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -67,14 +70,14 @@ Partial Class frmCardex
         Me.Label1.Location = New System.Drawing.Point(0, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Padding = New System.Windows.Forms.Padding(0, 3, 0, 0)
-        Me.Label1.Size = New System.Drawing.Size(868, 31)
+        Me.Label1.Size = New System.Drawing.Size(903, 31)
         Me.Label1.TabIndex = 230
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'mCalendar2
         '
         Me.mCalendar2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.mCalendar2.Location = New System.Drawing.Point(610, 40)
+        Me.mCalendar2.Location = New System.Drawing.Point(645, 40)
         Me.mCalendar2.Name = "mCalendar2"
         Me.mCalendar2.TabIndex = 232
         Me.ToolTip1.SetToolTip(Me.mCalendar2, "Hasta")
@@ -82,7 +85,7 @@ Partial Class frmCardex
         'mCalendar1
         '
         Me.mCalendar1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.mCalendar1.Location = New System.Drawing.Point(353, 40)
+        Me.mCalendar1.Location = New System.Drawing.Point(388, 40)
         Me.mCalendar1.Name = "mCalendar1"
         Me.mCalendar1.TabIndex = 231
         Me.ToolTip1.SetToolTip(Me.mCalendar1, "Desde")
@@ -141,8 +144,8 @@ Partial Class frmCardex
         '
         Me.grdcaptura.AllowUserToAddRows = False
         Me.grdcaptura.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.grdcaptura.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.grdcaptura.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
         Me.grdcaptura.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -154,13 +157,13 @@ Partial Class frmCardex
         Me.grdcaptura.ReadOnly = True
         Me.grdcaptura.RowHeadersVisible = False
         Me.grdcaptura.RowTemplate.Height = 30
-        Me.grdcaptura.Size = New System.Drawing.Size(846, 322)
+        Me.grdcaptura.Size = New System.Drawing.Size(881, 322)
         Me.grdcaptura.TabIndex = 243
         '
         'Column1
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle8
         Me.Column1.HeaderText = "Codigo"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
@@ -188,8 +191,8 @@ Partial Class frmCardex
         '
         'Column4
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column4.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column4.DefaultCellStyle = DataGridViewCellStyle9
         Me.Column4.HeaderText = "Precio"
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
@@ -197,8 +200,8 @@ Partial Class frmCardex
         '
         'Column5
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle10
         Me.Column5.HeaderText = "Inicial"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
@@ -206,8 +209,8 @@ Partial Class frmCardex
         '
         'Column6
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column6.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle11
         Me.Column6.HeaderText = "Cantidad"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
@@ -215,8 +218,8 @@ Partial Class frmCardex
         '
         'Column7
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column7.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column7.DefaultCellStyle = DataGridViewCellStyle12
         Me.Column7.HeaderText = "Final"
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
@@ -240,12 +243,12 @@ Partial Class frmCardex
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.lblExistencia)
-        Me.GroupBox1.Location = New System.Drawing.Point(232, 34)
+        Me.GroupBox1.Location = New System.Drawing.Point(148, 34)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(109, 61)
         Me.GroupBox1.TabIndex = 244
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Existencia actual"
+        Me.GroupBox1.Text = "Existencia Base"
         '
         'lblExistencia
         '
@@ -282,11 +285,32 @@ Partial Class frmCardex
         Me.cboCodigo.Size = New System.Drawing.Size(126, 23)
         Me.cboCodigo.TabIndex = 247
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.lblExisDeriv)
+        Me.GroupBox2.Location = New System.Drawing.Point(263, 34)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(109, 61)
+        Me.GroupBox2.TabIndex = 248
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Existencia Deriv."
+        '
+        'lblExisDeriv
+        '
+        Me.lblExisDeriv.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblExisDeriv.Location = New System.Drawing.Point(17, 20)
+        Me.lblExisDeriv.Name = "lblExisDeriv"
+        Me.lblExisDeriv.Size = New System.Drawing.Size(75, 26)
+        Me.lblExisDeriv.TabIndex = 0
+        Me.lblExisDeriv.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ToolTip1.SetToolTip(Me.lblExisDeriv, "Existencia actual del producto")
+        '
         'frmCardex
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(868, 541)
+        Me.ClientSize = New System.Drawing.Size(903, 541)
+        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.cboCodigo)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.txtcodigo)
@@ -308,6 +332,7 @@ Partial Class frmCardex
         Me.Text = "Cárdex de productos"
         CType(Me.grdcaptura, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -336,4 +361,6 @@ Partial Class frmCardex
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
     Friend WithEvents Column9 As DataGridViewTextBoxColumn
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents lblExisDeriv As Label
 End Class

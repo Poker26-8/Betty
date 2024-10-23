@@ -62,34 +62,87 @@ Public Class frmCardex
         grdcaptura.Rows.Clear()
 
         Try
-            cnn1.Close() : cnn1.Open()
 
+
+            If cboCodigo.Text = "" And cbonombre.Text = "" Then
+                MsgBox("Hay que seleccionar un código o una descripción para poder generar el Reporte")
+                Exit Sub
+            End If
+
+            If cboCodigo.Text = "" And cbonombre.Text <> "" Then
+                cnn1.Close() : cnn1.Open()
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText =
+                    "select Codigo from productos where Nombre='" & cbonombre.Text & "'"
+                rd1 = cmd1.ExecuteReader
+                If rd1.HasRows Then
+                    If rd1.Read Then
+                        cboCodigo.Text = rd1("Codigo").ToString
+                    End If
+                End If
+                rd1.Close() : cnn1.Close()
+            End If
+
+            If cboCodigo.Text <> "" And cbonombre.Text = "" Then
+                cnn1.Close() : cnn1.Open()
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText =
+                    "select Nombre from productos where Codigo='" & cboCodigo.Text & "'"
+                rd1 = cmd1.ExecuteReader
+                If rd1.HasRows Then
+                    If rd1.Read Then
+                        cbonombre.Text = rd1("Nombre").ToString
+                    End If
+                End If
+                rd1.Close() : cnn1.Close()
+            End If
+
+            cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
 
-
-
-            If cbonombre.Text = "" Then
+            If cboCodigo.Text = "" Then
                 cmd1.CommandText =
                     "select Codigo,Nombre,Folio,Movimiento,Precio,Inicial,Cantidad,Final,Usuario,Fecha from Cardex where Fecha between '" & Format(M1, "yyyy-MM-dd 00:00:00") & "' and '" & Format(M2, "yyyy-MM-dd 23:59:59") & "' order by Id"
             Else
                 cmd1.CommandText =
-                    "select Codigo,Nombre,Folio,Movimiento,Precio,Inicial,Cantidad,Final,Usuario,Fecha from Cardex where Fecha between '" & Format(M1, "yyyy-MM-dd 00:00:00") & "' and '" & Format(M2, "yyyy-MM-dd 23:59:59") & "' and Nombre='" & cbonombre.Text & "' order by Id"
+                    "select Codigo,Nombre,Folio,Movimiento,Precio,Inicial,Cantidad,Final,Usuario,Fecha from Cardex where Fecha between '" & Format(M1, "yyyy-MM-dd 00:00:00") & "' and '" & Format(M2, "yyyy-MM-dd 23:59:59") & "' and mid(Codigo,1,6) = '" & Mid(cboCodigo.Text, 1, 6) & "' order by Id"
             End If
 
             rd1 = cmd1.ExecuteReader
             Do While rd1.Read
+
+                Dim varmultiplo As Double = 1
+                cnn2.Close() : cnn2.Open()
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText =
+                    "select Multiplo from Productos where Codigo='" & rd1("Codigo").ToString & "'"
+                rd2 = cmd2.ExecuteReader
+                If rd2.HasRows Then
+                    If rd2.Read Then
+                        varmultiplo = rd2(0).ToString
+                    End If
+                End If
+                rd2.Close()
+                cnn2.Close()
+
                 Dim codigo As String = rd1("Codigo").ToString
                 Dim nombre As String = rd1("Nombre").ToString
                 Dim folio As String = rd1("Folio").ToString
                 Dim movimi As String = rd1("Movimiento").ToString
                 Dim precio As Double = rd1("Precio").ToString
                 Dim inicia As Double = rd1("Inicial").ToString
-                Dim cantidad As Double = rd1("Cantidad").ToString
+                Dim cantidad As Double = Math.Abs(CDbl(rd1("Cantidad").ToString))
                 Dim final As Double = rd1("Final").ToString
                 Dim usuario As String = rd1("Usuario").ToString
                 Dim fecha As String = rd1("Fecha").ToString
 
-                grdcaptura.Rows.Add(codigo, nombre, folio, movimi, FormatNumber(precio, 2), inicia, cantidad, final, usuario, FormatDateTime(fecha, DateFormat.GeneralDate))
+                If inicia > final Then
+                    grdcaptura.Rows.Add(codigo, nombre, folio, movimi, FormatNumber(precio, 2), inicia * varmultiplo, "-" & cantidad * varmultiplo, final * varmultiplo, usuario, FormatDateTime(fecha, DateFormat.GeneralDate))
+                Else
+                    grdcaptura.Rows.Add(codigo, nombre, folio, movimi, FormatNumber(precio, 2), inicia * varmultiplo, "+" & cantidad * varmultiplo, final * varmultiplo, usuario, FormatDateTime(fecha, DateFormat.GeneralDate))
+                End If
+
+
             Loop
             rd1.Close() : cnn1.Close()
         Catch ex As Exception
@@ -97,98 +150,24 @@ Public Class frmCardex
             cnn1.Close()
         End Try
 
-        If cbonombre.Text <> "" Then
-            Dim vas As Integer = grdcaptura.Rows.Count - 1
-
+        If cboCodigo.Text <> "" Then
             cnn1.Close() : cnn1.Open()
-            For RT As Integer = 0 To vas
-                Dim existencia As Double = 0
-                Dim multiplo As Double = 0
-                Dim exist As Double = 0
-
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText =
-                    "select Existencia,Multiplo from Productos where Codigo='" & grdcaptura.Rows(RT).Cells(0).Value.ToString & "'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        existencia = rd1(0).ToString
-                        multiplo = rd1(1).ToString
-                        If Len(grdcaptura.Rows(RT).Cells(0).Value.ToString) <= 6 Then
-                            exist = existencia / multiplo
-                            lblExistencia.Text = FormatNumber(exist, 2)
-                        End If
-                    End If
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText =
+                    "select Existencia,Multiplo from Productos where Codigo='" & Mid(cboCodigo.Text, 1, 6) & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    lblExistencia.Text = FormatNumber(rd1(0).ToString / rd1(1).ToString, 2)
+                    lblExisDeriv.Text = rd1(0).ToString
                 End If
-                rd1.Close()
-
-                If Len(grdcaptura.Rows(RT).Cells(0).Value.ToString) > 6 Then
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "select Existencia,Multiplo from Productos where Codigo='" & Mid(grdcaptura.Rows(RT).Cells(0).Value.ToString, 1, 6) & "'"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.HasRows Then
-                        If rd1.Read Then
-                            existencia = rd1(0).ToString
-                            multiplo = rd1(1).ToString
-                            If Len(grdcaptura.Rows(RT).Cells(0).Value.ToString) <= 6 Then
-                                exist = CDbl(rd1(0).ToString) / multiplo
-                                lblExistencia.Text = FormatNumber(exist, 2)
-                            End If
-                        End If
-                    Else
-                        lblExistencia.Text = "0.00"
-                    End If
-                    rd1.Close()
-                End If
-            Next
+            End If
+            rd1.Close()
             cnn1.Close()
         End If
 
-        If cbonombre.Text <> "" Then
-            Dim vas As Integer = grdcaptura.Rows.Count - 1
+        MsgBox("Proceso terminado")
 
-            cnn1.Close() : cnn1.Open()
-            For RT As Integer = 0 To vas
-                Dim existencia As Double = 0
-                Dim multiplo As Double = 0
-                Dim exist As Double = 0
-
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText =
-                    "select Existencia,Multiplo from Productos where Codigo='" & grdcaptura.Rows(RT).Cells(0).Value.ToString & "'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        existencia = rd1(0).ToString
-                        multiplo = rd1(1).ToString
-                        If Len(grdcaptura.Rows(RT).Cells(0).Value.ToString) <= 6 Then
-                            exist = existencia / multiplo
-                            lblExistencia.Text = FormatNumber(exist, 2)
-                        End If
-                    End If
-                End If
-                rd1.Close()
-
-                If Len(grdcaptura.Rows(RT).Cells(0).Value.ToString) > 6 Then
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "select Existencia, Multiplo  from Productos where Codigo='" & Mid(grdcaptura.Rows(RT).Cells(0).Value.ToString, 1, 6) & "'"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.HasRows Then
-                        If rd1.Read Then
-                            existencia = CDbl(rd1(0).ToString) / multiplo
-                            lblExistencia.Text = FormatNumber(exist, 2)
-
-                            End If
-                    Else
-                        lblExistencia.Text = "0.00"
-                    End If
-                    rd1.Close()
-                End If
-            Next
-            cnn1.Close()
-        End If
     End Sub
 
     Private Sub btnexportar_Click(sender As System.Object, e As System.EventArgs) Handles btnexportar.Click

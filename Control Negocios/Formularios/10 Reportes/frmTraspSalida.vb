@@ -509,14 +509,21 @@ Public Class frmTraspSalida
                 CODx = grdcaptura.Rows(index).Cells(0).Value.ToString
                 CantDX = grdcaptura.Rows(index).Cells(3).Value.ToString
                 grdcaptura.Rows.Remove(grdcaptura.Rows(index))
-                If grdcaptura.Rows(index).Cells(1).Value.ToString <> "" And grdcaptura.Rows(index).Cells(0).Value.ToString = "" Then
-                    MyNota = grdcaptura.Rows(index).Cells(1).Value.ToString
-                    If grdcaptura.Rows.Count = 1 Then
-                        grdcaptura.Rows.Clear()
-                    Else
-                        grdcaptura.Rows.Remove(grdcaptura.Rows(index))
+
+                Try
+                    If grdcaptura.Rows(index).Cells(1).Value.ToString <> "" And grdcaptura.Rows(index).Cells(0).Value.ToString = "" Then
+                        MyNota = grdcaptura.Rows(index).Cells(1).Value.ToString
+                        If grdcaptura.Rows.Count = 1 Then
+                            grdcaptura.Rows.Clear()
+                        Else
+                            grdcaptura.Rows.Remove(grdcaptura.Rows(index))
+                        End If
                     End If
-                End If
+                Catch ex As Exception
+
+                End Try
+
+
             End If
         End If
     End Sub
@@ -636,7 +643,7 @@ Public Class frmTraspSalida
 
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
-                    "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & codigo & "','" & nombre & "','Traspaso de salida'," & MyExiste & "," & cantidad & "," & mynuevaexis & "," & precio & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & lblusuario.Text & "','" & lblfolio.Text & "','','','','','')"
+                    "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & codigo & "','" & nombre & "','Traspaso de salida'," & MyExiste / multiplo & "," & cantidad & "," & mynuevaexis / multiplo & "," & precio & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & lblusuario.Text & "','" & lblfolio.Text & "','','','','','')"
                 cmd1.ExecuteNonQuery()
                 Continue For
 Nota:

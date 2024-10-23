@@ -5921,6 +5921,17 @@ quepasowey:
             End If
             rd1.Close()
 
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText =
+                    "select Existencia from Productos where Codigo='" & Mid(codigo, 1, 6) & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    existe = rd1("Existencia").ToString
+                End If
+            End If
+            rd1.Close()
+
             If dpto = "ANTIBIOTICO" Then
                 tipo_anti = "ANTIBIOTICO"
             Else
@@ -5984,12 +5995,22 @@ quepasowey:
 
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
-                    "update Productos set Existencia=" & nueva_exis & ", PrecioCompra=" & pcompra & ", Cargado=0, Almacen3=" & pcompra & " where Codigo='" & codigo & "'"
+                    "update Productos set Existencia=" & nueva_exis & ", Cargado=0 where Codigo='" & Mid(codigo, 1, 6) & "'"
             cmd1.ExecuteNonQuery()
 
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
-                    "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & codigo & "','" & nombre & "','Ingreso por compra'," & existe & "," & CDbl(cantid) & "," & CDbl(existe + (cantid)) & "," & pcompra & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & alias_compras & "','" & cboremision.Text & "','" & tipo_anti & "','','','','')"
+                    "update Productos set PrecioCompra=" & pcompra & ", Cargado=0, Almacen3=" & pcompra & " where Codigo='" & codigo & "'"
+            cmd1.ExecuteNonQuery()
+
+
+            Dim existencia_modificada As Double = 0
+            existencia_modificada = existe / mymultiplo
+
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText =
+                    "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & codigo & "','" & nombre & "','Ingreso por compra'," & existencia_modificada & "," & CDbl(cantid) & "," & CDbl(existencia_modificada + (cantid)) & "," & pcompra & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & alias_compras & "','" & cboremision.Text & "','" & tipo_anti & "','','','','')"
+            '"insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & codigo & "','" & nombre & "','Ingreso por compra'," & existe & "," & CDbl(cantid) & "," & CDbl(existe + (cantid)) & "," & pcompra & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & alias_compras & "','" & cboremision.Text & "','" & tipo_anti & "','','','','')"
             cmd1.ExecuteNonQuery()
 
             If lote <> "" Then
