@@ -1021,6 +1021,12 @@
     <Compile Include="Formularios\20 Refaccionaria\frmMarcas.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\20 Refaccionaria\frmMenuTaller.Designer.vb">
+      <DependentUpon>frmMenuTaller.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\20 Refaccionaria\frmMenuTaller.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\20 Refaccionaria\frmModelos.Designer.vb">
       <DependentUpon>frmModelos.vb</DependentUpon>
     </Compile>
@@ -2828,6 +2834,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\20 Refaccionaria\frmMarcas.resx">
       <DependentUpon>frmMarcas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\20 Refaccionaria\frmMenuTaller.resx">
+      <DependentUpon>frmMenuTaller.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\20 Refaccionaria\frmModelos.resx">
       <DependentUpon>frmModelos.vb</DependentUpon>

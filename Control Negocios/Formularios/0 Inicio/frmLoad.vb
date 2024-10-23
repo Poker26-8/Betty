@@ -98,8 +98,9 @@ Public Class frmLoad
             Dim costeo As Integer = DatosRecarga2("Costeo")
             ProgressBar1.Value = ProgressBar1.Value + 1
             My.Application.DoEvents()
-            Dim restaurante As Integer = DatosRecarga2("Restaurante")
-            Dim refaccionaria As Integer = DatosRecarga2("Refaccionaria")
+        Dim restaurante As Integer = DatosRecarga2("Restaurante")
+        Dim taller As Integer = DatosRecarga2("Taller")
+        Dim refaccionaria As Integer = DatosRecarga2("Refaccionaria")
             Dim pollos As Integer = DatosRecarga2("pollos")
             ProgressBar1.Value = ProgressBar1.Value + 1
             My.Application.DoEvents()
@@ -332,13 +333,19 @@ Public Class frmLoad
             ProgressBar1.Value = ProgressBar1.Value + 1
             My.Application.DoEvents()
 
-            If refaccionaria = 1 Then
-                Inicio.btnRefaccionaria.Visible = True
-            Else
-                Inicio.btnRefaccionaria.Visible = False
-            End If
+        If refaccionaria = 1 Then
+            Inicio.btnRefaccionaria.Visible = True
+        Else
+            Inicio.btnRefaccionaria.Visible = False
+        End If
 
-            If pollos = 1 Then
+        If taller = 1 Then
+            Inicio.btnTaller.Visible = True
+        Else
+            Inicio.btnTaller.Visible = False
+        End If
+
+        If pollos = 1 Then
                 Inicio.btnpollo.Visible = True
             Else
                 Inicio.btnpollo.Visible = False

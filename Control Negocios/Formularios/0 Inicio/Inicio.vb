@@ -1966,4 +1966,9 @@ Public Class Inicio
         frmEntalla.BringToFront()
         frmEntalla.Show()
     End Sub
+
+    Private Sub btnTaller_Click(sender As Object, e As EventArgs) Handles btnTaller.Click
+        frmMenuTaller.BringToFront()
+        frmMenuTaller.Show()
+    End Sub
 End Class

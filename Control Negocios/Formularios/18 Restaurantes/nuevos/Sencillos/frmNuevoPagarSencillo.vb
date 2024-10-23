@@ -84,8 +84,7 @@ Public Class frmNuevoPagarSencillo
             DesglosaIVA = IIf(DatosRecarga("Desglosa") = "", 0, DatosRecarga("Desglosa"))
             facLinea = IIf(DatosRecarga("AutoFac") = "", 0, DatosRecarga("AutoFac"))
 
-            cnn1.Close()
-            cnn1.Open()
+            cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "Select Terminal,Clave,Solicitud,Resultado from DatosProsepago"
             rd1 = cmd1.ExecuteReader
@@ -116,6 +115,7 @@ Public Class frmNuevoPagarSencillo
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText = "SELECT IDC,Codigo,Nombre,UVenta,Cantidad,Precio,Total,Comensal,CUsuario,Id FROM Comandas WHERE NMESA='" & lblmesa.Text & "'"
+
             rd2 = cmd2.ExecuteReader
             Do While rd2.Read
                 If rd2.HasRows Then
@@ -159,9 +159,9 @@ Public Class frmNuevoPagarSencillo
             If cboComanda.Text <> "" Then
 
                 If cboComensal.Text = "" Then
-                    cmd2.CommandText = "SELECT IDC,Codigo,Nombre,UVenta,Cantidad,Precio,Total,Comensal,CUsuario,Id FROM Comandas WHERE NMESA='" & lblmesa.Text & "' AND Id=" & cboComanda.Text & " AND Comensal='" & cboComensal.Text & "'"
+                    cmd2.CommandText = "SELECT IDC,Codigo,Nombre,UVenta,Cantidad,Precio,Total,Comensal,CUsuario,Id FROM Comandas WHERE NMESA='" & lblmesa.Text & "' AND Id=" & cboComanda.Text & ""
                 Else
-                    cmd2.CommandText = "SELECT IDC,Codigo,Nombre,UVenta,Cantidad,Precio,Total,Comensal,CUsuario,Id FROM Comandas WHERE NMESA='" & lblmesa.Text & "' AND Id=" & cboComanda.Text
+                    cmd2.CommandText = "SELECT IDC,Codigo,Nombre,UVenta,Cantidad,Precio,Total,Comensal,CUsuario,Id FROM Comandas WHERE NMESA='" & lblmesa.Text & "'  AND Comensal='" & cboComensal.Text & "' AND Id=" & cboComanda.Text
                 End If
 
             End If
@@ -554,9 +554,9 @@ Public Class frmNuevoPagarSencillo
                                        rd2("Codigo").ToString,
                                        rd2("Nombre").ToString,
                                        rd2("UVenta").ToString,
-                                       rd2("Cantidad").ToString,
-                                       rd2("Precio").ToString,
-                                       rd2("Total").ToString,
+                                       FormatNumber(rd2("Cantidad").ToString, 2),
+                                       FormatNumber(rd2("Precio").ToString, 2),
+                                       FormatNumber(rd2("Total").ToString, 2),
                                        rd2("Comensal").ToString,
                                        rd2("CUsuario").ToString,
                                        rd2("Id").ToString
@@ -1008,7 +1008,7 @@ kakaxd:
 
         cnn3.Close() : cnn3.Open()
         cmd3 = cnn3.CreateCommand
-        cmd3.CommandText = cmd3.CommandText = "UPDATE hismesa SET Cerro='" & lblusuario2.Text & "', FCerrado='" & Format(Date.Now, "yyyy-MM-dd") & "',HCerrado='" & Format(Date.Now, "HH:mm:ss") & "',Status=1 WHERE Status=0 AND Mesa='" & lblmesa.Text & "'"
+        cmd3.CommandText = "UPDATE hismesa SET Cerro='" & lblusuario2.Text & "', FCerrado='" & Format(Date.Now, "yyyy-MM-dd") & "',HCerrado='" & Format(Date.Now, "HH:mm:ss") & "',Status=1 WHERE Status=0 AND Mesa='" & lblmesa.Text & "'"
         cmd3.ExecuteNonQuery()
 
         cmd3 = cnn3.CreateCommand

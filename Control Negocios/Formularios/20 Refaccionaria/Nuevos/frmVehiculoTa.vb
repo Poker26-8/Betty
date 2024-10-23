@@ -1,4 +1,6 @@
 ﻿Public Class frmVehiculoTa
+
+    Dim idcliente As Integer = 0
     Private Sub frmVehiculoTa_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Obtener el año actual
         Dim añoActual As Integer = DateTime.Now.Year
@@ -174,7 +176,7 @@
             Else
                 cnn2.Close() : cnn2.Open()
                 cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "INSERT INTO vehiculo(Placa,Descripcion,Marca,Submarca,Modelo,Ano,Cliente,StatusT,Observaciones) VALUES('" & txtPlacas.Text & "','" & direccion & "','" & cbomarca.Text & "','" & txtSubmarca.Text & "','" & cbomodelo.Text & "'," & cboA.Text & ",'" & cboCliente.Text & "',1,'" & observaciones & "')"
+                cmd2.CommandText = "INSERT INTO vehiculo(Placa,Descripcion,Marca,Submarca,Modelo,Ano,IdCliente,Cliente,StatusT,Observaciones) VALUES('" & txtPlacas.Text & "','" & direccion & "','" & cbomarca.Text & "','" & txtSubmarca.Text & "','" & cbomodelo.Text & "'," & cboA.Text & "," & idcliente & ",'" & cboCliente.Text & "',1,'" & observaciones & "')"
                 If cmd2.ExecuteNonQuery() Then
                     MsgBox("Vehiculo agregado correctamente", vbInformation + vbOKOnly, titulocentral)
                 End If
@@ -193,5 +195,26 @@
         If AscW(e.KeyChar) = Keys.Enter Then
             btnguardar.Focus.Equals(True)
         End If
+    End Sub
+
+    Private Sub cboCliente_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCliente.SelectedValueChanged
+        Try
+            idcliente = 0
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT Id FROM clientes WHERE Nombre='" & cboCliente.Text & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    idcliente = rd1(0).ToString
+                End If
+            End If
+            rd1.Close()
+            cnn1.Close()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
     End Sub
 End Class

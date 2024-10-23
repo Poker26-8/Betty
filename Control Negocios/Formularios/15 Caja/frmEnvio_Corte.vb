@@ -3,7 +3,13 @@
     Public archivoadj2 As String = ""
 
     Private Sub frmEnvio_Corte_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Try
+            Dim correoc As String = DatosRecarga("CorreoCorte")
+            txtpara.Text = correoc
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
     End Sub
 
     Private Sub link_archivo_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles link_archivo.LinkClicked

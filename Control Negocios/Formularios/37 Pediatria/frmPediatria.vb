@@ -507,4 +507,10 @@ Public Class frmPediatria
             txtTemperatura.Focus.Equals(True)
         End If
     End Sub
+
+    Private Sub txtFAlergia_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFAlergia.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            txtAlergias.Focus.Equals(True)
+        End If
+    End Sub
 End Class

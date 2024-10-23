@@ -179,6 +179,7 @@ Public Class frmCorteCaja
         txtSaldoFinalG.Text = "0.00"
         EfectivoCajaG.Text = "0.00"
         MonederoCajaG.Text = "0.00"
+
     End Sub
 
     Private Sub btnCalcularGlobal_Click(sender As Object, e As EventArgs) Handles btnCalcularGlobal.Click
@@ -669,7 +670,7 @@ Public Class frmCorteCaja
         End With
     End Sub
 
-    Private Sub PDF_Corte_G()
+    Public Sub PDF_Corte_G()
         Dim root_name_recibo As String = ""
         Dim FileOpen As New ProcessStartInfo
         Dim FileNta As New Corte_Caja
@@ -683,7 +684,10 @@ Public Class frmCorteCaja
         crea_ruta("C:\ControlNegociosPro\ARCHIVOSDL1\CORTES\")
         root_name_recibo = "C:\ControlNegociosPro\ARCHIVOSDL1\CORTES\CorteDia_" & Format(Date.Now, "yyyy-MM-dd") & ".pdf"
 
+
+
         If File.Exists("C:\ControlNegociosPro\ARCHIVOSDL1\CORTES\CorteDia_" & Format(Date.Now, "yyyy-MM-dd") & ".pdf") Then
+            ' Aquí se realizan las operaciones necesarias con el archivo
             File.Delete("C:\ControlNegociosPro\ARCHIVOSDL1\CORTES\CorteDia_" & Format(Date.Now, "yyyy-MM-dd") & ".pdf")
         End If
 
@@ -761,6 +765,7 @@ Public Class frmCorteCaja
 
             System.IO.File.Copy("C:\ControlNegociosPro\ARCHIVOSDL1\CORTES\CorteDia_" & Format(Date.Now, "yyyy-MM-dd") & ".pdf", "\\" & varrutabase & "\ControlNegociosPro\ARCHIVOSDL1\CORTES\CorteDia_" & Format(Date.Now, "yyyy-MM-dd") & ".pdf")
         End If
+
     End Sub
 
     Private Sub btnSaldoUsuario_Click(sender As Object, e As EventArgs) Handles btnSaldoUsuario.Click
@@ -1482,6 +1487,7 @@ Public Class frmCorteCaja
             MsgBox(ex.Message)
         End Try
         FileNta.Close()
+        FileNta.Dispose()
 
         If varrutabase <> "" Then
 

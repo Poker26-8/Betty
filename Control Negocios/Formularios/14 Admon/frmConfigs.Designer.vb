@@ -340,6 +340,9 @@ Partial Class frmConfigs
         Me.Label86 = New System.Windows.Forms.Label()
         Me.Label85 = New System.Windows.Forms.Label()
         Me.Label84 = New System.Windows.Forms.Label()
+        Me.GroupBox28 = New System.Windows.Forms.GroupBox()
+        Me.txtCorreoCorte = New System.Windows.Forms.TextBox()
+        Me.btnCorreo = New System.Windows.Forms.Button()
         Me.tabCFDI.SuspendLayout()
         Me.GroupBox13.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
@@ -395,6 +398,7 @@ Partial Class frmConfigs
         Me.GroupBox27.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
+        Me.GroupBox28.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label57
@@ -1171,14 +1175,15 @@ Partial Class frmConfigs
         '
         'tabCorreo
         '
+        Me.tabCorreo.Controls.Add(Me.GroupBox28)
         Me.tabCorreo.Controls.Add(Me.GroupBox17)
         Me.tabCorreo.Controls.Add(Me.Button13)
         Me.tabCorreo.Controls.Add(Me.Button12)
         Me.tabCorreo.Controls.Add(Me.GroupBox12)
         Me.tabCorreo.Controls.Add(Me.GroupBox11)
-        Me.tabCorreo.Location = New System.Drawing.Point(4, 58)
+        Me.tabCorreo.Location = New System.Drawing.Point(4, 84)
         Me.tabCorreo.Name = "tabCorreo"
-        Me.tabCorreo.Size = New System.Drawing.Size(478, 463)
+        Me.tabCorreo.Size = New System.Drawing.Size(478, 437)
         Me.tabCorreo.TabIndex = 6
         Me.tabCorreo.Text = "Configuración de correo"
         Me.tabCorreo.UseVisualStyleBackColor = True
@@ -3645,10 +3650,10 @@ Partial Class frmConfigs
         Me.TabPage2.Controls.Add(Me.Label75)
         Me.TabPage2.Controls.Add(Me.Label77)
         Me.TabPage2.Controls.Add(Me.Label78)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 84)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 58)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(478, 437)
+        Me.TabPage2.Size = New System.Drawing.Size(478, 463)
         Me.TabPage2.TabIndex = 9
         Me.TabPage2.Text = "Recargas Telefonicas"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -3751,10 +3756,10 @@ Partial Class frmConfigs
         Me.TabPage3.Controls.Add(Me.Label86)
         Me.TabPage3.Controls.Add(Me.Label85)
         Me.TabPage3.Controls.Add(Me.Label84)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 84)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 58)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(478, 437)
+        Me.TabPage3.Size = New System.Drawing.Size(478, 463)
         Me.TabPage3.TabIndex = 10
         Me.TabPage3.Text = "Configuración de Prosepago"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -3861,6 +3866,39 @@ Partial Class frmConfigs
         Me.Label84.TabIndex = 0
         Me.Label84.Text = "Configuración de Prosepago"
         '
+        'GroupBox28
+        '
+        Me.GroupBox28.Controls.Add(Me.btnCorreo)
+        Me.GroupBox28.Controls.Add(Me.txtCorreoCorte)
+        Me.GroupBox28.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox28.Location = New System.Drawing.Point(3, 379)
+        Me.GroupBox28.Name = "GroupBox28"
+        Me.GroupBox28.Size = New System.Drawing.Size(462, 50)
+        Me.GroupBox28.TabIndex = 23
+        Me.GroupBox28.TabStop = False
+        Me.GroupBox28.Text = "Correo Corte de caja"
+        '
+        'txtCorreoCorte
+        '
+        Me.txtCorreoCorte.BackColor = System.Drawing.Color.White
+        Me.txtCorreoCorte.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtCorreoCorte.Location = New System.Drawing.Point(10, 20)
+        Me.txtCorreoCorte.Name = "txtCorreoCorte"
+        Me.txtCorreoCorte.Size = New System.Drawing.Size(361, 25)
+        Me.txtCorreoCorte.TabIndex = 7
+        '
+        'btnCorreo
+        '
+        Me.btnCorreo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnCorreo.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCorreo.Location = New System.Drawing.Point(381, 16)
+        Me.btnCorreo.Name = "btnCorreo"
+        Me.btnCorreo.Size = New System.Drawing.Size(75, 28)
+        Me.btnCorreo.TabIndex = 8
+        Me.btnCorreo.Text = "Guardar"
+        Me.btnCorreo.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnCorreo.UseVisualStyleBackColor = True
+        '
         'frmConfigs
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -3965,6 +4003,8 @@ Partial Class frmConfigs
         Me.TabPage2.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
+        Me.GroupBox28.ResumeLayout(False)
+        Me.GroupBox28.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -4287,4 +4327,7 @@ Partial Class frmConfigs
     Friend WithEvents optEM25X38 As RadioButton
     Friend WithEvents chkauto As CheckBox
     Friend WithEvents cbVerExistencias As CheckBox
+    Friend WithEvents GroupBox28 As GroupBox
+    Friend WithEvents btnCorreo As Button
+    Friend WithEvents txtCorreoCorte As TextBox
 End Class

@@ -86,7 +86,9 @@ Public Class frmConfigs
         End Try
 
         Try
-          
+            Dim correocorte As String = DatosRecarga("CorreoCorte")
+            txtCorreoCorte.Text = correocorte
+
             Dim tipo_impresora As String = ""
             Dim nLogo As String = ""
             Dim nlogoeti As String = ""
@@ -3380,5 +3382,50 @@ Public Class frmConfigs
                 cnn1.Close()
             End Try
         End If
+    End Sub
+
+    Private Sub txtCorreoCorte_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCorreoCorte.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            btnCorreo.Focus.Equals(True)
+        End If
+    End Sub
+
+    Private Sub btnCorreo_Click(sender As Object, e As EventArgs) Handles btnCorreo.Click
+        Try
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT NotasCred FROM formatos WHERE Facturas='CorreoCorte'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    cnn2.Close() : cnn2.Open()
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "UPDATE formatos SET NotasCred='" & txtCorreoCorte.Text & "' WHERE Facturas='CorreoCorte'"
+                    If cmd2.ExecuteNonQuery() Then
+                        MsgBox("Correo actualizado correctamente", vbInformation + vbOKOnly, titulocentral)
+                        cnn2.Close()
+                    End If
+
+
+                End If
+                Else
+
+                cnn2.Close() : cnn2.Open()
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "INSERT INTO formatos(Facturas,NotasCred,Numpart) VALUES('CorreoCorte','" & txtCorreoCorte.Text & "',0)"
+                If cmd2.ExecuteNonQuery() Then
+                    MsgBox("Correo insertado correctamente", vbInformation + vbOKOnly, titulocentral)
+                    cnn2.Close()
+                End If
+
+
+
+            End If
+            rd1.Close()
+            cnn1.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
     End Sub
 End Class
