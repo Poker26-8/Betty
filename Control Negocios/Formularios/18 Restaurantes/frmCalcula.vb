@@ -121,13 +121,13 @@
                                         If rd3.HasRows Then
                                             If rd3.Read Then
                                                 txtPrecioHora.Text = FormatNumber(rd3("Precio").ToString, 2)
-                                                If cuartos = 1 Then
-                                                    txtTotalPag.Text = FormatNumber((CDec(txtPrecioHora.Text) * varHoras) + (CDec(varopeminutos) * CDec(CDec(txtPrecioHora.Text * 15 / 60))))
-                                                Else
-                                                    txtTotalPag.Text = rd3("Precio").ToString * txtTiempoUso.Text
-                                                    txtTotalPag.Text = txtTotalPag.Text / 60
-                                                    txtTotalPag.Text = FormatNumber(txtTotalPag.Text, 2)
-                                                End If
+                                                'If cuartos = 1 Then
+                                                '    txtTotalPag.Text = FormatNumber((CDec(txtPrecioHora.Text) * varHoras) + (CDec(varopeminutos) * CDec(CDec(txtPrecioHora.Text * 15 / 60))))
+                                                'Else
+                                                '    txtTotalPag.Text = rd3("Precio").ToString * txtTiempoUso.Text
+                                                '    txtTotalPag.Text = txtTotalPag.Text / 60
+                                                '    txtTotalPag.Text = FormatNumber(txtTotalPag.Text, 2)
+                                                'End If
                                             End If
                                         End If
                                         rd3.Close()
