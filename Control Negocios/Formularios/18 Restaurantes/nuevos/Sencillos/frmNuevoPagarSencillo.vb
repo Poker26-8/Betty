@@ -168,9 +168,9 @@ Public Class frmNuevoPagarSencillo
 
             If cboComensal.Text <> "" Then
                 If cboComanda.Text = "" Then
-                    cmd2.CommandText = "SELECT IDC,Codigo,Nombre,UVenta,Cantidad,Precio,Total,Comensal,CUsuario,Id FROM Comandas WHERE NMESA='" & lblmesa.Text & "' AND Comensal='" & cboComensal.Text & "' AND Comanda" & cboComanda.Text
-                Else
                     cmd2.CommandText = "SELECT IDC,Codigo,Nombre,UVenta,Cantidad,Precio,Total,Comensal,CUsuario,Id FROM Comandas WHERE NMESA='" & lblmesa.Text & "' AND Comensal='" & cboComensal.Text & "'"
+                Else
+                    cmd2.CommandText = "SELECT IDC,Codigo,Nombre,UVenta,Cantidad,Precio,Total,Comensal,CUsuario,Id FROM Comandas WHERE NMESA='" & lblmesa.Text & "' AND Comensal='" & cboComensal.Text & "' AND Comanda" & cboComanda.Text & ""
                 End If
 
             End If
