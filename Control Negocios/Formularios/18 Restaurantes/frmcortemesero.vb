@@ -2507,7 +2507,7 @@ Public Class frmcortemesero
                 "select NumCorte from CorteUsuario where Id=(select MAX(Id) from CorteUsuario where (Saldo_Ini<>0) and Usuario='" & cbomesero.Text & "' and Saldo_Fin=0)"
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
-                If rd1.HasRows Then
+                If rd1.Read Then
                     txtNumCorte.Text = rd1(0).ToString
                 End If
             Else

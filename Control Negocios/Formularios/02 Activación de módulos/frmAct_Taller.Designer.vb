@@ -148,6 +148,7 @@ Partial Class frmAct_Taller
         Me.Controls.Add(Me.Label1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmAct_Taller"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Activar  módulo de taller"
         Me.Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)

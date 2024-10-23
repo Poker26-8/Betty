@@ -25,7 +25,10 @@ Module FunAsync
 
     Public Function SformatosInicio()
 
-        SFormatos("Bodegas", "0")
+        Try
+
+
+            SFormatos("Bodegas", "0")
         SFormatos("VentasRuta", "0")
         SFormatos("SinNumCoemensal", "0")
         SFormatos("CobroSimplificado", "0")
@@ -76,6 +79,10 @@ Module FunAsync
         SFormatos("Dentista", "0")
         SFormatos("Pediatra", "0")
 
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+        End Try
     End Function
 
     Public Async Function RunAsyncFunctions() As Task

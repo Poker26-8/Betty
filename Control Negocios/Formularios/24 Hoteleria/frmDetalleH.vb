@@ -931,4 +931,6 @@ Public Class frmDetalleH
             btnGuardar.Focus.Equals(True)
         End If
     End Sub
+
+
 End Class

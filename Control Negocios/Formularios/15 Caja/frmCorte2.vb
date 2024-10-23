@@ -497,12 +497,13 @@ Public Class frmCorte2
                 txtEgrDepositoU.Text = FormatNumber(Otros, 2)
 
                 cnn2.Close()
+                txtCanceDevoU.Text = FormatNumber(CanceDevo, 2)
 
                 Dim Egresos As String = ""
-                'Egresos = CDec(txtEgrEfectivoU.Text) + CDec(txtegresosformapago.Text) + CDec(txtOtrosGastosU.Text) + CDec(txtTransporteU.Text) + CDec(txtNominaU.Text) + CDec(txtPresEmpU.Text) + CDec(txtComprasU.Text)
-                Egresos = CDec(txtComprasU.Text) + CDec(txtPresEmpU.Text) + CDec(txtNominaU.Text) + CDec(txtTransporteU.Text) + CDec(txtOtrosGastosU.Text)
+                Egresos = CDec(txtComprasU.Text) + CDec(txtPresEmpU.Text) + CDec(txtNominaU.Text) + CDec(txtTransporteU.Text) + CDec(txtOtrosGastosU.Text) + CDbl(txtCanceDevoU.Text)
+
                 txtEgresosUsuario.Text = FormatNumber(Egresos, 2)
-                txtCanceDevoU.Text = FormatNumber(CanceDevo, 2)
+
 
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)

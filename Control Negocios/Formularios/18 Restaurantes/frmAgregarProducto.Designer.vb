@@ -514,7 +514,7 @@ Partial Class frmAgregarProducto
         Me.pExtras.Padding = New System.Windows.Forms.Padding(3)
         Me.pExtras.Size = New System.Drawing.Size(321, 234)
         Me.pExtras.TabIndex = 1
-        Me.pExtras.Text = "    Extras    "
+        Me.pExtras.Text = "      Extras      "
         '
         'pPromociones
         '
@@ -524,7 +524,7 @@ Partial Class frmAgregarProducto
         Me.pPromociones.Padding = New System.Windows.Forms.Padding(3)
         Me.pPromociones.Size = New System.Drawing.Size(321, 234)
         Me.pPromociones.TabIndex = 2
-        Me.pPromociones.Text = " Promoción "
+        Me.pPromociones.Text = "    Promoción    "
         '
         'Panel7
         '
@@ -708,7 +708,7 @@ Partial Class frmAgregarProducto
         Me.pDepartamento.Dock = System.Windows.Forms.DockStyle.Left
         Me.pDepartamento.Location = New System.Drawing.Point(0, 61)
         Me.pDepartamento.Name = "pDepartamento"
-        Me.pDepartamento.Size = New System.Drawing.Size(112, 572)
+        Me.pDepartamento.Size = New System.Drawing.Size(127, 572)
         Me.pDepartamento.TabIndex = 4
         '
         'pgrupo
@@ -716,18 +716,18 @@ Partial Class frmAgregarProducto
         Me.pgrupo.AutoScroll = True
         Me.pgrupo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.pgrupo.Dock = System.Windows.Forms.DockStyle.Left
-        Me.pgrupo.Location = New System.Drawing.Point(112, 61)
+        Me.pgrupo.Location = New System.Drawing.Point(127, 61)
         Me.pgrupo.Name = "pgrupo"
-        Me.pgrupo.Size = New System.Drawing.Size(144, 572)
+        Me.pgrupo.Size = New System.Drawing.Size(127, 572)
         Me.pgrupo.TabIndex = 5
         '
         'pProductos
         '
         Me.pProductos.BackColor = System.Drawing.Color.White
         Me.pProductos.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pProductos.Location = New System.Drawing.Point(256, 61)
+        Me.pProductos.Location = New System.Drawing.Point(254, 61)
         Me.pProductos.Name = "pProductos"
-        Me.pProductos.Size = New System.Drawing.Size(630, 572)
+        Me.pProductos.Size = New System.Drawing.Size(632, 572)
         Me.pProductos.TabIndex = 6
         '
         'pteclado

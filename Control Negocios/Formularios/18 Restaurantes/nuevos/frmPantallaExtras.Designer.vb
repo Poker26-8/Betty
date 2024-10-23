@@ -48,7 +48,7 @@ Partial Class frmPantallaExtras
         Me.pExtras.Padding = New System.Windows.Forms.Padding(3)
         Me.pExtras.Size = New System.Drawing.Size(754, 351)
         Me.pExtras.TabIndex = 1
-        Me.pExtras.Text = "          Extras          "
+        Me.pExtras.Text = "          Extras                 "
         '
         'btnSalir
         '
@@ -61,7 +61,7 @@ Partial Class frmPantallaExtras
         Me.btnSalir.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btnSalir.Location = New System.Drawing.Point(672, 12)
         Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(78, 87)
+        Me.btnSalir.Size = New System.Drawing.Size(78, 80)
         Me.btnSalir.TabIndex = 85
         Me.btnSalir.Text = "Salir"
         Me.btnSalir.TextAlign = System.Drawing.ContentAlignment.BottomCenter

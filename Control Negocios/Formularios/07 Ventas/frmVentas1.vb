@@ -9867,7 +9867,7 @@ safo:
 
                 If Resta_ventas > 0 Then
                     If Resta_ventas >= Total_devo Then
-                        MsgBox("La devolución afectará al total restante de la venta, por lo tanto no habrá movimiento de efectivo en caja.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                        MsgBox("La devolución afectará al total restante de la venta, por lo tanto no habrá movimiento de efectivo en caja.", vbInformation + vbOKOnly, titulocentral)
                         TipoDevolucion = 1
                         SalenDevos = 0
                         Nuevo_resta = Resta_ventas - Total_devo
@@ -9975,7 +9975,7 @@ safo:
                     If lblNumCliente.Text = "MOSTRADOR" And Devuelve > 0 Then
                         cmd1 = cnn1.CreateCommand
                         cmd1.CommandText =
-                            "insert into AbonoI(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Corte,CorteU,Cargado,MontoSF) values(" & cbonota.Text & ",0,'" & cboNombre.Text & "','DEVOLUCION','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & Total_devo & ",0," & (MySaldo - Resta_ventas) & ",'EFECTIVO'," & Devuelve & ",'','','" & lblusuario.Text & "',0,0,0,0)"
+                            "insert into AbonoI(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Corte,CorteU,Cargado,MontoSF) values(" & cbonota.Text & ",0,'" & cboNombre.Text & "','DEVOLUCION','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & Total_devo & "," & Total_devo & "," & (MySaldo - Resta_ventas) & ",'EFECTIVO'," & Devuelve & ",'','','" & lblusuario.Text & "',0,0,0,0)"
                         cmd1.ExecuteNonQuery()
                     End If
                     cnn1.Close()

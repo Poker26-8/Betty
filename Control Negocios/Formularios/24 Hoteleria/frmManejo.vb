@@ -1299,6 +1299,7 @@ Public Class frmManejo
     Private Sub btnPagar_Click(sender As Object, e As EventArgs) Handles btnPagar.Click
         Try
 
+
             Dim idempleado As Integer = 0
             Dim empleado As String = ""
             Dim realizarventas As Integer = 0
@@ -1323,7 +1324,7 @@ Public Class frmManejo
 
                     If realizarventas = 1 Then
 
-
+                        frmPagarH.pasoadeudo = 1
                         frmPagarH.lblAtendio.Text = lblusuario.Text
                         frmPagarH.lblHabitacion.Text = txtHabitacion.Text
                         frmPagarH.lblNumCliente.Text = lblidcliente.Text

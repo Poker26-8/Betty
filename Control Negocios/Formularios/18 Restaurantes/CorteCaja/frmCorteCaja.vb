@@ -1325,11 +1325,12 @@ Public Class frmCorteCaja
             txtEgrDepositoU.Text = FormatNumber(Otros, 2)
             cnn2.Close()
 
-            Dim Egresos As String = ""
-            Egresos = CDec(txtComprasU.Text) + CDec(txtPresEmpU.Text) + CDec(txtNominaU.Text) + CDec(txtTransporteU.Text) + CDec(txtOtrosGastosU.Text)
-            txtEgresosUsuario.Text = FormatNumber(Egresos, 2)
             txtCanceDevoU.Text = FormatNumber(CanceDevo, 2)
 
+            Dim Egresos As String = ""
+            Egresos = CDec(txtComprasU.Text) + CDec(txtPresEmpU.Text) + CDec(txtNominaU.Text) + CDec(txtTransporteU.Text) + CDec(txtOtrosGastosU.Text) + CDbl(txtCanceDevoU.Text)
+
+            txtEgresosUsuario.Text = FormatNumber(Egresos, 2)
 
             If TipoCorte() = 1 Then
                 Dim EnCaja As String = "0"

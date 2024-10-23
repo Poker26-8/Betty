@@ -71,11 +71,14 @@
                                               `FSalida` datetime DEFAULT NULL,
                                               `Asigno` varchar(70) DEFAULT '',
                                               `Reservo` varchar(70) DEFAULT '',
-                                              `Status` int(1) DEFAULT '0'
+                                              `Status` int(1) DEFAULT '0',
+                                              `Tipo` varchar(50) DEFAULT '',
+                                              `Precio` double DEFAULT '0',
+                                              `Anticipo` double DEFAULT '0'
                                             ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
     'prescripcion
-    Public VartablaPrescripcion As String = "CREATE TABLE IF NOT EXIST `prescripcion` (
+    Public VartablaPrescripcion As String = "CREATE TABLE `prescripcion` (
                                               `Folio` int(11) NOT NULL,
                                               `Id` int(11) NOT NULL DEFAULT '0',
                                               `Paciente` varchar(250) NOT NULL DEFAULT '',
