@@ -406,7 +406,7 @@ Public Class frmTraspEntrada
 
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
-                "insert into Traslados(Nombre,Totales,FVenta,HVenta,Usuario,Concepto,Cargado,FPago,FCancelado,Comisionista) values('" & cbo.Text & "'," & MyTotal & ",'" & Format(dtpfecha.Value, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblusuario.Text & "','ENTRADA',0,'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & cbo.Text & "')"
+                "insert into Traslados(Nombre,Totales,FVenta,HVenta,Usuario,Concepto,Cargado,FPago,FCancelado,Comisionista,IdNube) values('" & cbo.Text & "'," & MyTotal & ",'" & Format(dtpfecha.Value, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblusuario.Text & "','ENTRADA',1,'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & cbo.Text & "',1)"
             If cmd1.ExecuteNonQuery Then
             Else
                 MsgBox("No se pudo insertar el traslado en la base de datos.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
@@ -458,7 +458,7 @@ Public Class frmTraspEntrada
 
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
-                    "insert into TrasladosDet(Folio,Codigo,Nombre,Unidad,Cantidad,Precio,Total,Existe,Fecha,Concepto,Depto,Grupo,CostVR) values(" & MYFOLIO & ",'" & codigo & "','" & nombre & "','" & unidad & "'," & cantidad & "," & precio & "," & total & "," & existe & ",'" & Format(dtpfecha.Value, "yyyy-MM-dd HH:mm:ss") & "','ENTRADA','" & depto & "','" & grupo & "','')"
+                    "insert into TrasladosDet(Folio,Codigo,Nombre,Unidad,Cantidad,Precio,Total,Existe,Fecha,Concepto,Depto,Grupo,CostVR,IdNube,IdNubeActu) values(" & MYFOLIO & ",'" & codigo & "','" & nombre & "','" & unidad & "'," & cantidad & "," & precio & "," & total & "," & existe & ",'" & Format(dtpfecha.Value, "yyyy-MM-dd HH:mm:ss") & "','ENTRADA','" & depto & "','" & grupo & "','',1,1)"
                 cmd1.ExecuteNonQuery()
 
                 Dim MyExiste As Double = 0
@@ -484,7 +484,7 @@ Public Class frmTraspEntrada
 
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
-                    "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & codigo & "','" & nombre & "','Traspaso de entrada'," & MyExiste & "," & cantidad & "," & mynuevaexis & "," & precio & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','','" & lblfolio.Text & "','','','','','')"
+                    "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & codigo & "','" & nombre & "','Traspaso de entrada'," & MyExiste / multiplo & "," & cantidad & "," & mynuevaexis / multiplo & "," & precio & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','','" & lblfolio.Text & "','','','','','')"
                 cmd1.ExecuteNonQuery()
                 Continue For
 Nota:
@@ -581,8 +581,10 @@ Nota:
                 End If
 
                 If TPrint = "TICKET" Then
-                    If Impresora = "" Then MsgBox("No se encontró una impresora.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : btnnuevo.PerformClick() :
+                    If Impresora = "" Then MsgBox("No se encontró una impresora.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : btnnuevo.PerformClick() : 
+                    btnnuevo.PerformClick()
                     Exit Sub
+
                     If Tamaño = "80" Then
                         For t As Integer = 1 To Copias
                             pEntrada80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
@@ -685,14 +687,21 @@ Nota:
                 CODx = grdcaptura.Rows(index).Cells(0).Value.ToString
                 CantDX = grdcaptura.Rows(index).Cells(3).Value.ToString
                 grdcaptura.Rows.Remove(grdcaptura.Rows(index))
-                If grdcaptura.Rows(index).Cells(1).Value.ToString <> "" And grdcaptura.Rows(index).Cells(0).Value.ToString = "" Then
-                    MyNota = grdcaptura.Rows(index).Cells(1).Value.ToString
-                    If grdcaptura.Rows.Count = 1 Then
-                        grdcaptura.Rows.Clear()
-                    Else
-                        grdcaptura.Rows.Remove(grdcaptura.Rows(index))
+
+                Try
+                    If grdcaptura.Rows(index).Cells(1).Value.ToString <> "" And grdcaptura.Rows(index).Cells(0).Value.ToString = "" Then
+                        MyNota = grdcaptura.Rows(index).Cells(1).Value.ToString
+                        If grdcaptura.Rows.Count = 1 Then
+                            grdcaptura.Rows.Clear()
+                        Else
+                            grdcaptura.Rows.Remove(grdcaptura.Rows(index))
+                        End If
                     End If
-                End If
+                Catch ex As Exception
+
+                End Try
+
+
             End If
         End If
     End Sub
@@ -1363,5 +1372,6 @@ milky:
         cnn1.Close()
         Exit Sub
     End Sub
+
 
 End Class

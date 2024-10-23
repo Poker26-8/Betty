@@ -519,13 +519,16 @@
                 End If
                 rd1.Close()
 
+                Dim existenciainicia As Double = 0
+
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
-                    "select PrecioVentaIVA from Productos where Codigo='" & Strings.Left(cbocodigo.Text, 6) & "'"
+                    "select PrecioVentaIVA, Existencia from Productos where Codigo='" & Strings.Left(cbocodigo.Text, 6) & "'"
                 rd1 = cmd1.ExecuteReader
                 If rd1.HasRows Then
                     If rd1.Read Then
                         MyPreci = IIf(rd1("PrecioVentaIVA").ToString = "", 0, rd1("PrecioVentaIVA").ToString)
+                        existenciainicia = rd1("Existencia").ToString / MyMult2
                     End If
                 End If
                 rd1.Close()
@@ -546,6 +549,9 @@
                     existemmmmmmmcias = CDec(txtfisica.Text) * CDec(MyMult2)
                 End If
 
+                If CDbl(txtdiferencia.Text) < 0 Then
+                    txtdiferencia.Text = Math.Abs(CDbl(txtdiferencia.Text))
+                End If
 
 
                 cmd1 = cnn1.CreateCommand
