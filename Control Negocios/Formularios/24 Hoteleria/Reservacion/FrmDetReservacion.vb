@@ -108,6 +108,11 @@
 
     Private Sub cboCLientes_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCLientes.SelectedValueChanged
         Try
+
+            Dim precio As Double = 0
+            Dim anticipo As Double = 0
+            Dim resta As Double = 0
+
             cnn1.Close() : cnn1.Open()
             cnn2.Close() : cnn2.Open()
 
@@ -145,6 +150,11 @@
                                 varHoras = DateDiff(DateInterval.Hour, CDate(fechaentrada), FECHASALIDA)
                                 cboTipo.Text = "DIA"
                                 txtHoras.Text = varHoras
+                                cboPrecio.Text = rd2("precio").ToString
+                                precio = cboPrecio.Text
+                                anticipo = rd2("Anticipo").ToString
+                                resta = CDbl(precio) - CDbl(anticipo)
+                                cboPrecio.Text = FormatNumber(resta, 2)
                             Else
                                 MsgBox("Esta reservación aun no esta disponible", vbInformation + vbOKOnly, titulohotelriaa)
                                 btnLimpiar.PerformClick()
@@ -220,6 +230,9 @@
                 Dim fechaentrada As Date = Nothing
                 Dim salida As String = ""
 
+                Dim PRECIO As Double = 0
+                PRECIO = cboPrecio.Text
+
                 fechaentrada = Format(Date.Now, "yyyy-MM-dd HH:mm:ss")
 
                 cnn1.Close() : cnn1.Open()
@@ -278,17 +291,17 @@
 
                     cnn2.Close() : cnn2.Open()
                     cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "INSERT INTO detallehotel(Habitacion,Tipo,Estado,Horas,Precio,Cliente,Telefono,FEntrada,FSalida,Caracteristicas) VALUES('" & lblHabitacion.Text & "','" & lblTipo.Text & "','" & ESTADO & "'," & txtHoras.Text & "," & cboPrecio.Text & ",'" & cboCLientes.Text & "','" & txttelefono.Text & "','" & Format(dtpEntrada.Value, "yyyy/MM/dd HH:mm:ss") & "','" & Format(dtpSalida.Value, "yyyy/MM/dd") & "','" & lblCaracteristicas.Text & "')"
+                    cmd2.CommandText = "INSERT INTO detallehotel(Habitacion,Tipo,Estado,Horas,Precio,Cliente,Telefono,FEntrada,FSalida,Caracteristicas) VALUES('" & lblHabitacion.Text & "','" & lblTipo.Text & "','" & ESTADO & "'," & txtHoras.Text & "," & PRECIO & ",'" & cboCLientes.Text & "','" & txttelefono.Text & "','" & Format(dtpEntrada.Value, "yyyy/MM/dd HH:mm:ss") & "','" & Format(dtpSalida.Value, "yyyy/MM/dd") & "','" & lblCaracteristicas.Text & "')"
                     cmd2.ExecuteNonQuery()
                     cnn2.Close()
 
                     cnn2.Close() : cnn2.Open()
                     cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "INSERT INTO comandas(Id,NMESA,Codigo,Nombre,Cantidad,UVenta,CostVR,CostVP,CostVUE,Descuento,Precio,Total,PrecioSinIva,TotalSinIVA,Comisionista,Fecha,Comensal,Status,Comentario,GPrint,CUsuario,Total_comensales,Depto,Grupo,EstatusT,Hr,EntregaT) VALUES(" & cfolio & ",'" & lblHabitacion.Text & "','xc3','Tiempo Habitacion',1,'SER',0,0,0,0," & cboPrecio.Text & "," & cboPrecio.Text & "," & cboPrecio.Text & "," & cboPrecio.Text & ",'0','" & Format(Date.Now, "yyyy/MM/dd") & "',0,'RESTA','Renta de Habitacion','','" & lblusuario.Text & "',0,'HABITACION','HABITACION',0,'" & HrTiempo & "','" & HrEntrega & "')"
+                    cmd2.CommandText = "INSERT INTO comandas(Id,NMESA,Codigo,Nombre,Cantidad,UVenta,CostVR,CostVP,CostVUE,Descuento,Precio,Total,PrecioSinIva,TotalSinIVA,Comisionista,Fecha,Comensal,Status,Comentario,GPrint,CUsuario,Total_comensales,Depto,Grupo,EstatusT,Hr,EntregaT) VALUES(" & cfolio & ",'" & lblHabitacion.Text & "','xc3','Tiempo Habitacion',1,'SER',0,0,0,0," & PRECIO & "," & PRECIO & "," & PRECIO & "," & PRECIO & ",'0','" & Format(Date.Now, "yyyy/MM/dd") & "',0,'RESTA','Renta de Habitacion','','" & lblusuario.Text & "',0,'HABITACION','HABITACION',0,'" & HrTiempo & "','" & HrEntrega & "')"
                     cmd2.ExecuteNonQuery()
 
                     cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "INSERT INTO rep_comandas(Id,NMESA,Codigo,Nombre,Cantidad,UVenta,CostVR,CostVP,CostVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Comisionista,Fecha,Comensal,Status,Comentario,GPrint,CUsuario,Total_comensales,Depto,Grupo,EstatusT,Hr,EntregaT) VALUES(" & cfolio & ",'" & lblHabitacion.Text & "','xc3','Tiempo Habitacion',1,'SER',0,'0',0," & cboPrecio.Text & "," & cboPrecio.Text & "," & cboPrecio.Text & "," & cboPrecio.Text & ",0,'" & Format(Date.Now, "yyyy/MM/dd") & "',0,'RESTA','xc3 ','','" & lblusuario.Text & "',0,'HABITACION','HABITACION',0,'" & HrTiempo & "','" & HrEntrega & "')"
+                    cmd2.CommandText = "INSERT INTO rep_comandas(Id,NMESA,Codigo,Nombre,Cantidad,UVenta,CostVR,CostVP,CostVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Comisionista,Fecha,Comensal,Status,Comentario,GPrint,CUsuario,Total_comensales,Depto,Grupo,EstatusT,Hr,EntregaT) VALUES(" & cfolio & ",'" & lblHabitacion.Text & "','xc3','Tiempo Habitacion',1,'SER',0,'0',0," & PRECIO & "," & PRECIO & "," & PRECIO & "," & PRECIO & ",0,'" & Format(Date.Now, "yyyy/MM/dd") & "',0,'RESTA','xc3 ','','" & lblusuario.Text & "',0,'HABITACION','HABITACION',0,'" & HrTiempo & "','" & HrEntrega & "')"
                     cmd2.ExecuteNonQuery()
                     cnn2.Close()
 
@@ -302,7 +315,7 @@
                 cmd2.ExecuteNonQuery()
 
                 cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "UPDATE detallehotelprecios SET Horas=" & txtHoras.Text & ",PrecioA=" & cboPrecio.Text & " WHERE Nombre='" & cboTipo.Text & "'"
+                cmd2.CommandText = "UPDATE detallehotelprecios SET Horas=" & txtHoras.Text & ",PrecioA=" & PRECIO & " WHERE Nombre='" & cboTipo.Text & "'"
                 cmd2.ExecuteNonQuery()
 
                 cmd2 = cnn2.CreateCommand

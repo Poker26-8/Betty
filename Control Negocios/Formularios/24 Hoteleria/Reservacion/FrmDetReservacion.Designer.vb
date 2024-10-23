@@ -253,9 +253,9 @@ Partial Class FrmDetReservacion
         Me.Label13.AutoSize = True
         Me.Label13.Location = New System.Drawing.Point(318, 20)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(51, 18)
+        Me.Label13.Size = New System.Drawing.Size(41, 18)
         Me.Label13.TabIndex = 4
-        Me.Label13.Text = "Precio"
+        Me.Label13.Text = "Total"
         '
         'txtHoras
         '

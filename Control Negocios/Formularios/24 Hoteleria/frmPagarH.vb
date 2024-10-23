@@ -1070,7 +1070,7 @@ Public Class frmPagarH
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then
-                    MYSALDO = FormatNumber(IIf(rd1(0).ToString = "", 0, rd1(0).ToString) + CDbl(txtTotal.Text), 2)
+                    MYSALDO = FormatNumber(IIf(rd1(0).ToString = "", 0, rd1(0).ToString), 2)
                 End If
             Else
                 MYSALDO = FormatNumber(txtTotal.Text, 2)

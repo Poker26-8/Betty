@@ -157,7 +157,7 @@ Public Class frmAnticiposReservaciones
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then
-                    anticipo = rd1(0).ToString
+                    anticipo = IIf(rd1(0).ToString = "", 0, rd1(0).ToString)
                 End If
             End If
             rd1.Close()
@@ -427,6 +427,7 @@ Public Class frmAnticiposReservaciones
             Dim tarjeta As Double = 0
             Dim transaferencia As Double = 0
             Dim otro As Double = 0
+            Dim cambio As Double = 0
 
             If lblUsuario.Text = "Contraseña" Then
                 MsgBox("Ingrese la contraseña para continuar.", vbInformation + vbOKOnly, titulohotelriaa)
@@ -447,8 +448,9 @@ Public Class frmAnticiposReservaciones
                 tarjeta = CDbl(txtTarjeta.Text)
                 transaferencia = CDbl(txtTransfe.Text)
                 otro = CDbl(txtOtro.Text)
+                cambio = CDbl(txtCambio.Text)
 
-                acuenta = FormatNumber(CDbl(efectivo) + CDbl(tarjeta) + CDbl(transaferencia) + CDbl(otro), 2)
+                acuenta = FormatNumber((CDbl(efectivo) + CDbl(tarjeta) + CDbl(transaferencia) + CDbl(otro)) - CDbl(cambio), 2)
                 mydescuento = FormatNumber(CDbl(txtDescuento.Text), 2)
                 mysubtotal = FormatNumber(CDbl(txtSubtotal.Text), 2)
                 mytotalventa = FormatNumber(CDbl(txtTotalVenta.Text), 2)
@@ -644,7 +646,7 @@ Public Class frmAnticiposReservaciones
                 cmd2.ExecuteNonQuery()
 
                 cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "UPDATE reservaciones SET Tipo='" & cboTipo.Text & "', Precio=" & cboPrecio.Text & " WHERE IdReservacion=" & cboFolio.Text & " AND Cliente='" & cboClIente.Text & "'"
+                cmd2.CommandText = "UPDATE reservaciones SET Tipo='" & cboTipo.Text & "', Precio=" & cboPrecio.Text & ",Anticipo=" & acuenta & " WHERE IdReservacion=" & cboFolio.Text & " AND Cliente='" & cboClIente.Text & "'"
                 cmd2.ExecuteNonQuery()
                 cnn2.Close()
 
@@ -934,4 +936,6 @@ deku:
 
         e.HasMorePages = False
     End Sub
+
+
 End Class

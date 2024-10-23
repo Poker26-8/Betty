@@ -71,7 +71,10 @@
                                               `FSalida` datetime DEFAULT NULL,
                                               `Asigno` varchar(70) DEFAULT '',
                                               `Reservo` varchar(70) DEFAULT '',
-                                              `Status` int(1) DEFAULT '0'
+                                              `Status` int(1) DEFAULT '0',
+                                              `Tipo` varchar(50) DEFAULT '',
+                                              `Precio` double DEFAULT '0',
+                                              `Anticipo` double DEFAULT '0'
                                             ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
     'prescripcion

@@ -43,9 +43,9 @@ Partial Class frmServicioCuarto
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.txtBarras = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnEnviar = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.btnEnviar = New System.Windows.Forms.Button()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.piclogo = New System.Windows.Forms.PictureBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
@@ -71,10 +71,6 @@ Partial Class frmServicioCuarto
         Me.pdepa = New System.Windows.Forms.Panel()
         Me.PGrupo = New System.Windows.Forms.Panel()
         Me.pproductos = New System.Windows.Forms.Panel()
-        Me.TFecha = New System.Windows.Forms.Timer(Me.components)
-        Me.TFolio = New System.Windows.Forms.Timer(Me.components)
-        Me.PComandaH80 = New System.Drawing.Printing.PrintDocument()
-        Me.PComandaH58 = New System.Drawing.Printing.PrintDocument()
         Me.PTeclado = New System.Windows.Forms.Panel()
         Me.btnaceptar = New System.Windows.Forms.Button()
         Me.btnclose = New System.Windows.Forms.Button()
@@ -92,6 +88,10 @@ Partial Class frmServicioCuarto
         Me.btn1 = New System.Windows.Forms.Button()
         Me.gdato = New System.Windows.Forms.GroupBox()
         Me.txtRespuesta = New System.Windows.Forms.TextBox()
+        Me.TFecha = New System.Windows.Forms.Timer(Me.components)
+        Me.TFolio = New System.Windows.Forms.Timer(Me.components)
+        Me.PComandaH80 = New System.Drawing.Printing.PrintDocument()
+        Me.PComandaH58 = New System.Drawing.Printing.PrintDocument()
         Me.Panel1.SuspendLayout()
         CType(Me.grdCaptura, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
@@ -281,6 +281,22 @@ Partial Class frmServicioCuarto
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Codigo de Barras"
         '
+        'btnEnviar
+        '
+        Me.btnEnviar.BackColor = System.Drawing.Color.White
+        Me.btnEnviar.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnEnviar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnEnviar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEnviar.Image = CType(resources.GetObject("btnEnviar.Image"), System.Drawing.Image)
+        Me.btnEnviar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnEnviar.Location = New System.Drawing.Point(663, 0)
+        Me.btnEnviar.Name = "btnEnviar"
+        Me.btnEnviar.Size = New System.Drawing.Size(75, 100)
+        Me.btnEnviar.TabIndex = 1
+        Me.btnEnviar.Text = "Enviar"
+        Me.btnEnviar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnEnviar.UseVisualStyleBackColor = False
+        '
         'btnLimpiar
         '
         Me.btnLimpiar.BackColor = System.Drawing.Color.White
@@ -312,22 +328,6 @@ Partial Class frmServicioCuarto
         Me.Button1.Text = "Salir"
         Me.Button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.Button1.UseVisualStyleBackColor = False
-        '
-        'btnEnviar
-        '
-        Me.btnEnviar.BackColor = System.Drawing.Color.White
-        Me.btnEnviar.Dock = System.Windows.Forms.DockStyle.Right
-        Me.btnEnviar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnEnviar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEnviar.Image = CType(resources.GetObject("btnEnviar.Image"), System.Drawing.Image)
-        Me.btnEnviar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnEnviar.Location = New System.Drawing.Point(663, 0)
-        Me.btnEnviar.Name = "btnEnviar"
-        Me.btnEnviar.Size = New System.Drawing.Size(75, 100)
-        Me.btnEnviar.TabIndex = 1
-        Me.btnEnviar.Text = "Enviar"
-        Me.btnEnviar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnEnviar.UseVisualStyleBackColor = False
         '
         'Panel5
         '
@@ -652,18 +652,6 @@ Partial Class frmServicioCuarto
         Me.pproductos.Size = New System.Drawing.Size(662, 565)
         Me.pproductos.TabIndex = 70
         '
-        'TFecha
-        '
-        '
-        'TFolio
-        '
-        '
-        'PComandaH80
-        '
-        '
-        'PComandaH58
-        '
-        '
         'PTeclado
         '
         Me.PTeclado.BackColor = System.Drawing.Color.PaleTurquoise
@@ -873,6 +861,18 @@ Partial Class frmServicioCuarto
         Me.txtRespuesta.Size = New System.Drawing.Size(350, 22)
         Me.txtRespuesta.TabIndex = 0
         Me.txtRespuesta.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TFecha
+        '
+        '
+        'TFolio
+        '
+        '
+        'PComandaH80
+        '
+        '
+        'PComandaH58
+        '
         '
         'frmServicioCuarto
         '
