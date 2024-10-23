@@ -124,7 +124,7 @@
   <data name="btnreporte.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAD0AAAAvCAYAAABQfMJ5AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DwAACw8BkvkDpQAAA7hJREFUaEPtl21LU2EYx/sIfYTeBX2D3vWiXgUR9KKooLIiKrKoIDIClxCZUfZE
+        DgAACw4BQL7hQQAAA7hJREFUaEPtl21LU2EYx/sIfYTeBX2D3vWiXgUR9KKooLIiKrKoIDIClxCZUfZE
         DwapGWENzcciVCyNcCWazZpZNnNnDzbdUue2Wvy7r9udYfOaZ5OdnXXqgh/nnOvsvu7rd859zrZlAP45
         2KTZYZNmh02aHTZpdtik3gyfXbtcsIbgzusNm9STuLBTgDj93Of0hE3qiZAsniescoT7rF6wyWwhZOiu
         9s+TS5egQLelzya12HOydI0WWw+dWtdp2VidJJM2NJZqcLWT4XpcDDaZCjHBCoFTAC1Ew6go2sEKpQON
@@ -143,13 +143,10 @@
         Js0Nlv0GDQNIzDXd2csAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="btnexportar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACYAAAAoCAYAAACSN4jeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EAAACxABrSO9dQAAAnFJREFUWEftmLFLHEEUxv0T7i8I1pIine2RFDZBbMRKCCZpQgIXEC0ieKjERuEg
+        DwAACw8BkvkDpQAAAnFJREFUWEftmLFLHEEUxv0T7i8I1pIine2RFDZBbMRKCCZpQgIXEC0ieKjERuEg
         QqIkQSRFIgqCRiwslDs7PU4QsRAUvCIBjUkZm/F9A7O8nXu7N7t3c15h8eO4/Wbnfcx8M7NMh1KqaTx4
         87iT6CPyxDOpjSviQxeo8CMUJwrEDvGXUBapzYkPOdR5hsgSOWKRqBC2gSjyUp8uhP5QR3wq1ohzQiro
         Snpj9DKmJGoqGqUhYz4MaXrev1j8ffknm4IMjImdNoPJlU+KiqSh0q7GdODFTpvBvbGkvPo8oTb3iwGV

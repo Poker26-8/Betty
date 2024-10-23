@@ -250,6 +250,7 @@
                     txtfisica.Text = Trim(Replace(txtfisica.Text, "-", ""))
                 End If
 
+
                 If sistema < 0 Then
                     If fisica < 0 Then
                         diferencia = CDbl(IIf(sistema = 0, 0, sistema)) - CDbl(IIf(fisica = 0, 0, fisica))

@@ -52,8 +52,8 @@ Public Class frmLoad
         Label1.Text = "Cargando Permisos de usuario..."
         My.Application.DoEvents()
         'Licencia()
-        Try
-            cnn1.Close()
+
+        cnn1.Close()
             cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "Select numero,usuario,password from loginrecargas"

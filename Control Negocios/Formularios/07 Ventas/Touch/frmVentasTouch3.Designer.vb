@@ -314,9 +314,9 @@ Partial Class frmVentasTouch3
         Me.pProductos.AutoScroll = True
         Me.pProductos.BackColor = System.Drawing.Color.White
         Me.pProductos.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pProductos.Location = New System.Drawing.Point(208, 79)
+        Me.pProductos.Location = New System.Drawing.Point(260, 79)
         Me.pProductos.Name = "pProductos"
-        Me.pProductos.Size = New System.Drawing.Size(560, 437)
+        Me.pProductos.Size = New System.Drawing.Size(508, 437)
         Me.pProductos.TabIndex = 19
         '
         'pGrupos
@@ -324,9 +324,9 @@ Partial Class frmVentasTouch3
         Me.pGrupos.AutoScroll = True
         Me.pGrupos.BackColor = System.Drawing.Color.LemonChiffon
         Me.pGrupos.Dock = System.Windows.Forms.DockStyle.Left
-        Me.pGrupos.Location = New System.Drawing.Point(104, 79)
+        Me.pGrupos.Location = New System.Drawing.Point(130, 79)
         Me.pGrupos.Name = "pGrupos"
-        Me.pGrupos.Size = New System.Drawing.Size(104, 437)
+        Me.pGrupos.Size = New System.Drawing.Size(130, 437)
         Me.pGrupos.TabIndex = 18
         '
         'pDeptos
@@ -336,7 +336,7 @@ Partial Class frmVentasTouch3
         Me.pDeptos.Dock = System.Windows.Forms.DockStyle.Left
         Me.pDeptos.Location = New System.Drawing.Point(0, 79)
         Me.pDeptos.Name = "pDeptos"
-        Me.pDeptos.Size = New System.Drawing.Size(104, 437)
+        Me.pDeptos.Size = New System.Drawing.Size(130, 437)
         Me.pDeptos.TabIndex = 17
         '
         'Panel3
