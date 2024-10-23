@@ -305,7 +305,7 @@ Partial Class frmManejo
         Me.lblidusuario.BackColor = System.Drawing.Color.Silver
         Me.lblidusuario.Location = New System.Drawing.Point(9, 601)
         Me.lblidusuario.Name = "lblidusuario"
-        Me.lblidusuario.Size = New System.Drawing.Size(85, 20)
+        Me.lblidusuario.Size = New System.Drawing.Size(100, 20)
         Me.lblidusuario.TabIndex = 121
         Me.lblidusuario.Visible = False
         '

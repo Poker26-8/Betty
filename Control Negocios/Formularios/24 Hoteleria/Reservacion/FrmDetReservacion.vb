@@ -388,7 +388,7 @@
             cnn2.Close() : cnn2.Open()
 
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT * FROM reservaciones WHERE IdCliente=" & cboFolio.Text
+            cmd1.CommandText = "SELECT * FROM reservaciones WHERE IdReservacion=" & cboFolio.Text
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then
@@ -398,7 +398,13 @@
 
                     cnn2.Close() : cnn2.Open()
                     cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "SELECT * FROM reservaciones WHERE Habitacion='" & lblHabitacion.Text & "' AND Status=0 AND Cliente='" & cboCLientes.Text & "' AND IdReservacion=" & cboFolio.Text & ""
+
+                    If cboCLientes.Text = "" Then
+                        cmd2.CommandText = "SELECT * FROM reservaciones WHERE Habitacion='" & lblHabitacion.Text & "' AND Status=0  AND IdReservacion=" & cboFolio.Text & ""
+                    Else
+                        cmd2.CommandText = "SELECT * FROM reservaciones WHERE Habitacion='" & lblHabitacion.Text & "' AND Status=0 AND Cliente='" & cboCLientes.Text & "' AND IdReservacion=" & cboFolio.Text & ""
+                    End If
+
                     rd2 = cmd2.ExecuteReader
                     If rd2.HasRows Then
                         If rd2.Read Then
@@ -411,7 +417,13 @@
 
                             If Date.Now > fechaentrada Then
                                 pReservacion.Visible = True
-                                cboCLientes.Text = rd2("Cliente").ToString
+
+                                If cboCLientes.Text = "" Then
+                                    cboCLientes.Text = rd2("Cliente").ToString
+                                Else
+                                    cboFolio.Text = rd2("IdReservacion").ToString
+                                End If
+
                                 txttelefono.Text = rd2("Telefono").ToString
                                 dtpEntrada.Value = fentrada
                                 dtpSalida.Value = FECHASALIDA
