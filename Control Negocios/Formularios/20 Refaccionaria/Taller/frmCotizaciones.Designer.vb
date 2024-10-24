@@ -24,6 +24,8 @@ Partial Class frmCotizaciones
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCotizaciones))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.cboCotizaciones = New System.Windows.Forms.ComboBox()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.lblUsuario = New System.Windows.Forms.Label()
         Me.txtUsuario = New System.Windows.Forms.TextBox()
@@ -33,6 +35,9 @@ Partial Class frmCotizaciones
         Me.cboCliente = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label44 = New System.Windows.Forms.Label()
+        Me.txtdescu = New System.Windows.Forms.TextBox()
+        Me.btnAsignar = New System.Windows.Forms.Button()
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.btnLimpiar = New System.Windows.Forms.Button()
         Me.btnCotizacion = New System.Windows.Forms.Button()
@@ -57,24 +62,36 @@ Partial Class frmCotizaciones
         Me.Label6 = New System.Windows.Forms.Label()
         Me.grdCaptura = New System.Windows.Forms.DataGridView()
         Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.cboCotizaciones = New System.Windows.Forms.ComboBox()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.lblPlaca = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.lblidVehiculo = New System.Windows.Forms.Label()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel4.SuspendLayout()
         CType(Me.grdCaptura, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
+        Me.Panel6.SuspendLayout()
+        Me.Panel7.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.lblidVehiculo)
+        Me.Panel1.Controls.Add(Me.Label15)
+        Me.Panel1.Controls.Add(Me.lblPlaca)
+        Me.Panel1.Controls.Add(Me.Label12)
         Me.Panel1.Controls.Add(Me.cboCotizaciones)
         Me.Panel1.Controls.Add(Me.Label13)
         Me.Panel1.Controls.Add(Me.Panel3)
@@ -87,6 +104,25 @@ Partial Class frmCotizaciones
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1020, 90)
         Me.Panel1.TabIndex = 0
+        '
+        'cboCotizaciones
+        '
+        Me.cboCotizaciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboCotizaciones.FormattingEnabled = True
+        Me.cboCotizaciones.Location = New System.Drawing.Point(768, 9)
+        Me.cboCotizaciones.Name = "cboCotizaciones"
+        Me.cboCotizaciones.Size = New System.Drawing.Size(131, 24)
+        Me.cboCotizaciones.TabIndex = 7
+        '
+        'Label13
+        '
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(649, 9)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(125, 24)
+        Me.Label13.TabIndex = 6
+        Me.Label13.Text = "Cotizaciones:"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Panel3
         '
@@ -117,6 +153,7 @@ Partial Class frmCotizaciones
         Me.txtUsuario.Size = New System.Drawing.Size(111, 22)
         Me.txtUsuario.TabIndex = 3
         Me.txtUsuario.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtUsuario.UseSystemPasswordChar = True
         '
         'lblFolio
         '
@@ -132,7 +169,7 @@ Partial Class frmCotizaciones
         '
         Me.cboVehiculo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboVehiculo.FormattingEnabled = True
-        Me.cboVehiculo.Location = New System.Drawing.Point(93, 39)
+        Me.cboVehiculo.Location = New System.Drawing.Point(93, 36)
         Me.cboVehiculo.Name = "cboVehiculo"
         Me.cboVehiculo.Size = New System.Drawing.Size(433, 24)
         Me.cboVehiculo.TabIndex = 4
@@ -140,7 +177,7 @@ Partial Class frmCotizaciones
         'Label4
         '
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(3, 39)
+        Me.Label4.Location = New System.Drawing.Point(3, 36)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(92, 24)
         Me.Label4.TabIndex = 3
@@ -168,6 +205,9 @@ Partial Class frmCotizaciones
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.Label44)
+        Me.Panel2.Controls.Add(Me.txtdescu)
+        Me.Panel2.Controls.Add(Me.btnAsignar)
         Me.Panel2.Controls.Add(Me.btnSalir)
         Me.Panel2.Controls.Add(Me.btnLimpiar)
         Me.Panel2.Controls.Add(Me.btnCotizacion)
@@ -183,13 +223,51 @@ Partial Class frmCotizaciones
         Me.Panel2.Size = New System.Drawing.Size(1020, 108)
         Me.Panel2.TabIndex = 1
         '
+        'Label44
+        '
+        Me.Label44.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.Label44.Location = New System.Drawing.Point(604, 13)
+        Me.Label44.Name = "Label44"
+        Me.Label44.Size = New System.Drawing.Size(77, 27)
+        Me.Label44.TabIndex = 213
+        Me.Label44.Text = "$ Desc:"
+        Me.Label44.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtdescu
+        '
+        Me.txtdescu.BackColor = System.Drawing.Color.White
+        Me.txtdescu.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtdescu.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.txtdescu.ForeColor = System.Drawing.Color.Green
+        Me.txtdescu.Location = New System.Drawing.Point(687, 13)
+        Me.txtdescu.Name = "txtdescu"
+        Me.txtdescu.ReadOnly = True
+        Me.txtdescu.Size = New System.Drawing.Size(117, 24)
+        Me.txtdescu.TabIndex = 212
+        Me.txtdescu.Text = "0.00"
+        Me.txtdescu.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'btnAsignar
+        '
+        Me.btnAsignar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnAsignar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAsignar.Image = CType(resources.GetObject("btnAsignar.Image"), System.Drawing.Image)
+        Me.btnAsignar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnAsignar.Location = New System.Drawing.Point(12, 13)
+        Me.btnAsignar.Name = "btnAsignar"
+        Me.btnAsignar.Size = New System.Drawing.Size(95, 83)
+        Me.btnAsignar.TabIndex = 9
+        Me.btnAsignar.Text = "Asignar"
+        Me.btnAsignar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnAsignar.UseVisualStyleBackColor = True
+        '
         'btnSalir
         '
         Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnSalir.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
         Me.btnSalir.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSalir.Location = New System.Drawing.Point(215, 13)
+        Me.btnSalir.Location = New System.Drawing.Point(314, 13)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(95, 83)
         Me.btnSalir.TabIndex = 8
@@ -203,7 +281,7 @@ Partial Class frmCotizaciones
         Me.btnLimpiar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLimpiar.Image = CType(resources.GetObject("btnLimpiar.Image"), System.Drawing.Image)
         Me.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnLimpiar.Location = New System.Drawing.Point(114, 13)
+        Me.btnLimpiar.Location = New System.Drawing.Point(213, 13)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(95, 83)
         Me.btnLimpiar.TabIndex = 7
@@ -217,7 +295,7 @@ Partial Class frmCotizaciones
         Me.btnCotizacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCotizacion.Image = CType(resources.GetObject("btnCotizacion.Image"), System.Drawing.Image)
         Me.btnCotizacion.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnCotizacion.Location = New System.Drawing.Point(13, 13)
+        Me.btnCotizacion.Location = New System.Drawing.Point(112, 13)
         Me.btnCotizacion.Name = "btnCotizacion"
         Me.btnCotizacion.Size = New System.Drawing.Size(95, 83)
         Me.btnCotizacion.TabIndex = 6
@@ -228,9 +306,11 @@ Partial Class frmCotizaciones
         'txtTotalVenta
         '
         Me.txtTotalVenta.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalVenta.BackColor = System.Drawing.Color.White
         Me.txtTotalVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTotalVenta.Location = New System.Drawing.Point(913, 73)
         Me.txtTotalVenta.Name = "txtTotalVenta"
+        Me.txtTotalVenta.ReadOnly = True
         Me.txtTotalVenta.Size = New System.Drawing.Size(100, 24)
         Me.txtTotalVenta.TabIndex = 5
         Me.txtTotalVenta.Text = "0.00"
@@ -272,9 +352,12 @@ Partial Class frmCotizaciones
         'txtSubtotal
         '
         Me.txtSubtotal.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtSubtotal.BackColor = System.Drawing.Color.White
         Me.txtSubtotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSubtotal.ForeColor = System.Drawing.SystemColors.MenuHighlight
         Me.txtSubtotal.Location = New System.Drawing.Point(913, 13)
         Me.txtSubtotal.Name = "txtSubtotal"
+        Me.txtSubtotal.ReadOnly = True
         Me.txtSubtotal.Size = New System.Drawing.Size(100, 24)
         Me.txtSubtotal.TabIndex = 1
         Me.txtSubtotal.Text = "0.00"
@@ -393,6 +476,7 @@ Partial Class frmCotizaciones
         Me.txtUnidad.Name = "txtUnidad"
         Me.txtUnidad.Size = New System.Drawing.Size(92, 24)
         Me.txtUnidad.TabIndex = 8
+        Me.txtUnidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Label8
         '
@@ -445,7 +529,7 @@ Partial Class frmCotizaciones
         Me.grdCaptura.AllowUserToDeleteRows = False
         Me.grdCaptura.BackgroundColor = System.Drawing.Color.White
         Me.grdCaptura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdCaptura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6})
+        Me.grdCaptura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7})
         Me.grdCaptura.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdCaptura.Location = New System.Drawing.Point(0, 0)
         Me.grdCaptura.Name = "grdCaptura"
@@ -456,6 +540,7 @@ Partial Class frmCotizaciones
         '
         'Panel5
         '
+        Me.Panel5.Controls.Add(Me.Panel6)
         Me.Panel5.Controls.Add(Me.grdCaptura)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(0, 150)
@@ -463,24 +548,78 @@ Partial Class frmCotizaciones
         Me.Panel5.Size = New System.Drawing.Size(1020, 333)
         Me.Panel5.TabIndex = 3
         '
-        'Label13
+        'Panel6
         '
-        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(649, 9)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(125, 24)
-        Me.Label13.TabIndex = 6
-        Me.Label13.Text = "Cotizaciones:"
-        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Panel6.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Panel6.BackColor = System.Drawing.Color.LightCoral
+        Me.Panel6.Controls.Add(Me.Panel7)
+        Me.Panel6.Location = New System.Drawing.Point(369, 122)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(282, 88)
+        Me.Panel6.TabIndex = 219
+        Me.Panel6.Visible = False
         '
-        'cboCotizaciones
+        'Panel7
         '
-        Me.cboCotizaciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboCotizaciones.FormattingEnabled = True
-        Me.cboCotizaciones.Location = New System.Drawing.Point(768, 9)
-        Me.cboCotizaciones.Name = "cboCotizaciones"
-        Me.cboCotizaciones.Size = New System.Drawing.Size(131, 24)
-        Me.cboCotizaciones.TabIndex = 7
+        Me.Panel7.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel7.BackColor = System.Drawing.Color.White
+        Me.Panel7.Controls.Add(Me.Label14)
+        Me.Panel7.Location = New System.Drawing.Point(8, 9)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(266, 71)
+        Me.Panel7.TabIndex = 0
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Segoe UI Black", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(17, 20)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(233, 30)
+        Me.Label14.TabIndex = 0
+        Me.Label14.Text = "IMPRIMIENDO PDF..."
+        '
+        'Label12
+        '
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(3, 63)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(92, 24)
+        Me.Label12.TabIndex = 8
+        Me.Label12.Text = "Placa"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblPlaca
+        '
+        Me.lblPlaca.BackColor = System.Drawing.Color.Gainsboro
+        Me.lblPlaca.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPlaca.Location = New System.Drawing.Point(93, 63)
+        Me.lblPlaca.Name = "lblPlaca"
+        Me.lblPlaca.Size = New System.Drawing.Size(169, 24)
+        Me.lblPlaca.TabIndex = 9
+        Me.lblPlaca.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label15
+        '
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(268, 63)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(92, 24)
+        Me.Label15.TabIndex = 10
+        Me.Label15.Text = "IdVeh"
+        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblidVehiculo
+        '
+        Me.lblidVehiculo.BackColor = System.Drawing.Color.Gainsboro
+        Me.lblidVehiculo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblidVehiculo.Location = New System.Drawing.Point(314, 63)
+        Me.lblidVehiculo.Name = "lblidVehiculo"
+        Me.lblidVehiculo.Size = New System.Drawing.Size(179, 24)
+        Me.lblidVehiculo.TabIndex = 11
+        Me.lblidVehiculo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Column1
         '
@@ -529,6 +668,14 @@ Partial Class frmCotizaciones
         Me.Column6.ReadOnly = True
         Me.Column6.Width = 56
         '
+        'Column7
+        '
+        Me.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column7.HeaderText = "N° Parte"
+        Me.Column7.Name = "Column7"
+        Me.Column7.ReadOnly = True
+        Me.Column7.Width = 72
+        '
         'frmCotizaciones
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -552,6 +699,9 @@ Partial Class frmCotizaciones
         Me.Panel4.PerformLayout()
         CType(Me.grdCaptura, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
+        Me.Panel6.ResumeLayout(False)
+        Me.Panel7.ResumeLayout(False)
+        Me.Panel7.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -592,10 +742,21 @@ Partial Class frmCotizaciones
     Friend WithEvents Panel5 As Panel
     Friend WithEvents cboCotizaciones As ComboBox
     Friend WithEvents Label13 As Label
+    Friend WithEvents btnAsignar As Button
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents Panel7 As Panel
+    Friend WithEvents Label14 As Label
+    Friend WithEvents txtdescu As TextBox
+    Friend WithEvents Label44 As Label
+    Friend WithEvents lblPlaca As Label
+    Friend WithEvents Label12 As Label
+    Friend WithEvents lblidVehiculo As Label
+    Friend WithEvents Label15 As Label
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents Column5 As DataGridViewTextBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents Column7 As DataGridViewTextBoxColumn
 End Class
