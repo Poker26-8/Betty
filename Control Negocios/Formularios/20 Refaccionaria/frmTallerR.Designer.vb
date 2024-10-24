@@ -514,14 +514,13 @@ Partial Class frmTallerR
         Me.btnCotiza.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCotiza.Image = CType(resources.GetObject("btnCotiza.Image"), System.Drawing.Image)
         Me.btnCotiza.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnCotiza.Location = New System.Drawing.Point(525, 9)
+        Me.btnCotiza.Location = New System.Drawing.Point(508, 9)
         Me.btnCotiza.Name = "btnCotiza"
-        Me.btnCotiza.Size = New System.Drawing.Size(103, 79)
+        Me.btnCotiza.Size = New System.Drawing.Size(120, 79)
         Me.btnCotiza.TabIndex = 207
-        Me.btnCotiza.Text = "Cotizaciones"
+        Me.btnCotiza.Text = "Orden Servicio"
         Me.btnCotiza.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnCotiza.UseVisualStyleBackColor = True
-        Me.btnCotiza.Visible = False
         '
         'lblidvehiculo
         '

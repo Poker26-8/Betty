@@ -27,6 +27,8 @@ Public Class frmAsignacionRef
 
             Dim codigopro As String = ""
             Dim preciopro As Double = 0
+            Dim tot As Double = 0
+
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
 
@@ -48,6 +50,8 @@ Public Class frmAsignacionRef
                                           rd1(2).ToString,
                                           FormatNumber(txtCantidad.Text, 2),
                                           FormatNumber(preciopro, 2))
+
+                    txtTotal.Text = CDbl(txtTotal.Text) + CDbl(preciopro)
                 End If
             End If
             rd1.Close()
@@ -58,6 +62,7 @@ Public Class frmAsignacionRef
             cboDescripcion.Text = ""
             cboDescripcion.Focus.Equals(True)
 
+            txtTotal.Text = FormatNumber(txtTotal.Text, 2)
         End If
     End Sub
 
@@ -96,6 +101,10 @@ Public Class frmAsignacionRef
     Private Sub grdRefaccion_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles grdRefaccion.CellDoubleClick
         Dim index As Integer = grdRefaccion.CurrentRow.Index
 
+        Dim pre As Double = grdRefaccion.Rows(index).Cells(4).Value.ToString
+
+        txtTotal.Text = CDbl(txtTotal.Text) - CDbl(pre)
+        txtTotal.Text = FormatNumber(txtTotal.Text, 2)
         grdRefaccion.Rows.Remove(grdRefaccion.CurrentRow)
     End Sub
 
@@ -271,6 +280,7 @@ Door:
 
 
             grdRefaccion.Rows.Clear()
+            txtTotal.Text = "0.00"
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn1.Close()

@@ -43,33 +43,28 @@ Partial Class frmCotizaciones
         Me.txtSubtotal = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.cboCodigo = New System.Windows.Forms.ComboBox()
+        Me.txtTotal = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.txtPrecio = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtCantidad = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtUnidad = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.cboDescripcion = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtUnidad = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtCantidad = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.txtPrecio = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.txtTotal = New System.Windows.Forms.TextBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.txtExistencia = New System.Windows.Forms.TextBox()
-        Me.cboCodigo = New System.Windows.Forms.ComboBox()
         Me.grdCaptura = New System.Windows.Forms.DataGridView()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.cboCotizaciones = New System.Windows.Forms.ComboBox()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -80,6 +75,8 @@ Partial Class frmCotizaciones
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.cboCotizaciones)
+        Me.Panel1.Controls.Add(Me.Label13)
         Me.Panel1.Controls.Add(Me.Panel3)
         Me.Panel1.Controls.Add(Me.cboVehiculo)
         Me.Panel1.Controls.Add(Me.Label4)
@@ -119,6 +116,7 @@ Partial Class frmCotizaciones
         Me.txtUsuario.Name = "txtUsuario"
         Me.txtUsuario.Size = New System.Drawing.Size(111, 22)
         Me.txtUsuario.TabIndex = 3
+        Me.txtUsuario.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblFolio
         '
@@ -296,8 +294,6 @@ Partial Class frmCotizaciones
         'Panel4
         '
         Me.Panel4.Controls.Add(Me.cboCodigo)
-        Me.Panel4.Controls.Add(Me.txtExistencia)
-        Me.Panel4.Controls.Add(Me.Label12)
         Me.Panel4.Controls.Add(Me.txtTotal)
         Me.Panel4.Controls.Add(Me.Label11)
         Me.Panel4.Controls.Add(Me.txtPrecio)
@@ -315,13 +311,108 @@ Partial Class frmCotizaciones
         Me.Panel4.Size = New System.Drawing.Size(1020, 60)
         Me.Panel4.TabIndex = 2
         '
+        'cboCodigo
+        '
+        Me.cboCodigo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboCodigo.FormattingEnabled = True
+        Me.cboCodigo.Location = New System.Drawing.Point(3, 30)
+        Me.cboCodigo.Name = "cboCodigo"
+        Me.cboCodigo.Size = New System.Drawing.Size(92, 24)
+        Me.cboCodigo.TabIndex = 17
+        '
+        'txtTotal
+        '
+        Me.txtTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTotal.Location = New System.Drawing.Point(913, 30)
+        Me.txtTotal.Name = "txtTotal"
+        Me.txtTotal.Size = New System.Drawing.Size(103, 24)
+        Me.txtTotal.TabIndex = 14
+        Me.txtTotal.Text = "0.00"
+        Me.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label11
+        '
+        Me.Label11.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.ForeColor = System.Drawing.Color.White
+        Me.Label11.Location = New System.Drawing.Point(913, 3)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(103, 24)
+        Me.Label11.TabIndex = 13
+        Me.Label11.Text = "Total"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtPrecio
+        '
+        Me.txtPrecio.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPrecio.Location = New System.Drawing.Point(807, 30)
+        Me.txtPrecio.Name = "txtPrecio"
+        Me.txtPrecio.Size = New System.Drawing.Size(103, 24)
+        Me.txtPrecio.TabIndex = 12
+        Me.txtPrecio.Text = "0.00"
+        Me.txtPrecio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label10
+        '
+        Me.Label10.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.ForeColor = System.Drawing.Color.White
+        Me.Label10.Location = New System.Drawing.Point(807, 3)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(103, 24)
+        Me.Label10.TabIndex = 11
+        Me.Label10.Text = "Precio"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtCantidad
+        '
+        Me.txtCantidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCantidad.Location = New System.Drawing.Point(712, 30)
+        Me.txtCantidad.Name = "txtCantidad"
+        Me.txtCantidad.Size = New System.Drawing.Size(92, 24)
+        Me.txtCantidad.TabIndex = 10
+        Me.txtCantidad.Text = "1"
+        Me.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label9
+        '
+        Me.Label9.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.Color.White
+        Me.Label9.Location = New System.Drawing.Point(712, 3)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(92, 24)
+        Me.Label9.TabIndex = 9
+        Me.Label9.Text = "Cantidad"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtUnidad
+        '
+        Me.txtUnidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUnidad.Location = New System.Drawing.Point(617, 30)
+        Me.txtUnidad.Name = "txtUnidad"
+        Me.txtUnidad.Size = New System.Drawing.Size(92, 24)
+        Me.txtUnidad.TabIndex = 8
+        '
+        'Label8
+        '
+        Me.Label8.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.ForeColor = System.Drawing.Color.White
+        Me.Label8.Location = New System.Drawing.Point(617, 3)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(92, 24)
+        Me.Label8.TabIndex = 7
+        Me.Label8.Text = "Unidad"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'cboDescripcion
         '
         Me.cboDescripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboDescripcion.FormattingEnabled = True
         Me.cboDescripcion.Location = New System.Drawing.Point(99, 30)
         Me.cboDescripcion.Name = "cboDescripcion"
-        Me.cboDescripcion.Size = New System.Drawing.Size(408, 24)
+        Me.cboDescripcion.Size = New System.Drawing.Size(515, 24)
         Me.cboDescripcion.TabIndex = 6
         '
         'Label7
@@ -331,7 +422,7 @@ Partial Class frmCotizaciones
         Me.Label7.ForeColor = System.Drawing.Color.White
         Me.Label7.Location = New System.Drawing.Point(99, 3)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(408, 24)
+        Me.Label7.Size = New System.Drawing.Size(515, 24)
         Me.Label7.TabIndex = 6
         Me.Label7.Text = "Descripción"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -348,129 +439,13 @@ Partial Class frmCotizaciones
         Me.Label6.Text = "Codigo"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label8
-        '
-        Me.Label8.BackColor = System.Drawing.Color.DodgerBlue
-        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.ForeColor = System.Drawing.Color.White
-        Me.Label8.Location = New System.Drawing.Point(510, 3)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(92, 24)
-        Me.Label8.TabIndex = 7
-        Me.Label8.Text = "Unidad"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'txtUnidad
-        '
-        Me.txtUnidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUnidad.Location = New System.Drawing.Point(510, 30)
-        Me.txtUnidad.Name = "txtUnidad"
-        Me.txtUnidad.Size = New System.Drawing.Size(92, 24)
-        Me.txtUnidad.TabIndex = 8
-        '
-        'Label9
-        '
-        Me.Label9.BackColor = System.Drawing.Color.DodgerBlue
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.ForeColor = System.Drawing.Color.White
-        Me.Label9.Location = New System.Drawing.Point(605, 3)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(92, 24)
-        Me.Label9.TabIndex = 9
-        Me.Label9.Text = "Cantidad"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'txtCantidad
-        '
-        Me.txtCantidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCantidad.Location = New System.Drawing.Point(605, 30)
-        Me.txtCantidad.Name = "txtCantidad"
-        Me.txtCantidad.Size = New System.Drawing.Size(92, 24)
-        Me.txtCantidad.TabIndex = 10
-        Me.txtCantidad.Text = "1"
-        Me.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label10
-        '
-        Me.Label10.BackColor = System.Drawing.Color.DodgerBlue
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.ForeColor = System.Drawing.Color.White
-        Me.Label10.Location = New System.Drawing.Point(700, 3)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(103, 24)
-        Me.Label10.TabIndex = 11
-        Me.Label10.Text = "Precio"
-        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'txtPrecio
-        '
-        Me.txtPrecio.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPrecio.Location = New System.Drawing.Point(700, 30)
-        Me.txtPrecio.Name = "txtPrecio"
-        Me.txtPrecio.Size = New System.Drawing.Size(103, 24)
-        Me.txtPrecio.TabIndex = 12
-        Me.txtPrecio.Text = "0.00"
-        Me.txtPrecio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label11
-        '
-        Me.Label11.BackColor = System.Drawing.Color.DodgerBlue
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.ForeColor = System.Drawing.Color.White
-        Me.Label11.Location = New System.Drawing.Point(806, 3)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(103, 24)
-        Me.Label11.TabIndex = 13
-        Me.Label11.Text = "Total"
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'txtTotal
-        '
-        Me.txtTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTotal.Location = New System.Drawing.Point(806, 30)
-        Me.txtTotal.Name = "txtTotal"
-        Me.txtTotal.Size = New System.Drawing.Size(103, 24)
-        Me.txtTotal.TabIndex = 14
-        Me.txtTotal.Text = "0.00"
-        Me.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label12
-        '
-        Me.Label12.BackColor = System.Drawing.Color.DodgerBlue
-        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.ForeColor = System.Drawing.Color.White
-        Me.Label12.Location = New System.Drawing.Point(912, 3)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(103, 24)
-        Me.Label12.TabIndex = 15
-        Me.Label12.Text = "Existencia"
-        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'txtExistencia
-        '
-        Me.txtExistencia.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtExistencia.Location = New System.Drawing.Point(912, 30)
-        Me.txtExistencia.Name = "txtExistencia"
-        Me.txtExistencia.Size = New System.Drawing.Size(103, 24)
-        Me.txtExistencia.TabIndex = 16
-        Me.txtExistencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'cboCodigo
-        '
-        Me.cboCodigo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboCodigo.FormattingEnabled = True
-        Me.cboCodigo.Location = New System.Drawing.Point(3, 30)
-        Me.cboCodigo.Name = "cboCodigo"
-        Me.cboCodigo.Size = New System.Drawing.Size(92, 24)
-        Me.cboCodigo.TabIndex = 17
-        '
         'grdCaptura
         '
         Me.grdCaptura.AllowUserToAddRows = False
         Me.grdCaptura.AllowUserToDeleteRows = False
         Me.grdCaptura.BackgroundColor = System.Drawing.Color.White
         Me.grdCaptura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdCaptura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10, Me.Column11})
+        Me.grdCaptura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6})
         Me.grdCaptura.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdCaptura.Location = New System.Drawing.Point(0, 0)
         Me.grdCaptura.Name = "grdCaptura"
@@ -487,6 +462,25 @@ Partial Class frmCotizaciones
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(1020, 333)
         Me.Panel5.TabIndex = 3
+        '
+        'Label13
+        '
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(649, 9)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(125, 24)
+        Me.Label13.TabIndex = 6
+        Me.Label13.Text = "Cotizaciones:"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'cboCotizaciones
+        '
+        Me.cboCotizaciones.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboCotizaciones.FormattingEnabled = True
+        Me.cboCotizaciones.Location = New System.Drawing.Point(768, 9)
+        Me.cboCotizaciones.Name = "cboCotizaciones"
+        Me.cboCotizaciones.Size = New System.Drawing.Size(131, 24)
+        Me.cboCotizaciones.TabIndex = 7
         '
         'Column1
         '
@@ -535,46 +529,6 @@ Partial Class frmCotizaciones
         Me.Column6.ReadOnly = True
         Me.Column6.Width = 56
         '
-        'Column7
-        '
-        Me.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column7.HeaderText = "Existencia"
-        Me.Column7.Name = "Column7"
-        Me.Column7.ReadOnly = True
-        Me.Column7.Width = 80
-        '
-        'Column8
-        '
-        Me.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column8.HeaderText = "IEPS"
-        Me.Column8.Name = "Column8"
-        Me.Column8.ReadOnly = True
-        Me.Column8.Width = 56
-        '
-        'Column9
-        '
-        Me.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column9.HeaderText = "PorcentajeIEPS"
-        Me.Column9.Name = "Column9"
-        Me.Column9.ReadOnly = True
-        Me.Column9.Width = 107
-        '
-        'Column10
-        '
-        Me.Column10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column10.HeaderText = "Subtotal"
-        Me.Column10.Name = "Column10"
-        Me.Column10.ReadOnly = True
-        Me.Column10.Width = 71
-        '
-        'Column11
-        '
-        Me.Column11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column11.HeaderText = "Subtotal"
-        Me.Column11.Name = "Column11"
-        Me.Column11.ReadOnly = True
-        Me.Column11.Width = 71
-        '
         'frmCotizaciones
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -588,7 +542,7 @@ Partial Class frmCotizaciones
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmCotizaciones"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Cotizaciones"
+        Me.Text = "Orden de servicio"
         Me.Panel1.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
@@ -625,8 +579,6 @@ Partial Class frmCotizaciones
     Friend WithEvents Label6 As Label
     Friend WithEvents cboDescripcion As ComboBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents txtExistencia As TextBox
-    Friend WithEvents Label12 As Label
     Friend WithEvents txtTotal As TextBox
     Friend WithEvents Label11 As Label
     Friend WithEvents txtPrecio As TextBox
@@ -638,15 +590,12 @@ Partial Class frmCotizaciones
     Friend WithEvents cboCodigo As ComboBox
     Friend WithEvents grdCaptura As DataGridView
     Friend WithEvents Panel5 As Panel
+    Friend WithEvents cboCotizaciones As ComboBox
+    Friend WithEvents Label13 As Label
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents Column5 As DataGridViewTextBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
-    Friend WithEvents Column7 As DataGridViewTextBoxColumn
-    Friend WithEvents Column8 As DataGridViewTextBoxColumn
-    Friend WithEvents Column9 As DataGridViewTextBoxColumn
-    Friend WithEvents Column10 As DataGridViewTextBoxColumn
-    Friend WithEvents Column11 As DataGridViewTextBoxColumn
 End Class

@@ -780,7 +780,7 @@ Door:
 
                     cnn2.Close() : cnn2.Open()
                     cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "UPDATE Vehiculo SET Placa='', StatusT=0,Cliente='' WHERE Descripcion='" & txtvehiculo.Text & "' AND IdVehiculo='" & lblidvehiculo.Text & "'"
+                    cmd2.CommandText = "UPDATE Vehiculo SET StatusT=0 WHERE Descripcion='" & txtvehiculo.Text & "' AND IdVehiculo='" & lblidvehiculo.Text & "'"
                     cmd2.ExecuteNonQuery()
                     cnn2.Close()
 
