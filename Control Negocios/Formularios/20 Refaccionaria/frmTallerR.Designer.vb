@@ -521,6 +521,7 @@ Partial Class frmTallerR
         Me.btnCotiza.Text = "Cotizaciones"
         Me.btnCotiza.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnCotiza.UseVisualStyleBackColor = True
+        Me.btnCotiza.Visible = False
         '
         'lblidvehiculo
         '

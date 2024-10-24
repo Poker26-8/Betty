@@ -237,7 +237,7 @@ Public Class frmTallerR
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Me.Close()
-        frmMenuPrincipal.Show()
+        frmMenuTaller.Show()
     End Sub
 
     Private Sub TVenta_Tick(sender As Object, e As EventArgs) Handles TVenta.Tick

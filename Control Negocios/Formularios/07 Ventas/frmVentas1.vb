@@ -6570,8 +6570,8 @@ Door:
                     rd1.Close()
                 End If
             Next
-            TotalIVAPrint = FormatNumber(TotalIVAPrint, 4)
-            MySubtotal = FormatNumber(MySubtotal, 4)
+            TotalIVAPrint = FormatNumber(TotalIVAPrint, 2)
+            MySubtotal = FormatNumber(MySubtotal, 2)
 
             cnn1.Close()
         Catch ex As Exception
@@ -6579,9 +6579,9 @@ Door:
             cnn1.Close()
         End Try
 
-        IVA_Vent = FormatNumber(CDbl(txtPagar.Text) - CDbl(TotalIVAPrint), 4)
-        SubTotal = FormatNumber(TotalIVAPrint, 4)
-        Total_Ve = FormatNumber(CDbl(txtPagar.Text), 4)
+        IVA_Vent = FormatNumber(CDbl(txtPagar.Text) - CDbl(TotalIVAPrint), 2)
+        SubTotal = FormatNumber(TotalIVAPrint, 2)
+        Total_Ve = FormatNumber(CDbl(txtPagar.Text), 2)
 
         FileNta.SetDatabaseLogon("", "jipl22")
         FileNta.DataDefinition.FormulaFields("Folio").Text = "'" & MYFOLIO & "'"
