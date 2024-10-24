@@ -6134,7 +6134,7 @@ quepasowey:
 
             If tPapel = "TICKET" Then
                 If tMilimetros = "80" Then
-                    Dim ps As New System.Drawing.Printing.PaperSize("Custom", 269, 3000)
+                    Dim ps As New System.Drawing.Printing.PaperSize("Custom", 297, 3000)
                     pTicket80.DefaultPageSettings.PaperSize = ps
                     pTicket80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
                     pTicket80.Print()
