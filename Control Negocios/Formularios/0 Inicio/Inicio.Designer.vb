@@ -175,12 +175,13 @@ Partial Class Inicio
         Me.tFoto = New System.Windows.Forms.Timer(Me.components)
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Button8 = New System.Windows.Forms.Button()
         Me.btnOptica = New System.Windows.Forms.Button()
         Me.btnTelefonia = New System.Windows.Forms.Button()
         Me.btnpollo = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
         Me.btnHoteleria = New System.Windows.Forms.Button()
         Me.btnRefaccionaria = New System.Windows.Forms.Button()
+        Me.btnTaller = New System.Windows.Forms.Button()
         Me.btnBodegas = New System.Windows.Forms.Button()
         Me.btnDentista = New System.Windows.Forms.Button()
         Me.btnPediatra = New System.Windows.Forms.Button()
@@ -194,7 +195,6 @@ Partial Class Inicio
         Me.Button3 = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.btnPagarComa = New System.Windows.Forms.Button()
-        Me.btnTaller = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -1370,20 +1370,6 @@ Partial Class Inicio
         Me.Panel2.Size = New System.Drawing.Size(90, 706)
         Me.Panel2.TabIndex = 5
         '
-        'Button8
-        '
-        Me.Button8.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Button8.FlatAppearance.BorderSize = 0
-        Me.Button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray
-        Me.Button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
-        Me.Button8.Location = New System.Drawing.Point(0, 783)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(90, 90)
-        Me.Button8.TabIndex = 189
-        Me.Button8.UseVisualStyleBackColor = True
-        Me.Button8.Visible = False
-        '
         'btnOptica
         '
         Me.btnOptica.Dock = System.Windows.Forms.DockStyle.Top
@@ -1429,6 +1415,20 @@ Partial Class Inicio
         Me.btnpollo.UseVisualStyleBackColor = True
         Me.btnpollo.Visible = False
         '
+        'Button8
+        '
+        Me.Button8.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Button8.FlatAppearance.BorderSize = 0
+        Me.Button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray
+        Me.Button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
+        Me.Button8.Location = New System.Drawing.Point(0, 783)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(90, 90)
+        Me.Button8.TabIndex = 189
+        Me.Button8.UseVisualStyleBackColor = True
+        Me.Button8.Visible = False
+        '
         'btnHoteleria
         '
         Me.btnHoteleria.Dock = System.Windows.Forms.DockStyle.Top
@@ -1456,6 +1456,20 @@ Partial Class Inicio
         Me.btnRefaccionaria.TabIndex = 182
         Me.btnRefaccionaria.UseVisualStyleBackColor = True
         Me.btnRefaccionaria.Visible = False
+        '
+        'btnTaller
+        '
+        Me.btnTaller.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnTaller.FlatAppearance.BorderSize = 0
+        Me.btnTaller.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray
+        Me.btnTaller.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnTaller.Image = CType(resources.GetObject("btnTaller.Image"), System.Drawing.Image)
+        Me.btnTaller.Location = New System.Drawing.Point(0, 547)
+        Me.btnTaller.Name = "btnTaller"
+        Me.btnTaller.Size = New System.Drawing.Size(90, 73)
+        Me.btnTaller.TabIndex = 191
+        Me.btnTaller.UseVisualStyleBackColor = True
+        Me.btnTaller.Visible = False
         '
         'btnBodegas
         '
@@ -1637,20 +1651,6 @@ Partial Class Inicio
         Me.btnPagarComa.Size = New System.Drawing.Size(90, 90)
         Me.btnPagarComa.TabIndex = 185
         Me.btnPagarComa.UseVisualStyleBackColor = True
-        '
-        'btnTaller
-        '
-        Me.btnTaller.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnTaller.FlatAppearance.BorderSize = 0
-        Me.btnTaller.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray
-        Me.btnTaller.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnTaller.Image = CType(resources.GetObject("btnTaller.Image"), System.Drawing.Image)
-        Me.btnTaller.Location = New System.Drawing.Point(0, 547)
-        Me.btnTaller.Name = "btnTaller"
-        Me.btnTaller.Size = New System.Drawing.Size(90, 73)
-        Me.btnTaller.TabIndex = 191
-        Me.btnTaller.UseVisualStyleBackColor = True
-        Me.btnTaller.Visible = False
         '
         'Inicio
         '

@@ -1057,6 +1057,18 @@
     <Compile Include="Formularios\20 Refaccionaria\Nuevos\frmVehiculoTa.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\20 Refaccionaria\Taller\frmCotizaciones.Designer.vb">
+      <DependentUpon>frmCotizaciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\20 Refaccionaria\Taller\frmCotizaciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\20 Refaccionaria\Taller\frmVehClientes.Designer.vb">
+      <DependentUpon>frmVehClientes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\20 Refaccionaria\Taller\frmVehClientes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\24 Hoteleria\frmCalcularNuvHab.Designer.vb">
       <DependentUpon>frmCalcularNuvHab.vb</DependentUpon>
     </Compile>
@@ -2852,6 +2864,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\20 Refaccionaria\Nuevos\frmVehiculoTa.resx">
       <DependentUpon>frmVehiculoTa.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\20 Refaccionaria\Taller\frmCotizaciones.resx">
+      <DependentUpon>frmCotizaciones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\20 Refaccionaria\Taller\frmVehClientes.resx">
+      <DependentUpon>frmVehClientes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\24 Hoteleria\frmCalcularNuvHab.resx">
       <DependentUpon>frmCalcularNuvHab.vb</DependentUpon>

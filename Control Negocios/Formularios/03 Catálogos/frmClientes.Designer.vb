@@ -84,6 +84,7 @@ Partial Class frmClientes
         Me.txtNumCliente = New System.Windows.Forms.TextBox()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.cboCFDI = New System.Windows.Forms.ComboBox()
+        Me.btnvehiculos = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -731,11 +732,27 @@ Partial Class frmClientes
         Me.cboCFDI.Size = New System.Drawing.Size(768, 23)
         Me.cboCFDI.TabIndex = 229
         '
+        'btnvehiculos
+        '
+        Me.btnvehiculos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.btnvehiculos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnvehiculos.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnvehiculos.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnvehiculos.Location = New System.Drawing.Point(386, 202)
+        Me.btnvehiculos.Name = "btnvehiculos"
+        Me.btnvehiculos.Size = New System.Drawing.Size(70, 63)
+        Me.btnvehiculos.TabIndex = 230
+        Me.btnvehiculos.Text = "Vehiculos"
+        Me.btnvehiculos.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnvehiculos.UseVisualStyleBackColor = True
+        Me.btnvehiculos.Visible = False
+        '
         'frmClientes
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(878, 272)
+        Me.Controls.Add(Me.btnvehiculos)
         Me.Controls.Add(Me.cboCFDI)
         Me.Controls.Add(Me.Label23)
         Me.Controls.Add(Me.txtNumCliente)
@@ -853,4 +870,5 @@ Partial Class frmClientes
     Friend WithEvents txtNumCliente As TextBox
     Friend WithEvents Label23 As Label
     Friend WithEvents cboCFDI As ComboBox
+    Friend WithEvents btnvehiculos As Button
 End Class

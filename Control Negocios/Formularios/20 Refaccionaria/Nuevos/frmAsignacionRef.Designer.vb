@@ -31,22 +31,23 @@ Partial Class frmAsignacionRef
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.txtCantidad = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.txtNumParte = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.cboDescripcion = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.grdRefaccion = New System.Windows.Forms.DataGridView()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.btnEnviar = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.txtCantidad = New System.Windows.Forms.TextBox()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnEnviar = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.grdRefaccion, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -65,7 +66,7 @@ Partial Class frmAsignacionRef
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(620, 159)
+        Me.Panel1.Size = New System.Drawing.Size(613, 159)
         Me.Panel1.TabIndex = 15
         '
         'txtVeh
@@ -93,7 +94,7 @@ Partial Class frmAsignacionRef
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(599, 21)
         Me.Label3.TabIndex = 10
-        Me.Label3.Text = "Vehiculo"
+        Me.Label3.Text = "Observaciones"
         Me.Label3.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'txtCliente
@@ -139,8 +140,30 @@ Partial Class frmAsignacionRef
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(0, 159)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(620, 58)
+        Me.Panel2.Size = New System.Drawing.Size(613, 58)
         Me.Panel2.TabIndex = 16
+        '
+        'txtCantidad
+        '
+        Me.txtCantidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCantidad.Location = New System.Drawing.Point(516, 27)
+        Me.txtCantidad.Name = "txtCantidad"
+        Me.txtCantidad.Size = New System.Drawing.Size(95, 21)
+        Me.txtCantidad.TabIndex = 15
+        Me.txtCantidad.Text = "1"
+        Me.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label6
+        '
+        Me.Label6.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.White
+        Me.Label6.Location = New System.Drawing.Point(516, 3)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(95, 21)
+        Me.Label6.TabIndex = 14
+        Me.Label6.Text = "Cantidad"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'txtNumParte
         '
@@ -149,6 +172,14 @@ Partial Class frmAsignacionRef
         Me.txtNumParte.Name = "txtNumParte"
         Me.txtNumParte.Size = New System.Drawing.Size(157, 21)
         Me.txtNumParte.TabIndex = 13
+        '
+        'cboDescripcion
+        '
+        Me.cboDescripcion.FormattingEnabled = True
+        Me.cboDescripcion.Location = New System.Drawing.Point(12, 27)
+        Me.cboDescripcion.Name = "cboDescripcion"
+        Me.cboDescripcion.Size = New System.Drawing.Size(335, 21)
+        Me.cboDescripcion.TabIndex = 7
         '
         'Label5
         '
@@ -161,14 +192,6 @@ Partial Class frmAsignacionRef
         Me.Label5.TabIndex = 8
         Me.Label5.Text = "N° Parte"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'cboDescripcion
-        '
-        Me.cboDescripcion.FormattingEnabled = True
-        Me.cboDescripcion.Location = New System.Drawing.Point(12, 27)
-        Me.cboDescripcion.Name = "cboDescripcion"
-        Me.cboDescripcion.Size = New System.Drawing.Size(335, 21)
-        Me.cboDescripcion.TabIndex = 7
         '
         'Label4
         '
@@ -194,76 +217,8 @@ Partial Class frmAsignacionRef
         Me.grdRefaccion.Name = "grdRefaccion"
         Me.grdRefaccion.ReadOnly = True
         Me.grdRefaccion.RowHeadersVisible = False
-        Me.grdRefaccion.Size = New System.Drawing.Size(620, 189)
+        Me.grdRefaccion.Size = New System.Drawing.Size(613, 391)
         Me.grdRefaccion.TabIndex = 14
-        '
-        'Panel3
-        '
-        Me.Panel3.Controls.Add(Me.grdRefaccion)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(0, 217)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(620, 189)
-        Me.Panel3.TabIndex = 17
-        '
-        'Panel4
-        '
-        Me.Panel4.Controls.Add(Me.btnEnviar)
-        Me.Panel4.Controls.Add(Me.Button1)
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel4.Location = New System.Drawing.Point(0, 406)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(620, 81)
-        Me.Panel4.TabIndex = 18
-        '
-        'btnEnviar
-        '
-        Me.btnEnviar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnEnviar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEnviar.Image = CType(resources.GetObject("btnEnviar.Image"), System.Drawing.Image)
-        Me.btnEnviar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnEnviar.Location = New System.Drawing.Point(474, 4)
-        Me.btnEnviar.Name = "btnEnviar"
-        Me.btnEnviar.Size = New System.Drawing.Size(70, 70)
-        Me.btnEnviar.TabIndex = 10
-        Me.btnEnviar.Text = "Asignar"
-        Me.btnEnviar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnEnviar.UseVisualStyleBackColor = True
-        '
-        'Button1
-        '
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button1.Location = New System.Drawing.Point(550, 3)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(61, 70)
-        Me.Button1.TabIndex = 9
-        Me.Button1.Text = "Salir"
-        Me.Button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Label6
-        '
-        Me.Label6.BackColor = System.Drawing.SystemColors.HotTrack
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.ForeColor = System.Drawing.Color.White
-        Me.Label6.Location = New System.Drawing.Point(516, 3)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(95, 21)
-        Me.Label6.TabIndex = 14
-        Me.Label6.Text = "Cantidad"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'txtCantidad
-        '
-        Me.txtCantidad.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCantidad.Location = New System.Drawing.Point(516, 27)
-        Me.txtCantidad.Name = "txtCantidad"
-        Me.txtCantidad.Size = New System.Drawing.Size(95, 21)
-        Me.txtCantidad.TabIndex = 15
-        Me.txtCantidad.Text = "1"
-        Me.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Column1
         '
@@ -302,12 +257,58 @@ Partial Class frmAsignacionRef
         Me.Column6.ReadOnly = True
         Me.Column6.Width = 62
         '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.grdRefaccion)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(0, 217)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(613, 391)
+        Me.Panel3.TabIndex = 17
+        '
+        'Panel4
+        '
+        Me.Panel4.Controls.Add(Me.btnEnviar)
+        Me.Panel4.Controls.Add(Me.Button1)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel4.Location = New System.Drawing.Point(0, 608)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(613, 83)
+        Me.Panel4.TabIndex = 18
+        '
+        'btnEnviar
+        '
+        Me.btnEnviar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnEnviar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEnviar.Image = CType(resources.GetObject("btnEnviar.Image"), System.Drawing.Image)
+        Me.btnEnviar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnEnviar.Location = New System.Drawing.Point(473, 7)
+        Me.btnEnviar.Name = "btnEnviar"
+        Me.btnEnviar.Size = New System.Drawing.Size(70, 70)
+        Me.btnEnviar.TabIndex = 10
+        Me.btnEnviar.Text = "Asignar"
+        Me.btnEnviar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnEnviar.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
+        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.Button1.Location = New System.Drawing.Point(549, 6)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(61, 70)
+        Me.Button1.TabIndex = 9
+        Me.Button1.Text = "Salir"
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'frmAsignacionRef
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(620, 487)
+        Me.ClientSize = New System.Drawing.Size(613, 691)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel2)
@@ -351,4 +352,5 @@ Partial Class frmAsignacionRef
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents PrintDocument1 As Printing.PrintDocument
 End Class

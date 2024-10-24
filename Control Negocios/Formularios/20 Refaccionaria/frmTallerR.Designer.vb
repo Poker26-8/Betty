@@ -58,6 +58,7 @@ Partial Class frmTallerR
         Me.Label4 = New System.Windows.Forms.Label()
         Me.lblcliente = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btnCotiza = New System.Windows.Forms.Button()
         Me.lblidvehiculo = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -75,8 +76,6 @@ Partial Class frmTallerR
         Me.TFecha = New System.Windows.Forms.Timer(Me.components)
         Me.PVenta80 = New System.Drawing.Printing.PrintDocument()
         Me.PVenta58 = New System.Drawing.Printing.PrintDocument()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.grdProductos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel7.SuspendLayout()
@@ -488,8 +487,7 @@ Partial Class frmTallerR
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.White
-        Me.Panel3.Controls.Add(Me.Button3)
-        Me.Panel3.Controls.Add(Me.Button2)
+        Me.Panel3.Controls.Add(Me.btnCotiza)
         Me.Panel3.Controls.Add(Me.lblidvehiculo)
         Me.Panel3.Controls.Add(Me.Label10)
         Me.Panel3.Controls.Add(Me.Label9)
@@ -506,6 +504,23 @@ Partial Class frmTallerR
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(877, 108)
         Me.Panel3.TabIndex = 4
+        '
+        'btnCotiza
+        '
+        Me.btnCotiza.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCotiza.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.btnCotiza.Cursor = System.Windows.Forms.Cursors.Arrow
+        Me.btnCotiza.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCotiza.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCotiza.Image = CType(resources.GetObject("btnCotiza.Image"), System.Drawing.Image)
+        Me.btnCotiza.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnCotiza.Location = New System.Drawing.Point(525, 9)
+        Me.btnCotiza.Name = "btnCotiza"
+        Me.btnCotiza.Size = New System.Drawing.Size(103, 79)
+        Me.btnCotiza.TabIndex = 207
+        Me.btnCotiza.Text = "Cotizaciones"
+        Me.btnCotiza.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnCotiza.UseVisualStyleBackColor = True
         '
         'lblidvehiculo
         '
@@ -646,40 +661,6 @@ Partial Class frmTallerR
         'PVenta58
         '
         '
-        'Button2
-        '
-        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Button2.Cursor = System.Windows.Forms.Cursors.Arrow
-        Me.Button2.Enabled = False
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(440, 9)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(92, 79)
-        Me.Button2.TabIndex = 207
-        Me.Button2.Text = "Orden de servicio"
-        Me.Button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Button3.Cursor = System.Windows.Forms.Cursors.Arrow
-        Me.Button3.Enabled = False
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button3.Location = New System.Drawing.Point(538, 9)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(90, 79)
-        Me.Button3.TabIndex = 208
-        Me.Button3.Text = "Cotización"
-        Me.Button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button3.UseVisualStyleBackColor = True
-        '
         'frmTallerR
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -760,6 +741,5 @@ Partial Class frmTallerR
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents Column5 As DataGridViewTextBoxColumn
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnCotiza As Button
 End Class

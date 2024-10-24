@@ -501,6 +501,14 @@ Public Class frmClientes
     Private Sub frmClientes_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         txtId.Text = ""
         Try
+
+            Dim taller As Integer = DatosRecarga2("Taller")
+
+            If taller = 1 Then
+                btnvehiculos.Visible = True
+            Else
+                btnvehiculos.Visible = False
+            End If
             cnn1.Close() : cnn1.Open()
 
             cmd1 = cnn1.CreateCommand

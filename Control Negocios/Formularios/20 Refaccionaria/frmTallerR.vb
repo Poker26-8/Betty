@@ -1,5 +1,6 @@
 ﻿
 Imports System.IO
+Imports Core.DAL.Addendas
 Public Class frmTallerR
 
     Dim var_placa As String = ""
@@ -98,15 +99,17 @@ Public Class frmTallerR
         grdProductos.Rows.Clear()
         lblTotalPagar.Text = "0.00"
 
+
+        Dim descripcion As String = ""
+        Dim marca As String = ""
+        Dim modelo As String = ""
+        Dim cliente As String = ""
+        Dim observaciones As String = ""
+
         If btnVehiculo.BackColor = Color.FromArgb(255, 255, 255) Then
 
             btnpagar.Enabled = False
 
-            Dim descripcion As String = ""
-            Dim marca As String = ""
-            Dim modelo As String = ""
-            Dim cliente As String = ""
-            Dim observaciones As String = ""
 
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
@@ -150,31 +153,70 @@ Public Class frmTallerR
             txtvehiculo.Text = var_vehiculo
             txtplaca.Text = var_placa
 
-            cnn2.Close() : cnn2.Open()
-            cmd2 = cnn2.CreateCommand
-            cmd2.CommandText = "SELECT Precio,IdVehiculo,Codigo,Nombre,Cantidad,Precio,Cliente FROM comandasveh WHERE Vehiculo='" & var_vehiculo & "'"
-            rd2 = cmd2.ExecuteReader
-            Do While rd2.Read
+            My.Application.DoEvents()
+
+            If MsgBox("¿Necesita agregar mas refacciones al vehiculo " & var_vehiculo & " ?", vbInformation + vbYesNo, titulorefaccionaria) = vbYes Then
+
+                cnn2.Close() : cnn2.Open()
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "SELECT Descripcion,Marca,Modelo,IdVehiculo,Cliente,Observaciones FROM Vehiculo WHERE Descripcion='" & var_vehiculo & "' and StatusT=1"
+                rd2 = cmd2.ExecuteReader
                 If rd2.HasRows Then
-
-                    Dim total As Double = CDbl(1 * rd2("Precio").ToString)
-                    Dim idveh As Integer = rd2("IdVehiculo").ToString
-
-                    grdProductos.Rows.Add(rd2("Codigo").ToString,
-                                          rd2("Nombre").ToString,
-                                          rd2("Cantidad").ToString,
-                                          rd2("Precio").ToString,
-                                          total
-)
-                    lblcliente.Text = rd2("Cliente").ToString
-
-                    lblTotalPagar.Text = lblTotalPagar.Text + CDbl(total)
-                    btnpagar.Enabled = True
-                    lblidvehiculo.Text = idveh
+                    If rd2.Read Then
+                        descripcion = rd2(0).ToString
+                        marca = rd2(1).ToString
+                        modelo = rd2(2).ToString
+                        id = rd2(3).ToString
+                        cliente = rd2(4).ToString
+                        observaciones = rd2(5).ToString
+                    End If
                 End If
-            Loop
-            rd2.Close()
-            cnn2.Close()
+                rd2.Close()
+                cnn2.Close()
+
+                frmAsignacionRef.txtVeh.Text = descripcion
+                frmAsignacionRef.txtCliente.Text = cliente
+                frmAsignacionRef.lblObservaciones.Text = observaciones
+                frmAsignacionRef.marcaveh = marca
+                frmAsignacionRef.placa = var_placa
+                frmAsignacionRef.idvehiculo = id
+                frmAsignacionRef.Show()
+
+            Else
+
+                cnn2.Close() : cnn2.Open()
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "SELECT Precio,IdVehiculo,Codigo,Nombre,Cantidad,Precio,Cliente FROM comandasveh WHERE Vehiculo='" & var_vehiculo & "'"
+                rd2 = cmd2.ExecuteReader
+                Do While rd2.Read
+                    If rd2.HasRows Then
+
+                        Dim total As Double = CDbl(1 * rd2("Precio").ToString)
+                        Dim idveh As Integer = rd2("IdVehiculo").ToString
+
+                        grdProductos.Rows.Add(rd2("Codigo").ToString,
+                                              rd2("Nombre").ToString,
+                                              rd2("Cantidad").ToString,
+                                              rd2("Precio").ToString,
+                                              total
+    )
+                        lblcliente.Text = rd2("Cliente").ToString
+
+                        lblTotalPagar.Text = lblTotalPagar.Text + CDbl(total)
+                        btnpagar.Enabled = True
+                        lblidvehiculo.Text = idveh
+
+
+                    End If
+                Loop
+                rd2.Close()
+                cnn2.Close()
+
+            End If
+
+
+
+
 
         End If
 
@@ -1556,5 +1598,10 @@ Door:
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
         End Try
+    End Sub
+
+    Private Sub btnCotiza_Click(sender As Object, e As EventArgs) Handles btnCotiza.Click
+        frmCotizaciones.BringToFront()
+        frmCotizaciones.Show()
     End Sub
 End Class

@@ -1,4 +1,9 @@
-﻿Public Class frmAsignacionRef
+﻿
+Imports System.IO
+Imports CrystalDecisions.Shared
+Imports CrystalDecisions.CrystalReports.Engine
+
+Public Class frmAsignacionRef
 
     Public marcaveh As String = ""
     Public placa As String = ""
@@ -30,10 +35,9 @@
             If cboDescripcion.Text <> "" Then
                 cmd1.CommandText = "SELECT Codigo,Nombre,N_Serie,PrecioVentaIVA FROM productos  WHERE Nombre='" & cboDescripcion.Text & "'"
             End If
-
             rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
+            If rd1.HasRows Then
+                If rd1.Read Then
                     codigopro = rd1(0).ToString
                     preciopro = rd1(3).ToString
 
@@ -42,10 +46,9 @@
                                           rd1(2).ToString,
                                           FormatNumber(txtCantidad.Text, 2),
                                           FormatNumber(preciopro, 2))
-
                 End If
-                End If
-                rd1.Close()
+            End If
+            rd1.Close()
             cnn1.Close()
 
             txtCantidad.Text = "1"
@@ -128,4 +131,6 @@
         End Try
 
     End Sub
+
+
 End Class
