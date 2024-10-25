@@ -106,7 +106,7 @@ Public Class frmNuevoPagarSencillo
 
         grdComanda.Rows.Clear()
         TFolio.Start()
-        tim.Interval = 5000
+        tim.Interval = 10000
         AddHandler tim.Tick, AddressOf Timer_Tick
         tim.Start()
 
