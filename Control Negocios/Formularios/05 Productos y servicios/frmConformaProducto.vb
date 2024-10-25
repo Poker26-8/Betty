@@ -187,7 +187,7 @@
 
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
-                "select distinct Nombre from Productos"
+                "select distinct Nombre from Productos where Grupo='INSUMO'"
             rd1 = cmd1.ExecuteReader
             Do While rd1.Read
                 If rd1.HasRows Then cbodescripcion.Items.Add(
@@ -298,7 +298,7 @@
                         Dim codigo As String = rd1("Codigo").ToString()
                         Dim nombre As String = rd1("Descrip").ToString()
                         Dim unidad As String = rd1("UVenta").ToString()
-                        Dim cantidad As Double = rd1("Cantidad").ToString()
+                        Dim cantidad As Decimal = rd1("Cantidad").ToString()
 
                         grdcaptura.Rows.Add(codigo, nombre, unidad, cantidad)
                     End If
@@ -399,11 +399,11 @@
                     Dim codigo As String = grdcaptura.Rows(s).Cells(0).Value.ToString()
                     Dim nombre As String = grdcaptura.Rows(s).Cells(1).Value.ToString()
                     Dim unidad As String = grdcaptura.Rows(s).Cells(2).Value.ToString()
-                    Dim cantidad As Double = grdcaptura.Rows(s).Cells(3).Value.ToString()
+                    Dim cantidad As String = grdcaptura.Rows(s).Cells(3).Value.ToString()
 
                     cmd1 = cnn1.CreateCommand
                     cmd1.CommandText =
-                        "insert into MiProd(CodigoP,DescripP,UVentaP,CantidadP,Codigo,Descrip,UVenta,Cantidad,Grupo) values('" & cbocod.Text & "','" & cbonombre.Text & "','" & txtuni.Text & "'," & IIf(txtexistencia.Text = "", "0", txtexistencia.Text) & ",'" & codigo & "','" & nombre & "','" & unidad & "'," & cantidad & ",'INSUMO')"
+                        "insert into MiProd(CodigoP,DescripP,UVentaP,CantidadP,Codigo,Descrip,UVenta,Cantidad,Grupo) values('" & cbocod.Text & "','" & cbonombre.Text & "','" & txtuni.Text & "'," & IIf(txtexistencia.Text = "", "0", txtexistencia.Text) & ",'" & codigo & "','" & nombre & "','" & unidad & "','" & cantidad & "','INSUMO')"
                     cmd1.ExecuteNonQuery()
                 Next
                 MsgBox("Conformación de producto guardada correctamente.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : btnnuevo.PerformClick()

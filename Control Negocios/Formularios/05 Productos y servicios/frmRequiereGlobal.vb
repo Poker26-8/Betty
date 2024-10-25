@@ -34,7 +34,7 @@
                 If rd1.Read Then
                     txtcodigo.Text = rd1("CodigoP").ToString
                     txtunidad.Text = rd1("UVentaP").ToString
-                    txtcantidad.Text = "0.00"
+                    txtcantidad.Text = "1.0"
                 End If
             End If
             rd1.Close()
@@ -63,7 +63,7 @@
                             rd1("Codigo").ToString,
                             rd1("Descrip").ToString,
                             rd1("UVenta").ToString,
-                            FormatNumber(rd1("Cantidad").ToString, 2)
+                            rd1("Cantidad").ToString
                             )
                     End If
                 Loop
@@ -73,6 +73,7 @@
                 MessageBox.Show(ex.ToString)
                 cnn1.Close()
             End Try
+
 
             txtcodigo.Focus().Equals(True)
         End If
@@ -94,41 +95,40 @@
             Dim codigo_tem As String = ""
             Dim nombre_tem As String = ""
             Dim unidad_tem As String = ""
-            Dim cantid_tem As Double = 0
+            Dim cantid_tem As Decimal = 0
+
             If txtcodigo.Text <> "" Then
-                If (temporal.Rows.Count - 1) > 0 Then
+                If (temporal.Rows.Count) > 0 Then
                     For dx As Integer = 0 To temporal.Rows.Count - 1
                         If temporal.Rows.Count = 0 Then Continue For
                         codigo_tem = temporal.Rows(0).Cells(0).Value.ToString
                         nombre_tem = temporal.Rows(0).Cells(1).Value.ToString
                         unidad_tem = temporal.Rows(0).Cells(2).Value.ToString
                         cantid_tem = temporal.Rows(0).Cells(3).Value.ToString
-
-                        'If grdnecesita.Rows.Count > 0 Then
-                        'For fij As Integer = 0 To grdnecesita.Rows.Count - 1
-                        '    Dim codigo_f As String = grdnecesita.Rows(fij).Cells(0).Value.ToString
-                        '    Dim nombre_f As String = grdnecesita.Rows(fij).Cells(1).Value.ToString
-                        '    Dim unidad_f As String = grdnecesita.Rows(fij).Cells(2).Value.ToString
-                        '    Dim cantid_f As Double = grdnecesita.Rows(fij).Cells(3).Value.ToString
-
-                        '    If codigo_tem = codigo_f Then
-                        '        grdnecesita.Rows(fij).Cells(3).Value = FormatNumber(cantid_tem + cantid_tem)
-                        '    Else
-                        '        grdnecesita.Rows.Add(
-                        '            codigo_tem,
-                        '            nombre_tem,
-                        '            unidad_tem,
-                        '            FormatNumber(cantid_tem, 2)
-                        '            )
-                        '    End If
-                        'Next
-                        ' Else
+                        Dim pcompra As Double = 0
+                        Dim prov As String = ""
+                        Dim depto As String = ""
+                        Dim grupo As String = ""
+                        Dim costo As String = "0"
+                        cnn1.Close()
+                        cnn1.Open()
+                        cmd1 = cnn1.CreateCommand
+                        cmd1.CommandText = "Select ProvPri,PrecioCompra,Departamento,Grupo from Productos where COdigo='" & codigo_tem & "'"
+                        rd1 = cmd1.ExecuteReader
+                        If rd1.Read Then
+                            pcompra = FormatNumber(rd1(1).ToString, 2)
+                            prov = rd1(0).ToString
+                            depto = rd1(2).ToString
+                            grupo = rd1(3).ToString
+                        End If
+                        rd1.Close()
+                        cnn1.Close()
+                        costo = CDec(pcompra * cantid_tem)
                         grdnecesita.Rows.Add(
                             codigo_tem,
                             nombre_tem,
                             unidad_tem,
-                            FormatNumber(cantid_tem, 2)
-                            )
+                            cantid_tem, pcompra, costo, prov, txtcodigo.Text, depto, grupo)
                         'End If
                         temporal.Rows.Remove(temporal.Rows(0))
                         My.Application.DoEvents()
@@ -159,18 +159,33 @@
             If Not IsNumeric(txtcantidad.Text) Then Exit Sub
             If CDec(txtcantidad.Text) = 0 Then Exit Sub
             For d As Integer = 0 To grdnecesita.Rows.Count - 1
-                Dim total As Double = 0
-                Dim cantidad As Double = grdnecesita.Rows(d).Cells(3).Value.ToString
-
-                grdnecesita.Rows(d).Cells(3).Value = FormatNumber(cantidad * CDec(txtcantidad.Text), 4)
+                If txtcodigo.Text = grdnecesita.Rows(d).Cells(7).Value.ToString Then
+                    Dim total As Double = 0
+                    Dim cantidad As Decimal = grdnecesita.Rows(d).Cells(3).Value.ToString
+                    Dim pcompra As Decimal = grdnecesita.Rows(d).Cells(4).Value.ToString
+                    Dim vaapagar As String = cantidad * CDec(txtcantidad.Text)
+                    Dim vaapagar2 As String = vaapagar * pcompra
+                    grdnecesita.Rows(d).Cells(3).Value = vaapagar
+                    grdnecesita.Rows(d).Cells(5).Value = vaapagar2
+                End If
             Next
-
+            My.Application.DoEvents()
+            Dim sumatoria As String = "0"
+            For xxx As Integer = 0 To grdnecesita.Rows.Count - 1
+                If txtcodigo.Text = grdnecesita.Rows(xxx).Cells(7).Value.ToString Then
+                    sumatoria = CDec(sumatoria) + CDec(grdnecesita.Rows(xxx).Cells(5).Value.ToString)
+                End If
+            Next
+            My.Application.DoEvents()
             grdproducir.Rows.Add(
                 txtcodigo.Text,
                 cbonombre.Text,
                 txtunidad.Text,
-                FormatNumber(txtcantidad.Text, 2)
-                )
+                FormatNumber(txtcantidad.Text, 2), sumatoria)
+
+            My.Application.DoEvents()
+
+            TextBox1.Text = CDec(TextBox1.Text) + CDec(sumatoria)
 
             cbonombre.Text = ""
             txtcodigo.Text = ""
@@ -188,6 +203,7 @@
         txtcodigo.Text = ""
         txtunidad.Text = ""
         txtcantidad.Text = "1.00"
+        TextBox1.Text = "0.00"
     End Sub
 
     Private Sub btnexportar_Click(sender As Object, e As EventArgs) Handles btnexportar.Click

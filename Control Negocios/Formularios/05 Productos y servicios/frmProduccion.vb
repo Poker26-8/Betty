@@ -155,11 +155,11 @@
             For d As Integer = 0 To grdcaptura.Rows.Count - 1
                 Dim total As Double = 0
                 Dim precio As Double = grdcaptura.Rows(d).Cells(4).Value.ToString
-                Dim cantidad As Double = grdcaptura.Rows(d).Cells(3).Value.ToString
+                Dim cantidad As String = grdcaptura.Rows(d).Cells(3).Value.ToString
 
-                grdcaptura.Rows(d).Cells(3).Value = FormatNumber(cantidad * CDec(txtcantidad.Text), 4)
+                grdcaptura.Rows(d).Cells(3).Value = CDec(cantidad) * CDec(txtcantidad.Text)
                 cantidad = grdcaptura.Rows(d).Cells(3).Value.ToString
-                total = cantidad * precio
+                total = CDec(cantidad) * precio
                 grdcaptura.Rows(d).Cells(5).Value = FormatNumber(total, 2)
                 MyTotal += total
             Next
@@ -205,7 +205,7 @@
         Dim codigo As String = ""
         Dim nombre As String = ""
         Dim unidad As String = ""
-        Dim cantidad As Double = 0
+        Dim cantidad As String = ""
         Dim precio_com As Double = 0
         Dim existencia As Double = 0
         Dim multiplo As Double = 0
@@ -258,18 +258,18 @@
                         existencia = rd2("Existencia").ToString
                         multiplo = rd2("Multiplo").ToString
 
-                        MyTotal = CDec(rd2("PrecioCompra").ToString) * cantidad
+                        MyTotal = CDec(rd2("PrecioCompra").ToString) * CDec(cantidad)
 
                         If rd1("Grupo").ToString <> "SERVICIOS" Then
                             grdcaptura.Rows.Add(
                                 codigo,
                                 nombre,
                                 unidad,
-                                FormatNumber(cantidad, 6),
+                                cantidad,
                                 FormatNumber(precio_com, 4),
-                                FormatNumber(cantidad * precio_com, 2),
+                                FormatNumber(CDec(cantidad) * precio_com, 2),
                                 FormatNumber(existencia / multiplo, 2),
-                                FormatNumber((existencia / multiplo) / cantidad, 2)
+                                FormatNumber((existencia / multiplo) / CDec(cantidad), 2)
                                 )
                         Else
                             grdcaptura.Rows.Add(

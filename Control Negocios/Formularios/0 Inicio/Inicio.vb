@@ -390,15 +390,16 @@ Public Class Inicio
     Private Async Sub ProducirToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles pProducir.Click
 
         Try
-            Dim produccion As Integer = Await ValidarAsync("Produccion")
+            'Dim produccion As Integer = Await ValidarAsync("Produccion")
 
-            If produccion = 1 Then
-                frmProduccion.Show()
-                frmProduccion.BringToFront()
-            Else
+            'If produccion = 1 Then
+            '    frmProduccion.Show()
+            '    frmProduccion.BringToFront()
+            'Else
 
-            End If
-
+            'End If
+            frmProduccion.Show()
+            frmProduccion.BringToFront()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn1.Close()
