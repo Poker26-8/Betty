@@ -12,6 +12,7 @@ Public Class frmCotizaciones
 
     Dim marca As String = ""
     Dim modelo As String = ""
+    Dim my_folio As Integer = 0
 
     Private Sub cboCotizaciones_DropDown(sender As Object, e As EventArgs) Handles cboCotizaciones.DropDown
         Try
@@ -877,7 +878,7 @@ doorcita:
         Dim dr As DataRow = Nothing
         Dim dt As New DataTable
 
-        Dim my_folio As Integer = 0
+
         Dim MyStatus As String = ""
 
 
@@ -981,15 +982,15 @@ doorcita:
         Dim CrTable As Table
 
         crea_ruta(My.Application.Info.DirectoryPath & "\ARCHIVOSDL1\ORDEN_SERVICIO\")
-        root_name_recibo = My.Application.Info.DirectoryPath & "\ARCHIVOSDL1\ORDEN_SERVICIO\" & MyFolio & ".pdf"
+        root_name_recibo = My.Application.Info.DirectoryPath & "\ARCHIVOSDL1\ORDEN_SERVICIO\" & my_folio & ".pdf"
 
-        If File.Exists(My.Application.Info.DirectoryPath & "\ARCHIVOSDL1\ORDEN_SERVICIO\" & MyFolio & ".pdf") Then
-            File.Delete(My.Application.Info.DirectoryPath & "\ARCHIVOSDL1\ORDEN_SERVICIO\" & MyFolio & ".pdf")
+        If File.Exists(My.Application.Info.DirectoryPath & "\ARCHIVOSDL1\ORDEN_SERVICIO\" & my_folio & ".pdf") Then
+            File.Delete(My.Application.Info.DirectoryPath & "\ARCHIVOSDL1\ORDEN_SERVICIO\" & my_folio & ".pdf")
         End If
 
         If varrutabase <> "" Then
-            If File.Exists("\\" & varrutabase & "\ControlNegociosPro\ARCHIVOSDL1\ORDEN_SERVICIO\" & MyFolio & ".pdf") Then
-                File.Delete("\\" & varrutabase & "\ControlNegociosPro\ARCHIVOSDL1\ORDEN_SERVICIO\" & MyFolio & ".pdf")
+            If File.Exists("\\" & varrutabase & "\ControlNegociosPro\ARCHIVOSDL1\ORDEN_SERVICIO\" & my_folio & ".pdf") Then
+                File.Delete("\\" & varrutabase & "\ControlNegociosPro\ARCHIVOSDL1\ORDEN_SERVICIO\" & my_folio & ".pdf")
             End If
         End If
 
@@ -1052,19 +1053,18 @@ doorcita:
         Total_Ve = FormatNumber(CDbl(txtTotalVenta.Text), 2)
 
         FileNta.SetDatabaseLogon("", "jipl22")
-        'FileNta.DataDefinition.FormulaFields("Folio").Text = "'" & MyFolio & "'"
-        'FileNta.DataDefinition.FormulaFields("Marca").Text = "'" & marca & "'"
-        'FileNta.DataDefinition.FormulaFields("Modelo").Text = "'" & modelo & "'"
-        'FileNta.DataDefinition.FormulaFields("Placa").Text = "'" & lblPlaca.Text & "'"
+        FileNta.DataDefinition.FormulaFields("conLetra").Text = "'" & convLetras(txtTotalVenta.Text) & "'"
+        FileNta.DataDefinition.FormulaFields("Usuario").Text = "'" & lblUsuario.Text & "'"
+
 
 
 
 
         'Dim total_des As Double = Total_Ve + CDbl(txtdescu.Text)
 
-        'FileNta.DataDefinition.FormulaFields("Total").Text = "'" & FormatNumber(Total_Ve, 2) & "'"             'Total
+        'FileNta.DataDefinition.FormulaFields("Subtotal").Text = "'" & FormatNumber(Total_Ve, 2) & "'"             'Total
         'If CDbl(txtdescu.Text) > 0 Then
-        '    FileNta.DataDefinition.FormulaFields("TTotal").Text = "'" & FormatNumber(total_des, 2) & "'"             'Total
+        '    FileNta.DataDefinition.FormulaFields("TotalT").Text = "'" & FormatNumber(total_des, 2) & "'"             'Total
         '    FileNta.DataDefinition.FormulaFields("Descuento").Text = "'" & FormatNumber(txtdescu.Text, 2) & "'"             'Total
         'End If
 
