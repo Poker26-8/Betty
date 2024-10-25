@@ -820,6 +820,14 @@ doorcita:
                     cnn2.Close()
 
                 Next
+
+                Panel6.Visible = True
+                My.Application.DoEvents()
+                Insert_Asignacion()
+                PDF_Cotizacion()
+                Panel6.Visible = False
+                My.Application.DoEvents()
+
                 MsgBox("Refacciones agregadas correctamente.", vbInformation + vbOKOnly, titulorefaccionaria)
                 grdCaptura.Rows.Clear()
                 frmTallerR.TVehiculo.Start()
@@ -855,5 +863,115 @@ doorcita:
             MessageBox.Show(ex.ToString)
             cnn1.Close()
         End Try
+    End Sub
+
+    Public Sub Insert_Asignacion()
+        Dim oData As New ToolKitSQL.oledbdata
+        Dim sSql As String = ""
+        Dim a_cnn As OleDb.OleDbConnection = New OleDb.OleDbConnection
+        Dim sInfo As String = ""
+        Dim dr As DataRow = Nothing
+        Dim dt As New DataTable
+
+        Dim my_folio As Integer = 0
+        Dim MyStatus As String = ""
+
+
+        Dim marca As String = ""
+        Dim placa As String = ""
+        Dim modelo As String = ""
+
+        With oData
+            If .dbOpen(a_cnn, Direcc_Access, sInfo) Then
+                .runSp(a_cnn, "delete from DetTaller", sInfo) : sInfo = ""
+                '.runSp(a_cnn, "delete from CotPed", sInfo) : sInfo = ""
+
+                If cboCliente.Text <> "" Then
+                    cnn3.Close() : cnn3.Open()
+                    cmd3 = cnn3.CreateCommand
+                    cmd3.CommandText =
+                        "select * from vehiculo WHERE Descripcion='" & cboVehiculo.Text & "'"
+                    rd3 = cmd3.ExecuteReader
+                    If rd3.HasRows Then
+                        If rd3.Read Then
+                            marca = rd3("Marca").ToString
+                            placa = rd1("Placa").ToString
+                            modelo = rd1("Modelo").ToString
+                        End If
+                    End If
+                    rd3.Close() : cnn3.Close()
+                End If
+
+                If .runSp(a_cnn, "insert into DetDetalle() values()", sInfo) Then
+                    sInfo = ""
+                Else
+                    MsgBox(sInfo)
+                End If
+
+                If .getDr(a_cnn, dr, "select MAX(Folio) from CotPed", sInfo) Then
+                    my_folio = dr(0).ToString()
+                End If
+
+                Dim cod_temp As String = ""
+
+                Dim ruta_imagen As String = ""
+
+
+                cnn1.Close() : cnn1.Open()
+
+                For pipo As Integer = 0 To grdCaptura.Rows.Count - 1
+                    Dim myund As String = ""
+
+                    Dim codigo As String = grdCaptura.Rows(pipo).Cells(0).Value.ToString()
+                    If codigo = "" Then GoTo doorcita
+
+                    'Traa la imgen del producto para la cotización
+                    If File.Exists("C:\ControlNegociosPro\ProductosImg\" & codigo & ".jpg") Then
+                        ruta_imagen = "C:\ControlNegociosPro\ProductosImg\" & codigo & ".jpg"
+                    Else
+                        If varrutabase <> "" Then
+                            If File.Exists("\\" & varrutabase & "\ControlNegociosPro\ProductosImg\" & codigo & ".jpg") Then
+                                ruta_imagen = "\\" & varrutabase & "\ControlNegociosPro\ProductosImg\" & codigo & ".jpg"
+                            Else
+                                ruta_imagen = ""
+                            End If
+                        Else
+                            ruta_imagen = ""
+                        End If
+                    End If
+
+                    cmd1 = cnn1.CreateCommand
+                    cmd1.CommandText = "SELECT UVenta FROM productos WHERE Codigo='" & codigo & "'"
+                    rd1 = cmd1.ExecuteReader
+                    If rd1.HasRows Then
+                        If rd1.Read Then
+                            myund = rd1(0).ToString
+                        End If
+                    End If
+                    rd1.Close()
+
+
+                    Dim nombre As String = grdCaptura.Rows(pipo).Cells(1).Value.ToString()
+                    Dim cantidad As Double = grdCaptura.Rows(pipo).Cells(3).Value.ToString()
+                    Dim precio_original As Double = grdCaptura.Rows(pipo).Cells(4).Value.ToString()
+                    Dim total_original As Double = precio_original * cantidad
+
+                    If codigo <> "" Then
+                        cod_temp = codigo
+                        If .runSp(a_cnn, "insert into CotPedDetalle(Folio,Codigo,Nombre,Cantidad,UVenta,Precio_Original,Total_Original,Descuento_Unitario,Descuento_Total,Precio_Descuento,Total_Descuento,Comisionista,Comentario,Ruta_Imagen) values(" & my_folio & ",'" & codigo & "','" & nombre & "'," & cantidad & ",'" & myund & "'," & precio_original & "," & total_original & ",0,0,0,0,'','','" & ruta_imagen & "')", sInfo) Then
+                            sInfo = ""
+                        Else
+                            MsgBox(sInfo)
+                        End If
+                    End If
+                    Continue For
+doorcita:
+
+
+                Next
+                cnn1.Close()
+                a_cnn.Close()
+            End If
+        End With
     End Sub
 End Class
