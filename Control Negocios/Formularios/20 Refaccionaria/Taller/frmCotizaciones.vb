@@ -679,6 +679,8 @@ doorcita:
     Private Sub txtPrecio_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPrecio.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
 
+            If cboDescripcion.Text = "" Then cboDescripcion.Focus.Equals(True) : Exit Sub
+
             grdCaptura.Rows.Add(cboCodigo.Text,
                                 cboDescripcion.Text,
                                 txtUnidad.Text,
@@ -698,6 +700,7 @@ doorcita:
             txtCantidad.Text = "1"
             txtPrecio.Text = "0.00"
             txtTotal.Text = "0.00"
+            cboDescripcion.Focus.Equals(True)
         End If
     End Sub
 
@@ -808,6 +811,9 @@ doorcita:
 
     Private Sub btnAsignar_Click(sender As Object, e As EventArgs) Handles btnAsignar.Click
         Try
+
+            If lblUsuario.Text = "" Then MsgBox("Ingrese la contraseña de favor", vbInformation + vbOKOnly) : txtUsuario.Focus.Equals(True)
+
             If grdCaptura.Rows.Count > 0 Then
                 For luffy As Integer = 0 To grdCaptura.Rows.Count - 1
 
@@ -880,9 +886,6 @@ doorcita:
 
 
         Dim MyStatus As String = ""
-
-
-
 
         With oData
             If .dbOpen(a_cnn, Direcc_Access, sInfo) Then
@@ -1060,13 +1063,16 @@ doorcita:
 
 
 
-        'Dim total_des As Double = Total_Ve + CDbl(txtdescu.Text)
+        Dim total_des As Double = Total_Ve - CDbl(txtdescu.Text)
 
-        'FileNta.DataDefinition.FormulaFields("Subtotal").Text = "'" & FormatNumber(Total_Ve, 2) & "'"             'Total
-        'If CDbl(txtdescu.Text) > 0 Then
-        '    FileNta.DataDefinition.FormulaFields("TotalT").Text = "'" & FormatNumber(total_des, 2) & "'"             'Total
-        '    FileNta.DataDefinition.FormulaFields("Descuento").Text = "'" & FormatNumber(txtdescu.Text, 2) & "'"             'Total
-        'End If
+        'Total
+        If CDbl(txtdescu.Text) > 0 Then
+            FileNta.DataDefinition.FormulaFields("Subtotal").Text = "'" & FormatNumber(Total_Ve, 2) & "'"
+            FileNta.DataDefinition.FormulaFields("TotalT").Text = "'" & FormatNumber(total_des, 2) & "'"             'Total
+            FileNta.DataDefinition.FormulaFields("Descuento").Text = "'" & FormatNumber(txtdescu.Text, 2) & "'"
+        Else
+            FileNta.DataDefinition.FormulaFields("TotalT").Text = "'" & FormatNumber(Total_Ve, 2) & "'"
+        End If
 
 
 
@@ -1106,7 +1112,7 @@ doorcita:
         FileNta.Close()
 
         If varrutabase <> "" Then
-            System.IO.File.Copy(My.Application.Info.DirectoryPath & "\ARCHIVOSDL1\COTIZACIONES\" & MyFolio & ".pdf", "\\" & varrutabase & "\ControlNegociosPro\ARCHIVOSDL1\COTIZACIONES\" & MyFolio & ".pdf")
+            System.IO.File.Copy(My.Application.Info.DirectoryPath & "\ARCHIVOSDL1\ORDEN_SERVICIO\" & my_folio & ".pdf", "\\" & varrutabase & "\ControlNegociosPro\ARCHIVOSDL1\ORDEN_SERVICIO\" & my_folio & ".pdf")
         End If
     End Sub
 
@@ -1128,5 +1134,17 @@ doorcita:
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
         End Try
+    End Sub
+
+    Private Sub cboVehiculo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboVehiculo.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            cboDescripcion.Focus.Equals(True)
+        End If
+    End Sub
+
+    Private Sub cboCliente_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboCliente.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            cboVehiculo.Focus.Equals(True)
+        End If
     End Sub
 End Class
