@@ -2374,6 +2374,8 @@ kak:
         End Select
     End Sub
     Private Sub cbodesc_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cbodesc.KeyPress
+
+        My.Application.DoEvents()
         e.KeyChar = UCase(e.KeyChar)
         Dim Multiplica As String = ""
         Dim VSE As Boolean = False
