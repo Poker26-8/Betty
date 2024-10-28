@@ -255,7 +255,7 @@
             MyComen = frmMesas.lblusuario.Text
 
             cmd2 = cnn2.CreateCommand
-            cmd2.CommandText = "insert into Comandas(Id,NMESA,Codigo,Nombre,Cantidad,UVenta,CostVUE,CostVP,Precio,Total,PrecioSinIVA,TotalSinIVA,Comisionista,Fecha,Comensal,Status,Comentario,GPrint,CUsuario,Total_comensales,Depto,Grupo,EstatusT,Hr,EntregaT) values(" & CFOLIO & ",'" & lblpc.Text & "','" & "xc3" & "','" & "Tiempo X hora " & lblpc.Text & "',0,'" & "SER" & "',0,0,0,0," & MyPreciosin & "," & MyTotalSin & ",0,'" & Format(Date.Now, "yyyy/MM/dd") & "',0,'" & "RESTA" & "','" & "Renta de Mesa" & "',' ','" & MyComen & "',0,'" & "MESAS" & "','" & "MESAS" & "',0,'" & HrTiempo & "','" & HrEntrega & "')"
+            cmd2.CommandText = "insert into Comandas(Id,NMESA,Codigo,Nombre,Cantidad,UVenta,CostVUE,CostVP,Precio,Total,PrecioSinIVA,TotalSinIVA,Comisionista,Fecha,Comensal,Status,Comentario,GPrint,CUsuario,Total_comensales,Depto,Grupo,EstatusT,Hr,EntregaT) values(" & CFOLIO & ",'" & lblpc.Text & "','" & "xc3" & "','" & "Tiempo X hora " & lblpc.Text & "',0,'" & "SER" & "',0,0,0,0," & MyPreciosin & "," & MyTotalSin & ",0,'" & Format(Date.Now, "yyyy/MM/dd") & "',1,'" & "RESTA" & "','" & "Renta de Mesa" & "',' ','" & MyComen & "',0,'" & "MESAS" & "','" & "MESAS" & "',0,'" & HrTiempo & "','" & HrEntrega & "')"
             cmd2.ExecuteNonQuery()
             cnn2.Close()
 
