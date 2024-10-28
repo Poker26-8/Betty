@@ -1,6 +1,14 @@
 ﻿Public Class frmCitasH
+    Dim id_cita As Integer = 0
+    Dim tipo As Integer = 0
+
     Private Sub frmCitasH_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        cboUsuario.Focus.Equals(True)
         tHora.Start()
+        My.Application.DoEvents()
+        tActuales.Start()
+        My.Application.DoEvents()
     End Sub
 
     Private Sub tHora_Tick(sender As Object, e As EventArgs) Handles tHora.Tick
@@ -96,5 +104,229 @@
         Next
         Tiempo(2) = A_horita
 
+    End Sub
+
+    Private Sub tActuales_Tick(sender As Object, e As EventArgs) Handles tActuales.Tick
+        If (optDia.Checked) Then
+            ActuDiaHab(grdCaptura, cboUsuario.Text, cboHabitacion.Text)
+        End If
+    End Sub
+
+    Public Sub ActuDiaHab(ByRef grid As DataGridView, ByRef usuario As String, ByRef habita As String)
+
+        grid.Rows.Clear()
+
+        Dim HORA As String = ""
+        Dim HORX As String = ""
+        Dim EVENTO As String = ""
+
+        Try
+            cnn2.Close() : cnn2.Open()
+            cnn3.Close() : cnn3.Open()
+
+            For field As Integer = 0 To 23
+                If field < 10 Then
+                    HORA = "0" & field
+                Else
+                    HORA = field
+                End If
+
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "SELECT Hora,Id,Minuto,Activo FROM agenda WHERE Hora=" & HORA & " AND Dia=" & Fechita(1) & " AND mes=" & Fechita(2) & " AND Anio=" & Fechita(3) & " AND Usuario='" & usuario & "' AND Habitacion='" & cboHabitacion.Text & "' AND Activo=1"
+                rd2 = cmd2.ExecuteReader
+                If rd2.HasRows Then
+                    If rd2.Read Then
+                        cmd3 = cnn3.CreateCommand
+                        cmd3.CommandText = "SELECT Asunto FROM agenda WHERE Hora=" & HORA & " AND Dia=" & Fechita(1) & " AND Mes=" & Fechita(2) & " AND Anio=" & Fechita(3) & " AND Usuario='" & usuario & "' AND Habitacion='" & habita & "' AND Activo=1"
+                        rd3 = cmd3.ExecuteReader
+                        If rd3.HasRows Then
+                            Do While rd3.Read
+                                EVENTO = EVENTO & " - " & rd3(0).ToString
+                            Loop
+                        End If
+                        rd3.Close()
+
+                        EVENTO = Mid(EVENTO, 4, 99000)
+
+                        If rd2("Hora").ToString < 10 Then
+                            HORX = "0" & rd2("Hora").ToString
+                        Else
+                            HORX = rd2("Hora").ToString
+                        End If
+                        grid.Rows.Add(rd2("Id").ToString, rd2("Hora").ToString & ":" & rd2("Minuto").ToString, EVENTO, rd2("Activo").ToString)
+                    End If
+                    rd2.Close()
+                Else
+                    If HORA < 10 Then
+                        HORX = "0" & field
+                    Else
+                        HORX = field
+                    End If
+                    grid.Rows.Add("0", HORA & ":00", "", "0")
+                End If
+                cnn2.Close()
+                cnn3.Close()
+            Next
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn2.Close()
+            cnn3.Close()
+        End Try
+    End Sub
+
+    Public Sub ActuHora(ByVal grid As DataGridView, ByRef usuario As String, ByVal habita As String)
+
+    End Sub
+
+    Public Sub ActualMes(ByRef grid As DataGridView, ByRef usuario As String, ByRef habita As String)
+
+    End Sub
+
+    Private Sub optMes_Click(sender As Object, e As EventArgs) Handles optMes.Click
+        grdCaptura.Rows.Clear()
+        tipo = 3
+
+        If cboUsuario.Text = "" And cboHabitacion.Text = "" Then
+            MsgBox("Seleccione un usuario y habitación", vbInformation + vbOKOnly, titulohotelriaa)
+            cboUsuario.Focus.Equals(True)
+            cboHabitacion.Focus.Equals(True)
+            optMes.Checked = True
+            Exit Sub
+        End If
+
+        Dim R As Integer = Date.DaysInMonth(Now.Year, Now.Month)
+        Dim dia As String = ""
+        Dim evento As String = ""
+
+        Try
+            cnn4.Close() : cnn4.Open()
+            cnn2.Close() : cnn2.Open()
+
+            For field As Integer = 1 To R
+                dia = field
+
+                cmd4 = cnn4.CreateCommand
+                cmd4.CommandText = "select Id,Dia,Activo from Agenda where Dia=" & dia & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "'"
+                rd4 = cmd4.ExecuteReader
+                If rd4.HasRows Then
+                    If rd4.Read Then
+                        cmd2 = cnn2.CreateCommand
+                        cmd2.CommandText = "SELECT Asunto FROM agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND anio=" & Fechita(3) & " AND Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "'"
+                        rd2 = cmd2.ExecuteReader
+                        Do While rd2.Read
+                            If rd2.HasRows Then
+                                evento = evento & " - " & rd2("").ToString
+                            End If
+                        Loop
+                        evento = Mid(evento, 4, 1000)
+                        rd2.Close()
+
+                        grdCaptura.Rows.Add(rd4("Id").ToString, rd4("Dia").ToString, evento, rd4("Activo").ToString)
+                    End If
+                Else
+                    grdCaptura.Rows.Add("0", dia, "", "DX")
+                End If
+
+                If grdCaptura.Rows(field - 1).Cells(3).Value.ToString = "DX" Then
+                Else
+                    If grdCaptura.Rows(field - 1).Cells(3).Value = False Then
+                        grdCaptura.Rows(field - 1).DefaultCellStyle.BackColor = Color.Blue
+                    End If
+                End If
+                My.Application.DoEvents()
+                rd4.Close()
+            Next
+            cnn4.Close()
+            cnn2.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn4.Close()
+            cnn3.Close()
+        End Try
+
+        btnAgregar.Visible = True
+        btnModificar.Visible = False
+        btnDetalle.Visible = True
+    End Sub
+
+    Private Sub optDia_Click(sender As Object, e As EventArgs) Handles optDia.Click
+
+    End Sub
+
+    Private Sub optHora_Click(sender As Object, e As EventArgs) Handles optHora.Click
+
+    End Sub
+
+    Private Sub cboHabitacion_DropDown(sender As Object, e As EventArgs) Handles cboHabitacion.DropDown
+        Try
+            cboHabitacion.Items.Clear()
+
+            cnn5.Close() : cnn5.Open()
+            cmd5 = cnn5.CreateCommand
+            cmd5.CommandText = "SELECT DISTINCT N_Habitacion FROM habitacion WHERE N_Habitacion<>'' ORDER BY N_Habitacion"
+            rd5 = cmd5.ExecuteReader
+            Do While rd5.Read
+                If rd5.HasRows Then
+                    cboHabitacion.Items.Add(rd5(0).ToString)
+                End If
+            Loop
+            rd5.Close()
+            cnn5.Close()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn5.Close()
+        End Try
+    End Sub
+
+    Private Sub cboHabitacion_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboHabitacion.KeyPress
+        e.KeyChar = UCase(e.KeyChar)
+        If AscW(e.KeyChar) = Keys.Enter Then
+            cboUsuario.Focus.Equals(True)
+        End If
+    End Sub
+
+    Private Sub cboUsuario_DropDown(sender As Object, e As EventArgs) Handles cboUsuario.DropDown
+        Try
+            cboUsuario.Items.Clear()
+
+            cnn5.Close() : cnn5.Open()
+            cmd5 = cnn5.CreateCommand
+            cmd5.CommandText = "SELECT DISTINCT Alias FROM usuarios WHERE alias<>'' ORDER BY Alias"
+            rd5 = cmd5.ExecuteReader
+            Do While rd5.Read
+                If rd5.HasRows Then
+                    cboUsuario.Items.Add(rd5(0).ToString)
+                End If
+            Loop
+            rd5.Close()
+            cnn5.Close()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn5.Close()
+        End Try
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnConsultar_Click(sender As Object, e As EventArgs) Handles btnConsultar.Click
+
+    End Sub
+
+    Private Sub btnDetalle_Click(sender As Object, e As EventArgs) Handles btnDetalle.Click
+
+    End Sub
+
+    Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
+
+    End Sub
+
+    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
+        frmAddCitaH.BringToFront()
+        frmAddCitaH.Show()
+        tActuales.Stop()
     End Sub
 End Class

@@ -1093,6 +1093,12 @@
     <Compile Include="Formularios\24 Hoteleria\frmCatPrecios.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\24 Hoteleria\Reservacion\Citas\frmAddCitaH.Designer.vb">
+      <DependentUpon>frmAddCitaH.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\24 Hoteleria\Reservacion\Citas\frmAddCitaH.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\24 Hoteleria\Reservacion\Citas\frmCitasH.Designer.vb">
       <DependentUpon>frmCitasH.vb</DependentUpon>
     </Compile>
@@ -2895,6 +2901,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\24 Hoteleria\frmCatPrecios.resx">
       <DependentUpon>frmCatPrecios.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\24 Hoteleria\Reservacion\Citas\frmAddCitaH.resx">
+      <DependentUpon>frmAddCitaH.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\24 Hoteleria\Reservacion\Citas\frmCitasH.resx">
       <DependentUpon>frmCitasH.vb</DependentUpon>
