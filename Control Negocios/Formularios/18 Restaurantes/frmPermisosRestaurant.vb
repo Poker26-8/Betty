@@ -69,8 +69,6 @@
                 rbhora.Checked = True
             ElseIf TIPOCOBRO = "MINUTO" Then
                 rbminuto.Checked = True
-            ElseIf TIPOCOBRO = "CUARTOS" Then
-                rbcuartos.Checked = True
             ElseIf TIPOCOBRO = "MEDIAHORA5MIN" Then
                 rbMediaHora5Min.Checked = True
             End If
@@ -468,29 +466,6 @@
                     cnn2.Close() : cnn2.Open()
                     cmd2 = cnn2.CreateCommand
                     cmd2.CommandText = "Insert INTO Formatos(Facturas,NotasCred,NumPart) VALUES('TipoCobroBillar','MINUTOS','0')"
-                    cmd2.ExecuteNonQuery()
-                    cnn2.Close()
-                End If
-                rd1.Close()
-                cnn1.Close()
-            ElseIf (rbcuartos.Checked) Then
-
-                cnn1.Close() : cnn1.Open()
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "SELECT Facturas FROM Formatos WHERE Facturas='TipoCobroBillar'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        cnn2.Close() : cnn2.Open()
-                        cmd2 = cnn2.CreateCommand
-                        cmd2.CommandText = "UPDATE Formatos SET NotasCred='CUARTOS' WHERE Facturas='TipoCobroBillar'"
-                        cmd2.ExecuteNonQuery()
-                        cnn2.Close()
-                    End If
-                Else
-                    cnn2.Close() : cnn2.Open()
-                    cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "Insert INTO Formatos(Facturas,NotasCred,NumPart) VALUES('TipoCobroBillar','CUARTOS','0')"
                     cmd2.ExecuteNonQuery()
                     cnn2.Close()
                 End If
@@ -1033,9 +1008,7 @@
         End Try
     End Sub
 
-    Private Sub RadioButton1_Click(sender As Object, e As EventArgs) Handles rbcuartos.Click
-        CambioTipoBillar()
-    End Sub
+
 
     Private Sub rbMediaHora5Min_Click(sender As Object, e As EventArgs) Handles rbMediaHora5Min.Click
         CambioTipoBillar()

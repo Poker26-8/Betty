@@ -41,7 +41,6 @@ Partial Class frmPermisosRestaurant
         Me.txttolerancia = New System.Windows.Forms.TextBox()
         Me.GroupBox19 = New System.Windows.Forms.GroupBox()
         Me.rbMediaHora5Min = New System.Windows.Forms.RadioButton()
-        Me.rbcuartos = New System.Windows.Forms.RadioButton()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.rbminuto = New System.Windows.Forms.RadioButton()
         Me.rbhora = New System.Windows.Forms.RadioButton()
@@ -274,7 +273,6 @@ Partial Class frmPermisosRestaurant
         'GroupBox19
         '
         Me.GroupBox19.Controls.Add(Me.rbMediaHora5Min)
-        Me.GroupBox19.Controls.Add(Me.rbcuartos)
         Me.GroupBox19.Controls.Add(Me.Label5)
         Me.GroupBox19.Controls.Add(Me.rbminuto)
         Me.GroupBox19.Controls.Add(Me.rbhora)
@@ -300,17 +298,6 @@ Partial Class frmPermisosRestaurant
         "del precio")
         Me.rbMediaHora5Min.UseVisualStyleBackColor = True
         '
-        'rbcuartos
-        '
-        Me.rbcuartos.AutoSize = True
-        Me.rbcuartos.Location = New System.Drawing.Point(104, 19)
-        Me.rbcuartos.Name = "rbcuartos"
-        Me.rbcuartos.Size = New System.Drawing.Size(86, 25)
-        Me.rbcuartos.TabIndex = 239
-        Me.rbcuartos.TabStop = True
-        Me.rbcuartos.Text = "Cuartos"
-        Me.rbcuartos.UseVisualStyleBackColor = True
-        '
         'Label5
         '
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -324,7 +311,7 @@ Partial Class frmPermisosRestaurant
         'rbminuto
         '
         Me.rbminuto.AutoSize = True
-        Me.rbminuto.Location = New System.Drawing.Point(203, 19)
+        Me.rbminuto.Location = New System.Drawing.Point(113, 19)
         Me.rbminuto.Name = "rbminuto"
         Me.rbminuto.Size = New System.Drawing.Size(84, 25)
         Me.rbminuto.TabIndex = 1
@@ -986,7 +973,6 @@ Partial Class frmPermisosRestaurant
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Button1 As Button
     Friend WithEvents cbCobroSimplificado As CheckBox
-    Friend WithEvents rbcuartos As RadioButton
     Friend WithEvents rbMediaHora5Min As RadioButton
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents chkPantallaExtras As CheckBox

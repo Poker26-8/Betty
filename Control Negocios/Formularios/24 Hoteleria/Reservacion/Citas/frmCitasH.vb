@@ -616,6 +616,7 @@
             frmDetalleCH.Text = "Detalle de la reservación del día " & refer & " de " & lblMes.Text
         End If
         frmDetalleCH.cbousu.Text = cboUsuario.Text
+        frmDetalleCH.cboHabi.Text = cboHabitacion.Text
         frmDetalleCH.txtReferencia.Text = refer
         My.Application.DoEvents()
         frmDetalleCH.Show()

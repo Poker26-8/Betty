@@ -30,6 +30,7 @@ Partial Class frmDetalleCH
         Me.btnModificar = New System.Windows.Forms.Button()
         Me.btnCancelar = New System.Windows.Forms.Button()
         Me.grdCaptura = New System.Windows.Forms.DataGridView()
+        Me.cboHabi = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.grdCaptura, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -37,6 +38,7 @@ Partial Class frmDetalleCH
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.cboHabi)
         Me.Panel1.Controls.Add(Me.cbousu)
         Me.Panel1.Controls.Add(Me.txtReferencia)
         Me.Panel1.Controls.Add(Me.btnModificar)
@@ -117,6 +119,14 @@ Partial Class frmDetalleCH
         Me.grdCaptura.Size = New System.Drawing.Size(825, 387)
         Me.grdCaptura.TabIndex = 47
         '
+        'cboHabi
+        '
+        Me.cboHabi.Location = New System.Drawing.Point(274, 21)
+        Me.cboHabi.Name = "cboHabi"
+        Me.cboHabi.Size = New System.Drawing.Size(100, 20)
+        Me.cboHabi.TabIndex = 48
+        Me.cboHabi.Visible = False
+        '
         'frmDetalleCH
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -143,4 +153,5 @@ Partial Class frmDetalleCH
     Friend WithEvents txtReferencia As TextBox
     Friend WithEvents Panel2 As Panel
     Friend WithEvents grdCaptura As DataGridView
+    Friend WithEvents cboHabi As TextBox
 End Class
