@@ -38,6 +38,7 @@ Partial Class frmCitasH
         Me.cboUsuario = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.btnDetalle = New System.Windows.Forms.Button()
         Me.btnConsultar = New System.Windows.Forms.Button()
         Me.btnModificar = New System.Windows.Forms.Button()
@@ -47,11 +48,10 @@ Partial Class frmCitasH
         Me.tHora = New System.Windows.Forms.Timer(Me.components)
         Me.tActuales = New System.Windows.Forms.Timer(Me.components)
         Me.tEstado = New System.Windows.Forms.Timer(Me.components)
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.a = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ss = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column1saasas = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.azxzx = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -218,6 +218,19 @@ Partial Class frmCitasH
         Me.Panel3.Size = New System.Drawing.Size(533, 67)
         Me.Panel3.TabIndex = 1
         '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.ForeColor = System.Drawing.Color.White
+        Me.Button1.Location = New System.Drawing.Point(457, 9)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(73, 55)
+        Me.Button1.TabIndex = 4
+        Me.Button1.Text = "Salir"
+        Me.Button1.UseVisualStyleBackColor = False
+        '
         'btnDetalle
         '
         Me.btnDetalle.BackColor = System.Drawing.Color.DodgerBlue
@@ -285,7 +298,7 @@ Partial Class frmCitasH
         Me.grdCaptura.AllowUserToDeleteRows = False
         Me.grdCaptura.BackgroundColor = System.Drawing.Color.White
         Me.grdCaptura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdCaptura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column1, Me.Column2, Me.Column4})
+        Me.grdCaptura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.a, Me.ss, Me.Column1saasas, Me.azxzx})
         Me.grdCaptura.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdCaptura.Location = New System.Drawing.Point(0, 0)
         Me.grdCaptura.Name = "grdCaptura"
@@ -296,53 +309,46 @@ Partial Class frmCitasH
         '
         'tHora
         '
+        Me.tHora.Interval = 10
         '
         'tActuales
         '
+        Me.tActuales.Interval = 60000
         '
-        'Button1
+        'tEstado
         '
-        Me.Button1.BackColor = System.Drawing.Color.DodgerBlue
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Location = New System.Drawing.Point(457, 9)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(73, 55)
-        Me.Button1.TabIndex = 4
-        Me.Button1.Text = "Salir"
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.tEstado.Interval = 10000
         '
-        'Column3
+        'a
         '
-        Me.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column3.HeaderText = "Id"
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        Me.Column3.Width = 41
+        Me.a.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.a.HeaderText = "Id"
+        Me.a.Name = "a"
+        Me.a.ReadOnly = True
+        Me.a.Width = 41
         '
-        'Column1
+        'ss
         '
-        Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column1.HeaderText = "Hora"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        Me.Column1.Width = 55
+        Me.ss.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.ss.HeaderText = "Hora"
+        Me.ss.Name = "ss"
+        Me.ss.ReadOnly = True
+        Me.ss.Width = 55
         '
-        'Column2
+        'Column1saasas
         '
-        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.Column2.HeaderText = "Evento"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
+        Me.Column1saasas.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Column1saasas.HeaderText = "Evento"
+        Me.Column1saasas.Name = "Column1saasas"
+        Me.Column1saasas.ReadOnly = True
         '
-        'Column4
+        'azxzx
         '
-        Me.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.Column4.HeaderText = "Activo"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        Me.Column4.Width = 62
+        Me.azxzx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.azxzx.HeaderText = "Activo"
+        Me.azxzx.Name = "azxzx"
+        Me.azxzx.ReadOnly = True
+        Me.azxzx.Width = 62
         '
         'frmCitasH
         '
@@ -395,4 +401,8 @@ Partial Class frmCitasH
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents a As DataGridViewTextBoxColumn
+    Friend WithEvents ss As DataGridViewTextBoxColumn
+    Friend WithEvents Column1saasas As DataGridViewTextBoxColumn
+    Friend WithEvents azxzx As DataGridViewTextBoxColumn
 End Class

@@ -4,11 +4,21 @@
 
     Private Sub frmCitasH_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        cboUsuario.Focus.Equals(True)
+        cboHabitacion.Focus.Equals(True)
         tHora.Start()
+
         My.Application.DoEvents()
         tActuales.Start()
+
         My.Application.DoEvents()
+        tEstado.Start()
+
+        refer = ""
+        My.Application.DoEvents()
+
+        btnAgregar.Visible = True
+        btnModificar.Visible = False
+        btnDetalle.Visible = False
     End Sub
 
     Private Sub tHora_Tick(sender As Object, e As EventArgs) Handles tHora.Tick
@@ -110,6 +120,14 @@
         If (optDia.Checked) Then
             ActuDiaHab(grdCaptura, cboUsuario.Text, cboHabitacion.Text)
         End If
+
+        If (optHora.Checked) Then
+            ActuHora(grdCaptura, cboUsuario.Text, cboHabitacion.Text)
+        End If
+
+        If (optMes.Checked) Then
+            ActuMes(grdCaptura, cboUsuario.Text, cboHabitacion.Text)
+        End If
     End Sub
 
     Public Sub ActuDiaHab(ByRef grid As DataGridView, ByRef usuario As String, ByRef habita As String)
@@ -175,15 +193,126 @@
     End Sub
 
     Public Sub ActuHora(ByVal grid As DataGridView, ByRef usuario As String, ByVal habita As String)
+        grid.Rows.Clear()
+        Dim minuto As String = ""
+        Dim hora As String = ""
 
+        Try
+            cnn2.Close() : cnn2.Open()
+            For field As Integer = 0 To 60
+                If field = 60 Then Exit Sub
+                minuto = field
+
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "select Hora,Minuto,Id,Asunto,Activo from Agenda where Minuto=" & minuto & " and Hora=" & Tiempo(1) & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & usuario & "' AND Habitacion='" & habita & "' and Activo=-1"
+                rd2 = cmd2.ExecuteReader
+                If rd2.HasRows Then
+                    If rd2.Read Then
+                        If rd2("Hora").ToString < 10 Then
+                            hora = "0" & rd2("Hora").ToString
+                        Else
+                            hora = rd2("Hora").ToString
+                        End If
+
+                        If rd2("Minuto").ToString < 10 Then
+                            minuto = "0" & rd2("Minuto").ToString
+                        Else
+                            minuto = rd2("Minuto").ToString
+                        End If
+
+                        grid.Rows.Add(rd2("Id").ToString, hora & ":" & minuto, rd2("Asunto").ToString, rd2("Activo").ToString)
+                    End If
+                Else
+                    If field < 10 Then
+                        minuto = "0" & field
+                    Else
+                        minuto = field
+                    End If
+
+                    If CDec(Tiempo(1)) < 10 Then
+                        hora = "0" & Tiempo(1)
+                    Else
+                        hora = Tiempo(1)
+                    End If
+                    grid.Rows.Add("0", hora & ":" & minuto, "", "0")
+                End If
+                rd2.Close()
+            Next
+            cnn2.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn2.Close()
+        End Try
     End Sub
 
-    Public Sub ActualMes(ByRef grid As DataGridView, ByRef usuario As String, ByRef habita As String)
+    Public Sub ActuMes(ByRef grid As DataGridView, ByRef usuario As String, ByRef habita As String)
+        grid.Rows.Clear()
+        Dim dia As String = ""
+        Dim evento As String = ""
 
+        Try
+            cnn2.Close() : cnn2.Open()
+            cnn3.Close() : cnn3.Open()
+
+            For field As Integer = 1 To Date.DaysInMonth(Now.Year, Now.Month)
+                dia = field
+
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "select Id,Dia,Activo from Agenda where Dia=" & dia & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & usuario & "' AND Habitacion='" & cboHabitacion.Text & "' and Activo=-1"
+                rd2 = cmd2.ExecuteReader
+                If rd2.HasRows Then
+                    If rd2.Read Then
+                        cmd3 = cnn3.CreateCommand
+                        cmd3.CommandText = "SELECT Asunto FROM Agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND Anio=" & Fechita(3) & " AND Usuario='" & usuario & "' AND Habitacion='" & habita & "' AND Activo=-1"
+                        rd3 = cmd3.ExecuteReader
+                        Do While rd3.Read
+                            If rd3.HasRows Then
+                                evento = evento & " - " & rd3(0).ToString
+                            End If
+                        Loop
+                        rd3.Close()
+                        evento = Mid(evento, 4, 99000)
+                        grid.Rows.Add(rd2("Id"), ToString, rd2("Dia").ToString, evento, rd2("Activo").ToString)
+                    End If
+                Else
+                    grid.Rows.Add("0", dia, "", "0")
+                End If
+                rd2.Close()
+            Next
+            cnn3.Close()
+            cnn2.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn2.Close()
+            cnn3.Close()
+        End Try
+    End Sub
+
+    Public Sub EstadoH()
+        Try
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "UPDATE agenda SET Activo=0 WHERE Anio<=" & CDec(Fechita(3)) & " AND Mes<=" & CDec(Fechita(2)) & " AND Dia<" & CDec(Fechita(1)) & ""
+            cmd1.ExecuteNonQuery()
+
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "UPDATE agenda SET Activo=0 WHERE Anio<=" & CDec(Fechita(3)) & " AND Mes<=" & CDec(Fechita(2)) & " AND Dia<" & CDec(Fechita(1)) & " AND Hora<" & CDec(Tiempo(1)) & ""
+            cmd1.ExecuteNonQuery()
+
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "UPDATE Agenda SET Activo=0 WHERE Anio<=" & CDec(Fechita(3)) & " AND Mes<=" & CDec(Fechita(2)) & " AND Dia<=" & CDec(Fechita(1)) & " AND Hora<=" & CDec(Fechita(1)) & " AND Minuto<" & CDec(Tiempo(2)) & ""
+            cmd1.ExecuteNonQuery()
+            cnn1.Close()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
     End Sub
 
     Private Sub optMes_Click(sender As Object, e As EventArgs) Handles optMes.Click
         grdCaptura.Rows.Clear()
+
         tipo = 3
 
         If cboUsuario.Text = "" And cboHabitacion.Text = "" Then
@@ -193,6 +322,7 @@
             optMes.Checked = True
             Exit Sub
         End If
+
 
         Dim R As Integer = Date.DaysInMonth(Now.Year, Now.Month)
         Dim dia As String = ""
@@ -215,7 +345,7 @@
                         rd2 = cmd2.ExecuteReader
                         Do While rd2.Read
                             If rd2.HasRows Then
-                                evento = evento & " - " & rd2("").ToString
+                                evento = evento & " - " & rd2(0).ToString
                             End If
                         Loop
                         evento = Mid(evento, 4, 1000)
@@ -231,6 +361,7 @@
                 Else
                     If grdCaptura.Rows(field - 1).Cells(3).Value = False Then
                         grdCaptura.Rows(field - 1).DefaultCellStyle.BackColor = Color.Blue
+                        grdCaptura.Rows(field - 1).DefaultCellStyle.ForeColor = Color.White
                     End If
                 End If
                 My.Application.DoEvents()
@@ -250,10 +381,161 @@
     End Sub
 
     Private Sub optDia_Click(sender As Object, e As EventArgs) Handles optDia.Click
+        grdCaptura.Rows.Clear()
+        tipo = 2
+        If cboUsuario.Text = "" And cboHabitacion.Text = "" Then
+            MsgBox("Seleccione un usuario y habitación.", vbInformation + vbOKOnly, titulohotelriaa)
+            cboUsuario.Focus.Equals(True)
+            cboHabitacion.Focus.Equals(True)
+            optDia.Checked = True
+            Exit Sub
+        End If
 
+        Dim hora As String = ""
+        Dim horx As String = ""
+        Dim evento As String = ""
+        Try
+            cnn3.Close() : cnn3.Open()
+            cnn2.Close() : cnn2.Open()
+
+            For field As Integer = 0 To 24
+                If field = 24 Then Exit For
+                hora = field
+
+                cmd3 = cnn3.CreateCommand
+                cmd3.CommandText =
+                    "select Hora,Id,Activo from Agenda where Hora=" & hora & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "'"
+                rd3 = cmd3.ExecuteReader
+                If rd3.HasRows Then
+                    If rd3.Read Then
+                        cmd2 = cnn2.CreateCommand
+                        cmd2.CommandText =
+                            "select Asunto from Agenda where Hora=" & hora & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "'"
+                        rd2 = cmd2.ExecuteReader
+                        Do While rd2.Read
+                            If rd2.HasRows Then
+                                evento = rd2(0).ToString
+                            End If
+                        Loop
+                        rd2.Close()
+                        evento = Mid(evento, 4, 10000)
+
+                        If CDec(rd3("Hora").ToString) < 10 Then
+                            horx = "0" & rd3("Hora").ToString
+                        Else
+                            horx = rd3("Hora").ToString
+                        End If
+
+                        grdCaptura.Rows.Add(rd3("Id").ToString, horx & ":00", evento, rd3("Activo").ToString)
+                    End If
+                Else
+                    If hora < 10 Then
+                        horx = "0" & field
+                    Else
+                        horx = field
+                    End If
+                    grdCaptura.Rows.Add("0", horx & ":00", "", "NULO")
+                End If
+
+                If grdCaptura.Rows(field).Cells(3).Value.ToString = "NULO" Then
+                Else
+                    If grdCaptura.Rows(field).Cells(3).Value = False Then
+                        grdCaptura.Rows(field).DefaultCellStyle.BackColor = Color.Blue
+                        grdCaptura.Rows(field).DefaultCellStyle.ForeColor = Color.White
+                    End If
+                End If
+
+                My.Application.DoEvents()
+                rd3.Close()
+            Next
+            cnn2.Close()
+            cnn3.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn3.Close()
+            cnn2.Close()
+        End Try
+
+        btnAgregar.Visible = True
+        btnModificar.Visible = False
+        btnDetalle.Visible = True
     End Sub
 
     Private Sub optHora_Click(sender As Object, e As EventArgs) Handles optHora.Click
+        grdCaptura.Rows.Clear()
+        tipo = 1
+
+        If cboUsuario.Text = "" And cboHabitacion.Text = "" Then
+            MsgBox("Seleccione un usuario por consultar.", vbInformation + vbOKOnly, titulohotelriaa)
+            cboUsuario.Focus.Equals(True)
+            cboHabitacion.Focus.Equals(True)
+            optHora.Checked = False
+            Exit Sub
+        End If
+
+        Dim minuto As String = ""
+        Dim hora As String = ""
+
+        Try
+            cnn1.Close() : cnn1.Open()
+
+            For field As Integer = 0 To 60
+                If field = 60 Then Exit For
+                minuto = field
+
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText =
+                    "select Hora,Minuto,Id,Asunto,Activo from Agenda where Minuto=" & minuto & " and Hora=" & Tiempo(1) & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "'"
+                rd1 = cmd1.ExecuteReader
+                If rd1.HasRows Then
+                    If rd1.Read Then
+                        If CDec(rd1("Hora").ToString) < 10 Then
+                            hora = "0" & rd1("Hora").ToString
+                        Else
+                            hora = rd1("Hora").ToString
+                        End If
+                        If CDec(rd1("Minuto").ToString) < 10 Then
+                            minuto = "0" & rd1("Minuto").ToString
+                        Else
+                            minuto = rd1("Minuto").ToString
+                        End If
+
+                        grdCaptura.Rows.Add(rd1("Id").ToString, hora & ":" & minuto, rd1("Asunto").ToString, rd1("Activo").ToString)
+                    End If
+                Else
+                    If field < 10 Then
+                        minuto = "0" & field
+                    Else
+                        minuto = field
+                    End If
+
+                    If CDec(Tiempo(1)) < 10 Then
+                        hora = "0" & Tiempo(1)
+                    Else
+                        hora = Tiempo(1)
+                    End If
+
+                    grdCaptura.Rows.Add("0", hora & ":" & minuto, "", "NULO")
+                End If
+                rd1.Close()
+
+                If grdCaptura.Rows(field).Cells(3).Value.ToString = "NULO" Then
+                Else
+                    If grdCaptura.Rows(field).Cells(3).Value = False Then
+                        grdCaptura.Rows(field).DefaultCellStyle.BackColor = Color.Blue
+                        grdCaptura.Rows(field).DefaultCellStyle.ForeColor = Color.White
+                    End If
+                End If
+            Next
+            cnn1.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
+
+        btnAgregar.Visible = True
+        btnModificar.Visible = True
+        btnDetalle.Visible = False
 
     End Sub
 
@@ -317,16 +599,55 @@
     End Sub
 
     Private Sub btnDetalle_Click(sender As Object, e As EventArgs) Handles btnDetalle.Click
+        If id_cita = 0 Then
+            MsgBox("Seleccione un registro con información para poder modificarlo.", vbInformation + vbOKOnly, titulohotelriaa)
+            Exit Sub
+        End If
 
+        If refer = "" Then
+            MsgBox("Seleccione un registro con información para poder modificarlo.", vbInformation + vbOKOnly, titulohotelriaa)
+            Exit Sub
+        End If
+        tActuales.Stop()
+        If (optDia.Checked) Then
+            frmDetalleCH.Text = "Detalle de la reservación del día " & lblDía.Text & " entre las " & Mid(refer, 1, 2) & ":00 y las " & Mid(refer, 1, 2) + 1 & ":00"
+        End If
+        If (optMes.Checked) Then
+            frmDetalleCH.Text = "Detalle de la reservación del día " & refer & " de " & lblMes.Text
+        End If
+        frmDetalleCH.cbousu.Text = cboUsuario.Text
+        frmDetalleCH.txtReferencia.Text = refer
+        My.Application.DoEvents()
+        frmDetalleCH.Show()
     End Sub
 
     Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
-
+        If id_cita = 0 Then
+            MsgBox("Selecciona un registro con información para poder modificarlo.", vbInformation + vbOKOnly, titulohotelriaa)
+            Exit Sub
+        End If
+        frmModificarCH.txtId.text = id_cita
+        tActuales.Stop()
+        My.Application.DoEvents()
+        frmModificarCH.Show()
     End Sub
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
         frmAddCitaH.BringToFront()
         frmAddCitaH.Show()
         tActuales.Stop()
+    End Sub
+
+    Private Sub tEstado_Tick(sender As Object, e As EventArgs) Handles tEstado.Tick
+        EstadoH()
+    End Sub
+
+    Private Sub cboHabitacion_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboHabitacion.SelectedValueChanged
+        grdCaptura.Rows.Clear()
+    End Sub
+
+    Private Sub grdCaptura_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles grdCaptura.CellClick
+        id_cita = grdCaptura.CurrentRow.Cells(0).Value.ToString
+        refer = grdCaptura.CurrentRow.Cells(1).Value.ToString
     End Sub
 End Class

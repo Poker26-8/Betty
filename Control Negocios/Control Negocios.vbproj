@@ -1105,6 +1105,18 @@
     <Compile Include="Formularios\24 Hoteleria\Reservacion\Citas\frmCitasH.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\24 Hoteleria\Reservacion\Citas\frmDetalleCH.Designer.vb">
+      <DependentUpon>frmDetalleCH.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\24 Hoteleria\Reservacion\Citas\frmDetalleCH.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\24 Hoteleria\Reservacion\Citas\frmModificarCH.Designer.vb">
+      <DependentUpon>frmModificarCH.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\24 Hoteleria\Reservacion\Citas\frmModificarCH.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\24 Hoteleria\Reservacion\frmAnticiposReservaciones.Designer.vb">
       <DependentUpon>frmAnticiposReservaciones.vb</DependentUpon>
     </Compile>
@@ -2907,6 +2919,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\24 Hoteleria\Reservacion\Citas\frmCitasH.resx">
       <DependentUpon>frmCitasH.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\24 Hoteleria\Reservacion\Citas\frmDetalleCH.resx">
+      <DependentUpon>frmDetalleCH.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\24 Hoteleria\Reservacion\Citas\frmModificarCH.resx">
+      <DependentUpon>frmModificarCH.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\24 Hoteleria\Reservacion\frmAnticiposReservaciones.resx">
       <DependentUpon>frmAnticiposReservaciones.vb</DependentUpon>

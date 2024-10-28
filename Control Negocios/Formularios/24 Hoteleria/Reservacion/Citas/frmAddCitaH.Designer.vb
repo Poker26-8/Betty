@@ -41,11 +41,14 @@ Partial Class frmAddCitaH
         Me.cboHora = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.btnCancelar = New System.Windows.Forms.Button()
-        Me.btnAGregar = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.rtAsunto = New System.Windows.Forms.RichTextBox()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.btnCancelar = New System.Windows.Forms.Button()
+        Me.btnAGregar = New System.Windows.Forms.Button()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.dtpFsalida = New System.Windows.Forms.DateTimePicker()
+        Me.dtpHSalida = New System.Windows.Forms.DateTimePicker()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -107,6 +110,9 @@ Partial Class frmAddCitaH
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.dtpHSalida)
+        Me.Panel1.Controls.Add(Me.dtpFsalida)
+        Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Controls.Add(Me.cboAño)
         Me.Panel1.Controls.Add(Me.Label8)
         Me.Panel1.Controls.Add(Me.cboMes)
@@ -126,7 +132,7 @@ Partial Class frmAddCitaH
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(510, 128)
+        Me.Panel1.Size = New System.Drawing.Size(510, 177)
         Me.Panel1.TabIndex = 6
         '
         'cboAño
@@ -239,6 +245,38 @@ Partial Class frmAddCitaH
         Me.Panel2.Size = New System.Drawing.Size(510, 59)
         Me.Panel2.TabIndex = 7
         '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.rtAsunto)
+        Me.Panel3.Controls.Add(Me.Label9)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(0, 177)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(510, 214)
+        Me.Panel3.TabIndex = 8
+        '
+        'rtAsunto
+        '
+        Me.rtAsunto.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.rtAsunto.Location = New System.Drawing.Point(0, 21)
+        Me.rtAsunto.Name = "rtAsunto"
+        Me.rtAsunto.Size = New System.Drawing.Size(510, 193)
+        Me.rtAsunto.TabIndex = 8
+        Me.rtAsunto.Text = ""
+        '
+        'Label9
+        '
+        Me.Label9.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Label9.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.Color.White
+        Me.Label9.Location = New System.Drawing.Point(0, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(510, 21)
+        Me.Label9.TabIndex = 7
+        Me.Label9.Text = "Asunto"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'btnCancelar
         '
         Me.btnCancelar.BackColor = System.Drawing.Color.DodgerBlue
@@ -271,37 +309,36 @@ Partial Class frmAddCitaH
         Me.btnAGregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnAGregar.UseVisualStyleBackColor = False
         '
-        'Panel3
+        'Label10
         '
-        Me.Panel3.Controls.Add(Me.rtAsunto)
-        Me.Panel3.Controls.Add(Me.Label9)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(0, 128)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(510, 263)
-        Me.Panel3.TabIndex = 8
+        Me.Label10.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.ForeColor = System.Drawing.Color.White
+        Me.Label10.Location = New System.Drawing.Point(8, 124)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(493, 21)
+        Me.Label10.TabIndex = 16
+        Me.Label10.Text = "Fecha Salida"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'rtAsunto
+        'dtpFsalida
         '
-        Me.rtAsunto.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.rtAsunto.Location = New System.Drawing.Point(0, 21)
-        Me.rtAsunto.Name = "rtAsunto"
-        Me.rtAsunto.Size = New System.Drawing.Size(510, 242)
-        Me.rtAsunto.TabIndex = 8
-        Me.rtAsunto.Text = ""
+        Me.dtpFsalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpFsalida.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpFsalida.Location = New System.Drawing.Point(8, 148)
+        Me.dtpFsalida.Name = "dtpFsalida"
+        Me.dtpFsalida.Size = New System.Drawing.Size(95, 22)
+        Me.dtpFsalida.TabIndex = 17
         '
-        'Label9
+        'dtpHSalida
         '
-        Me.Label9.BackColor = System.Drawing.Color.DodgerBlue
-        Me.Label9.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.ForeColor = System.Drawing.Color.White
-        Me.Label9.Location = New System.Drawing.Point(0, 0)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(510, 21)
-        Me.Label9.TabIndex = 7
-        Me.Label9.Text = "Asunto"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.dtpHSalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpHSalida.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.dtpHSalida.Location = New System.Drawing.Point(109, 148)
+        Me.dtpHSalida.Name = "dtpHSalida"
+        Me.dtpHSalida.ShowUpDown = True
+        Me.dtpHSalida.Size = New System.Drawing.Size(95, 22)
+        Me.dtpHSalida.TabIndex = 18
         '
         'frmAddCitaH
         '
@@ -347,4 +384,7 @@ Partial Class frmAddCitaH
     Friend WithEvents Panel3 As Panel
     Friend WithEvents rtAsunto As RichTextBox
     Friend WithEvents Label9 As Label
+    Friend WithEvents dtpHSalida As DateTimePicker
+    Friend WithEvents dtpFsalida As DateTimePicker
+    Friend WithEvents Label10 As Label
 End Class

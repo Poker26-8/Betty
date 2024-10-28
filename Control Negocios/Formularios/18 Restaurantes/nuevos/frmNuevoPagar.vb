@@ -1084,7 +1084,7 @@ Public Class frmNuevoPagar
 
     Private Sub btnIntro_Click(sender As Object, e As EventArgs) Handles btnIntro.Click
 
-        btnIntro.Enabled = True
+        btnIntro.Enabled = False
         Dim varieps As String = ""
         Dim vartotal As String = ""
         Dim mypago As Double = 0
@@ -1125,11 +1125,13 @@ Public Class frmNuevoPagar
                         If rd2(0).ToString = 1 Then
                         Else
                             MsgBox("No cuentas con permiso para cerrar la cuenta", vbInformation + vbOKOnly, titulorestaurante)
+                            btnIntro.Enabled = True
                             Exit Sub
                         End If
                     End If
                 Else
                     MsgBox("No cuentas con permiso para cerrar la cuenta", vbInformation + vbOKOnly, titulorestaurante)
+                    btnIntro.Enabled = True
                     Exit Sub
                 End If
                 rd2.Close()
@@ -1137,6 +1139,7 @@ Public Class frmNuevoPagar
             End If
         Else
             MsgBox("No tienes asignados permisos contacta a tu administrador", vbInformation + vbOKOnly, titulorestaurante)
+            btnIntro.Enabled = True
             Exit Sub
         End If
         rd1.Close()
@@ -1164,6 +1167,7 @@ Public Class frmNuevoPagar
 
         If mypago < CDec(txtTotal.Text) Then
             MsgBox("Debe cerrar la cuenta!.", vbInformation + vbOKOnly, titulomensajes)
+            btnIntro.Enabled = True
             Exit Sub
         End If
 

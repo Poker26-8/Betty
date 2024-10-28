@@ -725,11 +725,13 @@ Public Class frmNuevoPagarSencillo
                         If rd2(0).ToString = 1 Then
                         Else
                             MsgBox("No cuentas con permiso para cerrar la cuenta", vbInformation + vbOKOnly, titulorestaurante)
+                            btnIntro.Enabled = True
                             Exit Sub
                         End If
                     End If
                 Else
                     MsgBox("No cuentas con permiso para cerrar la cuenta", vbInformation + vbOKOnly, titulorestaurante)
+                    btnIntro.Enabled = True
                     Exit Sub
                 End If
                 rd2.Close()
@@ -737,6 +739,7 @@ Public Class frmNuevoPagarSencillo
             End If
         Else
             MsgBox("No tienes asignados permisos contacta a tu administrador", vbInformation + vbOKOnly, titulorestaurante)
+            btnIntro.Enabled = True
             Exit Sub
         End If
         rd1.Close()
@@ -776,9 +779,10 @@ Public Class frmNuevoPagarSencillo
 
         If mypago < CDec(txtTotal.Text) Then
             MsgBox("Debe cerrar la cuenta!.", vbInformation + vbOKOnly, titulomensajes)
+            btnIntro.Enabled = True
             Exit Sub
         End If
-
+        btnIntro.Enabled = False
         If txtMonedero.Text <> "" Then
             Dim sal_monedero As Double = 0
             Dim tipo_mone As Integer = 0

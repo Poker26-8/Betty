@@ -35,8 +35,9 @@
                 mes = "Diciembre"
         End Select
         cboMes.Text = mes
-        cbomesTag
+        cboMesTag()
 
+        dtpHSalida.Text = "00:00:00"
     End Sub
 
     Public Sub cboMesTag()
@@ -68,12 +69,126 @@
     End Sub
 
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
+        frmCitasH.tActuales.Start()
+        Me.Hide()
+        My.Application.DoEvents()
+        If (frmCitasH.optHora.Checked) Then
+            frmCitasH.ActuHora(frmCitasH.grdCaptura, frmCitasH.cboUsuario.Text, frmCitasH.cboHabitacion.Text)
+        End If
+
+        If frmCitasH.optDia.Checked Then
+            frmCitasH.ActuDiaHab(frmCitasH.grdCaptura, frmCitasH.cboUsuario.Text, frmCitasH.cboHabitacion.Text)
+        End If
+        My.Application.DoEvents()
         Me.Close()
     End Sub
 
     Private Sub btnAGregar_Click(sender As Object, e As EventArgs) Handles btnAGregar.Click
-        Dim observaciones As String = ""
-        observaciones = rtAsunto.Text.TrimEnd(vbCrLf.ToCharArray)
+
+        If cboHora.Text = "" Or cboMinuto.Text = "" Or txtDia.Text = "" Or cboMes.Text = "" Or cboAño.Text = "" Or cboUsuario.Text = "" Or rtAsunto.Text = "" Then
+            MsgBox("Necesita llenar todos los datos para guardar el evento.", vbInformation + vbOKOnly, titulohotelriaa)
+            Exit Sub
+        End If
+
+        'CorroboraR que la fecha sea coherente
+        Dim añito As String = Format(Now, "yyyy")
+        Dim añote As String = cboAño.Text
+        If añote < añito Then
+            MsgBox("No puedes guardar un evento en un año pasado.", vbInformation + vbOKOnly, titulohotelriaa)
+            cboAño.Focus()
+            Exit Sub
+        End If
+
+        Dim mesesito As Integer = Now.Month
+        Dim mesesote As Integer = CInt(cboMes.Tag)
+        If añote = añito Then
+            If mesesote < mesesito Then
+                MsgBox("No puedes guardar un evento en un mes pasado.", vbInformation + vbOKOnly, titulohotelriaa)
+                cboMes.Focus()
+                Exit Sub
+            End If
+        End If
+
+        Dim fechita As String = Format(Now, "dd")
+        Dim fechota As String = txtDia.Text
+        If añote = añito Then
+            If mesesote = mesesito Then
+                If fechota < fechita Then
+                    MsgBox("No puedes guardar un evento en un día pasado.", vbInformation + vbOKOnly, titulohotelriaa)
+                    txtDia.Focus()
+                    Exit Sub
+                End If
+            End If
+        End If
+
+
+        Dim tiempito As String = Format(Now, "HHmm")
+        Dim tiempote As String = cboHora.Text & cboMinuto.Text
+        If añote = añito Then
+            If mesesote = mesesito Then
+                If fechota = fechita Then
+                    If tiempote < tiempito Then
+                        MsgBox("No puedes guardar un evento en una hora pasada.", vbInformation + vbOKOnly, titulohotelriaa)
+                        txtDia.Focus()
+                        Exit Sub
+                    End If
+                End If
+            End If
+        End If
+        Dim fechaentera As String = cboAño.Text & "/" & cboMes.Tag & "/" & txtDia.Text & " " & cboHora.Text & ":" & cboMinuto.Text
+
+        Dim fechasalida As String = ""
+        Dim f As Date = dtpFsalida.Value
+        Dim h As Date = dtpHSalida.Value
+        Dim FF As String = Format(f, "yyyy-MM-dd")
+        Dim hh As String = Format(h, "HH:mm:ss")
+        fechasalida = FF & " " & hh
+
+        Try
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT * FROM agenda WHERE Minuto=" & cboMinuto.Text & " AND Hora=" & cboHora.Text & " AND Dia=" & txtDia.Text & " AND Mes=" & cboMes.Tag & " AND Anio=" & cboAño.Text & " AND Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "' AND Activo=1"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    MsgBox("Ya hay una cita programada para el día " & txtDia.Text & "/" & cboMes.Tag & "/" & cboAño.Text & " a las " & cboHora.Text & ":" & cboMinuto.Text & ".", vbInformation + vbOKOnly, titulohotelriaa)
+                    rd1.Close()
+                    cnn1.Close()
+                    Exit Sub
+                End If
+            Else
+                cnn2.Close() : cnn2.Open()
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "INSERT INTO agenda(Hora,Minuto,DIa,Mes,Anio,FEntrada,FSalida,Asunto,Usuario,Habitacion,Cliente,Activo) VALUES(" & cboHora.Text & "," & cboMinuto.Text & "," & txtDia.Text & "," & cboMes.Tag & "," & cboAño.Text & ",'" & fechaentera & "','" & fechasalida & "','" & QuitaSaltos(rtAsunto.Text, " ") & "','" & cboUsuario.Text & "','" & cboHabitacion.Text & "','" & cbocliente.Text & "',1)"
+                cmd2.ExecuteNonQuery()
+                cnn2.Close()
+                MsgBox("Evento registrado con éxito.", vbInformation + vbOKOnly, titulohotelriaa)
+
+            End If
+            rd1.Close()
+            cnn1.Close()
+
+            frmCitasH.tActuales.Start()
+            Me.Hide()
+            If (frmCitasH.optHora.Checked) Then
+                frmCitasH.ActuHora(frmCitasH.grdCaptura, frmCitasH.cboUsuario.Text, frmCitasH.cboHabitacion.Text)
+            End If
+
+            If (frmCitasH.optDia.Checked) Then
+                frmCitasH.ActuDiaHab(frmCitasH.grdCaptura, frmCitasH.cboUsuario.Text, frmCitasH.cboHabitacion.Text)
+            End If
+
+            If (frmCitasH.optMes.Checked) Then
+                frmCitasH.ActuMes(frmCitasH.grdCaptura, frmCitasH.cboUsuario.Text, frmCitasH.cboHabitacion.Text)
+            End If
+            My.Application.DoEvents()
+            Me.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
+
+
     End Sub
 
     Private Sub cbocliente_DropDown(sender As Object, e As EventArgs) Handles cbocliente.DropDown
@@ -137,7 +252,7 @@
             cboHabitacion.Items.Clear()
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand
-            cmd5.CommandText = "SELECT DISTINCT N_Habitacion FROM habitacion WHERE H_Habitacion<>'' ORDER BY H_Habitacion"
+            cmd5.CommandText = "SELECT DISTINCT N_Habitacion FROM habitacion WHERE N_Habitacion<>'' ORDER BY N_Habitacion"
             rd5 = cmd5.ExecuteReader
             Do While rd5.Read
                 If rd5.HasRows Then
@@ -193,5 +308,42 @@
         For a As Integer = 1 To 20
             cboAño.Items.Add(Now.Year + a)
         Next
+    End Sub
+
+    Private Sub cboMes_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboMes.SelectedValueChanged
+        cboMesTag()
+    End Sub
+
+    Private Sub cboHora_DropDown(sender As Object, e As EventArgs) Handles cboHora.DropDown
+        cboHora.Items.Clear()
+        For h As Integer = 0 To 23
+            Dim hora As String = ""
+            If h < 10 Then
+                hora = "0" & h
+            Else
+                hora = h
+            End If
+            cboHora.Items.Add(hora)
+        Next
+    End Sub
+
+    Private Sub cboMinuto_DropDown(sender As Object, e As EventArgs) Handles cboMinuto.DropDown
+        cboMinuto.Items.Clear()
+        For m As Integer = 0 To 59
+            Dim minuto As String = ""
+            If m < 10 Then
+                minuto = "0" & m
+            Else
+                minuto = m
+            End If
+            cboMinuto.Items.Add(minuto)
+        Next
+    End Sub
+
+    Private Sub rtAsunto_KeyPress(sender As Object, e As KeyPressEventArgs)
+        e.KeyChar = UCase(e.KeyChar)
+        If AscW(e.KeyChar) = Keys.Enter Then
+            btnAGregar.Focus.Equals(True)
+        End If
     End Sub
 End Class
