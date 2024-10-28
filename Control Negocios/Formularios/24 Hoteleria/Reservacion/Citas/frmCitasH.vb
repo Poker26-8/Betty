@@ -592,6 +592,9 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Me.Close()
+        refer = ""
+        cboHabitacion.Text = ""
+        cboUsuario.Text = ""
     End Sub
 
     Private Sub btnConsultar_Click(sender As Object, e As EventArgs) Handles btnConsultar.Click
@@ -650,5 +653,11 @@
     Private Sub grdCaptura_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles grdCaptura.CellClick
         id_cita = grdCaptura.CurrentRow.Cells(0).Value.ToString
         refer = grdCaptura.CurrentRow.Cells(1).Value.ToString
+    End Sub
+
+    Private Sub frmCitasH_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        refer = ""
+        cboHabitacion.Text = ""
+        cboUsuario.Text = ""
     End Sub
 End Class

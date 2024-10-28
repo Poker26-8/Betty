@@ -24,13 +24,13 @@ Partial Class frmDetalleCH
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDetalleCH))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.cboHabi = New System.Windows.Forms.TextBox()
         Me.cbousu = New System.Windows.Forms.TextBox()
         Me.txtReferencia = New System.Windows.Forms.TextBox()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.btnModificar = New System.Windows.Forms.Button()
         Me.btnCancelar = New System.Windows.Forms.Button()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.grdCaptura = New System.Windows.Forms.DataGridView()
-        Me.cboHabi = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.grdCaptura, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -49,6 +49,14 @@ Partial Class frmDetalleCH
         Me.Panel1.Size = New System.Drawing.Size(825, 63)
         Me.Panel1.TabIndex = 0
         '
+        'cboHabi
+        '
+        Me.cboHabi.Location = New System.Drawing.Point(274, 21)
+        Me.cboHabi.Name = "cboHabi"
+        Me.cboHabi.Size = New System.Drawing.Size(100, 20)
+        Me.cboHabi.TabIndex = 48
+        Me.cboHabi.Visible = False
+        '
         'cbousu
         '
         Me.cbousu.Location = New System.Drawing.Point(380, 21)
@@ -64,15 +72,6 @@ Partial Class frmDetalleCH
         Me.txtReferencia.Size = New System.Drawing.Size(100, 20)
         Me.txtReferencia.TabIndex = 46
         Me.txtReferencia.Visible = False
-        '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.grdCaptura)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(825, 387)
-        Me.Panel2.TabIndex = 1
         '
         'btnModificar
         '
@@ -106,6 +105,15 @@ Partial Class frmDetalleCH
         Me.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnCancelar.UseVisualStyleBackColor = False
         '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.grdCaptura)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(825, 387)
+        Me.Panel2.TabIndex = 1
+        '
         'grdCaptura
         '
         Me.grdCaptura.AllowUserToAddRows = False
@@ -116,16 +124,9 @@ Partial Class frmDetalleCH
         Me.grdCaptura.Location = New System.Drawing.Point(0, 0)
         Me.grdCaptura.Name = "grdCaptura"
         Me.grdCaptura.ReadOnly = True
+        Me.grdCaptura.RowHeadersVisible = False
         Me.grdCaptura.Size = New System.Drawing.Size(825, 387)
         Me.grdCaptura.TabIndex = 47
-        '
-        'cboHabi
-        '
-        Me.cboHabi.Location = New System.Drawing.Point(274, 21)
-        Me.cboHabi.Name = "cboHabi"
-        Me.cboHabi.Size = New System.Drawing.Size(100, 20)
-        Me.cboHabi.TabIndex = 48
-        Me.cboHabi.Visible = False
         '
         'frmDetalleCH
         '
