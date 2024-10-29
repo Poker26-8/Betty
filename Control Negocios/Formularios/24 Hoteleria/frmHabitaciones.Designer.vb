@@ -70,7 +70,7 @@ Partial Class frmHabitaciones
         Me.Panel3.Controls.Add(Me.btnGuardar)
         Me.Panel3.Controls.Add(Me.btnSalir)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel3.Location = New System.Drawing.Point(0, 124)
+        Me.Panel3.Location = New System.Drawing.Point(0, 123)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(597, 90)
         Me.Panel3.TabIndex = 5
@@ -170,7 +170,7 @@ Partial Class frmHabitaciones
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(0, 0)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(597, 214)
+        Me.Panel4.Size = New System.Drawing.Size(597, 213)
         Me.Panel4.TabIndex = 4
         '
         'txtHoras
@@ -331,7 +331,7 @@ Partial Class frmHabitaciones
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(597, 214)
+        Me.ClientSize = New System.Drawing.Size(597, 213)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel4)

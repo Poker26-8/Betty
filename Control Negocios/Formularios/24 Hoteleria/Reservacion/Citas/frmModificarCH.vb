@@ -227,8 +227,7 @@
         For M As Integer = 0 To 59
             Dim minuto As String = ""
             If M < 10 Then
-                'minuto = "0" & M
-                minuto = M
+                minuto = "0" & M
             Else
                 minuto = M
             End If
@@ -365,6 +364,7 @@
             If (frmCitasH.optHora.Checked) Then
                 frmCitasH.ActuHora(frmCitasH.grdCaptura, frmCitasH.cboUsuario.Text, frmCitasH.cboHabitacion.Text)
             End If
+
             If (frmCitasH.optDia.Checked) Then
                 frmCitasH.ActuDiaHab(frmCitasH.grdCaptura, frmCitasH.cboUsuario.Text, frmCitasH.cboHabitacion.Text)
             End If
@@ -376,4 +376,6 @@
             cnn1.Close()
         End Try
     End Sub
+
+
 End Class

@@ -24,7 +24,7 @@ Public Class frmPagarPollos
     Dim tLogo As String = ""
     Dim simbolo As String = ""
     Dim DesglosaIVA As String = ""
-    Dim facLinea As Integer = ""
+    Dim facLinea As Integer = 0
 
     Private Sub frmPagarPollos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -242,6 +242,8 @@ Public Class frmPagarPollos
             rd1.Close()
             cnn1.Close()
 
+            If impresora = "" Then MsgBox("No tiene impresora configurada.", vbInformation + vbOKOnly, titulocentral)
+
             If tamimpre = "80" Then
                 Precuenta80.DefaultPageSettings.PrinterSettings.PrinterName = impresora
                 Precuenta80.Print()
@@ -354,7 +356,7 @@ Public Class frmPagarPollos
             cnn4.Close() : cnn4.Open()
 
             cmd3 = cnn3.CreateCommand
-            cmd3.CommandText = "SELECT Nombre,Precio,Total,Cantidad FROM vtaimpresion WHERE Mesa='" & lblmesa.Text & "'"
+            cmd3.CommandText = "SELECT Codigo,Nombre,Precio,Total,Cantidad FROM vtaimpresion WHERE Mesa='" & lblmesa.Text & "'"
             rd3 = cmd3.ExecuteReader
             Do While rd3.Read
                 If rd3.HasRows Then
@@ -639,7 +641,6 @@ Public Class frmPagarPollos
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-
         lblforma.Text = ""
         cboComanda.Text = ""
         grdComandas.Rows.Clear()
@@ -879,7 +880,7 @@ Public Class frmPagarPollos
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT Multiplo,Modo_Almacen,Existencia FROM Productos WHERE Codigo='" & mycodigo & "' "
+            cmd1.CommandText = "SELECT Multiplo,Modo_Almacen,Existencia,PrecioCompra FROM Productos WHERE Codigo='" & mycodigo & "' "
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then

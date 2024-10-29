@@ -137,7 +137,7 @@
         Dim HORA As String = ""
         Dim HORX As String = ""
         Dim EVENTO As String = ""
-
+        Dim min As String = ""
         Try
             cnn2.Close() : cnn2.Open()
             cnn3.Close() : cnn3.Open()
@@ -152,16 +152,22 @@
                 cmd2 = cnn2.CreateCommand
 
                 If cboHabitacion.Text = "" Then
-                    cmd2.CommandText = "SELECT Hora,Id,Minuto,Activo FROM agenda WHERE Hora=" & HORA & " AND Dia=" & Fechita(1) & " AND mes=" & Fechita(2) & " AND Anio=" & Fechita(3) & " AND Usuario='" & usuario & "' AND Activo=1"
+                    cmd2.CommandText = "SELECT Hora,Id,Minuto,Activo FROM agenda WHERE Hora=" & HORA & " AND Dia=" & Fechita(1) & " AND mes=" & Fechita(2) & " AND Anio=" & Fechita(3) & " AND Usuario='" & usuario & "'"
                 Else
-                    cmd2.CommandText = "SELECT Hora,Id,Minuto,Activo FROM agenda WHERE Hora=" & HORA & " AND Dia=" & Fechita(1) & " AND mes=" & Fechita(2) & " AND Anio=" & Fechita(3) & " AND Usuario='" & usuario & "' AND Habitacion='" & cboHabitacion.Text & "' AND Activo=1"
+                    cmd2.CommandText = "SELECT Hora,Id,Minuto,Activo FROM agenda WHERE Hora=" & HORA & " AND Dia=" & Fechita(1) & " AND mes=" & Fechita(2) & " AND Anio=" & Fechita(3) & " AND Usuario='" & usuario & "' AND Habitacion='" & cboHabitacion.Text & "'"
                 End If
 
                 rd2 = cmd2.ExecuteReader
                 If rd2.HasRows Then
                     If rd2.Read Then
                         cmd3 = cnn3.CreateCommand
-                        cmd3.CommandText = "SELECT Asunto FROM agenda WHERE Hora=" & HORA & " AND Dia=" & Fechita(1) & " AND Mes=" & Fechita(2) & " AND Anio=" & Fechita(3) & " AND Usuario='" & usuario & "' AND Habitacion='" & habita & "' AND Activo=1"
+
+                        If cboHabitacion.Text = "" Then
+                            cmd3.CommandText = "SELECT Asunto FROM agenda WHERE Hora=" & HORA & " AND Dia=" & Fechita(1) & " AND Mes=" & Fechita(2) & " AND Anio=" & Fechita(3) & " AND Usuario='" & usuario & "'"
+                        Else
+                            cmd3.CommandText = "SELECT Asunto FROM agenda WHERE Hora=" & HORA & " AND Dia=" & Fechita(1) & " AND Mes=" & Fechita(2) & " AND Anio=" & Fechita(3) & " AND Usuario='" & usuario & "' AND Habitacion='" & habita & "'"
+                        End If
+
                         rd3 = cmd3.ExecuteReader
                         If rd3.HasRows Then
                             Do While rd3.Read
@@ -170,27 +176,32 @@
                         End If
                         rd3.Close()
 
-                        EVENTO = Mid(EVENTO, 4, 99000)
-
                         If rd2("Hora").ToString < 10 Then
                             HORX = "0" & rd2("Hora").ToString
                         Else
                             HORX = rd2("Hora").ToString
                         End If
-                        grid.Rows.Add(rd2("Id").ToString, rd2("Hora").ToString & ":" & rd2("Minuto").ToString, EVENTO, rd2("Activo").ToString)
+
+                        If rd2("Minuto").ToString = "0" Then
+                            min = "0" & rd2("Minuto").ToString
+                        Else
+                            min = rd2("Minuto").ToString
+                        End If
+                        grid.Rows.Add(rd2("Id").ToString, rd2("Hora").ToString & ":" & min, EVENTO, rd2("Activo").ToString)
                     End If
-                    rd2.Close()
+
                 Else
                     If HORA < 10 Then
                         HORX = "0" & field
                     Else
                         HORX = field
                     End If
-                    grid.Rows.Add("0", HORA & ":00", "", "0")
+                    grid.Rows.Add("0", HORA & ":00", "", "DX")
                 End If
-                cnn2.Close()
-                cnn3.Close()
+                rd2.Close()
             Next
+            cnn2.Close()
+            cnn3.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn2.Close()
@@ -201,10 +212,9 @@
     Public Sub ActuHora(ByVal grid As DataGridView, ByRef usuario As String, ByVal habita As String)
 
         grdCaptura.Rows.Clear()
-        grid.Rows.Clear()
         Dim minuto As String = ""
         Dim hora As String = ""
-
+        Dim valortiem As String = ""
         Try
             cnn2.Close() : cnn2.Open()
             For field As Integer = 0 To 60
@@ -214,9 +224,9 @@
                 cmd2 = cnn2.CreateCommand
 
                 If cboHabitacion.Text = "" Then
-                    cmd2.CommandText = "select Hora,Minuto,Id,Asunto,Activo from Agenda where Minuto=" & minuto & " and Hora=" & Tiempo(1) & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & usuario & "' and Activo=-1"
+                    cmd2.CommandText = "select Hora,Minuto,Id,Asunto,Activo from Agenda where Minuto=" & minuto & " and Hora=" & Tiempo(1) & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & usuario & "'"
                 Else
-                    cmd2.CommandText = "select Hora,Minuto,Id,Asunto,Activo from Agenda where Minuto=" & minuto & " and Hora=" & Tiempo(1) & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & usuario & "' AND Habitacion='" & habita & "' and Activo=-1"
+                    cmd2.CommandText = "select Hora,Minuto,Id,Asunto,Activo from Agenda where Minuto=" & minuto & " and Hora=" & Tiempo(1) & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & usuario & "' AND Habitacion='" & habita & "'"
                 End If
 
                 rd2 = cmd2.ExecuteReader
@@ -234,7 +244,7 @@
                             minuto = rd2("Minuto").ToString
                         End If
 
-                        grid.Rows.Add(rd2("Id").ToString, hora & ":" & minuto, rd2("Asunto").ToString, rd2("Activo").ToString)
+                        grdCaptura.Rows.Add(rd2("Id").ToString, hora & ":" & minuto, rd2("Asunto").ToString, rd2("Activo").ToString)
                     End If
                 Else
                     If field < 10 Then
@@ -248,8 +258,20 @@
                     Else
                         hora = Tiempo(1)
                     End If
-                    grid.Rows.Add("0", hora & ":" & minuto, "", "0")
+                    valortiem = hora & ":" & minuto
+
+                    grdCaptura.Rows.Add("0", valortiem, "", "DX")
                 End If
+
+
+                If grdCaptura.Rows(field).Cells(3).Value.ToString = "DX" Then
+                Else
+                    If grdCaptura.Rows(field).Cells(3).Value = 0 Then
+                        grdCaptura.Rows(field).DefaultCellStyle.BackColor = Color.Blue
+                        grdCaptura.Rows(field).DefaultCellStyle.ForeColor = Color.White
+                    End If
+                End If
+                My.Application.DoEvents()
                 rd2.Close()
             Next
             cnn2.Close()
@@ -275,29 +297,43 @@
                 cmd2 = cnn2.CreateCommand
 
                 If cboHabitacion.Text = "" Then
-                    cmd2.CommandText = "select Id,Dia,Activo from Agenda where Dia=" & dia & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & usuario & "' and Activo=-1"
+                    cmd2.CommandText = "select Id,Dia,Activo from Agenda where Dia=" & dia & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & usuario & "'"
                 Else
-                    cmd2.CommandText = "select Id,Dia,Activo from Agenda where Dia=" & dia & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & usuario & "' AND Habitacion='" & cboHabitacion.Text & "' and Activo=-1"
+                    cmd2.CommandText = "select Id,Dia,Activo from Agenda where Dia=" & dia & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & usuario & "' AND Habitacion='" & cboHabitacion.Text & "'"
                 End If
 
                 rd2 = cmd2.ExecuteReader
                 If rd2.HasRows Then
                     If rd2.Read Then
                         cmd3 = cnn3.CreateCommand
-                        cmd3.CommandText = "SELECT Asunto FROM Agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND Anio=" & Fechita(3) & " AND Usuario='" & usuario & "' AND Habitacion='" & habita & "' AND Activo=-1"
+                        If cboHabitacion.Text = "" Then
+                            cmd3.CommandText = "SELECT Asunto FROM Agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND Anio=" & Fechita(3) & " AND Usuario='" & usuario & "'"
+                        Else
+                            cmd3.CommandText = "SELECT Asunto FROM Agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND Anio=" & Fechita(3) & " AND Usuario='" & usuario & "' AND Habitacion='" & habita & "'"
+                        End If
                         rd3 = cmd3.ExecuteReader
-                        Do While rd3.Read
-                            If rd3.HasRows Then
+                        If rd3.HasRows Then
+                            If rd3.Read Then
                                 evento = rd3(0).ToString
                             End If
-                        Loop
+                        End If
                         rd3.Close()
-                        evento = Mid(evento, 4, 99000)
-                        grid.Rows.Add(rd2("Id"), ToString, rd2("Dia").ToString, evento, rd2("Activo").ToString)
+
+                        grdCaptura.Rows.Add(rd2("Id").ToString, rd2("Dia").ToString, evento, rd2("Activo").ToString)
                     End If
                 Else
-                    grid.Rows.Add("0", dia, "", "0")
+                    grdCaptura.Rows.Add("0", dia, "", "DX")
                 End If
+
+
+                If grdCaptura.Rows(field - 1).Cells(3).Value.ToString = "DX" Then
+                Else
+                    If grdCaptura.Rows(field - 1).Cells(3).Value = False Then
+                        grdCaptura.Rows(field - 1).DefaultCellStyle.BackColor = Color.Blue
+                        grdCaptura.Rows(field - 1).DefaultCellStyle.ForeColor = Color.White
+                    End If
+                End If
+                My.Application.DoEvents()
                 rd2.Close()
             Next
             cnn3.Close()
@@ -333,8 +369,16 @@
 
     Private Sub optMes_Click(sender As Object, e As EventArgs) Handles optMes.Click
         grdCaptura.Rows.Clear()
-
         tipo = 3
+
+        With grdCaptura.Columns(1)
+            .Name = "Dia"
+            '.Width = 50
+            '.AutoSizeMode = DataGridViewAutoSizeColumnMode.None
+            '.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            '.Visible = False
+            '.Resizable = DataGridViewTriState.False
+        End With
 
         If cboUsuario.Text = "" And cboHabitacion.Text = "" Then
             MsgBox("Seleccione un usuario y habitación", vbInformation + vbOKOnly, titulohotelriaa)
@@ -368,6 +412,7 @@
                 If rd4.HasRows Then
                     If rd4.Read Then
                         cmd2 = cnn2.CreateCommand
+
                         If cboHabitacion.Text = "" Then
                             cmd2.CommandText = "SELECT Asunto FROM agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND anio=" & Fechita(3) & " AND Usuario='" & cboUsuario.Text & "'"
                         Else
@@ -477,10 +522,10 @@
                     Else
                         horx = field
                     End If
-                    grdCaptura.Rows.Add("0", horx & ":00", "", "NULO")
+                    grdCaptura.Rows.Add("0", horx & ":00", "", "DX")
                 End If
 
-                If grdCaptura.Rows(field).Cells(3).Value.ToString = "NULO" Then
+                If grdCaptura.Rows(field).Cells(3).Value.ToString = "DX" Then
                 Else
                     If grdCaptura.Rows(field).Cells(3).Value = False Then
                         grdCaptura.Rows(field).DefaultCellStyle.BackColor = Color.Blue
@@ -500,7 +545,7 @@
         End Try
 
         btnAgregar.Visible = True
-        btnModificar.Visible = False
+        btnModificar.Visible = True
         btnDetalle.Visible = True
     End Sub
 
@@ -565,17 +610,17 @@
                         hora = Tiempo(1)
                     End If
 
-                    grdCaptura.Rows.Add("0", hora & ":" & minuto, "", "NULO")
+                    grdCaptura.Rows.Add("0", hora & ":" & minuto, "", "DX")
                 End If
-                rd1.Close()
 
-                If grdCaptura.Rows(field).Cells(3).Value.ToString = "NULO" Then
+                If grdCaptura.Rows(field).Cells(3).Value.ToString = "DX" Then
                 Else
                     If grdCaptura.Rows(field).Cells(3).Value = False Then
                         grdCaptura.Rows(field).DefaultCellStyle.BackColor = Color.Blue
                         grdCaptura.Rows(field).DefaultCellStyle.ForeColor = Color.White
                     End If
                 End If
+                rd1.Close()
             Next
             cnn1.Close()
         Catch ex As Exception
@@ -648,7 +693,8 @@
     End Sub
 
     Private Sub btnConsultar_Click(sender As Object, e As EventArgs) Handles btnConsultar.Click
-
+        frmConsultarCitaH.BringToFront()
+        frmConsultarCitaH.Show()
     End Sub
 
     Private Sub btnDetalle_Click(sender As Object, e As EventArgs) Handles btnDetalle.Click

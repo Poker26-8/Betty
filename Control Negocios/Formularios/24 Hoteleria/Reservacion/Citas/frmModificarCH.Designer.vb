@@ -118,12 +118,14 @@ Partial Class frmModificarCH
         Me.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnCancelar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancelar.ForeColor = System.Drawing.Color.White
+        Me.btnCancelar.Image = CType(resources.GetObject("btnCancelar.Image"), System.Drawing.Image)
         Me.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnCancelar.Location = New System.Drawing.Point(546, 5)
         Me.btnCancelar.Name = "btnCancelar"
         Me.btnCancelar.Size = New System.Drawing.Size(110, 55)
         Me.btnCancelar.TabIndex = 5
         Me.btnCancelar.Text = "Cancelar"
+        Me.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnCancelar.UseVisualStyleBackColor = False
         '
         'Panel2
@@ -156,16 +158,16 @@ Partial Class frmModificarCH
         'dtpHoraSalida
         '
         Me.dtpHoraSalida.Format = System.Windows.Forms.DateTimePickerFormat.Time
-        Me.dtpHoraSalida.Location = New System.Drawing.Point(563, 93)
+        Me.dtpHoraSalida.Location = New System.Drawing.Point(563, 92)
         Me.dtpHoraSalida.Name = "dtpHoraSalida"
         Me.dtpHoraSalida.ShowUpDown = True
-        Me.dtpHoraSalida.Size = New System.Drawing.Size(92, 20)
+        Me.dtpHoraSalida.Size = New System.Drawing.Size(93, 20)
         Me.dtpHoraSalida.TabIndex = 53
         '
         'dtpFechaSalida
         '
         Me.dtpFechaSalida.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpFechaSalida.Location = New System.Drawing.Point(456, 94)
+        Me.dtpFechaSalida.Location = New System.Drawing.Point(456, 92)
         Me.dtpFechaSalida.Name = "dtpFechaSalida"
         Me.dtpFechaSalida.Size = New System.Drawing.Size(101, 20)
         Me.dtpFechaSalida.TabIndex = 52
@@ -179,7 +181,7 @@ Partial Class frmModificarCH
         Me.Label10.ForeColor = System.Drawing.Color.White
         Me.Label10.Location = New System.Drawing.Point(456, 70)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(200, 21)
+        Me.Label10.Size = New System.Drawing.Size(200, 19)
         Me.Label10.TabIndex = 51
         Me.Label10.Text = "Fecha Salida"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -297,7 +299,7 @@ Partial Class frmModificarCH
         Me.Label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.White
-        Me.Label7.Location = New System.Drawing.Point(419, 10)
+        Me.Label7.Location = New System.Drawing.Point(435, 10)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(72, 21)
         Me.Label7.TabIndex = 39
@@ -306,10 +308,11 @@ Partial Class frmModificarCH
         '
         'cboUsuario
         '
+        Me.cboUsuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboUsuario.FormattingEnabled = True
-        Me.cboUsuario.Location = New System.Drawing.Point(497, 10)
+        Me.cboUsuario.Location = New System.Drawing.Point(513, 10)
         Me.cboUsuario.Name = "cboUsuario"
-        Me.cboUsuario.Size = New System.Drawing.Size(159, 21)
+        Me.cboUsuario.Size = New System.Drawing.Size(143, 21)
         Me.cboUsuario.TabIndex = 40
         '
         'lblHabitación
@@ -319,7 +322,7 @@ Partial Class frmModificarCH
         Me.lblHabitación.ForeColor = System.Drawing.Color.White
         Me.lblHabitación.Location = New System.Drawing.Point(112, 35)
         Me.lblHabitación.Name = "lblHabitación"
-        Me.lblHabitación.Size = New System.Drawing.Size(300, 21)
+        Me.lblHabitación.Size = New System.Drawing.Size(312, 21)
         Me.lblHabitación.TabIndex = 7
         Me.lblHabitación.Text = "Cliente:"
         '
@@ -339,7 +342,7 @@ Partial Class frmModificarCH
         Me.lblCliente.ForeColor = System.Drawing.Color.White
         Me.lblCliente.Location = New System.Drawing.Point(112, 9)
         Me.lblCliente.Name = "lblCliente"
-        Me.lblCliente.Size = New System.Drawing.Size(300, 21)
+        Me.lblCliente.Size = New System.Drawing.Size(312, 21)
         Me.lblCliente.TabIndex = 5
         Me.lblCliente.Text = "Cliente:"
         '

@@ -137,8 +137,26 @@
   </data>
   <data name="btnEliminar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
+        iVBORw0KGgoAAAANSUhEUgAAACYAAAAwCAYAAAB9sggoAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DwAACw8BkvkDpQAAArJJREFUWEft1z9oE2EYx/EuLh2yOLoUoSDtKNHSxQ4Bi04uJYuLUMWKGBxUrIIQ
+        cVCwDg6iDi5CV4cOovgHqq201tok5G/T1prWS1OttkFR8PH9xbx4Xp43ubu8l2ToA99SkuN9P71ccmkb
+        EZXKFz53iEKiKzpKZRZvyLXdVPrxZmq651O+8E0sSLqaiyVpcmo2Y93Qbhjf7Fz0Nbd4PQH25Pkr1ziM
+        PxZPRrjF60nC3OIwvV7D3OAaBnOKayjMCa7hMGQH1xQYqoXzDBZLZFiQuWo4z2CrxhqNT7xlQeZUOM9g
+        CLhEeoGi8XmKJrLK4umF8w2FyYy1dUrOL1MsuciWXVoJNQWGquGaCkMqXNNhiMO1BAxZcS0DQ2ZcS8GQ
+        xLUcDAH3IWcEWw5Wrm8b5rBtmNM0wxJxyo+/qDvj1rWQcbinT1YXbGk5RyuDAyQW8qKQa9izO7e5BXW1
+        4QqWTGVo7OZ1bkFtaYVt3h2h31ubpbYe3q94XlY4doR+TLwUlxLRr2yK8gOBimO0wgAyz/enYxXHAAGM
+        eb6OhCuO0woDxDpmHIfCH+P5GeM2xsiX1QoHav300Yp1kFYYUuF+RmbKv/2daiikHYZUODm1UMgTGFLh
+        7KCQZzCEa4sb7l1ozTMYNldN015KbFprGn7xYzNsah58ynOPV8NphXGb4w0gP0C/XBgqP/pvcDxuUda1
+        SrCZd+8nOYAqFUze/+SYUTLu2sM91nwMAsw/ePzEmdyqUeQQXCpY8dFoeSv1zRlZcTiT1mMA84n6u7q7
+        g8OXLl+008mhU1eHAwceWxdDG+FzpY1VKBmex5niXkYkv1/vEO10UOfZzl1hbkFd/fcPgN2A6/K1Bz8e
+        2l/kFtXQA3bjWonBGe4f3bfnXjSwN6Kz9EH/tIB1sBvbScxuUa8HtRNR2x+Y5Z/0YjbW1gAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
+  <data name="btnCancelar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
         iVBORw0KGgoAAAANSUhEUgAAAB8AAAAgCAYAAADqgqNBAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAApFJREFUWEedl79rFEEUx/Mn+A/oJZeIoNFczh9YKAQsxEoRIRYRrLTNPyBYWaey
+        DwAACw8BkvkDpQAAApFJREFUWEedl79rFEEUx/Mn+A/oJZeIoNFczh9YKAQsxEoRIRYRrLTNPyBYWaey
         UhQEW/0HhFMUUiU5VDRHjKJ3u6VWNoLj+272rW/evpndueJT3OzdfL67M/f2zYxzLols8eIhYqXg2Lmb
         k/n+esHC6QvW92OYgxoSzRIbxDfCMSR0k8PH/9NZ/DOZW9pDGGsejTnIkKBHDKRQUpNLZk/9bAphDgKa
         /L6WaaJyptvbpu91LEdtgCbFmr6UkhCt5KBz8rcVwPtAE0K8IwUxWsuBEUDLn2pBjCQ5oADSJ8W39eRN

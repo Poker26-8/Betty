@@ -1,5 +1,21 @@
 ﻿Module CrearBD
 
+    Public vartablaagenda As String = "CREATE TABLE `agenda` (
+                                              `Id` int(11) NOT NULL,
+                                              `Habitacion` varchar(100) DEFAULT '',
+                                              `Cliente` varchar(255) DEFAULT '',
+                                              `Hora` int(11) NOT NULL DEFAULT '0',
+                                              `Minuto` int(11) NOT NULL DEFAULT '0',
+                                              `Dia` int(11) NOT NULL DEFAULT '0',
+                                              `Mes` int(11) NOT NULL DEFAULT '0',
+                                              `Anio` int(11) NOT NULL DEFAULT '0',
+                                              `FEntrada` datetime NOT NULL,
+                                              `FSalida` datetime NOT NULL,
+                                              `Asunto` text NOT NULL,
+                                              `Usuario` varchar(50) NOT NULL DEFAULT '',
+                                              `Activo` int(11) NOT NULL DEFAULT '0'
+                                            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+
     Public vartablamovimientos As String = "CREATE TABLE `movimientos` (
                                               `Id` int(11) NOT NULL,
                                               `Id_Bodega` int(11) DEFAULT '0',
@@ -6326,7 +6342,8 @@
                                                   `F44` float DEFAULT '0',
                                                   `CargadoAndroid` int(11) DEFAULT '0' COMMENT 'para ventas en ruta',
                                                   `Mililitros` float DEFAULT '0',
-                                                  `Copas` float DEFAULT '0'
+                                                  `Copas` float DEFAULT '0',
+                                                  `PecioVentaMinIVA` float DEFAULT '0'
                                                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
 
@@ -7023,6 +7040,7 @@
     '/////////////////////////////////////////////////////////////////////////
     'LLAVES PRIMARIAS
     '/////////////////////////////////////////////////////////////////////////
+    Public VarKeyagenda As String = "ALTER TABLE `agenda` ADD PRIMARY KEY (`Id`);"
     Public VarKeymovimiento As String = "ALTER TABLE `movimientos` ADD PRIMARY KEY (`Id`);"
     Public VarKeyautoriza As String = "ALTER TABLE `autoriza`ADD PRIMARY KEY (`Id`);"
     Public VarKeybodegas As String = "ALTER TABLE `bodegas` ADD PRIMARY KEY (`Id`);"
@@ -7199,6 +7217,7 @@
     '/////////////////////////////////////////////////////////////////////////
     'AUTOINCREMENTO
     '/////////////////////////////////////////////////////////////////////////
+    Public VarAutoagenda As String = "ALTER TABLE `agenda` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
     Public VarAutomovimiento As String = "ALTER TABLE `movimientos` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
     Public VarAutoautoriza As String = "ALTER TABLE `autoriza` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
     Public VarAutobodegas As String = "ALTER TABLE `bodegas` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"

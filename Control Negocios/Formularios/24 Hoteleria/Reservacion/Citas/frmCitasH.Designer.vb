@@ -37,21 +37,21 @@ Partial Class frmCitasH
         Me.cboUsuario = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.btnDetalle = New System.Windows.Forms.Button()
-        Me.btnConsultar = New System.Windows.Forms.Button()
-        Me.btnModificar = New System.Windows.Forms.Button()
-        Me.btnAgregar = New System.Windows.Forms.Button()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.grdCaptura = New System.Windows.Forms.DataGridView()
         Me.tHora = New System.Windows.Forms.Timer(Me.components)
         Me.tActuales = New System.Windows.Forms.Timer(Me.components)
         Me.tEstado = New System.Windows.Forms.Timer(Me.components)
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnDetalle = New System.Windows.Forms.Button()
+        Me.btnConsultar = New System.Windows.Forms.Button()
+        Me.btnModificar = New System.Windows.Forms.Button()
+        Me.btnAgregar = New System.Windows.Forms.Button()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.a = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ss = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1saasas = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.azxzx = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -76,16 +76,16 @@ Partial Class frmCitasH
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(533, 143)
+        Me.Panel1.Size = New System.Drawing.Size(600, 143)
         Me.Panel1.TabIndex = 0
         '
         'Panel2
         '
         Me.Panel2.Controls.Add(Me.PictureBox1)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel2.Location = New System.Drawing.Point(343, 0)
+        Me.Panel2.Location = New System.Drawing.Point(345, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(190, 143)
+        Me.Panel2.Size = New System.Drawing.Size(255, 143)
         Me.Panel2.TabIndex = 46
         '
         'lblMes
@@ -202,75 +202,10 @@ Partial Class frmCitasH
         Me.Panel3.Controls.Add(Me.btnModificar)
         Me.Panel3.Controls.Add(Me.btnAgregar)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel3.Location = New System.Drawing.Point(0, 507)
+        Me.Panel3.Location = New System.Drawing.Point(0, 574)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(533, 67)
+        Me.Panel3.Size = New System.Drawing.Size(600, 67)
         Me.Panel3.TabIndex = 1
-        '
-        'Button1
-        '
-        Me.Button1.BackColor = System.Drawing.Color.DodgerBlue
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Location = New System.Drawing.Point(457, 9)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(73, 55)
-        Me.Button1.TabIndex = 4
-        Me.Button1.Text = "Salir"
-        Me.Button1.UseVisualStyleBackColor = False
-        '
-        'btnDetalle
-        '
-        Me.btnDetalle.BackColor = System.Drawing.Color.DodgerBlue
-        Me.btnDetalle.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnDetalle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDetalle.ForeColor = System.Drawing.Color.White
-        Me.btnDetalle.Location = New System.Drawing.Point(287, 9)
-        Me.btnDetalle.Name = "btnDetalle"
-        Me.btnDetalle.Size = New System.Drawing.Size(74, 55)
-        Me.btnDetalle.TabIndex = 3
-        Me.btnDetalle.Text = "Detalle"
-        Me.btnDetalle.UseVisualStyleBackColor = False
-        '
-        'btnConsultar
-        '
-        Me.btnConsultar.BackColor = System.Drawing.Color.DodgerBlue
-        Me.btnConsultar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnConsultar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnConsultar.ForeColor = System.Drawing.Color.White
-        Me.btnConsultar.Location = New System.Drawing.Point(367, 9)
-        Me.btnConsultar.Name = "btnConsultar"
-        Me.btnConsultar.Size = New System.Drawing.Size(84, 55)
-        Me.btnConsultar.TabIndex = 2
-        Me.btnConsultar.Text = "Consultar"
-        Me.btnConsultar.UseVisualStyleBackColor = False
-        '
-        'btnModificar
-        '
-        Me.btnModificar.BackColor = System.Drawing.Color.DodgerBlue
-        Me.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnModificar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnModificar.ForeColor = System.Drawing.Color.White
-        Me.btnModificar.Location = New System.Drawing.Point(86, 6)
-        Me.btnModificar.Name = "btnModificar"
-        Me.btnModificar.Size = New System.Drawing.Size(83, 55)
-        Me.btnModificar.TabIndex = 1
-        Me.btnModificar.Text = "Modificar"
-        Me.btnModificar.UseVisualStyleBackColor = False
-        '
-        'btnAgregar
-        '
-        Me.btnAgregar.BackColor = System.Drawing.Color.DodgerBlue
-        Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnAgregar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAgregar.ForeColor = System.Drawing.Color.White
-        Me.btnAgregar.Location = New System.Drawing.Point(6, 6)
-        Me.btnAgregar.Name = "btnAgregar"
-        Me.btnAgregar.Size = New System.Drawing.Size(74, 55)
-        Me.btnAgregar.TabIndex = 0
-        Me.btnAgregar.Text = "Agregar"
-        Me.btnAgregar.UseVisualStyleBackColor = False
         '
         'Panel4
         '
@@ -278,7 +213,7 @@ Partial Class frmCitasH
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(0, 143)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(533, 364)
+        Me.Panel4.Size = New System.Drawing.Size(600, 431)
         Me.Panel4.TabIndex = 2
         '
         'grdCaptura
@@ -293,7 +228,7 @@ Partial Class frmCitasH
         Me.grdCaptura.Name = "grdCaptura"
         Me.grdCaptura.ReadOnly = True
         Me.grdCaptura.RowHeadersVisible = False
-        Me.grdCaptura.Size = New System.Drawing.Size(533, 364)
+        Me.grdCaptura.Size = New System.Drawing.Size(600, 431)
         Me.grdCaptura.TabIndex = 0
         '
         'tHora
@@ -308,13 +243,108 @@ Partial Class frmCitasH
         '
         Me.tEstado.Interval = 10000
         '
+        'Button1
+        '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button1.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.ForeColor = System.Drawing.Color.White
+        Me.Button1.Image = Global.Control_Negocios.My.Resources.Resources.salir
+        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button1.Location = New System.Drawing.Point(482, 6)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(113, 55)
+        Me.Button1.TabIndex = 4
+        Me.Button1.Text = "Salir"
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'btnDetalle
+        '
+        Me.btnDetalle.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDetalle.BackColor = System.Drawing.Color.DodgerBlue
+        Me.btnDetalle.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDetalle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDetalle.ForeColor = System.Drawing.Color.White
+        Me.btnDetalle.Image = CType(resources.GetObject("btnDetalle.Image"), System.Drawing.Image)
+        Me.btnDetalle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDetalle.Location = New System.Drawing.Point(244, 6)
+        Me.btnDetalle.Name = "btnDetalle"
+        Me.btnDetalle.Size = New System.Drawing.Size(113, 55)
+        Me.btnDetalle.TabIndex = 3
+        Me.btnDetalle.Text = "Detalle"
+        Me.btnDetalle.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDetalle.UseVisualStyleBackColor = False
+        '
+        'btnConsultar
+        '
+        Me.btnConsultar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnConsultar.BackColor = System.Drawing.Color.DodgerBlue
+        Me.btnConsultar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnConsultar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnConsultar.ForeColor = System.Drawing.Color.White
+        Me.btnConsultar.Image = CType(resources.GetObject("btnConsultar.Image"), System.Drawing.Image)
+        Me.btnConsultar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnConsultar.Location = New System.Drawing.Point(363, 6)
+        Me.btnConsultar.Name = "btnConsultar"
+        Me.btnConsultar.Size = New System.Drawing.Size(113, 55)
+        Me.btnConsultar.TabIndex = 2
+        Me.btnConsultar.Text = "Consultar"
+        Me.btnConsultar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnConsultar.UseVisualStyleBackColor = False
+        '
+        'btnModificar
+        '
+        Me.btnModificar.BackColor = System.Drawing.Color.DodgerBlue
+        Me.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnModificar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnModificar.ForeColor = System.Drawing.Color.White
+        Me.btnModificar.Image = Global.Control_Negocios.My.Resources.Resources.timbrar
+        Me.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnModificar.Location = New System.Drawing.Point(125, 6)
+        Me.btnModificar.Name = "btnModificar"
+        Me.btnModificar.Size = New System.Drawing.Size(113, 55)
+        Me.btnModificar.TabIndex = 1
+        Me.btnModificar.Text = "Modificar"
+        Me.btnModificar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnModificar.UseVisualStyleBackColor = False
+        '
+        'btnAgregar
+        '
+        Me.btnAgregar.BackColor = System.Drawing.Color.DodgerBlue
+        Me.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnAgregar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAgregar.ForeColor = System.Drawing.Color.White
+        Me.btnAgregar.Image = CType(resources.GetObject("btnAgregar.Image"), System.Drawing.Image)
+        Me.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAgregar.Location = New System.Drawing.Point(6, 6)
+        Me.btnAgregar.Name = "btnAgregar"
+        Me.btnAgregar.Size = New System.Drawing.Size(113, 55)
+        Me.btnAgregar.TabIndex = 0
+        Me.btnAgregar.Text = "Agregar"
+        Me.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnAgregar.UseVisualStyleBackColor = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(255, 143)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 8
+        Me.PictureBox1.TabStop = False
+        '
         'a
         '
         Me.a.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.a.HeaderText = "Id"
         Me.a.Name = "a"
         Me.a.ReadOnly = True
-        Me.a.Width = 41
+        Me.a.Visible = False
+        Me.a.Width = 22
         '
         'ss
         '
@@ -337,25 +367,15 @@ Partial Class frmCitasH
         Me.azxzx.HeaderText = "Activo"
         Me.azxzx.Name = "azxzx"
         Me.azxzx.ReadOnly = True
+        Me.azxzx.Visible = False
         Me.azxzx.Width = 62
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(190, 143)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 8
-        Me.PictureBox1.TabStop = False
         '
         'frmCitasH
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(533, 574)
+        Me.ClientSize = New System.Drawing.Size(600, 641)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel1)

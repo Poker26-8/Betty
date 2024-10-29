@@ -12,7 +12,23 @@ Public Class frmManejo
     Dim varHoras As String = ""
     Dim vardias As String = ""
     Dim varhora As Double = 0
+
+    Dim tim As New Timer()
+
+    Private Sub Timer_Tick(sender As Object, e As EventArgs)
+        tim.Stop()
+
+        TRAERUBICACION()
+        primerBoton()
+        tim.Start()
+    End Sub
+
     Private Sub frmManejo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
+        tim.Interval = 15000
+        AddHandler tim.Tick, AddressOf Timer_Tick
+        tim.Start()
 
         TRAERUBICACION()
 

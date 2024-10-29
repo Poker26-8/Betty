@@ -783,6 +783,11 @@ Public Class Login
                     With odata
                         If .dbOpen(cnnprueba, sTargetprueba, sinfo) Then
 
+                            'agenda
+                            .runSp(cnnprueba, vartablaagenda, sinfo)
+                            .runSp(cnnprueba, VarKeyagenda, sinfo)
+                            .runSp(cnnprueba, VarAutoagenda, sinfo)
+
                             'movimeinto
                             .runSp(cnnprueba, vartablamovimientos, sinfo)
                             .runSp(cnnprueba, VarKeymovimiento, sinfo)

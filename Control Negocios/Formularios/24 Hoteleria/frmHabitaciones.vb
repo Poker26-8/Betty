@@ -21,7 +21,7 @@
     Private Sub cboTipo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboTipo.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
-            txtHoras.Focus.Equals(True)
+            rtbCaracteristicas.Focus.Equals(True)
         End If
     End Sub
 
