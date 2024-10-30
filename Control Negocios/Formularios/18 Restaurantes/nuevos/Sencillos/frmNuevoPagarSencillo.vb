@@ -685,6 +685,8 @@ Public Class frmNuevoPagarSencillo
 
     Private Sub btnIntro_Click(sender As Object, e As EventArgs) Handles btnIntro.Click
 
+        If MsgBox("Desea cerrar la nota de venta", vbInformation + vbYesNo) = vbNo Then Exit Sub
+
         Dim varieps As String = ""
         Dim vartotal As String = ""
         Dim mypago As Double = 0
@@ -1573,6 +1575,8 @@ Door:
         rd1.Close()
         cnn1.Close()
 
+        tim.Stop()
+
         If imprime = 1 Then
 
             If MsgBox("Desea Imprimir esta Ventana", vbInformation + vbYesNo, titulocentral) = vbYes Then
@@ -1620,6 +1624,7 @@ Door:
 
 deku:
 
+        My.Application.DoEvents()
         btnLimpiar.PerformClick()
         Me.Close()
 
