@@ -136,9 +136,9 @@ Partial Class FrmDetReservacion
         'lblusuario
         '
         Me.lblusuario.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblusuario.BackColor = System.Drawing.Color.DodgerBlue
+        Me.lblusuario.BackColor = System.Drawing.Color.SkyBlue
         Me.lblusuario.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblusuario.ForeColor = System.Drawing.Color.White
+        Me.lblusuario.ForeColor = System.Drawing.Color.Black
         Me.lblusuario.Location = New System.Drawing.Point(4, 10)
         Me.lblusuario.Name = "lblusuario"
         Me.lblusuario.Size = New System.Drawing.Size(115, 22)
@@ -183,9 +183,9 @@ Partial Class FrmDetReservacion
         '
         'lblTipo
         '
-        Me.lblTipo.BackColor = System.Drawing.Color.DodgerBlue
+        Me.lblTipo.BackColor = System.Drawing.Color.SkyBlue
         Me.lblTipo.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTipo.ForeColor = System.Drawing.Color.White
+        Me.lblTipo.ForeColor = System.Drawing.Color.Black
         Me.lblTipo.Location = New System.Drawing.Point(71, 62)
         Me.lblTipo.Name = "lblTipo"
         Me.lblTipo.Size = New System.Drawing.Size(304, 23)
@@ -202,9 +202,9 @@ Partial Class FrmDetReservacion
         '
         'lblCaracteristicas
         '
-        Me.lblCaracteristicas.BackColor = System.Drawing.Color.DodgerBlue
+        Me.lblCaracteristicas.BackColor = System.Drawing.Color.SkyBlue
         Me.lblCaracteristicas.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCaracteristicas.ForeColor = System.Drawing.Color.White
+        Me.lblCaracteristicas.ForeColor = System.Drawing.Color.Black
         Me.lblCaracteristicas.Location = New System.Drawing.Point(381, 18)
         Me.lblCaracteristicas.Name = "lblCaracteristicas"
         Me.lblCaracteristicas.Size = New System.Drawing.Size(356, 79)
@@ -369,9 +369,9 @@ Partial Class FrmDetReservacion
         '
         'lblidcliented
         '
-        Me.lblidcliented.BackColor = System.Drawing.Color.DodgerBlue
+        Me.lblidcliented.BackColor = System.Drawing.Color.SkyBlue
         Me.lblidcliented.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblidcliented.ForeColor = System.Drawing.Color.White
+        Me.lblidcliented.ForeColor = System.Drawing.Color.Black
         Me.lblidcliented.Location = New System.Drawing.Point(89, 118)
         Me.lblidcliented.Name = "lblidcliented"
         Me.lblidcliented.Size = New System.Drawing.Size(70, 22)
@@ -409,9 +409,9 @@ Partial Class FrmDetReservacion
         '
         'lblINE
         '
-        Me.lblINE.BackColor = System.Drawing.Color.DodgerBlue
+        Me.lblINE.BackColor = System.Drawing.Color.SkyBlue
         Me.lblINE.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblINE.ForeColor = System.Drawing.Color.White
+        Me.lblINE.ForeColor = System.Drawing.Color.Black
         Me.lblINE.Location = New System.Drawing.Point(310, 145)
         Me.lblINE.Name = "lblINE"
         Me.lblINE.Size = New System.Drawing.Size(165, 23)
@@ -430,9 +430,9 @@ Partial Class FrmDetReservacion
         '
         'lblEntrada
         '
-        Me.lblEntrada.BackColor = System.Drawing.Color.DodgerBlue
+        Me.lblEntrada.BackColor = System.Drawing.Color.SkyBlue
         Me.lblEntrada.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblEntrada.ForeColor = System.Drawing.Color.White
+        Me.lblEntrada.ForeColor = System.Drawing.Color.Black
         Me.lblEntrada.Location = New System.Drawing.Point(573, 167)
         Me.lblEntrada.Name = "lblEntrada"
         Me.lblEntrada.Size = New System.Drawing.Size(168, 23)
@@ -441,9 +441,9 @@ Partial Class FrmDetReservacion
         '
         'lblSalida
         '
-        Me.lblSalida.BackColor = System.Drawing.Color.DodgerBlue
+        Me.lblSalida.BackColor = System.Drawing.Color.SkyBlue
         Me.lblSalida.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSalida.ForeColor = System.Drawing.Color.White
+        Me.lblSalida.ForeColor = System.Drawing.Color.Black
         Me.lblSalida.Location = New System.Drawing.Point(572, 217)
         Me.lblSalida.Name = "lblSalida"
         Me.lblSalida.Size = New System.Drawing.Size(168, 23)
@@ -658,9 +658,9 @@ Partial Class FrmDetReservacion
         '
         'txtCambio
         '
-        Me.txtCambio.BackColor = System.Drawing.Color.RoyalBlue
+        Me.txtCambio.BackColor = System.Drawing.Color.SkyBlue
         Me.txtCambio.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCambio.ForeColor = System.Drawing.Color.White
+        Me.txtCambio.ForeColor = System.Drawing.Color.Black
         Me.txtCambio.Location = New System.Drawing.Point(116, 73)
         Me.txtCambio.Name = "txtCambio"
         Me.txtCambio.ReadOnly = True
