@@ -811,10 +811,10 @@ Public Class frmNuevoPagarSencillo
             rd2.Close()
 
             If validaTarjeta = 0 Then
-                If MsgBox("¿Deseas guardar los datos de esta venta?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then cnn1.Close() : Exit Sub
+                If MsgBox("¿Deseas guardar los datos de esta venta?", vbInformation + vbOKCancel, titulorestaurante) = vbCancel Then cnn1.Close() : Exit Sub
             Else
                 If SiPago = 0 Then
-                    If MsgBox("¿Deseas guardar los datos de esta venta?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then cnn1.Close() : Exit Sub
+                    If MsgBox("¿Deseas guardar los datos de esta venta?", vbInformation + vbOKCancel, titulorestaurante) = vbCancel Then cnn1.Close() : Exit Sub
                 End If
             End If
 
@@ -1575,7 +1575,7 @@ Door:
 
         If imprime = 1 Then
 
-            If MessageBox.Show("Desea Cerrar esta Ventana", "Confirmación", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.OK Then
+            If MsgBox("Desea Imprimir esta Ventana", vbInformation + vbYesNo, titulocentral) = vbYes Then
 
                 If TamImpre = "80" Then
                     For naruto As Integer = 1 To copias
@@ -1592,6 +1592,8 @@ Door:
                         pVentaMapeo58.Print()
                     Next
                 End If
+            Else
+                GoTo deku
             End If
 
         Else
@@ -1615,6 +1617,8 @@ Door:
 
 
 #End Region
+
+deku:
 
         btnLimpiar.PerformClick()
         Me.Close()

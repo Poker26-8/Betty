@@ -2053,8 +2053,7 @@ Door:
 
         If imprime = 1 Then
 
-            If MessageBox.Show("Desea imprimir esta Ventana", "Confirmación", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) = DialogResult.OK Then
-
+            If MsgBox("Desea imprimir esta Ventana", vbInformation + vbYesNo, titulorestaurante) = vbYes Then
 
                 If TamImpre = "80" Then
                     For naruto As Integer = 1 To copias
@@ -2071,10 +2070,12 @@ Door:
                         PVentaMapeo58.Print()
                     Next
                 End If
+            Else
+                GoTo deku
             End If
 
         Else
-            If TamImpre = "80" Then
+                If TamImpre = "80" Then
                 For naruto As Integer = 1 To copias
                     PVentaMapeo80.DefaultPageSettings.PrinterSettings.PrinterName = impresora
                     If PVentaMapeo80.DefaultPageSettings.PrinterSettings.PrinterName = impresora Then
