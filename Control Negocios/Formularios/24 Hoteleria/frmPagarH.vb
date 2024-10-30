@@ -1061,37 +1061,38 @@ Public Class frmPagarH
         rd1.Close()
         cnn1.Close()
 
+        ACUENTA = FormatNumber(EFECTIVOVENTA - CAMBIOVENTA + PAGOSVENTA, 2)
+
+
         Dim MYSALDO As Double = 0
         If lblTipoVenta.Text <> "MOSTRADOR" Then
 
+
             cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT Saldo FROM Abonoi WHERE Id=(SELECT MAX(Id) FROM Abonoi WHERE IdCliente=" & lblTipoVenta.Text & ")"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    MYSALDO = FormatNumber(IIf(rd1(0).ToString = "", 0, rd1(0).ToString), 2)
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "SELECT Saldo FROM Abonoi WHERE Id=(SELECT MAX(Id) FROM Abonoi WHERE IdCliente=" & lblTipoVenta.Text & ")"
+                rd1 = cmd1.ExecuteReader
+                If rd1.HasRows Then
+                    If rd1.Read Then
+                    MYSALDO = FormatNumber(IIf(rd1(0).ToString = "", 0, rd1(0).ToString), 2) + CDbl(txtTotal.Text)
                 End If
-            Else
-                MYSALDO = FormatNumber(txtTotal.Text, 2)
+                Else
+                    MYSALDO = FormatNumber(txtTotal.Text, 2)
+                End If
+                rd1.Close()
+
+                If RESTAVENTA > 0 And afavor_cliente > 0 And CDbl(TOTALVENTA) = txtResta.Text Then
+                    cmd1 = cnn1.CreateCommand
+                    cmd1.CommandText = "insert into Abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,Propina,FormaPago,Monto,Banco,Referencia,Usuario,MontoSF) values(" & folioventa & "," & lblTipoVenta.Text & ",'" & lblCliente.Text & "','NOTA VENTA','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & TOTALVENTA & ",0," & MYSALDO & ",0,'',0,'','','" & lblAtendio.Text & "'," & txtResta.Text & ")"
+                    cmd1.ExecuteNonQuery()
+                Else
+                    cmd1 = cnn1.CreateCommand
+                    cmd1.CommandText = "insert into Abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,Propina,FormaPago,Monto,Banco,Referencia,Usuario) values(" & folioventa & "," & lblTipoVenta.Text & ",'" & lblCliente.Text & "','NOTA VENTA','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & TOTALVENTA & ",0," & MYSALDO & ",0,'',0,'','','" & lblAtendio.Text & "')"
+                    cmd1.ExecuteNonQuery()
+                End If
+
             End If
-            rd1.Close()
 
-            If RESTAVENTA > 0 And afavor_cliente > 0 And CDbl(TOTALVENTA) = txtResta.Text Then
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "insert into Abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,Propina,FormaPago,Monto,Banco,Referencia,Usuario,MontoSF) values(" & folioventa & "," & lblTipoVenta.Text & ",'" & lblCliente.Text & "','NOTA VENTA','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & TOTALVENTA & ",0," & MYSALDO & ",0,'',0,'','','" & lblAtendio.Text & "'," & txtResta.Text & ")"
-                cmd1.ExecuteNonQuery()
-            Else
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "insert into Abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,Propina,FormaPago,Monto,Banco,Referencia,Usuario) values(" & folioventa & "," & lblTipoVenta.Text & ",'" & lblCliente.Text & "','NOTA VENTA','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & TOTALVENTA & ",0," & MYSALDO & ",0,'',0,'','','" & lblAtendio.Text & "')"
-                cmd1.ExecuteNonQuery()
-            End If
-
-
-
-        End If
-
-        ACUENTA = FormatNumber(EFECTIVOVENTA - CAMBIOVENTA + PAGOSVENTA, 2)
 
         If ACUENTA > 0 Then
             Dim EfectivoX As Double = FormatNumber(EFECTIVOVENTA - CAMBIOVENTA, 2)
@@ -1354,6 +1355,14 @@ Public Class frmPagarH
 
                     cmd3 = cnn3.CreateCommand
                     cmd3.CommandText = "DELETE FROM detallehotel WHERE Habitacion='" & lblHabitacion.Text & "'"
+                    cmd3.ExecuteNonQuery()
+
+                    cmd3 = cnn3.CreateCommand
+                    cmd3.CommandText = "DELETE FROM asigpc WHERE Nombre='" & lblHabitacion.Text & "'"
+                    cmd3.ExecuteNonQuery()
+
+                    cmd3 = cnn3.CreateCommand
+                    cmd3.CommandText = "DELETE FROM comanda1 WHERE Nombre='" & lblHabitacion.Text & "'"
                     cmd3.ExecuteNonQuery()
                 End If
 

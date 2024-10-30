@@ -240,7 +240,7 @@
     Private Sub cboCLientes_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboCLientes.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
-            cboPrecio.Focus.Equals(True)
+            cboFolio.Focus.Equals(True)
         End If
     End Sub
 
@@ -252,13 +252,26 @@
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Dim ESTADO As String = ""
+        Dim ESTADOPAGO As String = ""
+
+
+        If CDbl(txtResta.Text) > 0 Then
+            ESTADOPAGO = "RESTA"
+        Else
+            ESTADOPAGO = "PAGADO"
+        End If
+
         ESTADO = "Ocupada"
 
         If lblusuario.Text = "" Then MsgBox("Ingrese la contraseña de usuario", vbInformation + vbOKOnly, titulohotelriaa) : txtcontra.Focus.Equals(True) : Exit Sub
 
         If txtHoras.Text = "" Then MsgBox("Debe de ingresar la cantidad de horas", vbInformation + vbOKOnly, titulohotelriaa) : txtHoras.Focus.Equals(True) : Exit Sub
 
-        If cboCLientes.Text = "" Then MsgBox("Debe seleccionar el cliente para asignar la habitación", vbInformation + vbOKOnly, titulohotelriaa)
+        If cboCLientes.Text = "" Then MsgBox("Debe seleccionar el cliente para asignar la habitación", vbInformation + vbOKOnly, titulohotelriaa) : Exit Sub
+
+        If cboPrecio.Text <= 0 Then MsgBox("Debe ingresar el precio total de la habitación.", vbInformation + vbOKOnly, titulohotelriaa) : Exit Sub
+
+
 
         If ESTADO = "Ocupada" Then
             Try
@@ -275,7 +288,7 @@
                 Dim salida As String = ""
 
                 Dim PRECIO As Double = 0
-                PRECIO = cboPrecio.Text
+                PRECIO = txtResta.Text
 
                 fechaentrada = Format(Date.Now, "yyyy-MM-dd HH:mm:ss")
 
@@ -335,14 +348,20 @@
 
                     cnn2.Close() : cnn2.Open()
                     cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "INSERT INTO detallehotel(Habitacion,Tipo,Estado,Horas,Precio,Cliente,Telefono,FEntrada,FSalida,Caracteristicas) VALUES('" & lblHabitacion.Text & "','" & lblTipo.Text & "','" & ESTADO & "'," & txtHoras.Text & "," & PRECIO & ",'" & cboCLientes.Text & "','" & txttelefono.Text & "','" & lblEntrada.Text & "','" & lblSalida.Text & "','" & lblCaracteristicas.Text & "')"
+                    cmd2.CommandText = "INSERT INTO detallehotel(Habitacion,Tipo,Estado,Horas,Precio,Cliente,Telefono,FEntrada,FSalida,Caracteristicas) VALUES('" & lblHabitacion.Text & "','" & lblTipo.Text & "','" & ESTADOPAGO & "'," & txtHoras.Text & "," & CDbl(cboPrecio.Text) & ",'" & cboCLientes.Text & "','" & txttelefono.Text & "','" & lblEntrada.Text & "','" & lblSalida.Text & "','" & lblCaracteristicas.Text & "')"
                     cmd2.ExecuteNonQuery()
                     cnn2.Close()
 
                     cnn2.Close() : cnn2.Open()
-                    cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "INSERT INTO comandas(Id,NMESA,Codigo,Nombre,Cantidad,UVenta,CostVR,CostVP,CostVUE,Descuento,Precio,Total,PrecioSinIva,TotalSinIVA,Comisionista,Fecha,Comensal,Status,Comentario,GPrint,CUsuario,Total_comensales,Depto,Grupo,EstatusT,Hr,EntregaT) VALUES(" & cfolio & ",'" & lblHabitacion.Text & "','xc3','Tiempo Habitacion',1,'SER',0,0,0,0," & PRECIO & "," & PRECIO & "," & PRECIO & "," & PRECIO & ",'0','" & Format(Date.Now, "yyyy/MM/dd") & "',0,'RESTA','Renta de Habitacion','','" & lblusuario.Text & "',0,'HABITACION','HABITACION',0,'" & HrTiempo & "','" & HrEntrega & "')"
-                    cmd2.ExecuteNonQuery()
+                    If txtResta.Text > 0 Then
+
+                        cmd2 = cnn2.CreateCommand
+                        cmd2.CommandText = "INSERT INTO comandas(Id,NMESA,Codigo,Nombre,Cantidad,UVenta,CostVR,CostVP,CostVUE,Descuento,Precio,Total,PrecioSinIva,TotalSinIVA,Comisionista,Fecha,Comensal,Status,Comentario,GPrint,CUsuario,Total_comensales,Depto,Grupo,EstatusT,Hr,EntregaT) VALUES(" & cfolio & ",'" & lblHabitacion.Text & "','xc3','Tiempo Habitacion',1,'SER',0,0,0,0," & PRECIO & "," & PRECIO & "," & PRECIO & "," & PRECIO & ",'0','" & Format(Date.Now, "yyyy/MM/dd") & "',0,'RESTA','Renta de Habitacion','','" & lblusuario.Text & "',0,'HABITACION','HABITACION',0,'" & HrTiempo & "','" & HrEntrega & "')"
+                        cmd2.ExecuteNonQuery()
+                    Else
+
+                    End If
+
 
                     cmd2 = cnn2.CreateCommand
                     cmd2.CommandText = "INSERT INTO rep_comandas(Id,NMESA,Codigo,Nombre,Cantidad,UVenta,CostVR,CostVP,CostVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Comisionista,Fecha,Comensal,Status,Comentario,GPrint,CUsuario,Total_comensales,Depto,Grupo,EstatusT,Hr,EntregaT) VALUES(" & cfolio & ",'" & lblHabitacion.Text & "','xc3','Tiempo Habitacion',1,'SER',0,'0',0," & PRECIO & "," & PRECIO & "," & PRECIO & "," & PRECIO & ",0,'" & Format(Date.Now, "yyyy/MM/dd") & "',0,'RESTA','xc3 ','','" & lblusuario.Text & "',0,'HABITACION','HABITACION',0,'" & HrTiempo & "','" & HrEntrega & "')"
@@ -363,30 +382,21 @@
                 cmd2.ExecuteNonQuery()
 
                 cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "UPDATE reservaciones SET Status=1,Reservo='" & lblusuario.Text & "' WHERE Habitacion='" & lblHabitacion.Text & "' AND Cliente='" & cboCLientes.Text & "'and IdReservacion=" & cboFolio.Text & ""
+                cmd2.CommandText = "UPDATE reservaciones SET Status=1,Reservo='" & lblusuario.Text & "',Precio='" & PRECIO & "' WHERE Habitacion='" & lblHabitacion.Text & "' AND Cliente='" & cboCLientes.Text & "'and IdReservacion=" & cboFolio.Text & ""
                 cmd2.ExecuteNonQuery()
                 cnn2.Close()
 
                 MsgBox("La habitacion " & lblHabitacion.Text & " fue asignada correctamente", vbInformation + vbOKOnly, titulohotelriaa)
 
-                'frmPagarH.lblHabitacion.Text = lblHabitacion.Text
-                '' frmPagarH.txtTotal.Text = cboPrecio.Text
-                'frmPagarH.lblAtendio.Text = lblusuario.Text
-                'frmPagarH.lblNumCliente.Text = lblidcliented.Text
-                'frmPagarH.lblCliente.Text = cboCLientes.Text
-                'frmPagarH.focoh = 1
-                'frmPagarH.Show()
-
-
                 btnLimpiar.PerformClick()
                 Me.Close()
-
+                frmManejo.Show()
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
                 cnn1.Close()
             End Try
         End If
-    End Sub
+        End Sub
 
     Private Sub txtcontra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcontra.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
@@ -416,7 +426,12 @@
                 cnn1.Close()
                 cnn2.Close()
 
-                btnGuardar.Focus.Equals(True)
+                If txtEfectivo.Text > 0 Then
+                    btnAbonar.Focus.Equals(True)
+                Else
+                    btnGuardar.Focus.Equals(True)
+                End If
+
 
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
@@ -431,6 +446,7 @@
             Dim anticipo As Double = 0
             Dim precio As Double = 0
             Dim resta As Double = 0
+
 
 
             cnn4.Close() : cnn4.Open()
@@ -489,12 +505,14 @@
                         varHoras = DateDiff(DateInterval.Hour, CDate(fechaentrada), FECHASALIDA)
                         cboTipo.Text = "DIA"
                         txtHoras.Text = varHoras
-                        cboPrecio.Text = rd4("precio").ToString
-                        precio = cboPrecio.Text
+                        cboPrecio.Text = IIf(rd4("precio").ToString = "", "0", rd4("Precio").ToString)
+                        precio = rd4("precio").ToString
                         anticipo = rd4("Anticipo").ToString
                         resta = CDbl(precio) - CDbl(anticipo)
-                        cboPrecio.Text = FormatNumber(resta, 2)
-
+                        txtAnticipo.Text = FormatNumber(anticipo, 2)
+                        txtResta.Text = FormatNumber(resta, 2)
+                        txtSubtotal.Text = FormatNumber(rd4("precio").ToString, 2)
+                        txtTotalVenta.Text = FormatNumber(resta, 2)
                         If resta = "0.00" Then
                             btnAbonar.Enabled = False
                         Else
@@ -511,6 +529,32 @@
             End If
             rd3.Close()
             cnn4.Close()
+
+            If txtResta.Text > 0 Then
+                txtEfectivo.Focus.Equals(True)
+                txtEfectivo.Enabled = True
+                txtTarjeta.Enabled = True
+                txtTransfe.Enabled = True
+                txtOtro.Enabled = True
+                btnGuardar.Enabled = False
+                btnAbonar.Enabled = True
+            Else
+                txtEfectivo.Enabled = False
+                txtTarjeta.Enabled = False
+                txtTransfe.Enabled = False
+                txtOtro.Enabled = False
+                btnAbonar.Enabled = False
+                btnGuardar.Enabled = True
+                If cboPrecio.Text = "0" Then
+                    btnGuardar.Enabled = False
+                    cboPrecio.Focus.Equals(True)
+                Else
+                    btnGuardar.Enabled = True
+                    btnGuardar.Focus.Equals(True)
+                End If
+
+            End If
+
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn3.Close()
@@ -529,6 +573,15 @@
                 txtTotalVenta.Text = FormatNumber(cboPrecio.Text, 2)
                 txtSubtotal.Text = FormatNumber(cboPrecio.Text, 2)
                 txtResta.Text = FormatNumber(cboPrecio.Text, 2)
+
+                If txtResta.Text > 0 Then
+
+                    txtEfectivo.Enabled = True
+                    txtTarjeta.Enabled = True
+                    txtTransfe.Enabled = True
+                    txtOtro.Enabled = True
+                    txtEfectivo.Focus.Equals(True)
+                End If
                 txtEfectivo.Focus.Equals(True)
             End If
         End If
@@ -820,18 +873,6 @@
 
 
                 cnn1.Close() : cnn1.Open()
-                'cmd1 = cnn1.CreateCommand
-                'cmd1.CommandText = "SELECT Id FROM clientes WHERE Nombre='" & cboCLientes.Text & "'"
-                'rd1 = cmd1.ExecuteReader
-                'If rd1.HasRows Then
-                '    If rd1.Read Then
-                '        idcliente = rd1(0).ToString
-                '    End If
-                'Else
-                '    idcliente = 0
-                'End If
-                'rd1.Close()
-
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText = "INSERT INTO ventas(IdCliente,Cliente,Direccion,Subtotal,IVA,Totales,Descuento,Devolucion,Acuenta,Resta,Usuario,FVenta,HVenta,FPago,FCancelado,Status,Comisionista,Comision,Concepto,MontoSinDesc,FEntrega,Comentario,StatusE,FolMonedero,CodFactura,IP,Formato,Franquicia,Pedido,Fecha) values(" & lblidcliented.Text & ",'" & cboCLientes.Text & "',''," & mysubtotal & ",0," & mytotalventa & "," & mydescuento & ",0," & acuenta & "," & myresta & ",'" & lblusuario.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','','','" & mystatus & "','',0,'RESERVACION'," & mysubtotal & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','',0,'','" & cadenafact & "','" & dameIP2() & "','TICKET',0,'','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "')"
                 cmd1.ExecuteNonQuery()
@@ -848,25 +889,27 @@
 
 
                 cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "SELECT Saldo FROM abonoi WHERE Id=(SELECT MAX(Id) FROM abonoi WHERE Cliente='" & cboCLientes.Text & "')"
+                cmd1.CommandText = "SELECT Saldo FROM abonoi WHERE Id=(SELECT MAX(Id) FROM abonoi WHERE Comentario='" & cboFolio.Text & "' AND Cliente='" & cboCLientes.Text & "')"
                 rd1 = cmd1.ExecuteReader
                 If rd1.HasRows Then
                     If rd1.Read Then
-                        saldo = IIf(rd1(0).ToString = "", 0, rd1(0).ToString) + CDbl(txtTotalVenta.Text)
+                        saldo = IIf(rd1(0).ToString = "", 0, rd1(0).ToString) - CDbl(txtTotalVenta.Text)
                     End If
                 Else
-
                     saldo = CDbl(txtTotalVenta.Text)
+                    cnn2.Close() : cnn2.Open()
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "INSERT INTO abonoi(NumFolio,IdCliente,Cliente,Concepto,fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Descuento,MontoSF,Comentario) VALUES(" & myfolio & "," & lblidcliented.Text & ",'" & cboCLientes.Text & "','NOTA VENTA','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & CDbl(txtTotalVenta.Text) & ",0," & saldo & ",'',0,'','','" & lblusuario.Text & "'," & mydescuento & ",0,'" & cboFolio.Text & "')"
+                    cmd2.ExecuteNonQuery()
+                    cnn2.Close()
                 End If
                 rd1.Close()
 
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "INSERT INTO abonoi(NumFolio,IdCliente,Cliente,Concepto,fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Descuento,MontoSF,Comentario) VALUES(" & myfolio & "," & lblidcliented.Text & ",'" & cboCLientes.Text & "','NOTA VENTA','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & saldo & ",0," & saldo & ",'',0,'','','" & lblusuario.Text & "'," & mydescuento & ",0,'" & cboFolio.Text & "')"
-                cmd1.ExecuteNonQuery()
+
 
                 If efectivo > 0 Then
                     cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "SELECT Saldo FROM abonoi WHERE Id=(SELECT MAX(Id) FROM abonoi WHERE Cliente='" & cboCLientes.Text & "')"
+                    cmd1.CommandText = "SELECT Saldo FROM abonoi WHERE Id=(SELECT MAX(Id) FROM abonoi WHERE  Cliente='" & cboCLientes.Text & "')"
                     rd1 = cmd1.ExecuteReader
                     If rd1.HasRows Then
                         If rd1.Read Then
@@ -944,6 +987,9 @@
                 End If
                 cnn1.Close()
 
+
+
+
                 cnn2.Close() : cnn2.Open()
                 cmd2 = cnn2.CreateCommand
                 cmd2.CommandText =
@@ -951,7 +997,7 @@
                 cmd2.ExecuteNonQuery()
 
                 cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "UPDATE reservaciones SET Tipo='" & cboTipo.Text & "', Precio=" & cboPrecio.Text & ",Anticipo=" & acuenta & " WHERE IdReservacion=" & cboFolio.Text & " AND Cliente='" & cboCLientes.Text & "'"
+                cmd2.CommandText = "UPDATE reservaciones SET Tipo='" & cboTipo.Text & "', Precio=" & cboPrecio.Text & ",Anticipo=" & CDbl(txtAnticipo.Text) + acuenta & " WHERE IdReservacion=" & cboFolio.Text & " AND Cliente='" & cboCLientes.Text & "'"
                 cmd2.ExecuteNonQuery()
                 cnn2.Close()
 
@@ -974,5 +1020,11 @@ deku:
             MessageBox.Show(ex.ToString)
             cnn1.Close()
         End Try
+    End Sub
+
+    Private Sub cboFolio_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboFolio.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            cboPrecio.Focus.Equals(True)
+        End If
     End Sub
 End Class

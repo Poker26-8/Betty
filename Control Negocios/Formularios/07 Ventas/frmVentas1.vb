@@ -2707,6 +2707,7 @@ kaka:
                 End If
                 rd1.Close()
 
+
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
                     "select Status_Promocion,Grupo,Departamento,Codigo,Nombre,UVenta,Multiplo,Min,Ubicacion from Productos where Nombre='" & cbodesc.Text & "'"

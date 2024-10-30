@@ -7,6 +7,7 @@
 
     Dim timpo As Date = Nothing
     Dim timpon As String = ""
+
     Private Sub frmCalcularNuvHab_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Dim ToleHab As String = ""
@@ -15,9 +16,14 @@
         Dim precioaumento As Double = 0
         Dim saldocliente As Double = 0
         Dim precioprimero As Double = 0
+
+        Dim ESTATUSP As String = ""
+        Dim idreservacion As Integer = 0
+
         Try
             cnn2.Close() : cnn2.Open()
             cnn3.Close() : cnn3.Open()
+            cnn4.Clone() : cnn4.Open()
 
             'cmd2 = cnn2.CreateCommand
             'cmd2.CommandText = "SELECT NotasCred FROM formatos WHERE Facturas='SalidaHab'"
@@ -29,16 +35,6 @@
             '    End If
             'End If
             'rd2.Close()
-            'cmd2 = cnn2.CreateCommand
-            'cmd2.CommandText = "Select SUM(Abono) FROM abonoi  WHERE Cliente='" & lblCliente.Text & "'"
-            'rd2 = cmd2.ExecuteReader
-            'If rd2.HasRows Then
-            '    If rd2.Read Then
-            '        saldocliente = IIf(rd2(0).ToString = "", 0, rd2(0).ToString)
-            '    End If
-            'End If
-            'rd2.Close()
-
 
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText = "SELECT NotasCred FROM formatos WHERE Facturas='PrecioDia'"
@@ -60,19 +56,30 @@
             End If
             rd2.Close()
 
+
             cmd2 = cnn2.CreateCommand
-            cmd2.CommandText = "SELECT Horas,Precio,Cliente FROM detallehotel WHERE Habitacion='" & lblpc.Text & "' AND Status='PAGADO'"
+            cmd2.CommandText = "SELECT Horas,Precio,Cliente,Status FROM detallehotel WHERE Habitacion='" & lblpc.Text & "'"
             rd2 = cmd2.ExecuteReader
             If rd2.HasRows Then
                 If rd2.Read Then
-                    lblHoras.Text = rd2(0).ToString
-                    lblPrecio.Text = rd2(1).ToString
-                    lblAnticipo.Text = rd2(1).ToString
-                    precioprimero = rd2(1).ToString
-                    lblCliente.Text = rd2(2).ToString
+                    ESTATUSP = rd2("Status").ToString
+
+                    If ESTATUSP = "PAGADO" Then
+                        lblHoras.Text = rd2(0).ToString
+                        lblPrecio.Text = rd2(1).ToString
+                        precioprimero = rd2(1).ToString
+                        lblCliente.Text = rd2(2).ToString
+                        lblAnticipo.Text = rd2(1).ToString
+                    Else
+                        lblCliente.Text = rd2(2).ToString
+                        precioprimero = rd2(1).ToString
+                        lblHoras.Text = rd2(0).ToString
+                        lblPrecio.Text = rd2(1).ToString
+                    End If
                 End If
             End If
             rd2.Close()
+
 
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText = "Select HorEnt FROM AsigPC WHERE Nombre='" & lblpc.Text & "'"
@@ -103,24 +110,49 @@
 
                     Dim fsalidareservacion As Date = Nothing
                     Dim dsalidare As String
+                    Dim fechaentradarev As String = ""
+                    Dim fentrada As String = ""
                     cmd3 = cnn3.CreateCommand
                     cmd3 = cnn3.CreateCommand
-                    cmd3.CommandText = "SELECT * FROM reservaciones WHERE Habitacion='" & lblpc.Text & "' AND Status=0"
+                    cmd3.CommandText = "SELECT * FROM reservaciones WHERE Habitacion='" & lblpc.Text & "' AND Status=1"
                     rd3 = cmd3.ExecuteReader
                     If rd3.HasRows Then
                         If rd3.Read Then
-                            fsalidareservacion = rd3("FSalida").ToString
-                            dsalidare = Format(fsalidareservacion, "yyyy-MM-dd HH:mm:ss")
+                            idreservacion = rd3("IdReservacion").ToString
+                            fechaentradarev = rd3("FEntrada").ToString
+                            fentrada = Format(fechaentradarev, "yyyy-MM-dd HH:mm")
 
-                            If ToleHab > 0 Then
-                                Dim fechatolerancia As DateTime = fsalidareservacion.AddMinutes(ToleHab)
-                                lblsalida.Text = Format(fechatolerancia, "yyyy/MM/dd HH:mm")
-                            Else
-                                lblsalida.Text = Format(fsalidareservacion, "yyyy/MM/dd HH:mm")
+
+
+                            cmd4 = cnn4.CreateCommand
+                                cmd4.CommandText = "Select SUM(Abono) FROM abonoi  WHERE Cliente='" & lblCliente.Text & "' AND Comentario='" & idreservacion & "'"
+                                rd4 = cmd4.ExecuteReader
+                                If rd4.HasRows Then
+                                    If rd4.Read Then
+                                        saldocliente = IIf(rd4(0).ToString = "", 0, rd4(0).ToString)
+
+                                    End If
+                                Else
+                                    saldocliente = "0.00"
+                                End If
+                                rd4.Close()
+                                lblAnticipo.Text = FormatNumber(saldocliente, 2)
+
+
+
+
+                                fsalidareservacion = rd3("FSalida").ToString
+                                dsalidare = Format(fsalidareservacion, "yyyy-MM-dd HH:mm:ss")
+
+                                If ToleHab > 0 Then
+                                    Dim fechatolerancia As DateTime = fsalidareservacion.AddMinutes(ToleHab)
+                                    lblsalida.Text = Format(fechatolerancia, "yyyy/MM/dd HH:mm")
+                                Else
+                                    lblsalida.Text = Format(fsalidareservacion, "yyyy/MM/dd HH:mm")
+                                End If
+
                             End If
-
-                        End If
-                    Else
+                        Else
                         If ToleHab > 0 Then
                             Dim fechatolerancia As DateTime = fechasalida.AddMinutes(ToleHab)
                             lblsalida.Text = Format(fechatolerancia, "yyyy/MM/dd HH:mm")
@@ -129,8 +161,6 @@
                         End If
                     End If
                     rd3.Close()
-
-                    'lblAnticipo.Text = FormatNumber(saldocliente, 2)
 
                     If lblHorFin.Text >= lblsalida.Text Then
                             MsgBox("El tiempo de renta de la habitación termino.", vbInformation + vbOKOnly, titulohotelriaa)
@@ -146,23 +176,23 @@
                         precionuevo = FormatNumber(precionuevo, 2)
 
 
-                        ' lblPagar.Text = lblPagar.Text + CDbl(precioaumento)
                         lblPagar.Text = CDbl(precioaumento + precionuevo) - CDbl(lblAnticipo.Text)
 
                         Else
                             lblPagar.Text = CDbl(lblPrecio.Text) - CDbl(lblAnticipo.Text)
                     End If
-                    '  End If
 
-                    ' lblResta.Text = FormatNumber((CDbl(lblPagar.Text) + CDbl(precioprimero)) - CDbl(lblAnticipo.Text), 2)
 
                 End If
             End If
             rd2.Close()
             cnn2.Close()
             cnn3.Close()
+            cnn4.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
+            cnn3.Close()
+            cnn4.Close()
             cnn2.Close()
         End Try
 
@@ -224,20 +254,21 @@
                 rd1 = cmd1.ExecuteReader
                 If rd1.HasRows Then
                     If rd1.Read Then
+                        MsgBox("Debe pagar la habitacdión", vbInformation + vbOKOnly, titulohotelriaa)
                     End If
                 Else
                     cnn3.Close() : cnn3.Open()
 
                     cmd3 = cnn3.CreateCommand
-                        cmd3.CommandText = "DELETE FROM AsigPC WHERE Nombre='" & lblpc.Text & "'"
-                        cmd3.ExecuteNonQuery()
+                    cmd3.CommandText = "DELETE FROM AsigPC WHERE Nombre='" & lblpc.Text & "'"
+                    cmd3.ExecuteNonQuery()
 
-                        cmd3 = cnn3.CreateCommand
-                        cmd3.CommandText = "DELETE FROM detallehotel WHERE Habitacion='" & lblpc.Text & "'"
-                        cmd3.ExecuteNonQuery()
+                    cmd3 = cnn3.CreateCommand
+                    cmd3.CommandText = "DELETE FROM detallehotel WHERE Habitacion='" & lblpc.Text & "'"
+                    cmd3.ExecuteNonQuery()
 
-                        cmd3 = cnn3.CreateCommand
-                        cmd3.CommandText = "DELETE FROM comanda1 WHERE Nombre='" & lblpc.Text & "'"
+                    cmd3 = cnn3.CreateCommand
+                    cmd3.CommandText = "DELETE FROM comanda1 WHERE Nombre='" & lblpc.Text & "'"
                     cmd3.ExecuteNonQuery()
 
                     cmd3 = cnn3.CreateCommand
@@ -328,10 +359,6 @@
                 cnn4.Close()
 
             End If
-
-
-
-
             Me.Close()
             frmManejo.primerBoton()
         Catch ex As Exception

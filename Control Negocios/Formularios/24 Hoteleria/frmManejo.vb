@@ -917,8 +917,9 @@ Public Class frmManejo
                             End If
                         End If
                         rd1.Close()
+                        cnn1.Close()
 
-
+                        cnn1.Close() : cnn1.Open()
                         cmd1 = cnn1.CreateCommand
                         cmd1.CommandText = "SELECT Nombre FROM asigpc WHERE Nombre='" & txtHabitacion.Text & "'"
                         rd1 = cmd1.ExecuteReader

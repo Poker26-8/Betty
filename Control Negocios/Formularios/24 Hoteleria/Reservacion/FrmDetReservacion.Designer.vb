@@ -58,8 +58,17 @@ Partial Class FrmDetReservacion
         Me.lblSalida = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btnAbonar = New System.Windows.Forms.Button()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.txtOtro = New System.Windows.Forms.TextBox()
+        Me.txtTransfe = New System.Windows.Forms.TextBox()
+        Me.txtTarjeta = New System.Windows.Forms.TextBox()
+        Me.txtEfectivo = New System.Windows.Forms.TextBox()
         Me.txtAnticipo = New System.Windows.Forms.TextBox()
         Me.lblAnticipo = New System.Windows.Forms.Label()
         Me.txtCambio = New System.Windows.Forms.TextBox()
@@ -72,15 +81,6 @@ Partial Class FrmDetReservacion
         Me.Label15 = New System.Windows.Forms.Label()
         Me.txtTotalVenta = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.txtOtro = New System.Windows.Forms.TextBox()
-        Me.txtTransfe = New System.Windows.Forms.TextBox()
-        Me.txtTarjeta = New System.Windows.Forms.TextBox()
-        Me.txtEfectivo = New System.Windows.Forms.TextBox()
-        Me.btnAbonar = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -212,9 +212,9 @@ Partial Class FrmDetReservacion
         '
         'lblHabitacion
         '
-        Me.lblHabitacion.BackColor = System.Drawing.Color.DodgerBlue
+        Me.lblHabitacion.BackColor = System.Drawing.Color.SkyBlue
         Me.lblHabitacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHabitacion.ForeColor = System.Drawing.Color.White
+        Me.lblHabitacion.ForeColor = System.Drawing.Color.Black
         Me.lblHabitacion.Location = New System.Drawing.Point(113, 28)
         Me.lblHabitacion.Name = "lblHabitacion"
         Me.lblHabitacion.Size = New System.Drawing.Size(262, 23)
@@ -339,6 +339,7 @@ Partial Class FrmDetReservacion
         'btnGuardar
         '
         Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGuardar.Enabled = False
         Me.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnGuardar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
@@ -471,6 +472,21 @@ Partial Class FrmDetReservacion
         Me.Panel3.Size = New System.Drawing.Size(747, 77)
         Me.Panel3.TabIndex = 102
         '
+        'btnAbonar
+        '
+        Me.btnAbonar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAbonar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnAbonar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAbonar.Image = CType(resources.GetObject("btnAbonar.Image"), System.Drawing.Image)
+        Me.btnAbonar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnAbonar.Location = New System.Drawing.Point(497, 3)
+        Me.btnAbonar.Name = "btnAbonar"
+        Me.btnAbonar.Size = New System.Drawing.Size(75, 71)
+        Me.btnAbonar.TabIndex = 22
+        Me.btnAbonar.Text = "Abonar"
+        Me.btnAbonar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnAbonar.UseVisualStyleBackColor = True
+        '
         'Panel4
         '
         Me.Panel4.Controls.Add(Me.lblidcliented)
@@ -521,6 +537,99 @@ Partial Class FrmDetReservacion
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(747, 150)
         Me.Panel5.TabIndex = 104
+        '
+        'Label18
+        '
+        Me.Label18.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Label18.Location = New System.Drawing.Point(519, 116)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(109, 29)
+        Me.Label18.TabIndex = 50
+        Me.Label18.Text = "Otra"
+        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label19
+        '
+        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Label19.Location = New System.Drawing.Point(519, 81)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(112, 29)
+        Me.Label19.TabIndex = 49
+        Me.Label19.Text = "Transferencia"
+        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label20
+        '
+        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Label20.Location = New System.Drawing.Point(519, 46)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(104, 29)
+        Me.Label20.TabIndex = 48
+        Me.Label20.Text = "Tarjeta"
+        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label21
+        '
+        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Label21.Location = New System.Drawing.Point(519, 11)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(109, 29)
+        Me.Label21.TabIndex = 47
+        Me.Label21.Text = "Efectivo"
+        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtOtro
+        '
+        Me.txtOtro.BackColor = System.Drawing.Color.White
+        Me.txtOtro.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtOtro.ForeColor = System.Drawing.Color.Black
+        Me.txtOtro.Location = New System.Drawing.Point(632, 116)
+        Me.txtOtro.Name = "txtOtro"
+        Me.txtOtro.Size = New System.Drawing.Size(108, 29)
+        Me.txtOtro.TabIndex = 46
+        Me.txtOtro.Text = "0.00"
+        Me.txtOtro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtTransfe
+        '
+        Me.txtTransfe.BackColor = System.Drawing.Color.White
+        Me.txtTransfe.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTransfe.ForeColor = System.Drawing.Color.Black
+        Me.txtTransfe.Location = New System.Drawing.Point(632, 81)
+        Me.txtTransfe.Name = "txtTransfe"
+        Me.txtTransfe.Size = New System.Drawing.Size(108, 29)
+        Me.txtTransfe.TabIndex = 45
+        Me.txtTransfe.Text = "0.00"
+        Me.txtTransfe.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtTarjeta
+        '
+        Me.txtTarjeta.BackColor = System.Drawing.Color.White
+        Me.txtTarjeta.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTarjeta.ForeColor = System.Drawing.Color.Black
+        Me.txtTarjeta.Location = New System.Drawing.Point(632, 46)
+        Me.txtTarjeta.Name = "txtTarjeta"
+        Me.txtTarjeta.Size = New System.Drawing.Size(108, 29)
+        Me.txtTarjeta.TabIndex = 44
+        Me.txtTarjeta.Text = "0.00"
+        Me.txtTarjeta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtEfectivo
+        '
+        Me.txtEfectivo.BackColor = System.Drawing.Color.White
+        Me.txtEfectivo.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEfectivo.ForeColor = System.Drawing.Color.Black
+        Me.txtEfectivo.Location = New System.Drawing.Point(632, 11)
+        Me.txtEfectivo.Name = "txtEfectivo"
+        Me.txtEfectivo.Size = New System.Drawing.Size(108, 29)
+        Me.txtEfectivo.TabIndex = 43
+        Me.txtEfectivo.Text = "0.00"
+        Me.txtEfectivo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtAnticipo
         '
@@ -657,114 +766,6 @@ Partial Class FrmDetReservacion
         Me.Label17.TabIndex = 31
         Me.Label17.Text = "Total a pagar:"
         Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label18
-        '
-        Me.Label18.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Label18.Location = New System.Drawing.Point(519, 116)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(109, 29)
-        Me.Label18.TabIndex = 50
-        Me.Label18.Text = "Otra"
-        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label19
-        '
-        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Label19.Location = New System.Drawing.Point(519, 81)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(112, 29)
-        Me.Label19.TabIndex = 49
-        Me.Label19.Text = "Transferencia"
-        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label20
-        '
-        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Label20.Location = New System.Drawing.Point(519, 46)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(104, 29)
-        Me.Label20.TabIndex = 48
-        Me.Label20.Text = "Tarjeta"
-        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label21
-        '
-        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.ImageAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Label21.Location = New System.Drawing.Point(519, 11)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(109, 29)
-        Me.Label21.TabIndex = 47
-        Me.Label21.Text = "Efectivo"
-        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'txtOtro
-        '
-        Me.txtOtro.BackColor = System.Drawing.Color.White
-        Me.txtOtro.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtOtro.ForeColor = System.Drawing.Color.Black
-        Me.txtOtro.Location = New System.Drawing.Point(632, 116)
-        Me.txtOtro.Name = "txtOtro"
-        Me.txtOtro.Size = New System.Drawing.Size(108, 29)
-        Me.txtOtro.TabIndex = 46
-        Me.txtOtro.Text = "0.00"
-        Me.txtOtro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtTransfe
-        '
-        Me.txtTransfe.BackColor = System.Drawing.Color.White
-        Me.txtTransfe.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTransfe.ForeColor = System.Drawing.Color.Black
-        Me.txtTransfe.Location = New System.Drawing.Point(632, 81)
-        Me.txtTransfe.Name = "txtTransfe"
-        Me.txtTransfe.Size = New System.Drawing.Size(108, 29)
-        Me.txtTransfe.TabIndex = 45
-        Me.txtTransfe.Text = "0.00"
-        Me.txtTransfe.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtTarjeta
-        '
-        Me.txtTarjeta.BackColor = System.Drawing.Color.White
-        Me.txtTarjeta.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTarjeta.ForeColor = System.Drawing.Color.Black
-        Me.txtTarjeta.Location = New System.Drawing.Point(632, 46)
-        Me.txtTarjeta.Name = "txtTarjeta"
-        Me.txtTarjeta.Size = New System.Drawing.Size(108, 29)
-        Me.txtTarjeta.TabIndex = 44
-        Me.txtTarjeta.Text = "0.00"
-        Me.txtTarjeta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtEfectivo
-        '
-        Me.txtEfectivo.BackColor = System.Drawing.Color.White
-        Me.txtEfectivo.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEfectivo.ForeColor = System.Drawing.Color.Black
-        Me.txtEfectivo.Location = New System.Drawing.Point(632, 11)
-        Me.txtEfectivo.Name = "txtEfectivo"
-        Me.txtEfectivo.Size = New System.Drawing.Size(108, 29)
-        Me.txtEfectivo.TabIndex = 43
-        Me.txtEfectivo.Text = "0.00"
-        Me.txtEfectivo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'btnAbonar
-        '
-        Me.btnAbonar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAbonar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnAbonar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAbonar.Image = CType(resources.GetObject("btnAbonar.Image"), System.Drawing.Image)
-        Me.btnAbonar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnAbonar.Location = New System.Drawing.Point(497, 3)
-        Me.btnAbonar.Name = "btnAbonar"
-        Me.btnAbonar.Size = New System.Drawing.Size(75, 71)
-        Me.btnAbonar.TabIndex = 22
-        Me.btnAbonar.Text = "Abonar"
-        Me.btnAbonar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnAbonar.UseVisualStyleBackColor = True
         '
         'FrmDetReservacion
         '
