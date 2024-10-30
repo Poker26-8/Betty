@@ -30,6 +30,8 @@ Partial Class frmAddCitaH
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cboHabitacion = New System.Windows.Forms.ComboBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.txtTelefono = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
         Me.cboAñoSa = New System.Windows.Forms.ComboBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.cboMesSa = New System.Windows.Forms.ComboBox()
@@ -58,8 +60,8 @@ Partial Class frmAddCitaH
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.rtAsunto = New System.Windows.Forms.RichTextBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.txtTelefono = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.txtIne = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -124,6 +126,8 @@ Partial Class frmAddCitaH
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.txtIne)
+        Me.Panel1.Controls.Add(Me.Label18)
         Me.Panel1.Controls.Add(Me.txtTelefono)
         Me.Panel1.Controls.Add(Me.Label17)
         Me.Panel1.Controls.Add(Me.cboAñoSa)
@@ -159,6 +163,23 @@ Partial Class frmAddCitaH
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(510, 250)
         Me.Panel1.TabIndex = 6
+        '
+        'txtTelefono
+        '
+        Me.txtTelefono.Location = New System.Drawing.Point(78, 36)
+        Me.txtTelefono.Name = "txtTelefono"
+        Me.txtTelefono.Size = New System.Drawing.Size(160, 20)
+        Me.txtTelefono.TabIndex = 31
+        '
+        'Label17
+        '
+        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(3, 36)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(82, 20)
+        Me.Label17.TabIndex = 30
+        Me.Label17.Text = "Telefono:"
+        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'cboAñoSa
         '
@@ -466,22 +487,22 @@ Partial Class frmAddCitaH
         Me.Label9.Text = "DESCRIPCIÓN"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label17
+        'Label18
         '
-        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(3, 36)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(82, 20)
-        Me.Label17.TabIndex = 30
-        Me.Label17.Text = "Telefono:"
-        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(240, 36)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(45, 20)
+        Me.Label18.TabIndex = 32
+        Me.Label18.Text = "INE:"
+        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'txtTelefono
+        'txtIne
         '
-        Me.txtTelefono.Location = New System.Drawing.Point(78, 36)
-        Me.txtTelefono.Name = "txtTelefono"
-        Me.txtTelefono.Size = New System.Drawing.Size(160, 20)
-        Me.txtTelefono.TabIndex = 31
+        Me.txtIne.Location = New System.Drawing.Point(280, 36)
+        Me.txtIne.Name = "txtIne"
+        Me.txtIne.Size = New System.Drawing.Size(221, 20)
+        Me.txtIne.TabIndex = 33
         '
         'frmAddCitaH
         '
@@ -541,4 +562,6 @@ Partial Class frmAddCitaH
     Friend WithEvents Label16 As Label
     Friend WithEvents txtTelefono As TextBox
     Friend WithEvents Label17 As Label
+    Friend WithEvents txtIne As TextBox
+    Friend WithEvents Label18 As Label
 End Class

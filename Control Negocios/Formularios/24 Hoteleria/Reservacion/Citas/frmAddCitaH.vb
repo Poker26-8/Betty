@@ -195,7 +195,7 @@
                 cmd2.ExecuteNonQuery()
 
                 cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "INSERT INTO reservaciones(Cliente,Telefono,Habitacion,FEntrada,FSalida,Asigno,Reservo,Status,Tipo,Precio,Anticipo) VALUES('" & cbocliente.Text & "','" & txtTelefono.Text & "','" & cboHabitacion.Text & "','" & fechaentera & "','" & fechasalida & "','" & cboUsuario.Text & "','',0,'',0,0)"
+                cmd2.CommandText = "INSERT INTO reservaciones(Cliente,Telefono,INE,Habitacion,FEntrada,FSalida,Asigno,Reservo,Status,Tipo,Precio,Anticipo) VALUES('" & cbocliente.Text & "','" & txtTelefono.Text & "','" & txtIne.Text & "','" & cboHabitacion.Text & "','" & fechaentera & "','" & fechasalida & "','" & cboUsuario.Text & "','',0,'',0,0)"
                 cmd2.ExecuteNonQuery()
                 cnn2.Close()
 
@@ -252,7 +252,7 @@
     Private Sub cbocliente_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbocliente.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
-            cboUsuario.Focus.Equals(True)
+            txtTelefono.Focus.Equals(True)
         End If
     End Sub
 
@@ -386,6 +386,9 @@
 
     Private Sub rtAsunto_KeyPress_1(sender As Object, e As KeyPressEventArgs) Handles rtAsunto.KeyPress
         e.KeyChar = UCase(e.KeyChar)
+        If AscW(e.KeyChar) = Keys.Enter Then
+            btnAGregar.Focus.Equals(True)
+        End If
     End Sub
 
     Private Sub cboHabitacion_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboHabitacion.KeyPress
@@ -480,5 +483,18 @@
         End If
         rd1.Close()
         cnn1.Close()
+    End Sub
+
+    Private Sub txtTelefono_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtTelefono.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            txtIne.Focus.Equals(True)
+        End If
+    End Sub
+
+    Private Sub txtIne_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtIne.KeyPress
+        e.KeyChar = UCase(e.KeyChar)
+        If AscW(e.KeyChar) = Keys.Enter Then
+            rtAsunto.Focus.Equals(True)
+        End If
     End Sub
 End Class

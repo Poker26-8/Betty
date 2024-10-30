@@ -20,11 +20,15 @@
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        frmRepReservaciones.BringToFront()
-        frmRepReservaciones.Show()
+
 
 
         frmCitasH.BringToFront()
         frmCitasH.ShowDialog()
+    End Sub
+
+    Private Sub ReservacionesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReservacionesToolStripMenuItem.Click
+        frmRepReservaciones.BringToFront()
+        frmRepReservaciones.Show()
     End Sub
 End Class

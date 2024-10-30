@@ -402,9 +402,9 @@
                 cmd4 = cnn4.CreateCommand
 
                 If cboHabitacion.Text = "" Then
-                    cmd4.CommandText = "select Id,Dia,Activo from Agenda where Dia=" & dia & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "'"
+                    cmd4.CommandText = "select Id,Dia,Activo from Agenda where Dia=" & dia & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "' AND Activo=1"
                 Else
-                    cmd4.CommandText = "select Id,Dia,Activo from Agenda where Dia=" & dia & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "'"
+                    cmd4.CommandText = "select Id,Dia,Activo from Agenda where Dia=" & dia & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "' AND Activo=1"
                 End If
 
 
@@ -414,9 +414,9 @@
                         cmd2 = cnn2.CreateCommand
 
                         If cboHabitacion.Text = "" Then
-                            cmd2.CommandText = "SELECT Asunto FROM agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND anio=" & Fechita(3) & " AND Usuario='" & cboUsuario.Text & "'"
+                            cmd2.CommandText = "SELECT Asunto FROM agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND anio=" & Fechita(3) & " AND Usuario='" & cboUsuario.Text & "' AND Activo=1"
                         Else
-                            cmd2.CommandText = "SELECT Asunto FROM agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND anio=" & Fechita(3) & " AND Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "'"
+                            cmd2.CommandText = "SELECT Asunto FROM agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND anio=" & Fechita(3) & " AND Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "' AND Activo=1"
                         End If
 
                         rd2 = cmd2.ExecuteReader
@@ -435,7 +435,7 @@
 
                 If grdCaptura.Rows(field - 1).Cells(3).Value.ToString = "DX" Then
                 Else
-                    If grdCaptura.Rows(field - 1).Cells(3).Value = False Then
+                    If grdCaptura.Rows(field - 1).Cells(3).Value = 1 Then
                         grdCaptura.Rows(field - 1).DefaultCellStyle.BackColor = Color.Blue
                         grdCaptura.Rows(field - 1).DefaultCellStyle.ForeColor = Color.White
                     End If
@@ -482,10 +482,10 @@
 
                 If cboHabitacion.Text = "" Then
                     cmd3.CommandText =
-                   "select Hora,Id,Activo from Agenda where Hora=" & hora & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "'"
+                   "select Hora,Id,Activo from Agenda where Hora=" & hora & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "' AND Activo=1"
                 Else
                     cmd3.CommandText =
-                    "select Hora,Id,Activo from Agenda where Hora=" & hora & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "'"
+                    "select Hora,Id,Activo from Agenda where Hora=" & hora & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "' AND Activo=1"
                 End If
 
                 rd3 = cmd3.ExecuteReader
@@ -494,10 +494,10 @@
                         cmd2 = cnn2.CreateCommand
                         If cboHabitacion.Text = "" Then
                             cmd2.CommandText =
-                           "select Asunto from Agenda where Hora=" & hora & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "'"
+                           "select Asunto from Agenda where Hora=" & hora & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "' AND Activo=1"
                         Else
                             cmd2.CommandText =
-                            "select Asunto from Agenda where Hora=" & hora & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "'"
+                            "select Asunto from Agenda where Hora=" & hora & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "' AND Activo=1"
                         End If
 
                         rd2 = cmd2.ExecuteReader
@@ -527,7 +527,7 @@
 
                 If grdCaptura.Rows(field).Cells(3).Value.ToString = "DX" Then
                 Else
-                    If grdCaptura.Rows(field).Cells(3).Value = False Then
+                    If grdCaptura.Rows(field).Cells(3).Value = 1 Then
                         grdCaptura.Rows(field).DefaultCellStyle.BackColor = Color.Blue
                         grdCaptura.Rows(field).DefaultCellStyle.ForeColor = Color.White
                     End If
@@ -575,10 +575,10 @@
 
                 If cboHabitacion.Text = "" Then
                     cmd1.CommandText =
-                    "select Hora,Minuto,Id,Asunto,Activo from Agenda where Minuto=" & minuto & " and Hora=" & Tiempo(1) & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "'"
+                    "select Hora,Minuto,Id,Asunto,Activo from Agenda where Minuto=" & minuto & " and Hora=" & Tiempo(1) & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "' AND Activo=1"
                 Else
                     cmd1.CommandText =
-                    "select Hora,Minuto,Id,Asunto,Activo from Agenda where Minuto=" & minuto & " and Hora=" & Tiempo(1) & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "'"
+                    "select Hora,Minuto,Id,Asunto,Activo from Agenda where Minuto=" & minuto & " and Hora=" & Tiempo(1) & " and Dia=" & Fechita(1) & " and Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " and Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "' AND Activo=1"
                 End If
 
                 rd1 = cmd1.ExecuteReader
@@ -615,7 +615,7 @@
 
                 If grdCaptura.Rows(field).Cells(3).Value.ToString = "DX" Then
                 Else
-                    If grdCaptura.Rows(field).Cells(3).Value = False Then
+                    If grdCaptura.Rows(field).Cells(3).Value = 1 Then
                         grdCaptura.Rows(field).DefaultCellStyle.BackColor = Color.Blue
                         grdCaptura.Rows(field).DefaultCellStyle.ForeColor = Color.White
                     End If

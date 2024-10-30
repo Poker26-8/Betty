@@ -90,9 +90,9 @@ Partial Class frmCitasH
         '
         'lblMes
         '
-        Me.lblMes.BackColor = System.Drawing.Color.SkyBlue
+        Me.lblMes.BackColor = System.Drawing.Color.DodgerBlue
         Me.lblMes.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMes.ForeColor = System.Drawing.Color.Black
+        Me.lblMes.ForeColor = System.Drawing.Color.White
         Me.lblMes.Location = New System.Drawing.Point(112, 63)
         Me.lblMes.Name = "lblMes"
         Me.lblMes.Size = New System.Drawing.Size(227, 23)
@@ -102,9 +102,9 @@ Partial Class frmCitasH
         '
         'lblDía
         '
-        Me.lblDía.BackColor = System.Drawing.Color.SkyBlue
+        Me.lblDía.BackColor = System.Drawing.Color.DodgerBlue
         Me.lblDía.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDía.ForeColor = System.Drawing.Color.Black
+        Me.lblDía.ForeColor = System.Drawing.Color.White
         Me.lblDía.Location = New System.Drawing.Point(112, 89)
         Me.lblDía.Name = "lblDía"
         Me.lblDía.Size = New System.Drawing.Size(227, 23)
@@ -114,9 +114,9 @@ Partial Class frmCitasH
         '
         'lblHora
         '
-        Me.lblHora.BackColor = System.Drawing.Color.SkyBlue
+        Me.lblHora.BackColor = System.Drawing.Color.DodgerBlue
         Me.lblHora.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblHora.ForeColor = System.Drawing.Color.Black
+        Me.lblHora.ForeColor = System.Drawing.Color.White
         Me.lblHora.Location = New System.Drawing.Point(112, 114)
         Me.lblHora.Name = "lblHora"
         Me.lblHora.Size = New System.Drawing.Size(227, 23)
@@ -300,7 +300,7 @@ Partial Class frmCitasH
         Me.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnModificar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnModificar.ForeColor = System.Drawing.Color.White
-        Me.btnModificar.Image = Global.Control_Negocios.My.Resources.Resources.timbrar
+        Me.btnModificar.Image = CType(resources.GetObject("btnModificar.Image"), System.Drawing.Image)
         Me.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnModificar.Location = New System.Drawing.Point(125, 6)
         Me.btnModificar.Name = "btnModificar"
