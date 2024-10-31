@@ -36,7 +36,34 @@ Module ModGral
     Dim puerto As String = ""
     Dim seguridad As Boolean = False
 
+    Public Function TraerUsuarioIngresado(ByVal passw As String) As String
+        Dim miusuario As String = ""
 
+        Try
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT Alias,Status FROM usuarios WHERE Clave='" & passw & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    If rd1(1).ToString = 1 Then
+                        miusuario = rd1(0).ToString
+                    Else
+                        MsgBox("El usuario esta inactivo contacte a su administrador.", vbInformation + vbOKOnly, titulocentral)
+                    End If
+                End If
+            Else
+                MsgBox("Contraseña incorrecta.", vbInformation + vbOKOnly, titulocentral)
+            End If
+            rd1.Close()
+            cnn1.Close()
+
+            Return miusuario
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
+    End Function
 
     Public Function TraerFormatoImpresion() As String
 
@@ -92,6 +119,7 @@ Module ModGral
         Return respuesta
 
     End Function
+
     Public Function DatosRecarga2(ByVal valor As String) As String
         Dim respuesta As String = ""
         Dim siono As Integer = 0

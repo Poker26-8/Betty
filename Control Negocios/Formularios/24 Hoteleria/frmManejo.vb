@@ -1172,50 +1172,64 @@ Public Class frmManejo
 
             Try
 
+
+
                 If txtpass.Text = "" Then txtpass.Focus.Equals(True) : Exit Sub
 
-                cnn1.Close() : cnn1.Open()
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "SELECT Alias,Status,IdEmpleado FROM Usuarios WHERE Clave='" & txtpass.Text & "'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
+                Dim Pw As String = TraerUsuarioIngresado(txtpass.Text)
 
-
-
-                        If rd1(1).ToString = 1 Then
-
-
-                            lblusuario.Text = rd1(0).ToString
-                            lblidusuario.Text = rd1(2).ToString
-                            'KeyOP(focou)
-
-                            'frmServicioCuarto.Show()
-                            'frmServicioCuarto.lblCliente.Text = lblcliente.Text
-                            'frmServicioCuarto.lblNumCliente.Text = lblidcliente.Text
-                            'frmServicioCuarto.lblAtendio.Text = lblusuario.Text
-                            'frmServicioCuarto.lblHabitacion.Text = txtHabitacion.Text
-                            'Me.Close()
-                        Else
-                            MsgBox("El usuario no esta activo contacta a tu administrador", vbInformation + vbOKOnly, titulohotelriaa)
-                            txtpass.Text = ""
-                            txtpass.Focus.Equals(True)
-                            lblusuario.Text = ""
-                            cnn1.Close()
-                            Exit Sub
-                        End If
-
-                    End If
+                If Pw <> "" Then
+                    lblusuario.Text = Pw
+                    'lblidusuario.Text = rd1(2).ToString
                 Else
-                    MsgBox("contraseña incorrecta", vbInformation + vbOKOnly, titulohotelriaa)
-                    cnn1.Close()
                     txtpass.Text = ""
-                    txtpass.Focus.Equals(True)
                     lblusuario.Text = ""
+                    txtpass.Focus.Equals(True)
                     Exit Sub
                 End If
-                rd1.Close()
-                cnn1.Close()
+
+                'cnn1.Close() : cnn1.Open()
+                'cmd1 = cnn1.CreateCommand
+                'cmd1.CommandText = "SELECT Alias,Status,IdEmpleado FROM Usuarios WHERE Clave='" & txtpass.Text & "'"
+                'rd1 = cmd1.ExecuteReader
+                'If rd1.HasRows Then
+                '    If rd1.Read Then
+
+
+
+                '        If rd1(1).ToString = 1 Then
+
+
+                '            lblusuario.Text = rd1(0).ToString
+                '            lblidusuario.Text = rd1(2).ToString
+                '            'KeyOP(focou)
+
+                '            'frmServicioCuarto.Show()
+                '            'frmServicioCuarto.lblCliente.Text = lblcliente.Text
+                '            'frmServicioCuarto.lblNumCliente.Text = lblidcliente.Text
+                '            'frmServicioCuarto.lblAtendio.Text = lblusuario.Text
+                '            'frmServicioCuarto.lblHabitacion.Text = txtHabitacion.Text
+                '            'Me.Close()
+                '        Else
+                '            MsgBox("El usuario no esta activo contacta a tu administrador", vbInformation + vbOKOnly, titulohotelriaa)
+                '            txtpass.Text = ""
+                '            txtpass.Focus.Equals(True)
+                '            lblusuario.Text = ""
+                '            cnn1.Close()
+                '            Exit Sub
+                '        End If
+
+                '    End If
+                'Else
+                '    MsgBox("contraseña incorrecta", vbInformation + vbOKOnly, titulohotelriaa)
+                '    cnn1.Close()
+                '    txtpass.Text = ""
+                '    txtpass.Focus.Equals(True)
+                '    lblusuario.Text = ""
+                '    Exit Sub
+                'End If
+                'rd1.Close()
+                'cnn1.Close()
 
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)

@@ -12,9 +12,7 @@
             Dim resultado As Double = 0
             Dim resultado2 As Double = 0
 
-            'eximili=existencia despues del . * mililitros
-            'resultado=eximili/100
-            'resultado2=eximili/militroscopa
+
 
             Dim exispunto As String = ""
 
@@ -41,7 +39,7 @@
             barCarga.Value = 0
             barCarga.Maximum = rows
 
-            cmd1.CommandText = "SELECT * FROM Productos ORDER BY Nombre"
+            cmd1.CommandText = "SELECT * FROM Productos WHERE Copas>0 AND Mililitros>0 ORDER BY Nombre"
             rd1 = cmd1.ExecuteReader
             Do While rd1.Read
                 If rd1.HasRows Then
@@ -67,33 +65,71 @@
 
                     Dim EXISTENCIAREAL As Double = 0
 
-                    If existencia.IndexOf(".") <> -1 Then
-                        exispunto = existenciapartida(1)
-                        'convertir el numero a double de nuevo
-                        exispunto = exispunto.Substring(0, Math.Min(2, exispunto.Length))
+                    Dim c As String = ""
+                    Dim f As String = ""
+                    Dim a As String = ""
+                    Dim dx As Double = 0
 
-                        militroscopa = CDbl(militros) / CDbl(copas)
+                    If rd1("Mililitros").ToString > 0 And rd1("Copas").ToString > 0 Then
+                        For i = 1 To Len(existencia)
+                            If Mid(existencia, i, 1) = "." Then
+                                a = Mid(existencia, i, 99)
+                                a = 0 + a
+                                f = CDec(a) * rd1("Copas").ToString
+                                f = FormatNumber(f, 2)
+                                f = FormatNumber(f, 0)
+                                Exit For
+                            Else
+                                c = c + Mid(existencia, i, 1)
+                            End If
+                        Next
 
-                        eximili = exispunto * CDbl(militros)
-                        resultado = CDbl(eximili) / 100
-                        resultado2 = CDbl(resultado) / CDbl(militroscopa)
-                        resultado2 = Math.Round(resultado2, MidpointRounding.AwayFromZero)
-
-                        If copas = resultado2 Then
-                            EXISTENCIAREAL = CDbl(parteAntesDelPunto) + 1
+                        If f = "" Then
+                            dx = c
                         Else
-                            EXISTENCIAREAL = parteAntesDelPunto & "." & resultado2
-
+                            If Len(f) = 2 Then
+                                dx = c & "." & f
+                            Else
+                                'f = New String("0")
+                                dx = c & "." & f
+                            End If
                         End If
-
                     Else
-                        EXISTENCIAREAL = parteAntesDelPunto
+                        dx = existencia
                     End If
+
+
+                    'If existencia.IndexOf(".") <> -1 Then
+                    '    exispunto = existenciapartida(1)
+                    '    'convertir el numero a double de nuevo
+                    '    exispunto = exispunto.Substring(0, Math.Min(2, exispunto.Length))
+
+                    '    'eximili=existencia despues del . * mililitros
+                    '    'resultado=eximili/100
+                    '    'resultado2=eximili/militroscopa
+
+                    '    militroscopa = CDbl(militros) / CDbl(copas)
+                    '    eximili = exispunto * CDbl(militros)
+                    '    resultado = CDbl(eximili) / 100
+                    '    resultado2 = CDbl(resultado) / CDbl(militroscopa)
+                    '    resultado2 = Math.Round(resultado2, MidpointRounding.AwayFromZero)
+
+                    '    If copas = resultado2 Then
+                    '        EXISTENCIAREAL = CDbl(parteAntesDelPunto) + 1
+                    '    Else
+                    '        EXISTENCIAREAL = parteAntesDelPunto & "." & resultado2
+
+                    '    End If
+
+
+                    'Else
+                    '    EXISTENCIAREAL = parteAntesDelPunto
+                    'End If
 
                     grdCaptura.Rows.Add(codigo,
                                         nombre,
                                         unidad,
-                                        EXISTENCIAREAL,
+                                        dx,
                                         FormatNumber(pcompra, 2),
                                         FormatNumber(pventa, 2),
                                         FormatNumber(vcompra, 2),
@@ -101,10 +137,10 @@
 
 
                     ValCompra = ValCompra + vcompra
-                    ValVenta = ValVenta + vventa
+                        ValVenta = ValVenta + vventa
 
-                    barCarga.Value = barCarga.Value + 1
-                End If
+                        barCarga.Value = barCarga.Value + 1
+                    End If
             Loop
             rd1.Close()
             cnn1.Close()

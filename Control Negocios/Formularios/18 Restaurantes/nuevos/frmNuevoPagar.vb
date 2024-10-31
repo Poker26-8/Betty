@@ -1084,7 +1084,9 @@ Public Class frmNuevoPagar
 
     Private Sub btnIntro_Click(sender As Object, e As EventArgs) Handles btnIntro.Click
 
+
         btnIntro.Enabled = False
+        My.Application.DoEvents()
         Dim varieps As String = ""
         Dim vartotal As String = ""
         Dim mypago As Double = 0
@@ -1149,7 +1151,7 @@ Public Class frmNuevoPagar
         cmd1.CommandText = "DELETE FROM VtaImpresion"
         cmd1.ExecuteNonQuery()
         cnn1.Close()
-        btnIntro.Enabled = True
+
 
         Dim efectivocom As Double = 0
         efectivocom = txtEfectivo.Text
@@ -1781,73 +1783,123 @@ kakaxd:
                         Do While rd2.Read
                             If rd2.HasRows Then
 
+                                Dim copa As Integer = DatosRecarga2("Copa")
 
-                                VarCodigo = rd2("Codigo").ToString
-                                VarDesc = rd2("Descrip").ToString
-                                VarCanti = rd2("Cantidad").ToString * grdComanda.Rows(koni).Cells(4).Value.ToString
+                                If copa = 1 Then
 
-                                cnn3.Close() : cnn3.Open()
-                                cmd3 = cnn3.CreateCommand
-                                cmd3.CommandText = "SELECT Departamento,Grupo,ProvRes,MCD,Multiplo,Unico,GPrint FROM Productos WHERE Codigo='" & VarCodigo & "'"
-                                rd3 = cmd3.ExecuteReader
-                                If rd3.HasRows Then
+                                    existencia_inicial = 0
+                                    opeCantReal = 0
+                                    opediferencia = 0
+
+
+
+                                    VarCodigo = rd2("Codigo").ToString
+                                    VarDesc = rd2("Descrip").ToString
+                                    VarCanti = rd2("Cantidad").ToString * grdComanda.Rows(koni).Cells(4).Value.ToString
+
+                                    cnn3.Close() : cnn3.Open()
+                                    cmd3 = cnn3.CreateCommand
+                                    cmd3.CommandText = "SELECT * FROM productos WHERE Codigo='" & VarCodigo & "'"
+                                    rd3 = cmd3.ExecuteReader
                                     If rd3.Read Then
+                                        If rd3.HasRows Then
+                                            existencia_inicial = rd3("Existencia").ToString
+                                            opeCantReal = CDec(VarCanti) * CDec(rd3("Multiplo").ToString)
+                                            opediferencia = existencia_inicial + opeCantReal
+                                            Dim nueva_existe As Double = 0
+                                            nueva_existe = existencia_inicial - opeCantReal
 
-                                        MyCostVUE = 0
-                                        MyProm = 0
-                                        MyDepto = rd3("Departamento").ToString()
-                                        MyGrupo = rd3("Grupo").ToString()
-                                        Kit = rd3("ProvRes").ToString()
-                                        MyMCD = rd3("MCD").ToString()
-                                        MyMulti2 = rd3("Multiplo").ToString()
-                                        UNICO = rd3("Unico").ToString()
-                                        gprint = rd3("GPrint").ToString
-                                        If CStr(rd3("Departamento").ToString()) = "SERVICIOS" Then
-                                            rd3.Close() : cnn3.Close()
-                                            GoTo Door
-                                        End If
+                                            cnn4.Close() : cnn4.Open()
+                                            cmd4 = cnn4.CreateCommand
+                                            cmd4.CommandText = "INSERT INTO Cardex(Codigo,Nombre,Movimiento,Cantidad,Precio,Fecha,Usuario,Inicial,Final,Folio) VALUES('" & VarCodigo & "','" & VarDesc & "','Venta-Ingrediente'," & opeCantReal & "," & Pre_Comp & ",'" & Format(Date.Now, "yyyy/MM/dd HH:mm:ss") & "','" & lblusuario2.Text & "'," & existencia_inicial & "," & nueva_existe & "," & folio & ")"
+                                            cmd4.ExecuteNonQuery()
+                                            cnn4.Close()
 
-                                    End If
-                                End If
-                                rd3.Close()
-
-
-                                cmd3 = cnn3.CreateCommand
-                                cmd3.CommandText = "SELECT Existencia,MCD,Departamento,PrecioCompra FROM Productos WHERE Codigo='" & Strings.Left(VarCodigo, 6) & "'"
-                                rd3 = cmd3.ExecuteReader
-                                If rd3.HasRows Then
-                                    If rd3.Read Then
-                                        existe = rd3("Existencia").ToString()
-                                        MyMultiplo = rd3("MCD").ToString()
-                                        Existencia = existe / MyMultiplo
-                                        If rd3("Departamento").ToString() <> "SERVICIOS" Then
-                                            Pre_Comp = rd3("PrecioCompra").ToString()
-                                            MyCostVUE = Pre_Comp * (MYCANT / MyMCD)
                                         End If
                                     End If
+                                    rd3.Close()
+
+                                    cnn4.Close() : cnn4.Open()
+                                    cmd4 = cnn4.CreateCommand
+                                    cmd4.CommandText = "UPDATE Productos SET Cargado=0,CargadoInv=0,Existencia=Existencia - " & rd2("Cantidad").ToString & " WHERE Codigo='" & Strings.Left(VarCodigo, 6) & "'"
+                                    cmd4.ExecuteNonQuery()
+
+                                    cmd4 = cnn4.CreateCommand
+                                    cmd4.CommandText = "INSERT INTO Mov_Ingre(Codigo,Descripcion,Cantidad,Fecha) VALUES('" & VarCodigo & "','" & VarDesc & "'," & VarCanti & ",'" & Format(Date.Now, "yyyy/MM/dd") & "')"
+                                    cmd4.ExecuteNonQuery()
+                                    cnn4.Close()
+                                Else
+                                    '______________________________________
+
+                                    VarCodigo = rd2("Codigo").ToString
+                                    VarDesc = rd2("Descrip").ToString
+                                    VarCanti = rd2("Cantidad").ToString * grdComanda.Rows(koni).Cells(4).Value.ToString
+
+                                    cnn3.Close() : cnn3.Open()
+                                    cmd3 = cnn3.CreateCommand
+                                    cmd3.CommandText = "SELECT Departamento,Grupo,ProvRes,MCD,Multiplo,Unico,GPrint FROM Productos WHERE Codigo='" & VarCodigo & "'"
+                                    rd3 = cmd3.ExecuteReader
+                                    If rd3.HasRows Then
+                                        If rd3.Read Then
+
+                                            MyCostVUE = 0
+                                            MyProm = 0
+                                            MyDepto = rd3("Departamento").ToString()
+                                            MyGrupo = rd3("Grupo").ToString()
+                                            Kit = rd3("ProvRes").ToString()
+                                            MyMCD = rd3("MCD").ToString()
+                                            MyMulti2 = rd3("Multiplo").ToString()
+                                            UNICO = rd3("Unico").ToString()
+                                            gprint = rd3("GPrint").ToString
+                                            If CStr(rd3("Departamento").ToString()) = "SERVICIOS" Then
+                                                rd3.Close() : cnn3.Close()
+                                                GoTo Door
+                                            End If
+
+                                        End If
+                                    End If
+                                    rd3.Close()
+
+
+                                    cmd3 = cnn3.CreateCommand
+                                    cmd3.CommandText = "SELECT Existencia,MCD,Departamento,PrecioCompra FROM Productos WHERE Codigo='" & Strings.Left(VarCodigo, 6) & "'"
+                                    rd3 = cmd3.ExecuteReader
+                                    If rd3.HasRows Then
+                                        If rd3.Read Then
+                                            existe = rd3("Existencia").ToString()
+                                            MyMultiplo = rd3("MCD").ToString()
+                                            Existencia = existe / MyMultiplo
+                                            If rd3("Departamento").ToString() <> "SERVICIOS" Then
+                                                Pre_Comp = rd3("PrecioCompra").ToString()
+                                                MyCostVUE = Pre_Comp * (MYCANT / MyMCD)
+                                            End If
+                                        End If
+                                    End If
+                                    rd3.Close()
+
+                                    opeCantReal = CDbl(VarCanti) * CDbl(MyMulti2)
+                                    Dim nueva_existe As Double = 0
+                                    nueva_existe = Existencia - (VarCanti / MyMCD)
+
+
+                                    cnn4.Close() : cnn4.Open()
+                                    cmd4 = cnn4.CreateCommand
+                                    cmd4.CommandText = "INSERT INTO Cardex(Codigo,Nombre,Movimiento,Cantidad,Precio,Fecha,Usuario,Inicial,Final,Folio) VALUES('" & VarCodigo & "','" & VarDesc & "','Venta-Ingrediente'," & opeCantReal & "," & Pre_Comp & ",'" & Format(Date.Now, "yyyy/MM/dd HH:mm:ss") & "','" & lblusuario2.Text & "'," & Existencia & "," & nueva_existe & "," & folio & ")"
+                                    cmd4.ExecuteNonQuery()
+                                    cnn4.Close()
+
+                                    cnn4.Close() : cnn4.Open()
+                                    cmd4 = cnn4.CreateCommand
+                                    cmd4.CommandText = "UPDATE Productos SET Cargado=0,CargadoInv=0,Existencia=" & nueva_existe & " WHERE Codigo='" & Strings.Left(VarCodigo, 6) & "'"
+                                    cmd4.ExecuteNonQuery()
+
+                                    cmd4 = cnn4.CreateCommand
+                                    cmd4.CommandText = "INSERT INTO Mov_Ingre(Codigo,Descripcion,Cantidad,Fecha) VALUES('" & VarCodigo & "','" & VarDesc & "'," & VarCanti & ",'" & Format(Date.Now, "yyyy/MM/dd") & "')"
+                                    cmd4.ExecuteNonQuery()
+                                    cnn4.Close()
                                 End If
-                                rd3.Close()
-
-                                opeCantReal = CDbl(VarCanti) * CDbl(MyMulti2)
-                                Dim nueva_existe As Double = 0
-                                nueva_existe = Existencia - (VarCanti / MyMCD)
 
 
-                                cnn4.Close() : cnn4.Open()
-                                cmd4 = cnn4.CreateCommand
-                                cmd4.CommandText = "INSERT INTO Cardex(Codigo,Nombre,Movimiento,Cantidad,Precio,Fecha,Usuario,Inicial,Final,Folio) VALUES('" & VarCodigo & "','" & VarDesc & "','Venta-Ingrediente'," & opeCantReal & "," & Pre_Comp & ",'" & Format(Date.Now, "yyyy/MM/dd HH:mm:ss") & "','" & lblusuario2.Text & "'," & Existencia & "," & nueva_existe & "," & folio & ")"
-                                cmd4.ExecuteNonQuery()
-                                cnn4.Close()
-
-                                cnn4.Close() : cnn4.Open()
-                                cmd4 = cnn4.CreateCommand
-                                cmd4.CommandText = "UPDATE Productos SET Cargado=0,CargadoInv=0,Existencia=" & nueva_existe & " WHERE Codigo='" & Strings.Left(VarCodigo, 6) & "'"
-                                cmd4.ExecuteNonQuery()
-
-                                cmd4 = cnn4.CreateCommand
-                                cmd4.CommandText = "INSERT INTO Mov_Ingre(Codigo,Descripcion,Cantidad,Fecha) VALUES('" & VarCodigo & "','" & VarDesc & "'," & VarCanti & ",'" & Format(Date.Now, "yyyy/MM/dd") & "')"
-                                cmd4.ExecuteNonQuery()
-                                cnn4.Close()
 
                             End If
                         Loop
@@ -2100,7 +2152,7 @@ Door:
 #End Region
 
 deku:
-
+        btnIntro.Enabled = True
         Me.Close()
 
     End Sub

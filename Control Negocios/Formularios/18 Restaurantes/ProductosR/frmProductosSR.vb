@@ -1085,6 +1085,8 @@ nopasowey:
     Private Sub cboCodCorto_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCodCorto.SelectedValueChanged
 
         Try
+
+            Dim almacen As Integer = 0
             grdextras.Rows.Clear()
             grdpreferencia.Rows.Clear()
             grdpromociones.Rows.Clear()
@@ -1093,7 +1095,7 @@ nopasowey:
 
             cnn4.Close() : cnn4.Open()
             cmd4 = cnn4.CreateCommand
-            cmd4.CommandText = "SELECT Codigo,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,IIEPS FROM Productos WHERE Codigo='" & cboCodCorto.Text & "'"
+            cmd4.CommandText = "SELECT Codigo,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,IIEPS,Modo_Almacen FROM Productos WHERE Codigo='" & cboCodCorto.Text & "'"
             rd4 = cmd4.ExecuteReader
             If rd4.HasRows Then
                 If rd4.Read Then
@@ -1111,7 +1113,13 @@ nopasowey:
                     cboComanda.Text = rd4("GPrint").ToString
                     txtExistencia.Text = rd4("Existencia").ToString
                     TXTieps.Text = rd4("IIEPS").ToString
+                    almacen = rd4("Modo_Almacen").ToString
 
+                    If almacen = 1 Then
+                        rboDescIngredientes.Checked = True
+                    Else
+                        rboDescProductos.Checked = True
+                    End If
                 End If
             End If
             rd4.Close()
@@ -1304,19 +1312,19 @@ nopasowey:
             grdpromociones.Rows.Clear()
             txtcantidadpromo.Text = "0"
 
-
+            Dim alma As Integer = 0
             cnn4.Close() : cnn4.Open()
             cmd4 = cnn4.CreateCommand
             If dato = "barra" Then
-                cmd4.CommandText = "SELECT Codigo,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia FROM Productos WHERE CodBarra='" & txtCodBarras.Text & "'"
+                cmd4.CommandText = "SELECT Codigo,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Modo_Almacen FROM Productos WHERE CodBarra='" & txtCodBarras.Text & "'"
             End If
 
             If dato = "NOMBRE" Then
-                cmd4.CommandText = "SELECT Codigo,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia FROM Productos WHERE Nombre='" & cboDescripcion.Text & "'"
+                cmd4.CommandText = "SELECT Codigo,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Modo_Almacen FROM Productos WHERE Nombre='" & cboDescripcion.Text & "'"
             End If
 
             If dato = "CODIGO" Then
-                cmd4.CommandText = "SELECT Codigo,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia FROM Productos WHERE Codigo='" & cboCodCorto.Text & "'"
+                cmd4.CommandText = "SELECT Codigo,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Modo_Almacen FROM Productos WHERE Codigo='" & cboCodCorto.Text & "'"
             End If
 
             rd4 = cmd4.ExecuteReader
@@ -1335,6 +1343,13 @@ nopasowey:
                     cboGrupo.Text = rd4("Grupo").ToString
                     cboComanda.Text = rd4("GPrint").ToString
                     txtExistencia.Text = rd4("Existencia").ToString
+                    alma = rd4("Modo_Almacen").ToString
+
+                    If alma = 1 Then
+                        rboDescIngredientes.Checked = True
+                    Else
+                        rboDescProductos.Checked = True
+                    End If
                 End If
             End If
             rd4.Close()
