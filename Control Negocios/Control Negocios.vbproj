@@ -289,6 +289,12 @@
       <DependentUpon>EdoResultados.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CrystalReports\Hotel\Reservacion.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reservacion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CrystalReports\Imagenes\Cotización_Img.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2516,6 +2522,10 @@
     <EmbeddedResource Include="CrystalReports\EdoResultados.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EdoResultados.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReports\Hotel\Reservacion.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Reservacion.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="CrystalReports\Imagenes\Cotización_Img.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

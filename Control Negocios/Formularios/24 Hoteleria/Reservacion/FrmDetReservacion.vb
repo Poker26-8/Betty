@@ -1,4 +1,9 @@
-﻿Public Class FrmDetReservacion
+﻿
+Imports CrystalDecisions.CrystalReports.Engine
+Imports CrystalDecisions.Shared
+Imports System.IO
+
+Public Class FrmDetReservacion
 
     Dim varHoras As String = ""
     Dim minutosTiempoH As Double = 0
@@ -388,6 +393,18 @@
 
                 MsgBox("La habitacion " & lblHabitacion.Text & " fue asignada correctamente", vbInformation + vbOKOnly, titulohotelriaa)
 
+
+
+                'CUNAOD SE HSOPEDE
+                'Genera PDF y lo guarda en la ruta
+                Panel6.Visible = True
+                My.Application.DoEvents()
+
+                PDF_HOJA()
+
+                Panel6.Visible = False
+                My.Application.DoEvents()
+
                 btnLimpiar.PerformClick()
                 Me.Close()
                 frmManejo.Show()
@@ -396,7 +413,97 @@
                 cnn1.Close()
             End Try
         End If
-        End Sub
+    End Sub
+
+    Private Sub PDF_HOJA()
+        Dim root_name_recibo As String = ""
+        Dim FileOpen As New ProcessStartInfo
+        Dim FileNta As New Reservacion
+        Dim strServerName As String = Application.StartupPath
+        Dim crtableLogoninfos As New TableLogOnInfos
+        Dim crtableLogoninfo As New TableLogOnInfo
+        Dim crConnectionInfo As New ConnectionInfo
+        Dim CrTables As Tables
+        Dim CrTable As Table
+
+        Dim ruta As String = lblHabitacion.Text & " " & lblEntrada.Text
+        MsgBox(ruta)
+
+        crea_ruta("C:\ControlNegociosPro\ARCHIVOSDL1\HOSPEDAJE\")
+        root_name_recibo = "C:\ControlNegociosPro\ARCHIVOSDL1\HOSPEDAJE\Hab_" & ruta & ".pdf"
+
+        If File.Exists("C:\ControlNegociosPro\ARCHIVOSDL1\HOSPEDAJE\Hab_" & ruta & ".pdf") Then
+            File.Delete("C:\ControlNegociosPro\ARCHIVOSDL1\HOSPEDAJE\Hab_" & ruta & ".pdf")
+        End If
+
+        If varrutabase <> "" Then
+            If File.Exists("\\" & varrutabase & "\ControlNegociosPro\ARCHIVOSDL1\HOSPEDAJE\Hab_" & ruta & ".pdf") Then
+                File.Delete("\\" & varrutabase & "\ControlNegociosPro\ARCHIVOSDL1\HOSPEDAJE\Hab_" & ruta & ".pdf")
+            End If
+        End If
+
+        With crConnectionInfo
+            .ServerName = "C:\ControlNegociosPro\DL1.mdb"
+            .DatabaseName = "C:\ControlNegociosPro\DL1.mdb"
+            .UserID = ""
+            .Password = "jipl22"
+        End With
+
+        CrTables = FileNta.Database.Tables
+        For Each CrTable In CrTables
+            crtableLogoninfo = CrTable.LogOnInfo
+            crtableLogoninfo.ConnectionInfo = crConnectionInfo
+            CrTable.ApplyLogOnInfo(crtableLogoninfo)
+        Next
+
+
+        FileNta.DataDefinition.FormulaFields("Cliente").Text = "'" & cboCLientes.Text & "'"
+        FileNta.DataDefinition.FormulaFields("Habitacion").Text = "'" & lblHabitacion.Text & "'"
+
+        FileNta.Refresh()
+        FileNta.Refresh()
+        FileNta.Refresh()
+        If File.Exists(root_name_recibo) Then
+            File.Delete(root_name_recibo)
+        End If
+
+        Try
+            Dim CrExportOptions As ExportOptions
+            Dim CrDiskFileDestinationOptions As New DiskFileDestinationOptions()
+            Dim CrFormatTypeOptions As New PdfRtfWordFormatOptions()
+
+            CrDiskFileDestinationOptions.DiskFileName = root_name_recibo '"c:\crystalExport.pdf"
+            CrExportOptions = FileNta.ExportOptions
+            With CrExportOptions
+                .ExportDestinationType = ExportDestinationType.DiskFile
+                .ExportFormatType = ExportFormatType.PortableDocFormat
+                .DestinationOptions = CrDiskFileDestinationOptions
+                .FormatOptions = CrFormatTypeOptions
+            End With
+
+            FileNta.Export()
+            FileOpen.UseShellExecute = True
+            FileOpen.FileName = root_name_recibo
+
+            My.Application.DoEvents()
+
+            If MsgBox("¿Deseas abrir el archivo?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                Process.Start(FileOpen)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+        FileNta.Close()
+
+        If varrutabase <> "" Then
+
+            If File.Exists("\\" & varrutabase & "\ControlNegociosPro\ARCHIVOSDL1\HOSPEDAJE\Hab_" & ruta & ".pdf") Then
+                File.Delete("\\" & varrutabase & "\ControlNegociosPro\ARCHIVOSDL1\HOSPEDAJE\Hab_" & ruta & ".pdf")
+            End If
+
+            System.IO.File.Copy("C:\ControlNegociosPro\ARCHIVOSDL1\HOSPEDAJE\Hab_" & ruta & ".pdf", "\\" & varrutabase & "\ControlNegociosPro\ARCHIVOSDL1\HOSPEDAJE\Hab_" & ruta & ".pdf")
+        End If
+    End Sub
 
     Private Sub txtcontra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcontra.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then

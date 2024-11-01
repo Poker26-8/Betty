@@ -60,6 +60,9 @@ Partial Class FrmDetReservacion
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.btnAbonar = New System.Windows.Forms.Button()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.Label22 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -87,6 +90,8 @@ Partial Class FrmDetReservacion
         Me.GroupBox2.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
+        Me.Panel6.SuspendLayout()
+        Me.Panel7.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -489,6 +494,7 @@ Partial Class FrmDetReservacion
         '
         'Panel4
         '
+        Me.Panel4.Controls.Add(Me.Panel6)
         Me.Panel4.Controls.Add(Me.lblidcliented)
         Me.Panel4.Controls.Add(Me.GroupBox1)
         Me.Panel4.Controls.Add(Me.Label10)
@@ -509,6 +515,39 @@ Partial Class FrmDetReservacion
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(747, 261)
         Me.Panel4.TabIndex = 103
+        '
+        'Panel6
+        '
+        Me.Panel6.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Panel6.BackColor = System.Drawing.Color.LightCoral
+        Me.Panel6.Controls.Add(Me.Panel7)
+        Me.Panel6.Location = New System.Drawing.Point(222, 145)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(282, 88)
+        Me.Panel6.TabIndex = 218
+        Me.Panel6.Visible = False
+        '
+        'Panel7
+        '
+        Me.Panel7.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel7.BackColor = System.Drawing.Color.White
+        Me.Panel7.Controls.Add(Me.Label22)
+        Me.Panel7.Location = New System.Drawing.Point(8, 9)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(266, 71)
+        Me.Panel7.TabIndex = 0
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Font = New System.Drawing.Font("Segoe UI Black", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label22.Location = New System.Drawing.Point(17, 20)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(233, 30)
+        Me.Label22.TabIndex = 0
+        Me.Label22.Text = "IMPRIMIENDO PDF..."
         '
         'Panel5
         '
@@ -633,9 +672,9 @@ Partial Class FrmDetReservacion
         '
         'txtAnticipo
         '
-        Me.txtAnticipo.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.txtAnticipo.BackColor = System.Drawing.Color.SkyBlue
         Me.txtAnticipo.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAnticipo.ForeColor = System.Drawing.Color.White
+        Me.txtAnticipo.ForeColor = System.Drawing.Color.Black
         Me.txtAnticipo.Location = New System.Drawing.Point(360, 73)
         Me.txtAnticipo.Name = "txtAnticipo"
         Me.txtAnticipo.ReadOnly = True
@@ -746,9 +785,9 @@ Partial Class FrmDetReservacion
         '
         'txtTotalVenta
         '
-        Me.txtTotalVenta.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.txtTotalVenta.BackColor = System.Drawing.Color.SkyBlue
         Me.txtTotalVenta.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTotalVenta.ForeColor = System.Drawing.Color.White
+        Me.txtTotalVenta.ForeColor = System.Drawing.Color.Black
         Me.txtTotalVenta.Location = New System.Drawing.Point(360, 39)
         Me.txtTotalVenta.Name = "txtTotalVenta"
         Me.txtTotalVenta.ReadOnly = True
@@ -790,6 +829,9 @@ Partial Class FrmDetReservacion
         Me.Panel3.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
+        Me.Panel6.ResumeLayout(False)
+        Me.Panel7.ResumeLayout(False)
+        Me.Panel7.PerformLayout()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
         Me.ResumeLayout(False)
@@ -854,4 +896,7 @@ Partial Class FrmDetReservacion
     Friend WithEvents txtTarjeta As TextBox
     Friend WithEvents txtEfectivo As TextBox
     Friend WithEvents btnAbonar As Button
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents Panel7 As Panel
+    Friend WithEvents Label22 As Label
 End Class
