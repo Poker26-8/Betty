@@ -442,7 +442,7 @@ Public Class frmClientes
         txtreferencia.Text = ""
         txtNumCliente.Text = ""
         Info.Text = "> Más información"
-        Me.Size = New Size(894, 299)
+        Me.Size = New Size(894, 311)
     End Sub
 
     Private Sub btnEliminar_Click(sender As System.Object, e As System.EventArgs) Handles btnEliminar.Click
