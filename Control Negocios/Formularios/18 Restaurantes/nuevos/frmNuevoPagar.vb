@@ -1791,11 +1791,12 @@ kakaxd:
                                     opeCantReal = 0
                                     opediferencia = 0
 
-
+                                    Dim nueva_existe As Double = 0
 
                                     VarCodigo = rd2("Codigo").ToString
                                     VarDesc = rd2("Descrip").ToString
-                                    VarCanti = rd2("Cantidad").ToString * grdComanda.Rows(koni).Cells(4).Value.ToString
+                                    VarCanti = rd2("Cantidad").ToString * FormatNumber(grdComanda.Rows(koni).Cells(4).Value.ToString, 2)
+                                    VarCanti = FormatNumber(VarCanti, 2)
 
                                     cnn3.Close() : cnn3.Open()
                                     cmd3 = cnn3.CreateCommand
@@ -1806,7 +1807,7 @@ kakaxd:
                                             existencia_inicial = rd3("Existencia").ToString
                                             opeCantReal = CDec(VarCanti) * CDec(rd3("Multiplo").ToString)
                                             opediferencia = existencia_inicial + opeCantReal
-                                            Dim nueva_existe As Double = 0
+
                                             nueva_existe = existencia_inicial - opeCantReal
 
                                             cnn4.Close() : cnn4.Open()
@@ -1821,7 +1822,7 @@ kakaxd:
 
                                     cnn4.Close() : cnn4.Open()
                                     cmd4 = cnn4.CreateCommand
-                                    cmd4.CommandText = "UPDATE Productos SET Cargado=0,CargadoInv=0,Existencia=Existencia - " & rd2("Cantidad").ToString & " WHERE Codigo='" & Strings.Left(VarCodigo, 6) & "'"
+                                    cmd4.CommandText = "UPDATE Productos SET Cargado=0,CargadoInv=0,Existencia= Existencia -" & (rd2("Cantidad").ToString * grdComanda.Rows(koni).Cells(4).Value.ToString) * MULTIPLO & " WHERE Codigo='" & Strings.Left(VarCodigo, 6) & "'"
                                     cmd4.ExecuteNonQuery()
 
                                     cmd4 = cnn4.CreateCommand

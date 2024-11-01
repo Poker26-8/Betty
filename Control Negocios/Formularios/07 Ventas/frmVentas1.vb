@@ -10760,20 +10760,20 @@ ecomoda:
                 Y += 13.5
             End If
 
-            e.Graphics.DrawString("Total:", fuente_prods, Brushes.Black, 1, Y)
+            e.Graphics.DrawString("Total:", fuente_prods, Brushes.Black, 40, Y)
             e.Graphics.DrawString(simbolo & FormatNumber(txtPagar.Text, 2), fuente_prods, Brushes.Black, 270, Y, sf)
             Y += 18
 
-            e.Graphics.DrawString(convLetras(txtPagar.Text), New Drawing.Font(tipografia, 7, FontStyle.Italic), Brushes.Black, 1, Y)
+            e.Graphics.DrawString(convLetras(txtPagar.Text), New Drawing.Font(tipografia, 7, FontStyle.Italic), Brushes.Black, 40, Y)
             Y += 18
 
             If CDbl(txtefectivo.Text) > 0 Then
-                e.Graphics.DrawString("Efectivo:", fuente_prods, Brushes.Black, 1, Y)
+                e.Graphics.DrawString("Efectivo:", fuente_prods, Brushes.Black, 40, Y)
                 e.Graphics.DrawString(simbolo & FormatNumber(txtefectivo.Text, 2), fuente_prods, Brushes.Black, 270, Y, sf)
                 Y += 20
             End If
             If CDbl(txtCambio.Text) > 0 Then
-                e.Graphics.DrawString("Cambio:", fuente_prods, Brushes.Black, 1, Y)
+                e.Graphics.DrawString("Cambio:", fuente_prods, Brushes.Black, 40, Y)
                 e.Graphics.DrawString(simbolo & FormatNumber(txtCambio.Text, 2), fuente_prods, Brushes.Black, 270, Y, sf)
                 Y += 20
             End If
