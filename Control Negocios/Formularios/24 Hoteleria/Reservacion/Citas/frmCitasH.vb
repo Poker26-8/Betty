@@ -436,8 +436,8 @@
                 If grdCaptura.Rows(field - 1).Cells(3).Value.ToString = "DX" Then
                 Else
                     If grdCaptura.Rows(field - 1).Cells(3).Value = 1 Then
-                        grdCaptura.Rows(field - 1).DefaultCellStyle.BackColor = Color.Blue
-                        grdCaptura.Rows(field - 1).DefaultCellStyle.ForeColor = Color.White
+                        grdCaptura.Rows(field - 1).DefaultCellStyle.BackColor = Color.Beige
+                        grdCaptura.Rows(field - 1).DefaultCellStyle.ForeColor = Color.Black
                     End If
                 End If
                 My.Application.DoEvents()
@@ -528,8 +528,8 @@
                 If grdCaptura.Rows(field).Cells(3).Value.ToString = "DX" Then
                 Else
                     If grdCaptura.Rows(field).Cells(3).Value = 1 Then
-                        grdCaptura.Rows(field).DefaultCellStyle.BackColor = Color.Blue
-                        grdCaptura.Rows(field).DefaultCellStyle.ForeColor = Color.White
+                        grdCaptura.Rows(field).DefaultCellStyle.BackColor = Color.Beige
+                        grdCaptura.Rows(field).DefaultCellStyle.ForeColor = Color.Black
                     End If
                 End If
 
@@ -616,8 +616,8 @@
                 If grdCaptura.Rows(field).Cells(3).Value.ToString = "DX" Then
                 Else
                     If grdCaptura.Rows(field).Cells(3).Value = 1 Then
-                        grdCaptura.Rows(field).DefaultCellStyle.BackColor = Color.Blue
-                        grdCaptura.Rows(field).DefaultCellStyle.ForeColor = Color.White
+                        grdCaptura.Rows(field).DefaultCellStyle.BackColor = Color.Beige
+                        grdCaptura.Rows(field).DefaultCellStyle.ForeColor = Color.Black
                     End If
                 End If
                 rd1.Close()

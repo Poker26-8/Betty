@@ -73,68 +73,68 @@
 
 
                     If rd1("Mililitros").ToString > 0 And rd1("Copas").ToString > 0 Then
-                        '    For i = 1 To Len(existencia)
-                        '        If Mid(existencia, i, 1) = "." Then
-                        '            a = Mid(existencia, i, 99)
-                        '            a = 0 + a
-                        '            f = CDec(a) * rd1("Copas").ToString
-                        '            f = FormatNumber(f, 2)
-                        '            f = FormatNumber(f, 0)
-                        '            Exit For
-                        '        Else
-                        '            c = c + Mid(existencia, i, 1)
-                        '        End If
-                        '    Next
+                        For i = 1 To Len(existencia)
+                            If Mid(existencia, i, 1) = "." Then
+                                a = Mid(existencia, i, 99)
+                                a = 0 + a
+                                f = CDec(a) * rd1("Copas").ToString
+                                f = FormatNumber(f, 2)
+                                f = FormatNumber(f, 0)
+                                Exit For
+                            Else
+                                c = c + Mid(existencia, i, 1)
+                            End If
+                        Next
 
-                        '    If f = "" Then
-                        '        dx = c
-                        '    Else
-                        '        If Len(f) = 2 Then
-                        '            dx = c & "." & f
-                        '        Else
-                        '            'f = New String("0")
-                        '            dx = c & "." & f
-                        '        End If
-                        '    End If
-                        'Else
-                        '    dx = existencia
-                    End If
-
-
-                    If existencia.IndexOf(".") <> -1 Then
-                        exispunto = existenciapartida(1)
-                        'convertir el numero a double de nuevo
-                        exispunto = exispunto.Substring(0, Math.Min(2, exispunto.Length))
-
-                            militroscopa = CDbl(militros) / CDbl(copas)
-                        eximili = exispunto * CDbl(militros)
-                        resultado = CDbl(eximili) / 100
-                        resultado2 = CDbl(resultado) - CDbl(militroscopa)
-                        resultado2 = Math.Round(resultado2, MidpointRounding.AwayFromZero)
-
-                        If copas = resultado2 Then
-                            EXISTENCIAREAL = CDbl(parteAntesDelPunto) + 1
+                        If f = "" Then
+                            dx = c
                         Else
-                            EXISTENCIAREAL = parteAntesDelPunto & "." & resultado2
-
+                            If Len(f) = 2 Then
+                                dx = c & "." & f
+                            Else
+                                'f = New String("0")
+                                dx = c & "." & f
+                            End If
                         End If
-
-
                     Else
-                        EXISTENCIAREAL = parteAntesDelPunto
+                        dx = existencia
                     End If
 
-                        grdCaptura.Rows.Add(codigo,
+
+                    'If existencia.IndexOf(".") <> -1 Then
+                    '    exispunto = existenciapartida(1)
+                    '    'convertir el numero a double de nuevo
+                    '    exispunto = exispunto.Substring(0, Math.Min(2, exispunto.Length))
+
+                    '        militroscopa = CDbl(militros) / CDbl(copas)
+                    '    eximili = exispunto * CDbl(militros)
+                    '    resultado = CDbl(eximili) / 100
+                    '    resultado2 = CDbl(resultado) - CDbl(militroscopa)
+                    '    resultado2 = Math.Round(resultado2, MidpointRounding.AwayFromZero)
+
+                    '    If copas = resultado2 Then
+                    '        EXISTENCIAREAL = CDbl(parteAntesDelPunto) + 1
+                    '    Else
+                    '        EXISTENCIAREAL = parteAntesDelPunto & "." & resultado2
+
+                    '    End If
+
+
+                    'Else
+                    '    EXISTENCIAREAL = parteAntesDelPunto
+                    'End If
+
+                    grdCaptura.Rows.Add(codigo,
                                         nombre,
                                         unidad,
-                                        EXISTENCIAREAL,
+                                        dx,
                                         FormatNumber(pcompra, 2),
                                         FormatNumber(pventa, 2),
                                         FormatNumber(vcompra, 2),
                                         FormatNumber(vventa, 2))
 
 
-                        ValCompra = ValCompra + vcompra
+                    ValCompra = ValCompra + vcompra
                         ValVenta = ValVenta + vventa
 
                         barCarga.Value = barCarga.Value + 1
@@ -354,21 +354,21 @@
 
             Try
                 If (rbProveedor.Checked) Then
-                    query1 = "SELECT COUNT(Codigo) FROM productos WHERE Provpri='" & cbofiltro.Text & "'"
+                    query1 = "SELECT COUNT(Codigo) FROM productos WHERE Provpri='" & cbofiltro.Text & "' AND Copas>0 AND Mililitros>0"
 
-                    query2 = "SELECT * FROM Productos WHERE ProvPri='" & cbofiltro.Text & "' ORDER BY Nombre"
+                    query2 = "SELECT * FROM Productos WHERE ProvPri='" & cbofiltro.Text & "' AND Copas>0 AND Mililitros>0 ORDER BY Nombre"
                 End If
 
                 If (rbDepartamento.Checked) Then
-                    query1 = "SELECT COUNT(Codigo) FROM productos WHERE Departamento='" & cbofiltro.Text & "'"
+                    query1 = "SELECT COUNT(Codigo) FROM productos WHERE Departamento='" & cbofiltro.Text & "' AND Copas>0 AND Mililitros>0"
 
-                    query2 = "SELECT * FROM productos WHERE Departamento='" & cbofiltro.Text & "' ORDER BY Nombre"
+                    query2 = "SELECT * FROM productos WHERE Departamento='" & cbofiltro.Text & "'AND Copas>0 AND Mililitros>0 ORDER BY Nombre"
                 End If
 
                 If (rbGrupo.Checked) Then
-                    query1 = "SELECT COUNT(Codigo) FROM productos WHERE Grupo='" & cbofiltro.Text & "'"
+                    query1 = "SELECT COUNT(Codigo) FROM productos WHERE Grupo='" & cbofiltro.Text & "' AND Copas>0 AND Mililitros>0"
 
-                    query2 = "SELECT * FROM productos WHERE Grupo='" & cbofiltro.Text & "' ORDER BY Nombre"
+                    query2 = "SELECT * FROM productos WHERE Grupo='" & cbofiltro.Text & "' AND Copas>0 AND Mililitros>0 ORDER BY Nombre"
                 End If
 
                 cnn1.Close() : cnn1.Open()
