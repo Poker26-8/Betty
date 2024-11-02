@@ -1095,11 +1095,11 @@ nopasowey:
 
             cnn4.Close() : cnn4.Open()
             cmd4 = cnn4.CreateCommand
-            cmd4.CommandText = "SELECT Codigo,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,IIEPS,Modo_Almacen FROM Productos WHERE Codigo='" & cboCodCorto.Text & "'"
+            cmd4.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,IIEPS,Modo_Almacen FROM Productos WHERE Codigo='" & cboCodCorto.Text & "'"
             rd4 = cmd4.ExecuteReader
             If rd4.HasRows Then
                 If rd4.Read Then
-
+                    txtCodBarras.Text = rd4("CodBarra").ToString
                     cboCodCorto.Text = rd4("Codigo").ToString
                     cboDescripcion.Text = rd4("Nombre").ToString
                     cboIva.Text = rd4("IVA").ToString
@@ -1196,23 +1196,31 @@ nopasowey:
             txtcantidadpromo.Text = "0"
 
             Dim modo_almacen As Integer = 0
+            Dim v As Integer = 0
             cnn3.Close() : cnn3.Open()
             cmd3 = cnn3.CreateCommand
             If dato = "barra" Then
-                cmd3.CommandText = "SELECT Codigo,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Resumen,Descripcion_Tienda,IIEPS,Modo_Almacen FROM Productos WHERE CodBarra='" & txtCodBarras.Text & "'"
+                cmd3.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Resumen,Descripcion_Tienda,IIEPS,Modo_Almacen FROM Productos WHERE CodBarra='" & txtCodBarras.Text & "'"
+                v = 1
             End If
 
             If dato = "NOMBRE" Then
-                cmd3.CommandText = "SELECT Codigo,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Resumen,Descripcion_Tienda,IIEPS,Modo_Almacen FROM Productos WHERE Nombre='" & cboDescripcion.Text & "'"
+                cmd3.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Resumen,Descripcion_Tienda,IIEPS,Modo_Almacen FROM Productos WHERE Nombre='" & cboDescripcion.Text & "'"
+                v = 2
             End If
 
             If dato = "CODIGO" Then
-                cmd3.CommandText = "SELECT Codigo,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Resumen,Descripcion_Tienda,IIEPS,Modo_Almacen FROM Productos WHERE Codigo='" & cboCodCorto.Text & "'"
+                cmd3.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Resumen,Descripcion_Tienda,IIEPS,Modo_Almacen FROM Productos WHERE Codigo='" & cboCodCorto.Text & "'"
+                v = 2
             End If
 
             rd3 = cmd3.ExecuteReader
             If rd3.HasRows Then
                 If rd3.Read Then
+                    If v = 1 Then
+                    Else
+                        txtCodBarras.Text = rd3("CodBarra").ToString
+                    End If
 
                     cboCodCorto.Text = rd3("Codigo").ToString
                     cboDescripcion.Text = rd3("Nombre").ToString
@@ -1313,26 +1321,41 @@ nopasowey:
             txtcantidadpromo.Text = "0"
 
             Dim alma As Integer = 0
+            Dim a As Integer = 0
+            Dim b As Integer = 0
             cnn4.Close() : cnn4.Open()
             cmd4 = cnn4.CreateCommand
             If dato = "barra" Then
-                cmd4.CommandText = "SELECT Codigo,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Modo_Almacen FROM Productos WHERE CodBarra='" & txtCodBarras.Text & "'"
+                cmd4.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Modo_Almacen FROM Productos WHERE CodBarra='" & txtCodBarras.Text & "'"
+                a = 1
+                b = 2
             End If
 
             If dato = "NOMBRE" Then
-                cmd4.CommandText = "SELECT Codigo,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Modo_Almacen FROM Productos WHERE Nombre='" & cboDescripcion.Text & "'"
+                cmd4.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Modo_Almacen FROM Productos WHERE Nombre='" & cboDescripcion.Text & "'"
+                a = 2
+                b = 1
             End If
 
             If dato = "CODIGO" Then
-                cmd4.CommandText = "SELECT Codigo,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Modo_Almacen FROM Productos WHERE Codigo='" & cboCodCorto.Text & "'"
+                cmd4.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Modo_Almacen FROM Productos WHERE Codigo='" & cboCodCorto.Text & "'"
+                a = 2
+                b = 2
             End If
 
             rd4 = cmd4.ExecuteReader
             If rd4.HasRows Then
                 If rd4.Read Then
-
+                    If a = 1 Then
+                    Else
+                        txtCodBarras.Text = rd4("CodBarra").ToString
+                    End If
                     cboCodCorto.Text = rd4("Codigo").ToString
-                    cboDescripcion.Text = rd4("Nombre").ToString
+                    If b = 1 Then
+                    Else
+                        cboDescripcion.Text = rd4("Nombre").ToString
+                    End If
+
                     cboIva.Text = rd4("IVA").ToString
                     txtUnidad.Text = rd4("UCompra").ToString
                     txtPrecioCompra.Text = rd4("PrecioCompra").ToString

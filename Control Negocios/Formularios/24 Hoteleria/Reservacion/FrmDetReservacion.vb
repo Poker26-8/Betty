@@ -426,7 +426,7 @@ Public Class FrmDetReservacion
         Dim CrTables As Tables
         Dim CrTable As Table
 
-        Dim ruta As String = lblHabitacion.Text & " " & lblEntrada.Text
+        Dim ruta As String = lblHabitacion.Text
         MsgBox(ruta)
 
         crea_ruta("C:\ControlNegociosPro\ARCHIVOSDL1\HOSPEDAJE\")

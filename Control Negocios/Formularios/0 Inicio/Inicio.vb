@@ -445,6 +445,7 @@ Public Class Inicio
 
         Dim partes As Integer = DatosRecarga2("Partes")
         Dim escuelas As Integer = DatosRecarga2("Escuelas")
+        Dim restauratnet As Integer = DatosRecarga2("Restaurante")
 
         If partes = 1 Then
             frmProductosSerie.Show()
@@ -453,6 +454,10 @@ Public Class Inicio
         ElseIf escuelas = 1 Then
             frmProductos_Escuelas.Show()
             frmProductos_Escuelas.BringToFront()
+
+        ElseIf restauratnet = 1 Then
+            frmProductosSR.BringToFront()
+            frmProductosSR.Show()
         Else
             frmProductosS.Show()
             frmProductosS.BringToFront()

@@ -33,7 +33,7 @@
                 End If
             End If
             rd1.Close()
-
+            grdCaptura.Rows.Clear()
             txtregistros.Text = rows
             barCarga.Visible = True
             barCarga.Value = 0

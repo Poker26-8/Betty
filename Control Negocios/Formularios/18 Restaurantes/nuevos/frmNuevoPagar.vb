@@ -1796,7 +1796,7 @@ kakaxd:
                                     VarCodigo = rd2("Codigo").ToString
                                     VarDesc = rd2("Descrip").ToString
                                     VarCanti = rd2("Cantidad").ToString * FormatNumber(grdComanda.Rows(koni).Cells(4).Value.ToString, 2)
-                                    VarCanti = FormatNumber(VarCanti, 2)
+
 
                                     cnn3.Close() : cnn3.Open()
                                     cmd3 = cnn3.CreateCommand
