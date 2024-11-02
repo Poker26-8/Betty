@@ -501,12 +501,12 @@ Public Class frmConsultaNotas
             cnn1.Close() : cnn1.Open()
 
             cmd1 = cnn1.CreateCommand
-            If (optnotas.Checked) Then cmd1.CommandText = "select distinct Cliente from Ventas where Status<>'CANCELADA' AND Cliente<>''"
-            If (optcobrar.Checked) Then cmd1.CommandText = "select distinct Cliente from Ventas where Status='RESTA' AND Cliente<>''"
-            If (optpagadas.Checked) Then cmd1.CommandText = "select distinct Cliente from Ventas where Status='PAGADO' AND Cliente<>''"
-            If (optanceladas.Checked) Then cmd1.CommandText = "select distinct Cliente from Ventas where Status='CANCELADA' AND Cliente<>''"
-            If (optcotiz.Checked) Then cmd1.CommandText = "select distinct Cliente from CotPed where Tipo='COTIZACION' AND Cliente<>''"
-            If (optPedidos.Checked) Then cmd1.CommandText = "SELECT DISTINCT Cliente FROM cotped WHERE Tipo='PEDIDO' AND Cliente<>''"
+            If (optnotas.Checked) Then cmd1.CommandText = "select distinct Cliente from Ventas where Status<>'CANCELADA' AND Cliente<>'' ORDER BY Cliente"
+            If (optcobrar.Checked) Then cmd1.CommandText = "select distinct Cliente from Ventas where Status='RESTA' AND Cliente<>'' ORDER BY Cliente"
+            If (optpagadas.Checked) Then cmd1.CommandText = "select distinct Cliente from Ventas where Status='PAGADO' AND Cliente<>'' ORDER BY Cliente"
+            If (optanceladas.Checked) Then cmd1.CommandText = "select distinct Cliente from Ventas where Status='CANCELADA' AND Cliente<>'' ORDER BY Cliente"
+            If (optcotiz.Checked) Then cmd1.CommandText = "select distinct Cliente from CotPed where Tipo='COTIZACION' AND Cliente<>'' ORDER BY CLiente"
+            If (optPedidos.Checked) Then cmd1.CommandText = "SELECT DISTINCT Cliente FROM cotped WHERE Tipo='PEDIDO' AND Cliente<>'' ORDER BY Cliente"
 
             If (optdevos.Checked) Then rd1.Close() : cnn1.Close() : Exit Sub
 
