@@ -9,6 +9,7 @@ Public Class FrmDetReservacion
     Dim minutosTiempoH As Double = 0
     Dim cfolio As Integer = 0
     Dim cadenafact As String = ""
+    Dim email As String = ""
     Private Sub FrmDetReservacion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     End Sub
 
@@ -118,11 +119,12 @@ Public Class FrmDetReservacion
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT Id FROM clientes WHERE Nombre='" & cboCLientes.Text & "'"
+            cmd1.CommandText = "SELECT Id,Correo FROM clientes WHERE Nombre='" & cboCLientes.Text & "'"
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then
                     lblidcliented.Text = rd1(0).ToString
+                    email = rd1(1).ToString
                 End If
             End If
             rd1.Close()
@@ -426,8 +428,7 @@ Public Class FrmDetReservacion
         Dim CrTables As Tables
         Dim CrTable As Table
 
-        Dim ruta As String = lblHabitacion.Text
-        MsgBox(ruta)
+        Dim ruta As String = cboCLientes.Text
 
         crea_ruta("C:\ControlNegociosPro\ARCHIVOSDL1\HOSPEDAJE\")
         root_name_recibo = "C:\ControlNegociosPro\ARCHIVOSDL1\HOSPEDAJE\Hab_" & ruta & ".pdf"
@@ -459,6 +460,10 @@ Public Class FrmDetReservacion
 
         FileNta.DataDefinition.FormulaFields("Cliente").Text = "'" & cboCLientes.Text & "'"
         FileNta.DataDefinition.FormulaFields("Habitacion").Text = "'" & lblHabitacion.Text & "'"
+        FileNta.DataDefinition.FormulaFields("Llegada").Text = "'" & lblEntrada.Text & "'"
+        FileNta.DataDefinition.FormulaFields("Salida").Text = "'" & lblSalida.Text & "'"
+        FileNta.DataDefinition.FormulaFields("Telefono").Text = "'" & txttelefono.Text & "'"
+        FileNta.DataDefinition.FormulaFields("Correo").Text = "'" & email & "'"
 
         FileNta.Refresh()
         FileNta.Refresh()
