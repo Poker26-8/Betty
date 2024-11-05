@@ -3436,7 +3436,6 @@ doorcita:
 kaka:
 
                 cnn1.Close() : cnn1.Open()
-
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
                     "select VSE from Ticket"
