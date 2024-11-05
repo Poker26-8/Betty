@@ -780,6 +780,7 @@ Public Class Inicio
                 frmVentas_refa.Show()
                 frmVentas_refa.BringToFront()
             Else
+                My.Application.DoEvents()
                 frmVentas1.Show()
                 frmVentas1.BringToFront()
             End If

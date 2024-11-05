@@ -398,11 +398,11 @@ Public Class frmVentas2
         txtdia.Text = Weekday(Date.Now)
         Timer1.Start()
         cbodesc.Focus().Equals(True)
-
+        RunAsyncFunctionsV2()
         Me.Show()
         My.Application.DoEvents()
 
-        RunAsyncFunctionsV2()
+
 
     End Sub
     Private Sub frmVentas2_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
