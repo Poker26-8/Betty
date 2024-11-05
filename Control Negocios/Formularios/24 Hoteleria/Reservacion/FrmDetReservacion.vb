@@ -396,7 +396,6 @@ Public Class FrmDetReservacion
                 MsgBox("La habitacion " & lblHabitacion.Text & " fue asignada correctamente", vbInformation + vbOKOnly, titulohotelriaa)
 
 
-
                 'CUNAOD SE HSOPEDE
                 'Genera PDF y lo guarda en la ruta
                 Panel6.Visible = True
