@@ -62,7 +62,8 @@ Partial Class frmNuvRepVentas
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.rbVMesero = New System.Windows.Forms.RadioButton()
+        Me.rbComisionistaDetalle = New System.Windows.Forms.RadioButton()
+        Me.rbVentasComisionista = New System.Windows.Forms.RadioButton()
         Me.rbVVendedorDetalle = New System.Windows.Forms.RadioButton()
         Me.rbTraspasos = New System.Windows.Forms.RadioButton()
         Me.rbVentasTotales = New System.Windows.Forms.RadioButton()
@@ -83,6 +84,7 @@ Partial Class frmNuvRepVentas
         Me.rbVentasVendedor = New System.Windows.Forms.RadioButton()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.rbCortesias = New System.Windows.Forms.RadioButton()
+        Me.rbVMesero = New System.Windows.Forms.RadioButton()
         Me.rbComandasCance = New System.Windows.Forms.RadioButton()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.dtpinicio = New System.Windows.Forms.DateTimePicker()
@@ -97,8 +99,7 @@ Partial Class frmNuvRepVentas
         Me.barcarga = New System.Windows.Forms.ProgressBar()
         Me.grdCaptura = New System.Windows.Forms.DataGridView()
         Me.PMasVendido80 = New System.Drawing.Printing.PrintDocument()
-        Me.rbVentasComisionista = New System.Windows.Forms.RadioButton()
-        Me.rbComisionistaDetalle = New System.Windows.Forms.RadioButton()
+        Me.rbTiempo = New System.Windows.Forms.RadioButton()
         Me.Panel2.SuspendLayout()
         Me.Panel7.SuspendLayout()
         Me.Panel6.SuspendLayout()
@@ -546,16 +547,28 @@ Partial Class frmNuvRepVentas
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "          Ventas           "
         '
-        'rbVMesero
+        'rbComisionistaDetalle
         '
-        Me.rbVMesero.AutoSize = True
-        Me.rbVMesero.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbVMesero.Location = New System.Drawing.Point(10, 67)
-        Me.rbVMesero.Name = "rbVMesero"
-        Me.rbVMesero.Size = New System.Drawing.Size(152, 22)
-        Me.rbVMesero.TabIndex = 2
-        Me.rbVMesero.Text = "Ventas por mesero"
-        Me.rbVMesero.UseVisualStyleBackColor = True
+        Me.rbComisionistaDetalle.AutoSize = True
+        Me.rbComisionistaDetalle.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbComisionistaDetalle.Location = New System.Drawing.Point(232, 118)
+        Me.rbComisionistaDetalle.Name = "rbComisionistaDetalle"
+        Me.rbComisionistaDetalle.Size = New System.Drawing.Size(244, 22)
+        Me.rbComisionistaDetalle.TabIndex = 223
+        Me.rbComisionistaDetalle.TabStop = True
+        Me.rbComisionistaDetalle.Text = "Ventas por comisionista (Detalle)"
+        Me.rbComisionistaDetalle.UseVisualStyleBackColor = True
+        '
+        'rbVentasComisionista
+        '
+        Me.rbVentasComisionista.AutoSize = True
+        Me.rbVentasComisionista.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbVentasComisionista.Location = New System.Drawing.Point(232, 90)
+        Me.rbVentasComisionista.Name = "rbVentasComisionista"
+        Me.rbVentasComisionista.Size = New System.Drawing.Size(185, 22)
+        Me.rbVentasComisionista.TabIndex = 222
+        Me.rbVentasComisionista.Text = "Ventas por comisionista"
+        Me.rbVentasComisionista.UseVisualStyleBackColor = True
         '
         'rbVVendedorDetalle
         '
@@ -772,6 +785,7 @@ Partial Class frmNuvRepVentas
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.rbTiempo)
         Me.TabPage2.Controls.Add(Me.rbCortesias)
         Me.TabPage2.Controls.Add(Me.rbVMesero)
         Me.TabPage2.Controls.Add(Me.rbComandasCance)
@@ -793,6 +807,17 @@ Partial Class frmNuvRepVentas
         Me.rbCortesias.TabIndex = 1
         Me.rbCortesias.Text = "Cortesias"
         Me.rbCortesias.UseVisualStyleBackColor = True
+        '
+        'rbVMesero
+        '
+        Me.rbVMesero.AutoSize = True
+        Me.rbVMesero.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbVMesero.Location = New System.Drawing.Point(10, 67)
+        Me.rbVMesero.Name = "rbVMesero"
+        Me.rbVMesero.Size = New System.Drawing.Size(152, 22)
+        Me.rbVMesero.TabIndex = 2
+        Me.rbVMesero.Text = "Ventas por mesero"
+        Me.rbVMesero.UseVisualStyleBackColor = True
         '
         'rbComandasCance
         '
@@ -951,28 +976,16 @@ Partial Class frmNuvRepVentas
         'PMasVendido80
         '
         '
-        'rbVentasComisionista
+        'rbTiempo
         '
-        Me.rbVentasComisionista.AutoSize = True
-        Me.rbVentasComisionista.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbVentasComisionista.Location = New System.Drawing.Point(232, 90)
-        Me.rbVentasComisionista.Name = "rbVentasComisionista"
-        Me.rbVentasComisionista.Size = New System.Drawing.Size(185, 22)
-        Me.rbVentasComisionista.TabIndex = 222
-        Me.rbVentasComisionista.Text = "Ventas por comisionista"
-        Me.rbVentasComisionista.UseVisualStyleBackColor = True
-        '
-        'rbComisionistaDetalle
-        '
-        Me.rbComisionistaDetalle.AutoSize = True
-        Me.rbComisionistaDetalle.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbComisionistaDetalle.Location = New System.Drawing.Point(232, 118)
-        Me.rbComisionistaDetalle.Name = "rbComisionistaDetalle"
-        Me.rbComisionistaDetalle.Size = New System.Drawing.Size(244, 22)
-        Me.rbComisionistaDetalle.TabIndex = 223
-        Me.rbComisionistaDetalle.TabStop = True
-        Me.rbComisionistaDetalle.Text = "Ventas por comisionista (Detalle)"
-        Me.rbComisionistaDetalle.UseVisualStyleBackColor = True
+        Me.rbTiempo.AutoSize = True
+        Me.rbTiempo.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbTiempo.Location = New System.Drawing.Point(10, 95)
+        Me.rbTiempo.Name = "rbTiempo"
+        Me.rbTiempo.Size = New System.Drawing.Size(117, 22)
+        Me.rbTiempo.TabIndex = 3
+        Me.rbTiempo.Text = "Tiempo mesa"
+        Me.rbTiempo.UseVisualStyleBackColor = True
         '
         'frmNuvRepVentas
         '
@@ -1080,4 +1093,5 @@ Partial Class frmNuvRepVentas
     Friend WithEvents rbVMesero As RadioButton
     Friend WithEvents rbVentasComisionista As RadioButton
     Friend WithEvents rbComisionistaDetalle As RadioButton
+    Friend WithEvents rbTiempo As RadioButton
 End Class

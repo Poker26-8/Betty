@@ -4449,7 +4449,7 @@ Public Class frmNuvRepVentas
                 cmd1.CommandText = "SELECT Folio,Descuento,IVA,Subtotal,Totales,ACuenta,Resta,Status,Propina FROM Ventas WHERE Mesero='" & cboDatos.Text & "' AND Fecha between '" & Format(m1, "yyyy-MM-dd") & " " & dtpinicio.Text & "' AND '" & Format(m2, "yyyy-MM-dd") & " " & dtpFin.Text & "' AND Status<>'CANCELADA' order by Folio"
 
 
-                    rd1 = cmd1.ExecuteReader
+                rd1 = cmd1.ExecuteReader
                 Do While rd1.Read
                     If rd1.HasRows Then
                         folio = rd1("Folio").ToString
@@ -4495,6 +4495,31 @@ Public Class frmNuvRepVentas
                 MessageBox.Show(ex.ToString)
                 cnn1.Close()
             End Try
+
+        End If
+
+        If (rbTiempo.Checked) Then
+
+            Dim fentrada As Date = Nothing
+            Dim entrada As String = ""
+            Dim fsalida As Date = Nothing
+            Dim salida As String = ""
+
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT Nombre,NumHrs,Total,Fecha,HorEnt,HorSal FROM histasigpc WHERE Fecha BETWEEN '" & Format(m1, "yyyy-MM-dd") & "' AND '" & Format(m2, "yyyy-MM-dd") & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                Do While rd1.Read
+                    fentrada = rd1(4).ToString
+                    fsalida = rd1(5).ToString
+                    entrada = Format(fentrada, "yyyy-MM-dd HH:mm:ss")
+                    salida = Format(fsalida, "yyyy-MM-dd HH:mm:ss")
+                    grdCaptura.Rows.Add(rd1(0).ToString, rd1(1).ToString, rd1(2).ToString, rd1(3).ToString, entrada, salida)
+                Loop
+            End If
+            rd1.Close()
+            cnn1.Close()
 
         End If
     End Sub
@@ -6489,6 +6514,107 @@ Public Class frmNuvRepVentas
                     End With
                 End With
             End If
+            btnExcel.Enabled = False
+
+        End If
+    End Sub
+
+    Private Sub rbTiempo_Click(sender As Object, e As EventArgs) Handles rbTiempo.Click
+        If (rbTiempo.Checked) Then
+            grdCaptura.Rows.Clear()
+            grdCaptura.ColumnCount = 0
+            cboDatos.Items.Clear()
+            cboDatos.Text = ""
+            cboDatos.Visible = True
+
+            txtPropina.Text = "0.00"
+            txtSuma.Text = "0.00"
+            txtCosto.Text = "0.00"
+            txtCostoUtilidad.Text = "0.00"
+            txtSubtotal.Text = "0.00"
+            txtDescuento.Text = "0.00"
+            txtIeps.Text = "0.00"
+            txtIVA.Text = "0.00"
+            txtTotal.Text = "0.00"
+            txtAcuenta.Text = "0.00"
+            txtResta.Text = "0.00"
+
+            rbComandasCance.Checked = False
+            rbCortesias.Checked = False
+            btnImprimir.Visible = False
+            rbCortesias.Checked = False
+            rbVentasTotales.Checked = False
+            rbVentasDetalle.Checked = False
+            rbVentasClientes.Checked = False
+            rbVentasCliDetalle.Checked = False
+            rbVentasDepa.Checked = False
+            rbVentasGrupo.Checked = False
+            rbVentasPago.Checked = False
+            rbVentasProducto.Checked = False
+            rbVentasVendedor.Checked = False
+            rbVVendedorDetalle.Checked = False
+            rbVentasComisionista.Checked = False
+            rbComisionistaDetalle.Checked = False
+            rbProductoVendido.Checked = False
+            rbVendidoProveedor.Checked = False
+            rbVentasPorcentaje.Checked = False
+            rbFiscal.Checked = False
+            rbTraspasos.Checked = False
+            rbDevoluciones.Checked = False
+            rbVentasFormato.Checked = False
+
+            grdCaptura.ColumnCount = 6
+            With grdCaptura
+                With .Columns(0)
+                    .HeaderText = "Mesa"
+                    .Width = 70
+                    .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                    .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+                    .Visible = True
+                    .Resizable = DataGridViewTriState.False
+                End With
+                With .Columns(1)
+                    .HeaderText = "Horas"
+                    .Width = 75
+                    .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                    .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    .Visible = True
+                    .Resizable = DataGridViewTriState.False
+                End With
+                With .Columns(2)
+                    .HeaderText = "Total"
+                    .Width = 75
+                    .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                    .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    .Visible = True
+                    .Resizable = DataGridViewTriState.False
+                End With
+                With .Columns(3)
+                    .HeaderText = "Fecha"
+                    .Width = 75
+                    .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                    .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    .Visible = True
+                    .Resizable = DataGridViewTriState.False
+                End With
+                With .Columns(4)
+                    .HeaderText = "Hr.Entrada"
+                    .Width = 75
+                    .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                    .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    .Visible = True
+                    .Resizable = DataGridViewTriState.False
+                End With
+                With .Columns(5)
+                    .HeaderText = "Hr.Salida"
+                    .Width = 75
+                    .AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                    .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+                    .Visible = True
+                    .Resizable = DataGridViewTriState.False
+                End With
+
+            End With
             btnExcel.Enabled = False
 
         End If
