@@ -442,23 +442,15 @@
         If AscW(e.KeyChar) = Keys.Enter Then
             If txtcontraseña.Text <> "" Then
                 Try
-                    cnn1.Close() : cnn1.Open()
-
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "select Alias from Usuarios where Clave='" & txtcontraseña.Text & "'"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.HasRows Then
-                        If rd1.Read Then
-                            lblusuario.Text = rd1("Alias").ToString()
-                        End If
+                    Dim usuario As String = TraerUsuarioIngresado(txtcontraseña.Text)
+                    If usuario <> "" Then
+                        lblusuario.Text = usuario
                     Else
-                        MsgBox("Contraseña incorrecta, inténtalo de nuevo.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                        rd1.Close() : cnn1.Close()
+                        txtcontraseña.Text = ""
+                        lblusuario.Text = ""
                         txtcontraseña.SelectAll()
-                        Exit Sub
                     End If
-                    rd1.Close() : cnn1.Close()
+
                 Catch ex As Exception
                     MessageBox.Show(ex.ToString())
                     cnn1.Close()
