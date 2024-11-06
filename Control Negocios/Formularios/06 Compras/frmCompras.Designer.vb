@@ -214,7 +214,7 @@ Partial Class frmCompras
         Me.grdcaptura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column15, Me.Column16})
         Me.grdcaptura.ContextMenuStrip = Me.ContextMenuStrip1
         Me.grdcaptura.GridColor = System.Drawing.Color.White
-        Me.grdcaptura.Location = New System.Drawing.Point(7, 179)
+        Me.grdcaptura.Location = New System.Drawing.Point(12, 170)
         Me.grdcaptura.Name = "grdcaptura"
         Me.grdcaptura.ReadOnly = True
         Me.grdcaptura.RowHeadersVisible = False
