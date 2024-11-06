@@ -1102,9 +1102,14 @@ kakaxd:
             varieps = 0
             vartotal = 0
 
+            If mycodigo = "xc3" Then
+                DEPA = ""
+                GRUPO = ""
+            End If
+
             cnn3.Close() : cnn3.Open()
             cmd3 = cnn3.CreateCommand
-            cmd3.CommandText = "INSERT INTO VentasDetalle(Folio,Codigo,Nombre,Cantidad,Unidad,CostoVUE,CostoVP,Precio,Total,PrecioSinIVA,TotalSinIVA,Comisionista,Fecha,FechaCompleta,Depto,Grupo,Comensal,TasaIEPS,TotalIEPS,Descto,Facturado) VALUES('" & folio & "','" & mycodigo & "','" & mydescripcion & "'," & mycantidad & ",'" & myunidad & "'," & COSTVUE1 & "," & COSTVUE1 & "," & myprecio & "," & mytotal & "," & PRECIOSINIVA1 & "," & TOTALSIVA & ",'" & mymesero & "','" & Format(Date.Now, "yyyy/MM/dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & DEPA & "','" & GRUPO & "','" & mycomensal & "'," & varieps & "," & vartotal & ",'0','0')"
+            cmd3.CommandText = "INSERT INTO VentasDetalle(Folio,Codigo,Nombre,Cantidad,Unidad,CostoVUE,CostoVP,Precio,Total,PrecioSinIVA,TotalSinIVA,Usuario,Fecha,FechaCompleta,Depto,Grupo,Comensal,TasaIEPS,TotalIEPS,Descto,Facturado) VALUES('" & folio & "','" & mycodigo & "','" & mydescripcion & "'," & mycantidad & ",'" & myunidad & "'," & COSTVUE1 & "," & COSTVUE1 & "," & myprecio & "," & mytotal & "," & PRECIOSINIVA1 & "," & TOTALSIVA & ",'" & mymesero & "','" & Format(Date.Now, "yyyy/MM/dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & DEPA & "','" & GRUPO & "','" & mycomensal & "'," & varieps & "," & vartotal & ",'0','0')"
             cmd3.ExecuteNonQuery()
             cnn3.Close()
 
@@ -4637,6 +4642,11 @@ deku:
                 End If
                 rd5.Close()
                 cnn5.Close()
+
+                If CODIG = "xc3" Then
+                    DEPA = ""
+                    GRUPO1 = ""
+                End If
 
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand

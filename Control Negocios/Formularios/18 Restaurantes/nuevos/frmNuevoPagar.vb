@@ -1494,7 +1494,7 @@ kakaxd:
 
             cnn3.Close() : cnn3.Open()
             cmd3 = cnn3.CreateCommand
-            cmd3.CommandText = "INSERT INTO VentasDetalle(Folio,Codigo,Nombre,Cantidad,Unidad,CostoVUE,CostoVP,Precio,Total,PrecioSinIVA,TotalSinIVA,Comisionista,Fecha,FechaCompleta,Depto,Grupo,Comensal,Descto,Facturado,TotalIEPS,TasaIEPS) VALUES('" & folio & "','" & mycodigo & "','" & mydescripcion & "'," & mycantidad & ",'" & myunidad & "'," & COSTVUE1 & "," & COSTVUE1 & "," & myprecio & "," & mytotal & "," & PRECIOSINIVA1 & "," & TOTALSIVA & ",'" & mymesero & "','" & Format(Date.Now, "yyyy/MM/dd") & "','" & Format(Date.Now, "yyyy-mm-dd HH:mm:ss") & "','" & DEPA & "','" & GRUPO & "','" & mycomensal & "','0','0'," & IEPS & "," & TASIEPS & ")"
+            cmd3.CommandText = "INSERT INTO VentasDetalle(Folio,Codigo,Nombre,Cantidad,Unidad,CostoVUE,CostoVP,Precio,Total,PrecioSinIVA,TotalSinIVA,Usuario,Fecha,FechaCompleta,Depto,Grupo,Comensal,Descto,Facturado,TotalIEPS,TasaIEPS) VALUES('" & folio & "','" & mycodigo & "','" & mydescripcion & "'," & mycantidad & ",'" & myunidad & "'," & COSTVUE1 & "," & COSTVUE1 & "," & myprecio & "," & mytotal & "," & PRECIOSINIVA1 & "," & TOTALSIVA & ",'" & mymesero & "','" & Format(Date.Now, "yyyy/MM/dd") & "','" & Format(Date.Now, "yyyy-mm-dd HH:mm:ss") & "','" & DEPA & "','" & GRUPO & "','" & mycomensal & "','0','0'," & IEPS & "," & TASIEPS & ")"
             cmd3.ExecuteNonQuery()
             cnn3.Close()
 
