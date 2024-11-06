@@ -23,6 +23,9 @@ Partial Class frmNuevo
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.pmesas = New System.Windows.Forms.Panel()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.BTNBAJAR = New System.Windows.Forms.Button()
+        Me.pDeptos = New System.Windows.Forms.Panel()
         Me.psuperior = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txtconvertir = New System.Windows.Forms.TextBox()
@@ -48,7 +51,6 @@ Partial Class frmNuevo
         Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnPdf = New System.Windows.Forms.Button()
-        Me.pDeptos = New System.Windows.Forms.Panel()
         Me.pmesas.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -57,12 +59,41 @@ Partial Class frmNuevo
         'pmesas
         '
         Me.pmesas.BackColor = System.Drawing.Color.White
+        Me.pmesas.Controls.Add(Me.Button2)
+        Me.pmesas.Controls.Add(Me.BTNBAJAR)
         Me.pmesas.Controls.Add(Me.pDeptos)
         Me.pmesas.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pmesas.Location = New System.Drawing.Point(0, 100)
         Me.pmesas.Name = "pmesas"
         Me.pmesas.Size = New System.Drawing.Size(447, 540)
         Me.pmesas.TabIndex = 0
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(111, 478)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 34)
+        Me.Button2.TabIndex = 2
+        Me.Button2.Text = "SUBIR"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'BTNBAJAR
+        '
+        Me.BTNBAJAR.Location = New System.Drawing.Point(12, 478)
+        Me.BTNBAJAR.Name = "BTNBAJAR"
+        Me.BTNBAJAR.Size = New System.Drawing.Size(75, 34)
+        Me.BTNBAJAR.TabIndex = 1
+        Me.BTNBAJAR.Text = "BAJAR"
+        Me.BTNBAJAR.UseVisualStyleBackColor = True
+        '
+        'pDeptos
+        '
+        Me.pDeptos.AutoScroll = True
+        Me.pDeptos.BackColor = System.Drawing.Color.DodgerBlue
+        Me.pDeptos.Location = New System.Drawing.Point(12, 6)
+        Me.pDeptos.Name = "pDeptos"
+        Me.pDeptos.Size = New System.Drawing.Size(174, 466)
+        Me.pDeptos.TabIndex = 0
         '
         'psuperior
         '
@@ -303,15 +334,6 @@ Partial Class frmNuevo
         Me.btnPdf.Text = "TXT"
         Me.btnPdf.UseVisualStyleBackColor = True
         '
-        'pDeptos
-        '
-        Me.pDeptos.AutoScroll = True
-        Me.pDeptos.BackColor = System.Drawing.Color.DodgerBlue
-        Me.pDeptos.Location = New System.Drawing.Point(12, 6)
-        Me.pDeptos.Name = "pDeptos"
-        Me.pDeptos.Size = New System.Drawing.Size(174, 466)
-        Me.pDeptos.TabIndex = 0
-        '
         'frmNuevo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -365,4 +387,6 @@ Partial Class frmNuevo
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
     Friend WithEvents txtconvertir As TextBox
     Friend WithEvents pDeptos As Panel
+    Friend WithEvents BTNBAJAR As Button
+    Friend WithEvents Button2 As Button
 End Class

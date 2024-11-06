@@ -20,6 +20,13 @@ Public Class frmNuevo
     Private Const SB_THUMBPOSITION As Integer = 4
     Private Const SB_VERT As Integer = 1
 
+    Dim deptos As Integer = 0
+
+    Public currentIndex As Integer = 0
+    ' Tamaño del panel (especificado en píxeles)
+    Public panelHeight As Integer = 0
+    ' Número de controles a mostrar por clic
+    Public controlsPerClick As Integer = 6
 
 
     Private Sub frmNuevo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -194,7 +201,7 @@ Public Class frmNuevo
     End Sub
 
     Private Sub Departamentos()
-        Dim deptos As Integer = 0
+
         Try
 
             cnn1.Close() : cnn1.Open()
@@ -223,6 +230,7 @@ Public Class frmNuevo
                     btnDepto.FlatAppearance.BorderSize = 0
                     AddHandler btnDepto.Click, AddressOf btnDepto_Click
                     pDeptos.Controls.Add(btnDepto)
+
                     If deptos = 0 Then
                         ' Grupos(departamento)
                     End If
@@ -247,4 +255,38 @@ Public Class frmNuevo
         ' CantidadProd = 0
         ' Grupos(btnDepartamento.Text)
     End Sub
+
+    Private Sub BTNBAJAR_Click(sender As Object, e As EventArgs) Handles BTNBAJAR.Click
+        Dim controlsToShow As Integer = Math.Min(controlsPerClick, pDeptos.Controls.Count - currentIndex)
+
+        For i As Integer = currentIndex To currentIndex + controlsToShow - 1
+            pDeptos.Controls(i).Visible = True
+        Next
+
+        ' Actualizamos el índice para el siguiente clic
+        currentIndex += controlsToShow
+
+        ' Desplazar el panel hacia abajo en una cantidad fija
+        ' Este valor depende de la altura de los controles (40px) y el número de controles visibles por clic
+        ' If pDeptos.VerticalScroll.Visible Then
+        pDeptos.AutoScrollPosition = New Point(0, pDeptos.VerticalScroll.Value + 40)
+        'End If
+    End Sub
+
+
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim controlsToShow As Integer = Math.Min(controlsPerClick, pDeptos.Controls.Count - currentIndex)
+
+        For i As Integer = currentIndex To currentIndex + controlsToShow - 1
+            pDeptos.Controls(i).Visible = True
+        Next
+
+
+        currentIndex += controlsToShow
+
+
+        pDeptos.AutoScrollPosition = New Point(0, pDeptos.VerticalScroll.Value - 40)
+    End Sub
+
 End Class
