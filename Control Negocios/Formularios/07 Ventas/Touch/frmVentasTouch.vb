@@ -50,6 +50,14 @@ Public Class frmVentasTouch
     Dim tLogo As String = ""
     Dim simbolo As String = ""
     Dim DesglosaIVA As String = ""
+
+    Public currentIndex As Integer = 0
+
+    ' Tamaño del panel (especificado en píxeles)
+    Public panelHeight As Integer = 0
+
+    ' Número de controles a mostrar por clic
+    Public controlsPerClick As Integer = 12
     Public Sub Folio()
         If cnn9.State = 1 Then cnn9.Close()
         cnn9.Open()
@@ -3115,6 +3123,62 @@ Door:
         lblTotal.Text = FormatNumber(lblTotal.Text, 2)
     End Sub
 
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Dim controlsToShow As Integer = Math.Min(controlsPerClick, pDeptos.Controls.Count - currentIndex)
+
+        For i As Integer = currentIndex To currentIndex + controlsToShow - 1
+            pDeptos.Controls(i).Visible = True
+        Next
+
+        currentIndex += controlsToShow
+
+        If pDeptos.VerticalScroll.Visible Then
+            pDeptos.AutoScrollPosition = New Point(0, pDeptos.VerticalScroll.Value + 80)
+        End If
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Dim controlsToShow As Integer = Math.Min(controlsPerClick, pDeptos.Controls.Count - currentIndex)
+
+        For i As Integer = currentIndex To currentIndex + controlsToShow - 1
+            pDeptos.Controls(i).Visible = True
+        Next
+
+        currentIndex += controlsToShow
+
+        If pDeptos.VerticalScroll.Visible Then
+            pDeptos.AutoScrollPosition = New Point(0, pDeptos.VerticalScroll.Value - 80)
+        End If
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Dim controlsToShow As Integer = Math.Min(controlsPerClick, pGrupos.Controls.Count - currentIndex)
+
+        For i As Integer = currentIndex To currentIndex + controlsToShow - 1
+            pGrupos.Controls(i).Visible = True
+        Next
+
+        currentIndex += controlsToShow
+
+        If pGrupos.VerticalScroll.Visible Then
+            pGrupos.AutoScrollPosition = New Point(0, pGrupos.VerticalScroll.Value + 80)
+        End If
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Dim controlsToShow As Integer = Math.Min(controlsPerClick, pGrupos.Controls.Count - currentIndex)
+
+        For i As Integer = currentIndex To currentIndex + controlsToShow - 1
+            pGrupos.Controls(i).Visible = True
+        Next
+
+        currentIndex += controlsToShow
+
+        If pGrupos.VerticalScroll.Visible Then
+            pGrupos.AutoScrollPosition = New Point(0, pGrupos.VerticalScroll.Value - 80)
+        End If
+    End Sub
+
     Private Sub btnlimpiar_Click(sender As System.Object, e As System.EventArgs) Handles btnlimpiar.Click
         tFolio.Stop()
         pProductos.Controls.Clear()
@@ -3169,6 +3233,7 @@ Door:
 
         SiPago = 0
         validaTarjeta = 0
+        pDeptos.AutoScrollPosition = New Point(pDeptos.AutoScrollPosition.X, 0)
         My.Application.DoEvents()
     End Sub
 

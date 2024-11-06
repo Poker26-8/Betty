@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmVentasTouch
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,15 +20,15 @@ Partial Class frmVentasTouch
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmVentasTouch))
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.tFecha = New System.Windows.Forms.Timer(Me.components)
         Me.tFolio = New System.Windows.Forms.Timer(Me.components)
         Me.pVenta80 = New System.Drawing.Printing.PrintDocument()
@@ -50,7 +50,6 @@ Partial Class frmVentasTouch
         Me.btn1 = New System.Windows.Forms.Button()
         Me.txtcantidad = New System.Windows.Forms.TextBox()
         Me.pProductos = New System.Windows.Forms.Panel()
-        Me.pGrupos = New System.Windows.Forms.Panel()
         Me.pDeptos = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
@@ -94,6 +93,12 @@ Partial Class frmVentasTouch
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.lblTotal = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.pGrupos = New System.Windows.Forms.Panel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.panCantidad.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
@@ -106,6 +111,7 @@ Partial Class frmVentasTouch
         CType(Me.grdcaptura, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.grdProducto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel8.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'tFecha
@@ -324,32 +330,25 @@ Partial Class frmVentasTouch
         '
         'pProductos
         '
+        Me.pProductos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pProductos.AutoScroll = True
         Me.pProductos.BackColor = System.Drawing.Color.White
-        Me.pProductos.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pProductos.Location = New System.Drawing.Point(260, 79)
+        Me.pProductos.Location = New System.Drawing.Point(266, 79)
         Me.pProductos.Name = "pProductos"
-        Me.pProductos.Size = New System.Drawing.Size(508, 437)
+        Me.pProductos.Size = New System.Drawing.Size(502, 460)
         Me.pProductos.TabIndex = 12
-        '
-        'pGrupos
-        '
-        Me.pGrupos.AutoScroll = True
-        Me.pGrupos.BackColor = System.Drawing.Color.LemonChiffon
-        Me.pGrupos.Dock = System.Windows.Forms.DockStyle.Left
-        Me.pGrupos.Location = New System.Drawing.Point(130, 79)
-        Me.pGrupos.Name = "pGrupos"
-        Me.pGrupos.Size = New System.Drawing.Size(130, 437)
-        Me.pGrupos.TabIndex = 11
         '
         'pDeptos
         '
+        Me.pDeptos.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pDeptos.AutoScroll = True
         Me.pDeptos.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.pDeptos.Dock = System.Windows.Forms.DockStyle.Left
         Me.pDeptos.Location = New System.Drawing.Point(0, 79)
         Me.pDeptos.Name = "pDeptos"
-        Me.pDeptos.Size = New System.Drawing.Size(130, 437)
+        Me.pDeptos.Size = New System.Drawing.Size(135, 415)
         Me.pDeptos.TabIndex = 10
         '
         'Panel3
@@ -476,9 +475,9 @@ Partial Class frmVentasTouch
         Me.Panel2.BackColor = System.Drawing.Color.White
         Me.Panel2.Controls.Add(Me.TableLayoutPanel1)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel2.Location = New System.Drawing.Point(0, 516)
+        Me.Panel2.Location = New System.Drawing.Point(0, 539)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(768, 89)
+        Me.Panel2.Size = New System.Drawing.Size(768, 66)
         Me.Panel2.TabIndex = 8
         '
         'TableLayoutPanel1
@@ -501,15 +500,15 @@ Partial Class frmVentasTouch
         Me.TableLayoutPanel1.Controls.Add(Me.Label5, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.Label4, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 4, 0)
-        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 1)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 4
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.71899!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.28101!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.71899!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.28101!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(768, 89)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(768, 65)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'Label18
@@ -519,9 +518,9 @@ Partial Class frmVentasTouch
         Me.Label18.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label18.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label18.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.Label18.Location = New System.Drawing.Point(150, 60)
+        Me.Label18.Location = New System.Drawing.Point(150, 43)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(148, 29)
+        Me.Label18.Size = New System.Drawing.Size(148, 22)
         Me.Label18.TabIndex = 14
         Me.Label18.Text = "Lista"
         Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -532,9 +531,9 @@ Partial Class frmVentasTouch
         Me.Label17.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.Label17.Location = New System.Drawing.Point(150, 43)
+        Me.Label17.Location = New System.Drawing.Point(150, 31)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(148, 17)
+        Me.Label17.Size = New System.Drawing.Size(148, 12)
         Me.Label17.TabIndex = 13
         Me.Label17.Text = "Tipo de precio:"
         '
@@ -544,9 +543,9 @@ Partial Class frmVentasTouch
         Me.lbltipoventa.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lbltipoventa.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbltipoventa.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.lbltipoventa.Location = New System.Drawing.Point(3, 60)
+        Me.lbltipoventa.Location = New System.Drawing.Point(3, 43)
         Me.lbltipoventa.Name = "lbltipoventa"
-        Me.lbltipoventa.Size = New System.Drawing.Size(141, 29)
+        Me.lbltipoventa.Size = New System.Drawing.Size(141, 22)
         Me.lbltipoventa.TabIndex = 9
         Me.lbltipoventa.Text = "MOSTRADOR"
         Me.lbltipoventa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -557,9 +556,9 @@ Partial Class frmVentasTouch
         Me.lblatiende.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblatiende.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblatiende.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.lblatiende.Location = New System.Drawing.Point(304, 17)
+        Me.lblatiende.Location = New System.Drawing.Point(304, 12)
         Me.lblatiende.Name = "lblatiende"
-        Me.lblatiende.Size = New System.Drawing.Size(145, 26)
+        Me.lblatiende.Size = New System.Drawing.Size(145, 19)
         Me.lblatiende.TabIndex = 8
         Me.lblatiende.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -570,9 +569,9 @@ Partial Class frmVentasTouch
         Me.lblfecha.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblfecha.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblfecha.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.lblfecha.Location = New System.Drawing.Point(150, 17)
+        Me.lblfecha.Location = New System.Drawing.Point(150, 12)
         Me.lblfecha.Name = "lblfecha"
-        Me.lblfecha.Size = New System.Drawing.Size(148, 26)
+        Me.lblfecha.Size = New System.Drawing.Size(148, 19)
         Me.lblfecha.TabIndex = 7
         Me.lblfecha.Text = "DD/MM/YYYY"
         Me.lblfecha.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -583,9 +582,9 @@ Partial Class frmVentasTouch
         Me.lblFolio.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblFolio.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFolio.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.lblFolio.Location = New System.Drawing.Point(3, 17)
+        Me.lblFolio.Location = New System.Drawing.Point(3, 12)
         Me.lblFolio.Name = "lblFolio"
-        Me.lblFolio.Size = New System.Drawing.Size(141, 26)
+        Me.lblFolio.Size = New System.Drawing.Size(141, 19)
         Me.lblFolio.TabIndex = 6
         '
         'Label8
@@ -595,7 +594,7 @@ Partial Class frmVentasTouch
         Me.Label8.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Label8.Location = New System.Drawing.Point(304, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(145, 17)
+        Me.Label8.Size = New System.Drawing.Size(145, 12)
         Me.Label8.TabIndex = 4
         Me.Label8.Text = "Le atiende:"
         '
@@ -607,7 +606,7 @@ Partial Class frmVentasTouch
         Me.Label6.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Label6.Location = New System.Drawing.Point(150, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(148, 17)
+        Me.Label6.Size = New System.Drawing.Size(148, 12)
         Me.Label6.TabIndex = 2
         Me.Label6.Text = "Fecha:"
         '
@@ -616,9 +615,9 @@ Partial Class frmVentasTouch
         Me.Label5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.Label5.Location = New System.Drawing.Point(3, 43)
+        Me.Label5.Location = New System.Drawing.Point(3, 31)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(141, 17)
+        Me.Label5.Size = New System.Drawing.Size(141, 12)
         Me.Label5.TabIndex = 1
         Me.Label5.Text = "Tipo de venta:"
         '
@@ -629,7 +628,7 @@ Partial Class frmVentasTouch
         Me.Label4.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Label4.Location = New System.Drawing.Point(3, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(141, 17)
+        Me.Label4.Size = New System.Drawing.Size(141, 12)
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "Folio:"
         '
@@ -645,7 +644,7 @@ Partial Class frmVentasTouch
         Me.Panel1.Location = New System.Drawing.Point(455, 3)
         Me.Panel1.Name = "Panel1"
         Me.TableLayoutPanel1.SetRowSpan(Me.Panel1, 4)
-        Me.Panel1.Size = New System.Drawing.Size(344, 83)
+        Me.Panel1.Size = New System.Drawing.Size(344, 59)
         Me.Panel1.TabIndex = 15
         '
         'Button2
@@ -668,6 +667,7 @@ Partial Class frmVentasTouch
         Me.TextBox1.TabIndex = 3
         Me.TextBox1.Text = "0"
         Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.TextBox1.Visible = False
         '
         'Label2
         '
@@ -726,14 +726,14 @@ Partial Class frmVentasTouch
         Me.grdcaptura.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.grdcaptura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grdcaptura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column8, Me.Column7})
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.grdcaptura.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Segoe UI", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.grdcaptura.DefaultCellStyle = DataGridViewCellStyle10
         Me.grdcaptura.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdcaptura.GridColor = System.Drawing.Color.WhiteSmoke
         Me.grdcaptura.Location = New System.Drawing.Point(0, 120)
@@ -747,17 +747,17 @@ Partial Class frmVentasTouch
         'Column1
         '
         Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle6
         Me.Column1.HeaderText = "Item"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         '
         'Column2
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle7
         Me.Column2.HeaderText = "Cant."
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
@@ -765,9 +765,9 @@ Partial Class frmVentasTouch
         '
         'Column3
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle8
         Me.Column3.HeaderText = "Precio"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
@@ -775,9 +775,9 @@ Partial Class frmVentasTouch
         '
         'Column4
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Column4.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Column4.DefaultCellStyle = DataGridViewCellStyle9
         Me.Column4.FillWeight = 70.0!
         Me.Column4.HeaderText = "Total"
         Me.Column4.Name = "Column4"
@@ -880,6 +880,74 @@ Partial Class frmVentasTouch
         Me.Label1.Text = "VENTA TOTAL"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'pGrupos
+        '
+        Me.pGrupos.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.pGrupos.AutoScroll = True
+        Me.pGrupos.BackColor = System.Drawing.Color.LemonChiffon
+        Me.pGrupos.Location = New System.Drawing.Point(136, 79)
+        Me.pGrupos.Name = "pGrupos"
+        Me.pGrupos.Size = New System.Drawing.Size(129, 415)
+        Me.pGrupos.TabIndex = 11
+        '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.White
+        Me.Panel4.Controls.Add(Me.Button6)
+        Me.Panel4.Controls.Add(Me.Button7)
+        Me.Panel4.Controls.Add(Me.Button5)
+        Me.Panel4.Controls.Add(Me.Button3)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel4.Location = New System.Drawing.Point(0, 492)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(768, 47)
+        Me.Panel4.TabIndex = 14
+        '
+        'Button6
+        '
+        Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button6.Font = New System.Drawing.Font("Segoe UI Black", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button6.Location = New System.Drawing.Point(201, 1)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(65, 46)
+        Me.Button6.TabIndex = 3
+        Me.Button6.Text = "↑"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'Button7
+        '
+        Me.Button7.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button7.Font = New System.Drawing.Font("Segoe UI Black", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button7.Location = New System.Drawing.Point(136, 1)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(65, 46)
+        Me.Button7.TabIndex = 2
+        Me.Button7.Text = "↓"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button5.Font = New System.Drawing.Font("Segoe UI Black", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button5.Location = New System.Drawing.Point(65, 1)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(70, 46)
+        Me.Button5.TabIndex = 1
+        Me.Button5.Text = "↑"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button3.Font = New System.Drawing.Font("Segoe UI Black", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Location = New System.Drawing.Point(0, 1)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(65, 46)
+        Me.Button3.TabIndex = 0
+        Me.Button3.Text = "↓"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'frmVentasTouch
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -887,6 +955,7 @@ Partial Class frmVentasTouch
         Me.ClientSize = New System.Drawing.Size(1130, 605)
         Me.Controls.Add(Me.panCantidad)
         Me.Controls.Add(Me.pProductos)
+        Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.pGrupos)
         Me.Controls.Add(Me.pDeptos)
         Me.Controls.Add(Me.Panel3)
@@ -899,6 +968,7 @@ Partial Class frmVentasTouch
         Me.Name = "frmVentasTouch"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Delsscom® Control Negocios Pro - Ventas touch"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.panCantidad.ResumeLayout(False)
         Me.panCantidad.PerformLayout()
         Me.Panel3.ResumeLayout(False)
@@ -914,6 +984,7 @@ Partial Class frmVentasTouch
         CType(Me.grdcaptura, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.grdProducto, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel8.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -938,7 +1009,6 @@ Partial Class frmVentasTouch
     Friend WithEvents btn1 As Button
     Friend WithEvents txtcantidad As TextBox
     Friend WithEvents pProductos As Panel
-    Friend WithEvents pGrupos As Panel
     Friend WithEvents pDeptos As Panel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
@@ -982,4 +1052,10 @@ Partial Class frmVentasTouch
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
+    Friend WithEvents pGrupos As Panel
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Button5 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button6 As Button
+    Friend WithEvents Button7 As Button
 End Class

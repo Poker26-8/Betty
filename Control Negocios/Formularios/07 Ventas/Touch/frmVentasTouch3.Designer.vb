@@ -94,6 +94,11 @@ Partial Class frmVentasTouch3
         Me.pVenta80 = New System.Drawing.Printing.PrintDocument()
         Me.tFolio = New System.Windows.Forms.Timer(Me.components)
         Me.tFecha = New System.Windows.Forms.Timer(Me.components)
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.panCantidad.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
@@ -106,6 +111,7 @@ Partial Class frmVentasTouch3
         CType(Me.grdcaptura, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.grdProducto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel8.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'panCantidad
@@ -311,32 +317,36 @@ Partial Class frmVentasTouch3
         '
         'pProductos
         '
+        Me.pProductos.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pProductos.AutoScroll = True
         Me.pProductos.BackColor = System.Drawing.Color.White
-        Me.pProductos.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pProductos.Location = New System.Drawing.Point(260, 79)
         Me.pProductos.Name = "pProductos"
-        Me.pProductos.Size = New System.Drawing.Size(508, 437)
+        Me.pProductos.Size = New System.Drawing.Size(508, 466)
         Me.pProductos.TabIndex = 19
         '
         'pGrupos
         '
+        Me.pGrupos.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pGrupos.AutoScroll = True
         Me.pGrupos.BackColor = System.Drawing.Color.LemonChiffon
-        Me.pGrupos.Dock = System.Windows.Forms.DockStyle.Left
         Me.pGrupos.Location = New System.Drawing.Point(130, 79)
         Me.pGrupos.Name = "pGrupos"
-        Me.pGrupos.Size = New System.Drawing.Size(130, 437)
+        Me.pGrupos.Size = New System.Drawing.Size(129, 423)
         Me.pGrupos.TabIndex = 18
         '
         'pDeptos
         '
+        Me.pDeptos.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pDeptos.AutoScroll = True
         Me.pDeptos.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.pDeptos.Dock = System.Windows.Forms.DockStyle.Left
         Me.pDeptos.Location = New System.Drawing.Point(0, 79)
         Me.pDeptos.Name = "pDeptos"
-        Me.pDeptos.Size = New System.Drawing.Size(130, 437)
+        Me.pDeptos.Size = New System.Drawing.Size(129, 423)
         Me.pDeptos.TabIndex = 17
         '
         'Panel3
@@ -463,9 +473,9 @@ Partial Class frmVentasTouch3
         Me.Panel2.BackColor = System.Drawing.Color.White
         Me.Panel2.Controls.Add(Me.TableLayoutPanel1)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel2.Location = New System.Drawing.Point(0, 516)
+        Me.Panel2.Location = New System.Drawing.Point(0, 545)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(768, 89)
+        Me.Panel2.Size = New System.Drawing.Size(768, 60)
         Me.Panel2.TabIndex = 15
         '
         'TableLayoutPanel1
@@ -488,15 +498,15 @@ Partial Class frmVentasTouch3
         Me.TableLayoutPanel1.Controls.Add(Me.Label5, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.Label4, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 4, 0)
-        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 2)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 4
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.71899!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.28101!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.71899!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.28101!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(768, 89)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(768, 58)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'Label18
@@ -506,9 +516,9 @@ Partial Class frmVentasTouch3
         Me.Label18.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label18.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label18.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.Label18.Location = New System.Drawing.Point(150, 60)
+        Me.Label18.Location = New System.Drawing.Point(150, 39)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(148, 29)
+        Me.Label18.Size = New System.Drawing.Size(148, 19)
         Me.Label18.TabIndex = 14
         Me.Label18.Text = "Lista"
         Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -519,9 +529,9 @@ Partial Class frmVentasTouch3
         Me.Label17.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.Label17.Location = New System.Drawing.Point(150, 43)
+        Me.Label17.Location = New System.Drawing.Point(150, 28)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(148, 17)
+        Me.Label17.Size = New System.Drawing.Size(148, 11)
         Me.Label17.TabIndex = 13
         Me.Label17.Text = "Tipo de precio:"
         '
@@ -531,9 +541,9 @@ Partial Class frmVentasTouch3
         Me.lbltipoventa.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lbltipoventa.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbltipoventa.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.lbltipoventa.Location = New System.Drawing.Point(3, 60)
+        Me.lbltipoventa.Location = New System.Drawing.Point(3, 39)
         Me.lbltipoventa.Name = "lbltipoventa"
-        Me.lbltipoventa.Size = New System.Drawing.Size(141, 29)
+        Me.lbltipoventa.Size = New System.Drawing.Size(141, 19)
         Me.lbltipoventa.TabIndex = 9
         Me.lbltipoventa.Text = "MOSTRADOR"
         Me.lbltipoventa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -544,9 +554,9 @@ Partial Class frmVentasTouch3
         Me.lblatiende.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblatiende.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblatiende.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.lblatiende.Location = New System.Drawing.Point(304, 17)
+        Me.lblatiende.Location = New System.Drawing.Point(304, 11)
         Me.lblatiende.Name = "lblatiende"
-        Me.lblatiende.Size = New System.Drawing.Size(145, 26)
+        Me.lblatiende.Size = New System.Drawing.Size(145, 17)
         Me.lblatiende.TabIndex = 8
         Me.lblatiende.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -557,9 +567,9 @@ Partial Class frmVentasTouch3
         Me.lblfecha.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblfecha.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblfecha.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.lblfecha.Location = New System.Drawing.Point(150, 17)
+        Me.lblfecha.Location = New System.Drawing.Point(150, 11)
         Me.lblfecha.Name = "lblfecha"
-        Me.lblfecha.Size = New System.Drawing.Size(148, 26)
+        Me.lblfecha.Size = New System.Drawing.Size(148, 17)
         Me.lblfecha.TabIndex = 7
         Me.lblfecha.Text = "DD/MM/YYYY"
         Me.lblfecha.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -570,9 +580,9 @@ Partial Class frmVentasTouch3
         Me.lblFolio.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lblFolio.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFolio.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.lblFolio.Location = New System.Drawing.Point(3, 17)
+        Me.lblFolio.Location = New System.Drawing.Point(3, 11)
         Me.lblFolio.Name = "lblFolio"
-        Me.lblFolio.Size = New System.Drawing.Size(141, 26)
+        Me.lblFolio.Size = New System.Drawing.Size(141, 17)
         Me.lblFolio.TabIndex = 6
         '
         'Label8
@@ -582,7 +592,7 @@ Partial Class frmVentasTouch3
         Me.Label8.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Label8.Location = New System.Drawing.Point(304, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(145, 17)
+        Me.Label8.Size = New System.Drawing.Size(145, 11)
         Me.Label8.TabIndex = 4
         Me.Label8.Text = "Le atiende:"
         '
@@ -594,7 +604,7 @@ Partial Class frmVentasTouch3
         Me.Label6.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Label6.Location = New System.Drawing.Point(150, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(148, 17)
+        Me.Label6.Size = New System.Drawing.Size(148, 11)
         Me.Label6.TabIndex = 2
         Me.Label6.Text = "Fecha:"
         '
@@ -603,9 +613,9 @@ Partial Class frmVentasTouch3
         Me.Label5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.HotTrack
-        Me.Label5.Location = New System.Drawing.Point(3, 43)
+        Me.Label5.Location = New System.Drawing.Point(3, 28)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(141, 17)
+        Me.Label5.Size = New System.Drawing.Size(141, 11)
         Me.Label5.TabIndex = 1
         Me.Label5.Text = "Tipo de venta:"
         '
@@ -616,7 +626,7 @@ Partial Class frmVentasTouch3
         Me.Label4.ForeColor = System.Drawing.SystemColors.HotTrack
         Me.Label4.Location = New System.Drawing.Point(3, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(141, 17)
+        Me.Label4.Size = New System.Drawing.Size(141, 11)
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "Folio:"
         '
@@ -632,7 +642,7 @@ Partial Class frmVentasTouch3
         Me.Panel1.Location = New System.Drawing.Point(455, 3)
         Me.Panel1.Name = "Panel1"
         Me.TableLayoutPanel1.SetRowSpan(Me.Panel1, 4)
-        Me.Panel1.Size = New System.Drawing.Size(344, 83)
+        Me.Panel1.Size = New System.Drawing.Size(344, 52)
         Me.Panel1.TabIndex = 15
         '
         'Button2
@@ -879,6 +889,63 @@ Partial Class frmVentasTouch3
         '
         Me.tFecha.Interval = 1
         '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.White
+        Me.Panel4.Controls.Add(Me.Button6)
+        Me.Panel4.Controls.Add(Me.Button7)
+        Me.Panel4.Controls.Add(Me.Button5)
+        Me.Panel4.Controls.Add(Me.Button3)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel4.Location = New System.Drawing.Point(0, 498)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(768, 47)
+        Me.Panel4.TabIndex = 22
+        '
+        'Button6
+        '
+        Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button6.Font = New System.Drawing.Font("Segoe UI Black", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button6.Location = New System.Drawing.Point(194, 1)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(65, 46)
+        Me.Button6.TabIndex = 3
+        Me.Button6.Text = "↑"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'Button7
+        '
+        Me.Button7.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button7.Font = New System.Drawing.Font("Segoe UI Black", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button7.Location = New System.Drawing.Point(130, 1)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(65, 46)
+        Me.Button7.TabIndex = 2
+        Me.Button7.Text = "↓"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button5.Font = New System.Drawing.Font("Segoe UI Black", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button5.Location = New System.Drawing.Point(65, 1)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(65, 46)
+        Me.Button5.TabIndex = 1
+        Me.Button5.Text = "↑"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button3.Font = New System.Drawing.Font("Segoe UI Black", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Location = New System.Drawing.Point(0, 1)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(65, 46)
+        Me.Button3.TabIndex = 0
+        Me.Button3.Text = "↓"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'frmVentasTouch3
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -886,6 +953,7 @@ Partial Class frmVentasTouch3
         Me.ClientSize = New System.Drawing.Size(1017, 605)
         Me.Controls.Add(Me.panCantidad)
         Me.Controls.Add(Me.pProductos)
+        Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.pGrupos)
         Me.Controls.Add(Me.pDeptos)
         Me.Controls.Add(Me.Panel3)
@@ -895,6 +963,7 @@ Partial Class frmVentasTouch3
         Me.Name = "frmVentasTouch3"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Delsscom® Control Negocios Pro - Ventas touch 3"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.panCantidad.ResumeLayout(False)
         Me.panCantidad.PerformLayout()
         Me.Panel3.ResumeLayout(False)
@@ -910,6 +979,7 @@ Partial Class frmVentasTouch3
         CType(Me.grdcaptura, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.grdProducto, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel8.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -979,4 +1049,9 @@ Partial Class frmVentasTouch3
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Button6 As Button
+    Friend WithEvents Button7 As Button
+    Friend WithEvents Button5 As Button
+    Friend WithEvents Button3 As Button
 End Class
