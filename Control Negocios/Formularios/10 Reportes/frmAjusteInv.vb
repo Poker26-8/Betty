@@ -556,7 +556,7 @@
 
 
                 cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "update Productos set Cargado=0, CargadoInv=0, Existencia=" & existemmmmmmmcias & " where Codigo='" & Strings.Left(cbocodigo.Text, 6) & "'"
+                cmd1.CommandText = "update Productos set Cargado=0, CargadoInv=0, Existencia=" & existemmmmmmmcias & ", CargadoAndroid=0 where Codigo='" & Strings.Left(cbocodigo.Text, 6) & "'"
                 cmd1.ExecuteNonQuery()
 
                 cmd1 = cnn1.CreateCommand
