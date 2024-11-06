@@ -1026,18 +1026,16 @@ Public Class frmHisClinica
     Private Sub txtcontraseña_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcontraseña.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             Try
-                cnn1.Close() : cnn1.Open()
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "select Alias from Usuarios where Clave='" & txtcontraseña.Text & "'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        lblUsuario.Text = rd1("Alias").ToString
-                        btnGuardar.Focus().Equals(True)
-                    End If
+
+                Dim usuario As String = TraerUsuarioIngresado(txtcontraseña.Text)
+                If usuario <> "" Then
+                    lblUsuario.Text = usuario
+                    btnGuardar.Focus().Equals(True)
+                Else
+                    lblUsuario.Text = ""
+                    txtcontraseña.Text = ""
+                    txtcontraseña.Focus.Equals(True)
                 End If
-                rd1.Close()
-                cnn1.Close()
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
                 cnn1.Close()

@@ -39,31 +39,17 @@ Public Class frmMovCuentas
     Private Sub txtContra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContra.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
 
-            cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT Status,Alias FROM usuarios WHERE Clave='" & txtContra.Text & "'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    If rd1("Status").ToString = 1 Then
-                        lblUsuario.Text = rd1("Alias").ToString
-                    Else
-                        MsgBox("El usuario esta inactivo, Contacte a su administrador", vbInformation + vbOKOnly, titulocentral)
-                        txtContra.Text = ""
-                        lblUsuario.Text = ""
-                        txtContra.Focus.Equals(True)
-                        Exit Sub
-                    End If
-                End If
+            Dim usuario As String = TraerUsuarioIngresado(txtContra.Text)
+
+            If usuario <> "" Then
+                lblUsuario.Text = usuario
             Else
-                MsgBox("Contraseña incoreecta", vbInformation + vbOKOnly, titulocentral)
                 txtContra.Text = ""
                 lblUsuario.Text = ""
                 txtContra.Focus.Equals(True)
                 Exit Sub
             End If
-            rd1.Close()
-            cnn1.Close()
+
 
         End If
     End Sub

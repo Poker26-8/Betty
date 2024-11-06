@@ -194,31 +194,41 @@ Public Class frmPaciente
     Private Sub txtContraseña_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContraseña.KeyPress
         Try
             If AscW(e.KeyChar) = Keys.Enter Then
-                cnn1.Close() : cnn1.Open()
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "SELECT Alias,Status FROM usuarios WHERE Clave='" & txtContraseña.Text & "'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        If rd1(1).ToString = 1 Then
-                            lblUsuario.Text = rd1(0).ToString
-                        Else
-                            MsgBox("El usuario esta inactivo", vbInformation + vbOKOnly, titulocentral)
-                            txtContraseña.Text = ""
-                            lblUsuario.Text = ""
-                            txtContraseña.Focus.Equals(True)
-                            Exit Sub
-                        End If
-                    End If
+
+                Dim usuario As String = TraerUsuarioIngresado(txtContraseña.Text)
+
+                If usuario <> "" Then
+                    lblUsuario.Text = usuario
                 Else
-                    MsgBox("Contraseña incorrecta", vbInformation + vbOKOnly, titulocentral)
                     txtContraseña.Text = ""
                     lblUsuario.Text = ""
                     txtContraseña.Focus.Equals(True)
-                    Exit Sub
                 End If
-                rd1.Close()
-                cnn1.Close()
+                'cnn1.Close() : cnn1.Open()
+                '    cmd1 = cnn1.CreateCommand
+                '    cmd1.CommandText = "SELECT Alias,Status FROM usuarios WHERE Clave='" & txtContraseña.Text & "'"
+                '    rd1 = cmd1.ExecuteReader
+                '    If rd1.HasRows Then
+                '        If rd1.Read Then
+                '            If rd1(1).ToString = 1 Then
+                '                lblUsuario.Text = rd1(0).ToString
+                '            Else
+                '                MsgBox("El usuario esta inactivo", vbInformation + vbOKOnly, titulocentral)
+                '                txtContraseña.Text = ""
+                '                lblUsuario.Text = ""
+                '                txtContraseña.Focus.Equals(True)
+                '                Exit Sub
+                '            End If
+                '        End If
+                '    Else
+                '        MsgBox("Contraseña incorrecta", vbInformation + vbOKOnly, titulocentral)
+                '        txtContraseña.Text = ""
+                '        lblUsuario.Text = ""
+                '        txtContraseña.Focus.Equals(True)
+                '        Exit Sub
+                '    End If
+                '    rd1.Close()
+                '    cnn1.Close()
             End If
         Catch ex As Exception
             MessageBox.Show(ex.ToString)

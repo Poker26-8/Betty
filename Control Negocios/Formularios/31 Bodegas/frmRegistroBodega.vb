@@ -278,24 +278,17 @@
         If AscW(e.KeyChar) = Keys.Enter Then
             If txtUsuario.Text = "" Then Exit Sub
             Try
-                cnn1.Close() : cnn1.Open()
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText =
-                    "select Alias from Usuarios where Clave='" & txtUsuario.Text & "'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        lblusuario.Text = rd1("Alias").ToString
-                        btnGuardar.Focus().Equals(True)
-                    End If
+
+                Dim usuario As String = TraerUsuarioIngresado(txtUsuario.Text)
+                If usuario <> "" Then
+                    lblUsuario.Text = usuario
+                    btnGuardar.Focus().Equals(True)
                 Else
-                    MsgBox("Contraseña incorrecta, corrobora la información.", vbInformation + vbOKOnly, "Delsscom Control Negocios")
                     txtUsuario.SelectionStart = 0
                     txtUsuario.SelectionLength = Len(txtUsuario.Text)
                     txtUsuario.Focus().Equals(True)
                 End If
-                rd1.Close()
-                cnn1.Close()
+
             Catch ex As Exception
                 MessageBox.Show(ex.ToString) : cnn1.Close()
             End Try
