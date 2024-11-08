@@ -82,6 +82,7 @@
                                               `IdReservacion` int(11) NOT NULL,
                                               `Cliente` varchar(255) DEFAULT '',
                                               `Telefono` varchar(50) DEFAULT '',
+                                              `INE` varchar(50) DEFAULT '',
                                               `Habitacion` varchar(255) DEFAULT '',
                                               `FEntrada` datetime DEFAULT NULL,
                                               `FSalida` datetime DEFAULT NULL,
