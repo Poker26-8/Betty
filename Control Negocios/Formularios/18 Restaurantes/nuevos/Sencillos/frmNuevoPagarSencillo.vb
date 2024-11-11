@@ -1396,17 +1396,20 @@ kakaxd:
                         cnn2.Close()
                         cnn3.Close()
 
+
+
                     Else
                         If grdComanda.Rows(koni).Cells(0).Value.ToString = "" Then GoTo Door
 
                         Dim mycodigod As String = grdComanda.Rows(koni).Cells(1).Value.ToString
-
+                        Dim mydescripciond As String = ""
                         cnn2.Close() : cnn2.Open()
                         cmd2 = cnn2.CreateCommand
-                        cmd2.CommandText = "SELECT Departamento,Grupo,ProvRes,MCD,Multiplo,Unico,GPrint FROM Productos WHERE Codigo='" & mycodigo & "'"
+                        cmd2.CommandText = "SELECT Nombre,Departamento,Grupo,ProvRes,MCD,Multiplo,Unico,GPrint FROM Productos WHERE Codigo='" & mycodigod & "'"
                         rd2 = cmd2.ExecuteReader
                         If rd2.HasRows Then
                             If rd2.Read Then
+                                mydescripciond = rd2("Nombre").ToString
                                 MyCostVUE = 0
                                 MyProm = 0
                                 MyDepto = rd2("Departamento").ToString()
@@ -1426,7 +1429,7 @@ kakaxd:
 
 
                         cmd2 = cnn2.CreateCommand
-                        cmd2.CommandText = "SELECT Existencia,MCD,Departamento,PrecioCompra FROM Productos WHERE Codigo='" & Strings.Left(mycodigo, 6) & "'"
+                        cmd2.CommandText = "SELECT Existencia,MCD,Departamento,PrecioCompra FROM Productos WHERE Codigo='" & Strings.Left(mycodigod, 6) & "'"
                         rd2 = cmd2.ExecuteReader
                         If rd2.HasRows Then
                             If rd2.Read Then
@@ -1450,11 +1453,11 @@ Door:
 
                         cnn4.Close() : cnn4.Open()
                         cmd4 = cnn4.CreateCommand
-                        cmd4.CommandText = "INSERT INTO Cardex(Codigo,Nombre,Movimiento,Cantidad,Precio,Fecha,Usuario,Inicial,Final,Folio) VALUES('" & VarCodigo & "','" & VarDesc & "','Venta-Ingrediente'," & opeCantReal & "," & Pre_Comp & ",'" & Format(Date.Now, "yyyy/MM/dd HH:mm:ss") & "','" & lblusuario2.Text & "'," & Existencia & "," & nueva_existe & "," & folio & ")"
+                        cmd4.CommandText = "INSERT INTO Cardex(Codigo,Nombre,Movimiento,Cantidad,Precio,Fecha,Usuario,Inicial,Final,Folio) VALUES('" & mycodigod & "','" & mydescripciond & "','Venta'," & opeCantReal & "," & Pre_Comp & ",'" & Format(Date.Now, "yyyy/MM/dd HH:mm:ss") & "','" & lblusuario2.Text & "'," & Existencia & "," & nueva_existe & "," & folio & ")"
                         cmd4.ExecuteNonQuery()
 
                         cmd4 = cnn4.CreateCommand
-                        cmd4.CommandText = "UPDATE Productos SET Existencia=" & nueva_existe & ",Cargado=0,CargadoInv=0 WHERE Codigo='" & Strings.Left(mycodigo, 6) & "'"
+                        cmd4.CommandText = "UPDATE Productos SET Existencia=" & nueva_existe & ",Cargado=0,CargadoInv=0 WHERE Codigo='" & Strings.Left(mycodigod, 6) & "'"
                         cmd4.ExecuteNonQuery()
                         cnn4.Close()
 
