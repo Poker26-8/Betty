@@ -248,7 +248,7 @@
 
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
-                "select distinct Nombre from Productos where Grupo<>'INSUMO'"
+                "select distinct Nombre from Productos where Grupo<>'INSUMO' ORDER BY Nombre"
             rd1 = cmd1.ExecuteReader
             Do While rd1.Read
                 If rd1.HasRows Then cbonombre.Items.Add(
