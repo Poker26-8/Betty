@@ -413,31 +413,71 @@
                         vventa = IIf(vventa < 0, 0, vventa)
 
                         Dim EXISTENCIAREAL As Double = 0
-                        If existencia.IndexOf(".") <> -1 Then
-                            exispunto = existenciapartida(1)
-                            'convertir el numero a double de nuevo
-                            exispunto = exispunto.Substring(0, Math.Min(2, exispunto.Length))
 
-                            militroscopa = CDbl(militros) / CDbl(copas)
+                        Dim c As String = ""
+                        Dim f As String = ""
+                        Dim a As String = ""
+                        Dim dx As Double = 0
 
+                        If rd1("Mililitros").ToString > 0 And rd1("Copas").ToString > 0 Then
+                            For i = 1 To Len(existencia)
+                                If Mid(existencia, i, 1) = "." Then
+                                    a = Mid(existencia, i, 99)
+                                    a = 0 + a
+                                    f = CDec(a) * rd1("Copas").ToString
+                                    f = FormatNumber(f, 2)
+                                    f = FormatNumber(f, 0)
+                                    Exit For
+                                Else
+                                    c = c + Mid(existencia, i, 1)
+                                End If
+                            Next
 
-                            eximili = exispunto * CDbl(militros)
-                            resultado = CDbl(eximili) / 100
-                            resultado2 = CDbl(resultado) / CDbl(militroscopa)
-                            resultado2 = Math.Round(resultado2, MidpointRounding.AwayFromZero)
-
-                            If copas = resultado2 Then
-                                EXISTENCIAREAL = CDbl(parteAntesDelPunto) + 1
+                            If f = "" Then
+                                dx = c
                             Else
-                                EXISTENCIAREAL = parteAntesDelPunto & "." & resultado2
-
+                                If Len(f) = 2 Then
+                                    dx = c & "." & f
+                                Else
+                                    'f = New String("0")
+                                    dx = c & "." & f
+                                End If
                             End If
-
                         Else
-                            EXISTENCIAREAL = parteAntesDelPunto
+                            dx = existencia
                         End If
+                        'If existencia.IndexOf(".") <> -1 Then
+                        '    exispunto = existenciapartida(1)
+                        '    'convertir el numero a double de nuevo
+                        '    exispunto = exispunto.Substring(0, Math.Min(2, exispunto.Length))
 
-                        grdCaptura.Rows.Add(codigo, nombre, unidad, EXISTENCIAREAL, FormatNumber(pcompra, 2), FormatNumber(pventa, 2), FormatNumber(vcompra, 2), FormatNumber(vventa, 2))
+                        '    militroscopa = CDbl(militros) / CDbl(copas)
+
+
+                        '    eximili = exispunto * CDbl(militros)
+                        '    resultado = CDbl(eximili) / 100
+                        '    resultado2 = CDbl(resultado) / CDbl(militroscopa)
+                        '    resultado2 = Math.Round(resultado2, MidpointRounding.AwayFromZero)
+
+                        '    If copas = resultado2 Then
+                        '        EXISTENCIAREAL = CDbl(parteAntesDelPunto) + 1
+                        '    Else
+                        '        EXISTENCIAREAL = parteAntesDelPunto & "." & resultado2
+
+                        '    End If
+
+                        'Else
+                        '    EXISTENCIAREAL = parteAntesDelPunto
+                        'End If
+
+                        grdCaptura.Rows.Add(codigo,
+                                            nombre,
+                                            unidad,
+                                            dx,
+                                            FormatNumber(pcompra, 2),
+                                            FormatNumber(pventa, 2),
+                                            FormatNumber(vcompra, 2),
+                                            FormatNumber(vventa, 2))
 
 
                         ValCompra = ValCompra + vcompra
