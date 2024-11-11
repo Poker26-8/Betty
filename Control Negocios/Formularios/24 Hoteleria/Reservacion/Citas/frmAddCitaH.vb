@@ -178,6 +178,23 @@
 
         Try
             cnn1.Close() : cnn1.Open()
+            cnn2.Close() : cnn2.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT Nombre FROM clientes WHERE Nombre='" & cbocliente.Text & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+
+                End If
+            Else
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "INSERT INTO clientes(Nombre,RazonSocial,Tipo,RFC,Telefono) VALUES('" & cbocliente.Text & "','" & cbocliente.Text & "','Lista','','" & txtTelefono.Text & "')"
+                cmd2.ExecuteNonQuery()
+
+            End If
+            rd1.Close()
+            cnn2.Close()
+
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "SELECT * FROM agenda WHERE Minuto=" & cboMinuto.Text & " AND Hora=" & cboHora.Text & " AND Dia=" & txtDia.Text & " AND Mes=" & cboMes.Tag & " AND Anio=" & cboAño.Text & " AND Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "' AND Activo=1"
             rd1 = cmd1.ExecuteReader

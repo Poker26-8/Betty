@@ -286,30 +286,30 @@ Public Class frmDetalleH
                 frmManejo.pUbicaciones.Controls.Clear()
                 frmManejo.TRAERUBICACION()
 
-                If MsgBox("¿Deseas realizar algun abono?", vbInformation + vbOKCancel, titulohotelriaa) = vbOK Then
+                'If MsgBox("¿Deseas realizar algun abono?", vbInformation + vbOKCancel, titulohotelriaa) = vbOK Then
 
-                    cnn1.Close() : cnn1.Open()
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "SELECT MAX(IdReservacion) FROM reservaciones"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.HasRows Then
-                        If rd1.Read Then
-                            frmAnticiposReservaciones.cboFolio.Text = rd1(0).ToString
+                '    cnn1.Close() : cnn1.Open()
+                '    cmd1 = cnn1.CreateCommand
+                '    cmd1.CommandText = "SELECT MAX(IdReservacion) FROM reservaciones"
+                '    rd1 = cmd1.ExecuteReader
+                '    If rd1.HasRows Then
+                '        If rd1.Read Then
+                '            frmAnticiposReservaciones.cboFolio.Text = rd1(0).ToString
 
-                        End If
-                    End If
-                    rd1.Close()
-                    cnn1.Close()
-                    frmAnticiposReservaciones.cboFolio_SelectedValueChanged(frmAnticiposReservaciones.cboFolio, New EventArgs())
-                    frmAnticiposReservaciones.lblHabitacion.Text = lblhabitacion.Text
-                    frmAnticiposReservaciones.cboClIente.Text = cbocliente.Text
-                    frmAnticiposReservaciones.lblEntrada.Text = fentrada
-                    frmAnticiposReservaciones.lblSalida.Text = fsalida
+                '        End If
+                '    End If
+                '    rd1.Close()
+                '    cnn1.Close()
+                '    frmAnticiposReservaciones.cboFolio_SelectedValueChanged(frmAnticiposReservaciones.cboFolio, New EventArgs())
+                '    frmAnticiposReservaciones.lblHabitacion.Text = lblhabitacion.Text
+                '    frmAnticiposReservaciones.cboClIente.Text = cbocliente.Text
+                '    frmAnticiposReservaciones.lblEntrada.Text = fentrada
+                '    frmAnticiposReservaciones.lblSalida.Text = fsalida
 
-                    frmAnticiposReservaciones.BringToFront()
-                    frmAnticiposReservaciones.Show()
+                '    frmAnticiposReservaciones.BringToFront()
+                '    frmAnticiposReservaciones.Show()
 
-                End If
+                'End If
 
                 btnLimpiar.PerformClick()
                 Me.Close()
@@ -659,15 +659,7 @@ Public Class frmDetalleH
     End Sub
 
     Private Sub cboRegistro_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboRegistro.SelectedValueChanged
-        If cboRegistro.Text = "RESERVACION" Then
-            pReservacion.Visible = True
-            btnAbonos.Visible = True
-            gprecios.Visible = False
-        Else
-            pReservacion.Visible = False
-            btnAbonos.Visible = False
-            gprecios.Visible = True
-        End If
+
     End Sub
 
     Private Sub PReservacion80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PReservacion80.PrintPage

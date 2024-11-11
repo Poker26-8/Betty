@@ -289,7 +289,7 @@
 
         Try
             cnn2.Close() : cnn2.Open()
-            cnn3.Close() : cnn3.Open()
+            cnn1.Close() : cnn1.Open()
 
             For field As Integer = 1 To Date.DaysInMonth(Now.Year, Now.Month)
                 dia = field
@@ -305,19 +305,19 @@
                 rd2 = cmd2.ExecuteReader
                 If rd2.HasRows Then
                     If rd2.Read Then
-                        cmd3 = cnn3.CreateCommand
+                        cmd1 = cnn1.CreateCommand
                         If cboHabitacion.Text = "" Then
-                            cmd3.CommandText = "SELECT Asunto FROM Agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND Anio=" & Fechita(3) & " AND Usuario='" & usuario & "'"
+                            cmd1.CommandText = "SELECT Asunto FROM Agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND Anio=" & Fechita(3) & " AND Usuario='" & usuario & "'"
                         Else
-                            cmd3.CommandText = "SELECT Asunto FROM Agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND Anio=" & Fechita(3) & " AND Usuario='" & usuario & "' AND Habitacion='" & habita & "'"
+                            cmd1.CommandText = "SELECT Asunto FROM Agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND Anio=" & Fechita(3) & " AND Usuario='" & usuario & "' AND Habitacion='" & habita & "'"
                         End If
-                        rd3 = cmd3.ExecuteReader
-                        If rd3.HasRows Then
-                            If rd3.Read Then
-                                evento = rd3(0).ToString
+                        rd1 = cmd1.ExecuteReader
+                        If rd1.HasRows Then
+                            If rd1.Read Then
+                                evento = rd1(0).ToString
                             End If
                         End If
-                        rd3.Close()
+                        rd1.Close()
 
                         grdCaptura.Rows.Add(rd2("Id").ToString, rd2("Dia").ToString, evento, rd2("Activo").ToString)
                     End If
@@ -336,12 +336,12 @@
                 My.Application.DoEvents()
                 rd2.Close()
             Next
-            cnn3.Close()
+            cnn1.Close()
             cnn2.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn2.Close()
-            cnn3.Close()
+            cnn1.Close()
         End Try
     End Sub
 
@@ -395,7 +395,7 @@
 
         Try
             cnn4.Close() : cnn4.Open()
-            cnn2.Close() : cnn2.Open()
+            cnn5.Close() : cnn5.Open()
 
             For field As Integer = 1 To R
                 dia = field
@@ -411,21 +411,21 @@
                 rd4 = cmd4.ExecuteReader
                 If rd4.HasRows Then
                     If rd4.Read Then
-                        cmd2 = cnn2.CreateCommand
+                        cmd5 = cnn5.CreateCommand
 
                         If cboHabitacion.Text = "" Then
-                            cmd2.CommandText = "SELECT Asunto FROM agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND anio=" & Fechita(3) & " AND Usuario='" & cboUsuario.Text & "' AND Activo=1"
+                            cmd5.CommandText = "SELECT Asunto FROM agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND anio=" & Fechita(3) & " AND Usuario='" & cboUsuario.Text & "' AND Activo=1"
                         Else
-                            cmd2.CommandText = "SELECT Asunto FROM agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND anio=" & Fechita(3) & " AND Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "' AND Activo=1"
+                            cmd5.CommandText = "SELECT Asunto FROM agenda WHERE Dia=" & dia & " AND Mes=" & Fechita(2) & " AND anio=" & Fechita(3) & " AND Usuario='" & cboUsuario.Text & "' AND Habitacion='" & cboHabitacion.Text & "' AND Activo=1"
                         End If
 
-                        rd2 = cmd2.ExecuteReader
-                        Do While rd2.Read
-                            If rd2.HasRows Then
-                                evento = rd2(0).ToString
+                        rd5 = cmd5.ExecuteReader
+                        Do While rd5.Read
+                            If rd5.HasRows Then
+                                evento = rd5(0).ToString
                             End If
                         Loop
-                        rd2.Close()
+                        rd5.Close()
 
                         grdCaptura.Rows.Add(rd4("Id").ToString, rd4("Dia").ToString, evento, rd4("Activo").ToString)
                     End If
@@ -444,11 +444,11 @@
                 rd4.Close()
             Next
             cnn4.Close()
-            cnn2.Close()
+            cnn5.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn4.Close()
-            cnn3.Close()
+            cnn5.Close()
         End Try
 
         btnAgregar.Visible = True
