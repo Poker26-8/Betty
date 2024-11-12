@@ -68,7 +68,7 @@
                     Dim c As String = ""
                     Dim f As String = ""
                     Dim a As String = ""
-                    Dim dx As Double = 0
+                    Dim dx As String = ""
 
 
 
@@ -90,13 +90,14 @@
                             dx = c
                         Else
                             If Len(f) = 2 Then
+                                'If f Then
                                 dx = c & "." & f
-                            Else
+                                Else
                                 'f = New String("0")
                                 dx = c & "." & f
+                                End If
                             End If
-                        End If
-                    Else
+                            Else
                         dx = existencia
                     End If
 
