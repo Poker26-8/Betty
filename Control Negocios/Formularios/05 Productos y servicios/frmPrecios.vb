@@ -1753,7 +1753,9 @@
                     If rd1.Read Then
                         Dim IVA As Double = rd1("IVA").ToString
                         Dim PComp As Double = 0, PVent As Double = 0
-                        Dim NPcomp As Double = TxtPC.Text, NPvent As Double = TxtPreLta.Text
+                        ' Dim NPcomp As Double = TxtPC.Text
+                        Dim NPcomp As Double = TxtMonedaIva.Text
+                        Dim NPvent As Double = TxtPreLta.Text
 
                         cnn2.Close() : cnn2.Open()
 

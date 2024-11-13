@@ -10,7 +10,23 @@ Public Class frmProductosS
 
     Private Sub ShowData(ByVal tipo As String)
         Try
+
+            Dim TiCambio As Double = 0
+
             cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText =
+                                "select tipo_cambio from tb_moneda,Productos where Codigo='" & cboCodigo.Text & "' and Productos.id_tbMoneda=tb_moneda.id"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    TiCambio = rd1(0).ToString
+                    If TiCambio = 0 Then TiCambio = 1
+                End If
+            Else
+                TiCambio = 1
+            End If
+            rd1.Close()
 
             cmd1 = cnn1.CreateCommand
             If tipo = "BARRAS" Then
@@ -48,7 +64,7 @@ Public Class frmProductosS
                     txtUnidad.Text = rd1("UVenta").ToString()
                     txtpcompra.Text = FormatNumber(rd1("PrecioCompra").ToString(), 2)
                     txtpcompra2.Text = FormatNumber(CDbl(txtpcompra.Text) * (1 + CDbl(cboIVA.Text)), 2)
-                    txtpventa.Text = FormatNumber(rd1("PrecioVentaIVA").ToString(), 2)
+                    txtpventa.Text = FormatNumber(rd1("PrecioVentaIVA").ToString() * TiCambio, 2)
                     cboProvP.Text = rd1("ProvPri").ToString()
                     cboDepto.Text = rd1("Departamento").ToString()
                     cboGrupo.Text = rd1("Grupo").ToString()
@@ -84,7 +100,10 @@ Public Class frmProductosS
 
     Private Sub ShowData2(ByVal tipo As String)
         Try
+            Dim TiCambio As Double = 0
+
             cnn2.Close() : cnn2.Open()
+
 
             cmd2 = cnn2.CreateCommand
             If tipo = "BARRAS" Then
@@ -117,12 +136,29 @@ Public Class frmProductosS
                     txtBarras1.Text = rd2("CodBarra1").ToString
                     txtBarras2.Text = rd2("CodBarra2").ToString
                     cboCodigo.Text = rd2("Codigo").ToString()
+
+                    cnn3.Close() : cnn3.Open()
+                    cmd3 = cnn3.CreateCommand
+                    cmd3.CommandText =
+                                "select tipo_cambio from tb_moneda,Productos where Codigo='" & cboCodigo.Text & "' and Productos.id_tbMoneda=tb_moneda.id"
+                    rd3 = cmd3.ExecuteReader
+                    If rd3.HasRows Then
+                        If rd3.Read Then
+                            TiCambio = rd3(0).ToString
+                            If TiCambio = 0 Then TiCambio = 1
+                        End If
+                    Else
+                        TiCambio = 1
+                    End If
+                    rd3.Close()
+                    cnn3.Close()
+
                     cboNombre.Text = rd2("Nombre").ToString()
                     cboIVA.Text = rd2("IVA").ToString()
                     txtUnidad.Text = rd2("UVenta").ToString()
                     txtpcompra.Text = FormatNumber(rd2("PrecioCompra").ToString(), 2)
                     txtpcompra2.Text = FormatNumber(CDbl(txtpcompra.Text) * (1 + CDbl(cboIVA.Text)), 2)
-                    txtpventa.Text = FormatNumber(rd2("PrecioVentaIVA").ToString(), 2)
+                    txtpventa.Text = FormatNumber(rd2("PrecioVentaIVA").ToString() * TiCambio, 2)
                     cboProvP.Text = rd2("ProvPri").ToString()
                     cboDepto.Text = rd2("Departamento").ToString()
                     cboGrupo.Text = rd2("Grupo").ToString()

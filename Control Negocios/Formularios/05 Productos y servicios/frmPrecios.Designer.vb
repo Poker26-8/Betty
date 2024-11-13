@@ -141,7 +141,6 @@ Partial Class frmPrecios
         Me.lblTM.TabIndex = 128
         Me.lblTM.Text = "PESO"
         Me.lblTM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.lblTM.Visible = False
         '
         'Label9
         '
