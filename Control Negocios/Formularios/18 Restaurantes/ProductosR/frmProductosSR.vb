@@ -1351,6 +1351,7 @@ nopasowey:
                         txtCodBarras.Text = rd4("CodBarra").ToString
                     End If
                     cboCodCorto.Text = rd4("Codigo").ToString
+
                     If b = 1 Then
                     Else
                         cboDescripcion.Text = rd4("Nombre").ToString
