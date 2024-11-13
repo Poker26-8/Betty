@@ -125,9 +125,9 @@
                   cnn1.Close() : cnn1.Open()
 
                   cmd1 = cnn1.CreateCommand
-                  cmd1.CommandText =
-                      "select distinct Nombre from Productos where ProvRes=0"
-                  rd1 = cmd1.ExecuteReader
+            cmd1.CommandText =
+                      "select distinct Nombre from Productos where ProvRes=0 ORDER BY Nombre"
+            rd1 = cmd1.ExecuteReader
                   Do While rd1.Read
                         If rd1.HasRows Then cbodescripcion.Items.Add(
                             rd1(0).ToString()
@@ -149,16 +149,16 @@
 
                         cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
-                            "select Codigo,Grupo,UVenta,PreEsp from Productos where Nombre='" & cbodescripcion.Text & "' and Provres=0"
+                            "select Codigo,Grupo,UVenta,PrecioVentaIVA from Productos where Nombre='" & cbodescripcion.Text & "' and Provres=0"
                 rd1 = cmd1.ExecuteReader
                         If rd1.HasRows Then
                               If rd1.Read Then
                                     cbocodigo.Text = rd1("Codigo").ToString()
                                     cbocodigo.Tag = rd1("Grupo").ToString()
                                     txtunidad.Text = rd1("UVenta").ToString()
-                                    txtprecio.Text = FormatNumber(rd1("PreEsp").ToString(), 2)
+                        txtprecio.Text = FormatNumber(rd1("PrecioVentaIVA").ToString(), 2)
 
-                                    cbocodigo.Focus().Equals(True)
+                        cbocodigo.Focus().Equals(True)
                                     Exit Sub
                               End If
                         End If
@@ -444,6 +444,7 @@
             Else
                 Call txtcantidad_KeyPress(txtcantidad, New KeyPressEventArgs(ChrW(Keys.Enter)))
             End If
+            ' Call txtcantidad_KeyPress(txtcantidad, New KeyPressEventArgs(ChrW(Keys.Enter)))
         End If
     End Sub
 
@@ -651,7 +652,5 @@
         Me.Close()
     End Sub
 
-    Private Sub frmKits_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-    End Sub
 End Class
