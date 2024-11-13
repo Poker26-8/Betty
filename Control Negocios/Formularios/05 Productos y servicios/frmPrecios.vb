@@ -413,7 +413,7 @@
         TxtPorEsp.Enabled = False
         TxtPorEsp2.Enabled = False
         TxtPreEsp.Enabled = False
-        TxtPreEsp.Enabled = False
+        TxtPreEsp2.Enabled = False
         TxtCantEsp.Enabled = False
         TxtCantEsp2.Enabled = False
         TxtCantEsp3.Enabled = False
@@ -653,17 +653,17 @@
                     TxtPorLta.Text = IIf(rd4("Porcentaje").ToString = "", "0", FormatNumber(rd4("Porcentaje").ToString, 2))
                     TxtPorLta2.Text = IIf(rd4("Porcentaje2").ToString = "", "0", FormatNumber(rd4("Porcentaje2").ToString, 2))
 
-                    TxtPMI.Text = IIf(rd4("PreMin").ToString = "", "0.00", FormatNumber(rd4("PreMin").ToString, 2))
-                    TxtPMI2.Text = IIf(rd4("PreMin2").ToString = "", "0.00", FormatNumber(rd4("PreMin2").ToString, 2))
+                    TxtPMI.Text = IIf(rd4("PreMin").ToString = "", "0.00", FormatNumber(rd4("PreMin").ToString, 2)) * CDec(LblValor.Text)
+                    TxtPMI2.Text = IIf(rd4("PreMin2").ToString = "", "0.00", FormatNumber(rd4("PreMin2").ToString, 2)) * CDec(LblValor.Text)
 
-                    TxtPreMay.Text = IIf(rd4("PreMay").ToString = "", "0.00", FormatNumber(rd4("PreMay").ToString, 2))
-                    TxtPreMay2.Text = IIf(rd4("PreMay2").ToString = "", "0.00", FormatNumber(rd4("PreMay2").ToString, 2))
+                    TxtPreMay.Text = IIf(rd4("PreMay").ToString = "", "0.00", FormatNumber(rd4("PreMay").ToString, 2)) * CDec(LblValor.Text)
+                    TxtPreMay2.Text = IIf(rd4("PreMay2").ToString = "", "0.00", FormatNumber(rd4("PreMay2").ToString, 2)) * CDec(LblValor.Text)
 
-                    TxtPreMM.Text = IIf(rd4("PreMM").ToString = "", "0.00", FormatNumber(rd4("PreMM").ToString, 2))
-                    TxtPreMM2.Text = IIf(rd4("PreMM2").ToString = "", "0.00", FormatNumber(rd4("PreMM2").ToString, 2))
+                    TxtPreMM.Text = IIf(rd4("PreMM").ToString = "", "0.00", FormatNumber(rd4("PreMM").ToString, 2)) * CDec(LblValor.Text)
+                    TxtPreMM2.Text = IIf(rd4("PreMM2").ToString = "", "0.00", FormatNumber(rd4("PreMM2").ToString, 2)) * CDec(LblValor.Text)
 
-                    TxtPreEsp.Text = IIf(rd4("PreEsp").ToString = "", "0.00", FormatNumber(rd4("PreEsp").ToString, 2))
-                    TxtPreEsp2.Text = IIf(rd4("PreEsp2").ToString = "", "0.00", FormatNumber(rd4("PreEsp2").ToString, 2))
+                    TxtPreEsp.Text = IIf(rd4("PreEsp").ToString = "", "0.00", FormatNumber(rd4("PreEsp").ToString, 2)) * CDec(LblValor.Text)
+                    TxtPreEsp2.Text = IIf(rd4("PreEsp2").ToString = "", "0.00", FormatNumber(rd4("PreEsp2").ToString, 2)) * CDec(LblValor.Text)
 
                     If CDec(rd4("PrecioVentaIVA").ToString) > 0 Then
                         TxtPreLta.Text = CDec(IIf(rd4("PrecioVentaIVA").ToString = "", "0", rd4("PrecioVentaIVA").ToString)) * CDec(LblValor.Text)
@@ -1685,17 +1685,17 @@
 
     Private Sub btnGuardar_Click(sender As System.Object, e As System.EventArgs) Handles btnGuardar.Click
         Try
-            Dim pmin As Double = TxtPMI.Text
-            Dim pmay As Double = TxtPreMay.Text
-            Dim pmay2 As Double = TxtPreMay2.Text
 
-            Dim pmme As Double = TxtPreMM.Text
-            Dim pmme2 As Double = TxtPreMM2.Text
+            Dim pmay As Double = TxtPreMay.Text / CDbl(LblValor.Text)
+            Dim pmay2 As Double = TxtPreMay2.Text / CDbl(LblValor.Text)
 
-            Dim pesp As Double = TxtPreEsp.Text
-            Dim pesp2 As Double = TxtPreEsp2.Text
+            Dim pmme As Double = TxtPreMM.Text / CDbl(LblValor.Text)
+            Dim pmme2 As Double = TxtPreMM2.Text / CDbl(LblValor.Text)
 
-            Dim plis As Double = TxtPreLta.Text
+            Dim pesp As Double = CDbl(TxtPreEsp.Text) / CDbl(LblValor.Text)
+            Dim pesp2 As Double = CDbl(TxtPreEsp2.Text) / CDbl(LblValor.Text)
+
+
             Dim pvi As Double = CDbl(TxtPMI.Text) / CDbl(LblValor.Text)
             Dim pvi2 As Double = CDbl(TxtPMI2.Text) / CDbl(LblValor.Text)
 

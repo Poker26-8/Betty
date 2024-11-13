@@ -425,10 +425,11 @@ Public Class frmCompras
         Dim varConteo As Double = 0
 
         cnn2.Close() : cnn2.Open()
+        cnn3.Close() : cnn3.Open()
 
         cmd1 = cnn1.CreateCommand
         cmd1.CommandText =
-            "select Rem,Fac,Ped,Proveedor,Codigo,Nombre,Unidad,Cantidad,Precio,Caducidad,Lote,CP from AuxCompras order by Id"
+            "select Rem,Fac,Ped,Proveedor,Codigo,Nombre,Unidad,Cantidad,Precio,Caducidad,Lote,CP,Valor from AuxCompras order by Id"
         rd1 = cmd1.ExecuteReader
         Do While rd1.Read
             If rd1.HasRows Then
@@ -436,6 +437,22 @@ Public Class frmCompras
                 cbofactura.Text = rd1("Fac").ToString
                 cbopedido.Text = rd1("Ped").ToString
                 cboproveedor.Text = rd1("Proveedor").ToString
+                cbomoneda.Tag = rd1("Valor").ToString
+
+                cmd3 = cnn3.CreateCommand
+                cmd3.CommandText = "select tipo_cambio,id,nombre_moneda from tb_moneda where Id=" & cbomoneda.Tag & ""
+                rd3 = cmd3.ExecuteReader
+                If rd3.HasRows Then
+                    If rd3.Read Then
+                        txtvalor.Text = FormatNumber(rd3("tipo_cambio").ToString, 4)
+                        cbomoneda.Tag = rd3("id").ToString
+                        cbomoneda.Text = rd3("nombre_moneda").ToString
+                        cbomoneda.SelectedIndex = 0
+                    End If
+                Else
+                    cbomoneda.Tag = "0"
+                End If
+                rd3.Close()
 
                 Dim codigo As String = rd1("Codigo").ToString
                 Dim nombre As String = rd1("Nombre").ToString
@@ -488,25 +505,25 @@ Public Class frmCompras
         rd1.Close()
         cnn1.Close()
         cnn2.Close()
-
+        cnn3.Close()
         Call cboproveedor_SelectedValueChanged(cboproveedor, New EventArgs())
 
         If cboremision.Text <> "" And cbofactura.Text <> "" Then
             txtieps.Text = FormatNumber("0", 2)
-            txtsub1.Text = FormatNumber(varTotal, 2)
-            txtsub2.Text = FormatNumber(varTotal, 2)
+            txtsub1.Text = FormatNumber(varTotal * CDbl(txtvalor.Text), 2)
+            txtsub2.Text = FormatNumber(varTotal * CDbl(txtvalor.Text), 2)
             txtiva.Text = FormatNumber(varTotalIVA, 2)
-            txtTotalC.Text = FormatNumber(varTotal + varTotalIVA, 2)
-            txtapagar.Text = FormatNumber(varTotal + varTotalIVA, 2)
-            txtresta.Text = FormatNumber(varTotal + varTotalIVA, 2)
+            txtTotalC.Text = FormatNumber((varTotal + varTotalIVA) * CDbl(txtvalor.Text), 2)
+            txtapagar.Text = FormatNumber((varTotal + varTotalIVA) * CDbl(txtvalor.Text), 2)
+            txtresta.Text = FormatNumber((varTotal + varTotalIVA) * CDbl(txtvalor.Text), 2)
         Else
             txtieps.Text = FormatNumber(varTotalIEPS, 2)
-            txtsub1.Text = FormatNumber(varTotal + varTotalIEPS, 2)
-            txtsub2.Text = FormatNumber(varTotal + varTotalIEPS, 2)
+            txtsub1.Text = FormatNumber((varTotal + varTotalIEPS) * CDbl(txtvalor.Text), 2)
+            txtsub2.Text = FormatNumber((varTotal + varTotalIEPS) * CDbl(txtvalor.Text), 2)
             txtiva.Text = FormatNumber(varTotalIVA, 2)
-            txtTotalC.Text = FormatNumber(varTotal + varTotalIVA + varTotalIEPS, 2)
-            txtapagar.Text = FormatNumber(varTotal + varTotalIVA + varTotalIEPS, 2)
-            txtresta.Text = FormatNumber(varTotal + varTotalIVA + varTotalIEPS, 2)
+            txtTotalC.Text = FormatNumber((varTotal + varTotalIVA + varTotalIEPS) * CDbl(txtvalor.Text), 2)
+            txtapagar.Text = FormatNumber((varTotal + varTotalIVA + varTotalIEPS) * CDbl(txtvalor.Text), 2)
+            txtresta.Text = FormatNumber((varTotal + varTotalIVA + varTotalIEPS) * CDbl(txtvalor.Text), 2)
         End If
 
         cbonombre.Focus().Equals(True)
@@ -1596,7 +1613,7 @@ kaka:
             Conteo = Conteo + CDbl(grdcaptura.Rows(i).Cells(3).Value.ToString)
         Next
 
-        txtsub1.Text = FormatNumber(varOperacion, 2)
+        txtsub1.Text = FormatNumber(varOperacion * CDbl(txtvalor.Text), 2)
 
         CantidadP = txtcantidad.Text
         PrecioU = txtprecio.Text
@@ -1810,6 +1827,7 @@ kaka:
             End If
         Else
             txtresta.Text = CDbl(IIf(txtapagar.Text = "", 0, txtapagar.Text)) - (CDbl(IIf(txtanticipo.Text = "", 0, txtanticipo.Text)) + CDbl(IIf(txtefectivo.Text = "", 0, txtefectivo.Text)) + CDbl(IIf(txtpagos.Text = "", 0, txtpagos.Text)))
+
             txtresta.Text = FormatNumber(txtresta.Text, 2)
         End If
         rd3.Close()
@@ -1862,7 +1880,7 @@ kaka:
     End Sub
 
     Private Sub txtTotalC_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtTotalC.TextChanged
-        txtapagar.Text = CDbl(txtTotalC.Text) - CDbl(txtdesc2.Text)
+        txtapagar.Text = (CDbl(txtTotalC.Text) - CDbl(txtdesc2.Text)) * CDbl(txtvalor.Text)
         txtapagar.Text = FormatNumber(txtapagar.Text, 2)
     End Sub
 
