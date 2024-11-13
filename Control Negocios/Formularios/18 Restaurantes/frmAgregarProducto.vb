@@ -67,6 +67,8 @@ Public Class frmAgregarProducto
 
     Friend WithEvents btnDepto, btnGrupo, btnProd, btnPrefe, btnExtra, btnPromo As System.Windows.Forms.Button
 
+    Public currentIndex As Integer = 0
+    Public controlsPerClick As Integer = 12
     Private Sub Actualiza_Promos()
         Dim dia_hoy As Integer = Date.Now.DayOfWeek
         Dim dia_tex As String = ""
@@ -3279,6 +3281,62 @@ SAFO:
         lblFecha.Text = Format(Date.Now, "yyyy/MM/dd")
         TFecha.Start()
 
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Dim controlsToShow As Integer = Math.Min(controlsPerClick, pDepartamento.Controls.Count - currentIndex)
+
+        For i As Integer = currentIndex To currentIndex + controlsToShow - 1
+            pDepartamento.Controls(i).Visible = True
+        Next
+
+        currentIndex += controlsToShow
+
+        If pDepartamento.VerticalScroll.Visible Then
+            pDepartamento.AutoScrollPosition = New Point(0, pDepartamento.VerticalScroll.Value + 80)
+        End If
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Dim controlsToShow As Integer = Math.Min(controlsPerClick, pDepartamento.Controls.Count - currentIndex)
+
+        For i As Integer = currentIndex To currentIndex + controlsToShow - 1
+            pDepartamento.Controls(i).Visible = True
+        Next
+
+        currentIndex += controlsToShow
+
+        If pDepartamento.VerticalScroll.Visible Then
+            pDepartamento.AutoScrollPosition = New Point(0, pDepartamento.VerticalScroll.Value - 80)
+        End If
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Dim controlsToShow As Integer = Math.Min(controlsPerClick, pgrupo.Controls.Count - currentIndex)
+
+        For i As Integer = currentIndex To currentIndex + controlsToShow - 1
+            pgrupo.Controls(i).Visible = True
+        Next
+
+        currentIndex += controlsToShow
+
+        If pgrupo.VerticalScroll.Visible Then
+            pgrupo.AutoScrollPosition = New Point(0, pgrupo.VerticalScroll.Value + 80)
+        End If
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Dim controlsToShow As Integer = Math.Min(controlsPerClick, pgrupo.Controls.Count - currentIndex)
+
+        For i As Integer = currentIndex To currentIndex + controlsToShow - 1
+            pgrupo.Controls(i).Visible = True
+        Next
+
+        currentIndex += controlsToShow
+
+        If pgrupo.VerticalScroll.Visible Then
+            pgrupo.AutoScrollPosition = New Point(0, pgrupo.VerticalScroll.Value - 80)
+        End If
     End Sub
 
     Private Sub btntiempo3_Click(sender As Object, e As EventArgs) Handles btntiempo3.Click

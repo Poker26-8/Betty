@@ -24,8 +24,8 @@ Partial Class frmAgregarProducto
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmAgregarProducto))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.lblpromo = New System.Windows.Forms.Label()
@@ -125,6 +125,11 @@ Partial Class frmAgregarProducto
         Me.TFecha = New System.Windows.Forms.Timer(Me.components)
         Me.PComanda80 = New System.Drawing.Printing.PrintDocument()
         Me.PComanda58 = New System.Drawing.Printing.PrintDocument()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -138,6 +143,7 @@ Partial Class frmAgregarProducto
         Me.pteclado.SuspendLayout()
         Me.gteclas.SuspendLayout()
         Me.gdato.SuspendLayout()
+        Me.Panel5.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -348,29 +354,29 @@ Partial Class frmAgregarProducto
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Right
         Me.Panel3.Location = New System.Drawing.Point(886, 0)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(329, 682)
+        Me.Panel3.Size = New System.Drawing.Size(329, 778)
         Me.Panel3.TabIndex = 2
         '
         'grdCaptura
         '
         Me.grdCaptura.AllowUserToAddRows = False
         Me.grdCaptura.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.grdCaptura.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.grdCaptura.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle23
         Me.grdCaptura.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.grdCaptura.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.grdCaptura.BackgroundColor = System.Drawing.Color.White
         Me.grdCaptura.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.grdCaptura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grdCaptura.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column9, Me.Column10})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.grdCaptura.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.grdCaptura.DefaultCellStyle = DataGridViewCellStyle24
         Me.grdCaptura.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdCaptura.GridColor = System.Drawing.Color.White
         Me.grdCaptura.Location = New System.Drawing.Point(0, 73)
@@ -379,7 +385,7 @@ Partial Class frmAgregarProducto
         Me.grdCaptura.RowHeadersVisible = False
         Me.grdCaptura.RowHeadersWidth = 62
         Me.grdCaptura.RowTemplate.Height = 40
-        Me.grdCaptura.Size = New System.Drawing.Size(329, 346)
+        Me.grdCaptura.Size = New System.Drawing.Size(329, 442)
         Me.grdCaptura.TabIndex = 2
         '
         'Column1
@@ -476,7 +482,7 @@ Partial Class frmAgregarProducto
         Me.Panel8.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(195, Byte), Integer), CType(CType(89, Byte), Integer))
         Me.Panel8.Controls.Add(Me.TabControl1)
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel8.Location = New System.Drawing.Point(0, 419)
+        Me.Panel8.Location = New System.Drawing.Point(0, 515)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Size = New System.Drawing.Size(329, 263)
         Me.Panel8.TabIndex = 1
@@ -591,9 +597,9 @@ Partial Class frmAgregarProducto
         Me.Panel2.Controls.Add(Me.btnRepertir)
         Me.Panel2.Controls.Add(Me.btnordenar)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel2.Location = New System.Drawing.Point(0, 633)
+        Me.Panel2.Location = New System.Drawing.Point(0, 725)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(886, 49)
+        Me.Panel2.Size = New System.Drawing.Size(886, 53)
         Me.Panel2.TabIndex = 3
         '
         'btnSalir
@@ -602,9 +608,9 @@ Partial Class frmAgregarProducto
         Me.btnSalir.Dock = System.Windows.Forms.DockStyle.Left
         Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnSalir.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSalir.Location = New System.Drawing.Point(560, 0)
+        Me.btnSalir.Location = New System.Drawing.Point(561, 0)
         Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(56, 49)
+        Me.btnSalir.Size = New System.Drawing.Size(56, 53)
         Me.btnSalir.TabIndex = 28
         Me.btnSalir.Text = "Salir"
         Me.btnSalir.UseVisualStyleBackColor = False
@@ -615,9 +621,9 @@ Partial Class frmAgregarProducto
         Me.btnnuevo.Dock = System.Windows.Forms.DockStyle.Left
         Me.btnnuevo.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnnuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnnuevo.Location = New System.Drawing.Point(492, 0)
+        Me.btnnuevo.Location = New System.Drawing.Point(493, 0)
         Me.btnnuevo.Name = "btnnuevo"
-        Me.btnnuevo.Size = New System.Drawing.Size(68, 49)
+        Me.btnnuevo.Size = New System.Drawing.Size(68, 53)
         Me.btnnuevo.TabIndex = 25
         Me.btnnuevo.Text = "Limpiar"
         Me.btnnuevo.UseVisualStyleBackColor = False
@@ -629,9 +635,9 @@ Partial Class frmAgregarProducto
         Me.btnOcasional.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnOcasional.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnOcasional.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnOcasional.Location = New System.Drawing.Point(405, 0)
+        Me.btnOcasional.Location = New System.Drawing.Point(406, 0)
         Me.btnOcasional.Name = "btnOcasional"
-        Me.btnOcasional.Size = New System.Drawing.Size(87, 49)
+        Me.btnOcasional.Size = New System.Drawing.Size(87, 53)
         Me.btnOcasional.TabIndex = 27
         Me.btnOcasional.Text = "Producto ocasional"
         Me.btnOcasional.UseVisualStyleBackColor = False
@@ -642,9 +648,9 @@ Partial Class frmAgregarProducto
         Me.btntiempo3.Dock = System.Windows.Forms.DockStyle.Left
         Me.btntiempo3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btntiempo3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btntiempo3.Location = New System.Drawing.Point(344, 0)
+        Me.btntiempo3.Location = New System.Drawing.Point(345, 0)
         Me.btntiempo3.Name = "btntiempo3"
-        Me.btntiempo3.Size = New System.Drawing.Size(61, 49)
+        Me.btntiempo3.Size = New System.Drawing.Size(61, 53)
         Me.btntiempo3.TabIndex = 24
         Me.btntiempo3.Text = "Tercer tiempo"
         Me.btntiempo3.UseVisualStyleBackColor = False
@@ -655,9 +661,9 @@ Partial Class frmAgregarProducto
         Me.btntiempo2.Dock = System.Windows.Forms.DockStyle.Left
         Me.btntiempo2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btntiempo2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btntiempo2.Location = New System.Drawing.Point(278, 0)
+        Me.btntiempo2.Location = New System.Drawing.Point(279, 0)
         Me.btntiempo2.Name = "btntiempo2"
-        Me.btntiempo2.Size = New System.Drawing.Size(66, 49)
+        Me.btntiempo2.Size = New System.Drawing.Size(66, 53)
         Me.btntiempo2.TabIndex = 23
         Me.btntiempo2.Text = "Segundo tiempo"
         Me.btntiempo2.UseVisualStyleBackColor = False
@@ -668,9 +674,9 @@ Partial Class frmAgregarProducto
         Me.btntiempo1.Dock = System.Windows.Forms.DockStyle.Left
         Me.btntiempo1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btntiempo1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btntiempo1.Location = New System.Drawing.Point(215, 0)
+        Me.btntiempo1.Location = New System.Drawing.Point(216, 0)
         Me.btntiempo1.Name = "btntiempo1"
-        Me.btntiempo1.Size = New System.Drawing.Size(63, 49)
+        Me.btntiempo1.Size = New System.Drawing.Size(63, 53)
         Me.btntiempo1.TabIndex = 22
         Me.btntiempo1.Text = "Primer tiempo"
         Me.btntiempo1.UseVisualStyleBackColor = False
@@ -681,9 +687,9 @@ Partial Class frmAgregarProducto
         Me.btnRepertir.Dock = System.Windows.Forms.DockStyle.Left
         Me.btnRepertir.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnRepertir.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRepertir.Location = New System.Drawing.Point(134, 0)
+        Me.btnRepertir.Location = New System.Drawing.Point(135, 0)
         Me.btnRepertir.Name = "btnRepertir"
-        Me.btnRepertir.Size = New System.Drawing.Size(81, 49)
+        Me.btnRepertir.Size = New System.Drawing.Size(81, 53)
         Me.btnRepertir.TabIndex = 26
         Me.btnRepertir.Text = "Repetir producto"
         Me.btnRepertir.UseVisualStyleBackColor = False
@@ -696,7 +702,7 @@ Partial Class frmAgregarProducto
         Me.btnordenar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnordenar.Location = New System.Drawing.Point(0, 0)
         Me.btnordenar.Name = "btnordenar"
-        Me.btnordenar.Size = New System.Drawing.Size(134, 49)
+        Me.btnordenar.Size = New System.Drawing.Size(135, 53)
         Me.btnordenar.TabIndex = 21
         Me.btnordenar.Text = "Enviar a producción"
         Me.btnordenar.UseVisualStyleBackColor = False
@@ -705,29 +711,31 @@ Partial Class frmAgregarProducto
         '
         Me.pDepartamento.AutoScroll = True
         Me.pDepartamento.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.pDepartamento.Cursor = System.Windows.Forms.Cursors.Hand
         Me.pDepartamento.Dock = System.Windows.Forms.DockStyle.Left
         Me.pDepartamento.Location = New System.Drawing.Point(0, 61)
         Me.pDepartamento.Name = "pDepartamento"
-        Me.pDepartamento.Size = New System.Drawing.Size(127, 572)
+        Me.pDepartamento.Size = New System.Drawing.Size(135, 610)
         Me.pDepartamento.TabIndex = 4
         '
         'pgrupo
         '
         Me.pgrupo.AutoScroll = True
         Me.pgrupo.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.pgrupo.Cursor = System.Windows.Forms.Cursors.Hand
         Me.pgrupo.Dock = System.Windows.Forms.DockStyle.Left
-        Me.pgrupo.Location = New System.Drawing.Point(127, 61)
+        Me.pgrupo.Location = New System.Drawing.Point(135, 61)
         Me.pgrupo.Name = "pgrupo"
-        Me.pgrupo.Size = New System.Drawing.Size(127, 572)
+        Me.pgrupo.Size = New System.Drawing.Size(130, 610)
         Me.pgrupo.TabIndex = 5
         '
         'pProductos
         '
         Me.pProductos.BackColor = System.Drawing.Color.White
         Me.pProductos.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pProductos.Location = New System.Drawing.Point(254, 61)
+        Me.pProductos.Location = New System.Drawing.Point(265, 61)
         Me.pProductos.Name = "pProductos"
-        Me.pProductos.Size = New System.Drawing.Size(632, 572)
+        Me.pProductos.Size = New System.Drawing.Size(621, 610)
         Me.pProductos.TabIndex = 6
         '
         'pteclado
@@ -1338,15 +1346,77 @@ Partial Class frmAgregarProducto
         'PComanda58
         '
         '
+        'Panel5
+        '
+        Me.Panel5.BackColor = System.Drawing.Color.White
+        Me.Panel5.Controls.Add(Me.Button6)
+        Me.Panel5.Controls.Add(Me.Button7)
+        Me.Panel5.Controls.Add(Me.Button5)
+        Me.Panel5.Controls.Add(Me.Button3)
+        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel5.Location = New System.Drawing.Point(0, 671)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(886, 54)
+        Me.Panel5.TabIndex = 8
+        '
+        'Button3
+        '
+        Me.Button3.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button3.Font = New System.Drawing.Font("Segoe UI Black", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Location = New System.Drawing.Point(0, 0)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(65, 54)
+        Me.Button3.TabIndex = 1
+        Me.Button3.Text = "↓"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button5
+        '
+        Me.Button5.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button5.Font = New System.Drawing.Font("Segoe UI Black", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button5.Location = New System.Drawing.Point(65, 0)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(70, 54)
+        Me.Button5.TabIndex = 2
+        Me.Button5.Text = "↑"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button7
+        '
+        Me.Button7.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Button7.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button7.Font = New System.Drawing.Font("Segoe UI Black", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button7.Location = New System.Drawing.Point(135, 0)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(65, 54)
+        Me.Button7.TabIndex = 3
+        Me.Button7.Text = "↓"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        Me.Button6.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button6.Font = New System.Drawing.Font("Segoe UI Black", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button6.Location = New System.Drawing.Point(200, 0)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(65, 54)
+        Me.Button6.TabIndex = 4
+        Me.Button6.Text = "↑"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
         'frmAgregarProducto
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1215, 682)
+        Me.ClientSize = New System.Drawing.Size(1215, 778)
         Me.Controls.Add(Me.pteclado)
         Me.Controls.Add(Me.pProductos)
         Me.Controls.Add(Me.pgrupo)
         Me.Controls.Add(Me.pDepartamento)
+        Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel3)
@@ -1368,6 +1438,7 @@ Partial Class frmAgregarProducto
         Me.gteclas.ResumeLayout(False)
         Me.gdato.ResumeLayout(False)
         Me.gdato.PerformLayout()
+        Me.Panel5.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1471,4 +1542,9 @@ Partial Class frmAgregarProducto
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
     Friend WithEvents Column9 As DataGridViewTextBoxColumn
     Friend WithEvents Column10 As DataGridViewTextBoxColumn
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button5 As Button
+    Friend WithEvents Button7 As Button
+    Friend WithEvents Button6 As Button
 End Class
