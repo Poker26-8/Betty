@@ -883,7 +883,7 @@ Partial Class frmProductosSR
         Me.box_tienda.Controls.Add(Me.Label20)
         Me.box_tienda.Controls.Add(Me.txt_descripcion)
         Me.box_tienda.Controls.Add(Me.txt_resumen)
-        Me.box_tienda.Location = New System.Drawing.Point(108, 219)
+        Me.box_tienda.Location = New System.Drawing.Point(108, 100)
         Me.box_tienda.Name = "box_tienda"
         Me.box_tienda.Size = New System.Drawing.Size(635, 121)
         Me.box_tienda.TabIndex = 255

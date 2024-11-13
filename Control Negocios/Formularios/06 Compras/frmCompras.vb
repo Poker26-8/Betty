@@ -1632,12 +1632,12 @@ kaka:
         If txtlote.Text <> "" Then
             cnn1.Close() : cnn1.Open() : cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
-                "insert into AuxCompras(Rem,Fac,Ped,Proveedor,Codigo,Nombre,Unidad,Cantidad,Precio,Total,Caducidad,Lote,CP) values('" & cboremision.Text & "','" & cbofactura.Text & "','" & cbopedido.Text & "','" & cboproveedor.Text & "','" & txtcodigo.Text & "','" & cbonombre.Text & "','" & txtunidad.Text & "'," & CantidadP & "," & PrecioU & "," & TotalP & ",'" & Format(dtpcaducidad.Value, "yyyy-MM-dd") & "','" & txtlote.Text & "'," & CP & ")"
+                "insert into AuxCompras(Rem,Fac,Ped,Proveedor,Codigo,Nombre,Unidad,Cantidad,Precio,Total,Caducidad,Lote,CP,Valor) values('" & cboremision.Text & "','" & cbofactura.Text & "','" & cbopedido.Text & "','" & cboproveedor.Text & "','" & txtcodigo.Text & "','" & cbonombre.Text & "','" & txtunidad.Text & "'," & CantidadP & "," & PrecioU & "," & TotalP & ",'" & Format(dtpcaducidad.Value, "yyyy-MM-dd") & "','" & txtlote.Text & "'," & CP & "," & cbomoneda.Tag & ")"
             cmd1.ExecuteNonQuery() : cnn1.Close()
         Else
             cnn1.Close() : cnn1.Open() : cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
-                "insert into AuxCompras(Rem,Fac,Ped,Proveedor,Codigo,Nombre,Unidad,Cantidad,Precio,Total,Caducidad,Lote,CP) values('" & cboremision.Text & "','" & cbofactura.Text & "','" & cbopedido.Text & "','" & cboproveedor.Text & "','" & txtcodigo.Text & "','" & cbonombre.Text & "','" & txtunidad.Text & "'," & CantidadP & "," & PrecioU & "," & TotalP & ",'',''," & CP & ")"
+                "insert into AuxCompras(Rem,Fac,Ped,Proveedor,Codigo,Nombre,Unidad,Cantidad,Precio,Total,Caducidad,Lote,CP,Valor) values('" & cboremision.Text & "','" & cbofactura.Text & "','" & cbopedido.Text & "','" & cboproveedor.Text & "','" & txtcodigo.Text & "','" & cbonombre.Text & "','" & txtunidad.Text & "'," & CantidadP & "," & PrecioU & "," & TotalP & ",'',''," & CP & ","& cbomoneda.tag &")"
             cmd1.ExecuteNonQuery() : cnn1.Close()
         End If
 

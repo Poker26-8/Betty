@@ -1103,7 +1103,8 @@
                                       `Total` float NOT NULL DEFAULT '0',
                                       `Caducidad` varchar(50) NOT NULL DEFAULT '',
                                       `Lote` varchar(50) NOT NULL DEFAULT '',
-                                      `CP` varchar(50) NOT NULL DEFAULT ''
+                                      `CP` varchar(50) NOT NULL DEFAULT '',
+                                      `Valor` INT NOT NULL DEFAULT '1'
                                     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
 

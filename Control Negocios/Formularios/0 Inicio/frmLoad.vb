@@ -488,6 +488,25 @@ Public Class frmLoad
     End Sub
 
     Public Sub verif()
+
+        'AUXCOMPRAS
+        Try
+            cnn1.Close()
+            cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT Valor FROM auxcompras"
+            rd1 = cmd1.ExecuteReader
+            If rd1.Read Then
+            End If
+            rd1.Close()
+            cnn1.Close()
+        Catch ex As Exception
+            rd1.Close()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "ALTER TABLE auxcompras add column Valor INT DEFAULT '1'"
+            cmd1.ExecuteNonQuery()
+            cnn1.Close()
+        End Try
         'msc
         Try
             cnn1.Close()
