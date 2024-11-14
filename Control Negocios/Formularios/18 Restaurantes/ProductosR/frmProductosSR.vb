@@ -414,7 +414,7 @@ Public Class frmProductosSR
         cboDepartamento.Text = ""
         cboGrupo.Text = ""
         cboComanda.Text = ""
-        txtExistencia.Text = ""
+        txtExistencia.Text = "0"
 
         grdextras.Rows.Clear()
         grdpreferencia.Rows.Clear()
