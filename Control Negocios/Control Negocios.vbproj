@@ -1021,6 +1021,12 @@
     <Compile Include="Formularios\18 Restaurantes\Traspasar\frmTraspasarProducto.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\18 Restaurantes\Visor\frmVisorComanda.Designer.vb">
+      <DependentUpon>frmVisorComanda.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\18 Restaurantes\Visor\frmVisorComanda.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\20 Refaccionaria\frmConsultarRefaccion.Designer.vb">
       <DependentUpon>frmConsultarRefaccion.vb</DependentUpon>
     </Compile>
@@ -2884,6 +2890,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\18 Restaurantes\Traspasar\frmTraspasarProducto.resx">
       <DependentUpon>frmTraspasarProducto.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\18 Restaurantes\Visor\frmVisorComanda.resx">
+      <DependentUpon>frmVisorComanda.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\20 Refaccionaria\frmConsultarRefaccion.resx">
       <DependentUpon>frmConsultarRefaccion.vb</DependentUpon>

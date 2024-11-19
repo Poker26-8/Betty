@@ -1651,6 +1651,9 @@ Public Class Inicio
 
     Private Sub btnvtatouch_Click(sender As Object, e As EventArgs) Handles btnvtatouch.Click
         Try
+            frmVisorComanda.BringToFront()
+            frmVisorComanda.Show()
+
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "select NotasCred from Formatos where Facturas='TomaContra'"
