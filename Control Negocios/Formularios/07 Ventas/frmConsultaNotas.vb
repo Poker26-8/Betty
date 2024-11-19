@@ -2627,7 +2627,7 @@ Public Class frmConsultaNotas
 
             If (optnotas.Checked) Or (optcobrar.Checked) Or (optpagadas.Checked) Or (optanceladas.Checked) Or (optcotiz.Checked) Or (optPedidos.Checked) Then
 
-                If (optnotas.Checked) Then
+                If (optnotas.Checked) Or (optcobrar.Checked) Then
                     If formato = "TICKET" Then
                         If tamticket = "80" Then
                             If imp_ticket = "" Then MsgBox("No hay una impresora configurada para imprimir la copia.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
