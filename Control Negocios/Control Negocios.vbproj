@@ -373,6 +373,12 @@
     <Compile Include="Formularios\01 Formularios de función\frmSubeMonedero.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\01 Formularios de función\frmSubeMunicipios.Designer.vb">
+      <DependentUpon>frmSubeMunicipios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\01 Formularios de función\frmSubeMunicipios.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\01 Formularios de función\frmsubeProveedores.Designer.vb">
       <DependentUpon>frmsubeProveedores.vb</DependentUpon>
     </Compile>
@@ -2572,6 +2578,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\01 Formularios de función\frmSubeMonedero.resx">
       <DependentUpon>frmSubeMonedero.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\01 Formularios de función\frmSubeMunicipios.resx">
+      <DependentUpon>frmSubeMunicipios.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\01 Formularios de función\frmsubeProveedores.resx">
       <DependentUpon>frmsubeProveedores.vb</DependentUpon>

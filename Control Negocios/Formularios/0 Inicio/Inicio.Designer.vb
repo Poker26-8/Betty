@@ -1151,31 +1151,31 @@ Partial Class Inicio
         '
         Me.pMigracion.BackColor = System.Drawing.Color.White
         Me.pMigracion.Name = "pMigracion"
-        Me.pMigracion.Size = New System.Drawing.Size(176, 22)
+        Me.pMigracion.Size = New System.Drawing.Size(180, 22)
         Me.pMigracion.Text = "Migración de datos"
         '
         'SubeClientesToolStripMenuItem
         '
         Me.SubeClientesToolStripMenuItem.Name = "SubeClientesToolStripMenuItem"
-        Me.SubeClientesToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
+        Me.SubeClientesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SubeClientesToolStripMenuItem.Text = "Sube Clientes"
         '
         'SubeProveedoresToolStripMenuItem
         '
         Me.SubeProveedoresToolStripMenuItem.Name = "SubeProveedoresToolStripMenuItem"
-        Me.SubeProveedoresToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
+        Me.SubeProveedoresToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SubeProveedoresToolStripMenuItem.Text = "Sube Proveedores"
         '
         'SubeUsuariosToolStripMenuItem
         '
         Me.SubeUsuariosToolStripMenuItem.Name = "SubeUsuariosToolStripMenuItem"
-        Me.SubeUsuariosToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
+        Me.SubeUsuariosToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SubeUsuariosToolStripMenuItem.Text = "Sube Usuarios"
         '
         'SubeMonederosToolStripMenuItem
         '
         Me.SubeMonederosToolStripMenuItem.Name = "SubeMonederosToolStripMenuItem"
-        Me.SubeMonederosToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
+        Me.SubeMonederosToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SubeMonederosToolStripMenuItem.Text = "Sube Monederos"
         '
         'TransportistasToolStripMenuItem

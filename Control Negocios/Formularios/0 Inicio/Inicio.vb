@@ -1651,8 +1651,8 @@ Public Class Inicio
 
     Private Sub btnvtatouch_Click(sender As Object, e As EventArgs) Handles btnvtatouch.Click
         Try
-            frmVisorComanda.BringToFront()
-            frmVisorComanda.Show()
+            'frmVisorComanda.BringToFront()
+            'frmVisorComanda.Show()
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -1838,8 +1838,11 @@ Public Class Inicio
     End Sub
 
     Private Sub SubeMonederosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SubeMonederosToolStripMenuItem.Click
-        frmSubeMonedero.Show()
-        frmSubeMonedero.BringToFront()
+        'frmSubeMonedero.Show()
+        'frmSubeMonedero.BringToFront()
+
+        frmSubeMunicipios.Show()
+        frmSubeMunicipios.BringToFront()
     End Sub
 
     Private Sub menuconsignaciones_Click(sender As Object, e As EventArgs) Handles menuconsignaciones.Click
