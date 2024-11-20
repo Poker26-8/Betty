@@ -3983,10 +3983,12 @@ kaka:
             cbodesc.Text = ""
             cbodesc.Items.Clear()
             txtunidad.Text = ""
-            txtcantidad.Text = ""
+            txtcantidad.Text = "1"
             txtprecio.Text = "0.00"
             txttotal.Text = "0.00"
             txtexistencia.Text = ""
+            txtparte.Text = ""
+            cboservicio.Text = ""
             ' txtfechacad.Text = ""
             cboLote.Text = ""
             picProd.Image = Nothing

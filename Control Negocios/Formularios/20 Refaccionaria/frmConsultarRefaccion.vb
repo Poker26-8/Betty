@@ -264,7 +264,7 @@ Public Class frmConsultarRefaccion
                 varprecio = grdProductos.Rows(index).Cells(4).Value.ToString
                 varcantidad = "1"
             vartotal = CDec(varcantidad) * CDec(varprecio)
-
+            frmVentas_refa.txtparte.Text = numparte
             frmVentas_refa.cbocodigo.Text = varcodigo
             frmVentas_refa.cbodesc.Text = vardescripcion
             frmVentas_refa.txtunidad.Text = varunidad
@@ -277,5 +277,21 @@ Public Class frmConsultarRefaccion
 
         End Try
 
+    End Sub
+
+    Private Sub cboaño_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboaño.SelectedValueChanged
+        cboMarca.Focus.Equals(True)
+    End Sub
+
+    Private Sub cboMarca_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboMarca.SelectedValueChanged
+        cboModelo.Focus.Equals(True)
+    End Sub
+
+    Private Sub cboModelo_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboModelo.SelectedValueChanged
+        cboMotor.Focus.Equals(True)
+    End Sub
+
+    Private Sub cboMotor_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboMotor.SelectedValueChanged
+        Button3.Focus.Equals(True)
     End Sub
 End Class
