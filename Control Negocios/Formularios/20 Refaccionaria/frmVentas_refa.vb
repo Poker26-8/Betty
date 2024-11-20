@@ -1143,7 +1143,7 @@ kak:
 #End Region
 
     Private Sub cboNombre_DropDown(sender As Object, e As EventArgs) Handles cboNombre.DropDown
-        cboNombre.Items.Clear()
+
         If franquicia = 0 Then
             If Busqueda = True Then
                 Busqueda = False
@@ -3070,8 +3070,8 @@ kaka:
                     cbodesc.Focus().Equals(True)
                 End If
             Case Is = Keys.F3
-                frmBuscaVentas.Vienna = "Ventas Refaccionaria"
-                frmBuscaVentas.Show()
+                frmConsultarRefaccion.Vienna = "Ventas Refaccionaria"
+                frmConsultarRefaccion.Show()
             Case Is = Keys.F5
                 frmVentasKit.Vienna = "Ventas Refaccionaria"
                 frmVentasKit.Show()

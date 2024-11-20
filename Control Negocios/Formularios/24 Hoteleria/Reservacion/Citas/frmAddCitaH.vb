@@ -117,7 +117,7 @@
 
     Private Sub btnAGregar_Click(sender As Object, e As EventArgs) Handles btnAGregar.Click
 
-        If cboHora.Text = "" Or cboMinuto.Text = "" Or txtDia.Text = "" Or cboMes.Text = "" Or cboAño.Text = "" Or cboUsuario.Text = "" Or rtAsunto.Text = "" Or cboHabitacion.Text = "" Then
+        If cboHora.Text = "" Or cboMinuto.Text = "" Or txtDia.Text = "" Or cboMes.Text = "" Or cboAño.Text = "" Or cboUsuario.Text = "" Or cboHabitacion.Text = "" Then
             MsgBox("Necesita llenar todos los datos para guardar el evento.", vbInformation + vbOKOnly, titulohotelriaa)
             Exit Sub
         End If

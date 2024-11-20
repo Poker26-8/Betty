@@ -12,7 +12,7 @@ Public Class frmConsultarRefaccion
     ' Nueva ubicación y tamaño para el PictureBox
     Private newSize As Size
     Private newLocation As Point
-
+    Public Vienna As String = ""
     Private Sub frmConsultarRefaccion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Obtener el año actual
         Dim añoActual As Integer = DateTime.Now.Year
@@ -237,5 +237,45 @@ Public Class frmConsultarRefaccion
         If AscW(e.KeyChar) = Keys.Enter Then
             Button3.Focus.Equals(True)
         End If
+    End Sub
+
+    Private Sub grdProductos_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles grdProductos.CellDoubleClick
+
+        Dim index As Integer = grdProductos.CurrentRow.Index
+
+        Try
+            Dim varcodigo As String = ""
+            Dim numparte As String = ""
+            Dim vardescripcion As String = ""
+            Dim varunidad As String = ""
+            Dim varprecio As Double = 0
+            Dim varcantidad As Double = 0
+            Dim vartotal As Double = 0
+
+
+            Dim totalacumulado As Double = 0
+            frmVentas_refa.Show()
+
+
+            varcodigo = grdProductos.Rows(index).Cells(0).Value.ToString
+                numparte = grdProductos.Rows(index).Cells(1).Value.ToString
+                vardescripcion = grdProductos.Rows(index).Cells(2).Value.ToString
+                varunidad = grdProductos.Rows(index).Cells(3).Value.ToString
+                varprecio = grdProductos.Rows(index).Cells(4).Value.ToString
+                varcantidad = "1"
+            vartotal = CDec(varcantidad) * CDec(varprecio)
+
+            frmVentas_refa.cbocodigo.Text = varcodigo
+            frmVentas_refa.cbodesc.Text = vardescripcion
+            frmVentas_refa.txtunidad.Text = varunidad
+            frmVentas_refa.txtcantidad.Text = "1"
+            frmVentas_refa.txtprecio.Text = FormatNumber(varprecio, 4)
+            frmVentas_refa.txttotal.Text = FormatNumber(vartotal, 4)
+            frmVentas_refa.txtexistencia.Text = "100"
+            frmVentas_refa.cbodesc.Focus.Equals(True)
+        Catch ex As Exception
+
+        End Try
+
     End Sub
 End Class
