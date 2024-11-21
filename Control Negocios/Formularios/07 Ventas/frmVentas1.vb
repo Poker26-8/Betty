@@ -8265,7 +8265,7 @@ kakaxd:
 
 
                 mytotal = FormatNumber(mycant * myprecio - descuentotal, 4)
-                mypreciodescuento = FormatNumber(myprecio - DsctoProd, 2)
+                mypreciodescuento = myprecio - DsctoProd
 
                 Dim ieps As Double = 0
                 Dim tasaieps As Double = 0
@@ -10650,7 +10650,7 @@ ecomoda:
                 e.Graphics.DrawString(canti, fuente_prods, Brushes.Black, 50, Y, sf)
                 e.Graphics.DrawString(unidad, fuente_prods, Brushes.Black, 55, Y)
                 e.Graphics.DrawString("x", fuente_prods, Brushes.Black, 110, Y)
-                e.Graphics.DrawString(simbolo & FormatNumber(precio, 2), fuente_prods, Brushes.Black, 193, Y, sf)
+                e.Graphics.DrawString(simbolo & precio, fuente_prods, Brushes.Black, 193, Y, sf)
                 e.Graphics.DrawString(simbolo & FormatNumber(total, 2), fuente_prods, Brushes.Black, 270, Y, sf)
                 Y += 15
                 If lote = "" Then
@@ -13801,7 +13801,7 @@ ecomoda:
                 e.Graphics.DrawString(canti, fuente_prods, Brushes.Black, 7, Y)
                 e.Graphics.DrawString(unidad, fuente_prods, Brushes.Black, 30, Y)
                 e.Graphics.DrawString("x", fuente_prods, Brushes.Black, 50, Y)
-                e.Graphics.DrawString(simbolo & FormatNumber(precio, 1), fuente_prods, Brushes.Black, 115, Y, sf)
+                e.Graphics.DrawString(simbolo & precio, fuente_prods, Brushes.Black, 115, Y, sf)
                 e.Graphics.DrawString(simbolo & FormatNumber(total, 1), fuente_prods, Brushes.Black, 180, Y, sf)
                 Y += 15
                 'If descuento <> 0 Then
