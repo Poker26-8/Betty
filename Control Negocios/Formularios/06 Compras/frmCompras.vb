@@ -272,6 +272,7 @@ Public Class frmCompras
         e.KeyChar = UCase(e.KeyChar)
         If cboremision.Text = "" And cbofactura.Text = "" And cbopedido.Text = "" Then MsgBox("Necesitas escribir un número de remisión para continuar.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cboremision.Focus().Equals(True) : Exit Sub
         If AscW(e.KeyChar) = Keys.Enter Then
+
             If (CodBarra()) Then
                 txtcantidad.Focus().Equals(True)
             Else
@@ -592,7 +593,12 @@ Public Class frmCompras
                             txtunidad.Text = rd1("UCompra").ToString
                             cbonombre.Text = rd1("Nombre").ToString
                             lblvalor.Text = FormatNumber(rd1("PrecioCompra").ToString, 4)
-                            txtprecio.Text = FormatNumber(rd1("PrecioCompra".ToString), 4)
+                            If cbofactura.Text <> "" Then
+                                txtprecio.Text = FormatNumber(rd1("PrecioCompra".ToString) / (1.16), 4)
+                            Else
+                                txtprecio.Text = FormatNumber(rd1("PrecioCompra".ToString), 4)
+                            End If
+
                             Multiplo = rd1("Multiplo").ToString
                         End If
                     Else
@@ -1339,9 +1345,11 @@ Public Class frmCompras
                                     xy4 = FormatNumber((CDec(txtprecio.Text) * 1.16) + (CDec(txtprecio.Text) * 1.16) * CDec(rd1("PorcEsp").ToString) / 100, 2)
                                     xy44 = FormatNumber((CDec(txtprecio.Text) * 1.16) + (CDec(txtprecio.Text) * 1.16) * CDec(rd1("PorcEsp2").ToString) / 100, 2)
 
+                                    Dim nprecioc As Double = CDec(txtprecio.Text) * (1 + rd1("IVA").ToString)
+
                                     cnn2.Close() : cnn2.Open()
                                     cmd2 = cnn2.CreateCommand
-                                    cmd2.CommandText = "UPDATE Productos SET Cargado=0, PrecioCompra=" & txtprecio.Text & ",PrecioVentaIVA=" & xy & ",PrecioVentaIVA2=" & xyy & ",PreMin=" & xy1 & ",PreMin2=" & xy11 & ",PreMay=" & xy2 & ",PreMay2=" & xy22 & ",PreMM=" & xy3 & ",PreMM2=" & xy33 & ",PreEsp=" & xy4 & ",PreEsp2=" & xy44 & " WHERE Codigo='" & txtcodigo.Text & "' AND Nombre='" & cbonombre.Text & "'"
+                                    cmd2.CommandText = "UPDATE Productos SET Cargado=0, PrecioCompra=" & nprecioc & ",PrecioVentaIVA=" & xy & ",PrecioVentaIVA2=" & xyy & ",PreMin=" & xy1 & ",PreMin2=" & xy11 & ",PreMay=" & xy2 & ",PreMay2=" & xy22 & ",PreMM=" & xy3 & ",PreMM2=" & xy33 & ",PreEsp=" & xy4 & ",PreEsp2=" & xy44 & " WHERE Codigo='" & txtcodigo.Text & "' AND Nombre='" & cbonombre.Text & "'"
                                     cmd2.ExecuteNonQuery()
                                     cnn2.Close()
                                 Else
