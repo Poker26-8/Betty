@@ -4,6 +4,7 @@ Imports System.Text
 Imports System.Threading
 Imports System.Threading.Tasks
 Imports System.Xml
+Imports Chilkat
 Imports Gma.QrCodeNet.Encoding.Windows.Forms
 Public Class frmNuevoPagar
 
@@ -56,6 +57,7 @@ Public Class frmNuevoPagar
     Dim unidadeliminar As String = ""
     Dim cantidadeliminar As Double = 0
     Dim precioeliminar As Double = 0
+    Dim totaleliminar As Double = 0
     Dim comensaleliminar As String = ""
 
     Public cadenafact As String = ""
@@ -306,10 +308,8 @@ Public Class frmNuevoPagar
         Else
             myope = txttotalpropina.Text
         End If
-
-
-        If myope <0 Then
-            txtCambio.Text= FormatNumber(-myope, 2)
+        If myope < 0 Then
+            txtCambio.Text = FormatNumber(-myope, 2)
             txtResta.Text = "0.00"
         Else
             txtResta.Text = FormatNumber(myope, 2)
@@ -2128,7 +2128,7 @@ Door:
             End If
 
         Else
-                If TamImpre = "80" Then
+            If TamImpre = "80" Then
                 For naruto As Integer = 1 To copias
                     PVentaMapeo80.DefaultPageSettings.PrinterSettings.PrinterName = impresora
                     If PVentaMapeo80.DefaultPageSettings.PrinterSettings.PrinterName = impresora Then
@@ -3083,6 +3083,7 @@ deku:
             unidadeliminar = grdComanda.CurrentRow.Cells(3).Value.ToString
             cantidadeliminar = grdComanda.CurrentRow.Cells(4).Value.ToString
             precioeliminar = grdComanda.CurrentRow.Cells(5).Value.ToString
+            totaleliminar = grdComanda.CurrentRow.Cells(6).Value.ToString
             comensaleliminar = grdComanda.CurrentRow.Cells(7).Value.ToString
             ideliminar = grdComanda.CurrentRow.Cells(9).Value.ToString
 
@@ -3096,6 +3097,7 @@ deku:
             unidadeliminar = grdComanda.CurrentRow.Cells(3).Value.ToString
             cantidadeliminar = grdComanda.CurrentRow.Cells(4).Value.ToString
             precioeliminar = grdComanda.CurrentRow.Cells(5).Value.ToString
+            totaleliminar = grdComanda.CurrentRow.Cells(6).Value.ToString
             comensaleliminar = grdComanda.CurrentRow.Cells(7).Value.ToString
             ideliminar = grdComanda.CurrentRow.Cells(9).Value.ToString
 
@@ -3110,6 +3112,7 @@ deku:
             unidadeliminar = grdComanda.CurrentRow.Cells(3).Value.ToString
             cantidadeliminar = grdComanda.CurrentRow.Cells(4).Value.ToString
             precioeliminar = grdComanda.CurrentRow.Cells(5).Value.ToString
+            totaleliminar = grdComanda.CurrentRow.Cells(6).Value.ToString
             comensaleliminar = grdComanda.CurrentRow.Cells(7).Value.ToString
             ideliminar = grdComanda.CurrentRow.Cells(9).Value.ToString
 
@@ -3124,6 +3127,7 @@ deku:
             unidadeliminar = grdComanda.CurrentRow.Cells(3).Value.ToString
             cantidadeliminar = grdComanda.CurrentRow.Cells(4).Value.ToString
             precioeliminar = grdComanda.CurrentRow.Cells(5).Value.ToString
+            totaleliminar = grdComanda.CurrentRow.Cells(6).Value.ToString
             comensaleliminar = grdComanda.CurrentRow.Cells(7).Value.ToString
             ideliminar = grdComanda.CurrentRow.Cells(9).Value.ToString
 
@@ -3138,6 +3142,7 @@ deku:
             unidadeliminar = grdComanda.CurrentRow.Cells(3).Value.ToString
             cantidadeliminar = grdComanda.CurrentRow.Cells(4).Value.ToString
             precioeliminar = grdComanda.CurrentRow.Cells(5).Value.ToString
+            totaleliminar = grdComanda.CurrentRow.Cells(6).Value.ToString
             comensaleliminar = grdComanda.CurrentRow.Cells(7).Value.ToString
             ideliminar = grdComanda.CurrentRow.Cells(9).Value.ToString
 
@@ -3151,6 +3156,7 @@ deku:
             unidadeliminar = grdComanda.CurrentRow.Cells(3).Value.ToString
             cantidadeliminar = grdComanda.CurrentRow.Cells(4).Value.ToString
             precioeliminar = grdComanda.CurrentRow.Cells(5).Value.ToString
+            totaleliminar = grdComanda.CurrentRow.Cells(6).Value.ToString
             comensaleliminar = grdComanda.CurrentRow.Cells(7).Value.ToString
             ideliminar = grdComanda.CurrentRow.Cells(9).Value.ToString
 
@@ -5876,161 +5882,337 @@ deku:
 
         Dim subb As Double = 0
 
+        Dim preciocompra As Double = 0
+        Dim departamento As String = ""
+        Dim grupo As String = ""
+        Dim gprint As String = ""
+        Dim existe As Double = 0
+        Dim NEW_EXISTE As Double = 0
+
         Try
-            cortesia_venta = 1
-            txtResta.Text = "0.00"
+            If codigoeliminar = "" Then MsgBox("Necesita seleccionar un producto", vbInformation + vbOKOnly, titulorestaurante) : Exit Sub
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT idEmpleado FROM Usuarios WHERE Alias='" & lblusuario2.Text & "'"
+            cmd1.CommandText = "SELECT IdEmpleado FROM usuarios WHERE Alias='" & lblusuario2.Text & "'"
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then
-                    VarId = rd1(0).ToString
+                    idusuario = rd1(0).ToString
+                End If
+            End If
+            rd1.Close()
 
-                    cnn2.Close() : cnn2.Open()
-                    cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "select CortesiaM from permisosm where IdEmpleado=" & VarId & ""
-                    rd2 = cmd2.ExecuteReader
-                    If rd2.HasRows Then
-                        If rd2.Read Then
-                            VarCortesia = rd2(0).ToString
-                        End If
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT CortesiaM FROM permisosm WHERE IdEmpleado=" & idusuario
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    If rd1(0).ToString = 1 Then
+                    Else
+                        MsgBox("El usuario no tiene permisos para realizar esta operación", vbInformation + vbOKOnly, titulorestaurante)
+                        lblusuario2.Text = ""
+                        Exit Sub
                     End If
-                    rd2.Close()
-                    cnn2.Close()
+                End If
+            Else
+                MsgBox("Usuario sin asignación de permisos", vbInformation + vbOKOnly, titulorestaurante)
+                lblusuario2.Text = ""
+                Exit Sub
+            End If
+            rd1.Close()
 
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT PrecioCompra,Departamento,Grupo,GPrint,Existencia FROM productos WHERE Codigo='" & codigoeliminar & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    preciocompra = rd1("PrecioCompra").ToString
+                    departamento = rd1("Departamento").ToString
+                    grupo = rd1("Grupo").ToString
+                    gprint = rd1("GPrint").ToString
+                    existe = rd1("Existencia")
                 End If
             End If
             rd1.Close()
             cnn1.Close()
+            NEW_EXISTE = CDec(existe) - CDec(cantidadeliminar)
 
-            If VarCortesia = 0 Then
-                MsgBox("Usuario sin privilegios para la cortesia", vbInformation + vbOKOnly, "Delsscom® Restaurant")
-                Exit Sub
-            End If
-
-            If MsgBox("¿Desea continuar con el proceso, si continua no podra cancelarce el proceso?", vbInformation + vbYesNo, titulorestaurante) = vbNo Then Exit Sub
-
-            subb = CDec(txtTotal.Text) * 0.16
-            cuenta = CDec(CDec(txtEfectivo.Text) + CDec(txtpagos.Text)) - CDec(txtCambio.Text)
-
-            subb = 0
-            cuenta = FormatNumber(cuenta, 2)
-
-            cnn3.Close() : cnn3.Open()
-            cmd3 = cnn3.CreateCommand
-            cmd3.CommandText = "INSERT INTO Ventas(IdCliente,Cliente,Direccion,Subtotal,IVA,Totales,ACuenta,Resta,Usuario,FVenta,HVenta,FPago,Status,Descuento,Comisionista,Concepto,MntoCortesia,Fecha,Mesero) values(" & IIf(VarId, 0, VarId) & ",'" & lblmesa.Text & "','',0," & subb & ",0," & cuenta & "," & txtResta.Text & ",'" & lblusuario2.Text & "','" & Format(Date.Now, "yyyy/MM/dd HH:mm:ss") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy/MM/dd") & "','" & "PAGADO" & "',0,0,'" & "CORTESIA" & "'," & CDec(txtTotal.Text) & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblMesero.Text & "')"
-            cmd3.ExecuteNonQuery()
-            cnn3.Close()
-
-            cnn4.Close() : cnn4.Open()
-            cmd4 = cnn4.CreateCommand
-            cmd4.CommandText = "SELECT MAX(Folio) from Ventas"
-            rd4 = cmd4.ExecuteReader
-            If rd4.HasRows Then
-                If rd4.Read Then
-                    folio = IIf(rd4(0).ToString = "", 1, rd4(0).ToString)
-                Else
-                    folio = 0
-                End If
-            Else
-                folio = 0
-            End If
-            rd4.Close()
-            cnn4.Close()
-
-            For LUFFY As Integer = 0 To grdComanda.Rows.Count - 1
-
-                Dim existe As Double = 0
-                Dim nuv_existencia As Double = 0
-
-                CODIG = grdComanda.Rows(LUFFY).Cells(1).Value.ToString
-                DESC1 = grdComanda.Rows(LUFFY).Cells(2).Value.ToString
-                cant = grdComanda.Rows(LUFFY).Cells(4).Value.ToString
-                PUVCIVA = grdComanda.Rows(LUFFY).Cells(5).Value.ToString
-                Comen = grdComanda.Rows(LUFFY).Cells(7).Value
-                TOTAL1 = 0
-
-                cnn5.Close() : cnn5.Open()
-                cmd5 = cnn5.CreateCommand
-                cmd5.CommandText = "SELECT PrecioCompra,Departamento,Grupo,UVenta,Existencia FROM Productos WHERE Codigo='" & CODIG & "'"
-                rd5 = cmd5.ExecuteReader
-                If rd5.HasRows <> 0 Then
-                    If rd5.Read Then
-                        CostVUE1 = rd5("PrecioCompra").ToString
-                        PrecioSinIVA1 = 0
-                        TOTALSIVA = 0
-                        DEPA = Trim(rd5("Departamento").ToString)
-                        GRUPO1 = rd5("Grupo").ToString
-                        UDV = rd5("UVenta").ToString
-                        existe = rd5("Existencia").ToString
-                    End If
-                End If
-                rd5.Close()
-
-                nuv_existencia = CDec(existe) - CDec(cant)
-
-                cnn5.Close()
-
-
-
-                cnn1.Close() : cnn1.Open()
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "INSERT INTO VentasDetalle(Codigo,Folio,Nombre,Unidad,Cantidad,CostoVUE,CostoVP,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,FechaCompleta,Comisionista,Depto,Grupo,TotalIEPS,TasaIEPS,Mesero) VALUES('" & CODIG & "'," & folio & ",'" & DESC1 & "','" & UDV & "'," & cant & "," & PUVCIVA & "," & CostVUE1 & "," & PUVCIVA & "," & TOTAL1 & "," & PrecioSinIVA1 & "," & TOTALSIVA & ",'" & Format(Date.Now, "yyyy/MM/dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0,'" & DEPA & "','" & GRUPO1 & "',0,0,'" & lblMesero.Text & "')"
-                cmd1.ExecuteNonQuery()
-
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "INSERT INTO VtaImpresion(Folio,Codigo,Nombre,Cantidad,UVenta,CostVUE,CostVP,Precio,Total,PrecioSinIVA,TotalSinIVA,Comisionista,Fecha,Depto,Grupo) VALUES(" & folio & ",'" & CODIG & "','" & DESC1 & "'," & cant & ",'" & UDV & "'," & PUVCIVA & "," & CostVUE1 & "," & PUVCIVA & "," & TOTAL1 & "," & PrecioSinIVA1 & "," & TOTALSIVA & ",0,'" & Format(Date.Now, "yyyy/MM/dd") & "','" & DEPA & "','" & GRUPO1 & "')"
-                cmd1.ExecuteNonQuery()
-
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "UPDATE Productos SET Existencia= " & nuv_existencia & " WHERE Codigo='" & CODIG & "'"
-                cmd1.ExecuteNonQuery()
-
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "INSERT INTO cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio) VALUES('" & CODIG & "','" & DESC1 & "','Cortesia'," & existe & "," & cant & "," & nuv_existencia & "," & PUVCIVA & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblusuario2.Text & "','" & lblfolio.Text & "')"
-                cmd1.ExecuteNonQuery()
-                cnn1.Close()
-
-            Next
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "DELETE FROM comanda1 WHERE Nombre='" & lblmesa.Text & "'"
+            cmd1.CommandText = "DELETE FROM vtaimpresion"
             cmd1.ExecuteNonQuery()
 
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "DELETE FROM comandas WHERE NMesa='" & lblmesa.Text & "'"
+            cmd1.CommandText = "INSERT INTO ventas(IdCliente,Cliente,Direccion,Subtotal,IVA,Totales,Propina,Descuento,Devolucion,ACuenta,Resta,Usuario,FVenta,HVenta,MontoSinDesc,FEntrega,Status,Comisionista,Concepto,IP,Formato,Mesero) VALUES(0,'" & lblmesa.Text & "','',0,0,0,0," & totaleliminar & ",0,0,0,'" & lblusuario2.Text & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & Format(Date.Now, "HH:mm:ss") & "',0,'" & Format(Date.Now, "yyyy-MM-dd") & "','PAGADO','0','CORTESIA','" & dameIP2() & "','TICKET','" & lblMesero.Text & "')"
             cmd1.ExecuteNonQuery()
             cnn1.Close()
-            MsgBox("Cortesia agregada correctamente", vbInformation + vbOKOnly, titulomensajes)
-
-            Dim tamimpresion As Integer = 0
-            Dim impresora As String = ""
-
-            tamimpresion = TamImpre()
-            impresora = ImpresoraImprimir()
 
 
-            If tamimpresion = "80" Then
-                pCortesia80.DefaultPageSettings.PrinterSettings.PrinterName = impresora
-                pCortesia80.Print()
-            ElseIf tamimpresion = "58" Then
-                pCortesia58.DefaultPageSettings.PrinterSettings.PrinterName = impresora
-                pCortesia58.Print()
+            cnn2.Close() : cnn2.Open()
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText = "SELECT MAX(Folio) FROM ventas"
+            rd2 = cmd2.ExecuteReader
+            If rd2.HasRows Then
+                If rd2.Read Then
+                    folio = rd2(0).ToString
+                End If
             End If
+            rd2.Close()
+            cnn2.Close()
+
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "INSERT INTO abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Propina,Comisiones,Mesero,Descuento) VALUES(" & folio & ",0,'" & lblmesa.Text & "','ABONO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0,0,0,'CORTESIA',0,'','','" & lblusuario2.Text & "',0,0,'" & lblMesero.Text & "'," & precioeliminar & ")"
+            cmd1.ExecuteNonQuery()
+
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "INSERT INTO ventasdetalle(Folio,Codigo,Nombre,Unidad,Cantidad,CostoVP,CostoVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,FechaCompleta,Comisionista,Facturado,Depto,Grupo,CostVR,GPrint,Comensal,Comentario,Usuario) VALUES(" & folio & ",'" & codigoeliminar & "','" & descripcioneliminar & "','" & unidadeliminar & "'," & cantidadeliminar & "," & preciocompra & "," & precioeliminar & "," & precioeliminar & "," & precioeliminar & ",0,0,'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','','0','" & departamento & "','" & grupo & "','0','" & gprint & "','" & comensaleliminar & "','CORTESIA','" & lblusuario2.Text & "')"
+            cmd1.ExecuteNonQuery()
+
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "INSERT INTO vtaimpresion(Folio,Codigo,Nombre,UVenta,Cantidad,CostVR,CostVP,CostVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,Comisionista,Facturado,Depto,Grupo,Comensal,Propina,Mesa) VALUES(" & folio & ",'" & codigoeliminar & "','" & descripcioneliminar & "','" & unidadeliminar & "'," & cantidadeliminar & ",0," & preciocompra & "," & precioeliminar & "," & precioeliminar & ",0,0,0,'" & Format(Date.Now, "yyyy-MM-dd") & "','0',0,'" & departamento & "','" & grupo & "','" & comensaleliminar & "',0,'" & lblmesa.Text & "')"
+            cmd1.ExecuteNonQuery()
             cnn1.Close()
 
-            cortesia_venta = 0
-            btnlimpiar.PerformClick()
+            cnn2.Close() : cnn2.Open()
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText = "UPDATE productos SET Existencia=Existencia-" & CDbl(cantidadeliminar) & " WHERE Codigo='" & codigoeliminar & "'"
+            cmd2.ExecuteNonQuery()
+
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText = "INSERT INTO Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio) VALUES('" & codigoeliminar & "','" & descripcioneliminar & "','Cortesia'," & existe & "," & cantidadeliminar & "," & NEW_EXISTE & "," & precioeliminar & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblusuario2.Text & "','" & lblfolio.Text & "')"
+            cmd2.ExecuteNonQuery()
+            cnn2.Close()
+
+            If cboComanda.Text <> "" Then
+
+                cnn2.Close() : cnn2.Open()
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "UPDATE rep_comandas SET Status='CORTESIA' WHERE Id=" & cboComanda.Text & " AND NMESA='" & lblmesa.Text & "' AND Codigo='" & codigoeliminar & "'"
+                cmd2.ExecuteNonQuery()
+
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "DELETE FROM comandas WHERE Id=" & cboComanda.Text & " AND Nmesa='" & lblmesa.Text & "' AND Codigo='" & codigoeliminar & "'"
+                cmd2.ExecuteNonQuery()
+                cnn2.Close()
+            End If
+
+            If cboComanda.Text = "" Then
+
+                cnn2.Close() : cnn2.Open()
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "UPDATE rep_comandas SET Status='CORTESIA' WHERE NMESA='" & lblmesa.Text & "' AND Codigo='" & codigoeliminar & "'"
+                cmd2.ExecuteNonQuery()
+
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "DELETE FROM comandas WHERE Nmesa='" & lblmesa.Text & "' AND Codigo='" & codigoeliminar & "'"
+                cmd2.ExecuteNonQuery()
+                cnn2.Close()
+            End If
+
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT IDC FROM comandas WHERE Nmesa='" & lblmesa.Text & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+
+                End If
+            Else
+                cnn2.Close() : cnn2.Open()
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "DELETE FROM comanda1 WHERE Nombre='" & lblmesa.Text & "'"
+                cmd2.ExecuteNonQuery()
+
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "DELETE FROM mesa WHERE Nombre_mesa='" & lblmesa.Text & "' AND Temporal=1"
+                cmd2.ExecuteNonQuery()
+
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "DELETE FROM mesasxempleados WHERE Mesa='" & lblmesa.Text & "' AND Temporal=1"
+                cmd2.ExecuteNonQuery()
+                cnn2.Close()
+            End If
+            rd1.Close()
+            cnn1.Close()
+
+            Dim tamimpresion As Integer = TamImpre()
+            Dim copias As Integer = TraerNumCopias()
+            Dim impresora As String = ImpresoraImprimir()
+
+            If impresora = "" Then
+                MsgBox("Necesita configurar una impresora", vbInformation + vbOKOnly, titulorestaurante)
+            Else
+                If tamimpresion = "80" Then
+                    pCortesia80.DefaultPageSettings.PrinterSettings.PrinterName = impresora
+                    pCortesia80.Print()
+                ElseIf tamimpresion = "58" Then
+                    pCortesia58.DefaultPageSettings.PrinterSettings.PrinterName = impresora
+                    pCortesia58.Print()
+                End If
+            End If
+
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
-            cnn2.Open()
-            cnn3.Close()
-            cnn5.Close()
-            cnn4.Close()
+            cnn1.Clone()
         End Try
+
+        'Try
+        '    cortesia_venta = 1
+        '    txtResta.Text = "0.00"
+
+        '    cnn1.Close() : cnn1.Open()
+        '    cmd1 = cnn1.CreateCommand
+        '    cmd1.CommandText = "SELECT idEmpleado FROM Usuarios WHERE Alias='" & lblusuario2.Text & "'"
+        '    rd1 = cmd1.ExecuteReader
+        '    If rd1.HasRows Then
+        '        If rd1.Read Then
+        '            VarId = rd1(0).ToString
+
+        '            cnn2.Close() : cnn2.Open()
+        '            cmd2 = cnn2.CreateCommand
+        '            cmd2.CommandText = "select CortesiaM from permisosm where IdEmpleado=" & VarId & ""
+        '            rd2 = cmd2.ExecuteReader
+        '            If rd2.HasRows Then
+        '                If rd2.Read Then
+        '                    VarCortesia = rd2(0).ToString
+        '                End If
+        '            End If
+        '            rd2.Close()
+        '            cnn2.Close()
+
+        '        End If
+        '    End If
+        '    rd1.Close()
+        '    cnn1.Close()
+
+        '    If VarCortesia = 0 Then
+        '        MsgBox("Usuario sin privilegios para la cortesia", vbInformation + vbOKOnly, "Delsscom® Restaurant")
+        '        Exit Sub
+        '    End If
+
+        '    If MsgBox("¿Desea continuar con el proceso, si continua no podra cancelarce el proceso?", vbInformation + vbYesNo, titulorestaurante) = vbNo Then Exit Sub
+
+        '    subb = CDec(txtTotal.Text) * 0.16
+        '    cuenta = CDec(CDec(txtEfectivo.Text) + CDec(txtpagos.Text)) - CDec(txtCambio.Text)
+
+        '    subb = 0
+        '    cuenta = FormatNumber(cuenta, 2)
+
+        '    cnn3.Close() : cnn3.Open()
+        '    cmd3 = cnn3.CreateCommand
+        '    cmd3.CommandText = "INSERT INTO Ventas(IdCliente,Cliente,Direccion,Subtotal,IVA,Totales,ACuenta,Resta,Usuario,FVenta,HVenta,FPago,Status,Descuento,Comisionista,Concepto,MntoCortesia,Fecha,Mesero) values(" & IIf(VarId, 0, VarId) & ",'" & lblmesa.Text & "','',0," & subb & ",0," & cuenta & "," & txtResta.Text & ",'" & lblusuario2.Text & "','" & Format(Date.Now, "yyyy/MM/dd HH:mm:ss") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy/MM/dd") & "','" & "PAGADO" & "',0,0,'" & "CORTESIA" & "'," & CDec(txtTotal.Text) & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblMesero.Text & "')"
+        '    cmd3.ExecuteNonQuery()
+        '    cnn3.Close()
+
+        '    cnn4.Close() : cnn4.Open()
+        '    cmd4 = cnn4.CreateCommand
+        '    cmd4.CommandText = "SELECT MAX(Folio) from Ventas"
+        '    rd4 = cmd4.ExecuteReader
+        '    If rd4.HasRows Then
+        '        If rd4.Read Then
+        '            folio = IIf(rd4(0).ToString = "", 1, rd4(0).ToString)
+        '        Else
+        '            folio = 0
+        '        End If
+        '    Else
+        '        folio = 0
+        '    End If
+        '    rd4.Close()
+        '    cnn4.Close()
+
+        '    For LUFFY As Integer = 0 To grdComanda.Rows.Count - 1
+
+        '        Dim existe As Double = 0
+        '        Dim nuv_existencia As Double = 0
+
+        '        CODIG = grdComanda.Rows(LUFFY).Cells(1).Value.ToString
+        '        DESC1 = grdComanda.Rows(LUFFY).Cells(2).Value.ToString
+        '        cant = grdComanda.Rows(LUFFY).Cells(4).Value.ToString
+        '        PUVCIVA = grdComanda.Rows(LUFFY).Cells(5).Value.ToString
+        '        Comen = grdComanda.Rows(LUFFY).Cells(7).Value
+        '        TOTAL1 = 0
+
+        '        cnn5.Close() : cnn5.Open()
+        '        cmd5 = cnn5.CreateCommand
+        '        cmd5.CommandText = "SELECT PrecioCompra,Departamento,Grupo,UVenta,Existencia FROM Productos WHERE Codigo='" & CODIG & "'"
+        '        rd5 = cmd5.ExecuteReader
+        '        If rd5.HasRows <> 0 Then
+        '            If rd5.Read Then
+        '                CostVUE1 = rd5("PrecioCompra").ToString
+        '                PrecioSinIVA1 = 0
+        '                TOTALSIVA = 0
+        '                DEPA = Trim(rd5("Departamento").ToString)
+        '                GRUPO1 = rd5("Grupo").ToString
+        '                UDV = rd5("UVenta").ToString
+        '                existe = rd5("Existencia").ToString
+        '            End If
+        '        End If
+        '        rd5.Close()
+
+        '        nuv_existencia = CDec(existe) - CDec(cant)
+
+        '        cnn5.Close()
+
+
+
+        '        cnn1.Close() : cnn1.Open()
+        '        cmd1 = cnn1.CreateCommand
+        '        cmd1.CommandText = "INSERT INTO VentasDetalle(Codigo,Folio,Nombre,Unidad,Cantidad,CostoVUE,CostoVP,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,FechaCompleta,Comisionista,Depto,Grupo,TotalIEPS,TasaIEPS,Mesero) VALUES('" & CODIG & "'," & folio & ",'" & DESC1 & "','" & UDV & "'," & cant & "," & PUVCIVA & "," & CostVUE1 & "," & PUVCIVA & "," & TOTAL1 & "," & PrecioSinIVA1 & "," & TOTALSIVA & ",'" & Format(Date.Now, "yyyy/MM/dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0,'" & DEPA & "','" & GRUPO1 & "',0,0,'" & lblMesero.Text & "')"
+        '        cmd1.ExecuteNonQuery()
+
+        '        cmd1 = cnn1.CreateCommand
+        '        cmd1.CommandText = "INSERT INTO VtaImpresion(Folio,Codigo,Nombre,Cantidad,UVenta,CostVUE,CostVP,Precio,Total,PrecioSinIVA,TotalSinIVA,Comisionista,Fecha,Depto,Grupo) VALUES(" & folio & ",'" & CODIG & "','" & DESC1 & "'," & cant & ",'" & UDV & "'," & PUVCIVA & "," & CostVUE1 & "," & PUVCIVA & "," & TOTAL1 & "," & PrecioSinIVA1 & "," & TOTALSIVA & ",0,'" & Format(Date.Now, "yyyy/MM/dd") & "','" & DEPA & "','" & GRUPO1 & "')"
+        '        cmd1.ExecuteNonQuery()
+
+        '        cmd1 = cnn1.CreateCommand
+        '        cmd1.CommandText = "UPDATE Productos SET Existencia= " & nuv_existencia & " WHERE Codigo='" & CODIG & "'"
+        '        cmd1.ExecuteNonQuery()
+
+        '        cmd1 = cnn1.CreateCommand
+        '        cmd1.CommandText = "INSERT INTO cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio) VALUES('" & CODIG & "','" & DESC1 & "','Cortesia'," & existe & "," & cant & "," & nuv_existencia & "," & PUVCIVA & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblusuario2.Text & "','" & lblfolio.Text & "')"
+        '        cmd1.ExecuteNonQuery()
+        '        cnn1.Close()
+
+        '    Next
+        '    cnn1.Close() : cnn1.Open()
+        '    cmd1 = cnn1.CreateCommand
+        '    cmd1.CommandText = "DELETE FROM comanda1 WHERE Nombre='" & lblmesa.Text & "'"
+        '    cmd1.ExecuteNonQuery()
+
+        '    cmd1 = cnn1.CreateCommand
+        '    cmd1.CommandText = "DELETE FROM comandas WHERE NMesa='" & lblmesa.Text & "'"
+        '    cmd1.ExecuteNonQuery()
+        '    cnn1.Close()
+        '    MsgBox("Cortesia agregada correctamente", vbInformation + vbOKOnly, titulomensajes)
+
+        '    Dim tamimpresion As Integer = 0
+        '    Dim impresora As String = ""
+
+        '    tamimpresion = TamImpre()
+        '    impresora = ImpresoraImprimir()
+
+
+        '    If tamimpresion = "80" Then
+        '        pCortesia80.DefaultPageSettings.PrinterSettings.PrinterName = impresora
+        '        pCortesia80.Print()
+        '    ElseIf tamimpresion = "58" Then
+        '        pCortesia58.DefaultPageSettings.PrinterSettings.PrinterName = impresora
+        '        pCortesia58.Print()
+        '    End If
+        '    cnn1.Close()
+
+        '    cortesia_venta = 0
+        '    btnlimpiar.PerformClick()
+        'Catch ex As Exception
+        '    MessageBox.Show(ex.ToString)
+        '    cnn1.Close()
+        '    cnn2.Open()
+        '    cnn3.Close()
+        '    cnn5.Close()
+        '    cnn4.Close()
+        'End Try
     End Sub
 
     Private Sub pCortesia80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pCortesia80.PrintPage
@@ -6052,7 +6234,7 @@ deku:
         Dim Pie2 As String = ""
         Dim Pie3 As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
-
+        Dim articulos As Double = 0
         '[°]. Logotipo
         If tLogo <> "SIN" Then
             If File.Exists(My.Application.Info.DirectoryPath & "\" & nLogo) Then
@@ -6151,20 +6333,12 @@ deku:
         e.Graphics.DrawString("--------------------------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
         Y += 15
 
-        If grdComanda.Rows.Count > 0 Then
-            For barbi As Integer = 0 To grdComanda.Rows.Count - 1
 
-                Dim codigo As String = grdComanda.Rows(barbi).Cells(1).Value.ToString
-                Dim descripcion As String = grdComanda.Rows(barbi).Cells(2).Value.ToString
-                Dim cantidad As Double = grdComanda.Rows(barbi).Cells(4).Value.ToString
-                Dim precio As Double = grdComanda.Rows(barbi).Cells(5).Value.ToString
-                Dim total As Double = grdComanda.Rows(barbi).Cells(6).Value.ToString
-
-                e.Graphics.DrawString(cantidad, fuente_b, Brushes.Black, 1, Y)
+        e.Graphics.DrawString(cantidadeliminar, fuente_b, Brushes.Black, 1, Y)
 
                 Dim caracteresPorLinea As Integer = 30
-                Dim texto As String = descripcion
-                Dim inicio As Integer = 0
+        Dim texto As String = descripcioneliminar
+        Dim inicio As Integer = 0
                 Dim longitudTexto As Integer = texto.Length
 
                 While inicio < longitudTexto
@@ -6175,36 +6349,24 @@ deku:
                     inicio += caracteresPorLinea
                 End While
 
-                e.Graphics.DrawString(FormatNumber(precio, 2), fuente_b, Brushes.Black, 215, Y, derecha)
-                e.Graphics.DrawString(FormatNumber(total, 2), fuente_b, Brushes.Black, 270, Y, derecha)
-                Y += 20
+        e.Graphics.DrawString(FormatNumber(precioeliminar, 2), fuente_b, Brushes.Black, 215, Y, derecha)
+        e.Graphics.DrawString(FormatNumber(totaleliminar, 2), fuente_b, Brushes.Black, 270, Y, derecha)
+        Y += 20
 
-            Next
-        End If
+        articulos = articulos + cantidadeliminar
+
         e.Graphics.DrawString("--------------------------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
         Y += 16
+        e.Graphics.DrawString("Cantidad de articulos: " & articulos, fuente_r, Brushes.Black, 1, Y)
+        Y += 20
 
         e.Graphics.DrawString("TOTAL: ", fuente_b, Brushes.Black, 1, Y)
-        e.Graphics.DrawString(FormatNumber(txtTotal.Text, 2), fuente_b, Brushes.Black, 270, Y, derecha)
+        e.Graphics.DrawString(FormatNumber(totaleliminar, 2), fuente_b, Brushes.Black, 270, Y, derecha)
         Y += 15
 
         e.Graphics.DrawString("TOTAl A PAGAR: ", fuente_b, Brushes.Black, 1, Y)
         e.Graphics.DrawString("0.00", fuente_b, Brushes.Black, 270, Y, derecha)
         Y += 15
-
-        Dim CantidaLetra As String = ""
-        CantidaLetra = "Son: " & convLetras(txtTotal.Text)
-        Y += 15
-
-        If Mid(CantidaLetra, 1, 30) <> "" Then
-            e.Graphics.DrawString(Mid(CantidaLetra, 1, 30), fuente_r, Brushes.Black, 1, Y)
-            Y += 15
-        End If
-
-        If Mid(CantidaLetra, 31, 60) <> "" Then
-            e.Graphics.DrawString(Mid(CantidaLetra, 31, 60), fuente_r, Brushes.Black, 1, Y)
-            Y += 15
-        End If
 
         If Trim(Pie2) <> "" Then
             e.Graphics.DrawString(Mid(Pie2, 1, 38), fuente_r, Brushes.Black, 1, Y)
@@ -6228,14 +6390,12 @@ deku:
         Dim hoja As New Pen(Brushes.Black, 1)
         Dim Y As Double = 0
 
-        '  Dim nLogo As String = DatosRecarga("LogoG")
+
         Dim Logotipo As Drawing.Image = Nothing
-        '  Dim tLogo As String = DatosRecarga("TipoLogo")
-        ' Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim Pie2 As String = ""
         Dim Pie3 As String = ""
-        ' Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+        Dim articulos As Integer = 0
 
         '[°]. Logotipo
         If tLogo <> "SIN" Then
@@ -6336,22 +6496,13 @@ deku:
         e.Graphics.DrawString("---------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
         Y += 15
 
-        If grdComanda.Rows.Count > 0 Then
-            For barbi As Integer = 0 To grdComanda.Rows.Count - 1
 
 
+        e.Graphics.DrawString(cantidadeliminar, fuente_b, Brushes.Black, 1, Y)
 
-                Dim codigo As String = grdComanda.Rows(barbi).Cells(1).Value.ToString
-                Dim descripcion As String = grdComanda.Rows(barbi).Cells(2).Value.ToString
-                Dim cantidad As Double = grdComanda.Rows(barbi).Cells(4).Value.ToString
-                Dim precio As Double = grdComanda.Rows(barbi).Cells(5).Value.ToString
-                Dim total As Double = grdComanda.Rows(barbi).Cells(6).Value.ToString
-
-                e.Graphics.DrawString(cantidad, fuente_b, Brushes.Black, 1, Y)
-
-                Dim caracteresPorLinea As Integer = 25
-                Dim texto As String = descripcion
-                Dim inicio As Integer = 0
+        Dim caracteresPorLinea As Integer = 25
+        Dim texto As String = descripcioneliminar
+        Dim inicio As Integer = 0
                 Dim longitudTexto As Integer = texto.Length
 
                 While inicio < longitudTexto
@@ -6363,17 +6514,19 @@ deku:
                 End While
 
 
-                e.Graphics.DrawString(FormatNumber(precio, 2), fuente_b, Brushes.Black, 133, Y, derecha)
-                e.Graphics.DrawString(FormatNumber(total, 2), fuente_b, Brushes.Black, 180, Y, derecha)
-                Y += 20
+        e.Graphics.DrawString(FormatNumber(precioeliminar, 2), fuente_b, Brushes.Black, 133, Y, derecha)
+        e.Graphics.DrawString(FormatNumber(totaleliminar, 2), fuente_b, Brushes.Black, 180, Y, derecha)
+        Y += 20
 
-            Next
-        End If
+        articulos = articulos + cantidadeliminar
+
         e.Graphics.DrawString("--------------------------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
         Y += 16
+        e.Graphics.DrawString("Cantidad de articulos: " & articulos, fuente_r, Brushes.Black, 1, Y)
+        Y += 20
 
         e.Graphics.DrawString("TOTAL: ", fuente_b, Brushes.Black, 1, Y)
-        e.Graphics.DrawString(FormatNumber(txtTotal.Text, 2), fuente_b, Brushes.Black, 180, Y, derecha)
+        e.Graphics.DrawString(FormatNumber(totaleliminar, 2), fuente_b, Brushes.Black, 180, Y, derecha)
         Y += 15
 
         e.Graphics.DrawString("TOTAl A PAGAR: ", fuente_b, Brushes.Black, 1, Y)
