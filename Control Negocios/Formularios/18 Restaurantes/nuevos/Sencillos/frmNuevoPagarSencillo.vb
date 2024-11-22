@@ -4595,8 +4595,6 @@ deku:
                     If rd1(0).ToString = 1 Then
                     Else
                         MsgBox("El usuario no tiene permisos para realizar esta operación", vbInformation + vbOKOnly, titulorestaurante)
-                        lblusuario2.Text = ""
-
                         Exit Sub
                     End If
                 End If
