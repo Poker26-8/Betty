@@ -8550,8 +8550,9 @@ Door:
                     necesito = 0
                     tengo = 0
 
-                    cnn1.Close() : cnn1.Open()
+
                     If Kit = True Then
+                        cnn1.Close() : cnn1.Open()
                         cmd1 = cnn1.CreateCommand
                         cmd1.CommandText =
                             "select Codigo,Descrip,PPrecio,UVenta,Cantidad from Kits where Nombre='" & mydesc & "'"
@@ -8619,10 +8620,10 @@ Door:
                                 'Loop
 
                                 'Sí alcanzan las que tengo en el primer registro, entonces guarda y avanza
-                                cmd1 = cnn1.CreateCommand
-                                cmd1.CommandText =
+                                cmd2 = cnn2.CreateCommand
+                                cmd2.CommandText =
                                     "insert into Costeo(Fecha,Hora,Concepto,Referencia,Codigo,Descripcion,Unidad,Entrada,Salida,Saldo,Costo,Precio,Utilidad,Usuario) values('" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','VENTA','" & MYFOLIO & "','" & Strings.Left(Cod, 6) & "','" & Nomb & "','" & Unid & "',0," & (necesito * MyMultiplo) & ",0," & cuanto_cuestan & "," & Preci & "," & utilidad & ",'" & lblusuario.Text & "')"
-                                cmd1.ExecuteNonQuery()
+                                cmd2.ExecuteNonQuery()
 
                                 cmd2 = cnn2.CreateCommand
                                 cmd2.CommandText =
