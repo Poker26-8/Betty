@@ -249,7 +249,7 @@ Public Class frmAgregarProducto
                     If deptos = 0 Then
                         Grupos(departamento)
                     End If
-                    deptos += 1
+
 
 
 
