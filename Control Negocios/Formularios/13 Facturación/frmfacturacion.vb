@@ -69,6 +69,9 @@ Public Class frmfacturacion
     '''''factura en ticket'''''''''
     Dim FolioTicket As String = ""
 
+
+    Dim informacion_notasvta As String = ""
+
     Public Sub muestra_datos()
         FileGet(filenum, config, 1)
 
@@ -1870,8 +1873,16 @@ MALO:
                         Dim str As String = ""
                         Dim str1(10000) As String
                         Dim contarray As Integer = 0
-                        For x = 1 To txtNotaVenta.TextLength
-                            str = Mid$(txtNotaVenta.Text, x, 1)
+                        'For x = 1 To txtNotaVenta.TextLength
+                        '    str = Mid$(txtNotaVenta.Text, x, 1)
+                        '    If str = "," Then
+                        '        contarray = contarray + 1
+                        '    Else
+                        '        str1(contarray) = str1(contarray) & str
+                        '    End If
+                        'Next
+                        For x = 1 To Len(informacion_notasvta)
+                            str = Mid$(informacion_notasvta, x, 1)
                             If str = "," Then
                                 contarray = contarray + 1
                             Else
@@ -6148,6 +6159,8 @@ malo:
         chkAumentarISR.Checked = False
         txtISR.Text = ""
 
+        informacion_notasvta = ""
+
         limpia_lugarexp()
 
         gbLE.Visible = False
@@ -6481,6 +6494,8 @@ malo:
     Public Sub txtNotaVenta_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNotaVenta.KeyPress
         If e.KeyChar = ChrW(13) Then
             If txtNotaVenta.Text = "" Then Exit Sub
+
+            informacion_notasvta = Trim(txtNotaVenta.Text)
 
             Dim Banderaglobal As Integer = 0
             Dim rdPrueba As MySqlClient.MySqlDataReader

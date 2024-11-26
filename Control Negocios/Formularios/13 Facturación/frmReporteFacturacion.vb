@@ -58,24 +58,25 @@ Public Class frmReporteFacturacion
             cnn1.Close()
             cnn1.Open()
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "Select * from Facturas where Fecha >= '" & Format(inicio, "yyyy-MM-dd") & "' and Fecha <= '" & Format(final, "yyyy-MM-dd") & "' order by id_evento"
+            cmd1.CommandText = "Select nom_folio,nom_metodo_pago,nom_status,nom_nombre_cliente,preciopaq,iva,nom_total_pagado,Fecha,estatus_fac from Facturas where Fecha >= '" & Format(inicio, "yyyy-MM-dd") & "' and Fecha <= '" & Format(final, "yyyy-MM-dd") & "' order by nom_folio"
             rd1 = cmd1.ExecuteReader
             Do While rd1.Read
                 cnn2.Close()
                 cnn2.Open()
                 cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "Select Folio from Ventas where Facturado ='" & rd1("id_evento").ToString & "'"
+                cmd2.CommandText = "Select Folio from Ventas where Facturado ='" & rd1("nom_folio").ToString & "'"
                 rd2 = cmd2.ExecuteReader
-                If rd2.Read Then
-                    varFolioDx = rd2(0).ToString
-                    If varFolioDx <> "" Then
-                        varFolioDx = varFolioDx
-                    Else
-                        varFolioDx = varFolioDx
-                    End If
-                Else
-                    varFolioDx = ""
+                varFolioDx = ""
+                If rd2.HasRows Then
+                    Do While rd2.Read
+                        varFolioDx &= rd2(0).ToString & ","
+                    Loop
+                    varFolioDx = Mid(varFolioDx, 1, Len(varFolioDx) - 1)
+                    'If rd2.Read Then
+
+                    'End If
                 End If
+
 
                 rd2.Close()
                 cmd2 = cnn2.CreateCommand
@@ -106,8 +107,9 @@ Public Class frmReporteFacturacion
                     soy2 = "NOTAS CREDITO"
                 End If
 
-                grdcaptura.Rows.Add(rd1("id_evento").ToString, varFolioDx, rd1("nom_nombre_cliente").ToString, FormatNumber(rd1("preciopaq").ToString, 2), rd1("iva").ToString, FormatNumber(rd1("nom_total_pagado").ToString, 2), FormatDateTime(rd1("Fecha").ToString, DateFormat.ShortDate), soy1, soy2, soy3)
+                grdcaptura.Rows.Add(rd1("nom_folio").ToString, varFolioDx, rd1("nom_nombre_cliente").ToString, FormatNumber(rd1("preciopaq").ToString, 2), rd1("iva").ToString, FormatNumber(rd1("nom_total_pagado").ToString, 2), FormatDateTime(rd1("Fecha").ToString, DateFormat.ShortDate), soy1, soy2, soy3)
             Loop
+
             rd1.Close()
             cnn1.Close()
         End If
@@ -116,7 +118,7 @@ Public Class frmReporteFacturacion
             cnn1.Close()
             cnn1.Open()
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "Select * from Facturas where Fecha >= '" & Format(inicio, "yyyy-MM-dd") & "' and Fecha <= '" & Format(final, "yyyy-MM-dd") & "' order by id_evento"
+            cmd1.CommandText = "Select * from Facturas where Fecha >= '" & Format(inicio, "yyyy-MM-dd") & "' and Fecha <= '" & Format(final, "yyyy-MM-dd") & "' order by nom_folio"
             rd1 = cmd1.ExecuteReader
             Do While rd1.Read
                 cnn2.Close()
@@ -125,7 +127,7 @@ Public Class frmReporteFacturacion
                 cmd2.CommandText = "select * from detalle_factura where factura= " & rd1("nom_id").ToString & ""
                 rd2 = cmd2.ExecuteReader
                 Do While rd2.Read
-                    grdcaptura.Rows.Add(rd1("id_evento").ToString, rd2("id_prod").ToString, rd2("descripcion").ToString, rd2("unidad").ToString, FormatNumber(rd2("cantidad").ToString, 2), FormatNumber(CDec(rd2("totaliva").ToString) / CDec(rd2("cantidad").ToString), 2), FormatNumber(rd2("totaliva").ToString, 2))
+                    grdcaptura.Rows.Add(rd1("nom_folio").ToString, rd2("id_prod").ToString, rd2("descripcion").ToString, rd2("unidad").ToString, FormatNumber(rd2("cantidad").ToString, 2), FormatNumber(CDec(rd2("totaliva").ToString) / CDec(rd2("cantidad").ToString), 2), FormatNumber(rd2("totaliva").ToString, 2))
                 Loop
                 rd2.Close()
                 cnn2.Close()
@@ -138,7 +140,7 @@ Public Class frmReporteFacturacion
             cnn1.Close()
             cnn1.Open()
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "Select * from Facturas where nom_nombre_cliente='" & cbo.Text & "' and Fecha >= '" & Format(inicio, "yyyy-MM-dd") & "' and Fecha <= '" & Format(final, "yyyy-MM-dd") & "' order by id_evento"
+            cmd1.CommandText = "Select * from Facturas where nom_nombre_cliente='" & cbo.Text & "' and Fecha >= '" & Format(inicio, "yyyy-MM-dd") & "' and Fecha <= '" & Format(final, "yyyy-MM-dd") & "' order by nom_folio"
             rd1 = cmd1.ExecuteReader
             Do While rd1.Read
                 cnn2.Close()
@@ -170,7 +172,7 @@ Public Class frmReporteFacturacion
                 ElseIf rd1("estatus_fac").ToString = "6" Then
                     soy2 = "NOTAS CREDITO"
                 End If
-                grdcaptura.Rows.Add(rd1("id_evento").ToString, rd1("nom_nombre_cliente").ToString, FormatNumber(rd1("preciopaq").ToString, 2), rd1("iva").ToString, FormatNumber(rd1("nom_total_pagado").ToString, 2), FormatDateTime(rd1("Fecha").ToString, DateFormat.ShortDate), soy1, soy2, soy3)
+                grdcaptura.Rows.Add(rd1("nom_folio").ToString, rd1("nom_nombre_cliente").ToString, FormatNumber(rd1("preciopaq").ToString, 2), rd1("iva").ToString, FormatNumber(rd1("nom_total_pagado").ToString, 2), FormatDateTime(rd1("Fecha").ToString, DateFormat.ShortDate), soy1, soy2, soy3)
             Loop
             rd1.Close()
             cnn1.Close()
@@ -485,6 +487,8 @@ Public Class frmReporteFacturacion
         grdcaptura.ColumnCount = 10
         cbo.Visible = False
         GroupBox1.Visible = False
+        cbo.Items.Clear()
+        cbo.Text = ""
         With grdcaptura
             With .Columns(0)
                 .HeaderText = "Factura"
@@ -499,8 +503,9 @@ Public Class frmReporteFacturacion
                 .HeaderText = "Notas de Venta"
                 .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
                 .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+                .DefaultCellStyle.WrapMode = DataGridViewTriState.True ' Habilitar ajuste de texto
                 .Visible = True
-                .Resizable = DataGridViewTriState.False
+                .Resizable = DataGridViewTriState.True
             End With
             With .Columns(2)
                 .HeaderText = "Cliente"
@@ -567,6 +572,7 @@ Public Class frmReporteFacturacion
                 .Resizable = DataGridViewTriState.False
             End With
         End With
+
     End Sub
 
     Private Sub optCli_Click(sender As Object, e As EventArgs) Handles optCli.Click
@@ -659,6 +665,8 @@ Public Class frmReporteFacturacion
         grdcaptura.ColumnCount = 7
         cbo.Visible = False
         GroupBox1.Visible = False
+        cbo.Items.Clear()
+        cbo.Text = ""
         With grdcaptura
             With .Columns(0)
                 .HeaderText = "Factura"
@@ -725,6 +733,8 @@ Public Class frmReporteFacturacion
         grdcaptura.ColumnCount = 4
         cbo.Visible = True
         GroupBox1.Visible = True
+        cbo.Items.Clear()
+        cbo.Text = ""
         With grdcaptura
             With .Columns(0)
                 .HeaderText = "# Nota de venta"
@@ -767,6 +777,8 @@ Public Class frmReporteFacturacion
         grdcaptura.ColumnCount = 7
         cbo.Visible = True
         GroupBox1.Visible = True
+        cbo.Items.Clear()
+        cbo.Text = ""
         With grdcaptura
             With .Columns(0)
                 .HeaderText = "Nota de venta"
@@ -833,6 +845,8 @@ Public Class frmReporteFacturacion
         grdcaptura.Rows.Clear()
         grdcaptura.ColumnCount = 8
         cboParci.Visible = False
+        cbo.Items.Clear()
+        cbo.Text = ""
 
         With grdcaptura
 
@@ -1259,4 +1273,6 @@ Public Class frmReporteFacturacion
 
         End With
     End Sub
+
+
 End Class
