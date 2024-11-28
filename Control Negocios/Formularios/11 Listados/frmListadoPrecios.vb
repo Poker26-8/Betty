@@ -3682,6 +3682,7 @@ Public Class frmListadoPrecios
             Dim barras As String = ""
             Dim nombre As String = ""
             Dim pre_compra As Double = 0
+            Dim pre_compraiva As Double = 0
             Dim pre_minimo As Double = 0
             Dim pre_mediom As Double = 0
             Dim pre_mayore As Double = 0
@@ -3766,6 +3767,7 @@ Public Class frmListadoPrecios
                 nombre = Convert.ToString(DataGridView1.Rows.Item(X).Cells(2).Value)
                 If codigo = "" Then Exit For
                 pre_compra = Convert.ToString(DataGridView1.Rows.Item(X).Cells(5).Value)
+                pre_compraiva = Convert.ToString(DataGridView1.Rows.Item(X).Cells(6).Value)
                 pre_minimo = Convert.ToString(DataGridView1.Rows.Item(X).Cells(7).Value)
                 pre_mayore = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(8).Value)
                 pre_mediom = Convert.ToDouble(DataGridView1.Rows.Item(X).Cells(9).Value)
@@ -3879,7 +3881,7 @@ Public Class frmListadoPrecios
 
                         cmd2 = cnn2.CreateCommand
                         cmd2.CommandText =
-                            "update Productos set PrecioCompra=" & pre_compra & ", Porcentaje=" & por_list & ",Porcentaje2=" & por_list2 & ", PrecioVenta=" & pre_lista_siva & ",PrecioVenta2=" & pre_lista2_siva & ",PrecioventaIVA=" & pre_lista & ",PrecioVentaIVA2=" & preciolista2 & ", PorcMin=" & por_mini & ",PorcMin2=" & por_min2 & ", PreMin=" & pre_minimo & ",PreMin2=" & preciominimo2 & ", PorcMM=" & por_medi & ",PorcMM2=" & por_mm2 & ", PreMM=" & pre_mediom & ",PreMM2=" & preciomm2 & ", PorcMay=" & por_mayo & ",PorcMay2=" & por_may2 & ", PreMay=" & pre_mayore & ",PreMay2=" & preciomay2 & ", PorcEsp=" & por_espe & ",PorcEsp2=" & por_esp2 & ", PreEsp=" & pre_especi & ",PreEsp2=" & precioesp2 & ", Almacen3=" & pre_compra & ",Porcentaje=" & porcentaje & ",CantLst1=" & desdecantlista & ", CantLst2=" & hastacantlista & ",CantLst3=" & cantlista3 & ",CantLst4=" & cantlista4 & ",PorcMin=" & porminimo & ",PorcMin2=" & porcentajemin2 & ",CantMin1=" & desdecantmin & ",CantMin2=" & hastacantmin & ",CantMin3=" & cantminimo3 & ",CantMin4=" & cantminimo4 & ",PorcMay=" & pormay & ",PorcMay2=" & porcentajemay2 & ",PorcEsp2=" & porcentajeesp2 & ",CantMay1=" & desdecantmay & ",CantMay2=" & hastacantmay & ",CantMay3=" & cantmay3 & ",CantMay4=" & cantmay4 & ",PorcMM=" & pormedio & ",PorcMM2=" & porcentajemm2 & ",CantMM1=" & desdecantmedio & ",CantMM2=" & hastacantmedio & ",CantMM3=" & cantmm3 & ",CantMM4=" & cantmm4 & ",PorcEsp=" & poresp & ",CantEsp1=" & desdecantesp & ",CantEsp2=" & hastacantesp & ",CantEsp3=" & cantesp3 & ",CantEsp4=" & cantesp4 & "  where Codigo='" & codigo & "'"
+                            "update Productos set PrecioCompra=" & pre_compraiva & ", Porcentaje=" & por_list & ",Porcentaje2=" & por_list2 & ", PrecioVenta=" & pre_lista_siva & ",PrecioVenta2=" & pre_lista2_siva & ",PrecioventaIVA=" & pre_lista & ",PrecioVentaIVA2=" & preciolista2 & ", PorcMin=" & por_mini & ",PorcMin2=" & por_min2 & ", PreMin=" & pre_minimo & ",PreMin2=" & preciominimo2 & ", PorcMM=" & por_medi & ",PorcMM2=" & por_mm2 & ", PreMM=" & pre_mediom & ",PreMM2=" & preciomm2 & ", PorcMay=" & por_mayo & ",PorcMay2=" & por_may2 & ", PreMay=" & pre_mayore & ",PreMay2=" & preciomay2 & ", PorcEsp=" & por_espe & ",PorcEsp2=" & por_esp2 & ", PreEsp=" & pre_especi & ",PreEsp2=" & precioesp2 & ", Almacen3=" & pre_compra & ",Porcentaje=" & porcentaje & ",CantLst1=" & desdecantlista & ", CantLst2=" & hastacantlista & ",CantLst3=" & cantlista3 & ",CantLst4=" & cantlista4 & ",PorcMin=" & porminimo & ",PorcMin2=" & porcentajemin2 & ",CantMin1=" & desdecantmin & ",CantMin2=" & hastacantmin & ",CantMin3=" & cantminimo3 & ",CantMin4=" & cantminimo4 & ",PorcMay=" & pormay & ",PorcMay2=" & porcentajemay2 & ",PorcEsp2=" & porcentajeesp2 & ",CantMay1=" & desdecantmay & ",CantMay2=" & hastacantmay & ",CantMay3=" & cantmay3 & ",CantMay4=" & cantmay4 & ",PorcMM=" & pormedio & ",PorcMM2=" & porcentajemm2 & ",CantMM1=" & desdecantmedio & ",CantMM2=" & hastacantmedio & ",CantMM3=" & cantmm3 & ",CantMM4=" & cantmm4 & ",PorcEsp=" & poresp & ",CantEsp1=" & desdecantesp & ",CantEsp2=" & hastacantesp & ",CantEsp3=" & cantesp3 & ",CantEsp4=" & cantesp4 & "  where Codigo='" & codigo & "'"
                         If cmd2.ExecuteNonQuery Then
                         Else
                             MsgBox("No se pudieron actualizar los precios del producto " & nombre, vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
