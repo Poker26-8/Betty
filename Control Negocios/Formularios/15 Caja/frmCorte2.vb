@@ -552,6 +552,7 @@ Public Class frmCorte2
                     pCalculoUsuario80.DefaultPageSettings.PrinterSettings.PrinterName = impresora
                     pCalculoUsuario80.Print()
                 Else
+                    pCalculoUsuario58.DefaultPageSettings.PrinterSettings.PrinterName = impresora
                     pCalculoUsuario58.Print()
                 End If
             End If
@@ -1499,6 +1500,7 @@ Public Class frmCorte2
                 pCierreUsuario80.DefaultPageSettings.PrinterSettings.PrinterName = impresora
                 pCierreUsuario80.Print()
             Else
+                pCierreUsuario58.DefaultPageSettings.PrinterSettings.PrinterName = impresora
                 pCierreUsuario58.Print()
             End If
         Else
@@ -3396,6 +3398,8 @@ Public Class frmCorte2
         Dim tipografia As String = "Lucida Sans Typewriter"
         Dim fuente_datos As New Drawing.Font(tipografia, 8, FontStyle.Regular)
         Dim fuente_prods As New Drawing.Font(tipografia, 7, FontStyle.Regular)
+        Dim fuente_fecha As New Drawing.Font(tipografia, 6, FontStyle.Regular)
+
         'Variables
         Dim sc As New StringFormat With {.Alignment = StringAlignment.Center}
         Dim sf As New StringFormat With {.Alignment = StringAlignment.Far}
@@ -3480,32 +3484,32 @@ Public Class frmCorte2
 
             '[1]. Datos de la venta
             e.Graphics.DrawString("--------------------------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
-            Y += 15
-            e.Graphics.DrawString("CIERRE USUARIO", New Drawing.Font(tipografia, 12, FontStyle.Bold), Brushes.Black, 90, Y, sc)
+            Y += 11
+            e.Graphics.DrawString("CIERRE USUARIO", New Drawing.Font(tipografia, 8, FontStyle.Bold), Brushes.Black, 90, Y, sc)
+            Y += 9
+            e.Graphics.DrawString("--------------------------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
             Y += 12
-            e.Graphics.DrawString("--------------------------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
-            Y += 18
-            e.Graphics.DrawString("Usuario: " & cboUsuario.Text, fuente_datos, Brushes.Black, 180, Y, sf)
-            e.Graphics.DrawString("N° Corte: " & txtNumCorte.Text, fuente_datos, Brushes.Black, 1, Y)
-            Y += 18
-            e.Graphics.DrawString("Fecha: " & FormatDateTime(Date.Now, DateFormat.ShortDate), fuente_prods, Brushes.Black, 1, Y)
-            e.Graphics.DrawString("Hora: " & FormatDateTime(Date.Now, DateFormat.LongTime), fuente_datos, Brushes.Black, 180, Y, sf)
-            Y += 20
+            e.Graphics.DrawString("Usuario: " & cboUsuario.Text, fuente_prods, Brushes.Black, 180, Y, sf)
+            e.Graphics.DrawString("N° Corte: " & txtNumCorte.Text, fuente_prods, Brushes.Black, 1, Y)
+            Y += 12
+            e.Graphics.DrawString("Fecha: " & FormatDateTime(Date.Now, DateFormat.ShortDate), fuente_fecha, Brushes.Black, 1, Y)
+            e.Graphics.DrawString("Hora: " & FormatDateTime(Date.Now, DateFormat.LongTime), fuente_fecha, Brushes.Black, 180, Y, sf)
+            Y += 15
             e.Graphics.DrawString("Folios de " & Folio1 & "  al " & Folio2 & ".", fuente_prods, Brushes.Black, 1, Y)
-            Y += 20
+            Y += 15
             e.Graphics.DrawString("--------------------------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
-            Y += 20
+            Y += 14
 
-            e.Graphics.DrawString("SALDO INICIAL", New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 1, Y)
-            e.Graphics.DrawString(simbolo & FormatNumber(txtSaldoUsuario.Text, 2), New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 180, Y, sf)
-            Y += 28
+            e.Graphics.DrawString("SALDO INICIAL", New Drawing.Font(tipografia, 7, FontStyle.Bold), Brushes.Black, 1, Y)
+            e.Graphics.DrawString(simbolo & FormatNumber(txtSaldoUsuario.Text, 2), New Drawing.Font(tipografia, 7, FontStyle.Bold), Brushes.Black, 180, Y, sf)
+            Y += 18
 
-            e.Graphics.DrawString("TOTAL DE INGRESOS", New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 1, Y)
-            e.Graphics.DrawString(simbolo & FormatNumber(txtIngresosUsuario.Text, 2), New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 180, Y, sf)
-            Y += 15
-            e.Graphics.DrawString(" ING. EFECTIVO", New Drawing.Font(tipografia, 9, FontStyle.Regular), Brushes.Black, 1, Y)
+            e.Graphics.DrawString("TOTAL DE INGRESOS", New Drawing.Font(tipografia, 7, FontStyle.Bold), Brushes.Black, 1, Y)
+            e.Graphics.DrawString(simbolo & FormatNumber(txtIngresosUsuario.Text, 2), New Drawing.Font(tipografia, 7, FontStyle.Bold), Brushes.Black, 180, Y, sf)
+            Y += 11
+            e.Graphics.DrawString(" ING. EFECTIVO", New Drawing.Font(tipografia, 7, FontStyle.Regular), Brushes.Black, 1, Y)
             e.Graphics.DrawString(FormatNumber(txtIngEfectivoU.Text, 2), fuente_prods, Brushes.Black, 180, Y, sf)
-            Y += 15
+            Y += 11
 
 
             Dim lol As Integer = 0
@@ -3515,20 +3519,20 @@ Public Class frmCorte2
                 Dim forma As String = grdIngresos.Rows(lol).Cells(0).Value.ToString
                 Dim MONTO As Double = grdIngresos.Rows(lol).Cells(1).Value.ToString
 
-                e.Graphics.DrawString(" ING. " & forma & "", New Drawing.Font(tipografia, 9, FontStyle.Regular), Brushes.Black, 1, Y)
+                e.Graphics.DrawString(" ING. " & forma & "", New Drawing.Font(tipografia, 7, FontStyle.Regular), Brushes.Black, 1, Y)
                 e.Graphics.DrawString(FormatNumber(MONTO, 2), fuente_prods, Brushes.Black, 180, Y, sf)
-                Y += 15
+                Y += 11
 
             Next
-            Y += 25
+            Y += 16
 
 
-            e.Graphics.DrawString("TOTAL DE EGRESOS", New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 1, Y)
-            e.Graphics.DrawString(simbolo & FormatNumber(txtEgresosUsuario.Text, 2), New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 285, Y, sf)
-            Y += 15
-            e.Graphics.DrawString(" EGR. EFECTIVO", New Drawing.Font(tipografia, 9, FontStyle.Regular), Brushes.Black, 1, Y)
-            e.Graphics.DrawString(FormatNumber(txtEgrEfectivoU.Text, 2), fuente_prods, Brushes.Black, 285, Y, sf)
-            Y += 15
+            e.Graphics.DrawString("TOTAL DE EGRESOS", New Drawing.Font(tipografia, 7, FontStyle.Bold), Brushes.Black, 1, Y)
+            e.Graphics.DrawString(simbolo & FormatNumber(txtEgresosUsuario.Text, 2), New Drawing.Font(tipografia, 7, FontStyle.Bold), Brushes.Black, 180, Y, sf)
+            Y += 11
+            e.Graphics.DrawString(" EGR. EFECTIVO", New Drawing.Font(tipografia, 7, FontStyle.Regular), Brushes.Black, 1, Y)
+            e.Graphics.DrawString(FormatNumber(txtEgrEfectivoU.Text, 2), fuente_prods, Brushes.Black, 180, Y, sf)
+            Y += 11
 
             Dim egreso80 As Integer = 0
 
@@ -3536,38 +3540,38 @@ Public Class frmCorte2
 
                 Dim forma80 As String = grdEgresos.Rows(egreso80).Cells(0).Value.ToString
                 Dim MONTO80 As Double = grdEgresos.Rows(egreso80).Cells(1).Value.ToString
-                e.Graphics.DrawString(" EGR. " & forma80 & "", New Drawing.Font(tipografia, 9, FontStyle.Regular), Brushes.Black, 1, Y)
-                e.Graphics.DrawString(FormatNumber(MONTO80, 2), fuente_prods, Brushes.Black, 285, Y, sf)
-                Y += 15
+                e.Graphics.DrawString(" EGR. " & forma80 & "", New Drawing.Font(tipografia, 7, FontStyle.Regular), Brushes.Black, 1, Y)
+                e.Graphics.DrawString(FormatNumber(MONTO80, 2), fuente_prods, Brushes.Black, 180, Y, sf)
+                Y += 11
 
                 egreso80 += 1
             Next
-            Y += 34
+            Y += 26
 
-            e.Graphics.DrawString("SALDO FINAL", New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 1, Y)
-            e.Graphics.DrawString(simbolo & FormatNumber(txtSaldoFinalU.Text, 2), New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 285, Y, sf)
-            Y += 15
+            e.Graphics.DrawString("SALDO FINAL", New Drawing.Font(tipografia, 7, FontStyle.Bold), Brushes.Black, 1, Y)
+            e.Graphics.DrawString(simbolo & FormatNumber(txtSaldoFinalU.Text, 2), New Drawing.Font(tipografia, 7, FontStyle.Bold), Brushes.Black, 180, Y, sf)
+            Y += 11
             e.Graphics.DrawString("--------------------------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
-            Y += 21
+            Y += 15
 
-            e.Graphics.DrawString("EFECTIVO EN CAJA", New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 1, Y)
-            e.Graphics.DrawString(simbolo & FormatNumber(txtEfectivoCajaU.Text, 2), New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 285, Y, sf)
-            Y += 20
+            e.Graphics.DrawString("EFECTIVO EN CAJA", New Drawing.Font(tipografia, 7, FontStyle.Bold), Brushes.Black, 1, Y)
+            e.Graphics.DrawString(simbolo & FormatNumber(txtEfectivoCajaU.Text, 2), New Drawing.Font(tipografia, 7, FontStyle.Bold), Brushes.Black, 180, Y, sf)
+            Y += 15
 
             If TipoCorte() = 1 Then
-                e.Graphics.DrawString("CÁLCULO", New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 1, Y)
-                e.Graphics.DrawString(simbolo & FormatNumber(txtCalculo.Text, 2), New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 285, Y, sf)
-                Y += 15
-                e.Graphics.DrawString("DIFERENCIA", New Drawing.Font(tipografia, 9, FontStyle.Regular), Brushes.Black, 1, Y)
-                e.Graphics.DrawString(simbolo & FormatNumber(txtDiferencia.Text, 2), fuente_prods, Brushes.Black, 285, Y, sf)
-                Y += 15
+                e.Graphics.DrawString("CÁLCULO", New Drawing.Font(tipografia, 7, FontStyle.Bold), Brushes.Black, 1, Y)
+                e.Graphics.DrawString(simbolo & FormatNumber(txtCalculo.Text, 2), New Drawing.Font(tipografia, 7, FontStyle.Bold), Brushes.Black, 180, Y, sf)
+                Y += 11
+                e.Graphics.DrawString("DIFERENCIA", New Drawing.Font(tipografia, 7, FontStyle.Regular), Brushes.Black, 1, Y)
+                e.Graphics.DrawString(simbolo & FormatNumber(txtDiferencia.Text, 2), fuente_prods, Brushes.Black, 180, Y, sf)
+                Y += 11
             End If
 
-            Y += 50
+            Y += 45
 
-            e.Graphics.DrawString("____________________________", New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 140, Y, sc)
-            Y += 20
-            e.Graphics.DrawString("FIRMA", New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 140, Y, sc)
+            e.Graphics.DrawString("____________________________", New Drawing.Font(tipografia, 7, FontStyle.Bold), Brushes.Black, 95, Y, sc)
+            Y += 15
+            e.Graphics.DrawString("FIRMA", New Drawing.Font(tipografia, 7, FontStyle.Bold), Brushes.Black, 95, Y, sc)
 
             e.HasMorePages = False
         Catch ex As Exception
