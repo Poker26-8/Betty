@@ -204,7 +204,7 @@ Public Class Inicio
     End Sub
 
     Private Async Sub Inicio_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-
+        Licencia()
     End Sub
 
     Private Sub Licencia()
@@ -340,7 +340,7 @@ Public Class Inicio
                 End If
             End If
         Else
-            SerieLib = frmPagado.GenLicencia(MyNumPC)
+            SerieLib = GenerateAndValidateKey2(MyNumPC)
             SFile = redSerie(FileSerie)
             If SerieLib <> SFile Then
                 MsgBox("La licencia de este sistema es incorrecta.", vbInformation)
@@ -358,7 +358,7 @@ Public Class Inicio
         Dim SFile As String
         FileSerie = My.Computer.FileSystem.SpecialDirectories.Programs & "\DelsscomControlNegocios\Lib3r4c10n.dll"
         If System.IO.File.Exists(FileSerie) Then
-            SerieLib = frmPagado.GenLicencia(MyNumPC)
+            SerieLib = GenerateAndValidateKey2(MyNumPC)
             SFile = redSerie(FileSerie)
             If SerieLib = SFile Then
                 frmLiberado.Show()

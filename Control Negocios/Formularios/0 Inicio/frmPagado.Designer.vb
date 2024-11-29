@@ -35,10 +35,10 @@ Partial Class frmPagado
         Me.txtLiberacion = New System.Windows.Forms.TextBox()
         Me.lblNumPC = New System.Windows.Forms.Label()
         Me.txtNumPC = New System.Windows.Forms.TextBox()
-        Me.lblSerie = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.lblSerie = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -47,7 +47,7 @@ Partial Class frmPagado
         'LabelProductName
         '
         Me.LabelProductName.Font = New System.Drawing.Font("Segoe UI Light", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelProductName.Location = New System.Drawing.Point(12, 262)
+        Me.LabelProductName.Location = New System.Drawing.Point(15, 284)
         Me.LabelProductName.Margin = New System.Windows.Forms.Padding(0)
         Me.LabelProductName.Name = "LabelProductName"
         Me.LabelProductName.Size = New System.Drawing.Size(402, 34)
@@ -59,7 +59,7 @@ Partial Class frmPagado
         '
         Me.LabelVersion.BackColor = System.Drawing.Color.White
         Me.LabelVersion.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelVersion.Location = New System.Drawing.Point(128, 296)
+        Me.LabelVersion.Location = New System.Drawing.Point(131, 318)
         Me.LabelVersion.Margin = New System.Windows.Forms.Padding(0)
         Me.LabelVersion.Name = "LabelVersion"
         Me.LabelVersion.Size = New System.Drawing.Size(93, 18)
@@ -71,7 +71,7 @@ Partial Class frmPagado
         '
         Me.LabelCopyright.BackColor = System.Drawing.Color.White
         Me.LabelCopyright.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelCopyright.Location = New System.Drawing.Point(12, 296)
+        Me.LabelCopyright.Location = New System.Drawing.Point(15, 318)
         Me.LabelCopyright.Margin = New System.Windows.Forms.Padding(0)
         Me.LabelCopyright.Name = "LabelCopyright"
         Me.LabelCopyright.Size = New System.Drawing.Size(115, 18)
@@ -83,7 +83,7 @@ Partial Class frmPagado
         '
         Me.LabelCompanyName.BackColor = System.Drawing.Color.White
         Me.LabelCompanyName.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelCompanyName.Location = New System.Drawing.Point(222, 296)
+        Me.LabelCompanyName.Location = New System.Drawing.Point(225, 318)
         Me.LabelCompanyName.Margin = New System.Windows.Forms.Padding(6, 0, 3, 0)
         Me.LabelCompanyName.Name = "LabelCompanyName"
         Me.LabelCompanyName.Size = New System.Drawing.Size(192, 18)
@@ -107,7 +107,7 @@ Partial Class frmPagado
         '
         Me.lblLiberacion.AutoSize = True
         Me.lblLiberacion.ForeColor = System.Drawing.Color.Black
-        Me.lblLiberacion.Location = New System.Drawing.Point(9, 378)
+        Me.lblLiberacion.Location = New System.Drawing.Point(12, 400)
         Me.lblLiberacion.Name = "lblLiberacion"
         Me.lblLiberacion.Size = New System.Drawing.Size(130, 19)
         Me.lblLiberacion.TabIndex = 12
@@ -119,7 +119,7 @@ Partial Class frmPagado
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button2.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.Location = New System.Drawing.Point(208, 406)
+        Me.Button2.Location = New System.Drawing.Point(211, 428)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(99, 35)
         Me.Button2.TabIndex = 10
@@ -132,7 +132,7 @@ Partial Class frmPagado
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button1.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Location = New System.Drawing.Point(315, 406)
+        Me.Button1.Location = New System.Drawing.Point(318, 428)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(99, 35)
         Me.Button1.TabIndex = 9
@@ -141,7 +141,7 @@ Partial Class frmPagado
         '
         'txtLiberacion
         '
-        Me.txtLiberacion.Location = New System.Drawing.Point(149, 375)
+        Me.txtLiberacion.Location = New System.Drawing.Point(152, 397)
         Me.txtLiberacion.Name = "txtLiberacion"
         Me.txtLiberacion.Size = New System.Drawing.Size(265, 25)
         Me.txtLiberacion.TabIndex = 11
@@ -151,7 +151,7 @@ Partial Class frmPagado
         '
         Me.lblNumPC.AutoSize = True
         Me.lblNumPC.ForeColor = System.Drawing.Color.Black
-        Me.lblNumPC.Location = New System.Drawing.Point(9, 319)
+        Me.lblNumPC.Location = New System.Drawing.Point(12, 341)
         Me.lblNumPC.Name = "lblNumPC"
         Me.lblNumPC.Size = New System.Drawing.Size(102, 19)
         Me.lblNumPC.TabIndex = 8
@@ -161,24 +161,12 @@ Partial Class frmPagado
         '
         Me.txtNumPC.Enabled = False
         Me.txtNumPC.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNumPC.Location = New System.Drawing.Point(12, 344)
+        Me.txtNumPC.Location = New System.Drawing.Point(15, 366)
         Me.txtNumPC.Name = "txtNumPC"
         Me.txtNumPC.ReadOnly = True
         Me.txtNumPC.Size = New System.Drawing.Size(402, 25)
         Me.txtNumPC.TabIndex = 7
         Me.txtNumPC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'lblSerie
-        '
-        Me.lblSerie.BackColor = System.Drawing.Color.White
-        Me.lblSerie.Font = New System.Drawing.Font("Segoe UI", 13.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSerie.ForeColor = System.Drawing.Color.Black
-        Me.lblSerie.Location = New System.Drawing.Point(31, 173)
-        Me.lblSerie.Name = "lblSerie"
-        Me.lblSerie.Size = New System.Drawing.Size(337, 28)
-        Me.lblSerie.TabIndex = 13
-        Me.lblSerie.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.lblSerie.Visible = False
         '
         'Panel1
         '
@@ -211,11 +199,24 @@ Partial Class frmPagado
         Me.PictureBox1.TabIndex = 6
         Me.PictureBox1.TabStop = False
         '
+        'lblSerie
+        '
+        Me.lblSerie.BackColor = System.Drawing.Color.White
+        Me.lblSerie.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSerie.ForeColor = System.Drawing.Color.Black
+        Me.lblSerie.Location = New System.Drawing.Point(12, 259)
+        Me.lblSerie.Name = "lblSerie"
+        Me.lblSerie.Size = New System.Drawing.Size(402, 26)
+        Me.lblSerie.TabIndex = 15
+        Me.lblSerie.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblSerie.Visible = False
+        '
         'frmPagado
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(426, 454)
+        Me.ClientSize = New System.Drawing.Size(426, 470)
+        Me.Controls.Add(Me.lblSerie)
         Me.Controls.Add(Me.lblLiberacion)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
@@ -227,7 +228,6 @@ Partial Class frmPagado
         Me.Controls.Add(Me.LabelVersion)
         Me.Controls.Add(Me.LabelCopyright)
         Me.Controls.Add(Me.LabelCompanyName)
-        Me.Controls.Add(Me.lblSerie)
         Me.Controls.Add(Me.Panel1)
         Me.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -258,9 +258,8 @@ Partial Class frmPagado
     Friend WithEvents txtLiberacion As System.Windows.Forms.TextBox
     Friend WithEvents lblNumPC As System.Windows.Forms.Label
     Friend WithEvents txtNumPC As System.Windows.Forms.TextBox
-    Friend WithEvents lblSerie As System.Windows.Forms.Label
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-
+    Friend WithEvents lblSerie As Label
 End Class

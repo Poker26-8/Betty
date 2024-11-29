@@ -24,7 +24,7 @@ Public NotInheritable Class frmPagado
 
         txtNumPC.Text = MyNumPC
         My.Application.DoEvents()
-        lblSerie.Text = GenLicencia(txtNumPC.Text)
+        GenerateAndValidateKey()
         txtLiberacion.Focus.Equals(True)
         My.Application.DoEvents()
     End Sub
@@ -130,7 +130,7 @@ Public NotInheritable Class frmPagado
         Dim FileSerie As String
 
         If txtNumPC.TextLength <> 0 And txtLiberacion.TextLength <> 0 Then
-            Licencia = GenLicencia(Trim(txtNumPC.Text))
+            Licencia = GenerateAndValidateKey2(txtNumPC.Text)
             If txtLiberacion.Text <> Licencia Then
                 MsgBox("La licencia es Incorrecta.", vbInformation)
             Else
