@@ -2343,12 +2343,12 @@ Public Class frmCorte2
 
                     cnn2.Close() : cnn2.Open()
 
-                        cmd2 = cnn2.CreateCommand
-                        cmd2.CommandText =
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText =
                             "insert into CorteCaja(NumCorte,Saldo_Ini,Fecha,Saldo_Fin) values(0," & saldo_global & ",'" & Format(dtpFecha.Value, "yyyy-MM-dd") & "',0)"
-                        If cmd2.ExecuteNonQuery Then
-                            MsgBox("Saldo inicial registrado para el día " & FormatDateTime(dtpFecha.Value, DateFormat.ShortDate), vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                        End If
+                    If cmd2.ExecuteNonQuery Then
+                        MsgBox("Saldo inicial registrado para el día " & FormatDateTime(dtpFecha.Value, DateFormat.ShortDate), vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                    End If
                     cnn2.Close()
                 Else
                     txtSaldoGlobal.Focus().Equals(True)
