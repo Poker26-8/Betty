@@ -38,6 +38,8 @@ Partial Class frmMonederos
         Me.txtidcliente = New System.Windows.Forms.TextBox()
         Me.txtFolio = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.dtpCumple = New System.Windows.Forms.DateTimePicker()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -48,7 +50,7 @@ Partial Class frmMonederos
         Me.btnBorrar.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBorrar.Image = CType(resources.GetObject("btnBorrar.Image"), System.Drawing.Image)
         Me.btnBorrar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnBorrar.Location = New System.Drawing.Point(196, 162)
+        Me.btnBorrar.Location = New System.Drawing.Point(194, 207)
         Me.btnBorrar.Name = "btnBorrar"
         Me.btnBorrar.Size = New System.Drawing.Size(59, 63)
         Me.btnBorrar.TabIndex = 34
@@ -63,7 +65,7 @@ Partial Class frmMonederos
         Me.btnGuardar.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
         Me.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnGuardar.Location = New System.Drawing.Point(261, 162)
+        Me.btnGuardar.Location = New System.Drawing.Point(259, 207)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(59, 63)
         Me.btnGuardar.TabIndex = 33
@@ -77,7 +79,7 @@ Partial Class frmMonederos
         Me.btnNuevo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNuevo.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNuevo.Location = New System.Drawing.Point(326, 162)
+        Me.btnNuevo.Location = New System.Drawing.Point(324, 207)
         Me.btnNuevo.Name = "btnNuevo"
         Me.btnNuevo.Size = New System.Drawing.Size(59, 63)
         Me.btnNuevo.TabIndex = 32
@@ -202,6 +204,8 @@ Partial Class frmMonederos
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.dtpCumple)
+        Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.cboCliente)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.txtTelefono)
@@ -210,15 +214,34 @@ Partial Class frmMonederos
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Location = New System.Drawing.Point(10, 72)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(375, 84)
+        Me.GroupBox1.Size = New System.Drawing.Size(375, 112)
         Me.GroupBox1.TabIndex = 67
         Me.GroupBox1.TabStop = False
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(10, 81)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(77, 15)
+        Me.Label5.TabIndex = 43
+        Me.Label5.Text = "Cumpleaños:"
+        '
+        'dtpCumple
+        '
+        Me.dtpCumple.CalendarFont = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpCumple.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpCumple.Location = New System.Drawing.Point(93, 79)
+        Me.dtpCumple.Name = "dtpCumple"
+        Me.dtpCumple.Size = New System.Drawing.Size(270, 25)
+        Me.dtpCumple.TabIndex = 44
         '
         'frmMonederos
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(394, 236)
+        Me.ClientSize = New System.Drawing.Size(394, 282)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.txtFolio)
         Me.Controls.Add(Me.txtidcliente)
@@ -256,4 +279,6 @@ Partial Class frmMonederos
     Friend WithEvents txtidcliente As System.Windows.Forms.TextBox
     Friend WithEvents txtFolio As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents dtpCumple As DateTimePicker
 End Class

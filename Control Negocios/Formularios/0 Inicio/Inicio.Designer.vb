@@ -195,6 +195,7 @@ Partial Class Inicio
         Me.Button3 = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.btnPagarComa = New System.Windows.Forms.Button()
+        Me.ReporteDeCumpleañosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -908,7 +909,7 @@ Partial Class Inicio
         '
         'pReportes
         '
-        Me.pReportes.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.pRepVentas, Me.pRepVentasG, Me.pRepCompras, Me.pRepCuentas, Me.pRepIngEgr, Me.ReporteDeEgresosToolStripMenuItem, Me.pRepEgr, Me.pRepPrecios, Me.pRepInventario, Me.pEstResultados, Me.ReporteDeControlDeServiciosToolStripMenuItem, Me.ReporteDeSeries, Me.ReporteDeAuditoriaToolStripMenuItem, Me.ReporteMovCuentasToolStripMenuItem, Me.ReporteDeHotelToolStripMenuItem, Me.repHistorialMesas})
+        Me.pReportes.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.pRepVentas, Me.pRepVentasG, Me.pRepCompras, Me.pRepCuentas, Me.pRepIngEgr, Me.ReporteDeEgresosToolStripMenuItem, Me.pRepEgr, Me.pRepPrecios, Me.pRepInventario, Me.pEstResultados, Me.ReporteDeControlDeServiciosToolStripMenuItem, Me.ReporteDeSeries, Me.ReporteDeAuditoriaToolStripMenuItem, Me.ReporteMovCuentasToolStripMenuItem, Me.ReporteDeHotelToolStripMenuItem, Me.repHistorialMesas, Me.ReporteDeCumpleañosToolStripMenuItem})
         Me.pReportes.Name = "pReportes"
         Me.pReportes.Size = New System.Drawing.Size(65, 20)
         Me.pReportes.Text = "Reportes"
@@ -1151,31 +1152,31 @@ Partial Class Inicio
         '
         Me.pMigracion.BackColor = System.Drawing.Color.White
         Me.pMigracion.Name = "pMigracion"
-        Me.pMigracion.Size = New System.Drawing.Size(180, 22)
+        Me.pMigracion.Size = New System.Drawing.Size(176, 22)
         Me.pMigracion.Text = "Migración de datos"
         '
         'SubeClientesToolStripMenuItem
         '
         Me.SubeClientesToolStripMenuItem.Name = "SubeClientesToolStripMenuItem"
-        Me.SubeClientesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SubeClientesToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
         Me.SubeClientesToolStripMenuItem.Text = "Sube Clientes"
         '
         'SubeProveedoresToolStripMenuItem
         '
         Me.SubeProveedoresToolStripMenuItem.Name = "SubeProveedoresToolStripMenuItem"
-        Me.SubeProveedoresToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SubeProveedoresToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
         Me.SubeProveedoresToolStripMenuItem.Text = "Sube Proveedores"
         '
         'SubeUsuariosToolStripMenuItem
         '
         Me.SubeUsuariosToolStripMenuItem.Name = "SubeUsuariosToolStripMenuItem"
-        Me.SubeUsuariosToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SubeUsuariosToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
         Me.SubeUsuariosToolStripMenuItem.Text = "Sube Usuarios"
         '
         'SubeMonederosToolStripMenuItem
         '
         Me.SubeMonederosToolStripMenuItem.Name = "SubeMonederosToolStripMenuItem"
-        Me.SubeMonederosToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.SubeMonederosToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
         Me.SubeMonederosToolStripMenuItem.Text = "Sube Monederos"
         '
         'TransportistasToolStripMenuItem
@@ -1652,6 +1653,12 @@ Partial Class Inicio
         Me.btnPagarComa.TabIndex = 185
         Me.btnPagarComa.UseVisualStyleBackColor = True
         '
+        'ReporteDeCumpleañosToolStripMenuItem
+        '
+        Me.ReporteDeCumpleañosToolStripMenuItem.Name = "ReporteDeCumpleañosToolStripMenuItem"
+        Me.ReporteDeCumpleañosToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
+        Me.ReporteDeCumpleañosToolStripMenuItem.Text = "Reporte de Cumpleaños"
+        '
         'Inicio
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -1854,4 +1861,5 @@ Partial Class Inicio
     Friend WithEvents Button8 As Button
     Friend WithEvents btnPediatra As Button
     Friend WithEvents btnTaller As Button
+    Friend WithEvents ReporteDeCumpleañosToolStripMenuItem As ToolStripMenuItem
 End Class

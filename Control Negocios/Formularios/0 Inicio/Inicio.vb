@@ -1984,4 +1984,9 @@ Public Class Inicio
         frmMenuTaller.BringToFront()
         frmMenuTaller.Show()
     End Sub
+
+    Private Sub ReporteDeCumpleañosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReporteDeCumpleañosToolStripMenuItem.Click
+        frmCumple.Show()
+        frmCumple.BringToFront()
+    End Sub
 End Class

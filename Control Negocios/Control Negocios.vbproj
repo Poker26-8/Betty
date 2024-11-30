@@ -761,6 +761,12 @@
     <Compile Include="Formularios\10 Reportes\frmcofepris.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\10 Reportes\frmCumple.Designer.vb">
+      <DependentUpon>frmCumple.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\10 Reportes\frmCumple.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\10 Reportes\frmEtiquetas2.Designer.vb">
       <DependentUpon>frmEtiquetas2.vb</DependentUpon>
     </Compile>
@@ -2767,6 +2773,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\10 Reportes\frmcofepris.resx">
       <DependentUpon>frmcofepris.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\10 Reportes\frmCumple.resx">
+      <DependentUpon>frmCumple.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\10 Reportes\frmEtiquetas2.resx">
       <DependentUpon>frmEtiquetas2.vb</DependentUpon>

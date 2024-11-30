@@ -78,6 +78,7 @@
                     If rd1.Read Then
                         txtidcliente.Text = rd1("Id").ToString()
                         txtTelefono.Text = rd1("Telefono").ToString()
+                        dtpCumple.Value = IIf(rd1("Cumple").ToString = "", Date.Now, rd1("Cumple").ToString)
                     End If
                 End If
                 rd1.Close() : cnn1.Close()
@@ -95,12 +96,13 @@
 
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
-                 "select Id,Barras from monedero where Cliente='" & cboCliente.Text & "'"
+                 "select Id,Barras,Cumple from monedero where Cliente='" & cboCliente.Text & "'"
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then
                     txtidcliente.Text = rd1("Id").ToString()
                     txtTelefono.Text = rd1("Barras").ToString()
+                    dtpCumple.Value = IIf(rd1("Cumple").ToString = "", Date.Now, rd1("Cumple").ToString)
                 End If
             End If
             rd1.Close() : cnn1.Close()
@@ -170,6 +172,7 @@
         cboCliente.Text = ""
         txtTelefono.Text = ""
         txtSaldo.Text = "0.00"
+        dtpCumple.Value = Date.Now
         folio_monedero()
     End Sub
 
@@ -204,6 +207,7 @@
 
         Dim query As String = ""
         Dim fecha As Date = Date.Now
+        Dim fechacumple As String = Format(dtpCumple.Value, "yyyy-MM-dd")
         Try
             Dim saldo As Double = txtSaldo.Text
 
@@ -228,12 +232,12 @@
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then
-                    query = "update Monedero set Saldo=" & saldo & ", Actualiza='" & Format(Date.Now, "yyyy-MM-dd") & "' where Barras='" & txtTelefono.Text & "'"
+                    query = "update Monedero set Saldo=" & saldo & ", Actualiza='" & Format(Date.Now, "yyyy-MM-dd") & "', Cumple='" & fechacumple & "' where Barras='" & txtTelefono.Text & "'"
                 Else
-                    query = "insert into Monedero(Folio, Cliente, Saldo, Alta, Barras, Actualiza) values('" & txtFolio.Text & "''" & cboCliente.Text & "'," & saldo & ",'" & Format(Date.Now, "yyy-MM-dd") & "','" & txtTelefono.Text & "','" & Format(fecha, "yyyy-MM-dd") & "')"
+                    query = "insert into Monedero(Folio, Cliente, Saldo, Alta, Barras, Actualiza,Cumple) values('" & txtFolio.Text & "''" & cboCliente.Text & "'," & saldo & ",'" & Format(Date.Now, "yyy-MM-dd") & "','" & txtTelefono.Text & "','" & Format(fecha, "yyyy-MM-dd") & "','" & fechacumple & "')"
                 End If
             Else
-                query = "insert into Monedero(Folio, Cliente, Saldo, Alta, Barras, Actualiza) values('" & txtFolio.Text & "','" & cboCliente.Text & "'," & saldo & ",'" & Format(Date.Now, "yyy-MM-dd") & "','" & txtTelefono.Text & "','" & Format(fecha, "yyyy-MM-dd") & "')"
+                query = "insert into Monedero(Folio, Cliente, Saldo, Alta, Barras, Actualiza,Cumple) values('" & txtFolio.Text & "','" & cboCliente.Text & "'," & saldo & ",'" & Format(Date.Now, "yyy-MM-dd") & "','" & txtTelefono.Text & "','" & Format(fecha, "yyyy-MM-dd") & "','" & fechacumple & "')"
             End If
             rd1.Close()
 
