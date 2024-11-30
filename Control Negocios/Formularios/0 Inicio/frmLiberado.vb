@@ -15,7 +15,7 @@ Public Class frmLiberado
         cias.Close() : cias.Open()
         coma = cias.CreateCommand
         coma.CommandText =
-            "select Renta from Server"
+            "select Soporte from Server"
         lect = coma.ExecuteReader
         If lect.HasRows Then
             If lect.Read Then

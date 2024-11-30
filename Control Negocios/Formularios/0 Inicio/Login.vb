@@ -216,7 +216,7 @@ Public Class Login
                         tienda_enlinea = True
                     End If
                 End If
-                Else
+            Else
                 tienda_enlinea = False
             End If
             lector.Close()

@@ -167,7 +167,7 @@ Public NotInheritable Class frmPagado
                 conexion.Close() : conexion.Open()
                 comando = conexion.CreateCommand
                 comando.CommandText =
-                    "update Server set Renta='" & cadena & "'"
+                    "update Server set Soporte='" & cadena & "'"
                 comando.ExecuteNonQuery()
 
                 REM necesita una validación para saber sí la fecha de soporte va a ser igual o esa que sea aparte

@@ -134,7 +134,7 @@ Public Class frmCumple
                 numero = numero.Replace(" ", "").Replace("+", "").Replace("-", "")
 
                 If IsNumeric(numero) AndAlso numero.Length >= 10 Then
-                    Dim url As String = $"https://wa.me/{numero}?text=Hola Perro"
+                    Dim url As String = $"https://wa.me/{numero}"
                     Process.Start(New ProcessStartInfo(url) With {.UseShellExecute = True})
                 Else
                     MessageBox.Show("El número de teléfono no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
