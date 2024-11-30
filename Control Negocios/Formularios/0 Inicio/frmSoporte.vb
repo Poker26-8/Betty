@@ -75,4 +75,8 @@ Public Class frmSoporte
     Private Sub frmSoporte_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
 
     End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
 End Class
