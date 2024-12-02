@@ -5153,7 +5153,7 @@ doorcita:
 
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
-                    "select Departamento,Grupo,ProvRes,MCD,Multiplo,Unico, from Productos where Codigo='" & mycode & "'"
+                    "select Departamento,Grupo,ProvRes,MCD,Multiplo,Unico from Productos where Codigo='" & mycode & "'"
                 rd1 = cmd1.ExecuteReader
                 If rd1.HasRows Then
                     If rd1.Read Then
