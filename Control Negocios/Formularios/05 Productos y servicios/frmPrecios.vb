@@ -767,10 +767,16 @@
             GpbPromociones.Visible = True
             dtpFechaF.Enabled = True
             dtpFechaI.Enabled = True
+            rbDepa.Visible = True
+            rbGrupo.Visible = True
+            cboopcion.Visible = True
         Else
             GpbPromociones.Visible = False
             dtpFechaF.Enabled = False
             dtpFechaI.Enabled = False
+            rbDepa.Visible = False
+            rbGrupo.Visible = False
+            cboopcion.Visible = False
         End If
     End Sub
 
@@ -2607,7 +2613,6 @@
                 txtporc_mone.Text = "0"
                 cbodepto_grupo.Focus.Equals(True)
             End If
-
             cnn1.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
@@ -2617,5 +2622,69 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Me.Close()
+    End Sub
+
+    Private Sub cboopcion_DropDown(sender As Object, e As EventArgs) Handles cboopcion.DropDown
+        Try
+            cboopcion.Items.Clear()
+            If rbDepa.Checked = False And rbGrupo.Checked = False Then
+                Exit Sub
+            End If
+            cnn1.Close()
+            cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            If rbDepa.Checked = True Then
+                cmd1.CommandText = "Select distinct Departamento from Productos where Departamento<>'' order by Departamento"
+            ElseIf rbGrupo.Checked = True Then
+                cmd1.CommandText = "Select distinct Grupo from Productos where Grupo<>'' order by Grupo"
+            Else
+                Exit Sub
+            End If
+            rd1 = cmd1.ExecuteReader
+            Do While rd1.Read
+                cboopcion.Items.Add(rd1(0).ToString)
+            Loop
+            rd1.Close()
+            cnn1.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Try
+            If TxtPromoPercent.Text = "0" Then
+                MsgBox("EL porcentaje de promocion debe de ser mayor a 0", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                Exit Sub
+            End If
+            If MsgBox("¿Deseas Asignar la promoción al Departamento o Grupo Seleccionado?", vbQuestion + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then
+                Exit Sub
+            End If
+            cnn1.Close()
+            cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            If rbDepa.Checked = True Then
+                cmd1.CommandText = "Update Productos set Porcentaje_Promo=" & TxtPromoPercent.Text & ", Status_Promocion=1, Fecha_Inicial='" & Format(dtpFechaI.Value, "yyyy-MM-dd") & "', Fecha_Final='" & Format(dtpFechaF.Value, "yyyy-MM-dd") & "' where Departamento='" & cboopcion.Text & "'"
+            ElseIf rbGrupo.Checked = True Then
+                cmd1.CommandText = "Update Productos set Porcentaje_Promo=" & TxtPromoPercent.Text & ", Status_Promocion=1, Fecha_Inicial='" & Format(dtpFechaI.Value, "yyyy-MM-dd") & "', Fecha_Final='" & Format(dtpFechaF.Value, "yyyy-MM-dd") & "' where Grupo='" & cboopcion.Text & "'"
+            Else
+                cnn1.Close()
+                Exit Sub
+            End If
+            If cmd1.ExecuteNonQuery Then
+                MsgBox("Promocion Agregada Correctamente", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+            Else
+                MsgBox("Ocurrio un error, revisa la información", vbCritical + vbOKOnly, "Delsscom Control Negocios Pro")
+            End If
+            cnn1.Close()
+            cboopcion.Text = ""
+            TxtPromoPercent.Text = "0"
+            dtpFechaI.Value = Date.Now
+            dtpFechaF.Value = Date.Now
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
     End Sub
 End Class
