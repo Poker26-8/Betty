@@ -767,6 +767,7 @@ Partial Class frmVentas1_Descuentos
         Me.picProd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picProd.TabIndex = 155
         Me.picProd.TabStop = False
+        Me.picProd.Visible = False
         '
         'Label21
         '

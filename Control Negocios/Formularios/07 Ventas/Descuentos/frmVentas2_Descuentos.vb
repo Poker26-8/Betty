@@ -5507,16 +5507,17 @@ Door:
         Dim Pasa_Print As Boolean = False
 
         Dim pide As String = "", contra As String = txtcontraseña.Text, usu As String = lblusuario.Text
-
+        Dim copias As Integer = 0
         cnn1.Close() : cnn1.Open()
 
         cmd1 = cnn1.CreateCommand
         cmd1.CommandText =
-            "select NoPrint from Ticket"
+            "select NoPrint,Copias from Ticket"
         rd1 = cmd1.ExecuteReader
         If rd1.HasRows Then
             If rd1.Read Then
                 Imprime = rd1(0).ToString
+                copias = rd1("Copias").ToString
             End If
         End If
         rd1.Close() : cnn1.Close()
@@ -5630,12 +5631,18 @@ Door:
             If TPrint = "TICKET" Then
                 If Impresora = "" Then MsgBox("No se encontró una impresora.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Termina_Error_Ventas() : Exit Sub
                 If Tamaño = "80" Then
-                    pVenta80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
-                    pVenta80.Print()
+                    For t As Integer = 1 To copias
+                        pVenta80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
+                        pVenta80.Print()
+                    Next
+
                 End If
                 If Tamaño = "58" Then
-                    pVenta58.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
-                    pVenta58.Print()
+                    For t As Integer = 1 To copias
+                        pVenta58.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
+                        pVenta58.Print()
+                    Next
+
                 End If
             Else
                 'If TPrint = "MEDIA CARTA" Then
