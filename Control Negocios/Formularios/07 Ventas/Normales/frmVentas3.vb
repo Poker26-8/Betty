@@ -15,6 +15,7 @@ Imports System.Net
 Public Class frmVentas3
 
     Public soygratis As Integer = 0
+    Public nombrepromo As String = ""
     ''' variablesm para terminal bancaria
     Public valorxd As Integer = 0
     Public SiPago As Integer = 0
@@ -692,16 +693,18 @@ Public Class frmVentas3
             Dim desucentoiva As Double = 0
             Dim total1 As Double = 0
             Dim monedero As Double = 0
+            Dim nombregrupo As String = ""
             cnn3.Close() : cnn3.Open()
 
             cmd3 = cnn3.CreateCommand
             cmd3.CommandText =
-                "select IVA,Promo_Monedero,Min from Productos where Codigo='" & cbocodigo.Text & "'"
+                "select IVA,Promo_Monedero,Min,Grupo from Productos where Codigo='" & cbocodigo.Text & "'"
             rd3 = cmd3.ExecuteReader
             If rd3.HasRows Then
                 If rd3.Read Then
                     monedero = rd3(1).ToString()
                     minimo = rd3(2).ToString()
+                    nombregrupo = rd3(3).ToString
                     If CDbl(rd3(0).ToString) = 0.16 Then
                         desucentoiva = FormatNumber(CDbl(txttotal.Text) / 1.16, 4)
                         total1 = FormatNumber(CDbl(txttotal.Text) / 1.16, 4)
@@ -720,14 +723,14 @@ Public Class frmVentas3
             Dim acumulaxd As Integer = 0
             cnn1.Close()
             cnn1.Open()
-            cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Acumula'"
+            cmd1.CommandText = "Select NumPart from Formatos where Facturas='Acumula'"
             rd1 = cmd1.ExecuteReader
             If rd1.Read Then
                 acumulaxd = rd1(0).ToString
             End If
             rd1.Close()
             cnn1.Close()
-            If soygratis = 1 Then
+            If soygratis = 1 And nombrepromo = nombregrupo Then
                 total = 0
                 precio = 0
             End If
@@ -760,7 +763,7 @@ kak:
             My.Application.DoEvents()
             Dim soyconteo As Double = 0
             Dim soytotal As Double = 0
-            Dim nombrepromo As String = ""
+
             Dim soyfol As Integer = 0
             If soygratis = 0 Then
                 For xd As Integer = 0 To grdcaptura.Rows.Count - 1
@@ -794,8 +797,9 @@ kak:
                 End If
             End If
             For xxxx As Integer = 0 To grdcaptura.Rows.Count - 1
-                If grdcaptura.Rows(xxxx).Cells(5).Value = 0 Then
+                If grdcaptura.Rows(xxxx).Cells(4).Value = 0 Then
                     soygratis = 0
+                    nombrepromo = ""
                     Exit For
                 End If
             Next
@@ -5540,6 +5544,8 @@ kaka:
         End If
 
         Timer1.Stop()
+        soygratis = 0
+        nombrepromo = ""
         Me.Text = "Ventas (3)"
         lblpedido.Text = "0"
         cbodesc.Focus.Equals(True)
