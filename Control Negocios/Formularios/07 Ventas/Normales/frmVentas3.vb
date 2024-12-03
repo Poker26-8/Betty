@@ -14,6 +14,7 @@ Imports System.Text
 Imports System.Net
 Public Class frmVentas3
 
+    Public soygratis As Integer = 0
     ''' variablesm para terminal bancaria
     Public valorxd As Integer = 0
     Public SiPago As Integer = 0
@@ -726,6 +727,10 @@ Public Class frmVentas3
             End If
             rd1.Close()
             cnn1.Close()
+            If soygratis = 1 Then
+                total = 0
+                precio = 0
+            End If
 
             Dim varcodunico As String = Format(CDate(Date.Now), "yyyy/MM/ddHH:mm:ss.fff") & codigo
             varcodunico = QuitarCaracteresEspeciales(varcodunico)
@@ -752,11 +757,71 @@ kak:
                     MsgBox("Se ha alcanzo el mínimo en almacén para este producto.", vbCritical & vbOKOnly, "Delsscom Control Negocios Pro")
                 End If
             End If
+            My.Application.DoEvents()
+            Dim soyconteo As Double = 0
+            Dim soytotal As Double = 0
+            Dim nombrepromo As String = ""
+            Dim soyfol As Integer = 0
+            If soygratis = 0 Then
+                For xd As Integer = 0 To grdcaptura.Rows.Count - 1
+                    Dim codigoxd As String = grdcaptura.Rows(xd).Cells(0).Value.ToString
+                    Dim soycanty As Double = grdcaptura.Rows(xd).Cells(3).Value
+
+                    cnn7.Close()
+                    cnn7.Open()
+                    cmd7 = cnn7.CreateCommand
+                    cmd7.CommandText = "Select Folio from PromoDet where Codigo='" & codigoxd & "'"
+                    rd7 = cmd7.ExecuteReader
+                    If rd7.Read Then
+                        soyfol = rd7(0).ToString
+                        soyconteo = soyconteo + soycanty
+                        rd7.Close()
+
+                        cmd7 = cnn7.CreateCommand
+                        cmd7.CommandText = "Select Cantidad,Nombre from Promo where Id=" & soyfol & ""
+                        rd7 = cmd7.ExecuteReader
+                        If rd7.Read Then
+                            soytotal = rd7(0).ToString
+                            nombrepromo = rd7(1).ToString
+                        End If
+                        rd7.Close()
+                    End If
+                Next
+                If soyconteo >= soytotal Then
+                    'MsgBox("Obtienes una pieza de regalo por la compra de " & soytotal & " piezas del grupo " & nombrepromo, vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                    'agregaR(nombrepromo, soyfol)
+                    soygratis = 1
+                End If
+            End If
+            For xxxx As Integer = 0 To grdcaptura.Rows.Count - 1
+                If grdcaptura.Rows(xxxx).Cells(5).Value = 0 Then
+                    soygratis = 0
+                    Exit For
+                End If
+            Next
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn3.Close()
         End Try
         donde_va = "Descuento Porcentaje"
+    End Sub
+    Public Sub agregaR(ByVal soy As String, ByVal xd As Integer)
+        Try
+            frmRegalos.grdRegalo.Rows.Clear()
+            cnn7.Close()
+            cnn7.Open()
+            cmd7 = cnn7.CreateCommand
+            cmd7.CommandText = "Select Codigo, CodBarra, nombre, PrecioVentaIVA from Productos where Grupo='" & soy & "'"
+                rd7 = cmd7.ExecuteReader
+            Do While rd7.Read
+                frmRegalos.grdRegalo.Rows.Add(xd, rd7(0).ToString, rd7(1).ToString, rd7(2).ToString, False, rd7(3).ToString)
+            Loop
+            rd7.Close()
+            cnn7.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn7.Close()
+        End Try
     End Sub
 
     Private Sub AgregarOActualizarFila(codigo As String, nombre As String, cantidad As Integer)
@@ -2643,6 +2708,7 @@ kak:
 
                                 cbodesc.Focus().Equals(True)
                                 txtprecio.ReadOnly = False
+
                             Else
                                 txtcantidad.Focus().Equals(True)
                             End If
@@ -3068,6 +3134,7 @@ kaka:
 
                             cbodesc.Focus().Equals(True)
                             txtprecio.ReadOnly = False
+
                         Else
                             txtcantidad.Focus().Equals(True)
                         End If
@@ -3317,6 +3384,7 @@ kaka:
 
                                     cbodesc.Focus().Equals(True)
                                     txtprecio.ReadOnly = False
+
                                 Else
                                     txtcantidad.Focus().Equals(True)
                                 End If
@@ -4401,6 +4469,7 @@ kaka:
             Call txtdescuento1_TextChanged(txtdescuento1, New EventArgs())
 
             cbodesc.Focus().Equals(True)
+
         End If
     End Sub
 

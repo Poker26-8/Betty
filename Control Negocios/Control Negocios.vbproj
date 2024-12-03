@@ -611,6 +611,12 @@
     <Compile Include="Formularios\05 Productos y servicios\Produccion\frmProducirQ.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\05 Productos y servicios\Promociones\frmPromo.Designer.vb">
+      <DependentUpon>frmPromo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\05 Productos y servicios\Promociones\frmPromo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\06 Compras\Cambios\Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
@@ -681,6 +687,12 @@
       <DependentUpon>frmConsignacion.vb</DependentUpon>
     </Compile>
     <Compile Include="Formularios\07 Ventas\frmConsignacion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\07 Ventas\frmRegalos.Designer.vb">
+      <DependentUpon>frmRegalos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\07 Ventas\frmRegalos.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Formularios\07 Ventas\frmRepConsignacion.Designer.vb">
@@ -2707,6 +2719,9 @@
     <EmbeddedResource Include="Formularios\05 Productos y servicios\Produccion\frmProducirQ.resx">
       <DependentUpon>frmProducirQ.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\05 Productos y servicios\Promociones\frmPromo.resx">
+      <DependentUpon>frmPromo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formularios\06 Compras\Cambios\Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
@@ -2743,6 +2758,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\07 Ventas\frmConsignacion.resx">
       <DependentUpon>frmConsignacion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\07 Ventas\frmRegalos.resx">
+      <DependentUpon>frmRegalos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\07 Ventas\frmRepConsignacion.resx">
       <DependentUpon>frmRepConsignacion.vb</DependentUpon>

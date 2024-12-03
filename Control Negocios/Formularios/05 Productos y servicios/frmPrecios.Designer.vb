@@ -30,6 +30,10 @@ Partial Class frmPrecios
         Me.TxtUnidad = New System.Windows.Forms.TextBox()
         Me.BtnPrecios = New System.Windows.Forms.Button()
         Me.GpbPromociones = New System.Windows.Forms.GroupBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.cboopcion = New System.Windows.Forms.ComboBox()
+        Me.rbGrupo = New System.Windows.Forms.RadioButton()
+        Me.rbDepa = New System.Windows.Forms.RadioButton()
         Me.dtpFechaF = New System.Windows.Forms.DateTimePicker()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.TxtPromoPercent = New System.Windows.Forms.TextBox()
@@ -93,6 +97,7 @@ Partial Class frmPrecios
         Me.Label26 = New System.Windows.Forms.Label()
         Me.lblusuario = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.txtCantMin4 = New System.Windows.Forms.TextBox()
@@ -126,10 +131,6 @@ Partial Class frmPrecios
         Me.optmone_depto = New System.Windows.Forms.RadioButton()
         Me.btnmone_guarda = New System.Windows.Forms.Button()
         Me.lblporc_mone = New System.Windows.Forms.Label()
-        Me.rbGrupo = New System.Windows.Forms.RadioButton()
-        Me.rbDepa = New System.Windows.Forms.RadioButton()
-        Me.cboopcion = New System.Windows.Forms.ComboBox()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.GpbPromociones.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -230,6 +231,57 @@ Partial Class frmPrecios
         Me.GpbPromociones.TabIndex = 118
         Me.GpbPromociones.TabStop = False
         Me.GpbPromociones.Visible = False
+        '
+        'Button2
+        '
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
+        Me.Button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.Button2.Location = New System.Drawing.Point(525, 21)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(73, 70)
+        Me.Button2.TabIndex = 260
+        Me.Button2.Text = "Guardar Promocion"
+        Me.Button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'cboopcion
+        '
+        Me.cboopcion.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboopcion.FormattingEnabled = True
+        Me.cboopcion.Location = New System.Drawing.Point(6, 68)
+        Me.cboopcion.Name = "cboopcion"
+        Me.cboopcion.Size = New System.Drawing.Size(187, 23)
+        Me.cboopcion.TabIndex = 259
+        Me.cboopcion.Visible = False
+        '
+        'rbGrupo
+        '
+        Me.rbGrupo.AutoSize = True
+        Me.rbGrupo.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbGrupo.Location = New System.Drawing.Point(5, 43)
+        Me.rbGrupo.Name = "rbGrupo"
+        Me.rbGrupo.Size = New System.Drawing.Size(78, 19)
+        Me.rbGrupo.TabIndex = 258
+        Me.rbGrupo.TabStop = True
+        Me.rbGrupo.Text = "Por grupo"
+        Me.rbGrupo.UseVisualStyleBackColor = True
+        Me.rbGrupo.Visible = False
+        '
+        'rbDepa
+        '
+        Me.rbDepa.AutoSize = True
+        Me.rbDepa.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rbDepa.Location = New System.Drawing.Point(5, 18)
+        Me.rbDepa.Name = "rbDepa"
+        Me.rbDepa.Size = New System.Drawing.Size(121, 19)
+        Me.rbDepa.TabIndex = 257
+        Me.rbDepa.TabStop = True
+        Me.rbDepa.Text = "Por departamento"
+        Me.rbDepa.UseVisualStyleBackColor = True
+        Me.rbDepa.Visible = False
         '
         'dtpFechaF
         '
@@ -966,6 +1018,7 @@ Partial Class frmPrecios
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.Button3)
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.btnNuevo)
         Me.Panel1.Controls.Add(Me.BtnPrecios)
@@ -975,6 +1028,17 @@ Partial Class frmPrecios
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(619, 75)
         Me.Panel1.TabIndex = 227
+        '
+        'Button3
+        '
+        Me.Button3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button3.Location = New System.Drawing.Point(9, 13)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(103, 50)
+        Me.Button3.TabIndex = 136
+        Me.Button3.Text = "Registrar Promociones"
+        Me.Button3.UseVisualStyleBackColor = True
         '
         'Button1
         '
@@ -1372,57 +1436,6 @@ Partial Class frmPrecios
         Me.lblporc_mone.Text = "%"
         Me.lblporc_mone.Visible = False
         '
-        'rbGrupo
-        '
-        Me.rbGrupo.AutoSize = True
-        Me.rbGrupo.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbGrupo.Location = New System.Drawing.Point(5, 43)
-        Me.rbGrupo.Name = "rbGrupo"
-        Me.rbGrupo.Size = New System.Drawing.Size(78, 19)
-        Me.rbGrupo.TabIndex = 258
-        Me.rbGrupo.TabStop = True
-        Me.rbGrupo.Text = "Por grupo"
-        Me.rbGrupo.UseVisualStyleBackColor = True
-        Me.rbGrupo.Visible = False
-        '
-        'rbDepa
-        '
-        Me.rbDepa.AutoSize = True
-        Me.rbDepa.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbDepa.Location = New System.Drawing.Point(5, 18)
-        Me.rbDepa.Name = "rbDepa"
-        Me.rbDepa.Size = New System.Drawing.Size(121, 19)
-        Me.rbDepa.TabIndex = 257
-        Me.rbDepa.TabStop = True
-        Me.rbDepa.Text = "Por departamento"
-        Me.rbDepa.UseVisualStyleBackColor = True
-        Me.rbDepa.Visible = False
-        '
-        'cboopcion
-        '
-        Me.cboopcion.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboopcion.FormattingEnabled = True
-        Me.cboopcion.Location = New System.Drawing.Point(6, 68)
-        Me.cboopcion.Name = "cboopcion"
-        Me.cboopcion.Size = New System.Drawing.Size(187, 23)
-        Me.cboopcion.TabIndex = 259
-        Me.cboopcion.Visible = False
-        '
-        'Button2
-        '
-        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button2.Location = New System.Drawing.Point(525, 21)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(73, 70)
-        Me.Button2.TabIndex = 260
-        Me.Button2.Text = "Guardar Promocion"
-        Me.Button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button2.UseVisualStyleBackColor = True
-        '
         'frmPrecios
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -1642,4 +1655,5 @@ Partial Class frmPrecios
     Friend WithEvents rbGrupo As RadioButton
     Friend WithEvents rbDepa As RadioButton
     Friend WithEvents Button2 As Button
+    Friend WithEvents Button3 As Button
 End Class

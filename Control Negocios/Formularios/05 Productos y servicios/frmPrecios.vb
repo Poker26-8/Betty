@@ -2687,4 +2687,9 @@
             cnn1.Close()
         End Try
     End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        frmPromo.Show()
+        frmPromo.BringToFront()
+    End Sub
 End Class

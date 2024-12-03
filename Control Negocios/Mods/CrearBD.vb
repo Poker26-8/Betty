@@ -1,4 +1,15 @@
 ﻿Module CrearBD
+    Public vartablapromodet As String = "CREATE TABLE `promodet` (
+                                              `Id` int(11) NOT NULL,
+                                              `Folio` int(11) NOT NULL DEFAULT '0',
+                                              `Codigo`varchar(255) DEFAULT ''                                        
+                                            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+
+    Public vartablapromo As String = "CREATE TABLE `promo` (
+                                              `Id` int(11) NOT NULL,
+                                              `Nombre` varchar(255) DEFAULT '',
+                                              `Cantidad`int(11) NOT NULL DEFAULT '0'                                        
+                                            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
     Public vartablaagenda As String = "CREATE TABLE `agenda` (
                                               `Id` int(11) NOT NULL,
@@ -7042,6 +7053,8 @@
     '/////////////////////////////////////////////////////////////////////////
     'LLAVES PRIMARIAS
     '/////////////////////////////////////////////////////////////////////////
+    Public VarKeypromodet As String = "ALTER TABLE `promodet` ADD PRIMARY KEY (`Id`);"
+    Public VarKeypromo As String = "ALTER TABLE `promo` ADD PRIMARY KEY (`Id`);"
     Public VarKeyagenda As String = "ALTER TABLE `agenda` ADD PRIMARY KEY (`Id`);"
     Public VarKeymovimiento As String = "ALTER TABLE `movimientos` ADD PRIMARY KEY (`Id`);"
     Public VarKeyautoriza As String = "ALTER TABLE `autoriza`ADD PRIMARY KEY (`Id`);"
@@ -7219,6 +7232,8 @@
     '/////////////////////////////////////////////////////////////////////////
     'AUTOINCREMENTO
     '/////////////////////////////////////////////////////////////////////////
+    Public VarAutopromodet As String = "ALTER TABLE `promodet` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
+    Public VarAutopromo As String = "ALTER TABLE `promo` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
     Public VarAutoagenda As String = "ALTER TABLE `agenda` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
     Public VarAutomovimiento As String = "ALTER TABLE `movimientos` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
     Public VarAutoautoriza As String = "ALTER TABLE `autoriza` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
