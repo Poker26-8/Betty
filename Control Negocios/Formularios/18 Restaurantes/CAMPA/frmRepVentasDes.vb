@@ -114,7 +114,7 @@ Public Class frmRepVentasDes
                 e.Graphics.DrawString(simbolo & FormatNumber(total, 2), fuente_prods, Brushes.Black, 270, Y, sf)
                 Y += 15
             Next
-            Y += 5
+            Y += 3
             e.Graphics.DrawString("--------------------------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
             Y += 20
             e.Graphics.DrawString("TOTAL DE VENTAS:", New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 1, Y)
