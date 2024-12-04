@@ -1562,4 +1562,9 @@
             cnn2.Close()
         End Try
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        frmRepVentasDes.BringToFront()
+        frmRepVentasDes.Show()
+    End Sub
 End Class

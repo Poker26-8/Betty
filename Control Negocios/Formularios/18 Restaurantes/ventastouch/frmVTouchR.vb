@@ -3035,7 +3035,7 @@ kakaxd:
                     SubTotal = FormatNumber(SubTotal, 2)
                     Total_Ve = FormatNumber(CDbl(lbltotalventa.Text), 2)
                     Descuento = lblDescuento.Text
-                    MontoSDesc = FormatNumber(CDbl(lblTotalPagar.Text) - Descuento, 2)
+                    MontoSDesc = FormatNumber(CDbl(lblTotalPagar.Text), 2)
 
                     cmd1 = cnn1.CreateCommand
                     cmd1.CommandText =

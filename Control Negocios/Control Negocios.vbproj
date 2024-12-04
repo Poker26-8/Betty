@@ -875,6 +875,12 @@
     <Compile Include="Formularios\15 Caja\frmEnvio_Corte.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\18 Restaurantes\CAMPA\frmRepVentasDes.Designer.vb">
+      <DependentUpon>frmRepVentasDes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\18 Restaurantes\CAMPA\frmRepVentasDes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\18 Restaurantes\copeo\frmRepCopeo.Designer.vb">
       <DependentUpon>frmRepCopeo.vb</DependentUpon>
     </Compile>
@@ -2842,6 +2848,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\15 Caja\frmEnvio_Corte.resx">
       <DependentUpon>frmEnvio_Corte.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\18 Restaurantes\CAMPA\frmRepVentasDes.resx">
+      <DependentUpon>frmRepVentasDes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\18 Restaurantes\copeo\frmRepCopeo.resx">
       <DependentUpon>frmRepCopeo.vb</DependentUpon>

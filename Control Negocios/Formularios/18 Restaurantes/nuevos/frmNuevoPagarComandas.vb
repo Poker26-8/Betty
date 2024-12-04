@@ -1940,7 +1940,7 @@ kakaxd:
             Dim pagarmonedero As Double = 0
 
             Dim saldomonnuevo As Double = 0
-
+            Dim montosindesc As Double = lblSubtotal.Text
             If cbocliente.Text = "" Then
 
                 nombre = cboMesa.Text
@@ -1980,7 +1980,7 @@ kakaxd:
             nuevoabono = mypago - CDbl(txtPropina.Text)
 
             cmd3 = cnn3.CreateCommand
-            cmd3.CommandText = "INSERT INTO Ventas(IdCliente,Cliente,Direccion,Subtotal,IVA,Totales,Propina,Descuento,Devolucion,ACuenta,Resta,Usuario,FVenta,HVenta,FPago,FCancelado,MontoCance,Status,Comisionista,Facturado,Concepto,N_Traslado,Corte,CorteU,MontoSinDesc,Cargado,FEntrega,Entrega,Comentario,CantidadE,FolMonedero,CodFactura,IP,Formato,TComensales,MntoCortesia,Franquicia,Fecha,Mesero) VALUES(" & idcliente & ",'" & nombre & "',''," & subtotalventa & "," & totaliva & "," & totalventa & "," & propinaventa & "," & descuentoventa & ",0," & nuevoabono & "," & restaventa & ",'" & lblUsuario.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','','',0,'" & status & "','" & totalcomisiones & "',0,'',0,0,0," & totalventa & ",0,'" & Format(Date.Now, "yyyy-MM-dd") & "',0,'',0,'','" & lic & "','" & dameIP2() & "','TICKET','',0,1,'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblMesero.Text & "')"
+            cmd3.CommandText = "INSERT INTO Ventas(IdCliente,Cliente,Direccion,Subtotal,IVA,Totales,Propina,Descuento,Devolucion,ACuenta,Resta,Usuario,FVenta,HVenta,FPago,FCancelado,MontoCance,Status,Comisionista,Facturado,Concepto,N_Traslado,Corte,CorteU,MontoSinDesc,Cargado,FEntrega,Entrega,Comentario,CantidadE,FolMonedero,CodFactura,IP,Formato,TComensales,MntoCortesia,Franquicia,Fecha,Mesero) VALUES(" & idcliente & ",'" & nombre & "',''," & subtotalventa & "," & totaliva & "," & totalventa & "," & propinaventa & "," & descuentoventa & ",0," & nuevoabono & "," & restaventa & ",'" & lblUsuario.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','','',0,'" & status & "','" & totalcomisiones & "',0,'',0,0," & montosindesc & "," & totalventa & ",0,'" & Format(Date.Now, "yyyy-MM-dd") & "',0,'',0,'','" & lic & "','" & dameIP2() & "','TICKET','',0,1,'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblMesero.Text & "')"
             cmd3.ExecuteNonQuery()
             cnn3.Close()
 

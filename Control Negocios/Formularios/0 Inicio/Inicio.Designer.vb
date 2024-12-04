@@ -130,6 +130,7 @@ Partial Class Inicio
         Me.ReporteMovCuentasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReporteDeHotelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.repHistorialMesas = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReporteDeCumpleañosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.pListados = New System.Windows.Forms.ToolStripMenuItem()
         Me.pLisPrecios = New System.Windows.Forms.ToolStripMenuItem()
         Me.pLisProductos = New System.Windows.Forms.ToolStripMenuItem()
@@ -195,7 +196,6 @@ Partial Class Inicio
         Me.Button3 = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.btnPagarComa = New System.Windows.Forms.Button()
-        Me.ReporteDeCumpleañosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -1070,6 +1070,12 @@ Partial Class Inicio
         Me.repHistorialMesas.Size = New System.Drawing.Size(236, 22)
         Me.repHistorialMesas.Text = "Reporte Historial de Mesas"
         '
+        'ReporteDeCumpleañosToolStripMenuItem
+        '
+        Me.ReporteDeCumpleañosToolStripMenuItem.Name = "ReporteDeCumpleañosToolStripMenuItem"
+        Me.ReporteDeCumpleañosToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
+        Me.ReporteDeCumpleañosToolStripMenuItem.Text = "Reporte de Cumpleaños"
+        '
         'pListados
         '
         Me.pListados.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.pLisPrecios, Me.pLisProductos, Me.pFaltantes})
@@ -1239,19 +1245,19 @@ Partial Class Inicio
         'CorteDeCajaToolStripMenuItem
         '
         Me.CorteDeCajaToolStripMenuItem.Name = "CorteDeCajaToolStripMenuItem"
-        Me.CorteDeCajaToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.CorteDeCajaToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.CorteDeCajaToolStripMenuItem.Text = "Corte de caja"
         '
         'CORTEMESERO
         '
         Me.CORTEMESERO.Name = "CORTEMESERO"
-        Me.CORTEMESERO.Size = New System.Drawing.Size(166, 22)
+        Me.CORTEMESERO.Size = New System.Drawing.Size(180, 22)
         Me.CORTEMESERO.Text = "Corte por mesero"
         '
         'CorteDeCajaNToolStripMenuItem
         '
         Me.CorteDeCajaNToolStripMenuItem.Name = "CorteDeCajaNToolStripMenuItem"
-        Me.CorteDeCajaNToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.CorteDeCajaNToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.CorteDeCajaNToolStripMenuItem.Text = "Corte de Caja N"
         '
         'GimnasiosToolStripMenuItem
@@ -1308,30 +1314,30 @@ Partial Class Inicio
         'ContenidoToolStripMenuItem
         '
         Me.ContenidoToolStripMenuItem.Name = "ContenidoToolStripMenuItem"
-        Me.ContenidoToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.ContenidoToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ContenidoToolStripMenuItem.Text = "&Contenido"
         '
         'ÍndiceToolStripMenuItem
         '
         Me.ÍndiceToolStripMenuItem.Name = "ÍndiceToolStripMenuItem"
-        Me.ÍndiceToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.ÍndiceToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ÍndiceToolStripMenuItem.Text = "Índic&e"
         '
         'BuscarToolStripMenuItem
         '
         Me.BuscarToolStripMenuItem.Name = "BuscarToolStripMenuItem"
-        Me.BuscarToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.BuscarToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.BuscarToolStripMenuItem.Text = "&Buscar"
         '
         'toolStripSeparator6
         '
         Me.toolStripSeparator6.Name = "toolStripSeparator6"
-        Me.toolStripSeparator6.Size = New System.Drawing.Size(132, 6)
+        Me.toolStripSeparator6.Size = New System.Drawing.Size(177, 6)
         '
         'AcercadeToolStripMenuItem
         '
         Me.AcercadeToolStripMenuItem.Name = "AcercadeToolStripMenuItem"
-        Me.AcercadeToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.AcercadeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.AcercadeToolStripMenuItem.Text = "&Acerca de..."
         '
         'MenuVentasRuta
@@ -1652,12 +1658,6 @@ Partial Class Inicio
         Me.btnPagarComa.Size = New System.Drawing.Size(90, 90)
         Me.btnPagarComa.TabIndex = 185
         Me.btnPagarComa.UseVisualStyleBackColor = True
-        '
-        'ReporteDeCumpleañosToolStripMenuItem
-        '
-        Me.ReporteDeCumpleañosToolStripMenuItem.Name = "ReporteDeCumpleañosToolStripMenuItem"
-        Me.ReporteDeCumpleañosToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
-        Me.ReporteDeCumpleañosToolStripMenuItem.Text = "Reporte de Cumpleaños"
         '
         'Inicio
         '

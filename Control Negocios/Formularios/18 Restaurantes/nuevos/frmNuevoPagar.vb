@@ -1152,6 +1152,7 @@ Public Class frmNuevoPagar
         cmd1.ExecuteNonQuery()
         cnn1.Close()
 
+        Dim montosindescuento As Double = txtSubtotalmapeo.Text
 
         Dim efectivocom As Double = 0
         efectivocom = txtEfectivo.Text
@@ -1404,7 +1405,7 @@ kakaxd:
         cmd3.ExecuteNonQuery()
 
         cmd3 = cnn3.CreateCommand
-        cmd3.CommandText = "INSERT INTO Ventas(IdCliente,Cliente,Direccion,Subtotal,IVA,Totales,ACuenta,Resta,Propina,Usuario,FVenta,HVenta,FPago,Status,Descuento,Comisionista,TComensales,Corte,CorteU,CodFactura,Formato,IP,Fecha,Mesero) VALUES('','" & lblmesa.Text & "',''," & SubtotalVenta & "," & Tiva & "," & totalventa22 & "," & Cuenta & "," & restaventa22 & "," & propinaventa22 & ",'" & lblusuario2.Text & "','" & Format(Date.Now, "yyyy/MM/dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy/MM/dd") & "','PAGADO'," & descuentoventa22 & ",'" & totcomi & "','" & COMENSALES & "','1','0','" & cadenafact & "','TICKET','" & dameIP2() & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblMesero.Text & "')"
+        cmd3.CommandText = "INSERT INTO Ventas(IdCliente,Cliente,Direccion,Subtotal,IVA,Totales,ACuenta,Resta,Propina,Usuario,FVenta,HVenta,FPago,Status,Descuento,Comisionista,TComensales,Corte,CorteU,CodFactura,Formato,IP,Fecha,Mesero,MontoSinDesc) VALUES('','" & lblmesa.Text & "',''," & SubtotalVenta & "," & Tiva & "," & totalventa22 & "," & Cuenta & "," & restaventa22 & "," & propinaventa22 & ",'" & lblusuario2.Text & "','" & Format(Date.Now, "yyyy/MM/dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy/MM/dd") & "','PAGADO'," & descuentoventa22 & ",'" & totcomi & "','" & COMENSALES & "','1','0','" & cadenafact & "','TICKET','" & dameIP2() & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblMesero.Text & "'," & montosindescuento & ")"
         cmd3.ExecuteNonQuery()
         cnn3.Close()
 
