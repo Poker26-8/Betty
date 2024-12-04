@@ -43,6 +43,11 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
+            If txtCantidad.Text = "0" Then
+                MsgBox("La cantidad no puede ser 0, ingresa una cantidad mayor", vbExclamation + vbOKOnly, "Delsscom Control Negocios Pro")
+                txtCantidad.SelectAll()
+                txtCantidad.Focus.Equals(True)
+            End If
             Dim maxfol As Integer = 0
             cnn1.Close()
             cnn1.Open()
@@ -79,5 +84,45 @@
 
     Private Sub frmPromo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         rbGrupo.Checked = True
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        If ComboBox1.Text = "" Then
+            MsgBox("Selecciiona un grupo de promociones para eliminar", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+            Exit Sub
+        End If
+        Try
+            Dim folxd As Integer = 0
+            cnn1.Close()
+            cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "Select Id from Promo where Nombre='" & ComboBox1.Text & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.Read Then
+                folxd = rd1(0).ToString
+                rd1.Close()
+
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "Delete from PromoDet where Folio=" & folxd & ""
+                If cmd1.ExecuteNonQuery Then
+                    cmd1 = cnn1.CreateCommand
+                    cmd1.CommandText = "Delete from Promo where Id=" & folxd & ""
+                    If cmd1.ExecuteNonQuery Then
+                        MsgBox("Grupo de promoción eliminado correctamente", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                        grdProductos.Rows.Clear()
+                        txtCantidad.Text = "1"
+                        ComboBox1.Text = ""
+                    End If
+                    cnn1.Close()
+                End If
+                cnn1.Close()
+            Else
+                MsgBox("No hay ningun grupo de promoción registrado con este nombre", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                cnn1.Close()
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
     End Sub
 End Class

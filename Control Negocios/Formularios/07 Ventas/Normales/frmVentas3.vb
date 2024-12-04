@@ -730,6 +730,8 @@ Public Class frmVentas3
             End If
             rd1.Close()
             cnn1.Close()
+
+
             If soygratis = 1 And nombrepromo = nombregrupo Then
                 total = 0
                 precio = 0

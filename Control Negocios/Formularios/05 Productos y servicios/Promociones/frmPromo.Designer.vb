@@ -36,6 +36,7 @@ Partial Class frmPromo
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtCantidad = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         CType(Me.grdProductos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -103,6 +104,7 @@ Partial Class frmPromo
         '
         'ComboBox1
         '
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Location = New System.Drawing.Point(15, 48)
@@ -113,9 +115,10 @@ Partial Class frmPromo
         'rbGrupo
         '
         Me.rbGrupo.AutoSize = True
+        Me.rbGrupo.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.rbGrupo.Location = New System.Drawing.Point(24, 19)
         Me.rbGrupo.Name = "rbGrupo"
-        Me.rbGrupo.Size = New System.Drawing.Size(54, 17)
+        Me.rbGrupo.Size = New System.Drawing.Size(72, 24)
         Me.rbGrupo.TabIndex = 1
         Me.rbGrupo.TabStop = True
         Me.rbGrupo.Text = "Grupo"
@@ -154,12 +157,28 @@ Partial Class frmPromo
         'Button1
         '
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button1.Location = New System.Drawing.Point(521, 386)
+        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
+        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.Button1.Location = New System.Drawing.Point(429, 386)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(84, 66)
         Me.Button1.TabIndex = 185
-        Me.Button1.Text = "GUARDAR"
+        Me.Button1.Text = "Guardar"
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
+        Me.Button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.Button2.Location = New System.Drawing.Point(519, 386)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(84, 66)
+        Me.Button2.TabIndex = 186
+        Me.Button2.Text = "Eliminar"
+        Me.Button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'frmPromo
         '
@@ -167,6 +186,7 @@ Partial Class frmPromo
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(619, 466)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.txtCantidad)
         Me.Controls.Add(Me.Label3)
@@ -199,4 +219,5 @@ Partial Class frmPromo
     Friend WithEvents Label3 As Label
     Friend WithEvents txtCantidad As TextBox
     Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
 End Class
