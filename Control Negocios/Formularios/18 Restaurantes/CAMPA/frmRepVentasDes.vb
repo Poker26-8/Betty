@@ -14,6 +14,8 @@ Public Class frmRepVentasDes
             Dim total As Double = 0
             Dim sumasub As Double = 0
             Dim sumtotal As Double = 0
+            Dim sumsubtotal As Double = 0
+            Dim sumdescuentos As Double = 0
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -31,13 +33,16 @@ Public Class frmRepVentasDes
                     grdVentas.Rows.Add(rd1("Folio").ToString, total, descuento, sumasub)
 
                     sumtotal = sumtotal + CDec(sumasub)
+                    sumsubtotal = sumsubtotal + CDec(total)
+                    sumdescuentos = sumdescuentos + CDec(descuento)
                 Loop
             End If
             rd1.Close()
             cnn1.Close()
 
             lbltotal.Text = FormatNumber(sumtotal, 2)
-
+            lblTotalSub.Text = FormatNumber(sumsubtotal, 2)
+            lblTotalDescuento.Text = FormatNumber(sumdescuentos, 2)
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn1.Close()
@@ -116,6 +121,12 @@ Public Class frmRepVentasDes
             Next
             Y += 3
             e.Graphics.DrawString("--------------------------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
+            Y += 20
+            e.Graphics.DrawString("SUBTOTAL:", New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 1, Y)
+            e.Graphics.DrawString(lblTotalSub.Text, New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 270, Y, sf)
+            Y += 20
+            e.Graphics.DrawString("DESCUENTOS:", New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 1, Y)
+            e.Graphics.DrawString(lblTotalDescuento.Text, New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 270, Y, sf)
             Y += 20
             e.Graphics.DrawString("TOTAL DE VENTAS:", New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 1, Y)
             e.Graphics.DrawString(lbltotal.Text, New Drawing.Font(tipografia, 9, FontStyle.Bold), Brushes.Black, 270, Y, sf)

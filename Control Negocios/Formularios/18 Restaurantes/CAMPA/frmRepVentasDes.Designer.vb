@@ -47,6 +47,10 @@ Partial Class frmRepVentasDes
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lbltotal = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblTotalDescuento = New System.Windows.Forms.Label()
+        Me.lblTotalSub = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.grdVentas, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -233,35 +237,83 @@ Partial Class frmRepVentasDes
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.lblTotalSub)
+        Me.Panel3.Controls.Add(Me.lblTotalDescuento)
+        Me.Panel3.Controls.Add(Me.Label5)
+        Me.Panel3.Controls.Add(Me.Label4)
         Me.Panel3.Controls.Add(Me.lbltotal)
         Me.Panel3.Controls.Add(Me.Label3)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel3.Location = New System.Drawing.Point(0, 404)
+        Me.Panel3.Location = New System.Drawing.Point(0, 340)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(552, 46)
+        Me.Panel3.Size = New System.Drawing.Size(552, 110)
         Me.Panel3.TabIndex = 2
         '
         'Label3
         '
         Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(335, 17)
+        Me.Label3.Location = New System.Drawing.Point(335, 76)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(114, 18)
+        Me.Label3.Size = New System.Drawing.Size(117, 24)
         Me.Label3.TabIndex = 7
         Me.Label3.Text = "Total de Ventas:"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lbltotal
         '
         Me.lbltotal.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lbltotal.AutoSize = True
         Me.lbltotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbltotal.Location = New System.Drawing.Point(455, 11)
+        Me.lbltotal.Location = New System.Drawing.Point(455, 77)
         Me.lbltotal.Name = "lbltotal"
         Me.lbltotal.Size = New System.Drawing.Size(85, 24)
         Me.lbltotal.TabIndex = 8
         Me.lbltotal.Text = "00000.00"
+        '
+        'Label4
+        '
+        Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(335, 12)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(117, 24)
+        Me.Label4.TabIndex = 9
+        Me.Label4.Text = "Subtotal:"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label5
+        '
+        Me.Label5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(338, 44)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(120, 24)
+        Me.Label5.TabIndex = 10
+        Me.Label5.Text = "Descuento:"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblTotalDescuento
+        '
+        Me.lblTotalDescuento.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblTotalDescuento.AutoSize = True
+        Me.lblTotalDescuento.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalDescuento.Location = New System.Drawing.Point(455, 44)
+        Me.lblTotalDescuento.Name = "lblTotalDescuento"
+        Me.lblTotalDescuento.Size = New System.Drawing.Size(85, 24)
+        Me.lblTotalDescuento.TabIndex = 11
+        Me.lblTotalDescuento.Text = "00000.00"
+        '
+        'lblTotalSub
+        '
+        Me.lblTotalSub.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblTotalSub.AutoSize = True
+        Me.lblTotalSub.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalSub.Location = New System.Drawing.Point(454, 11)
+        Me.lblTotalSub.Name = "lblTotalSub"
+        Me.lblTotalSub.Size = New System.Drawing.Size(85, 24)
+        Me.lblTotalSub.TabIndex = 12
+        Me.lblTotalSub.Text = "00000.00"
         '
         'frmRepVentasDes
         '
@@ -304,4 +356,8 @@ Partial Class frmRepVentasDes
     Friend WithEvents Label3 As Label
     Friend WithEvents Panel3 As Panel
     Friend WithEvents lbltotal As Label
+    Friend WithEvents lblTotalSub As Label
+    Friend WithEvents lblTotalDescuento As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label4 As Label
 End Class
