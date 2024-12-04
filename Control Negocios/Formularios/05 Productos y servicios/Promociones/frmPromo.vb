@@ -78,7 +78,8 @@
             End If
             cnn1.Close()
         Catch ex As Exception
-
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
         End Try
     End Sub
 
