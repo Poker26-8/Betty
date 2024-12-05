@@ -1,4 +1,17 @@
 ﻿Module CrearBD
+
+    Public vartablaproduccion As String = "CREATE TABLE `produccion` (
+                                              `IdProduccion` int(11) NOT NULL,
+                                              `Codigo` varchar(50) DEFAULT '',
+                                              `Descripcion` varchar(255) DEFAULT '',
+                                              `Unidad` varchar(20) DEFAULT '',
+                                              `Cantidad` double DEFAULT '0',
+                                              `Florista` varchar(150) DEFAULT '',
+                                              `Usuario` varchar(150) DEFAULT '',
+                                              `FElaboracion` datetime DEFAULT NULL,
+                                              `Fecha` date DEFAULT NULL
+                                            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+
     Public vartablapromodet As String = "CREATE TABLE `promodet` (
                                               `Id` int(11) NOT NULL,
                                               `Folio` int(11) NOT NULL DEFAULT '0',
@@ -7053,6 +7066,7 @@
     '/////////////////////////////////////////////////////////////////////////
     'LLAVES PRIMARIAS
     '/////////////////////////////////////////////////////////////////////////
+    Public VarKeyproduccion As String = "ALTER TABLE `produccion` ADD PRIMARY KEY (`IdProduccion`);"
     Public VarKeypromodet As String = "ALTER TABLE `promodet` ADD PRIMARY KEY (`Id`);"
     Public VarKeypromo As String = "ALTER TABLE `promo` ADD PRIMARY KEY (`Id`);"
     Public VarKeyagenda As String = "ALTER TABLE `agenda` ADD PRIMARY KEY (`Id`);"
@@ -7232,6 +7246,7 @@
     '/////////////////////////////////////////////////////////////////////////
     'AUTOINCREMENTO
     '/////////////////////////////////////////////////////////////////////////
+    Public VarAutoproduccion As String = "ALTER TABLE `produccion` MODIFY `IdProduccion` int(11) NOT NULL AUTO_INCREMENT;"
     Public VarAutopromodet As String = "ALTER TABLE `promodet` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
     Public VarAutopromo As String = "ALTER TABLE `promo` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
     Public VarAutoagenda As String = "ALTER TABLE `agenda` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"

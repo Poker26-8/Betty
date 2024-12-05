@@ -821,6 +821,12 @@
     <Compile Include="Formularios\10 Reportes\Nuevo\frmNuvRepVentas.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\10 Reportes\Produccion\frmRepProduccion.Designer.vb">
+      <DependentUpon>frmRepProduccion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\10 Reportes\Produccion\frmRepProduccion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\12 Transportistas\frmEstadoResultados.Designer.vb">
       <DependentUpon>frmEstadoResultados.vb</DependentUpon>
     </Compile>
@@ -2821,6 +2827,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\10 Reportes\Nuevo\frmNuvRepVentas.resx">
       <DependentUpon>frmNuvRepVentas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\10 Reportes\Produccion\frmRepProduccion.resx">
+      <DependentUpon>frmRepProduccion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\12 Transportistas\frmEstadoResultados.resx">
       <DependentUpon>frmEstadoResultados.vb</DependentUpon>

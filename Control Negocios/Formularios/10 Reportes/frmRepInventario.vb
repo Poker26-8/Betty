@@ -263,6 +263,13 @@ Public Class frmRepInventario
             Dim copas As Integer = Await ValidarAsync("Copa")
             Dim part As Integer = Await ValidarAsync("Partes")
             Dim refaccion As Integer = Await ValidarAsync("Refaccionaria")
+            Dim produccion As Integer = Await ValidarAsync("Produccion")
+
+            If produccion = 1 Then
+                btnProdcuccion.Visible = True
+            Else
+                btnProdcuccion.Visible = False
+            End If
 
             If restaurante = 1 Then
                 Button1.Visible = True
@@ -3035,5 +3042,10 @@ quepaso_wey:
             End If
             cbofiltro.Focus().Equals(True)
         End If
+    End Sub
+
+    Private Sub btnProdcuccion_Click(sender As Object, e As EventArgs) Handles btnProdcuccion.Click
+        frmRepProduccion.BringToFront()
+        frmRepProduccion.Show()
     End Sub
 End Class
