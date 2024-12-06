@@ -10,6 +10,7 @@ Imports System.Security.Cryptography
 Imports System.Text
 
 Module ModGral
+
     Public ordetrabajo As Integer = 0
     Public HrTiempo As String = ""
     Public HrEntrega As String = ""
@@ -45,13 +46,27 @@ Module ModGral
         Dim diskSerial As String = GetDiskSerial()
 
         If String.IsNullOrEmpty(diskSerial) Then
-            MessageBox.Show("No se pudo obtener el número de serie del disco.")
-            Exit Sub
+            'MessageBox.Show("No se pudo obtener el número de serie del disco.")
+            'Exit Sub
+            Dim fechaCompleta As String = DateTime.Now.ToString("yyyy-MM-dd")
+            Dim random As New Random()
+            Dim cadena6Digitos As String = "0897653" ' Genera un número aleatorio de 6 dígitos
+            Dim resultado As String = fechaCompleta & " " & cadena6Digitos
+            Dim textoSinEspacios As String = resultado.Replace(" ", "")
+            diskSerial = textoSinEspacios
+
+
+            Dim uniqueKey2 As String = GenerateHash(diskSerial)
+            frmPagado.lblSerie.Text = uniqueKey2
+            frmPagado.txtNumPC.Text = diskSerial
+        Else
+            Dim uniqueKey As String = GenerateHash(diskSerial)
+            frmPagado.lblSerie.Text = uniqueKey
+            frmPagado.txtNumPC.Text = diskSerial
         End If
 
         ' Genera el hash único
-        Dim uniqueKey As String = GenerateHash(diskSerial)
-        frmPagado.lblSerie.Text = uniqueKey
+
         ' Muestra la clave
         'MessageBox.Show("Clave generada para esta máquina: " & uniqueKey)
     End Sub
@@ -59,13 +74,24 @@ Module ModGral
         ' Obtén el identificador único
         Dim diskSerial As String = ser
         If String.IsNullOrEmpty(diskSerial) Then
-            MessageBox.Show("No se pudo obtener el número de serie del disco.")
-            Exit Function
+            'MessageBox.Show("No se pudo obtener el número de serie del disco.")
+            'Exit Function
+            'Exit Sub
+            Dim fechaCompleta As String = DateTime.Now.ToString("yyyy-MM-dd")
+            Dim random As New Random()
+            Dim cadena6Digitos As String = "0897653" ' Genera un número aleatorio de 6 dígitos
+            Dim resultado As String = fechaCompleta & " " & cadena6Digitos
+            Dim textoSinEspacios As String = resultado.Replace(" ", "")
+            diskSerial = textoSinEspacios
+            Dim uniqueKey2 As String = GenerateHash(diskSerial)
+            Return uniqueKey2
+        Else
+            Dim uniqueKey As String = GenerateHash(diskSerial)
+            Return uniqueKey
         End If
 
         ' Genera el hash único
-        Dim uniqueKey As String = GenerateHash(diskSerial)
-        Return uniqueKey
+
         ' Muestra la clave
         'MessageBox.Show("Clave generada para esta máquina: " & uniqueKey)
     End Function
