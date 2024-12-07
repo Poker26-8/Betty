@@ -4576,7 +4576,6 @@ deku:
         Dim NEW_EXISTE As Double = 0
         Try
             If codigoeliminar = "" Then MsgBox("Necesita seleccionar un producto", vbInformation + vbOKOnly, titulorestaurante) : Exit Sub
-            MsgBox(codigoeliminar)
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -4692,7 +4691,7 @@ deku:
                 cmd2.ExecuteNonQuery()
 
                 cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "DELETE FROM comandas WHERE Nmesa='" & lblmesa.Text & "' AND Codigo='" & codigoeliminar & "'"
+                cmd2.CommandText = "DELETE FROM comandas WHERE Nmesa='" & lblmesa.Text & "' AND Codigo='" & codigoeliminar & "' AND IDC=" & comandaeliminar & ""
                 cmd2.ExecuteNonQuery()
                 cnn2.Close()
             End If

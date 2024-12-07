@@ -172,6 +172,7 @@ Public Class frmNuevoPagar
 
         Try
             cnn2.Close() : cnn2.Open()
+
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText = "SELECT IDC,Codigo,Nombre,UVenta,Cantidad,Precio,Total,Comensal,CUsuario,Id,CUsuario FROM Comandas WHERE NMESA='" & lblmesa.Text & "'"
             cmd2.CommandText = "SELECT IDC,Codigo,Nombre,UVenta,Cantidad,Precio,Total,Comensal,CUsuario,Id,CUsuario FROM Comandas WHERE NMESA='" & lblmesa.Text & "'"
@@ -196,6 +197,7 @@ Public Class frmNuevoPagar
 
                     IvaIeps = IIf(IvaIeps = 0, 0, IvaIeps)
                     ieps = IIf(ieps = 0, 0, ieps)
+
 
                     grdComanda.Rows.Add(vercomanda, vercodigo, verdescripcion, verunidad, vercantidad, FormatNumber(verprecio, 2), FormatNumber(vertotal, 2), vercomensal, vermesero, verid, FormatNumber(IvaIeps, 2), FormatNumber(ieps, 2))
 
@@ -6006,7 +6008,7 @@ deku:
                 cmd2.ExecuteNonQuery()
 
                 cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "DELETE FROM comandas WHERE Nmesa='" & lblmesa.Text & "' AND Codigo='" & codigoeliminar & "'"
+                cmd2.CommandText = "DELETE FROM comandas WHERE Nmesa='" & lblmesa.Text & "' AND Codigo='" & codigoeliminar & "' AND IDC=" & comandaeliminar & ""
                 cmd2.ExecuteNonQuery()
                 cnn2.Close()
             End If

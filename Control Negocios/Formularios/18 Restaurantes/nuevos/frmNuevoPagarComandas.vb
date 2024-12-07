@@ -29,6 +29,7 @@ Public Class frmNuevoPagarComandas
     Dim idusuario As Integer = 0
     Dim estadousuario As String = ""
     Dim codigoeliminar As String = ""
+    Dim IDCSELECCIONADO As String = ""
     Dim descripcioneliminar As String = ""
     Dim unidadeliminar As String = ""
     Dim cantidadeliminar As Double = 0
@@ -187,7 +188,7 @@ Public Class frmNuevoPagarComandas
 
         TFecha.Start()
         TFolio.Start()
-        tim.Interval = 5000
+        tim.Interval = 10000
         AddHandler tim.Tick, AddressOf Timer_Tick
         tim.Start()
 
@@ -530,7 +531,7 @@ Public Class frmNuevoPagarComandas
             rd2.Close()
 
             cmd2 = cnn2.CreateCommand
-            cmd2.CommandText = "SELECT Codigo,Nombre,UVenta,Cantidad,Precio,Total,Comensal,Id FROM comandas WHERE Nmesa='" & cboMesa.Text & "'"
+            cmd2.CommandText = "SELECT Codigo,Nombre,UVenta,Cantidad,Precio,Total,Comensal,Id,IDC FROM comandas WHERE Nmesa='" & cboMesa.Text & "'"
             rd2 = cmd2.ExecuteReader
             Do While rd2.Read
                 If rd2.HasRows Then
@@ -543,6 +544,7 @@ Public Class frmNuevoPagarComandas
                     Dim total As Double = rd2("Total").ToString
                     Dim comensal As String = rd2("Comensal").ToString
                     Dim comanda As Integer = rd2("Id").ToString
+                    Dim IDC As Integer = rd2("IDC").ToString
 
                     Dim PU As Double = CDbl(total) / (1 + IvaDSC(codigo))
                     Dim IvaIeps As Double = PU - (PU / (1 + ProdsIEPS(codigo)))
@@ -551,7 +553,7 @@ Public Class frmNuevoPagarComandas
                     IvaIeps = IIf(IvaIeps = 0, 0, IvaIeps)
                     ieps = IIf(ieps = 0, 0, ieps)
 
-                    grdCaptura.Rows.Add(codigo, nombre, unidad, cantidad, precio, total, comensal, comanda, FormatNumber(IvaIeps, 2), FormatNumber(ieps, 2))
+                    grdCaptura.Rows.Add(codigo, nombre, unidad, cantidad, precio, total, comensal, comanda, FormatNumber(IvaIeps, 2), FormatNumber(ieps, 2), IDC)
 
                     totalventa = totalventa + CDbl(total)
 
@@ -1108,7 +1110,7 @@ Public Class frmNuevoPagarComandas
         totaleliminar = grdCaptura.CurrentRow.Cells(5).Value.ToString
         comensaleliminar = grdCaptura.CurrentRow.Cells(6).Value.ToString
         comandaeliminar = grdCaptura.CurrentRow.Cells(7).Value.ToString
-
+        IDCSELECCIONADO = grdCaptura.CurrentRow.Cells(10).Value.ToString
     End Sub
 
     Private Sub PDevolucion80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PDevolucion80.PrintPage
@@ -3485,7 +3487,7 @@ deku:
                 cmd2.ExecuteNonQuery()
 
                 cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "DELETE FROM comandas WHERE Nmesa='" & cboMesa.Text & "' AND Codigo='" & codigoeliminar & "'"
+                cmd2.CommandText = "DELETE FROM comandas WHERE Nmesa='" & cboMesa.Text & "' AND Codigo='" & codigoeliminar & "' AND IDC=" & IDCSELECCIONADO & ""
                 cmd2.ExecuteNonQuery()
                 cnn2.Close()
             End If
