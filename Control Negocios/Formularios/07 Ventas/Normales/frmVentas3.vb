@@ -602,7 +602,7 @@ Public Class frmVentas3
             rd3 = cmd3.ExecuteReader
             If rd3.HasRows Then
                 If rd3.Read Then
-                    cbocodigo.Text = rd3("Codigo").ToString
+                    cbocodigo.Text = rd3("Codigo").ToStringYa di
                     Anti = rd3("Grupo").ToString
                 End If
             End If
