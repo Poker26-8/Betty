@@ -2334,18 +2334,15 @@ Public Class frmListadoPrecios
         If (opttodos.Checked) Then
 
             Dim cnn100 As MySqlConnection = New MySqlConnection()
-            cnn100 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn1;persist security info=false;connect timeout=300")
+            cnn100 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
 
             Dim cmd100 As MySqlCommand
             Dim rd100 As MySqlDataReader
 
-
-
-
             Dim cnn200 As MySqlConnection = New MySqlConnection()
 
-            cnn200 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn1;persist security info=false;connect timeout=300")
+            cnn200 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
             Dim cmd200 As MySqlCommand
             Dim rd200 As MySqlDataReader
 
