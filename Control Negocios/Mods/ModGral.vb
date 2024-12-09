@@ -48,7 +48,7 @@ Module ModGral
         If String.IsNullOrEmpty(diskSerial) Then
             'MessageBox.Show("No se pudo obtener el número de serie del disco.")
             'Exit Sub
-            Dim fechaCompleta As String = DateTime.Now.ToString("yyyy-MM-dd")
+            Dim fechaCompleta As String = "2024-01-01" 'DateTime.Now.ToString("yyyy-MM-dd")
             Dim random As New Random()
             Dim cadena6Digitos As String = "0897653" ' Genera un número aleatorio de 6 dígitos
             Dim resultado As String = fechaCompleta & " " & cadena6Digitos
@@ -77,7 +77,7 @@ Module ModGral
             'MessageBox.Show("No se pudo obtener el número de serie del disco.")
             'Exit Function
             'Exit Sub
-            Dim fechaCompleta As String = DateTime.Now.ToString("yyyy-MM-dd")
+            Dim fechaCompleta As String = "2024-01-01" 'DateTime.Now.ToString("yyyy-MM-dd")
             Dim random As New Random()
             Dim cadena6Digitos As String = "0897653" ' Genera un número aleatorio de 6 dígitos
             Dim resultado As String = fechaCompleta & " " & cadena6Digitos
