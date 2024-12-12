@@ -5,8 +5,61 @@ Imports System.Data.OleDb
 Imports MySql.Data
 Imports System.Runtime.Remoting.Contexts
 Imports ClosedXML.Excel
+Imports System.Net.NetworkInformation
+Imports System.Management
 
 Public Class frmProductosS
+
+    Private Sub ShowDataAccess()
+        My.Application.DoEvents()
+        Dim cnn100 As OleDb.OleDbConnection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & My.Application.Info.DirectoryPath & "\BaseExportar\DL1.mdb;Persist Security Info=True;Jet OLEDB:Database Password=jipl22")
+        Dim cmd100 As OleDbCommand = New OleDbCommand
+        Dim rd100 As OleDbDataReader
+        Try
+            cnn100.Close() : cnn100.Open()
+            cmd100 = cnn100.CreateCommand
+            cmd100.CommandText =
+                    "select Codigo,CodBarra,Nombre,NombreLargo,ProvPri,ProvEme,ProvRes,UCompra,UVenta,VentaMin,MCD,Multiplo,Departamento,Grupo,Ubicacion,Min,Max,Comision,PrecioCompra,PorcentageMin,Porcentage,PrecioVenta,PrecioVentaIVA,PecioVentaMinIVA,IVA,Existencia,PorMay,PorMm,PorEsp,PreMay,PreMM,PreEsp,PreLta,CantMin,CantMay,CantMM,CantEsp,CantLta,CantMin2,CantMay2,CantMM2,CantEsp2,CantLta2,pres_vol,id_tbMoneda,Almacen3,ClaveSat,ClaveUnidadSat,isr,Unico,GPrint from Productos where CodBarra='" & txtaccess.Text & "'"
+            rd100 = cmd100.ExecuteReader
+            If rd100.HasRows Then
+                If rd100.Read Then
+                    txtbarras.Text = rd100("CodBarra").ToString()
+                    cboCodigo.Text = rd100("Codigo").ToString()
+                    cboNombre.Text = rd100("Nombre").ToString()
+                    cboIVA.Text = rd100("IVA").ToString()
+                    txtUnidad.Text = rd100("UVenta").ToString()
+                    txtpcompra.Text = FormatNumber(rd100("PrecioCompra").ToString() / (1 + CDbl(cboIVA.Text)), 2)
+                    txtpcompra2.Text = FormatNumber(CDbl(txtpcompra.Text) * (1 + CDbl(cboIVA.Text)), 2)
+                    txtpventa.Text = FormatNumber(rd100("PrecioVentaIVA").ToString(), 2)
+                    cboProvP.Text = rd100("ProvPri").ToString()
+                    cboDepto.Text = rd100("Departamento").ToString()
+                    cboGrupo.Text = rd100("Grupo").ToString()
+                    cboubicacion.Text = rd100("Ubicacion").ToString()
+                    chkKIT.Checked = IIf(rd100("ProvRes").ToString() = True, False, True)
+                    txtClaveSAT.Text = rd100("ClaveUnidadSat").ToString()
+                    txtCodigoSAT.Text = rd100("ClaveSat").ToString()
+                    txtutilidad.Text = rd100("Porcentage").ToString()
+                    chkUnico.Checked = IIf(rd100("Unico").ToString() = True, True, False)
+                    cboComanda.Text = rd100("GPrint").ToString
+                    txtExistencia.Text = rd100("Existencia").ToString
+                    cboCodigo.Focus.Equals(True)
+                End If
+            Else
+                MsgBox("Producto no encontrado en la base de datos", vbInformation + vbOKOnly, "Delsscom Control Negocios PRO")
+                txtaccess.Text = ""
+                txtaccess.Focus.Equals(True)
+            End If
+            rd100.Close()
+            If File.Exists(My.Application.Info.DirectoryPath & "\ProductosImg" & base & "\" & cboCodigo.Text & ".jpg") Then
+                picImagen.Image = Image.FromFile(My.Application.Info.DirectoryPath & "\ProductosImg" & base & "\" & cboCodigo.Text & ".jpg")
+                txtrutaimagen.Text = ""
+            End If
+            cnn100.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn100.Close()
+        End Try
+    End Sub
 
     Private Sub ShowData(ByVal tipo As String)
         Try
@@ -505,6 +558,7 @@ Public Class frmProductosS
     End Sub
 
     Private Sub btnNuevo_Click(sender As System.Object, e As System.EventArgs) Handles btnNuevo.Click
+        txtaccess.Text = ""
         txtbarras.Text = ""
         txtBarras1.Text = ""
         txtBarras2.Text = ""
@@ -810,7 +864,21 @@ Public Class frmProductosS
             cnn1.Close()
         End Try
 
+        'Dim processorId As String = GetProcessorId()
+        'MsgBox(processorId)
     End Sub
+
+    'Private Function GetProcessorId() As String
+    '    Try
+    '        Dim searcher As New ManagementObjectSearcher("SELECT ProcessorId FROM Win32_Processor")
+    '        For Each obj As ManagementObject In searcher.Get()
+    '            Return obj("ProcessorId").ToString()
+    '        Next
+    '    Catch ex As Exception
+    '        ' Manejar excepción
+    '    End Try
+    '    Return "UnknownProcessor"
+    'End Function
 
     Private Sub btnImportar_Click(sender As System.Object, e As System.EventArgs) Handles btnImportar.Click
         If MsgBox("Estas apunto de importar tu catálogo desde un archivo de Excel, para evitar errores asegúrate de que la hoja de Excel tiene el nombre de 'Hoja1' y cerciórate de que el archivo está guardado y cerrado.", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
@@ -1343,7 +1411,7 @@ Public Class frmProductosS
                         My.Application.DoEvents()
                     Else
                         MsgBox("Revisa el codigo " & codigo & " hay un error", vbCritical + vbOKOnly)
-                        End If
+                    End If
 
                     'Else
                     '    'conteo += 1
@@ -1922,5 +1990,9 @@ Public Class frmProductosS
         End If
     End Sub
 
-
+    Private Sub txtaccess_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtaccess.KeyPress
+        If AscW(e.KeyChar) = Keys.Enter Then
+            ShowDataAccess()
+        End If
+    End Sub
 End Class

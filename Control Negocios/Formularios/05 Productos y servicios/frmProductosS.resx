@@ -136,6 +136,9 @@
         AABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="tip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="btnImportar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACYAAAAoCAYAAACSN4jeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
@@ -152,9 +155,6 @@
         qdKe11D8D3XUPhd30kMOdX73V51JoKJ3ezmcBDLCo5CT2rihOm4BPOnS7zAyc/EAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="tip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="btnGuardar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB8AAAAfCAYAAAAfrhY5AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
@@ -212,6 +212,9 @@
         WiL0421Ppwe4mX8ecMWUYLKNyQAAAABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="tip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="Label14.ToolTip" xml:space="preserve">
     <value>Para el registro de medicamentos controlados
 el campo 'Grupo' se llena con ANTIBIOTICO o
@@ -270,7 +273,7 @@ el campo 'Grupo' tendrá que ser INSUMO.</value>
   <data name="btn_tienda.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAYAAABXuSs3AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAA2BJREFUaEPtmj1oFEEUx9OIKEFEsVGQoIiYKKbwoxBBBBvBWiWIgUCwUGw9UYiS
+        DAAACwwBP0AiyAAAA2BJREFUaEPtmj1oFEEUx9OIKEFEsVGQoIiYKKbwoxBBBBvBWiWIgUCwUGw9UYiS
         zgMFPWLQxA9MGsWPA5uQShBFSKOINgExjTbBwvLunvPfj2Fn983tvNnNnYJ/+MHt27czfzaz7+0s6SGi
         shhUDCvGLOAccrhrxbBBR9YrYOalQipcg2sxBjd2Lmwwhz7FQ8UvRVFhDIyFMbm5rLBBC7g7+JOvlDC2
         81+ADTIcUXxTrLQwB+biPBiwwRRYi50W5uS8aNhgAqy/bglzc54C2GBEN03Hsppngwrx8viy+J0u33xA
