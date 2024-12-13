@@ -71,9 +71,7 @@ Public Class frmProductosSSerie
         End Try
     End Sub
 
-    Private Sub frmProductosSSerie_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-    End Sub
 
     Private Sub txtbarras_GotFocus(sender As Object, e As System.EventArgs) Handles txtbarras.GotFocus
         txtbarras.SelectionStart = 0

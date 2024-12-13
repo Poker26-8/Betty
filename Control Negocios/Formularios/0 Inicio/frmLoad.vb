@@ -489,6 +489,23 @@ Public Class frmLoad
 
     Public Sub verif()
         'cumpleaños monedero
+        Try
+            cnn1.Close()
+            cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT Porcentaje FROM kits"
+            rd1 = cmd1.ExecuteReader
+            If rd1.Read Then
+            End If
+            rd1.Close()
+            cnn1.Close()
+        Catch ex As Exception
+            rd1.Close()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "ALTER TABLE kits add column Porcentaje float DEFAULT '0'"
+            cmd1.ExecuteNonQuery()
+            cnn1.Close()
+        End Try
 
         Try
             cnn1.Close()

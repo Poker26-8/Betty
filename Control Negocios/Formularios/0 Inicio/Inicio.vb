@@ -449,10 +449,11 @@ Public Class Inicio
         Dim partes As Integer = DatosRecarga2("Partes")
         Dim escuelas As Integer = DatosRecarga2("Escuelas")
         Dim restauratnet As Integer = DatosRecarga2("Restaurante")
+        Dim refaccionaria As Integer = DatosRecarga2("Refaccionaria")
 
         If partes = 1 Then
-            frmProductosSerie.Show()
-            frmProductosSerie.BringToFront()
+            frmProductosSSerie.Show()
+            frmProductosSSerie.BringToFront()
 
         ElseIf escuelas = 1 Then
             frmProductos_Escuelas.Show()
@@ -461,6 +462,10 @@ Public Class Inicio
         ElseIf restauratnet = 1 Then
             frmProductosSR.BringToFront()
             frmProductosSR.Show()
+
+        ElseIf refaccionaria = 1 Then
+            frmProRefaccionaria.Show()
+            frmProRefaccionaria.BringToFront()
         Else
             frmProductosS.Show()
             frmProductosS.BringToFront()

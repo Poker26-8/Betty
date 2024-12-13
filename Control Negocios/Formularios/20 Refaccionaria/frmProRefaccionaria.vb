@@ -10,24 +10,34 @@ Public Class frmProRefaccionaria
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             If tipo = "BARRAS" Then
-                cmd1.CommandText = "SELECT CodBarra,Codigo,Nombre,IVA,UVenta,PrecioCompra,PrecioVentaIVA,ProvPri,Departamento,Grupo,Ubicacion,ProvRes,UnidadSat,ClaveSat,Porcentaje,N_Serie,GPrint FROM Productos WHERE CodBarra='" & txtbarras.Text & "'"
+                cmd1.CommandText = "SELECT CodBarra,CodBarra1,CodBarra2,Codigo,Nombre,IVA,UVenta,PrecioCompra,PrecioVentaIVA,ProvPri,Departamento,Grupo,Ubicacion,ProvRes,UnidadSat,ClaveSat,Porcentaje,N_Serie,GPrint FROM Productos WHERE CodBarra='" & txtbarras.Text & "'"
+            End If
+
+            If tipo = "BARRAS2" Then
+                cmd1.CommandText = "SELECT CodBarra,CodBarra1,CodBarra2,Codigo,Nombre,IVA,UVenta,PrecioCompra,PrecioVentaIVA,ProvPri,Departamento,Grupo,Ubicacion,ProvRes,UnidadSat,ClaveSat,Porcentaje,N_Serie,GPrint FROM Productos WHERE CodBarra1='" & txtBarras2.Text & "'"
+            End If
+
+            If tipo = "BARRAS3" Then
+                cmd1.CommandText = "SELECT CodBarra,CodBarra1,CodBarra2,Codigo,Nombre,IVA,UVenta,PrecioCompra,PrecioVentaIVA,ProvPri,Departamento,Grupo,Ubicacion,ProvRes,UnidadSat,ClaveSat,Porcentaje,N_Serie,GPrint FROM Productos WHERE CodBarra2='" & txtBarras3.Text & "'"
             End If
 
             If tipo = "CODIGO" Then
-                cmd1.CommandText = "SELECT CodBarra,Codigo,Nombre,IVA,UVenta,PrecioCompra,PrecioVentaIVA,ProvPri,Departamento,Grupo,Ubicacion,ProvRes,UnidadSat,ClaveSat,Porcentaje,N_Serie,GPrint FROM Productos WHERE Codigo='" & cboCodigo.Text & "'"
+                cmd1.CommandText = "SELECT CodBarra,CodBarra1,CodBarra2,Codigo,Nombre,IVA,UVenta,PrecioCompra,PrecioVentaIVA,ProvPri,Departamento,Grupo,Ubicacion,ProvRes,UnidadSat,ClaveSat,Porcentaje,N_Serie,GPrint FROM Productos WHERE Codigo='" & cboCodigo.Text & "'"
             End If
 
             If tipo = "PRODU" Then
-                cmd1.CommandText = "SELECT CodBarra,Codigo,Nombre,IVA,UVenta,PrecioCompra,PrecioVentaIVA,ProvPri,Departamento,Grupo,Ubicacion,ProvRes,UnidadSat,ClaveSat,Porcentaje,N_Serie,GPrint FROM Productos WHERE Nombre='" & cboNombre.Text & "' and Length(Codigo)<=6"
+                cmd1.CommandText = "SELECT CodBarra,CodBarra1,CodBarra2,Codigo,Nombre,IVA,UVenta,PrecioCompra,PrecioVentaIVA,ProvPri,Departamento,Grupo,Ubicacion,ProvRes,UnidadSat,ClaveSat,Porcentaje,N_Serie,GPrint FROM Productos WHERE Nombre='" & cboNombre.Text & "' and Length(Codigo)<=6"
             End If
             If tipo = "SERIE" Then
-                cmd1.CommandText = "SELECT CodBarra,Codigo,Nombre,IVA,UVenta,PrecioCompra,PrecioVentaIVA,ProvPri,Departamento,Grupo,Ubicacion,ProvRes,UnidadSat,ClaveSat,Porcentaje,N_Serie,GPrint FROM Productos WHERE N_Serie='" & txtn_serie.Text & "'"
+                cmd1.CommandText = "SELECT CodBarra,CodBarra1,CodBarra2,Codigo,Nombre,IVA,UVenta,PrecioCompra,PrecioVentaIVA,ProvPri,Departamento,Grupo,Ubicacion,ProvRes,UnidadSat,ClaveSat,Porcentaje,N_Serie,GPrint FROM Productos WHERE N_Serie='" & txtn_serie.Text & "'"
             End If
 
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then
                     txtbarras.Text = rd1("CodBarra").ToString()
+                    txtBarras2.Text = rd1("CodBarra1").ToString()
+                    txtBarras3.Text = rd1("CodBarra2").ToString()
                     cboCodigo.Text = rd1("Codigo").ToString()
                     cboNombre.Text = rd1("Nombre").ToString()
                     cboIVA.Text = rd1("IVA").ToString()
@@ -375,6 +385,8 @@ Public Class frmProRefaccionaria
 
     Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
         txtbarras.Text = ""
+        txtBarras2.Text = ""
+        txtBarras3.Text = ""
         cboCodigo.Items.Clear()
         cboCodigo.Text = ""
         cboNombre.Items.Clear()
@@ -498,7 +510,7 @@ Public Class frmProRefaccionaria
 
                     cmd2 = cnn2.CreateCommand
                     cmd2.CommandText =
-                        "update Productos set CodBarra='" & txtbarras.Text & "', Nombre='" & cboNombre.Text & "', ProvPri='" & cboProvP.Text & "', IVA=" & cboIVA.Text & ", UVenta='" & txtUnidad.Text & "', PrecioCompra=" & p_compra & ", PrecioVenta=" & p_venta & ", PrecioVentaIVA=" & p_ventaiva & ", Departamento='" & cboDepto.Text & "', Grupo='" & cboGrupo.Text & "', Ubicacion='" & cboubicacion.Text & "', ProvRes=" & IIf(chkKIT.Checked, 1, 0) & ", ClaveSat='" & txtCodigoSAT.Text & "', UnidadSat='" & txtClaveSAT.Text & "', Unico=0, N_Serie='" & txtn_serie.Text & "',GPrint='" & cboComanda.Text & "' where Codigo='" & cboCodigo.Text & "'"
+                        "update Productos set CodBarra='" & txtbarras.Text & "',CodBarra1='" & txtBarras2.Text & "',CodBarra2='" & txtBarras3.Text & "',Nombre='" & cboNombre.Text & "', ProvPri='" & cboProvP.Text & "', IVA=" & cboIVA.Text & ", UVenta='" & txtUnidad.Text & "', PrecioCompra=" & p_compra & ", PrecioVenta=" & p_venta & ", PrecioVentaIVA=" & p_ventaiva & ", Departamento='" & cboDepto.Text & "', Grupo='" & cboGrupo.Text & "', Ubicacion='" & cboubicacion.Text & "', ProvRes=" & IIf(chkKIT.Checked, 1, 0) & ", ClaveSat='" & txtCodigoSAT.Text & "', UnidadSat='" & txtClaveSAT.Text & "', Unico=0, N_Serie='" & txtn_serie.Text & "',GPrint='" & cboComanda.Text & "' where Codigo='" & cboCodigo.Text & "'"
                     If cmd2.ExecuteNonQuery Then
                         MsgBox("Datos de producto actualizados.", vbInformation + vbOKOnly, titulocentral)
 
@@ -529,7 +541,7 @@ Public Class frmProRefaccionaria
 
                 cmd2 = cnn2.CreateCommand
                 cmd2.CommandText =
-                    "insert into Productos(Codigo,CodBarra,Nombre,NombreLargo,ProvPri,ProvEme,ProvRes,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Ubicacion,Min,Max,Comision,PrecioCompra,PrecioVenta,PrecioVentaIVA,IVA,Existencia,Porcentaje,Fecha,pres_vol,id_tbMoneda,Promocion,Afecta_exis,Almacen3,ClaveSat,UnidadSat,Cargado,CargadoInv,Uso,Color,Genero,Marca,Articulo,Dia,Descu,Fecha_Inicial,Fecha_Final,Promo_Monedero,Unico,N_Serie,GPrint) values('" & cboCodigo.Text & "','" & txtbarras.Text & "','" & cboNombre.Text & "','','" & cboProvP.Text & "','" & cboProvP.Text & "'," & IIf(chkKIT.Checked, 1, 0) & ",'" & txtUnidad.Text & "','" & txtUnidad.Text & "','" & txtUnidad.Text & "',1,1,'" & cboDepto.Text & "','" & cboGrupo.Text & "','" & cboubicacion.Text & "',1,1,0," & p_compra & "," & p_venta & "," & p_ventaiva & "," & iva & "," & existencia & "," & porcentaje & ",'" & fecha & "',0,1,0,0," & p_compra & ",'" & txtCodigoSAT.Text & "','" & txtClaveSAT.Text & "',0,0,'','','','','',0,'0','" & fecha & "','" & fecha & "',0,0,'" & txtn_serie.Text & "','" & cboComanda.Text & "')"
+                    "insert into Productos(Codigo,CodBarra,CodBarra1,CodBarra2,Nombre,NombreLargo,ProvPri,ProvEme,ProvRes,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Ubicacion,Min,Max,Comision,PrecioCompra,PrecioVenta,PrecioVentaIVA,IVA,Existencia,Porcentaje,Fecha,pres_vol,id_tbMoneda,Promocion,Afecta_exis,Almacen3,ClaveSat,UnidadSat,Cargado,CargadoInv,Uso,Color,Genero,Marca,Articulo,Dia,Descu,Fecha_Inicial,Fecha_Final,Promo_Monedero,Unico,N_Serie,GPrint) values('" & cboCodigo.Text & "','" & txtbarras.Text & "','" & txtBarras2.Text & "','" & txtBarras3.Text & "','" & cboNombre.Text & "','','" & cboProvP.Text & "','" & cboProvP.Text & "'," & IIf(chkKIT.Checked, 1, 0) & ",'" & txtUnidad.Text & "','" & txtUnidad.Text & "','" & txtUnidad.Text & "',1,1,'" & cboDepto.Text & "','" & cboGrupo.Text & "','" & cboubicacion.Text & "',1,1,0," & p_compra & "," & p_venta & "," & p_ventaiva & "," & iva & "," & existencia & "," & porcentaje & ",'" & fecha & "',0,1,0,0," & p_compra & ",'" & txtCodigoSAT.Text & "','" & txtClaveSAT.Text & "',0,0,'','','','','',0,'0','" & fecha & "','" & fecha & "',0,0,'" & txtn_serie.Text & "','" & cboComanda.Text & "')"
                 If cmd2.ExecuteNonQuery Then
                     MsgBox("Datos de producto registrados.", vbInformation + vbOKOnly, titulocentral)
 
@@ -934,4 +946,23 @@ Public Class frmProRefaccionaria
         End If
     End Function
 
+    Private Sub txtBarras2_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtBarras2.KeyPress
+        If Not IsNumeric(txtBarras2.Text) Then txtBarras2.Text = "" : Exit Sub
+        If AscW(e.KeyChar) = Keys.Enter Then
+            If txtBarras2.Text <> "" Then
+                ShowData("BARRAS2")
+            End If
+            cboCodigo.Focus().Equals(True)
+        End If
+    End Sub
+
+    Private Sub txtBarras3_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtBarras3.KeyPress
+        If Not IsNumeric(txtBarras3.Text) Then txtBarras3.Text = "" : Exit Sub
+        If AscW(e.KeyChar) = Keys.Enter Then
+            If txtBarras3.Text <> "" Then
+                ShowData("BARRAS3")
+            End If
+            cboCodigo.Focus().Equals(True)
+        End If
+    End Sub
 End Class

@@ -2174,6 +2174,7 @@
                                   `Cantidad` float NOT NULL DEFAULT '0',
                                   `Grupo` varchar(255) NOT NULL DEFAULT '',
                                   `PPrecio` float NOT NULL DEFAULT '0',
+                                  `Porcentaje` float NOT NULL DEFAULT '0',
                                   `CTotal` float NOT NULL DEFAULT '0',
                                   `Fecha` DATE NOT NULL
                                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
