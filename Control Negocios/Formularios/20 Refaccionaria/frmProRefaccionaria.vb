@@ -75,7 +75,7 @@ Public Class frmProRefaccionaria
     End Sub
 
     Private Sub txtbarras_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbarras.KeyPress
-        If Not IsNumeric(txtbarras.Text) Then txtbarras.Text = "" : Exit Sub
+        'If Not IsNumeric(txtbarras.Text) Then txtbarras.Text = "" : Exit Sub
         If AscW(e.KeyChar) = Keys.Enter Then
             If txtbarras.Text <> "" Then
                 ShowData("BARRAS")
@@ -947,7 +947,7 @@ Public Class frmProRefaccionaria
     End Function
 
     Private Sub txtBarras2_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtBarras2.KeyPress
-        If Not IsNumeric(txtBarras2.Text) Then txtBarras2.Text = "" : Exit Sub
+
         If AscW(e.KeyChar) = Keys.Enter Then
             If txtBarras2.Text <> "" Then
                 ShowData("BARRAS2")
@@ -957,7 +957,7 @@ Public Class frmProRefaccionaria
     End Sub
 
     Private Sub txtBarras3_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtBarras3.KeyPress
-        If Not IsNumeric(txtBarras3.Text) Then txtBarras3.Text = "" : Exit Sub
+
         If AscW(e.KeyChar) = Keys.Enter Then
             If txtBarras3.Text <> "" Then
                 ShowData("BARRAS3")
