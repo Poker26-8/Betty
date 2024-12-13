@@ -2627,7 +2627,7 @@ Public Class frmConsultaNotas
 
             If (optnotas.Checked) Or (optcobrar.Checked) Or (optpagadas.Checked) Or (optanceladas.Checked) Or (optcotiz.Checked) Or (optPedidos.Checked) Then
 
-                If (optnotas.Checked) Or (optcobrar.Checked) Then
+                If (optnotas.Checked) Or (optcobrar.Checked) Or (optpagadas.Checked) Then
                     If formato = "TICKET" Then
                         If tamticket = "80" Then
                             If imp_ticket = "" Then MsgBox("No hay una impresora configurada para imprimir la copia.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
@@ -5604,7 +5604,7 @@ doorcita:
                 Y += 12.5
                 e.Graphics.DrawString(canti, fuente_prods, Brushes.Black, 50, Y, sf)
                 e.Graphics.DrawString(unidad, fuente_prods, Brushes.Black, 55, Y)
-                e.Graphics.DrawString("x", fuente_prods, Brushes.Black, 110, Y)
+                e.Graphics.DrawString("x", fuente_prods, Brushes.Black, 100, Y)
                 e.Graphics.DrawString(simbolo & FormatNumber(precio, 1), fuente_prods, Brushes.Black, 180, Y, sf)
                 e.Graphics.DrawString(simbolo & FormatNumber(total, 1), fuente_prods, Brushes.Black, 270, Y, sf)
                 Y += 21
