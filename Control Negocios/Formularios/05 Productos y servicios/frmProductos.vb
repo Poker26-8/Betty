@@ -130,7 +130,6 @@ Public Class frmProductos
         rd1.Close()
         cnn1.Close()
 
-        Me.Show()
         My.Application.DoEvents()
 
         '    RunAsyncFunctions()
