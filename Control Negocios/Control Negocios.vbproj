@@ -599,6 +599,12 @@
     <Compile Include="Formularios\05 Productos y servicios\CompararPrecios\frmRepComparador.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\05 Productos y servicios\Kits\frmkitsN.Designer.vb">
+      <DependentUpon>frmkitsN.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\05 Productos y servicios\Kits\frmkitsN.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\05 Productos y servicios\Produccion\frmLotesyCad.Designer.vb">
       <DependentUpon>frmLotesyCad.vb</DependentUpon>
     </Compile>
@@ -2724,6 +2730,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\05 Productos y servicios\CompararPrecios\frmRepComparador.resx">
       <DependentUpon>frmRepComparador.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\05 Productos y servicios\Kits\frmkitsN.resx">
+      <DependentUpon>frmkitsN.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\05 Productos y servicios\Produccion\frmLotesyCad.resx">
       <DependentUpon>frmLotesyCad.vb</DependentUpon>
