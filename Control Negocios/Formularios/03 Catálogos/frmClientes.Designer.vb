@@ -85,6 +85,7 @@ Partial Class frmClientes
         Me.Label23 = New System.Windows.Forms.Label()
         Me.cboCFDI = New System.Windows.Forms.ComboBox()
         Me.btnvehiculos = New System.Windows.Forms.Button()
+        Me.lbltotal = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -747,11 +748,19 @@ Partial Class frmClientes
         Me.btnvehiculos.UseVisualStyleBackColor = True
         Me.btnvehiculos.Visible = False
         '
+        'lbltotal
+        '
+        Me.lbltotal.Location = New System.Drawing.Point(188, 253)
+        Me.lbltotal.Name = "lbltotal"
+        Me.lbltotal.Size = New System.Drawing.Size(53, 14)
+        Me.lbltotal.TabIndex = 231
+        '
         'frmClientes
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(878, 272)
+        Me.Controls.Add(Me.lbltotal)
         Me.Controls.Add(Me.btnvehiculos)
         Me.Controls.Add(Me.cboCFDI)
         Me.Controls.Add(Me.Label23)
@@ -871,4 +880,5 @@ Partial Class frmClientes
     Friend WithEvents Label23 As Label
     Friend WithEvents cboCFDI As ComboBox
     Friend WithEvents btnvehiculos As Button
+    Friend WithEvents lbltotal As Label
 End Class
