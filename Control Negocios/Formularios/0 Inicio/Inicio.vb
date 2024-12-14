@@ -204,7 +204,26 @@ Public Class Inicio
     End Sub
 
     Private Async Sub Inicio_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-        Licencia()
+        Try
+            cnn1.Close()
+            cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Lib'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.Read Then
+                If rd1(0).ToString = "1" Then
+                    Licencia()
+                Else
+
+                End If
+            End If
+            rd1.Close()
+            cnn1.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
+
     End Sub
 
     Private Sub Licencia()

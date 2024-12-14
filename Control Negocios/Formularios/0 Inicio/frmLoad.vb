@@ -489,6 +489,28 @@ Public Class frmLoad
 
     Public Sub verif()
         'cumpleaños monedero
+
+        Try
+            cnn1.Close()
+            cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Lib'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.Read Then
+                rd1.Close()
+            Else
+                rd1.Close()
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "Insert Into Formatos(Facturas,NotasCred,NumPart) values('Lib','0','0')"
+                If cmd1.ExecuteNonQuery Then
+                Else
+
+                End If
+            End If
+            cnn1.Close()
+        Catch ex As Exception
+
+        End Try
         Try
             cnn1.Close()
             cnn1.Open()
