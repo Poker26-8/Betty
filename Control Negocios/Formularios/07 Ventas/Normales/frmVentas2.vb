@@ -5169,7 +5169,9 @@ kaka:
             Else
                 txttotal.Text = "0.00"
             End If
+            txtprecio.Focus.Equals(True)
         End If
+
     End Sub
     Private Sub txttotal_TextChanged(sender As Object, e As EventArgs) Handles txttotal.TextChanged
         Call Actualiza()

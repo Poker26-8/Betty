@@ -4138,6 +4138,7 @@ kaka:
         txttotal.Text = CDbl(IIf(txtcantidad.Text = "" Or txtcantidad.Text = ".", "0", txtcantidad.Text)) * CDbl(IIf(txtprecio.Text = "" Or txtprecio.Text = ".", "0", txtprecio.Text))
 
         'txttotal.Text = CDbl(IIf(txtcantidad.Text = "", "0", txtcantidad.Text)) * CDbl(IIf(txtprecio.Text = "" Or txtprecio.Text = ".", "0", txtprecio.Text))
+
         txttotal.Text = FormatNumber(txttotal.Text, 4)
     End Sub
     Private Sub cboLote_DropDown(sender As Object, e As System.EventArgs) Handles cboLote.DropDown
@@ -4438,7 +4439,9 @@ kaka:
             Else
                 txttotal.Text = "0.00"
             End If
+            txtprecio.Focus.Equals(True)
         End If
+
     End Sub
     Private Sub txttotal_TextChanged(sender As Object, e As System.EventArgs) Handles txttotal.TextChanged
         Call Actualiza()
@@ -15382,8 +15385,8 @@ ecomoda:
         frmRepExistenciaSincronizador.Show()
         frmRepExistenciaSincronizador.BringToFront()
 
-        frmNuevo.BringToFront()
-        frmNuevo.Show()
+        'frmNuevo.BringToFront()
+        'frmNuevo.Show()
         'frmOrdenTrabajo.Show()
         'frmOrdenTrabajo.BringToFront()
     End Sub

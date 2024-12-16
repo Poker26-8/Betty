@@ -20,6 +20,7 @@ Public Class frmComparador
 
     Private Sub cboCodigo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboCodigo.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+            Datos3()
             txtPrecio.Focus.Equals(True)
         End If
     End Sub
@@ -117,7 +118,11 @@ Public Class frmComparador
             GrdCaptura.Rows.Clear()
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT Codigo,Nombre,PrecioCompra,ProvPri FROM productos WHERE CodBarra='" & txtCodBarra.Text & "'"
+            If Trim(txtCodBarra.Text) = "" Then
+                cmd1.CommandText = "SELECT Codigo,Nombre,PrecioCompra,ProvPri FROM productos WHERE Codigo='" & cboCodigo.Text & "'"
+            Else
+                cmd1.CommandText = "SELECT Codigo,Nombre,PrecioCompra,ProvPri FROM productos WHERE CodBarra='" & txtCodBarra.Text & "'"
+            End If
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then
@@ -130,17 +135,15 @@ Public Class frmComparador
             rd1.Close()
 
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT Codigo,Descripcion,Proveedor,PrecioAnt FROM precios WHERE CodBarra='" & txtCodBarra.Text & "'"
+            If Trim(txtCodBarra.Text) = "" Then
+                cmd1.CommandText = "SELECT Codigo,Descripcion,Proveedor,PrecioAnt FROM precios WHERE Codigo='" & cboCodigo.Text & "'"
+            Else
+                cmd1.CommandText = "SELECT Codigo,Descripcion,Proveedor,PrecioAnt FROM precios WHERE CodBarra='" & txtCodBarra.Text & "'"
+            End If
             rd1 = cmd1.ExecuteReader
             Do While rd1.Read
                 If rd1.HasRows Then
-
-
-                    GrdCaptura.Rows.Add(rd1(0).ToString,
-                                        rd1(1).ToString,
-                                        rd1(2).ToString,
-                                        rd1(3).ToString
-)
+                    GrdCaptura.Rows.Add(rd1(0).ToString, rd1(1).ToString, rd1(2).ToString, rd1(3).ToString)
                 End If
             Loop
 
@@ -173,6 +176,47 @@ Public Class frmComparador
 
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText = "SELECT Codigo,Descripcion,Proveedor,PrecioAnt FROM precios WHERE Descripcion='" & cboDescripcion.Text & "'"
+            rd2 = cmd2.ExecuteReader
+            Do While rd2.Read
+                If rd2.HasRows Then
+
+
+
+                    GrdCaptura.Rows.Add(rd2("Codigo").ToString,
+                                        rd2("Descripcion").ToString,
+                                        rd2("Proveedor").ToString,
+                                        rd2("PrecioAnt").ToString)
+                End If
+            Loop
+            rd2.Close()
+            cnn2.Close()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn2.Close()
+        End Try
+    End Sub
+
+    Public Sub Datos3()
+        Try
+            GrdCaptura.Rows.Clear()
+            cnn2.Close() : cnn2.Open()
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText = "SELECT Codigo,CodBarra,Nombre,ProvPri,PrecioCompra FROM productos WHERE Codigo='" & cboCodigo.Text & "'"
+            rd2 = cmd2.ExecuteReader
+            If rd2.HasRows Then
+                If rd2.Read Then
+                    txtCodBarra.Text = rd2(1).ToString
+                    cboCodigo.Text = rd2(0).ToString
+                    cboDescripcion.Text = rd2(2).ToString
+                    cboproveedor.Text = rd2(3).ToString
+                    txtPrecio.Text = rd2(4).ToString
+                End If
+            End If
+            rd2.Close()
+
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText = "SELECT Codigo,Descripcion,Proveedor,PrecioAnt FROM precios WHERE Codigo='" & cboCodigo.Text & "'"
             rd2 = cmd2.ExecuteReader
             Do While rd2.Read
                 If rd2.HasRows Then
@@ -243,6 +287,9 @@ Public Class frmComparador
             End If
             rd1.Close()
             cnn1.Close()
+
+            Datos()
+
             cboDescripcion.Focus.Equals(True)
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
@@ -590,4 +637,5 @@ Public Class frmComparador
     Private Sub frmComparador_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
 End Class

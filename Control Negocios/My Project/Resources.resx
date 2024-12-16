@@ -124,6 +124,9 @@
   <data name="eliminar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\eliminar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8-correo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-correo1.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="entrega1Recurso 82" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\entrega1Recurso 821.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -184,6 +187,9 @@
   <data name="limpiar2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\limpiar2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="pedidoRecurso 89" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pedidoRecurso 89.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="pedidoRecurso 2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pedidoRecurso 2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -223,7 +229,10 @@
   <data name="corte2Recurso 81" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\corte2Recurso 811.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pedidoRecurso 89" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pedidoRecurso 89.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pdf1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="correo (1) (4)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\correo (1) (4)1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

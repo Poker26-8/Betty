@@ -599,6 +599,12 @@
     <Compile Include="Formularios\05 Productos y servicios\CompararPrecios\frmRepComparador.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\05 Productos y servicios\CompararPrecios\frmRepComparador2.Designer.vb">
+      <DependentUpon>frmRepComparador2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\05 Productos y servicios\CompararPrecios\frmRepComparador2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Formularios\05 Productos y servicios\Kits\frmkitsN.Designer.vb">
       <DependentUpon>frmkitsN.vb</DependentUpon>
     </Compile>
@@ -2533,6 +2539,7 @@
     <Compile Include="Mods\Module1.vb" />
     <Compile Include="Mods\Mod_Conexion.vb" />
     <Compile Include="Mods\PDFS\PDF_Ventas.vb" />
+    <Compile Include="Mods\pruebavb1.vb" />
     <Compile Include="Mods\pruebavb.vb" />
     <Compile Include="Mods\Rutinas.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -2730,6 +2737,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\05 Productos y servicios\CompararPrecios\frmRepComparador.resx">
       <DependentUpon>frmRepComparador.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\05 Productos y servicios\CompararPrecios\frmRepComparador2.resx">
+      <DependentUpon>frmRepComparador2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\05 Productos y servicios\Kits\frmkitsN.resx">
       <DependentUpon>frmkitsN.vb</DependentUpon>
@@ -3790,6 +3800,8 @@
     <None Include="Resources\consulta1Recurso 771.png" />
     <Content Include="Resources\consulta2Recurso 85.png" />
     <None Include="Resources\consulta2Recurso 851.png" />
+    <Content Include="Resources\correo %281%29 %284%29.png" />
+    <None Include="Resources\correo %281%29 %284%291.png" />
     <Content Include="Resources\corte1Recurso 80.png" />
     <None Include="Resources\corte1Recurso 801.png" />
     <Content Include="Resources\corte2Recurso 81.png" />
@@ -3801,12 +3813,16 @@
     <Content Include="Resources\hotel.png" />
     <None Include="Resources\hotel1.png" />
     <None Include="Resources\hotelRecurso 1.png" />
+    <Content Include="Resources\icons8-correo.gif" />
+    <None Include="Resources\icons8-correo1.gif" />
     <Content Include="Resources\monedero1Recurso 79.png" />
     <None Include="Resources\monedero1Recurso 791.png" />
     <Content Include="Resources\pagoservicos1Recurso 88.png" />
     <None Include="Resources\pagoservicos1Recurso 881.png" />
     <None Include="Resources\pedidoRecurso 2.png" />
     <None Include="Resources\pedidoRecurso 89.png" />
+    <Content Include="Resources\pdf.png" />
+    <None Include="Resources\pdf1.png" />
     <Content Include="Resources\recargas1Recurso 86.png" />
     <None Include="Resources\recargas1Recurso 861.png" />
     <Content Include="Resources\recargas2Recurso 87.png" />
