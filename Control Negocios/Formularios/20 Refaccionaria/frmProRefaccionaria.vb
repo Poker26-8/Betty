@@ -790,7 +790,7 @@ Public Class frmProRefaccionaria
             End If
 
             'Variables para alojar los datos del archivo de excel
-            Dim codigo, barras, nombre, unidad, proveedor, depto, grupo, prod_sat, unidad_sat, n_serie As String
+            Dim codigo, barras, barras2, barras3, nombre, unidad, proveedor, depto, grupo, prod_sat, unidad_sat, n_serie As String
             Dim fecha As String = Format(Date.Now, "yyyy-MM-dd")
             Dim iva, compra, compra_iva, venta_siva, venta_civa, porcentaje, existencia, ieps As Double
             Dim conteo As Integer = 0
@@ -804,29 +804,31 @@ Public Class frmProRefaccionaria
                 codigo = NulCad(DataGridView1.Rows(zef).Cells(0).Value.ToString())
                 If codigo = "" Then Exit For
                 barras = NulCad(DataGridView1.Rows(zef).Cells(1).Value.ToString())
-                nombre = UCase(NulCad(DataGridView1.Rows(zef).Cells(2).Value.ToString()))
-                iva = NulVa(DataGridView1.Rows(zef).Cells(3).Value.ToString())
-                unidad = NulCad(DataGridView1.Rows(zef).Cells(4).Value.ToString())
-                compra = NulVa(DataGridView1.Rows(zef).Cells(5).Value.ToString())
+                barras2 = NulCad(DataGridView1.Rows(zef).Cells(2).Value.ToString())
+                barras3 = NulCad(DataGridView1.Rows(zef).Cells(3).Value.ToString())
+                nombre = UCase(NulCad(DataGridView1.Rows(zef).Cells(4).Value.ToString()))
+                iva = NulVa(DataGridView1.Rows(zef).Cells(5).Value.ToString())
+                unidad = NulCad(DataGridView1.Rows(zef).Cells(6).Value.ToString())
+                compra = NulVa(DataGridView1.Rows(zef).Cells(7).Value.ToString())
                 compra_iva = CDbl(compra) * (1 + CDbl(iva))
-                venta_siva = FormatNumber(NulVa(DataGridView1.Rows(zef).Cells(6).Value.ToString()) / (1 + iva), 2)
-                venta_civa = NulVa(DataGridView1.Rows(zef).Cells(6).Value.ToString())
+                venta_siva = FormatNumber(NulVa(DataGridView1.Rows(zef).Cells(8).Value.ToString()) / (1 + iva), 2)
+                venta_civa = NulVa(DataGridView1.Rows(zef).Cells(8).Value.ToString())
                 porcentaje = FormatNumber(((venta_civa * 100) / compra_iva) - 100, 2)
-                proveedor = NulCad(DataGridView1.Rows(zef).Cells(7).Value.ToString())
-                depto = NulCad(DataGridView1.Rows(zef).Cells(8).Value.ToString())
-                grupo = NulCad(DataGridView1.Rows(zef).Cells(9).Value.ToString())
-                prod_sat = NulCad(DataGridView1.Rows(zef).Cells(10).Value.ToString())
-                unidad_sat = NulCad(DataGridView1.Rows(zef).Cells(11).Value.ToString())
-                existencia = NulVa(DataGridView1.Rows(zef).Cells(12).Value.ToString())
-                ieps = NulVa(DataGridView1.Rows(zef).Cells(13).Value.ToString())
-                n_serie = NulCad(DataGridView1.Rows(zef).Cells(14).Value.ToString())
+                proveedor = NulCad(DataGridView1.Rows(zef).Cells(9).Value.ToString())
+                depto = NulCad(DataGridView1.Rows(zef).Cells(10).Value.ToString())
+                grupo = NulCad(DataGridView1.Rows(zef).Cells(11).Value.ToString())
+                prod_sat = NulCad(DataGridView1.Rows(zef).Cells(12).Value.ToString())
+                unidad_sat = NulCad(DataGridView1.Rows(zef).Cells(13).Value.ToString())
+                existencia = NulVa(DataGridView1.Rows(zef).Cells(14).Value.ToString())
+                ieps = NulVa(DataGridView1.Rows(zef).Cells(15).Value.ToString())
+                n_serie = NulCad(DataGridView1.Rows(zef).Cells(16).Value.ToString())
 
-                If (Comprueba(codigo, nombre, barras, proveedor, n_serie)) Then
+                If (Comprueba(codigo, nombre, barras, barras2, barras3, proveedor, n_serie)) Then
                     If cnn1.State = 0 Then cnn1.Open()
 
                     cmd1 = cnn1.CreateCommand
                     cmd1.CommandText =
-                        "insert into Productos(Codigo,CodBarra,Nombre,NombreLargo,ProvPri,ProvEme,ProvRes,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Ubicacion,Min,Max,Comision,PrecioCompra,PrecioVenta,PrecioVentaIVA,IVA,Existencia,Porcentaje,Fecha,pres_vol,id_tbMoneda,Promocion,Afecta_exis,Almacen3,ClaveSat,UnidadSat,Cargado,CargadoInv,Uso,Color,Genero,Marca,Articulo,Dia,Descu,Fecha_Inicial,Fecha_Final,Promo_Monedero,Unico,N_Serie,Existencia,IIEPS) values('" & codigo & "','" & barras & "','" & nombre & "','" & nombre & "','" & proveedor & "','" & proveedor & "',0,'" & unidad & "','" & unidad & "','" & unidad & "',1,1,'" & depto & "','" & grupo & "','',1,1,0," & compra & "," & venta_siva & "," & venta_civa & "," & iva & ",0," & porcentaje & ",'" & fecha & "',0,1,0,0," & compra & ",'" & prod_sat & "','" & unidad_sat & "',0,0,'','','','','',0,'0','" & fecha & "','" & fecha & "',0,0,'" & n_serie & "'," & existencia & "," & ieps & ")"
+                        "insert into Productos(Codigo,CodBarra,CodBarra1,CodBarra2,Nombre,NombreLargo,ProvPri,ProvEme,ProvRes,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Ubicacion,Min,Max,Comision,PrecioCompra,PrecioVenta,PrecioVentaIVA,IVA,Existencia,Porcentaje,Fecha,pres_vol,id_tbMoneda,Promocion,Afecta_exis,Almacen3,ClaveSat,UnidadSat,Cargado,CargadoInv,Uso,Color,Genero,Marca,Articulo,Dia,Descu,Fecha_Inicial,Fecha_Final,Promo_Monedero,Unico,N_Serie,Existencia,IIEPS) values('" & codigo & "','" & barras & "','" & nombre & "','" & nombre & "','" & proveedor & "','" & proveedor & "',0,'" & unidad & "','" & unidad & "','" & unidad & "',1,1,'" & depto & "','" & grupo & "','',1,1,0," & compra & "," & venta_siva & "," & venta_civa & "," & iva & ",0," & porcentaje & ",'" & fecha & "',0,1,0,0," & compra & ",'" & prod_sat & "','" & unidad_sat & "',0,0,'','','','','',0,'0','" & fecha & "','" & fecha & "',0,0,'" & n_serie & "'," & existencia & "," & ieps & ")"
                     cmd1.ExecuteNonQuery()
                 Else
                     conteo += 1
@@ -849,7 +851,7 @@ Public Class frmProRefaccionaria
 
     End Sub
 
-    Private Function Comprueba(ByVal codigo As String, ByVal nombre As String, ByVal barras As String, ByVal provee As String, ByVal n_serie As String) As Boolean
+    Private Function Comprueba(ByVal codigo As String, ByVal nombre As String, ByVal barras As String, ByVal barras2 As String, ByVal barras3 As String, ByVal provee As String, ByVal n_serie As String) As Boolean
         Try
             Dim valida As Boolean = True
             cnn2.Close() : cnn2.Open()
@@ -884,6 +886,36 @@ Public Class frmProRefaccionaria
                 cmd2 = cnn2.CreateCommand
                 cmd2.CommandText =
                     "select CodBarra from Productos where CodBarra='" & barras & "'"
+                rd2 = cmd2.ExecuteReader
+                If rd2.HasRows Then
+                    If rd2.Read Then
+                        MsgBox("Ya cuentas con un producto registrado con el código de barras " & barras & ".", vbInformation + vbOKOnly, titulocentral)
+                        valida = False
+                    End If
+                End If
+                rd2.Close()
+            End If
+
+            If barras2 = "" Then
+            Else
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText =
+                    "select CodBarra1 from Productos where CodBarra1='" & barras & "'"
+                rd2 = cmd2.ExecuteReader
+                If rd2.HasRows Then
+                    If rd2.Read Then
+                        MsgBox("Ya cuentas con un producto registrado con el código de barras " & barras & ".", vbInformation + vbOKOnly, titulocentral)
+                        valida = False
+                    End If
+                End If
+                rd2.Close()
+            End If
+
+            If barras3 = "" Then
+            Else
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText =
+                    "select CodBarra2 from Productos where CodBarra2='" & barras & "'"
                 rd2 = cmd2.ExecuteReader
                 If rd2.HasRows Then
                     If rd2.Read Then
