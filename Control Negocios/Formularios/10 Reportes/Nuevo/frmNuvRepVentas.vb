@@ -6620,8 +6620,5 @@ Public Class frmNuvRepVentas
         End If
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        frmRepVentasDes.BringToFront()
-        frmRepVentasDes.Show()
-    End Sub
+
 End Class

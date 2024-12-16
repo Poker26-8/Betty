@@ -52,7 +52,6 @@ Partial Class frmNuvRepVentas
         Me.txtTotal = New System.Windows.Forms.TextBox()
         Me.lblTotal = New System.Windows.Forms.Label()
         Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnReporte = New System.Windows.Forms.Button()
         Me.btnImprimir = New System.Windows.Forms.Button()
@@ -385,7 +384,6 @@ Partial Class frmNuvRepVentas
         '
         'Panel6
         '
-        Me.Panel6.Controls.Add(Me.Button2)
         Me.Panel6.Controls.Add(Me.Button1)
         Me.Panel6.Controls.Add(Me.btnReporte)
         Me.Panel6.Controls.Add(Me.btnImprimir)
@@ -398,20 +396,6 @@ Partial Class frmNuvRepVentas
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(1175, 166)
         Me.Panel6.TabIndex = 16
-        '
-        'Button2
-        '
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button2.Location = New System.Drawing.Point(291, 86)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(91, 74)
-        Me.Button2.TabIndex = 7
-        Me.Button2.Text = "Ventas Descuento"
-        Me.Button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button2.UseVisualStyleBackColor = True
-        Me.Button2.Visible = False
         '
         'Button1
         '
@@ -1110,5 +1094,4 @@ Partial Class frmNuvRepVentas
     Friend WithEvents rbVentasComisionista As RadioButton
     Friend WithEvents rbComisionistaDetalle As RadioButton
     Friend WithEvents rbTiempo As RadioButton
-    Friend WithEvents Button2 As Button
 End Class
