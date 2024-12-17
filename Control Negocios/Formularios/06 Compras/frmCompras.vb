@@ -594,7 +594,7 @@ Public Class frmCompras
                             cbonombre.Text = rd1("Nombre").ToString
                             lblvalor.Text = FormatNumber(rd1("PrecioCompra").ToString, 4)
                             If cbofactura.Text <> "" Then
-                                txtprecio.Text = FormatNumber(rd1("PrecioCompra".ToString) / (1.16), 4)
+                                txtprecio.Text = FormatNumber(rd1("PrecioCompra".ToString), 4)
                             Else
                                 txtprecio.Text = FormatNumber(rd1("PrecioCompra".ToString), 4)
                             End If

@@ -105,7 +105,7 @@ Public Class frmRepInventario
                             .Resizable = DataGridViewTriState.False
                         End With
                         With .Columns(8)
-                            .HeaderText = "Precio de compra"
+                            .HeaderText = "Precio compra sin IVA"
                             .Width = 75
                             .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
                             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -193,7 +193,7 @@ Public Class frmRepInventario
                             .Resizable = DataGridViewTriState.False
                         End With
                         With .Columns(7)
-                            .HeaderText = "Precio de compra"
+                            .HeaderText = "Precio compra sin IVA"
                             .Width = 75
                             .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
                             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -396,7 +396,7 @@ Public Class frmRepInventario
                             .Resizable = DataGridViewTriState.False
                         End With
                         With .Columns(8)
-                            .HeaderText = "Precio de compra"
+                            .HeaderText = "Precio compra sin IVA"
                             .Width = 75
                             .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
                             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -484,7 +484,7 @@ Public Class frmRepInventario
                             .Resizable = DataGridViewTriState.False
                         End With
                         With .Columns(7)
-                            .HeaderText = "Precio de compra"
+                            .HeaderText = "Precio compra sin IVA"
                             .Width = 75
                             .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
                             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -601,7 +601,7 @@ Public Class frmRepInventario
                             .Resizable = DataGridViewTriState.False
                         End With
                         With .Columns(8)
-                            .HeaderText = "Precio de compra"
+                            .HeaderText = "Precio compra sin IVA"
                             .Width = 75
                             .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
                             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -689,7 +689,7 @@ Public Class frmRepInventario
                             .Resizable = DataGridViewTriState.False
                         End With
                         With .Columns(7)
-                            .HeaderText = "Precio de compra"
+                            .HeaderText = "Precio compra sin IVA"
                             .Width = 75
                             .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
                             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -806,7 +806,7 @@ Public Class frmRepInventario
                             .Resizable = DataGridViewTriState.False
                         End With
                         With .Columns(8)
-                            .HeaderText = "Precio de compra"
+                            .HeaderText = "Precio compra sin IVA"
                             .Width = 75
                             .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
                             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -894,7 +894,7 @@ Public Class frmRepInventario
                             .Resizable = DataGridViewTriState.False
                         End With
                         With .Columns(7)
-                            .HeaderText = "Precio de compra"
+                            .HeaderText = "Precio compra sin IVA"
                             .Width = 75
                             .AutoSizeMode = DataGridViewAutoSizeColumnMode.None
                             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight

@@ -473,7 +473,7 @@ Partial Class frmCompras
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(87, 21)
         Me.Label6.TabIndex = 82
-        Me.Label6.Text = "Precio"
+        Me.Label6.Text = "Precio sin IVA"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label7
@@ -1417,9 +1417,9 @@ Partial Class frmCompras
         Me.panpago_compra.Controls.Add(Me.btnpc_aceptar)
         Me.panpago_compra.Controls.Add(Me.Label43)
         Me.panpago_compra.Controls.Add(Me.boxPago)
-        Me.panpago_compra.Location = New System.Drawing.Point(337, 102)
+        Me.panpago_compra.Location = New System.Drawing.Point(337, 106)
         Me.panpago_compra.Name = "panpago_compra"
-        Me.panpago_compra.Size = New System.Drawing.Size(239, 362)
+        Me.panpago_compra.Size = New System.Drawing.Size(239, 358)
         Me.panpago_compra.TabIndex = 229
         Me.panpago_compra.Visible = False
         '

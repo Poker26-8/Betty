@@ -513,7 +513,8 @@
                 If rd3.Read Then
                     cboCodigo.Text = rd3("Codigo").ToString
                     IVA = rd3("IVA").ToString
-                    TxtPCI.Text = CDec(IIf(TxtPCI.Text = "", "0", TxtPCI.Text)) * (1 + IVA)
+                    ' TxtPCI.Text = CDec(IIf(TxtPCI.Text = "", "0", TxtPCI.Text)) * (1 + IVA)
+                    TxtPCI.Text = CDec(IIf(TxtPCI.Text = "", "0", TxtPCI.Text))
                     TxtPCI.Text = FormatNumber(TxtPCI.Text, 2)
                 End If
             End If
@@ -633,7 +634,8 @@
                     CboDescripcion.Text = rd4("Nombre").ToString
                     cboCodigo.Text = rd4("Codigo").ToString
                     TxtUnidad.Text = rd4("UVenta").ToString
-                    TxtPC.Text = FormatNumber(CDec((IIf(rd4("PrecioCompra").ToString = "", "0", rd4("PrecioCompra").ToString)) / (rd4("IVA").ToString + 1)) * CDec(LblValor.Text), 2)
+                    ' TxtPC.Text = FormatNumber(CDec((IIf(rd4("PrecioCompra").ToString = "", "0", rd4("PrecioCompra").ToString)) / (rd4("IVA").ToString + 1)) * CDec(LblValor.Text), 2)
+                    TxtPC.Text = FormatNumber(CDec((IIf(rd4("PrecioCompra").ToString = "", "0", rd4("PrecioCompra").ToString))) * CDec(LblValor.Text), 2)
                     TxtMonedaSIVA.Text = FormatNumber(CDec(IIf(rd4("PrecioCompra").ToString = "", "0", rd4("PrecioCompra").ToString)), 2)
                     TxtPCI.Text = FormatNumber(IIf(CDec(TxtPC.Text) = 0, 0, TxtPC.Text) * (rd4("IVA").ToString + 1), 2)
                     TxtMonedaSIVA.Text = FormatNumber(CDec(TxtPC.Text) / CDec(IIf(LblValor.Text = "0.00", "1", LblValor.Text)), 2)
@@ -731,7 +733,8 @@
                     If rd5.HasRows Then
                         If rd5.Read Then
                             If CDec(rd5("MCD").ToString) > 0 Then
-                                TxtPC.Text = (CDec((IIf(rd4("PrecioCompra").ToString = "", "0", rd4("PrecioCompra").ToString)) / (CDec(rd5("IVA").ToString) + 1)) * CDec(LblValor.Text)) / CDec(rd5("MCD").ToString)
+                                ' TxtPC.Text = (CDec((IIf(rd4("PrecioCompra").ToString = "", "0", rd4("PrecioCompra").ToString)) / (CDec(rd5("IVA").ToString) + 1)) * CDec(LblValor.Text)) / CDec(rd5("MCD").ToString)
+                                TxtPC.Text = (CDec((IIf(rd4("PrecioCompra").ToString = "", "0", rd4("PrecioCompra").ToString))) * CDec(LblValor.Text)) / CDec(rd5("MCD").ToString)
                                 TxtPC.Text = FormatNumber(TxtPC.Text, 2)
                                 TxtPCI.Text = CDec(IIf(TxtPC.Text = "", "0", TxtPC.Text)) * (CDec(rd5("IVA").ToString) + 1)
                                 TxtPCI.Text = FormatNumber(TxtPCI.Text, 2)
@@ -1761,7 +1764,8 @@
                         Dim IVA As Double = rd1("IVA").ToString
                         Dim PComp As Double = 0, PVent As Double = 0
                         ' Dim NPcomp As Double = TxtPC.Text
-                        Dim NPcomp As Double = TxtMonedaIva.Text
+                        ' Dim NPcomp As Double = TxtMonedaIva.Text
+                        Dim NPcomp As Double = TxtPC.Text
                         Dim NPvent As Double = TxtPreLta.Text
 
                         cnn2.Close() : cnn2.Open()
