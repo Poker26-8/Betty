@@ -1345,8 +1345,8 @@ Public Class frmCompras
                                     xy4 = FormatNumber((CDec(txtprecio.Text) * 1.16) + (CDec(txtprecio.Text) * 1.16) * CDec(rd1("PorcEsp").ToString) / 100, 2)
                                     xy44 = FormatNumber((CDec(txtprecio.Text) * 1.16) + (CDec(txtprecio.Text) * 1.16) * CDec(rd1("PorcEsp2").ToString) / 100, 2)
 
-                                    Dim nprecioc As Double = CDec(txtprecio.Text) * (1 + rd1("IVA").ToString)
-
+                                    'Dim nprecioc As Double = CDec(txtprecio.Text) * (1 + rd1("IVA").ToString)
+                                    Dim nprecioc As Double = CDec(txtprecio.Text)
                                     cnn2.Close() : cnn2.Open()
                                     cmd2 = cnn2.CreateCommand
                                     cmd2.CommandText = "UPDATE Productos SET Cargado=0, PrecioCompra=" & nprecioc & ",PrecioVentaIVA=" & xy & ",PrecioVentaIVA2=" & xyy & ",PreMin=" & xy1 & ",PreMin2=" & xy11 & ",PreMay=" & xy2 & ",PreMay2=" & xy22 & ",PreMM=" & xy3 & ",PreMM2=" & xy33 & ",PreEsp=" & xy4 & ",PreEsp2=" & xy44 & " WHERE Codigo='" & txtcodigo.Text & "' AND Nombre='" & cbonombre.Text & "'"
