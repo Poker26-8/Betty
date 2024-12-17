@@ -374,6 +374,7 @@ Public Class frmVentas_refa
 
     Public Sub CodBar()
         If cbocodigo.Text = "" And cbodesc.Text = "" Then Exit Sub
+        'Código de barras 1
         Try
             cnn3.Close() : cnn3.Open()
             cmd3 = cnn3.CreateCommand
@@ -390,14 +391,58 @@ Public Class frmVentas_refa
                     cbocodigo.Text = rd3("Codigo").ToString
                     Anti = rd1("Grupo").ToString
                 End If
-            Else
-                If IsNumeric(cbodesc.Text) Then
-                    cbodesc.Text = ""
-                    rd3.Close() : cnn3.Close() : Exit Sub
-                End If
             End If
             rd3.Close()
             cnn3.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn3.Close()
+        End Try
+
+        'Código de barras 2
+        Try
+            cnn3.Close() : cnn3.Open()
+
+            cmd3 = cnn3.CreateCommand
+            If cbocodigo.Text = "" Then
+                cmd3.CommandText =
+                    "select Codigo,Grupo from Productos where CodBarra1='" & cbodesc.Text & "'"
+            Else
+                cmd3.CommandText =
+                    "select Codigo,Grupo from Productos where CodBarra1='" & cbocodigo.Text & "'"
+            End If
+            rd3 = cmd3.ExecuteReader
+            If rd3.HasRows Then
+                If rd3.Read Then
+                    cbocodigo.Text = rd3("Codigo").ToString
+                    Anti = rd3("Grupo").ToString
+                End If
+            End If
+            rd3.Close() : cnn3.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn3.Close()
+        End Try
+        'Código de barras 3
+        Try
+            cnn3.Close() : cnn3.Open()
+
+            cmd3 = cnn3.CreateCommand
+            If cbocodigo.Text = "" Then
+                cmd3.CommandText =
+                    "select Codigo,Grupo from Productos where CodBarra2='" & cbodesc.Text & "'"
+            Else
+                cmd3.CommandText =
+                    "select Codigo,Grupo from Productos where CodBarra2='" & cbocodigo.Text & "'"
+            End If
+            rd3 = cmd3.ExecuteReader
+            If rd3.HasRows Then
+                If rd3.Read Then
+                    cbocodigo.Text = rd3("Codigo").ToString
+                    Anti = rd3("Grupo").ToString
+                End If
+            End If
+            rd3.Close() : cnn3.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn3.Close()
@@ -2579,7 +2624,7 @@ kaka:
                         Exit Sub
                     End If
                 Else
-                    '  CodBar()
+                    CodBar()
 
                     If cbocodigo.Text <> "" Then
                         cnn2.Close() : cnn2.Open()
