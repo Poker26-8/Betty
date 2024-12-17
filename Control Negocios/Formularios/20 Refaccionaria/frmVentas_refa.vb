@@ -715,7 +715,7 @@ kak:
             cnn3.Close() : cnn3.Open()
 
             cmd3 = cnn3.CreateCommand
-            cmd3.CommandText = "SELECT PrecioVentaIVA,PrecioVentaIVA2,PreMin,PreMin2,PreMay,PreMM,PreMM2,PreEsp,PreEsp2 FROM Productos WHERE Codigo='" & Trim(cbocodigo.Text) & "'"
+            cmd3.CommandText = "SELECT PrecioVentaIVA,PrecioVentaIVA2,PreMin,PreMin2,PreMay,PreMay2,PreMM,PreMM2,PreEsp,PreEsp2 FROM Productos WHERE Codigo='" & Trim(cbocodigo.Text) & "'"
             rd3 = cmd3.ExecuteReader
 
             Select Case cbotipo.Text
@@ -778,6 +778,19 @@ kak:
                         End If
                     End If
                     rd3.Close()
+
+                Case Is = "Mayoreo 2"
+                    If rd3.HasRows Then
+                        If rd3.Read Then
+                            If Moneda > 0 Then
+                                Cambio = CDbl(rd3("PreMay2").ToString) * Moneda
+                            Else
+                                Cambio = CDbl(rd3("PreMay2").ToString)
+                            End If
+                        End If
+                    End If
+                    rd3.Close()
+
                 Case Is = "Medio Mayoreo"
                     If rd3.HasRows Then
                         If rd3.Read Then
