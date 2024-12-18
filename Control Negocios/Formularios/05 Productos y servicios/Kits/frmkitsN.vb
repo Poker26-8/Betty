@@ -301,7 +301,7 @@ Public Class frmkitsN
                     cbocodigo.Text = ""
                     cbodescripcion.Text = ""
                     txtCantidad.Text = "1"
-                    txtPorcentaje.Text = ""
+                    txtPorcentaje.Text = "0"
                     grdDatos.Rows.Clear()
                     txtPrecio.Text = "0.00"
                     txtUtilidad.Text = "0.00"
@@ -335,5 +335,9 @@ Public Class frmkitsN
 
 
         grdDatos.Rows.Remove(grdDatos.Rows(CELDA))
+    End Sub
+
+    Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+
     End Sub
 End Class

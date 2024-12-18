@@ -291,6 +291,7 @@ Partial Class frmkitsN
         Me.btnEliminar.Text = "Eliminar"
         Me.btnEliminar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnEliminar.UseVisualStyleBackColor = True
+        Me.btnEliminar.Visible = False
         '
         'btnGuardar
         '
