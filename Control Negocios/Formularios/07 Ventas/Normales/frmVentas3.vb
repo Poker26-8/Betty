@@ -7998,6 +7998,7 @@ kakaxd:
         Loop
 
         If txttel.Text <> "" Then
+            cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText =
                 "update Ventas set FolMonedero='" & txttel.Text & "' where Folio=" & MYFOLIO
