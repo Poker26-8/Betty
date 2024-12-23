@@ -65,6 +65,7 @@ Partial Class frmkitsN
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -74,7 +75,7 @@ Partial Class frmkitsN
         'Label1
         '
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(3, 12)
+        Me.Label1.Location = New System.Drawing.Point(4, 46)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(71, 24)
         Me.Label1.TabIndex = 0
@@ -93,6 +94,7 @@ Partial Class frmkitsN
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.txtPorcentaje)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.txtCantidad)
@@ -107,7 +109,7 @@ Partial Class frmkitsN
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(815, 89)
+        Me.Panel1.Size = New System.Drawing.Size(815, 122)
         Me.Panel1.TabIndex = 2
         '
         'txtPorcentaje
@@ -116,7 +118,7 @@ Partial Class frmkitsN
         Me.txtPorcentaje.BackColor = System.Drawing.Color.White
         Me.txtPorcentaje.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtPorcentaje.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPorcentaje.Location = New System.Drawing.Point(729, 57)
+        Me.txtPorcentaje.Location = New System.Drawing.Point(730, 91)
         Me.txtPorcentaje.Name = "txtPorcentaje"
         Me.txtPorcentaje.Size = New System.Drawing.Size(74, 23)
         Me.txtPorcentaje.TabIndex = 37
@@ -130,7 +132,7 @@ Partial Class frmkitsN
         Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label5.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Bold)
         Me.Label5.ForeColor = System.Drawing.Color.White
-        Me.Label5.Location = New System.Drawing.Point(729, 39)
+        Me.Label5.Location = New System.Drawing.Point(730, 73)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(74, 19)
         Me.Label5.TabIndex = 36
@@ -143,7 +145,7 @@ Partial Class frmkitsN
         Me.txtCantidad.BackColor = System.Drawing.Color.White
         Me.txtCantidad.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtCantidad.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCantidad.Location = New System.Drawing.Point(673, 57)
+        Me.txtCantidad.Location = New System.Drawing.Point(674, 91)
         Me.txtCantidad.Name = "txtCantidad"
         Me.txtCantidad.Size = New System.Drawing.Size(57, 23)
         Me.txtCantidad.TabIndex = 35
@@ -157,7 +159,7 @@ Partial Class frmkitsN
         Me.Label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label11.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Bold)
         Me.Label11.ForeColor = System.Drawing.Color.White
-        Me.Label11.Location = New System.Drawing.Point(673, 39)
+        Me.Label11.Location = New System.Drawing.Point(674, 73)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(57, 19)
         Me.Label11.TabIndex = 34
@@ -171,7 +173,7 @@ Partial Class frmkitsN
         Me.cbodescripcion.BackColor = System.Drawing.Color.White
         Me.cbodescripcion.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbodescripcion.FormattingEnabled = True
-        Me.cbodescripcion.Location = New System.Drawing.Point(73, 57)
+        Me.cbodescripcion.Location = New System.Drawing.Point(74, 91)
         Me.cbodescripcion.Name = "cbodescripcion"
         Me.cbodescripcion.Size = New System.Drawing.Size(600, 23)
         Me.cbodescripcion.TabIndex = 33
@@ -184,7 +186,7 @@ Partial Class frmkitsN
         Me.Label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label8.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Bold)
         Me.Label8.ForeColor = System.Drawing.Color.White
-        Me.Label8.Location = New System.Drawing.Point(73, 39)
+        Me.Label8.Location = New System.Drawing.Point(74, 73)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(600, 19)
         Me.Label8.TabIndex = 32
@@ -196,7 +198,7 @@ Partial Class frmkitsN
         Me.cbocodigo.BackColor = System.Drawing.Color.White
         Me.cbocodigo.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbocodigo.FormattingEnabled = True
-        Me.cbocodigo.Location = New System.Drawing.Point(3, 57)
+        Me.cbocodigo.Location = New System.Drawing.Point(4, 91)
         Me.cbocodigo.Name = "cbocodigo"
         Me.cbocodigo.Size = New System.Drawing.Size(71, 23)
         Me.cbocodigo.TabIndex = 31
@@ -207,7 +209,7 @@ Partial Class frmkitsN
         Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label9.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.Color.White
-        Me.Label9.Location = New System.Drawing.Point(3, 39)
+        Me.Label9.Location = New System.Drawing.Point(4, 73)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(71, 19)
         Me.Label9.TabIndex = 30
@@ -217,8 +219,9 @@ Partial Class frmkitsN
         'txtCodigoKit
         '
         Me.txtCodigoKit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCodigoKit.Location = New System.Drawing.Point(679, 12)
+        Me.txtCodigoKit.Location = New System.Drawing.Point(680, 46)
         Me.txtCodigoKit.Name = "txtCodigoKit"
+        Me.txtCodigoKit.ReadOnly = True
         Me.txtCodigoKit.Size = New System.Drawing.Size(124, 22)
         Me.txtCodigoKit.TabIndex = 6
         '
@@ -226,7 +229,7 @@ Partial Class frmkitsN
         '
         Me.cboKit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboKit.FormattingEnabled = True
-        Me.cboKit.Location = New System.Drawing.Point(73, 12)
+        Me.cboKit.Location = New System.Drawing.Point(74, 46)
         Me.cboKit.Name = "cboKit"
         Me.cboKit.Size = New System.Drawing.Size(600, 24)
         Me.cboKit.TabIndex = 3
@@ -272,7 +275,7 @@ Partial Class frmkitsN
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.txtUtilidad)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel2.Location = New System.Drawing.Point(0, 381)
+        Me.Panel2.Location = New System.Drawing.Point(0, 402)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(815, 69)
         Me.Panel2.TabIndex = 3
@@ -291,7 +294,6 @@ Partial Class frmkitsN
         Me.btnEliminar.Text = "Eliminar"
         Me.btnEliminar.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnEliminar.UseVisualStyleBackColor = True
-        Me.btnEliminar.Visible = False
         '
         'btnGuardar
         '
@@ -342,9 +344,9 @@ Partial Class frmkitsN
         '
         Me.Panel3.Controls.Add(Me.grdDatos)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(0, 89)
+        Me.Panel3.Location = New System.Drawing.Point(0, 122)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(815, 292)
+        Me.Panel3.Size = New System.Drawing.Size(815, 280)
         Me.Panel3.TabIndex = 4
         '
         'grdDatos
@@ -387,7 +389,7 @@ Partial Class frmkitsN
         Me.grdDatos.RowHeadersVisible = False
         DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grdDatos.RowsDefaultCellStyle = DataGridViewCellStyle11
-        Me.grdDatos.Size = New System.Drawing.Size(815, 292)
+        Me.grdDatos.Size = New System.Drawing.Size(815, 280)
         Me.grdDatos.TabIndex = 0
         '
         'Column1
@@ -465,12 +467,25 @@ Partial Class frmkitsN
         Me.Column8.ReadOnly = True
         Me.Column8.Width = 63
         '
+        'Label4
+        '
+        Me.Label4.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.Label4.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI Historic", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.White
+        Me.Label4.Location = New System.Drawing.Point(0, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Padding = New System.Windows.Forms.Padding(0, 3, 0, 0)
+        Me.Label4.Size = New System.Drawing.Size(815, 31)
+        Me.Label4.TabIndex = 176
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'frmkitsN
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(815, 450)
+        Me.ClientSize = New System.Drawing.Size(815, 471)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
@@ -519,4 +534,5 @@ Partial Class frmkitsN
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
+    Friend WithEvents Label4 As Label
 End Class

@@ -392,8 +392,8 @@ Public Class Inicio
     End Sub
 
     Private Sub ArmadoDeKitsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles pKits.Click
-        frmKits.Show()
-        frmKits.BringToFront()
+        'frmKits.Show()
+        'frmKits.BringToFront()
 
         frmkitsN.Show()
         frmkitsN.BringToFront()

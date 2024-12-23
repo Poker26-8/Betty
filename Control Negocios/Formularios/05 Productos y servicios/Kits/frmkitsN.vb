@@ -114,6 +114,9 @@ Public Class frmkitsN
     End Sub
 
     Private Sub txtCantidad_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCantidad.KeyPress
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+            e.Handled = True
+        End If
         If AscW(e.KeyChar) = Keys.Enter Then
             If IsNumeric(txtCantidad.Text) Then
                 txtPorcentaje.Focus.Equals(True)
@@ -122,6 +125,9 @@ Public Class frmkitsN
     End Sub
 
     Private Sub txtPorcentaje_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPorcentaje.KeyPress
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+            e.Handled = True
+        End If
         If AscW(e.KeyChar) = Keys.Enter Then
             If IsNumeric(txtPorcentaje.Text) Then
 
@@ -179,7 +185,7 @@ Public Class frmkitsN
                         cbocodigo.Text = ""
                         cbodescripcion.Text = ""
                         txtCantidad.Text = "1"
-                        txtPorcentaje.Text = ""
+                        txtPorcentaje.Text = "0"
                         cbodescripcion.Focus.Equals(True)
                     End If
                 End If
@@ -194,6 +200,9 @@ Public Class frmkitsN
 
     Private Sub cboKit_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboKit.SelectedValueChanged
         Try
+            txtUtilidad.Text = "0.00"
+            txtPrecio.Text = "0.00"
+            grdDatos.Rows.Clear()
             Dim porcentaje As Double = 0
             Dim costo As Double = 0
             Dim totporce As Double = 0
@@ -272,10 +281,31 @@ Public Class frmkitsN
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Try
+            If cboKit.Text = "" Or txtCodigoKit.Text = "" Then
+                MsgBox("Selecciona un producto para continuar", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                cboKit.Focus.Equals(True)
+                Exit Sub
+            End If
+            If grdDatos.Rows.Count = 0 Then
+                MsgBox("Agrega productos al Kit para continuar", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                Exit Sub
+            End If
+
+
             If MsgBox("¿Desea guardar la información?", vbInformation + vbYesNo, titulocentral) Then
+                cnn1.Close()
+                cnn1.Open()
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "Delete from Kits where Nombre='" & cboKit.Text & "' and Cod='" & txtCodigoKit.Text & "'"
+                If cmd1.ExecuteNonQuery Then
+
+                Else
+                    MsgBox("Ocurrio un error", vbCritical + vbOKOnly, "Delsscom Control Negocios Pro")
+                    Exit Sub
+                End If
 
                 Dim precion As Double = txtPrecio.Text
-                cnn2.Clone() : cnn2.Open()
+                cnn2.Close() : cnn2.Open()
 
                 For isagi As Integer = 0 To grdDatos.Rows.Count - 1
                     Dim cod As String = grdDatos.Rows(isagi).Cells(0).Value.ToString
@@ -317,6 +347,9 @@ Public Class frmkitsN
     End Sub
 
     Private Sub grdDatos_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles grdDatos.CellDoubleClick
+        If grdDatos.Rows.Count = 0 Then
+            Exit Sub
+        End If
         Dim CELDA As Integer = grdDatos.CurrentRow.Index
         Dim TOTAL As Double = 0
         Dim costo As Double = 0
@@ -335,9 +368,57 @@ Public Class frmkitsN
 
 
         grdDatos.Rows.Remove(grdDatos.Rows(CELDA))
+        If grdDatos.Rows.Count = 0 Then
+            txtUtilidad.Text = "0.00"
+            txtPrecio.Text = "0.00"
+        End If
+        My.Application.DoEvents()
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+        If cboKit.Text = "" And txtCodigoKit.Text = "" Then
+            MsgBox("Selecciona un Kit para eliminar", vbCritical + vbOKOnly, "Delsscom Control Negocios PRO")
+            cboKit.Focus.Equals(True)
+            Exit Sub
+        End If
+        If grdDatos.Rows.Count = 0 Then
+            MsgBox("EL Kit seleccionado no cuenta con productos registrados", vbCritical + vbInformation, "Delsscom Control Negocios PRO")
+            Exit Sub
+        End If
+        If MsgBox("¿Deseas Eliminar el Kit Seleccionado?", vbQuestion + vbOKCancel, "Delsscom Control Negocios PRO") = vbCancel Then
+            Exit Sub
+        End If
+        Try
+            cnn1.Close()
+            cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "Select * from Kits where Nombre='" & cboKit.Text & "' and Cod='" & txtCodigoKit.Text & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.Read Then
+                rd1.Close()
+                cnn2.Close()
+                cnn2.Open()
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "Delete from Kits where Nombre='" & cboKit.Text & "' and Cod='" & txtCodigoKit.Text & "'"
+                If cmd2.ExecuteNonQuery Then
+                    MsgBox("Kit eliminado correctamente", vbInformation + vbOKOnly, "Delsscom Control Negocios PRO")
+                    cnn2.Close()
+                    cnn1.Close()
+                    btnLimpiar.PerformClick()
+                End If
+            Else
+                MsgBox("El kit seleccionado no se encuentra registrado en la base de datos", vbCritical + vbOKOnly, "Delsscom Control Negocios PRO")
+                rd1.Close()
+            End If
+            cnn1.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn2.Close()
+            cnn1.Close()
+        End Try
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
     End Sub
 End Class
