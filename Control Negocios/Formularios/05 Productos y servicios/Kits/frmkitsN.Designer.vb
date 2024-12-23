@@ -37,6 +37,7 @@ Partial Class frmkitsN
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.txtPorcentaje = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtCantidad = New System.Windows.Forms.TextBox()
@@ -57,6 +58,12 @@ Partial Class frmkitsN
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.grdDatos = New System.Windows.Forms.DataGridView()
+        Me.txtCompra = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtpventa = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -65,7 +72,6 @@ Partial Class frmkitsN
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -94,7 +100,13 @@ Partial Class frmkitsN
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.TextBox1)
+        Me.Panel1.Controls.Add(Me.Label10)
+        Me.Panel1.Controls.Add(Me.txtpventa)
+        Me.Panel1.Controls.Add(Me.Label7)
+        Me.Panel1.Controls.Add(Me.txtCompra)
         Me.Panel1.Controls.Add(Me.Label4)
+        Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.txtPorcentaje)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.txtCantidad)
@@ -112,18 +124,31 @@ Partial Class frmkitsN
         Me.Panel1.Size = New System.Drawing.Size(815, 122)
         Me.Panel1.TabIndex = 2
         '
+        'Label4
+        '
+        Me.Label4.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
+        Me.Label4.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI Historic", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.Color.White
+        Me.Label4.Location = New System.Drawing.Point(0, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Padding = New System.Windows.Forms.Padding(0, 3, 0, 0)
+        Me.Label4.Size = New System.Drawing.Size(815, 31)
+        Me.Label4.TabIndex = 176
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'txtPorcentaje
         '
         Me.txtPorcentaje.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPorcentaje.BackColor = System.Drawing.Color.White
         Me.txtPorcentaje.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtPorcentaje.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPorcentaje.Location = New System.Drawing.Point(730, 91)
+        Me.txtPorcentaje.Location = New System.Drawing.Point(691, 91)
         Me.txtPorcentaje.Name = "txtPorcentaje"
-        Me.txtPorcentaje.Size = New System.Drawing.Size(74, 23)
+        Me.txtPorcentaje.Size = New System.Drawing.Size(70, 23)
         Me.txtPorcentaje.TabIndex = 37
         Me.txtPorcentaje.Text = "0"
-        Me.txtPorcentaje.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtPorcentaje.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label5
         '
@@ -132,9 +157,9 @@ Partial Class frmkitsN
         Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label5.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Bold)
         Me.Label5.ForeColor = System.Drawing.Color.White
-        Me.Label5.Location = New System.Drawing.Point(730, 73)
+        Me.Label5.Location = New System.Drawing.Point(691, 73)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(74, 19)
+        Me.Label5.Size = New System.Drawing.Size(73, 19)
         Me.Label5.TabIndex = 36
         Me.Label5.Text = "Porcentaje"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -145,12 +170,12 @@ Partial Class frmkitsN
         Me.txtCantidad.BackColor = System.Drawing.Color.White
         Me.txtCantidad.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtCantidad.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCantidad.Location = New System.Drawing.Point(674, 91)
+        Me.txtCantidad.Location = New System.Drawing.Point(628, 91)
         Me.txtCantidad.Name = "txtCantidad"
-        Me.txtCantidad.Size = New System.Drawing.Size(57, 23)
+        Me.txtCantidad.Size = New System.Drawing.Size(64, 23)
         Me.txtCantidad.TabIndex = 35
         Me.txtCantidad.Text = "1"
-        Me.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label11
         '
@@ -159,9 +184,9 @@ Partial Class frmkitsN
         Me.Label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label11.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Bold)
         Me.Label11.ForeColor = System.Drawing.Color.White
-        Me.Label11.Location = New System.Drawing.Point(674, 73)
+        Me.Label11.Location = New System.Drawing.Point(628, 73)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(57, 19)
+        Me.Label11.Size = New System.Drawing.Size(67, 19)
         Me.Label11.TabIndex = 34
         Me.Label11.Text = "Cantidad"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -175,7 +200,7 @@ Partial Class frmkitsN
         Me.cbodescripcion.FormattingEnabled = True
         Me.cbodescripcion.Location = New System.Drawing.Point(74, 91)
         Me.cbodescripcion.Name = "cbodescripcion"
-        Me.cbodescripcion.Size = New System.Drawing.Size(600, 23)
+        Me.cbodescripcion.Size = New System.Drawing.Size(397, 23)
         Me.cbodescripcion.TabIndex = 33
         '
         'Label8
@@ -188,7 +213,7 @@ Partial Class frmkitsN
         Me.Label8.ForeColor = System.Drawing.Color.White
         Me.Label8.Location = New System.Drawing.Point(74, 73)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(600, 19)
+        Me.Label8.Size = New System.Drawing.Size(397, 19)
         Me.Label8.TabIndex = 32
         Me.Label8.Text = "Descripción"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -392,6 +417,89 @@ Partial Class frmkitsN
         Me.grdDatos.Size = New System.Drawing.Size(815, 280)
         Me.grdDatos.TabIndex = 0
         '
+        'txtCompra
+        '
+        Me.txtCompra.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtCompra.BackColor = System.Drawing.Color.White
+        Me.txtCompra.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtCompra.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCompra.Location = New System.Drawing.Point(468, 91)
+        Me.txtCompra.Name = "txtCompra"
+        Me.txtCompra.ReadOnly = True
+        Me.txtCompra.Size = New System.Drawing.Size(77, 23)
+        Me.txtCompra.TabIndex = 37
+        Me.txtCompra.Text = "0"
+        Me.txtCompra.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label6
+        '
+        Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label6.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label6.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label6.ForeColor = System.Drawing.Color.White
+        Me.Label6.Location = New System.Drawing.Point(468, 73)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(85, 19)
+        Me.Label6.TabIndex = 36
+        Me.Label6.Text = "Costo"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtpventa
+        '
+        Me.txtpventa.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtpventa.BackColor = System.Drawing.Color.White
+        Me.txtpventa.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtpventa.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtpventa.Location = New System.Drawing.Point(761, 91)
+        Me.txtpventa.Name = "txtpventa"
+        Me.txtpventa.Size = New System.Drawing.Size(51, 23)
+        Me.txtpventa.TabIndex = 178
+        Me.txtpventa.Text = "0"
+        Me.txtpventa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label7
+        '
+        Me.Label7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label7.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label7.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label7.ForeColor = System.Drawing.Color.White
+        Me.Label7.Location = New System.Drawing.Point(761, 73)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(51, 19)
+        Me.Label7.TabIndex = 177
+        Me.Label7.Text = "Precio Venta"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox1.BackColor = System.Drawing.Color.White
+        Me.TextBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(545, 91)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(88, 23)
+        Me.TextBox1.TabIndex = 180
+        Me.TextBox1.Text = "0"
+        Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label10
+        '
+        Me.Label10.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label10.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.Label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label10.Font = New System.Drawing.Font("Arial Narrow", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.Label10.ForeColor = System.Drawing.Color.White
+        Me.Label10.Location = New System.Drawing.Point(545, 73)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(88, 19)
+        Me.Label10.TabIndex = 179
+        Me.Label10.Text = "Precio Publico"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'Column1
         '
         Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
@@ -421,7 +529,7 @@ Partial Class frmkitsN
         'Column4
         '
         Me.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.Column4.DefaultCellStyle = DataGridViewCellStyle4
         Me.Column4.HeaderText = "Cantidad"
         Me.Column4.Name = "Column4"
@@ -430,17 +538,18 @@ Partial Class frmkitsN
         '
         'Column5
         '
-        Me.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.Column5.DefaultCellStyle = DataGridViewCellStyle5
         Me.Column5.HeaderText = "Porcentaje %"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
+        Me.Column5.Width = 110
         '
         'Column6
         '
         Me.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.Column6.DefaultCellStyle = DataGridViewCellStyle6
         Me.Column6.HeaderText = "Costo"
         Me.Column6.Name = "Column6"
@@ -450,7 +559,7 @@ Partial Class frmkitsN
         'Column7
         '
         Me.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.Column7.DefaultCellStyle = DataGridViewCellStyle7
         Me.Column7.HeaderText = "Subtotal"
         Me.Column7.Name = "Column7"
@@ -460,25 +569,12 @@ Partial Class frmkitsN
         'Column8
         '
         Me.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.Column8.DefaultCellStyle = DataGridViewCellStyle8
         Me.Column8.HeaderText = "Total"
         Me.Column8.Name = "Column8"
         Me.Column8.ReadOnly = True
         Me.Column8.Width = 63
-        '
-        'Label4
-        '
-        Me.Label4.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(170, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.Label4.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI Historic", 12.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.Color.White
-        Me.Label4.Location = New System.Drawing.Point(0, 0)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Padding = New System.Windows.Forms.Padding(0, 3, 0, 0)
-        Me.Label4.Size = New System.Drawing.Size(815, 31)
-        Me.Label4.TabIndex = 176
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'frmkitsN
         '
@@ -526,6 +622,13 @@ Partial Class frmkitsN
     Friend WithEvents Label8 As Label
     Friend WithEvents cbocodigo As ComboBox
     Friend WithEvents Label9 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents txtCompra As TextBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents txtpventa As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label10 As Label
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
@@ -534,5 +637,4 @@ Partial Class frmkitsN
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
-    Friend WithEvents Label4 As Label
 End Class

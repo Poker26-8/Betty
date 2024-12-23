@@ -100,11 +100,13 @@ Public Class frmkitsN
         If AscW(e.KeyChar) = Keys.Enter Then
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT Nombre FROM productos WHERE Codigo='" & cbocodigo.Text & "'"
+            cmd1.CommandText = "SELECT Nombre,PrecioCompra,PrecioVentaIVA FROM productos WHERE Codigo='" & cbocodigo.Text & "'"
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then
                     cbodescripcion.Text = rd1(0).ToString
+                    txtCompra.Text = FormatNumber(rd1(1).ToString, 2)
+                    TextBox1.Text = FormatNumber(rd1(2).ToString, 2)
                 End If
             End If
             rd1.Close()
@@ -130,67 +132,77 @@ Public Class frmkitsN
         End If
         If AscW(e.KeyChar) = Keys.Enter Then
             If IsNumeric(txtPorcentaje.Text) Then
-
-                Dim unidad As String = ""
-                Dim costo As Double = 0
                 Dim cantidad As Double = txtCantidad.Text
                 Dim porsentaje As Double = txtPorcentaje.Text
                 Dim totporce As Double = 0
                 Dim totporce2 As Double = 0
                 Dim subtotal As Double = 0
-                Dim total As Double = 0
-                Dim sumcosto As Double = 0
-                Dim totalkit As Double = 0
-                Dim totalcosto As Double = 0
+                totporce = CDec(porsentaje / 100)
+                totporce2 = CDec(txtCompra.Text) * CDec(totporce)
+                subtotal = CDec(totporce2 + txtCompra.Text)
+                txtpventa.Text = FormatNumber(subtotal, 2)
+                txtpventa.Focus.Equals(True)
+                My.Application.DoEvents()
+                'Dim unidad As String = ""
+                'Dim costo As Double = 0
+                'Dim cantidad As Double = txtCantidad.Text
+                'Dim porsentaje As Double = txtPorcentaje.Text
+                'Dim totporce As Double = 0
+                'Dim totporce2 As Double = 0
+                'Dim subtotal As Double = 0
+                'Dim total As Double = 0
+                'Dim sumcosto As Double = 0
+                'Dim totalkit As Double = 0
+                'Dim totalcosto As Double = 0
 
-                cnn1.Close() : cnn1.Open()
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "SELECT UVenta,PrecioCompra FROM productos WHERE Nombre='" & cbodescripcion.Text & "' AND Codigo='" & cbocodigo.Text & "'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        unidad = rd1("UVenta").ToString
-                        costo = rd1("PrecioCompra").ToString
+                'cnn1.Close() : cnn1.Open()
+                'cmd1 = cnn1.CreateCommand
+                'cmd1.CommandText = "SELECT UVenta,PrecioCompra FROM productos WHERE Nombre='" & cbodescripcion.Text & "' AND Codigo='" & cbocodigo.Text & "'"
+                'rd1 = cmd1.ExecuteReader
+                'If rd1.HasRows Then
+                '    If rd1.Read Then
+                '        unidad = rd1("UVenta").ToString
+                '        costo = rd1("PrecioCompra").ToString
 
-                        totporce = CDec(porsentaje / 100)
-                        totporce2 = CDec(costo) * CDec(totporce)
-                        subtotal = CDec(totporce2 + costo)
-                        total = CDec(subtotal * cantidad)
+                '        totporce = CDec(porsentaje / 100)
+                '        totporce2 = CDec(costo) * CDec(totporce)
+                '        subtotal = CDec(totporce2 + costo)
+                '        total = CDec(subtotal * cantidad)
 
 
 
-                        grdDatos.Rows.Add(cbocodigo.Text,
-                                          cbodescripcion.Text,
-                                          unidad,
-                                          cantidad,
-                                          porsentaje,
-                                          costo,
-                                          subtotal,
-                                          total)
+                '        grdDatos.Rows.Add(cbocodigo.Text,
+                '                          cbodescripcion.Text,
+                '                          unidad,
+                '                          cantidad,
+                '                          porsentaje,
+                '                          costo,
+                '                          subtotal,
+                '                          total)
 
-                        For luffy As Integer = 0 To grdDatos.Rows.Count - 1
-                            Dim tot As Double = grdDatos.Rows(luffy).Cells(7).Value.ToString
-                            Dim cant As Double = grdDatos.Rows(luffy).Cells(3).Value.ToString
-                            Dim cost As Double = grdDatos.Rows(luffy).Cells(5).Value.ToString
+                '        For luffy As Integer = 0 To grdDatos.Rows.Count - 1
+                '            Dim tot As Double = grdDatos.Rows(luffy).Cells(7).Value.ToString
+                '            Dim cant As Double = grdDatos.Rows(luffy).Cells(3).Value.ToString
+                '            Dim cost As Double = grdDatos.Rows(luffy).Cells(5).Value.ToString
 
-                            sumcosto = CDec(cant * cost)
+                '            sumcosto = CDec(cant * cost)
 
-                            totalkit = totalkit + CDec(tot)
-                            totalcosto = totalcosto + CDec(sumcosto)
-                        Next
+                '            totalkit = totalkit + CDec(tot)
+                '            totalcosto = totalcosto + CDec(sumcosto)
+                '        Next
 
-                        txtPrecio.Text = FormatNumber(totalkit, 2)
-                        txtUtilidad.Text = FormatNumber(totalkit - totalcosto, 2)
+                '        txtPrecio.Text = FormatNumber(totalkit, 2)
+                '        txtUtilidad.Text = FormatNumber(totalkit - totalcosto, 2)
 
-                        cbocodigo.Text = ""
-                        cbodescripcion.Text = ""
-                        txtCantidad.Text = "1"
-                        txtPorcentaje.Text = "0"
-                        cbodescripcion.Focus.Equals(True)
-                    End If
-                End If
-                rd1.Close()
-                cnn1.Close()
+                '        cbocodigo.Text = ""
+                '        cbodescripcion.Text = ""
+                '        txtCantidad.Text = "1"
+                '        txtPorcentaje.Text = "0"
+                '        cbodescripcion.Focus.Equals(True)
+                '    End If
+                'End If
+                'rd1.Close()
+                'cnn1.Close()
 
 
 
@@ -272,6 +284,7 @@ Public Class frmkitsN
         txtCodigoKit.Text = ""
         txtPrecio.Text = "0.00"
         txtUtilidad.Text = "0.00"
+        TextBox1.Text = "0"
         cboKit.Focus.Equals(True)
     End Sub
 
@@ -365,13 +378,27 @@ Public Class frmkitsN
 
         txtPrecio.Text = txtPrecio.Text - CDec(TOTAL)
         txtUtilidad.Text = txtUtilidad.Text - (CDec(uti - costo))
-
+        txtCompra.Text = costo
+        txtpventa.Text = uti
+        My.Application.DoEvents()
+        cnn1.Close()
+        cnn1.Open()
+        cmd1 = cnn1.CreateCommand
+        cmd1.CommandText = "Select PrecioVentaIVA from Productos where Codigo='" & cbocodigo.Text & "'"
+        rd1 = cmd1.ExecuteReader
+        If rd1.Read Then
+            TextBox1.Text = FormatNumber(rd1(0).ToString, 2)
+        End If
+        rd1.Close()
+        cnn1.Close()
 
         grdDatos.Rows.Remove(grdDatos.Rows(CELDA))
         If grdDatos.Rows.Count = 0 Then
             txtUtilidad.Text = "0.00"
             txtPrecio.Text = "0.00"
         End If
+        txtCantidad.SelectAll()
+        txtCantidad.Focus.Equals(True)
         My.Application.DoEvents()
     End Sub
 
@@ -420,5 +447,59 @@ Public Class frmkitsN
 
     Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
+    End Sub
+
+    Private Sub txtpventa_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtpventa.KeyPress
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+            e.Handled = True
+        End If
+
+        If AscW(e.KeyChar) = Keys.Enter Then
+            Dim unidad As String = ""
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT UVenta,PrecioCompra FROM productos WHERE Nombre='" & cbodescripcion.Text & "' AND Codigo='" & cbocodigo.Text & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    unidad = rd1("UVenta").ToString
+                End If
+            End If
+            rd1.Close()
+            cnn1.Close()
+            Dim sumcosto As Double = 0
+            Dim totalkit As Double = 0
+            Dim totalcosto As Double = 0
+            Dim total As Double = 0
+            total = CDec(txtCantidad.Text) * CDec(txtpventa.Text)
+
+            grdDatos.Rows.Add(cbocodigo.Text, cbodescripcion.Text, unidad, FormatNumber(txtCantidad.Text, 2), FormatNumber(txtPorcentaje.Text, 2), FormatNumber(txtCompra.Text, 2), FormatNumber(txtpventa.Text, 2), FormatNumber(total, 2))
+
+            My.Application.DoEvents()
+
+            For luffy As Integer = 0 To grdDatos.Rows.Count - 1
+                Dim tot As Double = grdDatos.Rows(luffy).Cells(7).Value.ToString
+                Dim cant As Double = grdDatos.Rows(luffy).Cells(3).Value.ToString
+                Dim cost As Double = grdDatos.Rows(luffy).Cells(5).Value.ToString
+
+                sumcosto = CDec(cant * cost)
+
+                totalkit = totalkit + CDec(tot)
+                totalcosto = totalcosto + CDec(sumcosto)
+            Next
+
+            txtPrecio.Text = FormatNumber(totalkit, 2)
+            txtUtilidad.Text = FormatNumber(totalkit - totalcosto, 2)
+
+            cbocodigo.Text = ""
+            cbodescripcion.Text = ""
+            txtCantidad.Text = "1"
+            txtPorcentaje.Text = "0"
+            txtCompra.Text = "0"
+            txtpventa.Text = "0"
+            TextBox1.Text = "0"
+            cbodescripcion.Focus.Equals(True)
+
+        End If
     End Sub
 End Class
