@@ -1,5 +1,23 @@
 ﻿Module CrearBD
 
+    Public vartablaoptica As String = "CREATE TABLE `optica` (
+                                          `Id` int(11) NOT NULL,
+                                          `Cliente` varchar(255) DEFAULT '',
+                                          `Medico` varchar(255) DEFAULT '',
+                                          `EsfD` varchar(50) DEFAULT '',
+                                          `CilD` varchar(50) DEFAULT '',
+                                          `EjeD` varchar(50) DEFAULT '',
+                                          `AddD` varchar(50) DEFAULT '',
+                                          `EsfI` varchar(50) DEFAULT '',
+                                          `CilI` varchar(50) DEFAULT '',
+                                          `EjeI` varchar(50) DEFAULT '',
+                                          `AddI` varchar(50) DEFAULT '',
+                                          `DIP` varchar(50) DEFAULT '',
+                                          `Nota` varchar(255) DEFAULT '',
+                                          `Fecha` datetime DEFAULT NULL,
+                                          `Usuario` varchar(50) DEFAULT ''
+                                        ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+
     Public vartablaproduccion As String = "CREATE TABLE `produccion` (
                                               `IdProduccion` int(11) NOT NULL,
                                               `Codigo` varchar(50) DEFAULT '',
@@ -7067,6 +7085,7 @@
     '/////////////////////////////////////////////////////////////////////////
     'LLAVES PRIMARIAS
     '/////////////////////////////////////////////////////////////////////////
+    Public VarKeyoptica As String = "ALTER TABLE `optica` ADD PRIMARY KEY (`Id`);"
     Public VarKeyproduccion As String = "ALTER TABLE `produccion` ADD PRIMARY KEY (`IdProduccion`);"
     Public VarKeypromodet As String = "ALTER TABLE `promodet` ADD PRIMARY KEY (`Id`);"
     Public VarKeypromo As String = "ALTER TABLE `promo` ADD PRIMARY KEY (`Id`);"
@@ -7247,6 +7266,7 @@
     '/////////////////////////////////////////////////////////////////////////
     'AUTOINCREMENTO
     '/////////////////////////////////////////////////////////////////////////
+    Public VarAutooptica As String = "ALTER TABLE `optica` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
     Public VarAutoproduccion As String = "ALTER TABLE `produccion` MODIFY `IdProduccion` int(11) NOT NULL AUTO_INCREMENT;"
     Public VarAutopromodet As String = "ALTER TABLE `promodet` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"
     Public VarAutopromo As String = "ALTER TABLE `promo` MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;"

@@ -783,6 +783,11 @@ Public Class Login
                     With odata
                         If .dbOpen(cnnprueba, sTargetprueba, sinfo) Then
 
+                            'optica
+                            .runSp(cnnprueba, vartablaoptica, sinfo)
+                            .runSp(cnnprueba, VarKeyoptica, sinfo)
+                            .runSp(cnnprueba, VarAutooptica, sinfo)
+
                             'produccion
                             .runSp(cnnprueba, vartablaproduccion, sinfo)
                             .runSp(cnnprueba, VarKeyproduccion, sinfo)
