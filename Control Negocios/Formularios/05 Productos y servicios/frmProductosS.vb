@@ -922,7 +922,7 @@ Public Class frmProductosS
             End If
 
             'Variables para alojar los datos del archivo de excel
-            Dim codigo, barras, nombre, unidad, proveedor, depto, grupo, prod_sat, unidad_sat, numparte As String
+            Dim codigo, barras, barras2, barras3, nombre, unidad, proveedor, depto, grupo, prod_sat, unidad_sat, numparte As String
             Dim fecha As String = Format(Date.Now, "yyyy-MM-dd")
             Dim iva, compra, compra_iva, venta_siva, venta_civa, porcentaje, existencia, ieps As Double
             Dim conteo As Integer = 0
@@ -944,25 +944,28 @@ Public Class frmProductosS
                 codigo = NulCad(DataGridView1.Rows(zef).Cells(0).Value.ToString())
                 If codigo = "" Then Exit For
                 barras = DataGridView1.Rows(zef).Cells(1).Value.ToString()
-                nombre = UCase(NulCad(DataGridView1.Rows(zef).Cells(2).Value.ToString()))
-                iva = NulVa(DataGridView1.Rows(zef).Cells(3).Value.ToString())
-                unidad = NulCad(DataGridView1.Rows(zef).Cells(4).Value.ToString())
-                compra = NulVa(DataGridView1.Rows(zef).Cells(5).Value.ToString())
-                compra_iva = CDbl(compra) * (1 + CDbl(iva))
-                venta_siva = FormatNumber(NulVa(DataGridView1.Rows(zef).Cells(6).Value.ToString()) / (1 + iva), 2)
-                venta_civa = NulVa(DataGridView1.Rows(zef).Cells(6).Value.ToString())
-                porcentaje = IIf(compra_iva = 0, 0, FormatNumber(((venta_civa * 100) / compra_iva) - 100, 2))
-                proveedor = NulCad(DataGridView1.Rows(zef).Cells(7).Value.ToString())
-                depto = NulCad(DataGridView1.Rows(zef).Cells(8).Value.ToString())
-                grupo = NulCad(DataGridView1.Rows(zef).Cells(9).Value.ToString())
-                prod_sat = NulCad(DataGridView1.Rows(zef).Cells(10).Value.ToString())
-                unidad_sat = NulCad(DataGridView1.Rows(zef).Cells(11).Value.ToString())
-                existencia = NulVa(DataGridView1.Rows(zef).Cells(12).Value.ToString())
-                ieps = NulVa(DataGridView1.Rows(zef).Cells(13).Value.ToString())
-                numparte = NulCad(DataGridView1.Rows(zef).Cells(14).Value.ToString())
+                barras2 = DataGridView1.Rows(zef).Cells(2).Value.ToString()
+                barras3 = DataGridView1.Rows(zef).Cells(3).Value.ToString()
 
-                lote = NulCad(DataGridView1.Rows(zef).Cells(15).Value.ToString())
-                caducidad = NulCad(IIf(DataGridView1.Rows(zef).Cells(16).Value.ToString() = "", Date.Now, DataGridView1.Rows(zef).Cells(16).Value.ToString()))
+                nombre = UCase(NulCad(DataGridView1.Rows(zef).Cells(4).Value.ToString()))
+                iva = NulVa(DataGridView1.Rows(zef).Cells(5).Value.ToString())
+                unidad = NulCad(DataGridView1.Rows(zef).Cells(6).Value.ToString())
+                compra = NulVa(DataGridView1.Rows(zef).Cells(7).Value.ToString())
+                compra_iva = CDbl(compra) * (1 + CDbl(iva))
+                venta_siva = FormatNumber(NulVa(DataGridView1.Rows(zef).Cells(8).Value.ToString()) / (1 + iva), 2)
+                venta_civa = NulVa(DataGridView1.Rows(zef).Cells(8).Value.ToString())
+                porcentaje = IIf(compra_iva = 0, 0, FormatNumber(((venta_civa * 100) / compra_iva) - 100, 2))
+                proveedor = NulCad(DataGridView1.Rows(zef).Cells(9).Value.ToString())
+                depto = NulCad(DataGridView1.Rows(zef).Cells(10).Value.ToString())
+                grupo = NulCad(DataGridView1.Rows(zef).Cells(11).Value.ToString())
+                prod_sat = NulCad(DataGridView1.Rows(zef).Cells(12).Value.ToString())
+                unidad_sat = NulCad(DataGridView1.Rows(zef).Cells(13).Value.ToString())
+                existencia = NulVa(DataGridView1.Rows(zef).Cells(14).Value.ToString())
+                ieps = NulVa(DataGridView1.Rows(zef).Cells(15).Value.ToString())
+                numparte = NulCad(DataGridView1.Rows(zef).Cells(16).Value.ToString())
+
+                lote = NulCad(DataGridView1.Rows(zef).Cells(17).Value.ToString())
+                caducidad = NulCad(IIf(DataGridView1.Rows(zef).Cells(18).Value.ToString() = "", Date.Now, DataGridView1.Rows(zef).Cells(16).Value.ToString()))
 
                 caducidad = Format(caducidad, "yyyy-MM-dd")
 
@@ -992,7 +995,7 @@ Public Class frmProductosS
 
                     cmd1 = cnn1.CreateCommand
                     cmd1.CommandText =
-                        "insert into Productos(Codigo,CodBarra,Nombre,NombreLargo,ProvPri,ProvEme,ProvRes,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Ubicacion,Min,Max,Comision,PrecioCompra,PrecioVenta,PrecioVentaIVA,IVA,Existencia,Porcentaje,Fecha,pres_vol,id_tbMoneda,Promocion,Afecta_exis,Almacen3,ClaveSat,UnidadSat,Cargado,CargadoInv,Uso,Color,Genero,Marca,Articulo,Dia,Descu,Fecha_Inicial,Fecha_Final,Promo_Monedero,Unico,IIEPS,N_Serie,GPrint) values('" & codigo & "','" & barras & "','" & nombre & "','" & nombre & "','" & proveedor & "','" & proveedor & "',0,'" & unidad & "','" & unidad & "','" & unidad & "',1,1,'" & depto & "','" & grupo & "','',1,1,0," & compra & "," & venta_siva & "," & venta_civa & "," & iva & "," & existencia & "," & porcentaje & ",'" & fecha & "',0,1,0,0," & compra & ",'" & prod_sat & "','" & unidad_sat & "',0,0,'','','','','',0,'0','" & fecha & "','" & fecha & "',0,0," & ieps & ",'" & numparte & "','')"
+                        "insert into Productos(Codigo,CodBarra,CodBarra1,CodBarra2,Nombre,NombreLargo,ProvPri,ProvEme,ProvRes,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Ubicacion,Min,Max,Comision,PrecioCompra,PrecioVenta,PrecioVentaIVA,IVA,Existencia,Porcentaje,Fecha,pres_vol,id_tbMoneda,Promocion,Afecta_exis,Almacen3,ClaveSat,UnidadSat,Cargado,CargadoInv,Uso,Color,Genero,Marca,Articulo,Dia,Descu,Fecha_Inicial,Fecha_Final,Promo_Monedero,Unico,IIEPS,N_Serie,GPrint) values('" & codigo & "','" & barras & "','" & barras2 & "','" & barras3 & "','" & nombre & "','" & nombre & "','" & proveedor & "','" & proveedor & "',0,'" & unidad & "','" & unidad & "','" & unidad & "',1,1,'" & depto & "','" & grupo & "','',1,1,0," & compra & "," & venta_siva & "," & venta_civa & "," & iva & "," & existencia & "," & porcentaje & ",'" & fecha & "',0,1,0,0," & compra & ",'" & prod_sat & "','" & unidad_sat & "',0,0,'','','','','',0,'0','" & fecha & "','" & fecha & "',0,0," & ieps & ",'" & numparte & "','')"
                     If cmd1.ExecuteNonQuery Then
                         If lote <> "" Then
                             Lote_Caducidad(codigo, existencia, caducidad, lote)
