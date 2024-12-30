@@ -87,6 +87,8 @@ Partial Class frmModulos
         Me.Label32 = New System.Windows.Forms.Label()
         Me.btnPediatra = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.btnMembresias = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label1
@@ -791,11 +793,33 @@ Partial Class frmModulos
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(899, 303)
+        Me.Button4.Location = New System.Drawing.Point(1001, 304)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(52, 34)
         Me.Button4.TabIndex = 63
         Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Label33
+        '
+        Me.Label33.BackColor = System.Drawing.Color.DodgerBlue
+        Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label33.ForeColor = System.Drawing.Color.White
+        Me.Label33.Location = New System.Drawing.Point(899, 304)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(93, 37)
+        Me.Label33.TabIndex = 64
+        Me.Label33.Text = "Membresias"
+        Me.Label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'btnMembresias
+        '
+        Me.btnMembresias.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btnMembresias.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnMembresias.Location = New System.Drawing.Point(899, 343)
+        Me.btnMembresias.Name = "btnMembresias"
+        Me.btnMembresias.Size = New System.Drawing.Size(93, 71)
+        Me.btnMembresias.TabIndex = 65
+        Me.btnMembresias.UseVisualStyleBackColor = True
         '
         'frmModulos
         '
@@ -803,6 +827,8 @@ Partial Class frmModulos
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1096, 424)
+        Me.Controls.Add(Me.btnMembresias)
+        Me.Controls.Add(Me.Label33)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.btnPediatra)
         Me.Controls.Add(Me.Label32)
@@ -939,4 +965,6 @@ Partial Class frmModulos
     Friend WithEvents Label32 As Label
     Friend WithEvents btnPediatra As Button
     Friend WithEvents Button4 As Button
+    Friend WithEvents Label33 As Label
+    Friend WithEvents btnMembresias As Button
 End Class

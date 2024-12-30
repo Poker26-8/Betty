@@ -790,6 +790,7 @@ Public Class Inicio
             Dim series As Integer = DatosRecarga2("Series")
             Dim descuento As Integer = DatosRecarga2("Desc_Ventas")
             Dim refaccionaria As Integer = DatosRecarga2("Refaccionaria")
+            Dim membresias As Integer = DatosRecarga2("Membresias")
 
             If partes = 1 Then
                 frmVentas1_Partes.Show()
@@ -806,6 +807,10 @@ Public Class Inicio
             ElseIf refaccionaria = 1 Then
                 frmVentas_refa.Show()
                 frmVentas_refa.BringToFront()
+
+            ElseIf membresias = 1 Then
+                frmVentasMembre.Show()
+                frmVentasMembre.BringToFront()
             Else
                 My.Application.DoEvents()
                 frmVentas1.Show()

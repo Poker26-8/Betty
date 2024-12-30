@@ -2531,6 +2531,18 @@
     <Compile Include="Formularios\37 Pediatria\frmPediatria.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Formularios\38 Membresias\frmMembresias.Designer.vb">
+      <DependentUpon>frmMembresias.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\38 Membresias\frmMembresias.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\38 Membresias\frmVentasMembre.Designer.vb">
+      <DependentUpon>frmVentasMembre.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\38 Membresias\frmVentasMembre.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Mods\Almacen.vb" />
     <Compile Include="Mods\CrearBD.vb" />
     <Compile Include="Mods\Facturacion.vb" />
@@ -3714,6 +3726,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\37 Pediatria\frmPediatria.resx">
       <DependentUpon>frmPediatria.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\38 Membresias\frmMembresias.resx">
+      <DependentUpon>frmMembresias.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\38 Membresias\frmVentasMembre.resx">
+      <DependentUpon>frmVentasMembre.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

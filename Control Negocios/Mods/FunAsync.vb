@@ -109,6 +109,51 @@ Module FunAsync
 
         Await Task.WhenAll(task44, task54)
     End Function
+
+    Public Async Function RunAsyncFunctionsVMembre() As Task
+        Dim taskmembre = FunctionVentasMembreAsync()
+        Dim taskmebre2 = FunctionClientesMembreAsync()
+    End Function
+    '------------------------------------------PANTALLA DE VENTAS MEMBRESIA-------------------------------------------------
+    Public Async Function FunctionVentasMembreAsync() As Task(Of String)
+
+        frmVentasMembre.cbodesc.Items.Clear()
+
+        cnn5.Close() : cnn5.Open()
+        cmd5 = cnn5.CreateCommand
+
+        If frmVentasMembre.cbonota.Text = "" Then
+            cmd5.CommandText = "select distinct Nombre from Productos where Grupo<>'INSUMO' and ProvRes<>1 order by Nombre"
+        Else
+            cmd5.CommandText = "select distinct Nombre from VentasDetalle where Folio=" & frmVentasMembre.cbonota.Text & " order by Nombre"
+        End If
+
+        rd5 = cmd5.ExecuteReader
+        Do While rd5.Read
+            If rd5.HasRows Then
+                frmVentasMembre.cbodesc.Items.Add(rd5(0).ToString)
+            End If
+        Loop
+        rd5.Close()
+        cnn5.Close()
+
+    End Function
+    Public Async Function FunctionClientesMembreAsync() As Task(Of String)
+
+        frmVentasMembre.cboNombre.Items.Clear()
+        cnn5.Close() : cnn5.Open()
+        cmd5 = cnn5.CreateCommand
+        cmd5.CommandText = "SELECT distinct Nombre FROM Clientes WHERE Nombre<>'' order by Nombre asc"
+        rd5 = cmd5.ExecuteReader
+        Do While rd5.Read
+            If rd5.HasRows Then
+                frmVentasMembre.cboNombre.Items.Add(rd5(0).ToString)
+            End If
+        Loop
+        rd5.Close()
+        cnn5.Close()
+
+    End Function
     '------------------------------------------PANTALLA DE VENTAS 3-------------------------------------------------
     Public Async Function FunctionVentas3Async() As Task(Of String)
 
