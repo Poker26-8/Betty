@@ -33,7 +33,7 @@ Public Class frmMembresias
                     lblIdCliente.Text = rd1("IdCliente").ToString
                     txtBarras.Text = rd1("CodBarra").ToString
                     lblCodigo.Text = rd1("Codigo").ToString
-                    dtpVigencia.Value = Format(rd1("Vigencia").ToString, "yyyy-MM-dd")
+                    dtpVigencia.Value = rd1("Vigencia").ToString
 
                     cnn2.Close() : cnn2.Open()
                     cmd2 = cnn2.CreateCommand
@@ -58,7 +58,52 @@ Public Class frmMembresias
             cnn1.Close()
 
         Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+            cnn2.Close()
+        End Try
+    End Sub
 
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        lblMembresia.Text = ""
+        lblCodigo.Text = ""
+        lblIdCliente.Text = ""
+        cboCliente.Text = ""
+        txtBarras.Text = ""
+        txtDuracion.Text = ""
+        dtpVigencia.Value = Date.Now
+        picMembresia.Image = Nothing
+        cboCliente.Focus.Equals(True)
+    End Sub
+
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+        Try
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT * FROM membresias WHERE Cliente='" & cboCliente.Text & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.Read Then
+                If rd1.HasRows Then
+                    cnn2.Close() : cnn2.Open()
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "UPDATE membresias SET CodBarra='" & txtBarras.Text & "',Vigencia='" & Format(dtpVigencia.Value, "yyyy-MM-dd") & "' WHERE Cliente='" & cboCliente.Text & "'"
+                    If cmd2.ExecuteNonQuery() Then
+                        MsgBox("Membresía actualizada correctamente.", vbInformation + vbOKOnly, titulocentral)
+                    End If
+                    cnn2.Close()
+                End If
+            End If
+            rd1.Close()
+            cnn1.Close()
+
+            btnLimpiar.PerformClick()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
         End Try
     End Sub
 End Class

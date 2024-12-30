@@ -1614,7 +1614,10 @@ kak:
 
 
                 End If
-                End If
+            Else
+                lblMembresia.Text = ""
+                lblMembresia.Visible = False
+            End If
             rd2.Close()
 
             If lblNumCliente.Text = "MOSTRADOR" Then MyIdCliente = 0 : Exit Sub
@@ -7741,7 +7744,7 @@ kakaxd:
                 rd1 = cmd1.ExecuteReader
                 If rd1.HasRows Then
                     If rd1.Read Then
-                        If rd1("Departamento").ToString = "MEMBRESIA" Then
+                        If rd1("Departamento").ToString = "MEMBRESIAS" Then
 
 
                             Dim mrmbre As String = rd1("DMembre").ToString

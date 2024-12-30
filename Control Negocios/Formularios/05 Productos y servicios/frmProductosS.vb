@@ -670,13 +670,16 @@ Public Class frmProductosS
 
         Dim membre As Integer = DatosRecarga2("Membresias")
 
-        If membre = 1 Then
-            If cboDuracion.Text = "" Then MsgBox("Dede seleccionar el tipo de duración.", vbInformation + vbOKOnly, titulocentral) : cboDuracion.Focused.Equals(True) : Exit Sub
-            If txtDuracion.Text = "" Then MsgBox("Debe ingresar la duración.", vbInformation + vbOKOnly, titulocentral) : txtDuracion.Focus.Equals(True) : Exit Sub
+        If cboDepto.Text = "MEMBRESIAS" Then
+            If membre = 1 Then
+                If cboDuracion.Text = "" Then MsgBox("Dede seleccionar el tipo de duración.", vbInformation + vbOKOnly, titulocentral) : cboDuracion.Focused.Equals(True) : Exit Sub
+                If txtDuracion.Text = "" Then MsgBox("Debe ingresar la duración.", vbInformation + vbOKOnly, titulocentral) : txtDuracion.Focus.Equals(True) : Exit Sub
+            End If
+
         End If
 
 
-            Dim p_compra As Double = txtpcompra.Text
+        Dim p_compra As Double = txtpcompra.Text
         Dim p_venta As Double = txtpventa.Text
         Dim porcentaje As Double = txtutilidad.Text
         Dim iva As Double = cboIVA.Text

@@ -60,7 +60,7 @@ Partial Class frmMembresias
         Me.Label1.ForeColor = System.Drawing.Color.DarkBlue
         Me.Label1.Location = New System.Drawing.Point(0, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(800, 23)
+        Me.Label1.Size = New System.Drawing.Size(789, 23)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "MEMBRESIAS"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -72,31 +72,31 @@ Partial Class frmMembresias
         Me.Panel1.Controls.Add(Me.Label8)
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.Panel3)
-        Me.Panel1.Controls.Add(Me.dtpVigencia)
         Me.Panel1.Controls.Add(Me.Panel2)
+        Me.Panel1.Controls.Add(Me.dtpVigencia)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.txtBarras)
         Me.Panel1.Controls.Add(Me.cboCliente)
         Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 23)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(800, 135)
+        Me.Panel1.Size = New System.Drawing.Size(789, 132)
         Me.Panel1.TabIndex = 1
         '
         'lblIdCliente
         '
-        Me.lblIdCliente.Location = New System.Drawing.Point(488, 76)
+        Me.lblIdCliente.Location = New System.Drawing.Point(530, 76)
         Me.lblIdCliente.Name = "lblIdCliente"
-        Me.lblIdCliente.Size = New System.Drawing.Size(85, 23)
+        Me.lblIdCliente.Size = New System.Drawing.Size(43, 23)
         Me.lblIdCliente.TabIndex = 15
         Me.lblIdCliente.Text = "Label9"
         Me.lblIdCliente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'txtDuracion
         '
-        Me.txtDuracion.Location = New System.Drawing.Point(75, 103)
+        Me.txtDuracion.Location = New System.Drawing.Point(86, 104)
         Me.txtDuracion.Name = "txtDuracion"
         Me.txtDuracion.Size = New System.Drawing.Size(119, 20)
         Me.txtDuracion.TabIndex = 14
@@ -104,7 +104,7 @@ Partial Class frmMembresias
         'Label8
         '
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(-1, 103)
+        Me.Label8.Location = New System.Drawing.Point(10, 104)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(74, 20)
         Me.Label8.TabIndex = 13
@@ -119,7 +119,7 @@ Partial Class frmMembresias
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.Location = New System.Drawing.Point(0, 32)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(590, 11)
+        Me.Label7.Size = New System.Drawing.Size(579, 11)
         Me.Label7.TabIndex = 12
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
@@ -130,7 +130,7 @@ Partial Class frmMembresias
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(590, 29)
+        Me.Panel3.Size = New System.Drawing.Size(579, 29)
         Me.Panel3.TabIndex = 11
         '
         'lblMembresia
@@ -139,7 +139,7 @@ Partial Class frmMembresias
         Me.lblMembresia.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblMembresia.Location = New System.Drawing.Point(0, 0)
         Me.lblMembresia.Name = "lblMembresia"
-        Me.lblMembresia.Size = New System.Drawing.Size(490, 29)
+        Me.lblMembresia.Size = New System.Drawing.Size(479, 29)
         Me.lblMembresia.TabIndex = 10
         Me.lblMembresia.Text = "Label6"
         '
@@ -147,7 +147,7 @@ Partial Class frmMembresias
         '
         Me.Panel4.Controls.Add(Me.lblCodigo)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel4.Location = New System.Drawing.Point(490, 0)
+        Me.Panel4.Location = New System.Drawing.Point(479, 0)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(100, 29)
         Me.Panel4.TabIndex = 11
@@ -167,7 +167,7 @@ Partial Class frmMembresias
         '
         Me.dtpVigencia.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpVigencia.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpVigencia.Location = New System.Drawing.Point(272, 102)
+        Me.dtpVigencia.Location = New System.Drawing.Point(283, 103)
         Me.dtpVigencia.Name = "dtpVigencia"
         Me.dtpVigencia.Size = New System.Drawing.Size(103, 21)
         Me.dtpVigencia.TabIndex = 8
@@ -176,9 +176,9 @@ Partial Class frmMembresias
         '
         Me.Panel2.Controls.Add(Me.picMembresia)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel2.Location = New System.Drawing.Point(590, 0)
+        Me.Panel2.Location = New System.Drawing.Point(579, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(210, 135)
+        Me.Panel2.Size = New System.Drawing.Size(210, 132)
         Me.Panel2.TabIndex = 6
         '
         'picMembresia
@@ -186,7 +186,7 @@ Partial Class frmMembresias
         Me.picMembresia.Dock = System.Windows.Forms.DockStyle.Fill
         Me.picMembresia.Location = New System.Drawing.Point(0, 0)
         Me.picMembresia.Name = "picMembresia"
-        Me.picMembresia.Size = New System.Drawing.Size(210, 135)
+        Me.picMembresia.Size = New System.Drawing.Size(210, 132)
         Me.picMembresia.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picMembresia.TabIndex = 0
         Me.picMembresia.TabStop = False
@@ -194,7 +194,7 @@ Partial Class frmMembresias
         'Label4
         '
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(200, 103)
+        Me.Label4.Location = New System.Drawing.Point(211, 104)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(76, 20)
         Me.Label4.TabIndex = 4
@@ -213,17 +213,17 @@ Partial Class frmMembresias
         '
         'txtBarras
         '
-        Me.txtBarras.Location = New System.Drawing.Point(75, 78)
+        Me.txtBarras.Location = New System.Drawing.Point(86, 78)
         Me.txtBarras.Name = "txtBarras"
-        Me.txtBarras.Size = New System.Drawing.Size(217, 20)
+        Me.txtBarras.Size = New System.Drawing.Size(206, 20)
         Me.txtBarras.TabIndex = 2
         '
         'cboCliente
         '
         Me.cboCliente.FormattingEnabled = True
-        Me.cboCliente.Location = New System.Drawing.Point(75, 52)
+        Me.cboCliente.Location = New System.Drawing.Point(86, 52)
         Me.cboCliente.Name = "cboCliente"
-        Me.cboCliente.Size = New System.Drawing.Size(498, 21)
+        Me.cboCliente.Size = New System.Drawing.Size(487, 21)
         Me.cboCliente.TabIndex = 1
         '
         'Label2
@@ -242,18 +242,19 @@ Partial Class frmMembresias
         Me.Panel5.Controls.Add(Me.btnLimpiar)
         Me.Panel5.Controls.Add(Me.btnSalir)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel5.Location = New System.Drawing.Point(0, 206)
+        Me.Panel5.Location = New System.Drawing.Point(0, 155)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(800, 82)
+        Me.Panel5.Size = New System.Drawing.Size(789, 82)
         Me.Panel5.TabIndex = 2
         '
         'btnGuardar
         '
+        Me.btnGuardar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnGuardar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
         Me.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnGuardar.Location = New System.Drawing.Point(575, 3)
+        Me.btnGuardar.Location = New System.Drawing.Point(564, 4)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(70, 75)
         Me.btnGuardar.TabIndex = 2
@@ -263,11 +264,12 @@ Partial Class frmMembresias
         '
         'btnLimpiar
         '
+        Me.btnLimpiar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnLimpiar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLimpiar.Image = CType(resources.GetObject("btnLimpiar.Image"), System.Drawing.Image)
         Me.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnLimpiar.Location = New System.Drawing.Point(651, 3)
+        Me.btnLimpiar.Location = New System.Drawing.Point(640, 4)
         Me.btnLimpiar.Name = "btnLimpiar"
         Me.btnLimpiar.Size = New System.Drawing.Size(70, 75)
         Me.btnLimpiar.TabIndex = 1
@@ -277,11 +279,12 @@ Partial Class frmMembresias
         '
         'btnSalir
         '
+        Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnSalir.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
         Me.btnSalir.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSalir.Location = New System.Drawing.Point(727, 3)
+        Me.btnSalir.Location = New System.Drawing.Point(716, 4)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(70, 75)
         Me.btnSalir.TabIndex = 0
@@ -294,10 +297,10 @@ Partial Class frmMembresias
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(800, 288)
-        Me.Controls.Add(Me.Panel5)
+        Me.ClientSize = New System.Drawing.Size(789, 237)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.Panel5)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "frmMembresias"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
