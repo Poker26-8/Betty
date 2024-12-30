@@ -33,6 +33,20 @@ Public Class frmMembresias
                     lblIdCliente.Text = rd1("IdCliente").ToString
                     txtBarras.Text = rd1("CodBarra").ToString
                     lblCodigo.Text = rd1("Codigo").ToString
+                    dtpVigencia.Value = Format(rd1("Vigencia").ToString, "yyyy-MM-dd")
+
+                    cnn2.Close() : cnn2.Open()
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "SELECT Nombre,DMembre FROM productos WHERE Codigo='" & lblCodigo.Text & "'"
+                    rd2 = cmd2.ExecuteReader
+                    If rd2.HasRows Then
+                        If rd2.Read Then
+                            txtDuracion.Text = rd2("DMembre").ToString
+                            lblMembresia.Text = rd2("Nombre").ToString
+                        End If
+                    End If
+                    rd2.Close()
+                    cnn2.Close()
 
                     If File.Exists(My.Application.Info.DirectoryPath & "\ProductosImg" & base & "\" & lblCodigo.Text & ".jpg") Then
                         picMembresia.Image = Image.FromFile(My.Application.Info.DirectoryPath & "\ProductosImg" & base & "\" & lblCodigo.Text & ".jpg")

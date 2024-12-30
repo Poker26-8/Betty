@@ -91,6 +91,9 @@ Partial Class frmProductosS
         Me.txtExistencia = New System.Windows.Forms.TextBox()
         Me.txtaccess = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.txtDuracion = New System.Windows.Forms.TextBox()
+        Me.cboDuracion = New System.Windows.Forms.ComboBox()
         CType(Me.picImagen, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.box_tienda.SuspendLayout()
@@ -121,7 +124,7 @@ Partial Class frmProductosS
         '
         Me.picImagen.Location = New System.Drawing.Point(880, 39)
         Me.picImagen.Name = "picImagen"
-        Me.picImagen.Size = New System.Drawing.Size(305, 250)
+        Me.picImagen.Size = New System.Drawing.Size(305, 229)
         Me.picImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.picImagen.TabIndex = 219
         Me.picImagen.TabStop = False
@@ -880,9 +883,9 @@ Partial Class frmProductosS
         Me.lblExistencia.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblExistencia.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblExistencia.ForeColor = System.Drawing.Color.White
-        Me.lblExistencia.Location = New System.Drawing.Point(470, 294)
+        Me.lblExistencia.Location = New System.Drawing.Point(434, 296)
         Me.lblExistencia.Name = "lblExistencia"
-        Me.lblExistencia.Size = New System.Drawing.Size(84, 24)
+        Me.lblExistencia.Size = New System.Drawing.Size(81, 22)
         Me.lblExistencia.TabIndex = 258
         Me.lblExistencia.Text = "Existencia"
         Me.lblExistencia.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -892,9 +895,9 @@ Partial Class frmProductosS
         Me.txtExistencia.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.txtExistencia.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtExistencia.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtExistencia.Location = New System.Drawing.Point(555, 295)
+        Me.txtExistencia.Location = New System.Drawing.Point(522, 296)
         Me.txtExistencia.Name = "txtExistencia"
-        Me.txtExistencia.Size = New System.Drawing.Size(101, 23)
+        Me.txtExistencia.Size = New System.Drawing.Size(134, 23)
         Me.txtExistencia.TabIndex = 259
         Me.txtExistencia.Text = "0"
         Me.txtExistencia.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -923,11 +926,48 @@ Partial Class frmProductosS
         Me.Label21.Text = "Agregar Producto:"
         Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'Label23
+        '
+        Me.Label23.BackColor = System.Drawing.SystemColors.HotTrack
+        Me.Label23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label23.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.ForeColor = System.Drawing.Color.White
+        Me.Label23.Location = New System.Drawing.Point(880, 271)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(78, 22)
+        Me.Label23.TabIndex = 262
+        Me.Label23.Text = "Duración:"
+        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtDuracion
+        '
+        Me.txtDuracion.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtDuracion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+        Me.txtDuracion.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDuracion.Location = New System.Drawing.Point(964, 271)
+        Me.txtDuracion.Name = "txtDuracion"
+        Me.txtDuracion.Size = New System.Drawing.Size(113, 23)
+        Me.txtDuracion.TabIndex = 263
+        Me.txtDuracion.Text = "0"
+        Me.txtDuracion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'cboDuracion
+        '
+        Me.cboDuracion.FormattingEnabled = True
+        Me.cboDuracion.Items.AddRange(New Object() {"Dias", "Meses", "Años"})
+        Me.cboDuracion.Location = New System.Drawing.Point(1083, 271)
+        Me.cboDuracion.Name = "cboDuracion"
+        Me.cboDuracion.Size = New System.Drawing.Size(102, 23)
+        Me.cboDuracion.TabIndex = 264
+        '
         'frmProductosS
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1197, 396)
+        Me.Controls.Add(Me.cboDuracion)
+        Me.Controls.Add(Me.txtDuracion)
+        Me.Controls.Add(Me.Label23)
         Me.Controls.Add(Me.txtaccess)
         Me.Controls.Add(Me.Label21)
         Me.Controls.Add(Me.txtExistencia)
@@ -1070,4 +1110,7 @@ Partial Class frmProductosS
     Friend WithEvents txtExistencia As TextBox
     Friend WithEvents txtaccess As TextBox
     Friend WithEvents Label21 As Label
+    Friend WithEvents Label23 As Label
+    Friend WithEvents txtDuracion As TextBox
+    Friend WithEvents cboDuracion As ComboBox
 End Class

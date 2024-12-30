@@ -98,7 +98,7 @@ Partial Class frmMembresias
         '
         Me.txtDuracion.Location = New System.Drawing.Point(75, 103)
         Me.txtDuracion.Name = "txtDuracion"
-        Me.txtDuracion.Size = New System.Drawing.Size(217, 20)
+        Me.txtDuracion.Size = New System.Drawing.Size(119, 20)
         Me.txtDuracion.TabIndex = 14
         '
         'Label8
@@ -167,7 +167,7 @@ Partial Class frmMembresias
         '
         Me.dtpVigencia.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpVigencia.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpVigencia.Location = New System.Drawing.Point(370, 102)
+        Me.dtpVigencia.Location = New System.Drawing.Point(272, 102)
         Me.dtpVigencia.Name = "dtpVigencia"
         Me.dtpVigencia.Size = New System.Drawing.Size(103, 21)
         Me.dtpVigencia.TabIndex = 8
@@ -194,7 +194,7 @@ Partial Class frmMembresias
         'Label4
         '
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(298, 103)
+        Me.Label4.Location = New System.Drawing.Point(200, 103)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(76, 20)
         Me.Label4.TabIndex = 4
@@ -242,7 +242,7 @@ Partial Class frmMembresias
         Me.Panel5.Controls.Add(Me.btnLimpiar)
         Me.Panel5.Controls.Add(Me.btnSalir)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel5.Location = New System.Drawing.Point(0, 224)
+        Me.Panel5.Location = New System.Drawing.Point(0, 206)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(800, 82)
         Me.Panel5.TabIndex = 2
@@ -294,7 +294,7 @@ Partial Class frmMembresias
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(800, 306)
+        Me.ClientSize = New System.Drawing.Size(800, 288)
         Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label1)

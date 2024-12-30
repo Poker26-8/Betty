@@ -7730,20 +7730,48 @@ kakaxd:
 
         'agrega la mebresia si el departamento es membresia
         Try
+
+
             cnn1.Close() : cnn1.Open()
 
             For luffy As Integer = 0 To grdcaptura.Rows.Count - 1
                 Dim codigom As String = grdcaptura.Rows(luffy).Cells(0).Value.ToString
                 cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "SELECT Departamento FROM productos WHERE Codigo='" & codigom & "'"
+                cmd1.CommandText = "SELECT Departamento,DMembre FROM productos WHERE Codigo='" & codigom & "'"
                 rd1 = cmd1.ExecuteReader
                 If rd1.HasRows Then
                     If rd1.Read Then
                         If rd1("Departamento").ToString = "MEMBRESIA" Then
 
+
+                            Dim mrmbre As String = rd1("DMembre").ToString
+                            Dim primerEspacio As Integer = mrmbre.IndexOf(" ")
+                            Dim primeraParte As String = ""
+                            Dim segundaParte As String = ""
+
+                            If primerEspacio >= 0 Then
+                                primeraParte = mrmbre.Substring(0, primerEspacio).Trim()
+                                segundaParte = mrmbre.Substring(primerEspacio + 1).Trim()
+                            Else
+                                primeraParte = mrmbre.Trim()
+                            End If
+
+                            Dim vigencia As Date = Date.Now
+
+                            If segundaParte = "Años" Then
+
+                                vigencia = vigencia.AddYears(primeraParte)
+
+                            ElseIf segundaParte = "Meses" Then
+                                vigencia = vigencia.AddMonths(primeraParte)
+                            ElseIf segundaParte = "Dias" Then
+                                vigencia = vigencia.AddDays(primeraParte)
+                            End If
+
+
                             cnn2.Close() : cnn2.Open()
                             cmd2 = cnn2.CreateCommand
-                            cmd2.CommandText = "INSERT INTO membresias(IdCliente,Cliente,CodBarra,Adquirio,Vigencia,Ticket,Codigo) VALUES(" & IdCliente & ",'" & cboNombre.Text & "','" & txttel.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd") & "'," & MyFolio & ",'" & codigom & "')"
+                            cmd2.CommandText = "INSERT INTO membresias(IdCliente,Cliente,CodBarra,Adquirio,Vigencia,Ticket,Codigo) VALUES(" & IdCliente & ",'" & cboNombre.Text & "','" & txttel.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(vigencia, "yyyy-MM-dd") & "'," & MyFolio & ",'" & codigom & "')"
                             cmd2.ExecuteNonQuery()
                             cnn2.Close()
                         End If
