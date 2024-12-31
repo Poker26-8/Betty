@@ -1,5 +1,13 @@
-﻿Public Class frmFormaPago
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmFormaPago
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             If cboMoneda.Text <> "" And txtValor.Text <> "" Then
@@ -87,6 +95,10 @@
     End Sub
 
     Private Sub cboFormaPago_DropDown(sender As Object, e As EventArgs) Handles cboFormaPago.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboFormaPago.Items.Clear()
 
@@ -108,6 +120,10 @@
     End Sub
 
     Private Sub cboFormaPago_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboFormaPago.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -132,6 +148,11 @@
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd3 As MySqlDataReader
+        Dim cmd1, cmd3 As MySqlCommand
         Try
 
             If cboFormaPago.Text = "TARJETA" Or cboFormaPago.Text = "TRANSFERENCIA" Or cboFormaPago.Text = "SALDO FAVOR" Then MsgBox("El concepto de pago " & cboFormaPago.Text & " no puede ser eliminado ya que forma parte del catálogo indispensable de formas de pago en el sistema.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
@@ -177,6 +198,10 @@
     End Sub
 
     Private Sub cboMoneda_DropDown(sender As Object, e As EventArgs) Handles cboMoneda.DropDown
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cboMoneda.Items.Clear()
             cnn1.Close()
@@ -196,6 +221,10 @@
     End Sub
 
     Private Sub cboMoneda_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboMoneda.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()

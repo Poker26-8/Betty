@@ -1,9 +1,13 @@
 ﻿Imports DocumentFormat.OpenXml.Drawing.Charts
+Imports MySql.Data.MySqlClient
 
 Public Class frmkitsN
 
 
     Private Sub cboKit_DropDown(sender As Object, e As EventArgs) Handles cboKit.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboKit.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -32,6 +36,9 @@ Public Class frmkitsN
     End Sub
 
     Private Sub cbodescripcion_DropDown(sender As Object, e As EventArgs) Handles cbodescripcion.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cbodescripcion.Items.Clear()
 
@@ -56,6 +63,10 @@ Public Class frmkitsN
     Private Sub cbodescripcion_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbodescripcion.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "SELECT Codigo FROM productos WHERE Nombre='" & cbodescripcion.Text & "'"
@@ -74,6 +85,9 @@ Public Class frmkitsN
     End Sub
 
     Private Sub cbocodigo_DropDown(sender As Object, e As EventArgs) Handles cbocodigo.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cbocodigo.Items.Clear()
 
@@ -98,6 +112,11 @@ Public Class frmkitsN
     Private Sub cbocodigo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbocodigo.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "SELECT Nombre,PrecioCompra,PrecioVentaIVA FROM productos WHERE Codigo='" & cbocodigo.Text & "'"
@@ -223,6 +242,12 @@ Public Class frmkitsN
 
             Dim preciokit As Double = 0
             Dim utilidad As Double = 0
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
+
             cnn1.Close() : cnn1.Open()
             cnn2.Close() : cnn2.Open()
 
@@ -303,7 +328,10 @@ Public Class frmkitsN
                 MsgBox("Agrega productos al Kit para continuar", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
                 Exit Sub
             End If
-
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
 
             If MsgBox("¿Desea guardar la información?", vbInformation + vbYesNo, titulocentral) Then
                 cnn1.Close()
@@ -368,6 +396,10 @@ Public Class frmkitsN
         Dim costo As Double = 0
         Dim uti As Double = 0
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cbocodigo.Text = grdDatos.Rows(CELDA).Cells(0).Value.ToString
         cbodescripcion.Text = grdDatos.Rows(CELDA).Cells(1).Value.ToString
         txtCantidad.Text = grdDatos.Rows(CELDA).Cells(3).Value.ToString
@@ -415,6 +447,10 @@ Public Class frmkitsN
         If MsgBox("¿Deseas Eliminar el Kit Seleccionado?", vbQuestion + vbOKCancel, "Delsscom Control Negocios PRO") = vbCancel Then
             Exit Sub
         End If
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()
@@ -453,6 +489,9 @@ Public Class frmkitsN
         If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
             e.Handled = True
         End If
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If AscW(e.KeyChar) = Keys.Enter Then
             Dim unidad As String = ""
@@ -501,5 +540,9 @@ Public Class frmkitsN
             cbodescripcion.Focus.Equals(True)
 
         End If
+    End Sub
+
+    Private Sub frmkitsN_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class

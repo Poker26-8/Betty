@@ -93,7 +93,6 @@ Partial Class frmRepComparador2
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
         Me.Column6.Visible = False
-        Me.Column6.Width = 82
         '
         'lblProveedor
         '

@@ -1,4 +1,5 @@
 ﻿Imports Microsoft.Office.Interop
+Imports MySql.Data.MySqlClient
 
 Public Class frmReporteAsistencia
 
@@ -20,6 +21,10 @@ Public Class frmReporteAsistencia
         If optEmpleado.Checked Then
             instruccion = "select distinct Nombre from Usuarios order by Nombre"
         End If
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cbofiltro.Items.Clear()
         Try
             cnn1.Close()
@@ -333,6 +338,11 @@ Public Class frmReporteAsistencia
         Dim horas As Double = 0
         Dim sueldo As Double = 0
         Dim sueldo_por_hora As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Month1 = mCalendar1.SelectionStart.ToShortDateString
         Month2 = mCalendar2.SelectionStart.ToShortDateString

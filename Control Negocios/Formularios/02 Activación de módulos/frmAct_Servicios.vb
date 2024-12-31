@@ -1,4 +1,6 @@
-﻿Public Class frmAct_Servicios
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmAct_Servicios
 
     Dim act As Integer = 0
     Private Sub frmAct_Servicios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -10,6 +12,10 @@
         If MsgBox("¿Deseas activar el módulo de control de servicios?", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") = vbOK Then
 
             If txtcontra.Text = "" Then MsgBox("Escribe la contraseña de activación." & vbNewLine & "Para generarla conmunícate con tu proveedor de software.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             If txtcontra.Text = "jipl2211*" Then
                 Try
@@ -39,6 +45,10 @@
         If MsgBox("¿Deseas desactivar el módulo de control de servicios?", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") = vbOK Then
 
             If txtcontra.Text = "" Then MsgBox("Escribe la contraseña de activación." & vbNewLine & "Para generarla conmunícate con tu proveedor de software.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             If txtcontra.Text = "jipl2211*" Then
                 Try

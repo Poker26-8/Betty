@@ -1,4 +1,6 @@
-﻿Public Class frmCuentabANCARIA
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmCuentabANCARIA
     Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
         txtId.Text = ""
         cbocuenta.Text = ""
@@ -13,9 +15,13 @@
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
             If cbocuenta.Text = "" Then MsgBox("Debe de ingresar una cuenta") : cbocuenta.Focus.Equals(True) : Exit Sub
-
             If cbocuenta.Text <> "" Then
 
                 cnn1.Close() : cnn1.Open()
@@ -79,6 +85,10 @@
     End Sub
 
     Private Sub cbocuenta_DropDown(sender As Object, e As EventArgs) Handles cbocuenta.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cbocuenta.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -100,6 +110,10 @@
     End Sub
 
     Private Sub cbobanco_DropDown(sender As Object, e As EventArgs) Handles cbobanco.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cbobanco.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -120,6 +134,10 @@
     End Sub
 
     Private Sub cboTitular_DropDown(sender As Object, e As EventArgs) Handles cboTitular.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboTitular.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -162,6 +180,11 @@
 
     Private Sub cbocuenta_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbocuenta.SelectedValueChanged
         Try
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
+
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "SELECT Id,Banco,Titular FROM cuentasbancarias WHERE CuentaBan='" & cbocuenta.Text & "'"
@@ -193,7 +216,12 @@
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3 As MySqlDataReader
+        Dim cmd2, cmd3 As MySqlCommand
         Try
+
             cnn2.Close() : cnn2.Open()
             cnn3.Close() : cnn3.Open()
 
@@ -231,7 +259,13 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
+
             Dim idmov As Integer = 0
 
             cnn1.Close() : cnn1.Open()

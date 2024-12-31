@@ -1,8 +1,14 @@
-﻿Public Class frmControlServicios
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmControlServicios
     Private Sub txtusuario_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtusuario.KeyPress
         Dim puesto As String = ""
         If AscW(e.KeyChar) = Keys.Enter Then
             grdPendientes.Rows.Clear()
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 cnn1.Close() : cnn1.Open()
@@ -63,6 +69,9 @@
         Dim status As Integer = 0
 
         limpia_1()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -127,6 +136,9 @@
     End Sub
 
     Private Sub btnfin_Click(sender As Object, e As EventArgs) Handles btnfin.Click
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
         Try
             cnn2.Close() : cnn2.Open()
 
@@ -155,7 +167,9 @@
 
     Private Sub muestra_detalle()
         grdFin.Rows.Clear()
-
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -197,6 +211,9 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If MsgBox("¿Deseas concluir el proceso?" & vbNewLine & "Ésta acción no se puede deshacer.", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -224,6 +241,9 @@
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         If MsgBox("¿Deseas dar por terminado este servicio?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
 

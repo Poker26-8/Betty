@@ -1,5 +1,6 @@
 ﻿
 Imports AForge.Controls.Joystick
+Imports MySql.Data.MySqlClient
 Imports System.IO
 
 Public Class frmHuellaEmp
@@ -21,6 +22,10 @@ Public Class frmHuellaEmp
     End Sub
 
     Private Sub cboNombre_DropDown(sender As Object, e As EventArgs) Handles cboNombre.DropDown
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cboNombre.Items.Clear()
             cnn1.Close()
@@ -40,6 +45,9 @@ Public Class frmHuellaEmp
     End Sub
 
     Private Sub cboNombre_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboNombre.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()
@@ -83,6 +91,10 @@ Public Class frmHuellaEmp
     End Sub
 
     Private Sub btnguardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close()
         cnn1.Open()
         cmd1 = cnn1.CreateCommand

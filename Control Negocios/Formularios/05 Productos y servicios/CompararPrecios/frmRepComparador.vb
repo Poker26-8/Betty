@@ -1,7 +1,12 @@
 ﻿Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepComparador
     Private Sub cboproveedor_DropDown(sender As Object, e As EventArgs) Handles cboproveedor.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboproveedor.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -23,6 +28,12 @@ Public Class frmRepComparador
     End Sub
 
     Private Sub btnConsultar_Click(sender As Object, e As EventArgs) Handles btnConsultar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             grdPrecios.Rows.Clear()
             Dim codigo As String = ""

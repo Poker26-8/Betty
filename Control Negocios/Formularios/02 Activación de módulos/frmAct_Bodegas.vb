@@ -1,4 +1,6 @@
-﻿Public Class frmAct_Bodegas
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmAct_Bodegas
 
     Dim act As Integer = 0
     Private Sub frmAct_Bodegas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -6,6 +8,10 @@
         SFormatos("Bodegas", "")
 
         act = DatosRecarga2("Bodegas")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Dim resta As Integer = 0
         Try
@@ -39,6 +45,11 @@
 
             If txtcontra.Text = "" Then MsgBox("Escribe la contraseña de activación." & vbNewLine & "Para generarla conmunícate con tu proveedor de software.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
 
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             If txtcontra.Text = "jipl2211*" Then
                 Try
                     cnn1.Close() : cnn1.Open()
@@ -67,6 +78,11 @@
         If MsgBox("¿Deseas desactivar el módulo de bodegas?", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") = vbOK Then
 
             If txtcontra.Text = "" Then MsgBox("Escribe la contraseña de activación." & vbNewLine & "Para generarla conmunícate con tu proveedor de software.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
+
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             If txtcontra.Text = "jipl2211*" Then
                 Try

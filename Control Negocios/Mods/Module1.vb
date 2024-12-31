@@ -460,6 +460,9 @@ Module Module1
     Public cmd1, cmd2, cmd3, cmd4, cmd5, cmd9, cmd8, cmd7, cmdtimer, cmdtimer2 As MySqlCommand
     Public rd1, rd2, rd3, rd4, rd5, rd9, rd8, rd7, rdtimer, rdtimer2 As MySqlDataReader
 
+    Public sTargetlocalmysql As String = ""
+
+
     Structure datos_c
         Dim ip_configuracion As String
         Dim usuario_configuracion As String
@@ -1399,6 +1402,7 @@ Module Module1
             MsgBox(ex.ToString)
         End Try
     End Sub
+
     Public Sub GeneraBarras2(ByVal pic2 As PictureBox, ByVal codigo2 As String)
         Dim barcod2 As New Barcode128
 

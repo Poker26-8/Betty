@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.Data.OleDb
 Imports Microsoft.Office.Core
 Imports MySql.Data
+Imports MySql.Data.MySqlClient
 
 Public Class Inicio
 
@@ -184,8 +185,11 @@ Public Class Inicio
 
     Public Sub Nuevos_Pedidos()
         Try
-            cnn4.Close() : cnn4.Open()
+            Dim cnn4 As MySqlConnection = New MySqlConnection(sTarget)
+            Dim rd4 As MySqlDataReader
+            Dim cmd4 As MySqlCommand
 
+            cnn4.Close() : cnn4.Open()
             cmd4 = cnn4.CreateCommand
             cmd4.CommandText =
                 "select COUNT(Id_Orden) from Pedidos_Tienda where Status=0"
@@ -205,6 +209,11 @@ Public Class Inicio
 
     Private Async Sub Inicio_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Try
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             cnn1.Close()
             cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -234,9 +243,13 @@ Public Class Inicio
         Dim SFile As String
         Dim params As Integer = 0
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTarget)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTarget)
+        Dim rd2, rd3 As MySqlDataReader
+        Dim cmd2, cmd3 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
-
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText =
                 "select Evaluo from Parametros"
@@ -656,12 +669,8 @@ Public Class Inicio
 
     Private Sub InventarioToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles pInventario.Click
 
-
         frmRepInventario.Show()
         frmRepInventario.BringToFront()
-
-
-
 
     End Sub
 
@@ -753,8 +762,6 @@ Public Class Inicio
     End Sub
 
     Private Sub PedidosToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles pPedidos.Click
-        'frmPedidos.Show()
-        ' frmPedidos.BringToFront()
 
         frmPedidosN.Show()
         frmPedidosN.BringToFront()
@@ -831,6 +838,10 @@ Public Class Inicio
     Public Sub Permisos(ByRef id_usuario As Integer)
         Dim Cat As Integer = 0
         Dim Dive As Integer = 0
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
 
         Try
             cnn5.Close() : cnn5.Open()
@@ -1584,13 +1595,6 @@ Public Class Inicio
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
         frmNuvRepVentas.Show()
         frmNuvRepVentas.BringToFront()
-
-
-        'frmRepVentas.Show()
-        'frmRepVentas.BringToFront()
-
-        'frmEtiquetas2.Show()
-        'frmEtiquetas2.BringToFront()
     End Sub
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
@@ -1613,8 +1617,6 @@ Public Class Inicio
         frmsubeclientes.Show()
         frmsubeclientes.BringToFront()
     End Sub
-
-
 
     Private Sub SubeProveedoresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SubeProveedoresToolStripMenuItem.Click
         frmsubeProveedores.Show()
@@ -1683,8 +1685,10 @@ Public Class Inicio
 
     Private Sub btnvtatouch_Click(sender As Object, e As EventArgs) Handles btnvtatouch.Click
         Try
-            'frmVisorComanda.BringToFront()
-            'frmVisorComanda.Show()
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand

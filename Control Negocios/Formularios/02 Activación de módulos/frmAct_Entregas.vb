@@ -1,11 +1,15 @@
-﻿Public Class frmAct_Entregas
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmAct_Entregas
     Dim act As Integer = 0
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If MsgBox("¿Deseas activar el módulo de entregas?", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") = vbOK Then
 
-
-
             If txtcontra.Text = "" Then MsgBox("Escribe la contraseña de activación." & vbNewLine & "Para generarla conmunícate con tu proveedor de software.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             If txtcontra.Text = "jipl2211*" Then
                 Try
@@ -33,8 +37,11 @@
 
     Private Sub frmAct_Entregas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SFormatos("Entregas", "")
-
         act = DatosRecarga2("Entregas")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Dim resta As Integer = 0
         Try
@@ -67,6 +74,10 @@
         If MsgBox("¿Deseas desactivar el módulo de entregas?", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") = vbOK Then
 
             If txtcontra.Text = "" Then MsgBox("Escribe la contraseña de activación." & vbNewLine & "Para generarla conmunícate con tu proveedor de software.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             If txtcontra.Text = "jipl2211*" Then
                 Try

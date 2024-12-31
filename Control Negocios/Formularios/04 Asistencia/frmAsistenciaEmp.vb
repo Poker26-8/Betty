@@ -2,6 +2,7 @@
 
 Imports System.IO
 Imports AForge.Controls
+Imports MySql.Data.MySqlClient
 
 Public Class frmAsistenciaEmp
     Dim WithEvents FpVer As FlexCodeSDK.FinFPVer
@@ -14,6 +15,11 @@ Public Class frmAsistenciaEmp
     Public soy As Integer = 0
 
     Public Sub GuardaRegistro()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close()
         cnn1.Open()
         cmd1 = cnn1.CreateCommand
@@ -71,6 +77,10 @@ Public Class frmAsistenciaEmp
         FpVer.PictureSamplePath = VarRuta & "\temp.bmp"
         FpVer.PictureSampleHeight = 4000
         FpVer.PictureSampleWidth = 4000
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close()
         cnn1.Open()
         cmd1 = cnn1.CreateCommand
@@ -104,6 +114,10 @@ Public Class frmAsistenciaEmp
 
     Private Sub FpVer_FPVerificationStatus(ByVal Status As FlexCodeSDK.VerificationStatus) Handles FpVer.FPVerificationStatus
         If Status = FlexCodeSDK.VerificationStatus.v_OK Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             cnn1.Close()
             cnn1.Open()
             cmd1 = cnn1.CreateCommand

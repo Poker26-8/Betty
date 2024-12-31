@@ -68,10 +68,11 @@ Public Class Login
 
             comando = conexion.CreateCommand
             comando.CommandText =
-                "select Adicional from Server"
+                "select Adicional,Servidor from Server"
             lector = comando.ExecuteReader
             If lector.HasRows Then
                 If lector.Read Then
+                    servidor = lector(1).ToString
                     adicional = lector(0).ToString
                 End If
             End If
@@ -83,6 +84,8 @@ Public Class Login
         End Try
 
         Try
+            sTargetlocalmysql = "server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300"
+
             If txtRuta.Text <> "" Then
                 cnn1 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                 cnn2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
@@ -106,9 +109,10 @@ Public Class Login
                 cnntimer = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                 cnntimer2 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
             End If
+
             varrutabase = txtRuta.Text
             empresa_activa = lblEmpresa.Text
-
+            base = cboEmpresa.Text
 
             If txtUsuario.Text = "" Then
             Else
@@ -163,7 +167,6 @@ Public Class Login
 
         Try
             conexion.Close() : conexion.Open()
-            '"Data source=" & MyIP & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22"
             comando = conexion.CreateCommand
             comando.CommandText =
                 "select Servidor,base from Server"
@@ -178,7 +181,6 @@ Public Class Login
                         txtRuta.Text = servidor
                     End If
                     base = lector("base").ToString()
-                    ' zinc = lector("Zink").ToString()
                 Loop
             End If
             lector.Close()
@@ -228,6 +230,7 @@ Public Class Login
             conexion.Close()
         End Try
 
+        sTargetlocalmysql = "server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300"
 
         cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
         cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
@@ -239,15 +242,6 @@ Public Class Login
         cnn7 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
         cnntimer = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
         cnntimer2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-
-        'cnn1 = New MySqlClient.MySqlConnection("Data source=" & servidor & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22; timeout=300")
-        'cnn2 = New MySqlClient.MySqlConnection("Data source=" & servidor & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22; timeout=300")
-        'cnn3 = New MySqlClient.MySqlConnection("Data source=" & servidor & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22; timeout=300")
-        'cnn4 = New MySqlClient.MySqlConnection("Data source=" & servidor & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22; timeout=300")
-        'cnn5 = New MySqlClient.MySqlConnection("Data source=" & servidor & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22; timeout=300")
-        'cnn9 = New MySqlClient.MySqlConnection("Data source=" & servidor & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22; timeout=300")
-        'cnn8 = New MySqlClient.MySqlConnection("Data source=" & servidor & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22; timeout=300")
-        'cnn7 = New MySqlClient.MySqlConnection("Data source=" & servidor & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22; timeout=300")
 
         My.Application.DoEvents()
         txtContrasena.Focus.Equals(True)
@@ -1943,6 +1937,10 @@ Public Class Login
     End Sub
 
     Private Sub lblEmpresa_Click(sender As Object, e As EventArgs) Handles lblEmpresa.Click
+
+    End Sub
+
+    Private Sub GroupBox2_Enter(sender As Object, e As EventArgs) Handles GroupBox2.Enter
 
     End Sub
 End Class

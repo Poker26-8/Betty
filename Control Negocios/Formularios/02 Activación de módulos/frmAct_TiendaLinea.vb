@@ -1,4 +1,6 @@
-﻿Public Class frmAct_TiendaLinea
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmAct_TiendaLinea
     Dim act As Integer = 0
     Private Sub frmAct_TiendaLinea_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Label5.Text = Mid(SerialNumber(), 1, 7)
@@ -6,6 +8,11 @@
         act = DatosRecarga2("TiendaLinea")
 
         Dim REFA As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -39,6 +46,10 @@
 
             If txtcontra.Text = "" Then MsgBox("Escribe la contraseña de activación." & vbNewLine & "Para generarla conmunícate con tu proveedor de software.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             If txtcontra.Text = "jipl2211*" Then
                 Try
                     cnn1.Close() : cnn1.Open()
@@ -67,6 +78,10 @@
         If MsgBox("¿Deseas desactivar el módulo de tienda en línea?", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") = vbOK Then
 
             If txtcontra.Text = "" Then MsgBox("Escribe la contraseña de activación." & vbNewLine & "Para generarla conmunícate con tu proveedor de software.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             If txtcontra.Text = "jipl2211*" Then
                 Try

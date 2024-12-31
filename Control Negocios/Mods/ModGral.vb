@@ -70,6 +70,7 @@ Module ModGral
         ' Muestra la clave
         'MessageBox.Show("Clave generada para esta máquina: " & uniqueKey)
     End Sub
+
     Public Function GenerateAndValidateKey2(ByVal ser As String)
         ' Obtén el identificador único
         Dim diskSerial As String = ser
@@ -336,6 +337,7 @@ Module ModGral
         End Try
         Return Nothing
     End Function
+
     Public Function SFormatos2(ByVal campo As String, ByVal valor As String)
         Dim existe As Boolean = False
         Try

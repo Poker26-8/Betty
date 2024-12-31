@@ -1,7 +1,14 @@
-﻿Public Class frmHorariosEmp
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmHorariosEmp
 
     Private Sub cboNombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cboNombre.DropDown
         cboNombre.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -31,6 +38,11 @@
 
     Private Sub cboNombre_SelectedValueChanged(sender As System.Object, e As System.EventArgs) Handles cboNombre.SelectedValueChanged
         If cboNombre.Text = "" Then Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -152,6 +164,9 @@
 
         Dim existe As Boolean = False
         Dim mensaje As String = String.Empty
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -195,6 +210,10 @@
     Private Sub btnEliminar_Click(sender As System.Object, e As System.EventArgs) Handles btnEliminar.Click
         If txtid.Text = "" Then MsgBox("Selecciona un usuario para eliminar sus horarios.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cboNombre.Focus().Equals(True) : Exit Sub
         If cboNombre.Text = "" Then MsgBox("Selecciona un empleado para eliminar sus horarios.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cboNombre.Focus().Equals(True) : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             If MsgBox("¿Deseas eliminar los horarios de éste usuario." & vbNewLine & "Esta acción no se puede deshacer." & vbNewLine & vbNewLine & "Importante: Sólo se eliminarán los horarios del usuario más no su registro y permisos.", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then

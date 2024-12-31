@@ -1,8 +1,14 @@
-﻿Public Class frmMonederos
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmMonederos
 
     Protected Sub folio_monedero()
         Dim id As Integer = 0
         Dim folio As Integer = 0
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
         Try
             cnn2.Close()
             cnn2.Open()
@@ -38,6 +44,9 @@
 
     Private Sub cboCliente_DropDown(sender As System.Object, e As System.EventArgs) Handles cboCliente.DropDown
         cboCliente.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -67,6 +76,9 @@
     Private Sub cboCliente_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cboCliente.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -91,9 +103,11 @@
     End Sub
 
     Private Sub cboCliente_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cboCliente.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
-
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                  "select Id,Barras,Cumple from monedero where Cliente='" & cboCliente.Text & "'"
@@ -119,6 +133,9 @@
 
     Private Sub txtTelefono_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtTelefono.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 If txtTelefono.Text <> "" Then
                     cnn1.Close() : cnn1.Open()
@@ -181,6 +198,11 @@
         If txtFolio.Text = "" Then MsgBox("Selecciona un monedero existente para poder eliminarlo.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : txtFolio.Focus().Equals(True) : Exit Sub
 
         If MsgBox("¿Deseas eliminar el monedero con folio " & txtFolio.Text & "?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close()
                 cnn1.Open()
@@ -208,25 +230,16 @@
         Dim query As String = ""
         Dim fecha As Date = Date.Now
         Dim fechacumple As String = Format(dtpCumple.Value, "yyyy-MM-dd")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim saldo As Double = txtSaldo.Text
 
             cnn1.Close()
             cnn1.Open()
-            'cmd1 = cnn1.CreateCommand
-            'cmd1.CommandText = "SELECT * FROM clientes WHERE Nombre='" & cboCliente.Text & "'"
-            'rd1 = cmd1.ExecuteReader
-            'If rd1.HasRows Then
-            '    If rd1.Read Then
-
-            '    End If
-            'Else
-            '    MsgBox("El cliente no esta registrado", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-            '    Exit Sub
-            '    btnNuevo.PerformClick()
-            'End If
-            'rd1.Close()
-
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "select Id from Monedero where Barras='" & txtTelefono.Text & "'"
             rd1 = cmd1.ExecuteReader
@@ -264,6 +277,9 @@
     Private Sub txtFolio_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtFolio.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             If txtFolio.Text <> "" Then
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
                 Try
                     cnn1.Close() : cnn1.Open()
 

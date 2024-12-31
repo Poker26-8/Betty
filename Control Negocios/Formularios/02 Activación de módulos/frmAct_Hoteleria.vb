@@ -1,10 +1,16 @@
-﻿Public Class frmAct_Hoteleria
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmAct_Hoteleria
     Dim act As Integer = 0
 
     Private Sub btndesactivar_Click(sender As Object, e As EventArgs) Handles btndesactivar.Click
         If MsgBox("¿Deseas desactivar el módulo de Hoteles?", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") = vbOK Then
 
             If txtcontra.Text = "" Then MsgBox("Escribe la contraseña de activación." & vbNewLine & "Para generarla conmunícate con tu proveedor de software.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             If txtcontra.Text = "jipl2211*" Then
                 Try
@@ -36,6 +42,10 @@
 
             If txtcontra.Text = "" Then MsgBox("Escribe la contraseña de activación." & vbNewLine & "Para generarla conmunícate con tu proveedor de software.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             If txtcontra.Text = "jipl2211*" Then
                 Try
                     cnn1.Close() : cnn1.Open()
@@ -63,9 +73,13 @@
     Private Sub frmAct_Hoteleria_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Label5.Text = Mid(SerialNumber(), 1, 7)
         SFormatos("Hoteles", "")
-
         act = DatosRecarga2("Hoteles")
         Dim REFA As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand

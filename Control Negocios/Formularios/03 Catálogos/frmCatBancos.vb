@@ -1,10 +1,15 @@
-﻿Public Class frmCatBancos
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmCatBancos
 
     Private Sub cbonombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cbonombre.DropDown
         cbonombre.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
-
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select Banco from Bancos ORDER BY Banco"
@@ -37,6 +42,10 @@
     Private Sub btnEliminar_Click(sender As System.Object, e As System.EventArgs) Handles btnEliminar.Click
         If cbonombre.Text = "" Then MsgBox("Selecciona un banco del combo para eliminarlo.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbonombre.Focus().Equals(True) : Exit Sub
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If MsgBox("¿Deseas eliminar este registro de banco?" & vbNewLine & "Esta acción no se puede deshacer.", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
             Try
                 cnn1.Close() : cnn1.Open()
@@ -62,6 +71,10 @@
 
     Private Sub btnGuardar_Click(sender As System.Object, e As System.EventArgs) Handles btnGuardar.Click
         If cbonombre.Text = "" Then MsgBox("Escribe el nombre del banco para poder guardarlo.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbonombre.Focus().Equals(True) : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If MsgBox("¿Deseas guardar el nombre de este banco?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
             Dim existe As Boolean = False

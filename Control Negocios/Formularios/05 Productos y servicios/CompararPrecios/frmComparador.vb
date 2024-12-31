@@ -1,4 +1,5 @@
 ﻿Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmComparador
 
@@ -50,6 +51,9 @@ Public Class frmComparador
     End Sub
 
     Private Sub cboDescripcion_DropDown(sender As Object, e As EventArgs) Handles cboDescripcion.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd15 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboDescripcion.Items.Clear()
 
@@ -71,6 +75,9 @@ Public Class frmComparador
     End Sub
 
     Private Sub cboCodigo_DropDown(sender As Object, e As EventArgs) Handles cboCodigo.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboCodigo.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -92,6 +99,10 @@ Public Class frmComparador
     End Sub
 
     Private Sub cboproveedor_DropDown(sender As Object, e As EventArgs) Handles cboproveedor.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboproveedor.Items.Clear()
 
@@ -114,6 +125,10 @@ Public Class frmComparador
     End Sub
 
     Public Sub Datos()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             GrdCaptura.Rows.Clear()
             cnn1.Close() : cnn1.Open()
@@ -157,6 +172,11 @@ Public Class frmComparador
     End Sub
 
     Public Sub Datos2()
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             GrdCaptura.Rows.Clear()
             cnn2.Close() : cnn2.Open()
@@ -198,6 +218,11 @@ Public Class frmComparador
     End Sub
 
     Public Sub Datos3()
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             GrdCaptura.Rows.Clear()
             cnn2.Close() : cnn2.Open()
@@ -260,6 +285,11 @@ Public Class frmComparador
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             cnn1.Close() : cnn1.Open()
@@ -305,6 +335,12 @@ Public Class frmComparador
     End Sub
 
     Private Sub CargarDatosDesdeExcel()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         ' Crear el OpenFileDialog para seleccionar el archivo Excel
         Dim openFileDialog As New OpenFileDialog()
         openFileDialog.Filter = "Archivos de Excel|*.xlsx"
@@ -421,6 +457,11 @@ Public Class frmComparador
         Dim cuadro_dialogo As New OpenFileDialog
         Dim ruta As String = ""
         Dim sheet As String = "hoja1"
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         With cuadro_dialogo
             .Filter = "Archivos de cálculo(*.xls;*.xlsx)|*.xls;*.xlsx"
@@ -555,6 +596,9 @@ Public Class frmComparador
 
         frmPedidosN.cboProveedor.Text = proveedorseleccionado
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Dim total As Double = CDec(txtCantidad.Text) * CDec(precioseleccionado)
         Dim iva As Double = 0

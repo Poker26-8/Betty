@@ -1,4 +1,6 @@
-﻿Public Class frmAct_Taller
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmAct_Taller
     Dim act As Integer = 0
     Private Sub frmAct_Taller_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -7,6 +9,10 @@
         act = DatosRecarga2("Taller")
 
         Dim tele As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -41,6 +47,11 @@
 
             If txtcontra.Text = "" Then MsgBox("Escribe la contraseña de activación." & vbNewLine & "Para generarla conmunícate con tu proveedor de software.", vbInformation + vbOKOnly, titulocentral) : Exit Sub
 
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             If txtcontra.Text = "jipl2211*" Then
                 Try
                     cnn1.Close() : cnn1.Open()
@@ -71,6 +82,10 @@
         If MsgBox("¿Deseas desactivar el módulo de telefonia?", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") = vbOK Then
 
             If txtcontra.Text = "" Then MsgBox("Escribe la contraseña de activación." & vbNewLine & "Para generarla conmunícate con tu proveedor de software.", vbInformation + vbOKOnly, titulocentral) : Exit Sub
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             If txtcontra.Text = "jipl2211*" Then
                 Try

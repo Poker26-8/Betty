@@ -2,6 +2,7 @@
 Imports DPFP
 Imports DPFP.Capture
 Imports System.Text
+Imports MySql.Data.MySqlClient
 
 Public Class frmHuella
 
@@ -156,6 +157,12 @@ Public Class frmHuella
     Public Sub OnComplete(Capture As Object, ReaderSerialNumber As String, Sample As DPFP.Sample) Implements DPFP.Capture.EventHandler.OnComplete
         PonerImg(ConvertMuestra(Sample))
         Dim caracteristicas As DPFP.FeatureSet = ExtraerCar(Sample, DPFP.Processing.DataPurpose.Verification)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+
         If Not caracteristicas Is Nothing Then
             Dim result As New DPFP.Verification.Verification.Result
             Dim verificado As Boolean = False
@@ -228,6 +235,9 @@ Public Class frmHuella
             btnGuardar.Enabled = False
             Exit Sub
         End If
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()

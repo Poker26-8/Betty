@@ -2,6 +2,7 @@
 Imports System.Data.OleDb
 Imports ClosedXML.Excel
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+Imports MySql.Data.MySqlClient
 Public Class frmClientes
 
     Private Sub Info_Click(sender As System.Object, e As System.EventArgs) Handles Info.Click
@@ -16,6 +17,9 @@ Public Class frmClientes
 
     Private Sub cboNombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cboNombre.DropDown
         cboNombre.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -44,6 +48,10 @@ Public Class frmClientes
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
             If cboNombre.Text <> "" Then
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
+
                 Try
                     cnn1.Close() : cnn1.Open()
 
@@ -89,9 +97,12 @@ Public Class frmClientes
 
     Private Sub cboNombre_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cboNombre.SelectedValueChanged
         If cboNombre.Text = "" Then Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
-
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                  "select Id,RazonSocial,Tipo,RFC,Telefono,Correo,Credito,DiasCred,Comisionista,Suspender,Calle,NInterior,NExterior,Colonia,CP,Delegacion,Entidad,Pais,RegFis,Referencia,NumCliente  from Clientes where Nombre='" & Trim(Replace(cboNombre.Text, "'", "''")) & "'"
@@ -132,8 +143,11 @@ Public Class frmClientes
     Private Sub cboRazon_DropDown(sender As System.Object, e As System.EventArgs) Handles cboRazon.DropDown
         cboRazon.Items.Clear()
         Try
-            cnn1.Close() : cnn1.Open()
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
+            cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                  "select distinct RazonSocial from Clientes where RazonSocial<>''"
@@ -159,9 +173,13 @@ Public Class frmClientes
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
             If cboRazon.Text <> "" Then
+
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
+
                 Try
                     cnn1.Close() : cnn1.Open()
-
                     cmd1 = cnn1.CreateCommand
                     cmd1.CommandText =
                         "select Id,Nombre,Tipo,RFC,Telefono,Correo,Credito,DiasCred,Comisionista,Suspender,Calle,NInterior,NExterior,Colonia,CP,Delegacion,Entidad,Pais,RegFis,Referencia,NumCliente  from Clientes where RazonSocial='" & Trim(Replace(cboRazon.Text, "'", "''")) & "'"
@@ -205,8 +223,11 @@ Public Class frmClientes
     Private Sub cboRazon_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cboRazon.SelectedValueChanged
         If cboRazon.Text = "" Then Exit Sub
         Try
-            cnn1.Close() : cnn1.Open()
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
+            cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                  "select Id,Nombre,Tipo,RFC,Telefono,Correo,Credito,DiasCred,Comisionista,Suspender,Calle,NInterior,NExterior,Colonia,CP,Delegacion,Entidad,Pais,RegFis,Referencia,NumCliente from Clientes where RazonSocial='" &
@@ -258,6 +279,11 @@ Public Class frmClientes
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
             If cboRFC.Text <> "" Then
+
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
+
                 Try
                     cnn1.Close() : cnn1.Open()
 
@@ -358,6 +384,10 @@ Public Class frmClientes
             existe = False
         End If
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             If existe Then
                 cnn1.Close() : cnn1.Open()
@@ -456,6 +486,11 @@ Public Class frmClientes
         Else
             If MsgBox("¿Deseas eliminar los datos de éste cliente?" & vbNewLine & "Ésta acción no se puede deshacer.", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
                 Try
+                    Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                    Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                    Dim rd1, rd2 As MySqlDataReader
+                    Dim cmd1, cmd2 As MySqlCommand
+
                     cnn1.Close() : cnn1.Open()
                     cnn2.Close() : cnn2.Open()
 
@@ -469,8 +504,6 @@ Public Class frmClientes
                         cmd2.ExecuteNonQuery()
 
                     End If
-
-
 
                     cmd1 = cnn1.CreateCommand
                     cmd1.CommandText =
@@ -504,6 +537,10 @@ Public Class frmClientes
         txtId.Text = ""
         Try
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Dim taller As Integer = DatosRecarga2("Taller")
 
             If taller = 1 Then
@@ -520,11 +557,6 @@ Public Class frmClientes
             If rd1.HasRows Then
                 If rd1.Read Then
                     If rd1(0).ToString() = "0" Then
-
-                        cnn2.Close() : cnn2.Open()
-
-                        cnn2.Close()
-
                     Else
                         btnmigra.Visible = True
                     End If
@@ -553,6 +585,9 @@ Public Class frmClientes
 
     Private Sub cboRFC_DropDown(sender As System.Object, e As System.EventArgs) Handles cboRFC.DropDown
         cboRFC.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -610,6 +645,9 @@ Public Class frmClientes
 
     Private Sub cboVendedor_DropDown(sender As System.Object, e As System.EventArgs) Handles cboVendedor.DropDown
         cboVendedor.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -631,6 +669,10 @@ Public Class frmClientes
 
     Private Sub cboregimen_DropDown(sender As System.Object, e As System.EventArgs) Handles cboregimen.DropDown
         cboregimen.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -652,8 +694,11 @@ Public Class frmClientes
 
     Private Sub cboregimen_SelectedValueChanged(sender As System.Object, e As System.EventArgs) Handles cboregimen.SelectedValueChanged
         Try
-            cnn1.Close() : cnn1.Open()
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
+            cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select ClaveRegFis from RegimenFiscalSat where Descripcion='" & cboregimen.Text & "'"
@@ -673,8 +718,11 @@ Public Class frmClientes
     Private Sub txtClaveRegFis_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtClaveRegFis.TextChanged
         If txtClaveRegFis.Text <> "" Then
             Try
-                cnn2.Close() : cnn2.Open()
+                Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd2 As MySqlDataReader
+                Dim cmd2 As MySqlCommand
 
+                cnn2.Close() : cnn2.Open()
                 cmd2 = cnn2.CreateCommand
                 cmd2.CommandText =
                     "select Descripcion from RegimenFiscalSat where ClaveRegFis='" & Trim(txtClaveRegFis.Text) & "'"
@@ -822,6 +870,10 @@ Public Class frmClientes
 
     Private Sub Excel_Grid_SQL(ByVal tabla As DataGridView)
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Dim con As OleDb.OleDbConnection
         Dim dt As New System.Data.DataTable
         Dim ds As New DataSet
@@ -933,6 +985,10 @@ Public Class frmClientes
 
     Private Function Comprueba(ByVal nombre As String) As Boolean
         Try
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd2 As MySqlDataReader
+            Dim cmd2 As MySqlCommand
+
             Dim valida As Boolean = True
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
@@ -1025,6 +1081,11 @@ Public Class frmClientes
             Dim suspender As Integer = 0
             Dim conteo As Integer = 0
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
+
             barsube.Value = 0
             barsube.Visible = True
             barsube.Maximum = DataGridView1.Rows.Count
@@ -1101,6 +1162,10 @@ Public Class frmClientes
 
     Private Sub cboCFDI_DropDown(sender As Object, e As EventArgs) Handles cboCFDI.DropDown
         Try
+            Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd5 As MySqlDataReader
+            Dim cmd5 As MySqlCommand
+
             cboCFDI.Items.Clear()
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand

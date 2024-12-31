@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Threading.Tasks
+Imports MySql.Data.MySqlClient
 
 Public Class frmEmpleados
 
@@ -26,6 +27,9 @@ Public Class frmEmpleados
 
     Private Sub cboNombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cboNombre.DropDown
         cboNombre.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -49,9 +53,12 @@ Public Class frmEmpleados
     Private Sub cboNombre_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cboNombre.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
-
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
                     "select IdEmpleado,Ingreso,Area,Puesto,Alias,Sueldo,Horas,NSS,Comisionista,Calle,Colonia,CP,Delegacion,Entidad,Telefono,Correo,Facebook from Usuarios where Nombre='" & cboNombre.Text & "'"
@@ -87,9 +94,11 @@ Public Class frmEmpleados
     End Sub
 
     Private Sub cboNombre_SelectedValueChanged(sender As System.Object, e As System.EventArgs) Handles cboNombre.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
-
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select IdEmpleado,Ingreso,Area,Puesto,Alias,Sueldo,Horas,NSS,Comisionista,Calle,Colonia,CP,Delegacion,Entidad,Telefono,Correo,Facebook from Usuarios where Nombre='" & cboNombre.Text & "'"
@@ -164,10 +173,13 @@ Public Class frmEmpleados
     Private Sub txtAlias_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtAlias.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             If txtId.Text = "" Then
                 Try
                     cnn1.Close() : cnn1.Open()
-
                     cmd1 = cnn1.CreateCommand
                     cmd1.CommandText =
                     "select Nombre,Ingreso,Area,Sueldo,Horas,Puesto,NSS,Comisionista,IdEmpleado,Calle,Colonia,CP,Delegacion,Entidad,Telefono,Facebook,Correo from  Usuarios where Alias='" & txtAlias.Text & "'"
@@ -301,6 +313,9 @@ Public Class frmEmpleados
         Else
             existe = True
         End If
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             If existe Then
@@ -397,7 +412,9 @@ Public Class frmEmpleados
         End If
 
         If MsgBox("¿Deseas eliminar los datos de éste usuario?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then Exit Sub
-
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -522,6 +539,10 @@ Public Class frmEmpleados
             Dim nombre, aliass, area, puesto, clave As String
             Dim conteo As Integer = 0
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             barsube.Value = 0
             barsube.Maximum = DataGridView1.Rows.Count
 
@@ -593,6 +614,9 @@ Public Class frmEmpleados
     End Function
 
     Private Function Comprueba(ByVal nombre As String) As Boolean
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
         Try
             Dim valida As Boolean = True
             cnn2.Close() : cnn2.Open()

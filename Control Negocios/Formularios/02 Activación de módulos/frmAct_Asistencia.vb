@@ -1,4 +1,6 @@
-﻿Public Class frmAct_Asistencia
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmAct_Asistencia
     Dim act As Integer = 0
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -33,8 +35,11 @@
     Private Sub frmAct_Asistencia_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Label5.Text = Mid(SerialNumber(), 1, 7)
         SFormatos("Mod_Asis", "")
-
         act = DatosRecarga2("Mod_Asis")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Dim resta As Integer = 0
         Try
@@ -67,6 +72,11 @@
         If MsgBox("¿Deseas desactivar el módulo de asistencia para empleados?", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") = vbOK Then
 
             If txtcontra.Text = "" Then MsgBox("Escribe la contraseña de activación." & vbNewLine & "Para generarla conmunícate con tu proveedor de software.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
+
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             If txtcontra.Text = "jipl2211*" Then
                 Try

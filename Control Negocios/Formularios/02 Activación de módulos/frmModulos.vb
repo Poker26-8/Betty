@@ -1,4 +1,6 @@
-﻿Public Class frmModulos
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmModulos
     Private Sub btnControl_Click(sender As Object, e As EventArgs) Handles btnControl.Click
         frmAct_Asistencia.Show()
         frmAct_Asistencia.BringToFront()
@@ -181,6 +183,10 @@
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand
         cmd1.CommandText = "ALTER TABLE VENTAS MODIFY Cliente VARCHAR(255) DEFAULT '' NOT NULL"
@@ -192,5 +198,9 @@
             MsgBox("TERMINO")
         End If
         cnn1.Close()
+    End Sub
+
+    Private Sub frmModulos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class

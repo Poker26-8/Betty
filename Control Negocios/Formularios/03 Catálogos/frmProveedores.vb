@@ -1,5 +1,6 @@
 ﻿Imports System.Data.OleDb
 Imports System.Runtime.Remoting.Contexts
+Imports MySql.Data.MySqlClient
 
 Public Class frmProveedores
 
@@ -15,6 +16,10 @@ Public Class frmProveedores
 
     Private Sub cboNombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cboNombre.DropDown
         cboNombre.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -47,6 +52,9 @@ Public Class frmProveedores
     Private Sub cboNombre_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cboNombre.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd2 As MySqlDataReader
+            Dim cmd2 As MySqlCommand
             Try
                 cnn2.Close() : cnn2.Open()
 
@@ -83,6 +91,9 @@ Public Class frmProveedores
     End Sub
 
     Private Sub cboNombre_SelectedValueChanged(sender As System.Object, e As System.EventArgs) Handles cboNombre.SelectedValueChanged
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
         Try
             cnn2.Close() : cnn2.Open()
 
@@ -118,6 +129,10 @@ Public Class frmProveedores
 
     Private Sub cboRazon_DropDown(sender As System.Object, e As System.EventArgs) Handles cboRazon.DropDown
         cboRazon.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -140,6 +155,9 @@ Public Class frmProveedores
     Private Sub cboRazon_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cboRazon.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -175,9 +193,11 @@ Public Class frmProveedores
     End Sub
 
     Private Sub cboRazon_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cboRazon.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
-
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select Id,NComercial,RFC,CURP,Credito,DiasCred,Calle,Colonia,CP,Delegacion,Entidad,Telefono,Facebook,Correo from Proveedores where Compania='" & cboRazon.Text & "'"
@@ -318,10 +338,13 @@ Public Class frmProveedores
             existe = True
         End If
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             If existe Then
                 cnn1.Close() : cnn1.Open()
-
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
                      "select Id from Proveedores where Id=" &
@@ -340,11 +363,9 @@ Public Class frmProveedores
                     MsgBox("Datos de proveedor actualizados.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
                     btnNuevo.PerformClick()
                 End If
-
                 cnn1.Close()
             Else
                 cnn1.Close() : cnn1.Open()
-
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
                      "select Id from Proveedores where NComercial='" & cboNombre.Text & "'"
@@ -384,6 +405,10 @@ Public Class frmProveedores
 
         If MsgBox("¿Deseas eliminar a éste proveedor?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then Exit Sub
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -420,6 +445,10 @@ Public Class frmProveedores
         Dim cuadro_dialogo As New OpenFileDialog
         Dim ruta As String = ""
         Dim sheet As String = "hoja1"
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         With cuadro_dialogo
             .Filter = "Archivos de cálculo(*.xls;*.xlsx)|*.xls;*.xlsx"
@@ -519,6 +548,9 @@ Public Class frmProveedores
     End Sub
 
     Private Function Comprueba(ByVal nombre As String) As Boolean
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
         Try
             Dim valida As Boolean = True
             cnn2.Close() : cnn2.Open()

@@ -81,6 +81,8 @@ Public Class frmVentas1
     Dim autofact As String = ""
     Dim siqr As String = ""
 
+
+
     Private Sub frmVentas1_Activated(sender As Object, e As System.EventArgs) Handles Me.Activated
         txtdia.Text = Weekday(Date.Now)
     End Sub
@@ -88,6 +90,10 @@ Public Class frmVentas1
     Public Sub leePeso()
 
         Try
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Dim puertobascula As String = ""
             Dim bascula As String = ""
@@ -220,6 +226,17 @@ Public Class frmVentas1
 
     Private Async Sub frmVentas1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
 
+        Dim cnn11 As MySqlConnection = New MySqlConnection()
+        Dim serror As String = ""
+        Dim dr11 As DataRow
+        Dim odata11 As New ToolKitSQL.myssql
+        Dim sql As String = ""
+        Dim sql1 As String = ""
+        Dim sql2 As String = ""
+        Dim sql3 As String = ""
+
+        Dim log As String = ""
+
         nLogo = DatosRecarga("LogoG")
         tLogo = DatosRecarga("TipoLogo")
         simbolo = DatosRecarga("Simbolo")
@@ -231,28 +248,23 @@ Public Class frmVentas1
         Me.KeyPreview = True
         txtResta.ReadOnly = True
         Try
-            cnn1.Close()
-            cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "Select Terminal,Clave,Solicitud,Resultado from DatosProsepago"
-            rd1 = cmd1.ExecuteReader
-            If rd1.Read Then
-                hayTerminal = 1
-                numTerminal = rd1("Terminal").ToString
-                numClave = rd1("Clave").ToString
-                URLsolicitud = rd1("Solicitud").ToString
-                URLresultado = rd1("Resultado").ToString
-            Else
-                hayTerminal = 0
+            If odata11.dbOpen(cnn11, sTarget, serror) = True Then
+                sql = "Select Terminal,Clave,Solicitud,Resultado from DatosProsepago"
+                If odata11.getDr(cnn11, dr11, sql, serror) = True Then
+                    hayTerminal = 1
+                    numTerminal = dr11("Terminal").ToString
+                    numClave = dr11("Clave").ToString
+                    URLsolicitud = dr11("Solicitud").ToString
+                    URLresultado = dr11("Resultado").ToString
+                Else
+                    hayTerminal = 0
+                End If
             End If
-            rd1.Close()
-            cnn1.Close()
+            cnn11.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn11.Close()
         End Try
-
-
 
         Dim orden As Integer = Await ValidarAsync("Ordenes")
         Dim verexistencia As Integer = Await ValidarAsync("VerExistencias")
@@ -277,22 +289,17 @@ Public Class frmVentas1
 
         If tomarcontra = 1 Then
 
-            cnn2.Close() : cnn2.Open()
-            cmd2 = cnn2.CreateCommand
-            cmd2.CommandText = "SELECT Clave,Alias FROM Usuarios WHERE IdEmpleado=" & id_usu_log
-            rd2 = cmd2.ExecuteReader
-            If rd2.HasRows Then
-                If rd2.Read Then
-                    txtcontraseña.Text = rd2(0).ToString
-                    lblusuario.Text = rd2(1).ToString
+            If odata11.dbOpen(cnn1, sTarget, serror) = True Then
+                sql1 = "SELECT Clave,Alias FROM Usuarios WHERE IdEmpleado=" & id_usu_log
+                If odata11.getDr(cnn11, dr11, sql1, serror) = True Then
+                    txtcontraseña.Text = dr11(0).ToString
+                    lblusuario.Text = dr11(1).ToString
                     txtcontraseña.PasswordChar = "*"
                     txtcontraseña.ForeColor = Color.Black
                 End If
             End If
-            rd2.Close()
-
         End If
-        cnn2.Close()
+        cnn11.Close()
 
         If IO.File.Exists(ARCHIVO_DE_CONFIGURACION) Then
 
@@ -342,20 +349,25 @@ Public Class frmVentas1
         grdcaptura.DefaultCellStyle.SelectionBackColor = Color.WhiteSmoke
         grdcaptura.DefaultCellStyle.SelectionForeColor = Color.Blue
 
-        Dim log As String = ""
 
 
-        cnn4.Close() : cnn4.Open()
-        cmd4 = cnn4.CreateCommand
-        cmd4.CommandText = "select NotasCred from Formatos where Facturas='LogoG'"
-        rd4 = cmd4.ExecuteReader
-        If rd4.HasRows Then
-            If rd4.Read Then
-                log = rd4(0).ToString
+        If odata11.dbOpen(cnn11, sTarget, serror) = True Then
+            sql2 = "select NotasCred from Formatos where Facturas='LogoG'"
+            If odata11.getDr(cnn11, dr11, sql2, serror) = True Then
+                log = dr11(0).ToString
             End If
         End If
-        rd4.Close()
+        cnn11.Close()
 
+        If odata11.dbOpen(cnn11, sTarget, serror) = True Then
+            sql3 = "select Formato from RutasImpresion where Equipo='" & ObtenerNombreEquipo() & "' and Tipo='Venta'"
+            If odata11.getDr(cnn11, dr11, sql3, serror) = True Then
+                cboimpresion.Text = dr11(0).ToString()
+            Else
+                cboimpresion.Text = "TICKET"
+            End If
+        End If
+        cnn11.Close()
 
         If log <> "" Then
             If File.Exists(My.Application.Info.DirectoryPath & "\" & log) Then
@@ -365,26 +377,6 @@ Public Class frmVentas1
                 'Panel8.Controls.Add(PictureBox2)
             End If
         End If
-
-        Try
-            cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
-                "select Formato from RutasImpresion where Equipo='" & ObtenerNombreEquipo() & "' and Tipo='Venta'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    cboimpresion.Text = rd1(0).ToString()
-                End If
-            Else
-                cboimpresion.Text = "TICKET"
-            End If
-            rd1.Close()
-            cnn1.Close()
-        Catch ex As Exception
-            MessageBox.Show(ex.ToString())
-            cnn1.Close()
-        End Try
 
         DondeVoy = ""
         cbonombretag = ""
@@ -416,22 +408,20 @@ Public Class frmVentas1
         Timer1.Start()
         cbodesc.Focus().Equals(True)
 
-
-
         Me.Show()
         My.Application.DoEvents()
 
-
     End Sub
+
     Private Sub frmVentas1_Shown(sender As Object, e As System.EventArgs) Handles Me.Shown
         cbodesc.Focus().Equals(True)
     End Sub
+
     Private Sub Timer1_Tick(sender As System.Object, e As System.EventArgs) Handles Timer1.Tick
         Timer1.Stop()
         Folio()
         Timer1.Start()
     End Sub
-
 
     Private Sub txtcontraseña_Click(sender As System.Object, e As System.EventArgs) Handles txtcontraseña.Click
         If txtcontraseña.Text = "CONTRASEÑA" Then
@@ -443,6 +433,7 @@ Public Class frmVentas1
             txtcontraseña.SelectionLength = Len(txtcontraseña.Text)
         End If
     End Sub
+
     Private Sub txtcontraseña_GotFocus(sender As Object, e As System.EventArgs) Handles txtcontraseña.GotFocus
         If txtcontraseña.Text = "CONTRASEÑA" Then
             txtcontraseña.Text = ""
@@ -453,26 +444,33 @@ Public Class frmVentas1
             txtcontraseña.SelectionLength = Len(txtcontraseña.Text)
         End If
     End Sub
+
     Private Sub txtcontraseña_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtcontraseña.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
-            Try
-                cnn1.Close() : cnn1.Open()
 
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText =
+            Dim cnn11 As MySqlConnection = New MySqlConnection
+            cnn11 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+            Dim rd11 As MySqlDataReader
+            Dim cmd11 As MySqlCommand
+
+            Try
+                cnn11.Close() : cnn11.Open()
+
+                cmd11 = cnn11.CreateCommand
+                cmd11.CommandText =
                     "select Alias from Usuarios where Clave='" & txtcontraseña.Text & "'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        lblusuario.Text = rd1("Alias").ToString
+                rd11 = cmd11.ExecuteReader
+                If rd11.HasRows Then
+                    If rd11.Read Then
+                        lblusuario.Text = rd11("Alias").ToString
                         btnventa.Focus().Equals(True)
                     End If
                 End If
-                rd1.Close()
-                cnn1.Close()
+                rd11.Close()
+                cnn11.Close()
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
-                cnn1.Close()
+                cnn11.Close()
             End Try
             If DondeVoy = "Venta" Then
                 btnventa.Focus().Equals(True)
@@ -485,6 +483,7 @@ Public Class frmVentas1
             End If
         End If
     End Sub
+
     Private Sub txtcontraseña_LostFocus(sender As Object, e As System.EventArgs) Handles txtcontraseña.LostFocus
         If txtcontraseña.Text = "" Then
             txtcontraseña.Text = "CONTRASEÑA"
@@ -493,27 +492,27 @@ Public Class frmVentas1
         End If
     End Sub
 
-
-
 #Region "Funciones"
     Public Sub Folio()
         Try
+            Dim cnn9 As MySqlConnection = New MySqlConnection
+            cnn9 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+            Dim rd9 As MySqlDataReader
+            Dim cmd9 As MySqlCommand
+
             If cnn9.State = 1 Then cnn9.Close()
             cnn9.Open()
 
             cmd9 = cnn9.CreateCommand
             If Me.Text = "Ventas (1)" Then
-                cmd9.CommandText =
-                    "select MAX(Folio) from Ventas"
+                cmd9.CommandText = "select MAX(Folio) from Ventas"
             End If
             If Me.Text = "Cotización (1)" Then
-                cmd9.CommandText =
-                    "select MAX(Folio) from CotPed"
+                cmd9.CommandText = "select MAX(Folio) from CotPed"
             End If
 
             If Me.Text = "Pedidos (1)" Then
-                cmd9.CommandText =
-                   "select MAX(Folio) from CotPed"
+                cmd9.CommandText = "select MAX(Folio) from CotPed"
             End If
 
             If Me.Text = "" Then Exit Sub
@@ -537,17 +536,20 @@ Public Class frmVentas1
     Public Sub CodBar()
         If cbocodigo.Text = "" And cbodesc.Text = "" Then Exit Sub
 
+        Dim cnn3 As MySqlConnection = New MySqlConnection
+        cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         'Código de barras 1
         Try
             cnn3.Close() : cnn3.Open()
 
             cmd3 = cnn3.CreateCommand
             If cbocodigo.Text = "" Then
-                cmd3.CommandText =
-                    "select Codigo,Grupo from Productos where CodBarra='" & cbodesc.Text & "'"
+                cmd3.CommandText = "select Codigo,Grupo from Productos where CodBarra='" & cbodesc.Text & "'"
             Else
-                cmd3.CommandText =
-                    "select Codigo,Grupo from Productos where CodBarra='" & cbocodigo.Text & "'"
+                cmd3.CommandText = "select Codigo,Grupo from Productos where CodBarra='" & cbocodigo.Text & "'"
             End If
             rd3 = cmd3.ExecuteReader
             If rd3.HasRows Then
@@ -565,7 +567,6 @@ Public Class frmVentas1
         'Código de barras 2
         Try
             cnn3.Close() : cnn3.Open()
-
             cmd3 = cnn3.CreateCommand
             If cbocodigo.Text = "" Then
                 cmd3.CommandText =
@@ -590,7 +591,6 @@ Public Class frmVentas1
         'Código de barras 3
         Try
             cnn3.Close() : cnn3.Open()
-
             cmd3 = cnn3.CreateCommand
             If cbocodigo.Text = "" Then
                 cmd3.CommandText =
@@ -620,20 +620,19 @@ Public Class frmVentas1
         Dim Acumula As Boolean = False
         Dim minimo As Double = 0
 
+        Dim cnn3 As MySqlConnection = New MySqlConnection
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+
+        cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
-
-            'cmd3 = cnn3.CreateCommand
-            'cmd3.CommandText =
-            '    "select NotasCred from Formatos where Facturas='TPapelV'"
-            'rd3 = cmd3.ExecuteReader
-            'If rd3.HasRows Then
-            '    If rd3.Read Then
-            '        TPapel = rd3(0).ToString
-            '    End If
-            'End If
-            'rd3.Close()
-
             cmd3 = cnn3.CreateCommand
             cmd3.CommandText =
                 "select NotasCred from Formatos where Facturas='MinimoA'"
@@ -693,8 +692,9 @@ Public Class frmVentas1
             Dim desucentoiva As Double = 0
             Dim total1 As Double = 0
             Dim monedero As Double = 0
-            cnn3.Close() : cnn3.Open()
+            Dim acumulaxd As Integer = 0
 
+            cnn3.Close() : cnn3.Open()
             cmd3 = cnn3.CreateCommand
             cmd3.CommandText =
                 "select IVA,Promo_Monedero,Min from Productos where Codigo='" & cbocodigo.Text & "'"
@@ -718,9 +718,9 @@ Public Class frmVentas1
             rd3.Close()
             cnn3.Close()
 
-            Dim acumulaxd As Integer = 0
-            cnn1.Close()
-            cnn1.Open()
+
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Acumula'"
             rd1 = cmd1.ExecuteReader
             If rd1.Read Then
@@ -740,8 +740,6 @@ Public Class frmVentas1
                         GoTo kak
                     End If
                 Next
-
-
                 grdcaptura.Rows.Add(codigo, nombre, unidad, cantid, FormatNumber(precio, 4), FormatNumber(total, 2), existencia, id_lote, lote, fcad, FormatNumber(IvaIeps, 2), FormatNumber(ieps, 2), desucentoiva, total1, monedero, varcodunico)
             Else
                 grdcaptura.Rows.Add(codigo, nombre, unidad, cantid, FormatNumber(precio, 4), FormatNumber(total, 2), existencia, id_lote, lote, fcad, FormatNumber(IvaIeps, 2), FormatNumber(ieps, 2), desucentoiva, total1, monedero, varcodunico)
@@ -787,16 +785,27 @@ kak:
         ' Si no se encuentra ninguna fila con el código, devolver Nothing
         Return Nothing
     End Function
+
     Private Function ConsultaPrecio(ByVal codigo As String, ByVal cantidad As Double) As Double
+
+
         Dim precio_base As Double = 0
+        Dim temp As Double = 0
+        Dim TiCambio As Double = 0
+        Dim H_Actual As String = Format(Date.Now, "HH:mm")
+
+        Dim cnn4 As MySqlConnection = New MySqlConnection
+        cnn4 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection
+        cnn5 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
 
         Try
             cnn4.Close() : cnn4.Open()
-
-            Dim temp As Double = 0
-            Dim TiCambio As Double = 0
-            Dim H_Actual As String = Format(Date.Now, "HH:mm")
-
             cmd4 = cnn4.CreateCommand
             cmd4.CommandText =
                 "select tipo_cambio from tb_moneda,Productos where Codigo='" & codigo & "' and Productos.id_tbMoneda=tb_moneda.id"
@@ -917,6 +926,7 @@ kak:
 
         Return precio_base
     End Function
+
     Private Sub Actualiza()
         If txtSubTotal.Tag = 0 Then
             txtSubTotal.Text = txtSubTotal.Text
@@ -927,12 +937,17 @@ kak:
             txtSubTotal.Text = txtSubTotal.Text
         End If
     End Sub
+
     Private Function CalPreDevo(ByVal folio As Integer, ByVal cod As String) As Double
         Dim precio As Double = 0
 
+        Dim cnn3 As MySqlConnection = New MySqlConnection
+        cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
-
             cmd3 = cnn3.CreateCommand
             cmd3.CommandText =
                 "select Precio from VentasDetalle where Folio=" & folio & " and Codigo='" & cbocodigo.Text & "'"
@@ -953,10 +968,17 @@ kak:
 
         Return precio
     End Function
+
     Public Function IvaDSC(ByVal cod As String) As Double
         Try
-            cnn3.Close() : cnn3.Open()
+            Dim cnn3 As MySqlConnection = New MySqlConnection
+            Dim cnn1 As MySqlConnection = New MySqlConnection
 
+            cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+            Dim rd3 As MySqlDataReader
+            Dim cmd3 As MySqlCommand
+
+            cnn3.Close() : cnn3.Open()
             cmd3 = cnn3.CreateCommand
             cmd3.CommandText =
                 "select IVA from Productos where Codigo='" & cod & "'"
@@ -976,6 +998,7 @@ kak:
             cnn3.Close()
         End Try
     End Function
+
     Private Function ValCantDev(ByVal ka As Integer) As Boolean
         Try
             Dim getpaso As Boolean = False
@@ -995,12 +1018,17 @@ kak:
             MessageBox.Show(ex.ToString())
         End Try
     End Function
+
     Private Sub Cant(ByVal codigo As String, ByRef paso As Boolean)
         Dim canti As Double = 0
+        Dim cnn5 As MySqlConnection = New MySqlConnection
+        cnn5 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         If txtcantidad.Text = "" Then Exit Sub
         Try
             cnn5.Close() : cnn5.Open()
-
             cmd5 = cnn5.CreateCommand
             cmd5.CommandText =
                 "select Folio,Codigo,Cantidad from VentasDetalle where Folio=" & cbonota.Text & " and Codigo='" & codigo & "' order by Nombre"
@@ -1028,11 +1056,16 @@ kak:
             cnn5.Close()
         End Try
     End Sub
+
     Private Function CantLte() As Double
+
         If cboLote.Tag <> 0 Then
+            Dim cnn5 As MySqlConnection = New MySqlConnection
+            cnn5 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+            Dim rd5 As MySqlDataReader
+            Dim cmd5 As MySqlCommand
             Try
                 cnn5.Close() : cnn5.Open()
-
                 cmd5 = cnn5.CreateCommand
                 cmd5.CommandText =
                             "Select Cantidad From LoteCaducidad Where id=" & cboLote.Tag
@@ -1049,16 +1082,20 @@ kak:
             End Try
         End If
     End Function
+
     Private Function Cambio(ByVal Moneda As Double) As Double
         Cambio = 0
         Try
-            cnn3.Close() : cnn3.Open()
+            Dim cnn3 As MySqlConnection = New MySqlConnection
+            cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+            Dim rd3 As MySqlDataReader
+            Dim cmd3 As MySqlCommand
 
+            cnn3.Close() : cnn3.Open()
             cmd3 = cnn3.CreateCommand
             cmd3.CommandText =
                 "select PrecioVentaIVA,PrecioVentaIVA2,PreMin,PreMin2,PreMay,PreMay2,PreMM,PreMM2,PreEsp,PreEsp2 from Productos where Codigo='" & Trim(cbocodigo.Text) & "'"
             rd3 = cmd3.ExecuteReader
-
             Select Case cbotipo.Text
                 Case Is = "Lista"
                     If rd3.HasRows Then
@@ -1181,7 +1218,6 @@ kak:
                     rd3.Close()
 
             End Select
-
             cnn3.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
@@ -1189,6 +1225,7 @@ kak:
         End Try
         Return Cambio
     End Function
+
     Private Sub Fn()
         Try
             Dim Imprime As Boolean = False
@@ -1200,8 +1237,17 @@ kak:
 
             Dim pide As String = "", contra As String = txtcontraseña.Text, usu As String = lblusuario.Text
 
-            cnn1.Close() : cnn1.Open()
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
+            Dim cnn2 As MySqlConnection = New MySqlConnection
+            cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+            Dim rd2 As MySqlDataReader
+            Dim cmd2 As MySqlCommand
+
+            cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
             "select NoPrint from Ticket"
@@ -1228,7 +1274,6 @@ kak:
                 TPrint = cboimpresion.Text
 
                 cnn1.Close() : cnn1.Open()
-
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
                 "select NotasCred from Formatos where Facturas='TamImpre'"
@@ -1382,19 +1427,23 @@ kak:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub ActualizaPEPS(ByVal folio As String, ByVal codigo As String, ByVal cantidad As Double)
         Dim cant_registros As Integer = 0
         Dim suma_registros As Double = 0
         Dim cuestan_registros As Double = 0
-
         Dim costo_registro As Double = 0
-
         Dim p_nombre As String = ""
         Dim p_unidad As String = ""
 
+
+        Dim cnn4 As MySqlConnection = New MySqlConnection
+        cnn4 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
+
         Try
             cnn4.Close() : cnn4.Open()
-
             cmd4 = cnn4.CreateCommand
             cmd4.CommandText =
                  "select Nombre,UVenta from Productos where Codigo='" & codigo & "'"
@@ -1463,10 +1512,15 @@ kak:
             cnn4.Close()
         End Try
     End Sub
+
     Private Function TotCantBase(ByVal FOL As Integer, ByVal COD As String) As Double
         Try
-            cnn3.Close() : cnn3.Open()
+            Dim cnn3 As MySqlConnection = New MySqlConnection
+            cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+            Dim rd3 As MySqlDataReader
+            Dim cmd3 As MySqlCommand
 
+            cnn3.Close() : cnn3.Open()
             cmd3 = cnn3.CreateCommand
             cmd3.CommandText =
                 "select Cantidad from VentasDetalle where Folio=" & FOL & " and Codigo='" & COD & "'"
@@ -1479,13 +1533,21 @@ kak:
                 TotCantBase = 0
             End If
             rd3.Close() : cnn3.Close()
+
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn3.Close()
         End Try
+
+        Return TotCantBase
     End Function
+
     Private Function TCantProd(ByVal fol As Integer) As Double
         Dim resultado As Double = 0
+        Dim cnn3 As MySqlConnection = New MySqlConnection
+        cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
         Try
             cnn3.Close() : cnn3.Open()
             cmd3 = cnn3.CreateCommand
@@ -1507,13 +1569,18 @@ kak:
         End Try
         Return resultado
     End Function
+
     Private Function DESuni(ByVal FOL As Integer, ByVal COD As String) As Double
         Dim Cant As Double = 0
         Dim TotDesc As Double = 0
 
+        Dim cnn3 As MySqlConnection = New MySqlConnection
+        cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
-
             cmd3 = cnn3.CreateCommand
             cmd3.CommandText =
                 "select Descto, Cantidad from VentasDetalle where Folio=" & FOL & " and Codigo='" & COD & "'"
@@ -1545,8 +1612,15 @@ kak:
 
         Return descuento
     End Function
+
     Private Function GetCantLote(ByVal cod As String, ByVal lote As String) As Double
         GetCantLote = 0
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection
+        cnn5 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         If cod = "" Then GetCantLote = 0 : Exit Function
         Try
             cnn5.Close() : cnn5.Open()
@@ -1569,8 +1643,14 @@ kak:
         End Try
         Return GetCantLote
     End Function
+
     Private Function ReviewLote() As Boolean
         ReviewLote = True
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection
+        cnn5 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         If cboLote.Text <> "" Then
             ReviewLote = False
             Try
@@ -1654,6 +1734,12 @@ kak:
     Public Sub cboNombre_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cboNombre.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             If franquicia = 0 Then
                 Try
                     cnn1.Close() : cnn1.Open()
@@ -1817,8 +1903,14 @@ kak:
             End If
         End If
     End Sub
+
     Private Sub cboNombre_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cboNombre.SelectedValueChanged
         Dim MySaldo As Double = 0
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection
+        cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
         If franquicia = 0 Then
             Try
                 If cboNombre.Text = "" Then Exit Sub
@@ -2012,6 +2104,7 @@ kak:
             End Try
         End If
     End Sub
+
     Private Sub cboNombre_TextChanged(sender As Object, e As System.EventArgs) Handles cboNombre.TextChanged
         'If cboNombre.Text <> cbonombretag Then
         '    lblNumCliente.Text = "MOSTRADOR"
@@ -2050,6 +2143,7 @@ kak:
             My.Application.DoEvents()
         End If
     End Sub
+
     Private Sub cbotipo_DropDown(sender As System.Object, e As System.EventArgs) Handles cbotipo.DropDown
         cbotipo.Items.Clear()
         cbotipo.Items.Add("Lista")
@@ -2063,8 +2157,13 @@ kak:
         cbotipo.Items.Add("Especial")
         cbotipo.Items.Add("Especial 2")
     End Sub
+
     Private Sub cboDomi_DropDown_1(sender As System.Object, e As System.EventArgs) Handles cboDomi.DropDown
         cboDomi.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -2084,10 +2183,15 @@ kak:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub cboDomi_SelectedValueChanged1(sender As Object, e As System.EventArgs) Handles cboDomi.SelectedValueChanged
         Try
-            cnn1.Close() : cnn1.Open()
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
+            cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                  "select Domicilio from Entregas where Contador=" & cboDomi.Text & " and IdCliente=(select Id from Clientes where Nombre='" & cboNombre.Text & "')"
@@ -2110,11 +2214,16 @@ kak:
             txtObservaciones.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub cbocomisionista_DropDown(sender As System.Object, e As System.EventArgs) Handles cbocomisionista.DropDown
         cbocomisionista.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
-
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select Alias from Usuarios where Comisionista=1"
@@ -2131,12 +2240,14 @@ kak:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub cbocomisionista_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cbocomisionista.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
             btnventa.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub picProd_DoubleClick(sender As Object, e As System.EventArgs)
         If picProd.Width = 72 Then
             picProd.Left = 767
@@ -2150,11 +2261,16 @@ kak:
             picProd.Height = 72
         End If
     End Sub
+
     Private Sub cbonota_DropDown(sender As System.Object, e As System.EventArgs) Handles cbonota.DropDown
         cbonota.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
-
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select DISTINCT Folio from Ventas where Status<>'CANCELADA' order by Folio"
@@ -2171,17 +2287,23 @@ kak:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub cbonota_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cbonota.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
             cbodesc.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub cbonota_LostFocus(sender As Object, e As System.EventArgs) Handles cbonota.LostFocus
         If cbonota.Text <> "" Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
-
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
                     "select IdCliente,Cliente from Ventas where Status<>'CANCELADA' AND Folio=" & cbonota.Text
@@ -2215,6 +2337,7 @@ kak:
             Exit Sub
         End If
     End Sub
+
     Private Async Sub cbonota_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cbonota.SelectedValueChanged
 
         cbodesc.Focus().Equals(True)
@@ -2232,6 +2355,7 @@ kak:
         cboimpresion.Items.Add("PDF - CARTA 1")
         cboimpresion.Items.Add("PDF - CARTA 2")
     End Sub
+
     Private Sub chkBuscaCliente_CheckedChanged(sender As Object, e As EventArgs) Handles chkBuscaCliente.CheckedChanged
         If (chkBuscaCliente.Checked) Then
             txtNombreClave.Text = ""
@@ -2240,13 +2364,19 @@ kak:
             txtNombreClave.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub txtNombreClave_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNombreClave.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn2 As MySqlConnection = New MySqlConnection
+            cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+            Dim rd2 As MySqlDataReader
+            Dim cmd2 As MySqlCommand
+
             cboNombre.Items.Clear()
 
             Try
                 cnn2.Close() : cnn2.Open()
-
                 cmd2 = cnn2.CreateCommand
                 cmd2.CommandText =
                     "select Nombre from Clientes where Nombre like '%" & txtNombreClave.Text & "%' order by Nombre"
@@ -2268,14 +2398,15 @@ kak:
 
     End Sub
 
-
-
     'Productos
     Private Sub cbodesc_DropDown(sender As System.Object, e As System.EventArgs)
         If Serchi = True Then
             Serchi = False
         Else
-
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -2302,17 +2433,23 @@ kak:
             End Try
         End If
     End Sub
+
     Private Sub cbodesc_GotFocus(sender As Object, e As System.EventArgs)
         T_Precio = DatosRecarga("TipoPrecio")
         H_Inicia = DatosRecarga("HoraInicia")
         H_Final = DatosRecarga("HoraTermina")
     End Sub
+
     Private Sub cbodesc_SelectedValueChanged(sender As Object, e As System.EventArgs)
         Dim tasm_impre As String = DatosRecarga("TPapelV")
         Dim MyCode As String = ""
 
         If tasm_impre = "MEDIA CARTA" And grdcaptura.Rows.Count > 12 Then MsgBox("Se establecen 13 partidas como máximo para el formato de impresión 'MEDIA CARTA'", vbInformation + vbOK, "Delsscom Control Negocios Pro") : cbodesc.Text = "" : Exit Sub
 
+        Dim cnn4 As MySqlConnection = New MySqlConnection
+        cnn4 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
         Try
             cnn4.Close() : cnn4.Open()
 
@@ -2323,7 +2460,6 @@ kak:
             If rd4.HasRows Then
                 If rd4.Read Then
                     MyCode = rd4(0).ToString
-                    ' cbocodigo.Text = ""
                     cbocodigo.Text = MyCode
                 End If
             Else
@@ -2345,16 +2481,12 @@ kak:
             Loop
             rd4.Close()
             cnn4.Close()
-
-            'txtunidad.Text = ""
-            'txtprecio.Text = "0.00"
-            'txtprecio.Tag = 0
-            'txtexistencia.Text = ""
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn4.Close()
         End Try
     End Sub
+
     Private Sub cbodesc_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs)
         Select Case e.KeyCode
             Case Is = Keys.F2
@@ -2377,6 +2509,7 @@ kak:
                 chkBuscaProd.Checked = True
         End Select
     End Sub
+
     Private Sub cbodesc_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs)
 
         My.Application.DoEvents()
@@ -2397,14 +2530,24 @@ kak:
                 cbodesc.Text = Mid(cbodesc.Text, 2, 99)
             End If
 
+            Dim cnn1, cnn2, cnn3 As MySqlConnection
+            Dim rd1, rd2, rd3 As MySqlDataReader
+            Dim cmd1, cmd2, cmd3 As MySqlCommand
+
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
+            cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
+            cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
+
             Try
                 Dim noprefijo As String = ""
                 Dim nocodigo As Integer = 0
                 Dim nopeso As Integer = 0
                 Dim basculaxd As String = ""
 
-                cnn1.Close()
-                cnn1.Open()
+                cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Bascula'"
                 rd1 = cmd1.ExecuteReader
@@ -2699,7 +2842,6 @@ kak:
 kaka:
 
                 cnn1.Close() : cnn1.Open()
-
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
                     "select VSE from Ticket"
@@ -3376,19 +3518,27 @@ kaka:
             End Try
         End If
     End Sub
+
     Private Sub cbocodigo_Click(sender As System.Object, e As System.EventArgs) Handles cbocodigo.Click
         cbocodigo.SelectionStart = 0
         cbocodigo.SelectionLength = Len(cbocodigo.Text)
     End Sub
+
     Private Sub cbocodigo_TextChanged(sender As Object, e As System.EventArgs) Handles cbocodigo.TextChanged
         Dim nombre As String = cbocodigo.Text
         If System.IO.File.Exists(ruta_servidor & "\ProductosImg\" & nombre & ".jpg") Then
             picProd.Image = System.Drawing.Image.FromFile(ruta_servidor & "\ProductosImg\" & nombre & ".jpg")
         End If
     End Sub
+
     Private Sub cbocodigo_DropDown(sender As System.Object, e As System.EventArgs) Handles cbocodigo.DropDown
 
         cbocodigo.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -3407,6 +3557,7 @@ kaka:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub cbocodigo_GotFocus(sender As Object, e As System.EventArgs) Handles cbocodigo.GotFocus
         cbocodigo.SelectionStart = 0
         cbocodigo.SelectionLength = Len(cbocodigo.Text)
@@ -3415,12 +3566,18 @@ kaka:
         H_Inicia = DatosRecarga("HoraInicia")
         H_Final = DatosRecarga("HoraTermina")
 
-
     End Sub
+
     Private Sub cbocodigo_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cbocodigo.KeyPress
         e.KeyChar = UCase(e.KeyChar)
 
+        Dim cnn1, cnn2 As MySqlConnection
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         If AscW(e.KeyChar) = Keys.Enter And (cbocodigo.Text <> "" Or cbodesc.Text <> "") Then
+
             Dim MCD As Double = 0
             Dim Multiplo As Double = 0
             Dim Minimo As Double = 0
@@ -3646,19 +3803,27 @@ kaka:
         End If
         If AscW(e.KeyChar) = Keys.Enter And btndevo.Text = "GUARDAR DEVOLUCIÓN" And cbocodigo.Text = "" Then btndevo.Focus().Equals(True)
     End Sub
+
     Private Sub txtcantidad_Click(sender As System.Object, e As System.EventArgs) Handles txtcantidad.Click
         txtcantidad.SelectionStart = 0
         txtcantidad.SelectionLength = Len(txtcantidad.Text)
     End Sub
+
     Private Sub txtcantidad_GotFocus(sender As Object, e As System.EventArgs) Handles txtcantidad.GotFocus
         txtcantidad.SelectionStart = 0
         txtcantidad.SelectionLength = Len(txtcantidad.Text)
     End Sub
+
     Private Sub txtcantidad_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtcantidad.KeyPress
 
         If txtcantidad.Text = "" Then Exit Sub
         If AscW(e.KeyChar) = Keys.Enter And cbodesc.Text = "" Then cbodesc.Focus().Equals(True)
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 Dim VSE As Boolean = False
@@ -3765,11 +3930,21 @@ kaka:
 
         End If
     End Sub
+
     Private Sub txtcantidad_TextChanged(sender As Object, e As System.EventArgs) Handles txtcantidad.TextChanged
         Dim temp As Double = 0
         Dim TiCambio As Double = 0
         Dim H_Actual As String = Format(Date.Now, "HH:mm")
         If txtcantidad.Text = "" Or txtcantidad.Text = "." Then Exit Sub
+
+
+        Dim cnn4, cnn5 As MySqlConnection
+        Dim rd4, rd5 As MySqlDataReader
+        Dim cmd4, cmd5 As MySqlCommand
+
+        cnn4 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        cnn5 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
 
         Try
             cnn4.Close() : cnn4.Open()
@@ -3956,19 +4131,29 @@ kaka:
         End Try
         If txtprecio.Text = "" Then txtprecio.Text = "0.00"
     End Sub
+
     Private Sub txtprecio_Click(sender As System.Object, e As System.EventArgs) Handles txtprecio.Click
         txtprecio.SelectionStart = 0
         txtprecio.SelectionLength = Len(txtprecio.Text)
     End Sub
+
     Private Sub txtprecio_GotFocus(sender As Object, e As System.EventArgs) Handles txtprecio.GotFocus
         txtprecio.SelectionStart = 0
         txtprecio.SelectionLength = Len(txtprecio.Text)
     End Sub
+
     Public Sub txtprecio_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtprecio.KeyPress
         Dim chec As Boolean = False
         Dim editap As Boolean = False
         If Not IsNumeric(txtprecio.Text) Then txtprecio.Text = ""
         If cbocodigo.Text = "" Then MsgBox("Necesitas seleccionar un producto.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbodesc.Focus().Equals(True) : Exit Sub
+
+        Dim cnn1, cnn2 As MySqlConnection
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         Try
             Dim VSE As Boolean = False
@@ -4135,6 +4320,7 @@ kaka:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub txtprecio_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtprecio.TextChanged
         txttotal.Text = CDbl(IIf(txtcantidad.Text = "" Or txtcantidad.Text = ".", "0", txtcantidad.Text)) * CDbl(IIf(txtprecio.Text = "" Or txtprecio.Text = ".", "0", txtprecio.Text))
 
@@ -4142,8 +4328,15 @@ kaka:
 
         txttotal.Text = FormatNumber(txttotal.Text, 4)
     End Sub
+
     Private Sub cboLote_DropDown(sender As Object, e As System.EventArgs) Handles cboLote.DropDown
         cboLote.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand
         If btndevo.Text = "GUARDAR DEVOLUCIÓN" Then
@@ -4170,6 +4363,7 @@ kaka:
         End If
         cnn1.Close()
     End Sub
+
     Private Sub cboLote_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboLote.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         Dim chec As Boolean = False
@@ -4181,6 +4375,12 @@ kaka:
                 Exit Sub
             End If
         End If
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         If AscW(e.KeyChar) = Keys.Enter Then
             cnn1.Close() : cnn1.Open()
@@ -4408,16 +4608,24 @@ kaka:
             cbodesc.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub txttotal_Click(sender As System.Object, e As System.EventArgs) Handles txttotal.Click
         txttotal.SelectionStart = 0
         txttotal.SelectionLength = Len(txttotal.Text)
     End Sub
+
     Private Sub txttotal_GotFocus(sender As Object, e As System.EventArgs) Handles txttotal.GotFocus
         txttotal.SelectionStart = 0
         txttotal.SelectionLength = Len(txttotal.Text)
     End Sub
+
     Private Sub txttotal_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txttotal.KeyPress
         Dim edita_pr As Boolean = False
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         cnn1.Close() : cnn1.Open()
 
@@ -4444,9 +4652,11 @@ kaka:
         End If
 
     End Sub
+
     Private Sub txttotal_TextChanged(sender As Object, e As System.EventArgs) Handles txttotal.TextChanged
         Call Actualiza()
     End Sub
+
     Private Sub txtcoment_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtcoment.KeyPress
         If AscW(e.KeyChar) = 0 Then
             txtcoment.Text = ""
@@ -4474,6 +4684,7 @@ kaka:
             cbodesc.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub txtcomentario_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtcomentario.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
@@ -4483,6 +4694,12 @@ kaka:
     End Sub
 
     Private Sub grdcaptura_KeyDown(sender As Object, e As KeyEventArgs) Handles grdcaptura.KeyDown
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
         If e.KeyCode = Keys.Delete Then
 
             Dim totaleliminado As Double = 0
@@ -4493,6 +4710,8 @@ kaka:
             Dim CODx As String = ""
             Dim CantDX As Double = 0
             Dim MyNota As String = ""
+
+
 
             cbodesc.Focus().Equals(True)
             If grdcaptura.Rows.Count > 0 Then
@@ -4707,9 +4926,12 @@ kaka:
         Dim CODx As String = ""
         Dim CantDX As Double = 0
         Dim MyNota As String = ""
-
-
         Dim limpiar As Integer = DatosRecarga2("LimpiarV")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         If limpiar = 1 Then
 
@@ -4846,10 +5068,14 @@ kaka:
             Panel4.Visible = False
         End If
     End Sub
+
     Private Sub txtProdClave_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtProdClave.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             cbodesc.Items.Clear()
-
+            Dim cnn3 As MySqlConnection = New MySqlConnection
+            Dim rd3 As MySqlDataReader
+            Dim cmd3 As MySqlCommand
+            cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
             Try
                 cnn3.Close() : cnn3.Open()
 
@@ -4897,16 +5123,19 @@ kaka:
             txtefectivo.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub txtdescuento1_Click(sender As Object, e As System.EventArgs) Handles txtdescuento1.Click
         donde_va = "Descuento Porcentaje"
         txtdescuento1.SelectionStart = 0
         txtdescuento1.SelectionLength = Len(txtdescuento1.Text)
     End Sub
+
     Private Sub txtdescuento1_GotFocus(sender As Object, e As System.EventArgs) Handles txtdescuento1.GotFocus
         donde_va = "Descuento Porcentaje"
         txtdescuento1.SelectionStart = 0
         txtdescuento1.SelectionLength = Len(txtdescuento1.Text)
     End Sub
+
     Private Sub txtdescuento1_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtdescuento1.KeyPress
         If txtdescuento1.Text = "" And AscW(e.KeyChar) = 46 Then
             txtdescuento1.Text = "0.00"
@@ -4922,8 +5151,15 @@ kaka:
             End If
         End If
     End Sub
+
     Public Sub txtdescuento1_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtdescuento1.TextChanged
         If donde_va = "Descuento Porcentaje" Then
+
+            Dim cnn5 As MySqlConnection = New MySqlConnection
+            Dim rd5 As MySqlDataReader
+            Dim cmd5 As MySqlCommand
+            cnn5 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
             If txtdescuento1.Text = "" Then
                 txtdescuento1.Text = "0"
                 txtPagar.Text = txtSubTotal.Text
@@ -4988,10 +5224,12 @@ kaka:
             txtResta.Text = FormatNumber(txtSubTotal.Text, 2)
         End If
     End Sub
+
     Private Sub txtdescuento2_GotFocus(sender As Object, e As System.EventArgs) Handles txtdescuento2.GotFocus
         txtdescuento2.SelectionStart = 0
         txtdescuento2.SelectionLength = Len(txtdescuento2.Text)
     End Sub
+
     Private Sub txtdescuento2_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtdescuento2.KeyPress
         If Not IsNumeric(txtdescuento2.Text) Then txtdescuento2.Text = "" : Exit Sub
         If AscW(e.KeyChar) = Keys.Enter Then
@@ -5001,18 +5239,22 @@ kaka:
             txtefectivo.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub txtdescuento2_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtdescuento2.TextChanged
         txtdescuento2.SelectionStart = 0
         txtdescuento2.SelectionLength = Len(txtdescuento2.Text)
     End Sub
+
     Private Sub txtefectivo_Click(sender As System.Object, e As System.EventArgs) Handles txtefectivo.Click
         txtefectivo.SelectionStart = 0
         txtefectivo.SelectionLength = Len(txtefectivo.Text)
     End Sub
+
     Private Sub txtefectivo_GotFocus(sender As Object, e As System.EventArgs) Handles txtefectivo.GotFocus
         txtefectivo.SelectionStart = 0
         txtefectivo.SelectionLength = Len(txtefectivo.Text)
     End Sub
+
     Private Sub txtefectivo_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txtefectivo.KeyDown
         If txtSubTotal.Text <> "" Then
             If modo_caja = "CAJA" Then
@@ -5022,6 +5264,7 @@ kaka:
             txtefectivo.ReadOnly = True
         End If
     End Sub
+
     Private Sub txtefectivo_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtefectivo.KeyPress
         If Not IsNumeric(txtefectivo.Text) Then txtefectivo.Text = "" : Exit Sub
         If txtefectivo.Text = "" And AscW(e.KeyChar) = 46 Then
@@ -5046,6 +5289,7 @@ kaka:
             btnventa.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub txtefectivo_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtefectivo.TextChanged
         Dim MyOpe As Double = CDbl(IIf(txtPagar.Text = "", "0", txtPagar.Text)) - (CDbl(IIf(txtMontoP.Text = "", "0", txtMontoP.Text)) + CDbl(IIf(txtefectivo.Text = "", "0", txtefectivo.Text)))
         If MyOpe < 0 Then
@@ -5058,11 +5302,16 @@ kaka:
         txtCambio.Text = FormatNumber(txtCambio.Text, 2)
         txtResta.Text = FormatNumber(txtResta.Text, 2)
     End Sub
+
     Private Sub cbobanco_DropDown(sender As System.Object, e As System.EventArgs) Handles cbobanco.DropDown
         cbobanco.Items.Clear()
         Try
-            cnn1.Close() : cnn1.Open()
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
+            cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select Banco from Bancos"
@@ -5079,28 +5328,37 @@ kaka:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub cbobanco_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cbobanco.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
             txtnumref.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub cbotpago_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cbotpago.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             cbobanco.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub txtnumref_Click(sender As Object, e As System.EventArgs) Handles txtnumref.Click
         txtnumref.SelectionStart = 0
         txtnumref.SelectionLength = Len(txtnumref.Text)
     End Sub
+
     Private Sub txtnumref_GotFocus(sender As Object, e As System.EventArgs) Handles txtnumref.GotFocus
         txtnumref.SelectionStart = 0
         txtnumref.SelectionLength = Len(txtnumref.Text)
     End Sub
+
     Private Sub txtnumref_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtnumref.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             Dim saldo As Double = 0
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
             If cbotpago.Text = "MONEDERO" Then
                 Try
@@ -5197,18 +5455,25 @@ kaka:
             txtmonto.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub txtmonto_Click(sender As System.Object, e As System.EventArgs) Handles txtmonto.Click
         txtmonto.SelectionStart = 0
         txtmonto.SelectionLength = Len(txtmonto.Text)
     End Sub
+
     Private Sub txtmonto_GotFocus(sender As Object, e As System.EventArgs) Handles txtmonto.GotFocus
         txtmonto.SelectionStart = 0
         txtmonto.SelectionLength = Len(txtmonto.Text)
     End Sub
+
     Private Sub txtmonto_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtmonto.KeyPress
         If Not IsNumeric(txtmonto.Text) Then txtmonto.Text = "" : Exit Sub
         If AscW(e.KeyChar) = Keys.Enter Then
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
             If cbotpago.Text = "SALDO A FAVOR" Then
                 If CDbl(txtafavor.Text) <= 0 Then
                     MsgBox("No es posible agregar el pago ya que el cliente no cuenta con un saldo a favor disponible.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
@@ -5265,6 +5530,7 @@ kaka:
             End If
         End If
     End Sub
+
     Private Sub txtMontoP_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtMontoP.TextChanged
         If txtMontoP.Text = "" Then txtMontoP.Text = "0.00"
         If txtefectivo.Text = "" Then txtefectivo.Text = "0.00"
@@ -5282,11 +5548,15 @@ kaka:
         txtCambio.Text = FormatNumber(txtCambio.Text, 2)
         txtResta.Text = FormatNumber(txtResta.Text, 2)
     End Sub
+
     Private Sub cbotpago_DropDown(sender As System.Object, e As System.EventArgs) Handles cbotpago.DropDown
         cbotpago.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
         Try
             cnn1.Close() : cnn1.Open()
-
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select distinct FormaPago from FormasPago where FormaPago<>''"
@@ -5306,6 +5576,7 @@ kaka:
             Button9.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub grdpago_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles grdpago.CellDoubleClick
         Dim indexito As Integer = grdpago.CurrentRow.Index
 
@@ -5326,6 +5597,7 @@ kaka:
 
         txtMontoP.Text = FormatNumber(pagos, 4)
     End Sub
+
     Private Sub Button9_Click(sender As System.Object, e As System.EventArgs) Handles Button9.Click
         Dim tpago As String = cbotpago.Text
         Dim banco As String = cbobanco.Text
@@ -5392,6 +5664,7 @@ kaka:
 
 
     End Sub
+
     Public Sub validaMontosTarjeta()
         Try
             Dim cuantopaga As Double = 0
@@ -5402,7 +5675,6 @@ kaka:
                 End If
             Next
             validaTarjeta = cuantopaga
-            'MsgBox("La suma de pagos con tarjeta es: " & cuantopaga)
         Catch ex As Exception
             MsgBox(ex.ToString)
         End Try
@@ -5418,11 +5690,16 @@ kaka:
         boxcomentario.Visible = True
         txtcomentario.Focus().Equals(True)
     End Sub
+
     Private Sub btnnuevo_Click(sender As System.Object, e As System.EventArgs) Handles btnnuevo.Click
 
         Dim limpiar As Integer = DatosRecarga2("LimpiarV")
-
         btnventa.Enabled = True : My.Application.DoEvents()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         If limpiar = 1 Then
 
@@ -5617,12 +5894,18 @@ kaka:
         Timer1.Start()
 
     End Sub
+
     Private Sub Button7_Click(sender As System.Object, e As System.EventArgs) Handles Button7.Click
         VieneDe_Folios = "frmVentas1"
         frmConsultaNotas.Show()
         frmConsultaNotas.BringToFront()
     End Sub
+
     Private Sub Button11_Click(sender As System.Object, e As System.EventArgs) Handles Button11.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -5652,28 +5935,26 @@ kaka:
 
 
     End Sub
+
     Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
         frmMonederos.Show()
         frmMonederos.BringToFront()
     End Sub
+
     Private Sub Button5_Click(sender As System.Object, e As System.EventArgs) Handles Button5.Click
         frmAbonoNotas.Show()
         frmAbonoNotas.BringToFront()
-
-        'frmNuevo.BringToFront()
-        'frmNuevo.Show()
     End Sub
+
     Private Sub Button4_Click(sender As System.Object, e As System.EventArgs) Handles Button4.Click
-        'frmPasa_Corte.Show()
-        'frmPedidosCli.Show()
+
         frmEntregaPedidos.Show()
         frmEntregaPedidos.BringToFront()
     End Sub
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         frmVentas2.BringToFront()
         frmVentas2.Show()
-
-
     End Sub
 
     'Cotizaciones
@@ -5688,6 +5969,11 @@ kaka:
         Dim my_folio As Integer = 0
         Dim MyStatus As String = ""
         Dim tel_cliente As String = ""
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+        cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         With oData
             If .dbOpen(a_cnn, Direcc_Access, sInfo) Then
@@ -5776,8 +6062,16 @@ doorcita:
             End If
         End With
     End Sub
+
     Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles Button3.Click
         Me.Text = "Cotización (1)"
+
+        Dim cnn1, cnn2 As MySqlConnection
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
         If Me.Text = "Ventas (1)" Then
             btnnuevo.PerformClick()
 
@@ -6270,6 +6564,11 @@ Door:
 
     Public Sub PDF_pedido()
 
+        Dim cn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
         Dim root_name_recibo As String = ""
         Dim FileOpen As New ProcessStartInfo
 
@@ -6490,6 +6789,12 @@ Door:
     End Sub
 
     Public Sub PDF_Cotizacion()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
         Dim root_name_recibo As String = ""
         Dim FileOpen As New ProcessStartInfo
 
@@ -6665,7 +6970,13 @@ Door:
             System.IO.File.Copy(My.Application.Info.DirectoryPath & "\ARCHIVOSDL1\COTIZACIONES\" & MYFOLIO & ".pdf", "\\" & varrutabase & "\ControlNegociosPro\ARCHIVOSDL1\COTIZACIONES\" & MYFOLIO & ".pdf")
         End If
     End Sub
+
     Public Sub PDF_Cotizacion_Img()
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
         Dim root_name_recibo As String = ""
         Dim FileOpen As New ProcessStartInfo
 
@@ -6777,6 +7088,10 @@ Door:
 
     Public Sub Termina_Error_Coti()
         Dim pide As String = "", contra As String = txtcontraseña.Text, usu As String = lblusuario.Text
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand
@@ -6814,6 +7129,11 @@ Door:
         Dim ACuenta As Double = 0
         Dim Resta As Double = 0
         Dim tel_cliente As String = ""
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+        cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         With oData
             If .dbOpen(a_cnn, Direcc_Access, sinfo) Then
@@ -6986,6 +7306,10 @@ doorcita:
 
     Private Sub Valida_Datos_Cliente(ByVal nombre As String)
         Try
+            Dim cnn4 As MySqlConnection = New MySqlConnection
+            Dim rd4 As MySqlDataReader
+            Dim cmd4 As MySqlCommand
+            cnn4 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
             cnn4.Close() : cnn4.Open()
 
             Dim MySaldo As Double = 0
@@ -7242,6 +7566,15 @@ doorcita:
 
 
     Private Sub btnventa_Click(sender As System.Object, e As System.EventArgs) Handles btnventa.Click
+
+        Dim cnn1, cnn2, cnn3 As MySqlConnection
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
+
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
+        cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         Dim VarUser As String = "", VarIdUsuario As Integer = 0, DsctoProd As Single = 0, PorcentDscto As Single = 0, DsctoProdTod As Single = 0
         Dim CveLte As Double = 0
@@ -7916,7 +8249,6 @@ kakaxd:
                 Dim porcentaje_mone As Double = 0
 
                 cnn1.Close() : cnn1.Open()
-
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
                     "select NumPart,NotasCred from Formatos where Facturas='Porc_Mone'"
@@ -8238,7 +8570,6 @@ kakaxd:
             'Actualiza saldo a favor del cliente
             Try
                 cnn1.Close() : cnn1.Open()
-
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
                     "select SaldoFavor from Clientes where Nombre='" & cboNombre.Text & "'"
@@ -9467,6 +9798,12 @@ safo:
         Dim CrTables As Tables
         Dim CrTable As Table
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
         crea_ruta("C:\ControlNegociosPro\ARCHIVOSDL1\VENTAS\")
         root_name_recibo = "C:\ControlNegociosPro\ARCHIVOSDL1\VENTAS\Venta_" & MYFOLIO & ".pdf"
 
@@ -9682,6 +10019,13 @@ safo:
         Dim CrTables As Tables
         Dim CrTable As Table
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
+
         crea_ruta("C:\ControlNegociosPro\ARCHIVOSDL1\VENTAS\")
         root_name_recibo = "C:\ControlNegociosPro\ARCHIVOSDL1\VENTAS\Venta_" & MYFOLIO & ".pdf"
 
@@ -9896,9 +10240,13 @@ safo:
         End If
     End Sub
 
-
     Public Sub Termina_Error_Ventas()
         Dim pide As String = "", contra As String = txtcontraseña.Text, usu As String = lblusuario.Text
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         cnn1.Close() : cnn1.Open()
         If txtcotped.Text <> "" Then
@@ -9936,7 +10284,6 @@ safo:
         cbodesc.Focus().Equals(True)
     End Sub
 
-
     'Devolucines
     Private Sub btndevo_Click(sender As System.Object, e As System.EventArgs) Handles btndevo.Click
         Dim id_usu As Integer = 0
@@ -9945,6 +10292,15 @@ safo:
         Dim Totalx As Single = 0
 
         If lblusuario.Text = "" Then MsgBox("Escribe tu contraseña para continuar.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : DondeVoy = "Devo" : txtcontraseña.Focus().Equals(True) : Exit Sub
+
+        Dim cnn1, cnn2, cnn3 As MySqlConnection
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
+
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
+        cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         cnn1.Close() : cnn1.Open()
 
@@ -10628,6 +10984,10 @@ ecomoda:
         Dim pagare As String = ""
         Dim ligaqr As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
 
         If whats <> "" Then
@@ -11186,6 +11546,7 @@ ecomoda:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub pCotiza80_PrintPage(sender As System.Object, e As System.Drawing.Printing.PrintPageEventArgs) Handles pCotiza80.PrintPage
         'Fuentes prederminadas
         Dim tipografia As String = "Lucida Sans Typewriter"
@@ -11203,6 +11564,11 @@ ecomoda:
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         Try
             '[°]. Logotipo
@@ -11465,6 +11831,7 @@ ecomoda:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub pPedido80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs)
         'Fuentes prederminadas
         Dim tipografia As String = "Lucida Sans Typewriter"
@@ -11482,6 +11849,11 @@ ecomoda:
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         Try
             '[°]. Logotipo
@@ -11826,6 +12198,7 @@ ecomoda:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub pDevo80_PrintPage(sender As System.Object, e As System.Drawing.Printing.PrintPageEventArgs) Handles pDevo80.PrintPage
         'Fuentes prederminadas
         Dim tipografia As String = "Lucida Sans Typewriter"
@@ -11842,6 +12215,11 @@ ecomoda:
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         Try
 
@@ -11864,7 +12242,6 @@ ecomoda:
 
             '[°]. Datos del negocio
             cnn1.Close() : cnn1.Open()
-
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "select Pie3,Cab0,Cab1,Cab2,Cab3,Cab4,Cab5,Cab6 from Ticket"
             rd1 = cmd1.ExecuteReader
@@ -12121,6 +12498,7 @@ ecomoda:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub pVentaCarta_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pVentaCarta.PrintPage
         'Fuentes prederminadas
         Dim tipografia As String = "Lucida Sans Typewriter"
@@ -12140,8 +12518,12 @@ ecomoda:
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
         Dim pagare As String = ""
         Dim clausu(10) As String
-
         Dim continua_en As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         Y = 35
 
@@ -12692,6 +13074,7 @@ ecomoda:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub pCotizaCarta_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pCotizaCarta.PrintPage
         'Fuentes prederminadas
         Dim tipografia As String = "Lucida Sans Typewriter"
@@ -12709,6 +13092,11 @@ ecomoda:
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         Y = 35
 
@@ -12733,7 +13121,6 @@ ecomoda:
             e.Graphics.DrawString("FOLIO  " & lblfolio.Text, New Drawing.Font(tipografia, 12, FontStyle.Bold), Brushes.Red, 840, 0, sf)
 
             cnn1.Close() : cnn1.Open()
-
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select Pie3,Cab0,Cab1,Cab2,Cab3,Cab4,Cab5,Cab6 from Ticket"
@@ -12949,6 +13336,7 @@ ecomoda:
 
         e.HasMorePages = False
     End Sub
+
     Private Sub pPedidoCarta_PrintPage(sender As Object, e As Printing.PrintPageEventArgs)
         'Fuentes prederminadas
         Dim tipografia As String = "Lucida Sans Typewriter"
@@ -12966,6 +13354,11 @@ ecomoda:
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         Y = 35
 
@@ -13119,7 +13512,7 @@ ecomoda:
                 End If
                 total_prods = total_prods + canti
             Next
-            Y -= 3
+            Y += 3
             e.Graphics.DrawLine(pen, 1, CInt(Y), 840, CInt(Y))
             Y += 5
             e.Graphics.DrawString("TOTAL DE PRODUCTOS " & total_prods, New Drawing.Font(tipografia, 7, FontStyle.Italic), Brushes.Black, 450, Y, sf)
@@ -13238,6 +13631,7 @@ ecomoda:
                     Y += 15.5
                 End If
             End If
+
             If CDbl(txtResta.Text) > 0 Then
                 e.Graphics.DrawString("Resta:", New Drawing.Font(tipografia, 10, FontStyle.Bold), Brushes.Black, 570, Y)
                 e.Graphics.DrawString(FormatNumber(txtResta.Text, 4), New Drawing.Font(tipografia, 10, FontStyle.Regular), Brushes.Black, 835, Y, sf)
@@ -13266,6 +13660,7 @@ ecomoda:
 
         e.HasMorePages = False
     End Sub
+
     Private Sub pDevoCarta_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pDevoCarta.PrintPage
         'Fuentes prederminadas
         Dim tipografia As String = "Lucida Sans Typewriter"
@@ -13283,6 +13678,11 @@ ecomoda:
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         Y = 35
 
@@ -13307,7 +13707,6 @@ ecomoda:
             e.Graphics.DrawString("FOLIO  " & cbonota.Text, New Drawing.Font(tipografia, 12, FontStyle.Bold), Brushes.Red, 840, 0, sf)
 
             cnn1.Close() : cnn1.Open()
-
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select Pie3,Cab0,Cab1,Cab2,Cab3,Cab4,Cab5,Cab6 from Ticket"
@@ -13423,7 +13822,7 @@ ecomoda:
                 Y += 22
                 total_prods = total_prods + canti
             Next
-            Y -= 3
+            Y += 3
             e.Graphics.DrawLine(pen, 1, CInt(Y), 840, CInt(Y))
             Y += 5
             e.Graphics.DrawString("TOTAL DE PRODUCTOS " & total_prods, New Drawing.Font(tipografia, 7, FontStyle.Italic), Brushes.Black, 450, Y, sf)
@@ -13498,9 +13897,13 @@ ecomoda:
             Dim dire(9) As String
             Dim direccion As String = ""
 
+            Dim cnn2 As MySqlConnection = New MySqlConnection
+            Dim rd2 As MySqlDataReader
+            Dim cmd2 As MySqlCommand
+            cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
             Try
                 cnn2.Close() : cnn2.Open()
-
                 cmd2 = cnn2.CreateCommand
                 cmd2.CommandText =
                     "select Calle,NInterior,NExterior,Colonia,Delegacion,Entidad,Pais,CP from Clientes where Nombre='" & cboNombre.Text & "'"
@@ -13571,9 +13974,12 @@ ecomoda:
 
     Private Sub cbocedula_DropDown(sender As Object, e As EventArgs) Handles cbocedula.DropDown
         cbocedula.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
         Try
             cnn1.Close() : cnn1.Open()
-
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select distinct Cedula from CtMedicos where Cedula<>''"
@@ -13589,6 +13995,7 @@ ecomoda:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub cbocedula_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbocedula.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
@@ -13602,10 +14009,15 @@ ecomoda:
             End If
         End If
     End Sub
+
     Private Sub cbocedula_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbocedula.SelectedValueChanged
         Try
-            cnn1.Close() : cnn1.Open()
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
+            cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select Id,Nombre,Domicilio from CtMedicos where Cedula='" & cbocedula.Text & "'"
@@ -13627,36 +14039,44 @@ ecomoda:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub txtreceta_Click(sender As System.Object, e As System.EventArgs) Handles txtreceta.Click
         txtreceta.SelectionStart = 0
         txtreceta.SelectionLength = Len(txtreceta.Text)
     End Sub
+
     Private Sub txtreceta_GotFocus(sender As Object, e As System.EventArgs) Handles txtreceta.GotFocus
         txtreceta.SelectionStart = 0
         txtreceta.SelectionLength = Len(txtreceta.Text)
     End Sub
+
     Private Sub txtreceta_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtreceta.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             txtmedico.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub txtmedico_Click(sender As System.Object, e As System.EventArgs) Handles txtmedico.Click
         txtmedico.SelectionStart = 0
         txtmedico.SelectionLength = Len(txtmedico.Text)
     End Sub
+
     Private Sub txtmedico_GotFocus(sender As Object, e As System.EventArgs) Handles txtmedico.GotFocus
         txtmedico.SelectionStart = 0
         txtmedico.SelectionLength = Len(txtmedico.Text)
     End Sub
+
     Private Sub txtmedico_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtmedico.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             txtdireccion_med.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub txtdireccion_med_Click(sender As System.Object, e As System.EventArgs) Handles txtdireccion_med.Click
         txtdireccion_med.SelectionStart = 0
         txtdireccion_med.SelectionLength = Len(txtdireccion_med.Text)
     End Sub
+
     Private Sub txtdireccion_med_GotFocus(sender As Object, e As System.EventArgs) Handles txtdireccion_med.GotFocus
         txtdireccion_med.SelectionStart = 0
         txtdireccion_med.SelectionLength = Len(txtdireccion_med.Text)
@@ -13666,9 +14086,16 @@ ecomoda:
             btnantis.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub btnantis_Click(sender As System.Object, e As System.EventArgs) Handles btnantis.Click
         If cbocedula.Text = "" Then MsgBox("Introduce los datos del médico para continuar.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbocedula.Focus().Equals(True) : Exit Sub
         If txtreceta.Text = "" Then MsgBox("Introduce el número de la receta.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : txtreceta.Focus().Equals(True) : Exit Sub
+
+        Dim cnn1, cnn2 As MySqlConnection
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+        cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -13725,15 +14152,20 @@ ecomoda:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub txtComentarioPago_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtComentarioPago.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             cboCuentaRecepcion.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub txttel_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txttel.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             cbodesc.Focus().Equals(True)
-
+            Dim cnn2 As MySqlConnection = New MySqlConnection
+            Dim rd2 As MySqlDataReader
+            Dim cmd2 As MySqlCommand
+            cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
             Try
                 cnn2.Close() : cnn2.Open()
 
@@ -13757,6 +14189,7 @@ ecomoda:
 
         End If
     End Sub
+
     Private Sub pVenta58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pVenta58.PrintPage
         'Fuentes prederminadas
         Dim tipografia As String = "Lucida Sans Typewriter"
@@ -13781,6 +14214,11 @@ ecomoda:
 
         Dim autofact As String = DatosRecarga("LinkAuto")
         Dim siqr As String = DatosRecarga("LinkAuto")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         If whats <> "" Then
             ligaqr = "http://wa.me/" & whats
@@ -14331,6 +14769,7 @@ ecomoda:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub pCotiza58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pCotiza58.PrintPage
         'Fuentes prederminadas
         Dim tipografia As String = "Lucida Sans Typewriter"
@@ -14348,6 +14787,11 @@ ecomoda:
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         Try
             '[°]. Logotipo
@@ -14369,7 +14813,6 @@ ecomoda:
 
             '[°]. Datos del negocio
             cnn1.Close() : cnn1.Open()
-
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select Pie3,Cab0,Cab1,Cab2,Cab3,Cab4,Cab5,Cab6 from Ticket"
@@ -14658,6 +15101,7 @@ ecomoda:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub pPedido58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs)
         'Fuentes prederminadas
         Dim tipografia As String = "Lucida Sans Typewriter"
@@ -14675,6 +15119,11 @@ ecomoda:
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         Try
             '[°]. Logotipo
@@ -14696,7 +15145,6 @@ ecomoda:
 
             '[°]. Datos del negocio
             cnn1.Close() : cnn1.Open()
-
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select Pie3,Cab0,Cab1,Cab2,Cab3,Cab4,Cab5,Cab6 from Ticket"
@@ -15031,9 +15479,14 @@ ecomoda:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub cboCuentaRecepcion_DropDown(sender As Object, e As EventArgs) Handles cboCuentaRecepcion.DropDown
         Try
             cboCuentaRecepcion.Items.Clear()
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -15051,8 +15504,14 @@ ecomoda:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub cboCuentaRecepcion_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCuentaRecepcion.SelectedValueChanged
         Try
+            Dim cnn2 As MySqlConnection = New MySqlConnection
+            Dim rd2 As MySqlDataReader
+            Dim cmd2 As MySqlCommand
+            cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText = "SELECT Banco FROM cuentasbancarias WHERE CuentaBan='" & cboCuentaRecepcion.Text & "'"
@@ -15069,20 +15528,27 @@ ecomoda:
             cnn2.Close()
         End Try
     End Sub
+
     Private Sub cboCuentaRecepcion_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboCuentaRecepcion.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             cboBancoRecepcion.Focus.Equals(True)
         End If
     End Sub
+
     Private Sub cboBancoRecepcion_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboBancoRecepcion.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             dtpFecha_P.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         Try
-            cnn1.Close()
-            cnn1.Open()
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
+            cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "Select Id from loginrecargas"
             rd1 = cmd1.ExecuteReader
@@ -15098,11 +15564,13 @@ ecomoda:
             MessageBox.Show(ex.ToString)
         End Try
     End Sub
+
     Private Sub frmVentas1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         If e.Control AndAlso e.KeyCode = Keys.A Then
             btnventa.PerformClick()
         End If
     End Sub
+
     Private Sub pComanda80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pComanda80.PrintPage
 
         'Fuentes prederminadas
@@ -15122,6 +15590,10 @@ ecomoda:
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+        cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
         Try
 
             e.Graphics.DrawString("--S A L I D A  D E  A L M A C E N---", New Drawing.Font(tipografia, 10, FontStyle.Regular), Brushes.Black, 1, Y)
@@ -15221,10 +15693,15 @@ ecomoda:
         End Try
 
     End Sub
+
     Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
         Try
-            cnn1.Close()
-            cnn1.Open()
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
+            cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "Select Id from loginrecargas"
             rd1 = cmd1.ExecuteReader
@@ -15242,19 +15719,26 @@ ecomoda:
         End Try
 
     End Sub
+
     Private Sub txtdescu_Click(sender As Object, e As EventArgs) Handles txtdescu.Click
         donde_va = "Descuento Moneda"
         txtdescu.SelectionStart = 0
         txtdescu.SelectionLength = Len(txtdescu.Text)
     End Sub
+
     Private Sub txtdescu_GotFocus(sender As Object, e As EventArgs) Handles txtdescu.GotFocus
         donde_va = "Descuento Moneda"
         txtdescu.SelectionStart = 0
         txtdescu.SelectionLength = Len(txtdescu.Text)
     End Sub
+
     Private Sub txtdescu_TextChanged(sender As Object, e As EventArgs) Handles txtdescu.TextChanged
         If donde_va = "Descuento Moneda" Then
             Dim resta As Double = 0
+            Dim cnn5 As MySqlConnection = New MySqlConnection
+            Dim rd5 As MySqlDataReader
+            Dim cmd5 As MySqlCommand
+            cnn5 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
             If txtdescuento1.Enabled = True Then
                 If txtdescu.Text = "" Then
@@ -15323,6 +15807,7 @@ ecomoda:
             End If
         End If
     End Sub
+
     Private Sub txtdescu_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtdescu.KeyPress
         If txtdescu.Text = "" And AscW(e.KeyChar) = 46 Then
             txtdescu.Text = "0.00"
@@ -15338,10 +15823,15 @@ ecomoda:
             End If
         End If
     End Sub
+
     Private Sub cbotpago_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbotpago.SelectedValueChanged
         Try
-            cnn1.Close()
-            cnn1.Open()
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
+            cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "Select Valor from FormasPago where Valor<>'' and FormaPago='" & cbotpago.Text & "'"
             rd1 = cmd1.ExecuteReader
@@ -15367,6 +15857,7 @@ ecomoda:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub grdcaptura_RowPrePaint(sender As Object, e As DataGridViewRowPrePaintEventArgs) Handles grdcaptura.RowPrePaint
 
         If e.RowIndex Mod 2 = 0 Then
@@ -15377,21 +15868,19 @@ ecomoda:
             'grdcaptura.Rows(e.RowIndex).DefaultCellStyle.Font = New Font(grdcaptura.Font, FontStyle.Bold)
         End If
     End Sub
+
     Private Sub txtObservaciones_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtObservaciones.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
             txttel.Focus().Equals(True)
         End If
     End Sub
+
     Private Sub Button17_Click(sender As Object, e As EventArgs) Handles Button17.Click
         frmRepExistenciaSincronizador.Show()
         frmRepExistenciaSincronizador.BringToFront()
-
-        'frmNuevo.BringToFront()
-        'frmNuevo.Show()
-        'frmOrdenTrabajo.Show()
-        'frmOrdenTrabajo.BringToFront()
     End Sub
+
     Private Sub Panel9_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
@@ -15400,6 +15889,12 @@ ecomoda:
     End Sub
     Private Sub btnPedido_Click(sender As Object, e As EventArgs) Handles btnPedido.Click
         Try
+            Dim cnn1, cnn2 As MySqlConnection
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+            cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
             Me.Text = "Pedidos (1)"
             If Me.Text = "Ventas (1)" Then
 
@@ -15857,7 +16352,7 @@ rayos2:
                         PDF_Cotizacion_Img()
                     Else
                         'PDF_Cotizacion()
-                        PDF_Pedido()
+                        PDF_pedido()
                     End If
                     Panel6.Visible = False
                     My.Application.DoEvents()
@@ -15929,6 +16424,7 @@ rayos2:
             cnn1.Close()
         End Try
     End Sub
+
     Public Sub Insert_Pedido()
 
         Dim oData As New ToolKitSQL.oledbdata
@@ -15941,6 +16437,12 @@ rayos2:
         Dim my_folio As Integer = 0
         Dim MyStatus As String = ""
         Dim tel_cliente As String = ""
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+        cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
 
         With oData
             If .dbOpen(a_cnn, Direcc_Access, sInfo) Then
@@ -16020,16 +16522,13 @@ doorcita:
                         .runSp(a_cnn, "update cotpeddetalle set Comentario='" & grdcaptura.Rows(pipo).Cells(1).Value.ToString() & "' where Id=" & id_a, sInfo)
                         sInfo = ""
                     End If
-
-
-
-
                 Next
                 a_cnn.Close()
             End If
         End With
 
     End Sub
+
     Private Sub PPedido80_PrintPage_1(sender As Object, e As Printing.PrintPageEventArgs) Handles PPedido80.PrintPage
         Try
             'Fuentes prederminadas
@@ -16051,6 +16550,11 @@ doorcita:
 
             Dim IVAVENTA As Double = 0
             Dim SUBTOTALVENTA As Double = 0
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
             '[°]. Logotipo
             If tLogo <> "SIN" Then
                 If File.Exists(My.Application.Info.DirectoryPath & "\" & nLogo) Then
@@ -16290,6 +16794,7 @@ doorcita:
             cnn1.Close()
         End Try
     End Sub
+
     Private Sub PPedido58_PrintPage_1(sender As Object, e As Printing.PrintPageEventArgs) Handles PPedido58.PrintPage
         Try
             'Fuentes prederminadas
@@ -16311,6 +16816,12 @@ doorcita:
 
             Dim IVAVENTA As Double = 0
             Dim SUBTOTALVENTA As Double = 0
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
             '[°]. Logotipo
             If tLogo <> "SIN" Then
                 If File.Exists(My.Application.Info.DirectoryPath & "\" & nLogo) Then
@@ -17067,6 +17578,11 @@ doorcita:
         If Serchi = True Then
             Serchi = False
         Else
+            Dim cnn1 As MySqlConnection = New MySqlConnection
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
             ' cbodesc.Items.Clear()
             Try
                 cnn1.Close() : cnn1.Open()
@@ -17128,6 +17644,15 @@ doorcita:
         Dim Minimo As Double = 0
         Dim TiCambio As Double = 0
         Dim PreLst As Double = 0, PreEsp As Double = 0
+
+        Dim cnn1, cnn2, cnn3 As MySqlConnection
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd, cmd3 As MySqlCommand
+        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
+        cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
+        cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
 
         If AscW(e.KeyChar) = Keys.Enter And cbodesc.Text = "" Then cbocodigo.Focus().Equals(True) : Exit Sub
         If AscW(e.KeyChar) = Keys.Enter Then
@@ -18118,9 +18643,13 @@ kaka:
 
         If tasm_impre = "MEDIA CARTA" And grdcaptura.Rows.Count > 12 Then MsgBox("Se establecen 13 partidas como máximo para el formato de impresión 'MEDIA CARTA'", vbInformation + vbOK, "Delsscom Control Negocios Pro") : cbodesc.Text = "" : Exit Sub
 
+        Dim cnn4 As MySqlConnection = New MySqlConnection
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
+        cnn4 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+
         Try
             cnn4.Close() : cnn4.Open()
-
             cmd4 = cnn4.CreateCommand
             cmd4.CommandText =
                 "select Codigo,Grupo from Productos where Nombre='" & cbodesc.Text & "'"

@@ -1,4 +1,5 @@
 ﻿Imports System.Data.OleDb
+Imports MySql.Data.MySqlClient
 
 Public Class frmEntregas
 
@@ -23,6 +24,10 @@ Public Class frmEntregas
 
     Private Sub btnGuardar_Click(sender As System.Object, e As System.EventArgs) Handles btnGuardar.Click
         If txtId.Text <> "" Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             If cboConsulta.Text = "" Then 'Insert uno nuevo
                 Try
                     cnn1.Close() : cnn1.Open()
@@ -86,6 +91,11 @@ Public Class frmEntregas
 
     Private Sub cboConsulta_DropDown(sender As System.Object, e As System.EventArgs) Handles cboConsulta.DropDown
         cboConsulta.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -104,6 +114,10 @@ Public Class frmEntregas
     End Sub
 
     Private Sub cboConsulta_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cboConsulta.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -127,6 +141,10 @@ Public Class frmEntregas
         If txtNombre.Text = "" Then MsgBox("No hay ningún cliente activo para eliminar una de sus direcciones.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : txtNombre.Focus().Equals(True) : Exit Sub
         If txtId.Text = "" Then MsgBox("Proceso erróneo.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Me.Close()
         If cboConsulta.Text = "" Then MsgBox("Selecciona un domicilio para eliminarlo.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cboConsulta.Focus().Equals(True) : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -168,6 +186,10 @@ Public Class frmEntregas
         Dim contador As Integer = 0
         Dim domicilio As String = ""
 
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -188,10 +210,6 @@ Public Class frmEntregas
 
                 End If
             Loop
-
-
-
-
             MsgBox("domicilios importados correctamente", vbInformation + vbOKOnly, titulocentral)
             rd1.Close()
             cnn1.Close()
