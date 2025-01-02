@@ -503,22 +503,17 @@ Public Class frmLoad
             cnn1.Close()
             cnn1.Open()
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "Select DMembre from productos"
+            cmd1.CommandText = "SELECT DMembre FROM productos"
             rd1 = cmd1.ExecuteReader
             If rd1.Read Then
-                rd1.Close()
-            Else
-                rd1.Close()
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "ALTER TABLE productos add column DMembre varchar(50) DEFAULT ''"
-                If cmd1.ExecuteNonQuery Then
-                Else
-
-                End If
             End If
+            rd1.Close()
             cnn1.Close()
         Catch ex As Exception
-            MessageBox.Show(ex.ToString)
+
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "ALTER TABLE productos add column DMembre VARCHAR(50) DEFAULT ''"
+            cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
 

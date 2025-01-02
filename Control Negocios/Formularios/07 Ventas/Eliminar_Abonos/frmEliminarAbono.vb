@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports MySql.Data.MySqlClient
 Public Class frmEliminarAbono
 
     Dim ideliminar As Double = 0
@@ -16,6 +17,9 @@ Public Class frmEliminarAbono
     Dim simbolo As String = ""
 
     Private Sub cboCliente_DropDown(sender As Object, e As EventArgs) Handles cboCliente.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboCliente.Items.Clear()
 
@@ -38,6 +42,10 @@ Public Class frmEliminarAbono
     End Sub
 
     Private Sub cboFolio_DropDown(sender As Object, e As EventArgs) Handles cboFolio.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboFolio.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -66,6 +74,10 @@ Public Class frmEliminarAbono
     End Sub
 
     Private Sub cboFolio_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboFolio.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             grdAbonos.Rows.Clear()
             Dim fecha As Date = Nothing
@@ -200,6 +212,11 @@ Public Class frmEliminarAbono
 
     Private Sub btnguardar_Click(sender As Object, e As EventArgs) Handles btnguardar.Click
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             Dim mysaldo As Double = 0
             Dim monto As Double = 0
@@ -328,6 +345,10 @@ Public Class frmEliminarAbono
     Private Sub txtContraseña_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContraseña.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             idemp = 0
 
             cnn1.Close() : cnn1.Open()
@@ -362,6 +383,9 @@ Public Class frmEliminarAbono
     End Sub
 
     Private Sub cboCliente_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCliente.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             idcliente = 0
 
@@ -389,6 +413,11 @@ Public Class frmEliminarAbono
     End Sub
 
     Private Sub pEliminar80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pEliminar80.PrintPage
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
 
             'Fuentes prederminadas
@@ -550,6 +579,10 @@ Public Class frmEliminarAbono
             Dim simbolo As String = DatosRecarga("Simbolo")
             Dim Pie As String = ""
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             '[°]. Logotipo
             If tLogo <> "SIN" Then
                 If File.Exists(My.Application.Info.DirectoryPath & "\" & nLogo) Then
@@ -673,7 +706,7 @@ Public Class frmEliminarAbono
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-        cnn1.Close()
+            cnn1.Close()
         End Try
     End Sub
 End Class

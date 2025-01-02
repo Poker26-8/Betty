@@ -84,9 +84,12 @@ Public Class Login
         End Try
 
         Try
-            sTargetlocalmysql = "server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300"
+
 
             If txtRuta.Text <> "" Then
+
+                sTargetlocalmysql = "server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300"
+
                 cnn1 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                 cnn2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                 cnn3 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
@@ -98,6 +101,9 @@ Public Class Login
                 cnntimer = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                 cnntimer2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
             Else
+
+                sTargetlocalmysql = "server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300"
+
                 cnn1 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                 cnn2 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                 cnn3 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")

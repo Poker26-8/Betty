@@ -1,9 +1,14 @@
 ﻿Imports Microsoft.Office.Interop.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmRequiere
 
     Private Sub cbonombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cbonombre.DropDown
         cbonombre.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()
@@ -45,6 +50,12 @@ Public Class frmRequiere
         Dim multiplo As Double = 0
 
         Dim MyTotal As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         Try
             cnn1.Close()

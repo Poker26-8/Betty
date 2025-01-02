@@ -1,4 +1,6 @@
-﻿Public Class frmEntalla
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmEntalla
 
     Dim cantpro As Integer = 0
     Dim bandera As Integer = 0
@@ -13,6 +15,9 @@
     End Sub
 
     Private Sub cboRemision_DropDown(sender As Object, e As EventArgs) Handles cboRemision.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboRemision.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -59,6 +64,10 @@
             Dim migrupo As String = ""
             Dim midepto As String = ""
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd3 As MySqlDataReader
+            Dim cmd1, cmd3 As MySqlCommand
 
             If Len(cboModelo.Text) > 0 And Len(cboRemision.Text) > 0 Then
                 cnn1.Close() : cnn1.Open()
@@ -159,6 +168,9 @@
     End Sub
 
     Private Sub cboModelo_DropDown(sender As Object, e As EventArgs) Handles cboModelo.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboModelo.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -186,6 +198,10 @@
                 cboModelo.Focus.Equals(True)
                 Exit Sub
             End If
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -231,6 +247,10 @@
 
     Private Sub txtContra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContra.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -348,6 +368,12 @@
 
             Dim mycalc As Double = 0
             Dim mycalc1 As Double = 0
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2, rd3 As MySqlDataReader
+            Dim cmd1, cmd2, cmd3 As MySqlCommand
 
             cnn1.Close() : cnn1.Open()
 

@@ -1,7 +1,7 @@
 ﻿Imports System.Data.OleDb
 Imports System.IO
 Imports System.Xml
-
+Imports MySql.Data.MySqlClient
 Public Class frmComprasSeries
 
     Dim printLine As Integer = 0
@@ -17,6 +17,11 @@ Public Class frmComprasSeries
     Dim simbolo As String = ""
 
     Private Sub frmComprasSeries_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         nLogo = DatosRecarga("LogoG")
         tLogo = DatosRecarga("TipoLogo")
@@ -206,6 +211,9 @@ Public Class frmComprasSeries
         cboproveedor.Items.Clear()
         btnnuevo.PerformClick()
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -235,6 +243,10 @@ Public Class frmComprasSeries
         If cboproveedor.Text <> "" Then
             txtsaldo.Text = "0.00"
             Dim dias As Integer = 0
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 cnn1.Close() : cnn1.Open()
@@ -289,7 +301,9 @@ Public Class frmComprasSeries
 
     Private Sub cbomoneda_DropDown(sender As Object, e As EventArgs) Handles cbomoneda.DropDown
         cbomoneda.Items.Clear()
-
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -310,6 +324,9 @@ Public Class frmComprasSeries
     End Sub
 
     Private Sub cbomoneda_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbomoneda.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -335,6 +352,13 @@ Public Class frmComprasSeries
     Public Function CodBarra() As Boolean
         Dim Bool As Boolean = False
         If cbonombre.Text = "" And txtcodigo.Text = "" Then CodBarra = False : Exit Function
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
         'Descripción
         If txtcodigo.Text = "" Then
             cnn2.Close() : cnn2.Open()
@@ -447,6 +471,9 @@ Public Class frmComprasSeries
 
     Private Sub cbonombre_DropDown(sender As Object, e As EventArgs) Handles cbonombre.DropDown
         cbonombre.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -466,6 +493,9 @@ Public Class frmComprasSeries
     End Sub
 
     Private Sub cbonombre_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbonombre.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -529,6 +559,9 @@ Public Class frmComprasSeries
         Dim Multiplo As Double = 0
 
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             If txtcodigo.Text <> "" Then
                 Try
                     cnn1.Close() : cnn1.Open()
@@ -617,6 +650,9 @@ Public Class frmComprasSeries
 
     Private Sub cboremision_DropDown(sender As Object, e As EventArgs) Handles cboremision.DropDown
         cboremision.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -646,6 +682,11 @@ Public Class frmComprasSeries
             If cboproveedor.Text <> "" And cboremision.Text = "" Then MsgBox("El número de remisión no puede permanecer vacío.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
             Dim Pedido As Integer = 0
             Dim conteo As Double = 0
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -810,6 +851,9 @@ Public Class frmComprasSeries
 
     Private Sub cbofactura_DropDown(sender As Object, e As EventArgs) Handles cbofactura.DropDown
         cbofactura.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -834,6 +878,10 @@ Public Class frmComprasSeries
         If AscW(e.KeyChar) = Keys.Enter Then
             If cbofactura.Text = "" Then cbopedido.Focus().Equals(True) : Exit Sub
             Dim Pedido As Integer = 0
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -981,6 +1029,9 @@ Public Class frmComprasSeries
 
     Private Sub cbopedido_DropDown(sender As Object, e As EventArgs) Handles cbopedido.DropDown
         cbopedido.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -1008,6 +1059,10 @@ Public Class frmComprasSeries
     Private Sub cbopedido_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbopedido.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -1104,6 +1159,10 @@ Public Class frmComprasSeries
 
     Private Sub btnnuevo_Click(sender As Object, e As EventArgs) Handles btnnuevo.Click
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         grdcaptura.DefaultCellStyle.ForeColor = Color.Black
         dtpfpago.Value = Date.Now
         dtpfecha.Value = Date.Now
@@ -1198,6 +1257,10 @@ Public Class frmComprasSeries
         Dim tasaIVA As Double = 0
         Dim opeIEPS As Double = 0
 
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
+
         If txtiva.Text = "" Then txtiva.Text = "0.00"
         txtiva.Tag = "0"
 
@@ -1249,6 +1312,10 @@ Public Class frmComprasSeries
             MsgBox("No se puede continuar porque el tipo de moneda del pedido no coincide con el tipo de moneda del producto.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
             Exit Sub
         End If
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         On Error GoTo kaka
 
@@ -1405,6 +1472,10 @@ kaka:
         Dim Pi As Double = 0
         Dim Pil As Double = 0
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If Trim(txtserie.Text) <> "" Then
             grdcaptura.Rows.Add(
                 txtcodigo.Text,
@@ -1475,6 +1546,10 @@ kaka:
         Dim codigo As String = ""
         Dim ImpIVA As Double = 0
         Dim ImIVA As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If cbofactura.Text <> "" Then
             If grdcaptura.Rows.Count > 0 Then
@@ -1566,6 +1641,10 @@ kaka:
     Private Sub txtusuario_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtusuario.KeyPress
         Dim id_usu As Integer = 0
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -1610,6 +1689,11 @@ kaka:
     End Sub
 
     Private Sub txtapagar_TextChanged(sender As Object, e As EventArgs) Handles txtapagar.TextChanged
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         cnn3.Close() : cnn3.Open()
         cmd3 = cnn3.CreateCommand
         cmd3.CommandText = "SELECT Resta FROM Compras WHERE NumRemision='" & cboremision.Text & "' AND Proveedor='" & cboproveedor.Text & "'"
@@ -1681,6 +1765,11 @@ kaka:
         Dim cantidad As Double = grdcaptura.CurrentRow.Cells(3).Value.ToString
         Dim valTotal As Double = 0
         Dim cant As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If e.KeyCode = Keys.Delete Then
             If grdcaptura.Rows.Count = 0 Then Exit Sub
             valTotal = grdcaptura.Rows(index).Cells(5).Value.ToString
@@ -1735,6 +1824,10 @@ kaka:
 
         Dim Pi As Double = 0
         Dim Pil As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Dim index As Integer = grdcaptura.CurrentRow.Index
         If grdcaptura.Rows.Count > 0 Then
@@ -1818,6 +1911,11 @@ kaka:
     End Sub
 
     Private Sub btnguardar_Click(sender As Object, e As EventArgs) Handles btnguardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
             Dim usuario As String = ""
             Dim MyID As Integer = 0
@@ -2425,6 +2523,9 @@ kaka:
         Dim Logotipo As Drawing.Image = Nothing
 
         Dim Pie As String = ""
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         On Error GoTo carbon
 
@@ -2720,6 +2821,9 @@ carbon:
         Dim ant_disponible As Double = 0
         Dim ant_pedidos As Double = 0
         Dim saldo_disponible As Double = 0
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If CDbl(txtpAnticipo.Text) > 0 Then
             Try
@@ -2783,7 +2887,9 @@ carbon:
 
 
         Dim Pie As String = ""
-
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         On Error GoTo oscuro
 
         '[°]. Logotipo
@@ -3086,7 +3192,9 @@ oscuro:
 
         Dim ACUENTA As Double = 0
         Dim RESTA As Double = 0
-
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         On Error GoTo deku
 
         If pagina = 0 Then
@@ -3525,7 +3633,9 @@ deku:
 
         Dim ACUENTA As Double = 0
         Dim RESTA As Double = 0
-
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         On Error GoTo lolkiller
 
         If pagina = 0 Then
@@ -4022,6 +4132,10 @@ lolkiller:
         Dim total_compra As Double = 0
         Dim serie As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Dim subtotal, iva_compra, total_final As Double
 
         If (grdcaptura.Rows.Count - 1) = 0 Then
@@ -4109,6 +4223,11 @@ lolkiller:
             Dim Impresora As String = ""
             Dim tPapel As String = ""
             Dim tMilimetros As String = ""
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             tipo_impre = "COPIA"
             printLine = 0
             Contador = 0
@@ -4202,6 +4321,11 @@ lolkiller:
     End Sub
 
     Private Sub btncancela_Click(sender As Object, e As EventArgs) Handles btncancela.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             If cboproveedor.Text = "" Then MsgBox("Necesitas seleccionar un proveedor para continuar con el proceso.", vbInformation + vbOKOnly, "Delsscom Contol Negocios Pro") : cboproveedor.Focus().Equals(True) : Exit Sub
             If cboremision.Text = "" Then MsgBox("Selecciona un número de remisión para continuar con el proceso.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cboremision.Focus().Equals(True) : Exit Sub
@@ -4489,6 +4613,10 @@ lolkiller:
         Dim Pie As String = ""
         Dim saldo_fav As Double = 0
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         On Error GoTo nopaso
 
         '[°]. Logotipo
@@ -4752,6 +4880,10 @@ nopaso:
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim saldo_fav As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         On Error GoTo nopaso
         '[°]. Logotipo
@@ -5185,6 +5317,10 @@ nopaso:
         Dim total_final As Double = 0
         Dim iva_compra As Double = 0
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             xmlDoc = New XmlDocument
             ' Carga el archivo XML
@@ -5252,6 +5388,10 @@ nopaso:
         Dim status As String = ""
 
         Dim id_prov As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         On Error GoTo nopaso
 

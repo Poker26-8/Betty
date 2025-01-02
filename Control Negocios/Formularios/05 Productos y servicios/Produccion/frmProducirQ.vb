@@ -2,9 +2,14 @@
 Imports System.Web.Services
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
+Imports MySql.Data.MySqlClient
 
 Public Class frmProducirQ
     Private Sub cbonombre_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbonombre.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
             grdcaptura.Rows.Clear()
             txtcostod.Text = "0.00"
@@ -137,6 +142,10 @@ Public Class frmProducirQ
 
     Private Sub cbonombre_DropDown(sender As Object, e As EventArgs) Handles cbonombre.DropDown
         cbonombre.Items.Clear()
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand
@@ -219,6 +228,9 @@ Public Class frmProducirQ
     End Sub
 
     Private Sub cboLote_DropDown(sender As Object, e As EventArgs) Handles cboLote.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboLote.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -378,6 +390,9 @@ Public Class frmProducirQ
     End Sub
 
     Private Sub cboDescripcion_DropDown(sender As Object, e As EventArgs) Handles cboDescripcion.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboDescripcion.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -399,6 +414,9 @@ Public Class frmProducirQ
     End Sub
 
     Private Sub cboCodigoI_DropDown(sender As Object, e As EventArgs) Handles cboCodigoI.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand
@@ -418,6 +436,9 @@ Public Class frmProducirQ
     End Sub
 
     Private Sub cbocodigo_DropDown(sender As Object, e As EventArgs) Handles cbocodigo.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cbocodigo.Items.Clear()
 
@@ -440,6 +461,9 @@ Public Class frmProducirQ
     End Sub
 
     Private Sub cboLoteS_DropDown(sender As Object, e As EventArgs) Handles cboLoteS.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboLoteS.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -499,6 +523,11 @@ Public Class frmProducirQ
     End Sub
 
     Private Sub btnguardar_Click(sender As Object, e As EventArgs) Handles btnguardar.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
         Try
             Dim existencia As Double = 0
             Dim multiplo As Double = 0
@@ -743,6 +772,9 @@ Public Class frmProducirQ
     End Sub
 
     Private Sub txtContraseña_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContraseña.KeyPress
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             If AscW(e.KeyChar) = Keys.Enter Then
 
@@ -980,6 +1012,9 @@ Public Class frmProducirQ
     End Sub
 
     Private Sub cboCliente_DropDown(sender As Object, e As EventArgs) Handles cboCliente.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboCliente.Items.Clear()
 
@@ -1243,6 +1278,11 @@ Public Class frmProducirQ
     End Sub
 
     Private Sub btnRegistro_Click(sender As Object, e As EventArgs) Handles btnRegistro.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
         Try
             Dim costod As Double = 0
             costod = txtcostod.Text
@@ -1658,6 +1698,9 @@ doorcita:
     End Sub
 
     Private Sub cboCliente_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCliente.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -1678,6 +1721,9 @@ doorcita:
     End Sub
 
     Private Sub cboLoteB_DropDown(sender As Object, e As EventArgs) Handles cboLoteB.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboLoteB.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -1698,6 +1744,11 @@ doorcita:
     End Sub
 
     Private Sub cboLoteB_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboLoteB.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
         Try
 
             cnn1.Close() : cnn1.Open()
@@ -1784,6 +1835,9 @@ doorcita:
     End Sub
 
     Private Sub cboDescripcion_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboDescripcion.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -1806,6 +1860,9 @@ doorcita:
     End Sub
 
     Private Sub cboLoteS_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboLoteS.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()

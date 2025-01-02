@@ -1,5 +1,12 @@
-﻿Public Class frmElige_Proveedores
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmElige_Proveedores
     Private Sub frmElige_Proveedores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -21,9 +28,13 @@
     End Sub
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If TextBox1.Text <> "" Then
             DataGridView1.Rows.Clear()
-
             Try
                 cnn1.Close() : cnn1.Open()
 

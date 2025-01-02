@@ -1,11 +1,15 @@
 ﻿
 Imports System.IO
+Imports MySql.Data.MySqlClient
 Public Class frmProduccion
 
     Dim nLogo As String = ""
     Dim tLogo As String = ""
     Private Sub cbocodigo_DropDown(sender As System.Object, e As System.EventArgs) Handles cbocodigo.DropDown
         cbocodigo.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()
@@ -39,6 +43,12 @@ Public Class frmProduccion
         Dim multiplo As Double = 0
 
         Dim MyTotal As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         Try
             cnn1.Close()
@@ -174,6 +184,11 @@ Public Class frmProduccion
 
     Private Sub cbonombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cbonombre.DropDown
         cbonombre.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close()
             cnn1.Open()
@@ -215,6 +230,12 @@ Public Class frmProduccion
         Dim multiplo As Double = 0
 
         Dim MyTotal As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         Try
             cnn1.Close()
@@ -310,6 +331,11 @@ Public Class frmProduccion
         If grdcaptura.Rows.Count = 0 Then MsgBox("Procedimiento erróneo.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbonombre.Focus().Equals(True) : Exit Sub
         Dim precio As Double = txtcostod.Text
         If MsgBox("¿Deseas guardar éste costo de producción para el producto?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close()
                 cnn1.Open()
@@ -334,6 +360,11 @@ Public Class frmProduccion
         End If
 
         If cboEmpleado.Text = "" Then MsgBox("Debe seleccionar el empleado que realizara el trabajo.") : cboEmpleado.Focus.Equals(True) : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close()
             cnn1.Open()
@@ -485,6 +516,11 @@ Public Class frmProduccion
 
     Private Sub txtcontraseña_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtcontraseña.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close()
                 cnn1.Open()
@@ -538,6 +574,9 @@ Public Class frmProduccion
     End Sub
 
     Private Sub cboEmpleado_DropDown(sender As Object, e As EventArgs) Handles cboEmpleado.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboEmpleado.Items.Clear()
 
@@ -578,6 +617,10 @@ Public Class frmProduccion
         Dim pen As New Pen(Brushes.Black, 1)
         Dim Y As Double = 0
         Dim Logotipo As Drawing.Image = Nothing
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
 
@@ -708,6 +751,10 @@ Public Class frmProduccion
         Dim pen As New Pen(Brushes.Black, 1)
         Dim Y As Double = 0
         Dim Logotipo As Drawing.Image = Nothing
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
 

@@ -6388,7 +6388,8 @@
                                                   `CargadoAndroid` int(11) DEFAULT '0' COMMENT 'para ventas en ruta',
                                                   `Mililitros` float DEFAULT '0',
                                                   `Copas` float DEFAULT '0',
-                                                  `PecioVentaMinIVA` float DEFAULT '0'
+                                                  `PecioVentaMinIVA` float DEFAULT '0',
+                                                  `DMembre` varchar(50) DEFAULT ''
                                                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
 

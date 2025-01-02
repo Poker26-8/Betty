@@ -1,4 +1,6 @@
-﻿Public Class frmNotasCredito
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmNotasCredito
     Dim CantidadProd As Double = 0
 
     Private Sub TextBox12_Click(sender As Object, e As System.EventArgs) Handles TextBox12.Click
@@ -34,6 +36,11 @@
     Private Sub cbonombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cbonombre.DropDown
         cbonombre.Items.Clear()
         If cbofactura.Text = "" And cboproveedor.Text = "" Then Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -61,6 +68,10 @@
             CantidadProd = 0
             If cboproveedor.Text = "" Or cbofactura.Text = "" Or cbonombre.Text = "" And grdcaptura.Rows.Count = 0 Then Exit Sub
             If cboproveedor.Text = "" Or cbofactura.Text = "" Or cbonombre.Text = "" And grdcaptura.Rows.Count > 0 Then Exit Sub
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 cnn1.Close() : cnn1.Open()
@@ -98,6 +109,10 @@
         On Error GoTo errs
         If cod = "" Then Exit Sub
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         cnn2.Close() : cnn2.Open()
 
         cmd2 = cnn2.CreateCommand
@@ -121,6 +136,11 @@ errs:
 
     Public Sub CODB(ByVal vemos As String)
         If vemos = "" Then Exit Sub
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
 
@@ -179,6 +199,9 @@ errs:
     End Sub
 
     Private Sub cbonombre_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cbonombre.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -201,6 +224,11 @@ errs:
 
     Private Sub cboremision_DropDown(sender As System.Object, e As System.EventArgs) Handles cboremision.DropDown
         cboremision.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -230,6 +258,11 @@ errs:
     End Sub
 
     Private Sub cboremision_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cboremision.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -276,6 +309,11 @@ errs:
 
     Private Sub cbofactura_DropDown(sender As System.Object, e As System.EventArgs) Handles cbofactura.DropDown
         cbofactura.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -305,6 +343,12 @@ errs:
     End Sub
 
     Private Sub cbofactura_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cbofactura.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -352,6 +396,11 @@ errs:
 
     Private Sub cbonota_c_DropDown(sender As System.Object, e As System.EventArgs) Handles cbonota_c.DropDown
         cbonota_c.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -380,6 +429,10 @@ errs:
     End Sub
 
     Private Sub cbonota_c_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cbonota_c.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim CNN2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, RD2 As MySqlDataReader
+        Dim cmd1, CMD2 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -402,7 +455,7 @@ errs:
                 "select Codigo,Cantidad,Precio,Total from ComprasDet where NotaCred='" & cbonota_c.Text & "' and Proveedor='" & cboproveedor.Text & "' and NumFactura='" & cbofactura.Text & "' and NumRemision='" & cboremision.Text & "'"
             rd1 = cmd1.ExecuteReader
 
-            cnn2.Close() : cnn2.Open()            
+            cnn2.Close() : cnn2.Open()
             Do While rd1.Read
                 Dim codigo As String = rd1("Codigo").ToString
                 Dim cantidad As Double = rd1("Cantidad").ToString
@@ -458,6 +511,11 @@ errs:
     Private Sub txtcodigo_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtcodigo.KeyPress
         If AscW(e.KeyChar) = Keys.Enter And txtcodigo.Text <> "" Then
             If cbofactura.Text = "" And cboproveedor.Text = "" And cboremision.Text = "" Then Exit Sub
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -580,6 +638,9 @@ errs:
 
     Public Sub CalcIVA()
         Dim MyCalc As Double = 0
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         txtivanc.Text = "0.00"
 
         cnn1.Close() : cnn1.Open()
@@ -608,7 +669,9 @@ errs:
     Private Sub TextBox12_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles TextBox12.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             Dim id_usuario As Double = 0
-
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -650,6 +713,10 @@ errs:
         cbofactura.Items.Clear()
         grdcaptura.Rows.Clear()
         If Trim(cboproveedor.Text) <> "" Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -694,7 +761,7 @@ errs:
             Call CalcSuma()
             Call CalcIVA()
             txtcodigo.Focus().Equals(True)
-        End If        
+        End If
     End Sub
 
     Private Sub btnguarda_Click(sender As System.Object, e As System.EventArgs) Handles btnguarda.Click
@@ -706,6 +773,11 @@ errs:
         If grdcaptura.Rows.Count = 0 Then MsgBox("Debes asignar productos a la nota para guardarla.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbonombre.Focus().Equals(True) : Exit Sub
 
         If MsgBox("¿Deseas guardar los datos de esta nota de crédito?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim CNN2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, RD2 As MySqlDataReader
+            Dim cmd1, CMD2 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -853,6 +925,11 @@ errs:
 
     Private Sub cboproveedor_DropDown(sender As System.Object, e As System.EventArgs) Handles cboproveedor.DropDown
         cboproveedor.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 

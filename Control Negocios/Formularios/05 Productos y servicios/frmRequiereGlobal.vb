@@ -1,7 +1,15 @@
-﻿Public Class frmRequiereGlobal
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmRequiereGlobal
 
     Private Sub cbonombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cbonombre.DropDown
         cbonombre.Items.Clear()
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -23,6 +31,11 @@
     End Sub
 
     Private Sub cbonombre_SelectedValueChanged(sender As System.Object, e As System.EventArgs) Handles cbonombre.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -50,6 +63,10 @@
             temporal.Rows.Clear()
             Call cbonombre_SelectedValueChanged(cbonombre, New EventArgs())
 
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -97,6 +114,11 @@
             Dim unidad_tem As String = ""
             Dim cantid_tem As Decimal = 0
 
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             If txtcodigo.Text <> "" Then
                 If (temporal.Rows.Count) > 0 Then
                     For dx As Integer = 0 To temporal.Rows.Count - 1
@@ -137,8 +159,9 @@
 
                 End If
                 txtcantidad.Focus().Equals(True)
-                End If
             End If
+        End If
+
     End Sub
 
     Private Sub txtcantidad_Click(sender As System.Object, e As System.EventArgs) Handles txtcantidad.Click

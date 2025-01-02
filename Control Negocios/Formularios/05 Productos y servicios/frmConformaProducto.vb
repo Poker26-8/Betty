@@ -1,6 +1,12 @@
-﻿Public Class frmConformaProducto
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmConformaProducto
 
     Private Sub CodBar()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -32,6 +38,11 @@
 
     Private Sub cbocodigo_DropDown(sender As System.Object, e As System.EventArgs) Handles cbocodigo.DropDown
         cbocodigo.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close()
             cnn1.Open()
@@ -61,6 +72,10 @@
     Private Sub cbocodigo_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cbocodigo.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close()
                 cnn1.Open()
@@ -97,6 +112,11 @@
 
     Private Sub cbocod_DropDown(sender As Object, e As System.EventArgs) Handles cbocod.DropDown
         Dim mycodigo As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close()
             cnn1.Open()
@@ -135,6 +155,10 @@
 
     Private Sub cbocod_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cbocod.KeyPress
         e.KeyChar = UCase(e.KeyChar)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         If AscW(e.KeyChar) = Keys.Enter Then
             grdcaptura.Rows.Clear()
             Try
@@ -181,6 +205,10 @@
 
     Private Sub cbodescripcion_DropDown(sender As System.Object, e As System.EventArgs) Handles cbodescripcion.DropDown
         cbodescripcion.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()
@@ -204,7 +232,14 @@
 
     Private Sub cbodescripcion_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cbodescripcion.KeyPress
         e.KeyChar = UCase(e.KeyChar)
+
+
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -242,6 +277,11 @@
 
     Private Sub cbonombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cbonombre.DropDown
         cbonombre.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close()
             cnn1.Open()
@@ -272,6 +312,11 @@
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
             grdcaptura.Rows.Clear()
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close()
                 cnn1.Open()
@@ -362,6 +407,11 @@
     Private Sub btneliminar_Click(sender As System.Object, e As System.EventArgs) Handles btneliminar.Click
         If cbonombre.Text = "" Or cbocod.Text = "" Then MsgBox("Selecciona un producto para eliminar su conformación.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbonombre.Focus().Equals(True) : Exit Sub
         If MsgBox("¿Deseas eliminar esta conformcación del producto " & cbonombre.Text & "?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close()
                 cnn1.Open()
@@ -386,6 +436,10 @@
             MsgBox("Necesitas agregar insumos para guaradar la conformación.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbodescripcion.Focus().Equals(True) : Exit Sub
         End If
         If MsgBox("¿Deseas guardar esta conformación de producto?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close()
                 cnn1.Open()

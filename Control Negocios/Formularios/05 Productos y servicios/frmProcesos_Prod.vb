@@ -1,7 +1,14 @@
-﻿Public Class frmProcesos_Prod
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmProcesos_Prod
 
     Private Sub cbonombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cbonombre.DropDown
         cbonombre.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -28,6 +35,9 @@
     End Sub
 
     Private Sub cbonombre_SelectedValueChanged(sender As System.Object, e As System.EventArgs) Handles cbonombre.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -53,6 +63,9 @@
     Private Sub cbonombre_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cbonombre.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             If cbonombre.Text <> "" Then
                 Try
                     cnn1.Close() : cnn1.Open()
@@ -92,6 +105,11 @@
     Private Sub txtcodigo_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtcodigo.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             If txtcodigo.Text <> "" Then
+
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
+
                 Try
                     cnn1.Close() : cnn1.Open()
 
@@ -138,6 +156,11 @@
 
     Private Sub cbolote_DropDown(sender As System.Object, e As System.EventArgs) Handles cbolote.DropDown
         cbolote.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -159,6 +182,11 @@
     End Sub
 
     Private Sub cbolote_SelectedValueChanged(sender As System.Object, e As System.EventArgs) Handles cbolote.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -188,12 +216,16 @@
     Dim nueva_p As Boolean = False
 
     Private Sub cbolote_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cbolote.KeyPress
-        If AscW(e.KeyChar) = Keys.Enter Then            
+        If AscW(e.KeyChar) = Keys.Enter Then
             If cbolote.Text <> "" Then
                 If cbolote.Text = "" Then MsgBox("Es necesario que asignes un número de lote a la producción." & vbNewLine & "Campo necesario para identificar la producción.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
                 If InStr(cbolote.Text, " ") > 0 Then
                     MsgBox("El lote no puede contener espacios, esto para evitar errores de captura y consulta." & vbNewLine & "Te sugerimos usar guiones en su lugar.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
                 End If
+
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
 
                 Try
                     cnn1.Close() : cnn1.Open()
@@ -267,6 +299,11 @@
 
         If AscW(e.KeyChar) = Keys.Enter Then
             If txtusuario.Text <> "" Then
+
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
+
                 Try
                     cnn1.Close() : cnn1.Open()
 
@@ -294,7 +331,7 @@
                                 cmd1 = cnn1.CreateCommand
                                 cmd1.CommandText =
                                     "insert into Procesos_Prod(Proceso,Codigo,Nombre,Cantidad,Lote,Encargado,Usuario,Status,Fecha) values('Inicio de producción','" & txtcodigo.Text & "','" & cbonombre.Text & "'," & txtcantidad.Text & ",'" & cbolote.Text & "','" & lblusuario.Text & "','" & lblusuario.Text & "',1,'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "')"
-                                If cmd1.ExecuteNonQuery Then                                    
+                                If cmd1.ExecuteNonQuery Then
                                     boxInicio.Enabled = True
                                     boxFin.Enabled = True
                                     txtproceso.Focus().Equals(True)
@@ -330,6 +367,11 @@
 
     Private Sub cboEncargado_DropDown(sender As System.Object, e As System.EventArgs) Handles cboEncargado.DropDown
         cboEncargado.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -358,6 +400,11 @@
 
     Private Sub cboDesc1_DropDown(sender As System.Object, e As System.EventArgs) Handles cboDesc1.DropDown
         cboDesc1.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -379,6 +426,10 @@
     End Sub
 
     Private Sub cboDesc1_SelectedValueChanged(sender As System.Object, e As System.EventArgs) Handles cboDesc1.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -405,6 +456,10 @@
     Private Sub cboDesc1_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cboDesc1.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             If cboDesc1.Text <> "" Then
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
+
                 Try
                     cnn1.Close() : cnn1.Open()
 
@@ -444,6 +499,9 @@
     Private Sub txtcod_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtcod.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             If txtcod.Text <> "" Then
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
                 Try
                     cnn1.Close() : cnn1.Open()
 

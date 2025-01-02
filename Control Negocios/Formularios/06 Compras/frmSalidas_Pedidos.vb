@@ -1,5 +1,11 @@
-﻿Public Class frmSalidas_Pedidos
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmSalidas_Pedidos
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, CMD2 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cnn2.Close() : cnn2.Open()
@@ -50,6 +56,9 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If DataGridView1.Rows.Count = 0 Then MsgBox("No se encontraron registros que puedan se utilizados.", vbInformation + vbOK, "Delsscom Control Negocios Pro") : Exit Sub
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             frmPedidos.grdcaptura.Rows.Clear()
 

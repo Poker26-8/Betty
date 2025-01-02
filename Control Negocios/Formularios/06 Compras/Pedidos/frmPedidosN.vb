@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports MySql.Data.MySqlClient
 Public Class frmPedidosN
 
     Dim nLogo As String = ""
@@ -10,6 +11,10 @@ Public Class frmPedidosN
     End Sub
 
     Private Sub cboProveedor_DropDown(sender As Object, e As EventArgs) Handles cboProveedor.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboProveedor.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -31,6 +36,11 @@ Public Class frmPedidosN
     End Sub
 
     Private Sub cbonombre_DropDown(sender As Object, e As EventArgs) Handles cbonombre.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cbonombre.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -60,6 +70,10 @@ Public Class frmPedidosN
     Private Sub cbonombre_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbonombre.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             If cbonombre.Text <> "" Then
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -96,6 +110,9 @@ Public Class frmPedidosN
     Private Sub txtcodigo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcodigo.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             If txtcodigo.Text <> "" Then
                 Dim valormoneda As Double = 0
                 Try
@@ -163,6 +180,12 @@ Public Class frmPedidosN
     End Sub
 
     Private Sub UpGrid1()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             Dim cod As String = ""
@@ -248,6 +271,10 @@ Public Class frmPedidosN
 
     Private Sub txtusuario_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtusuario.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -334,6 +361,10 @@ Public Class frmPedidosN
         If txtNumPed.Text = "" Then MsgBox("Favor de ingresar el número de pedido", vbInformation + vbOKOnly, titulocentral) : txtNumPed.Focus.Equals(True) : Exit Sub
 
         Dim SUBTOTAL As Double = 0
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         If MsgBox("Desea guardar la información del pedido", vbInformation + vbYesNo) = vbYes Then
 
@@ -433,6 +464,10 @@ Public Class frmPedidosN
     Public Sub Folio()
         TFolio.Stop()
 
+        Dim cnntimer As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rdtimer As MySqlDataReader
+        Dim cmdtimer As MySqlCommand
+
         cnntimer.Close() : cnntimer.Open()
         cmdtimer = cnntimer.CreateCommand
         cmdtimer.CommandText = "SELECT MAX(Id) FROM pedidos"
@@ -481,7 +516,9 @@ Public Class frmPedidosN
         Dim Y As Double = 0
         Dim Logotipo As Drawing.Image = Nothing
 
-
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             '[°]. Logotipo
             If tLogo <> "SIN" Then
@@ -648,6 +685,9 @@ Public Class frmPedidosN
         Dim Y As Double = 0
         Dim Logotipo As Drawing.Image = Nothing
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             '[°]. Logotipo

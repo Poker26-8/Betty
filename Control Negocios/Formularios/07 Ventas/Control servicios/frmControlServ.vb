@@ -1,10 +1,16 @@
-﻿Public Class frmControlServ
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmControlServ
     Private Sub frmControlServv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 
     Private Sub cbousuario_DropDown(sender As Object, e As EventArgs) Handles cbousuario.DropDown
         cbousuario.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -46,6 +52,10 @@
         If txtproceso.Text = "" Then MsgBox("Es necesario escribir una descripción del procesos a realizar.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : txtproceso.Focus().Equals(True) : Exit Sub
         If cbousuario.Text = "" Then MsgBox("Necesitas seleccionar un encargado del proceso.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbousuario.Focus().Equals(True) : Exit Sub
         If lblusuario.Text = "" Then MsgBox("Escribe tu contraseña para continuar.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : txtusuario.Focus().Equals(True) : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -90,6 +100,9 @@
 
     Private Sub txtusuario_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtusuario.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 Dim id_usu As Integer = 0
 
@@ -112,7 +125,7 @@
 
                     End If
 
-                    Else
+                Else
                     MsgBox("Contraseña incorrecta.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
                     txtusuario.SelectAll()
                     Exit Sub
@@ -129,6 +142,10 @@
     End Sub
 
     Private Sub btnCambiar_Click(sender As Object, e As EventArgs) Handles btnCambiar.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
 
             If lblusuario.Text = "" Then MsgBox("Necesita proporcionar la contraseña del administrador") : txtusuario.Focus.Equals(True) : Exit Sub

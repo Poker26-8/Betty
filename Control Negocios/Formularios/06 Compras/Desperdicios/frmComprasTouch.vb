@@ -1,5 +1,6 @@
 ﻿Imports System.Net
 Imports System.IO
+Imports MySql.Data.MySqlClient
 
 Public Class frmComprasTouch
     Public CantidadProd As Integer = 0
@@ -61,6 +62,10 @@ Public Class frmComprasTouch
             pProductos.BackgroundImage = System.Drawing.Image.FromFile(My.Application.Info.DirectoryPath & "\Fondo.jpg")
         End If
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         tFecha.Start()
         tFolio.Start()
         Try
@@ -101,6 +106,11 @@ Public Class frmComprasTouch
 
     Private Sub Departamentos()
         Dim deptos As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             If TotDeptos <= 10 Then
                 pDeptos.AutoScroll = False
@@ -160,6 +170,10 @@ Public Class frmComprasTouch
     Private Sub Grupos(ByVal depto As String)
         Dim grupos As Integer = 0
         TotGrupos = 0
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
         Try
             cnn2.Close() : cnn2.Open()
 
@@ -230,6 +244,9 @@ Public Class frmComprasTouch
         Dim prods As Integer = 1
         Dim cuantos As Integer = Math.Truncate(pProductos.Height / 70)
 
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
         Try
             cnn3.Close()
             cnn3.Open()
@@ -714,6 +731,11 @@ Public Class frmComprasTouch
     Dim Min As Double = 0
 
     Public Sub ObtenerProducto(ByVal codigo As String)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -760,6 +782,10 @@ Public Class frmComprasTouch
     Private Sub find_precio(ByVal codigo As String)
         Dim temp As Double = 0
         Dim TiCambio As Double = 0
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
 
         Try
             cnn3.Close() : cnn3.Open()
@@ -990,6 +1016,10 @@ keseso:
 
     Private Sub cboproveedor_DropDown(sender As Object, e As EventArgs) Handles cboproveedor.DropDown
         cboproveedor.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -1063,7 +1093,9 @@ keseso:
             If txtbarras.Text = "" Then
                 Exit Sub
             End If
-
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -1094,6 +1126,11 @@ keseso:
 
     Private Sub btnpagar_Click(sender As Object, e As EventArgs) Handles btnpagar.Click
         If grdcaptura.Rows.Count = 0 Then MsgBox("Necesitas agregar productos a la compra para poder guardarla.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             cnn2.Close() : cnn2.Open()
@@ -1414,6 +1451,10 @@ keseso:
 
         Dim Pie As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         '[°]. Logotipo
         If tLogo <> "SIN" Then
             If File.Exists(My.Application.Info.DirectoryPath & "\" & nLogo) Then
@@ -1487,7 +1528,7 @@ keseso:
         e.Graphics.DrawString("--------------------------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
         Y += 15
         e.Graphics.DrawString("C O M P R A", New Drawing.Font(tipografia, 12, FontStyle.Bold), Brushes.Black, 140, Y, sc)
-            Y += 12
+        Y += 12
 
         e.Graphics.DrawString("--------------------------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
         Y += 18
@@ -1621,6 +1662,10 @@ keseso:
         Dim Y As Double = 0
         Dim Logotipo As Drawing.Image = Nothing
         Dim Pie As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         '[°]. Logotipo
         If tLogo <> "SIN" Then
@@ -1799,6 +1844,9 @@ keseso:
     Private Sub cbofolio_DropDown(sender As Object, e As EventArgs) Handles cbofolio.DropDown
         cbofolio.Items.Clear()
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -1819,6 +1867,10 @@ keseso:
     End Sub
 
     Private Sub cboproveedor_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboproveedor.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -1851,6 +1903,10 @@ keseso:
         Dim Y As Double = 0
         Dim Logotipo As Drawing.Image = Nothing
         Dim Pie As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         '[°]. Logotipo
         If tLogo <> "SIN" Then
@@ -1986,7 +2042,7 @@ keseso:
             Y += 12
         End If
         Y += 8
-            e.Graphics.DrawString("--------------------------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
+        e.Graphics.DrawString("--------------------------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
         Y += 12
 
 
@@ -2062,6 +2118,9 @@ keseso:
         If AscW(e.KeyChar) = Keys.Enter Then
             If MsgBox("¿Deseas imprimir una copia del folio '" & cbofolio.Text & "'?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
                 Dim impresora As String = ""
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
 
                 cnn1.Close() : cnn1.Open()
 

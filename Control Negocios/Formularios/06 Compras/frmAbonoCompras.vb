@@ -1,5 +1,6 @@
 ﻿Imports System.Net
 Imports System.IO
+Imports MySql.Data.MySqlClient
 
 Public Class frmAbonoCompras
     Dim id_prov As Integer = 0
@@ -9,6 +10,10 @@ Public Class frmAbonoCompras
     Dim simbolo As String = ""
 
     Private Sub frmAbonoCompras_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         nLogo = DatosRecarga("LogoG")
         tLogo = DatosRecarga("TipoLogo")
@@ -39,6 +44,9 @@ Public Class frmAbonoCompras
     Private Sub txtremision_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtremision.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             If txtremision.Text <> "" Then
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
                 Try
                     cnn1.Close() : cnn1.Open()
 
@@ -92,6 +100,10 @@ Public Class frmAbonoCompras
 
     Private Sub cbobanco_DropDown(sender As System.Object, e As System.EventArgs) Handles cbobanco.DropDown
         cbobanco.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -202,6 +214,11 @@ Public Class frmAbonoCompras
 
     Private Sub btnguardar_Click(sender As System.Object, e As System.EventArgs) Handles btnguardar.Click
         If lblUsuario.Text = "" Then MsgBox("Escribe tu contraseña para continuar.", vbInformation + vbOK, "Delsscom Control Negocios Pro") : txtusuario.Focus().Equals(True) : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Dim id_usuario As Integer = 0
 
@@ -482,6 +499,10 @@ Public Class frmAbonoCompras
 
     Private Sub txtusuario_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtusuario.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -540,7 +561,9 @@ Public Class frmAbonoCompras
         Dim Logotipo As Drawing.Image = Nothing
 
         Dim Pie As String = ""
-
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         '[°]. Logotipo
         If tLogo <> "SIN" Then
             If File.Exists(My.Application.Info.DirectoryPath & "\" & nLogo) Then

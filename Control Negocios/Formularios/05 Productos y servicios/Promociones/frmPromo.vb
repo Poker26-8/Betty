@@ -1,6 +1,11 @@
-﻿Public Class frmPromo
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmPromo
     Private Sub ComboBox1_DropDown(sender As Object, e As EventArgs) Handles ComboBox1.DropDown
         If rbGrupo.Checked = True Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 ComboBox1.Items.Clear()
                 cnn1.Close()
@@ -21,6 +26,9 @@
     End Sub
 
     Private Sub ComboBox1_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             grdProductos.Rows.Clear()
             cnn1.Close()
@@ -42,6 +50,9 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             If txtCantidad.Text = "0" Then
                 MsgBox("La cantidad no puede ser 0, ingresa una cantidad mayor", vbExclamation + vbOKOnly, "Delsscom Control Negocios Pro")
@@ -92,6 +103,11 @@
             MsgBox("Selecciiona un grupo de promociones para eliminar", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
             Exit Sub
         End If
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim folxd As Integer = 0
             cnn1.Close()

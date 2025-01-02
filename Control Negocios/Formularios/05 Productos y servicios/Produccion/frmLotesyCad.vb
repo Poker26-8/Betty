@@ -1,4 +1,6 @@
-﻿Public Class frmLotesyCad
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmLotesyCad
     Private Sub optCaducos_Click(sender As Object, e As EventArgs) Handles optCaducos.Click
 
         If (optCaducos.Checked) Then
@@ -286,6 +288,10 @@
         Dim m1 As Date = mcdesde.SelectionStart.ToShortDateString
         Dim m2 As Date = mcHasta.SelectionStart.ToShortDateString
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -314,6 +320,11 @@
     Public Sub Caducidad()
         Dim m1 As Date = mcdesde.SelectionStart.ToShortDateString
         Dim m2 As Date = mcHasta.SelectionStart.ToShortDateString
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -347,6 +358,11 @@
         Dim CantCompra As Single = 0
         Dim CantVta As Single = 0
         Dim idL As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -395,6 +411,11 @@
         If (optCaducos.Checked) Then
             Exit Sub
         End If
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand

@@ -1,7 +1,14 @@
-﻿Public Class frmCtsPagar
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmCtsPagar
 
     Private Sub cbonombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cbonombre.DropDown
         cbonombre.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -30,6 +37,11 @@
     End Sub
 
     Private Sub cbonombre_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cbonombre.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -52,6 +64,11 @@
 
     Private Sub cboremision_DropDown(sender As System.Object, e As System.EventArgs) Handles cboremision.DropDown
         cboremision.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -79,6 +96,11 @@
 
     Private Sub cbofactura_DropDown(sender As System.Object, e As System.EventArgs) Handles cbofactura.DropDown
         cbofactura.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (optfacturas.Checked) Then
             Try
                 cnn1.Close() : cnn1.Open()
@@ -108,6 +130,10 @@
         Dim id_compra As Integer = 0
         If AscW(e.KeyChar) = Keys.Enter Then
             If cboremision.Text <> "" Then
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
+
                 Try
                     cnn1.Close() : cnn1.Open()
 
@@ -227,6 +253,10 @@
     Private Sub txtdesc2_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtdesc2.KeyPress
         If Not IsNumeric(txtdesc2.Text) Then txtdesc2.Text = ""
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
@@ -240,6 +270,10 @@
         Dim id_compra As Integer = 0
         If AscW(e.KeyChar) = Keys.Enter Then
             If cbofactura.Text <> "" Then
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
+
                 Try
                     cnn1.Close() : cnn1.Open()
 
@@ -369,6 +403,10 @@
         Dim factura As String = ""
 
         If cbofactura.Text <> "" Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
 

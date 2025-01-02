@@ -289,7 +289,7 @@ Public Class frmVentas1
 
         If tomarcontra = 1 Then
 
-            If odata11.dbOpen(cnn1, sTarget, serror) = True Then
+            If odata11.dbOpen(cnn11, sTarget, serror) = True Then
                 sql1 = "SELECT Clave,Alias FROM Usuarios WHERE IdEmpleado=" & id_usu_log
                 If odata11.getDr(cnn11, dr11, sql1, serror) = True Then
                     txtcontraseña.Text = dr11(0).ToString

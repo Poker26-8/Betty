@@ -1,4 +1,6 @@
-﻿Public Class frmBuscaCompras
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmBuscaCompras
 
     Private Sub optproveedor_Click(sender As System.Object, e As System.EventArgs) Handles optproveedor.Click
         If (optproveedor.Checked) Then
@@ -276,6 +278,11 @@
         Dim querry1 As String = ""
         Dim querry2 As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         'Proveedor
         If (optproveedor.Checked) Then
             querry1 = "select count(Codigo) from Productos where ProvPri='" & cboprod.Text & "' and Departamento<>'SERVICIOS' and Grupo<>'INSUMO' and Grupo<>'SERVICIOS'"
@@ -468,6 +475,10 @@
 
     Private Sub cboprod_DropDown(sender As System.Object, e As System.EventArgs) Handles cboprod.DropDown
         cboprod.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Dim query As String = ""
         If (optproveedor.Checked) Then
             query = "select distinct ProvPri from Productos order by ProvPri"

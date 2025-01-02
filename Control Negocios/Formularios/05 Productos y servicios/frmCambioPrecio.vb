@@ -1,4 +1,6 @@
-﻿Public Class frmCambioPrecio
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmCambioPrecio
 
     Private Sub frmCambioPrecio_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         cbo.Items.Clear()
@@ -13,6 +15,9 @@
     End Sub
 
     Private Sub cbo_DropDown(sender As System.Object, e As System.EventArgs) Handles cbo.DropDown
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             Dim sql As String = ""
             cbo.Items.Clear()
@@ -107,6 +112,10 @@
         If cbo.Text = "" Then MsgBox("Selecciona una opción de filtro para el cambio de precio.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbo.Focus().Equals(True) : Exit Sub
         If Not (optventa.Checked) And Not (optcompra.Checked) Then MsgBox("Selecciona el tipo de precio que deseas ajustar.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
         If Not (optaumento.Checked) And Not (optdiminuye.Checked) Then MsgBox("Selecciona el tipo de movimiento para el precio.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             Dim movi As String = "", precio As String = "", subebaja As String = ""
@@ -225,7 +234,7 @@
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
-        End Try        
+        End Try
     End Sub
 
     Private Sub btnNuevo_Click(sender As System.Object, e As System.EventArgs) Handles btnNuevo.Click
@@ -244,6 +253,11 @@
     Private Sub cbo3Op_DropDown(sender As System.Object, e As System.EventArgs) Handles cbo3Op.DropDown
         Dim sql As String = ""
         cbo3Op.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (optproves.Checked) Then
             sql = "SELECT DISTINCT ProvPri FROM Productos order by ProvPri"
         End If
@@ -305,6 +319,9 @@
     End Sub
 
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             If cbo3Op.Text = "" Then MsgBox("Selecciona una opción de filtro para el cambio de precio.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbo3Op.Focus().Equals(True) : Exit Sub
 
@@ -329,11 +346,15 @@
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
-        End Try        
+        End Try
     End Sub
 
     Private Sub cbomonedero_DropDown(sender As System.Object, e As System.EventArgs) Handles cbomonedero.DropDown
         cbomonedero.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -382,6 +403,11 @@
     Private Sub btnsave_mone_Click(sender As System.Object, e As System.EventArgs) Handles btnsave_mone.Click
         If cbomonedero.Text = "" Then MsgBox("Selecciona una opción para actualizar.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbomonedero.Focus().Equals(True) : Exit Sub
         If MsgBox("¿Deseas actualizar la bonificación en monedero para el " & IIf(optprov_m.Checked = True, "Proveedor", IIf(optdept_m.Checked = True, "Departamento", IIf(optgrup_m.Checked = True, "Grupo", ""))) & " " & cbomonedero.Text & "?", vbInformation + vbYesNo, "Delsscom Control Negocios Pro") = vbYes Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -400,6 +426,9 @@
     End Sub
 
     Private Sub ComboBox1_DropDown(sender As Object, e As EventArgs) Handles ComboBox1.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             ComboBox1.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -421,6 +450,9 @@
     End Sub
 
     Private Sub cboDescuentoDia_DropDown(sender As Object, e As EventArgs) Handles cboDescuentoDia.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboDescuentoDia.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -450,6 +482,10 @@
     End Sub
 
     Private Sub btnGuardarDia_Click(sender As Object, e As EventArgs) Handles btnGuardarDia.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
 
             If cboDescuentoDia.Text = "" Then MsgBox("Selecciona una opción de filtro para el cambio de precio.", vbInformation + vbOKOnly, "Delsscom® Control Negocios Pro") : cboDescuentoDia.Focus().Equals(True) : Exit Sub

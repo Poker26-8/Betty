@@ -260,7 +260,7 @@ Partial Class frmAnticipoProv
         Me.btnnuevo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnnuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnnuevo.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnnuevo.Location = New System.Drawing.Point(297, 246)
+        Me.btnnuevo.Location = New System.Drawing.Point(297, 247)
         Me.btnnuevo.Name = "btnnuevo"
         Me.btnnuevo.Size = New System.Drawing.Size(60, 63)
         Me.btnnuevo.TabIndex = 188
@@ -276,7 +276,7 @@ Partial Class frmAnticipoProv
         Me.btnguardar.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnguardar.Image = CType(resources.GetObject("btnguardar.Image"), System.Drawing.Image)
         Me.btnguardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnguardar.Location = New System.Drawing.Point(363, 246)
+        Me.btnguardar.Location = New System.Drawing.Point(363, 247)
         Me.btnguardar.Name = "btnguardar"
         Me.btnguardar.Size = New System.Drawing.Size(60, 63)
         Me.btnguardar.TabIndex = 187
@@ -447,7 +447,7 @@ Partial Class frmAnticipoProv
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(430, 318)
+        Me.ClientSize = New System.Drawing.Size(430, 319)
         Me.Controls.Add(Me.lblusuario)
         Me.Controls.Add(Me.grdPagos)
         Me.Controls.Add(Me.txtusuario)

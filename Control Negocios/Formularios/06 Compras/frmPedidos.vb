@@ -5,6 +5,7 @@ Imports iTextSharp.text.pdf
 
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
+Imports MySql.Data.MySqlClient
 Public Class frmPedidos
     Dim alias_pedidos As String = ""
     Dim tipo_impre As String = ""
@@ -120,6 +121,9 @@ Public Class frmPedidos
 
     Private Sub cbonombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cbonombre.DropDown
         cbonombre.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -141,6 +145,9 @@ Public Class frmPedidos
     End Sub
 
     Private Sub cbonombre_SelectedValueChanged(sender As System.Object, e As System.EventArgs) Handles cbonombre.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -166,6 +173,11 @@ Public Class frmPedidos
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
             If cbonombre.Text = "" Then txtcodigo.Focus().Equals(True) : Exit Sub
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -216,7 +228,9 @@ Public Class frmPedidos
         If AscW(e.KeyChar) = Keys.Enter Then
             If txtcodigo.Text <> "" Then
                 Dim MoneValor As Double = 0
-
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
                 Try
                     cnn1.Close() : cnn1.Open()
 
@@ -293,7 +307,9 @@ Public Class frmPedidos
         Dim maximo_p As Double = 0
         Dim precio_p As Double = 0
         Dim importe_p As Double = 0
-
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
         Try
             cnn2.Close() : cnn2.Open()
 
