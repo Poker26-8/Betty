@@ -15368,6 +15368,9 @@ ecomoda:
     Private Sub txtdescu_TextChanged(sender As Object, e As EventArgs) Handles txtdescu.TextChanged
         If donde_va = "Descuento Moneda" Then
             Dim resta As Double = 0
+            Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd5 As MySqlDataReader
+            Dim cmd5 As MySqlCommand
 
             If txtdescuento1.Enabled = True Then
                 If txtdescu.Text = "" Then
@@ -15454,6 +15457,9 @@ ecomoda:
     End Sub
 
     Private Sub cbotpago_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbotpago.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()
@@ -15506,6 +15512,11 @@ ecomoda:
     End Sub
 
     Private Sub btnPedido_Click(sender As Object, e As EventArgs) Handles btnPedido.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
             Me.Text = "Pedidos (2)"
             If Me.Text = "Ventas (2)" Then
@@ -15964,7 +15975,7 @@ rayos2:
                         ' PDF_Cotizacion_Img()
                     Else
                         ' PDF_Cotizacion()
-                        pdf_pedido
+                        PDF_pedido()
                     End If
                     Panel6.Visible = False
                     My.Application.DoEvents()
