@@ -126,7 +126,7 @@ Public Class Login
                 frmLoad.BringToFront()
                 My.Application.DoEvents()
                 frmLoad.cargaTodo()
-
+                Inicio.Text = Inicio.Text & "                                                                 " & lblEmpresa.Text
                 Me.Hide()
             End If
 
