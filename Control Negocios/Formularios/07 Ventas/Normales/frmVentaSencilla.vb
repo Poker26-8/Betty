@@ -1,4 +1,5 @@
-﻿Imports Org.BouncyCastle.Math.EC
+﻿Imports MySql.Data.MySqlClient
+Imports Org.BouncyCastle.Math.EC
 
 Public Class frmVentaSencilla
 
@@ -15,6 +16,9 @@ Public Class frmVentaSencilla
     End Sub
 
     Private Sub cbodesc_DropDown(sender As Object, e As EventArgs) Handles cbodesc.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cbodesc.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -45,6 +49,13 @@ Public Class frmVentaSencilla
         Dim TiCambio As Double = 0
         Dim PreLst As Double = 0, PreEsp As Double = 0
         Dim H_Actual As String = Format(Date.Now, "HH:mm")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
+
 
         If AscW(e.KeyChar) = Keys.Enter And cbodesc.Text = "" Then cbocodigo.Focus().Equals(True) : Exit Sub
         If AscW(e.KeyChar) = Keys.Enter Then
@@ -284,11 +295,11 @@ Public Class frmVentaSencilla
                             My.Application.DoEvents()
                             Dim voy2 As Double = 0
                             Dim VarSumXD As Double = 0
-                            For w = 0 To grdcaptura.Rows.Count - 1
-                                If grdcaptura.Rows(w).Cells(6).Value.ToString = "" Then
+                            For w = 0 To grdCaptura.Rows.Count - 1
+                                If grdCaptura.Rows(w).Cells(6).Value.ToString = "" Then
                                 Else
-                                    VarSumXD = VarSumXD + CDbl(grdcaptura.Rows(w).Cells(5).Value.ToString)
-                                    voy2 = voy2 + CDec(grdcaptura.Rows(w).Cells(3).Value)
+                                    VarSumXD = VarSumXD + CDbl(grdCaptura.Rows(w).Cells(5).Value.ToString)
+                                    voy2 = voy2 + CDec(grdCaptura.Rows(w).Cells(3).Value)
                                 End If
                                 txtSubTotal.Text = FormatNumber(VarSumXD, 2)
                             Next
@@ -530,11 +541,11 @@ Public Class frmVentaSencilla
                                     My.Application.DoEvents()
                                     Dim voy2 As Double = 0
                                     Dim VarSumXD As Double = 0
-                                    For w = 0 To grdcaptura.Rows.Count - 1
-                                        If grdcaptura.Rows(w).Cells(6).Value.ToString = "" Then
+                                    For w = 0 To grdCaptura.Rows.Count - 1
+                                        If grdCaptura.Rows(w).Cells(6).Value.ToString = "" Then
                                         Else
-                                            VarSumXD = VarSumXD + CDbl(grdcaptura.Rows(w).Cells(5).Value.ToString)
-                                            voy2 = voy2 + CDec(grdcaptura.Rows(w).Cells(3).Value)
+                                            VarSumXD = VarSumXD + CDbl(grdCaptura.Rows(w).Cells(5).Value.ToString)
+                                            voy2 = voy2 + CDec(grdCaptura.Rows(w).Cells(3).Value)
                                         End If
                                         txtSubTotal.Text = FormatNumber(VarSumXD, 2)
                                     Next
@@ -593,6 +604,9 @@ Public Class frmVentaSencilla
     End Sub
 
     Public Function IvaDSC(ByVal cod As String) As Double
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -621,6 +635,11 @@ Public Class frmVentaSencilla
         Dim Alerta_Min As Boolean = False
         Dim Acumula As Boolean = False
         Dim minimo As Double = 0
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3, rd1 As MySqlDataReader
+        Dim cmd3, cmd1 As MySqlCommand
 
         Try
             cnn3.Close() : cnn3.Open()
@@ -747,6 +766,9 @@ kak:
 
     Private Function CantLte() As Double
         If cboLote.Tag <> 0 Then
+            Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd5 As MySqlDataReader
+            Dim cmd5 As MySqlCommand
             Try
                 cnn5.Close() : cnn5.Open()
 
@@ -768,6 +790,11 @@ kak:
 
     Private Function Cambio(ByVal Moneda As Double) As Double
         Cambio = 0
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -910,6 +937,10 @@ kak:
     Public Sub CodBar()
         If cbocodigo.Text = "" And cbodesc.Text = "" Then Exit Sub
 
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         'Código de barras 1
         Try
             cnn3.Close() : cnn3.Open()
@@ -1000,6 +1031,9 @@ kak:
 
     Private Sub cbocodigo_DropDown(sender As Object, e As EventArgs) Handles cbocodigo.DropDown
         cbocodigo.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -1030,6 +1064,11 @@ kak:
 
     Private Sub cbocodigo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbocodigo.KeyPress
         e.KeyChar = UCase(e.KeyChar)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         If AscW(e.KeyChar) = Keys.Enter And (cbocodigo.Text <> "" Or cbodesc.Text <> "") Then
             Dim MCD As Double = 0
             Dim Multiplo As Double = 0
@@ -1037,6 +1076,8 @@ kak:
             Dim TiCambio As Double = 0
             Dim PreLst As Double = 0, PreEsp As Double = 0
             Dim H_Actual As String = Format(Date.Now, "HH:mm")
+
+
 
             If cbocodigo.Text <> "" Then
                 Try
@@ -1247,12 +1288,16 @@ kak:
                 End If
             End If
             If Me.Text = "Ventas (1)" Then
-                    txtefectivo.Focus().Equals(True)
-                End If
-                'If Me.Text = "Cotización (1)" Then
-                '    Button3.Focus().Equals(True)
-                'End If
+                txtefectivo.Focus().Equals(True)
             End If
+            'If Me.Text = "Cotización (1)" Then
+            '    Button3.Focus().Equals(True)
+            'End If
+        End If
+        'If Me.Text = "Cotización (1)" Then
+        '    Button3.Focus().Equals(True)
+        'End If
+
 
     End Sub
 
@@ -1260,7 +1305,6 @@ kak:
         txtcantidad.SelectionStart = 0
         txtcantidad.SelectionLength = Len(txtcantidad.Text)
     End Sub
-
     Private Sub txtcantidad_GotFocus(sender As Object, e As EventArgs) Handles txtcantidad.GotFocus
         txtcantidad.SelectionStart = 0
         txtcantidad.SelectionLength = Len(txtcantidad.Text)
@@ -1270,6 +1314,10 @@ kak:
         If txtcantidad.Text = "" Then Exit Sub
         If AscW(e.KeyChar) = Keys.Enter And cbodesc.Text = "" Then cbodesc.Focus().Equals(True)
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 Dim VSE As Boolean = False
@@ -1397,7 +1445,9 @@ kak:
 
     Private Function CalPreDevo(ByVal folio As Integer, ByVal cod As String) As Double
         Dim precio As Double = 0
-
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -1424,6 +1474,10 @@ kak:
     Private Sub Cant(ByVal codigo As String, ByRef paso As Boolean)
         Dim canti As Double = 0
         If txtcantidad.Text = "" Then Exit Sub
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cnn5.Close() : cnn5.Open()
 
@@ -1460,6 +1514,11 @@ kak:
         Dim TiCambio As Double = 0
         Dim H_Actual As String = Format(Date.Now, "HH:mm")
         If txtcantidad.Text = "" Or txtcantidad.Text = "." Then Exit Sub
+
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4, rd5 As MySqlDataReader
+        Dim cmd4, cmd5 As MySqlCommand
 
         Try
             cnn4.Close() : cnn4.Open()
@@ -1665,6 +1724,11 @@ kak:
         If Not IsNumeric(txtprecio.Text) Then txtprecio.Text = ""
         If cbocodigo.Text = "" Then MsgBox("Necesitas seleccionar un producto.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbodesc.Focus().Equals(True) : Exit Sub
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             cnn1.Close()
@@ -1833,6 +1897,9 @@ kak:
     Private Sub txttotal_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txttotal.KeyPress
         Dim edita_pr As Boolean = False
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         cnn1.Close() : cnn1.Open()
 
         cmd1 = cnn1.CreateCommand
@@ -1874,6 +1941,11 @@ kak:
 
     Private Sub cboLote_DropDown(sender As Object, e As EventArgs) Handles cboLote.DropDown
         cboLote.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand
         If btndevo.Text = "GUARDAR DEVOLUCIÓN" Then
@@ -1913,6 +1985,11 @@ kak:
                 Exit Sub
             End If
         End If
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
 
         If AscW(e.KeyChar) = Keys.Enter Then
 
@@ -2144,6 +2221,10 @@ kak:
 
     Private Function ReviewLote() As Boolean
         ReviewLote = True
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         If cboLote.Text <> "" Then
             ReviewLote = False
             Try

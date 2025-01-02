@@ -1,4 +1,6 @@
-﻿Public Class frmVentasTouchPago2
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmVentasTouchPago2
     Dim Foco As Byte = 0
     Public resta As Double = 0
     Private Sub txttarjeta_GotFocus(sender As Object, e As System.EventArgs) Handles txttarjeta.GotFocus
@@ -484,6 +486,11 @@
 
     Private Sub btnENTER_Click(sender As System.Object, e As System.EventArgs) Handles btnENTER.Click
         Dim existe As Boolean = False
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Select Case Foco
             Case Is = 1
                 txtefectivo.Text = FormatNumber(txtefectivo.Text, 2)
@@ -539,6 +546,11 @@
 
     Private Sub cboNombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cboNombre.DropDown
         cboNombre.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -585,6 +597,10 @@
 
     Private Sub cboNombre_SelectedValueChanged(sender As System.Object, e As System.EventArgs) Handles cboNombre.SelectedValueChanged
         Dim MySaldo As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         On Error GoTo 345
         If cboNombre.Text = "" Then Exit Sub

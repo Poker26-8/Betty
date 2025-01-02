@@ -1,10 +1,15 @@
-﻿Public Class frmBuscarPrecio
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmBuscarPrecio
     Public pantalla As String = ""
     Public codigop As String = ""
     Public nombrep As String = ""
 
     Dim precioseleccionado As Double = 0
     Private Sub frmBuscarPrecio_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand

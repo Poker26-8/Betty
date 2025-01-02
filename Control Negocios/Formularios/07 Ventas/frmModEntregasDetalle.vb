@@ -2,6 +2,7 @@
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports MySql.Data
+Imports MySql.Data.MySqlClient
 
 Public Class frmModEntregasDetalle
 
@@ -18,6 +19,11 @@ Public Class frmModEntregasDetalle
         Dim ACuenta As Double = 0
         Dim Resta As Double = 0
         Dim tel_cliente As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd3 As MySqlDataReader
+        Dim cmd1, cmd3 As MySqlCommand
 
         With oData
             If .dbOpen(a_cnn, Direcc_Access, sinfo) Then
@@ -90,6 +96,11 @@ Public Class frmModEntregasDetalle
         Dim folio As Integer = Trim(Replace(lblfolio.Text, "FOLIO: ", ""))
         Dim folioentrega As Integer = 0
         Dim pasa As Boolean = False
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -487,6 +498,11 @@ Public Class frmModEntregasDetalle
 
         Dim por_entregar As Double = 0
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -622,6 +638,12 @@ Public Class frmModEntregasDetalle
         Dim precio As Double = 0
         Dim tot As Double = 0
         Dim valor As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
 
         grdvendidos.Rows.Clear()
         grdentregados.Rows.Clear()
@@ -836,6 +858,10 @@ Public Class frmModEntregasDetalle
         Dim codigo As String = ""
         Dim producto As String = ""
         Dim cantidad As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         '[Primera parte]. Logotipo
         If tLogo <> "SIN" Then
@@ -1073,6 +1099,11 @@ Public Class frmModEntregasDetalle
         Dim Resta As Double = 0
         Dim tel_cliente As String = ""
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3 As MySqlDataReader
+        Dim cmd2, cmd3 As MySqlCommand
+
         With oData
             If .dbOpen(a_cnn, Direcc_Access, sinfo) Then
                 .runSp(a_cnn, "delete from EntregasDetalle", sinfo)
@@ -1145,6 +1176,11 @@ Public Class frmModEntregasDetalle
 
     Private Sub btncopia_Click(sender As Object, e As EventArgs) Handles btncopia.Click
         Dim Id_Folio As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
 
@@ -1229,10 +1265,9 @@ Public Class frmModEntregasDetalle
                 Inserta_Entrega_Folio(Id_Folio)
                 PDF_Entregas_Copia(Id_Folio)
                 Panel6.Visible = False
-                    My.Application.DoEvents()
-
-                Else
-                    cmd1 = cnn1.CreateCommand
+                My.Application.DoEvents()
+            Else
+                cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
                     "select Impresora from RutasImpresion where Equipo='" & ObtenerNombreEquipo() & "' and Tipo='" & TPrint & "'"
                 rd1 = cmd1.ExecuteReader
@@ -1343,6 +1378,11 @@ Public Class frmModEntregasDetalle
         Dim producto As String = ""
         Dim cantidad As Double = 0
         Dim chofer As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         If tLogo <> "SIN" Then
             If File.Exists(My.Application.Info.DirectoryPath & "\" & nLogo) Then
@@ -1559,6 +1599,9 @@ Public Class frmModEntregasDetalle
     Private Sub cbofecha_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbofecha.SelectedValueChanged
         Dim fecha_s As String = cbofecha.Text
         Dim fecha_g As String = ""
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close()
@@ -1593,6 +1636,10 @@ Public Class frmModEntregasDetalle
 
     Private Sub cboDomi_DropDown(sender As Object, e As EventArgs) Handles cboDomi.DropDown
         cboDomi.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -1614,6 +1661,11 @@ Public Class frmModEntregasDetalle
     End Sub
 
     Private Sub cboDomi_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboDomi.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -1670,6 +1722,12 @@ Public Class frmModEntregasDetalle
         Dim producto As String = ""
         Dim cantidad As Double = 0
         Dim chofer As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
 
         If tLogo <> "SIN" Then
             If File.Exists(My.Application.Info.DirectoryPath & "\" & nLogo) Then
@@ -1873,6 +1931,11 @@ Public Class frmModEntregasDetalle
 
     Private Sub cboFolio_DropDown(sender As Object, e As EventArgs) Handles cboFolio.DropDown
         cbofecha.Text = ""
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
 
             Dim folio0 As String = Trim(Replace(lblfolio.Text, "FOLIO: ", ""))
@@ -1946,6 +2009,11 @@ Public Class frmModEntregasDetalle
         Dim codigo As String = ""
         Dim producto As String = ""
         Dim cantidad As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
 
         '[Primera parte]. Logotipo
         If tLogo <> "SIN" Then
@@ -2083,11 +2151,11 @@ Public Class frmModEntregasDetalle
             End If
 
             Y += 4
-                Y += 8
-                e.Graphics.DrawString("--------------------------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
-                Y += 12
-            Else
-                Y += 4
+            Y += 8
+            e.Graphics.DrawString("--------------------------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
+            Y += 12
+        Else
+            Y += 4
             e.Graphics.DrawString("--------------------------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
             Y += 12
         End If

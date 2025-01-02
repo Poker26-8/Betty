@@ -1,5 +1,11 @@
-﻿Public Class frmOrdenTrabajo
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmOrdenTrabajo
     Private Sub cbonombre_DropDown(sender As Object, e As EventArgs) Handles cbonombre.DropDown
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cbonombre.Items.Clear()
             cnn1.Close()
@@ -63,6 +69,9 @@
     'End Sub
 
     Private Sub cboCodigoListo_DropDown(sender As Object, e As EventArgs) Handles cboCodigoListo.DropDown
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cboCodigoListo.Items.Clear()
             cnn1.Close()
@@ -83,6 +92,11 @@
 
     Private Sub cboCodigoListo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboCodigoListo.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2, rd3 As MySqlDataReader
+            Dim cmd1, cmd2, cmd3 As MySqlCommand
             Try
                 grdcaptura.Rows.Clear()
                 Dim myexist As Double = 0
@@ -101,7 +115,7 @@
                     txtuni.Text = rd1("UVenta").ToString
                     txtexistencia.Text = "1"
 
-                    
+
                     cnn2.Close()
                     cnn2.Open()
                     cmd2 = cnn2.CreateCommand
@@ -160,6 +174,9 @@
     End Sub
 
     Private Sub frmOrdenTrabajo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             Dim Turno As Integer = 0
             cnn1.Close()
@@ -187,6 +204,10 @@
     End Sub
 
     Private Sub ComboBox2_DropDown(sender As Object, e As EventArgs) Handles ComboBox2.DropDown
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             ComboBox2.Items.Clear()
             cnn1.Close()
@@ -207,6 +228,9 @@
 
     Private Sub ComboBox2_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ComboBox2.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close()
                 cnn1.Open()
@@ -233,6 +257,9 @@
     End Sub
 
     Private Sub cbocodigoP_DropDown(sender As Object, e As EventArgs) Handles cbocodigoP.DropDown
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()
@@ -251,6 +278,9 @@
     End Sub
 
     Private Sub cbocodigoP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbocodigoP.KeyPress
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             If AscW(e.KeyChar) = Keys.Enter Then
                 cnn1.Close()
@@ -310,6 +340,9 @@
     End Sub
 
     Private Sub txtPrecioP_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPrecioP.KeyPress
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             If Asc(e.KeyChar) = Keys.Enter Then
                 'cbocodigoP.Text = "" : cbocodigoP.Focus.Equals(True) : Exit Sub
@@ -320,12 +353,10 @@
                 x = CDec(txtCantidadP.Text)
                 txttotalP.Text = FormatNumber(x * CDec(txtPrecioP.Text), 2)
 
-
                 Dim varias As Integer = 0
                 For chuchito As Integer = 0 To grdcaptura.Rows.Count - 1
                     varias = varias + CDec(grdcaptura.Rows(chuchito).Cells(5).Value)
                 Next
-
 
                 Dim myexist As Double = 0
 
@@ -356,6 +387,9 @@
     End Sub
 
     Private Sub btnnuevo_Click(sender As Object, e As EventArgs) Handles btnnuevo.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             Dim Turno As Integer = 0
             cnn1.Close()
@@ -403,6 +437,10 @@
     End Sub
 
     Private Sub btnguardar_Click(sender As Object, e As EventArgs) Handles btnguardar.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
 
             Dim Turno As Integer = 0
@@ -521,6 +559,10 @@
     End Sub
 
     Public Sub enviaDetalle()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         For xxx As Integer = 0 To grdcaptura.Rows.Count - 1
             Dim myexist As Double = 0
             cnn1.Close()
@@ -569,6 +611,12 @@
         'End Try
     End Sub
     Public Sub guardaProducto()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             Dim Turno As Integer = 0
@@ -659,6 +707,9 @@
 
     Private Sub cbonombre_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbonombre.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cbocod.Items.Clear()
                 cnn1.Close()

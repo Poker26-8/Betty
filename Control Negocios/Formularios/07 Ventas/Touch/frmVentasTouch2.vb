@@ -4,6 +4,7 @@ Imports System.Text
 Imports System.Threading.Tasks
 Imports System.Xml
 Imports System.IO.Ports
+Imports MySql.Data.MySqlClient
 Class frmVentasTouch2
 
     Public valorxd As Integer = 0
@@ -58,6 +59,10 @@ Class frmVentasTouch2
     Public controlsPerClick As Integer = 12
 
     Public Sub Folio()
+        Dim cnn9 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd9 As MySqlDataReader
+        Dim cmd9 As MySqlCommand
+
         If cnn9.State = 1 Then cnn9.Close()
         cnn9.Open()
 
@@ -96,6 +101,10 @@ Class frmVentasTouch2
     Public Direccion As String = ""
 
     Private Sub frmVentasTouch_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         DesglosaIVA = DatosRecarga("Desglosa")
         nLogo = DatosRecarga("LogoG")
@@ -179,6 +188,10 @@ Class frmVentasTouch2
 
     Private Sub Departamentos()
         Dim deptos As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
 
             cnn1.Close() : cnn1.Open()
@@ -234,6 +247,10 @@ Class frmVentasTouch2
 
     Private Sub Grupos(ByVal depto As String)
         Dim grupos As Integer = 0
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         TotGrupos = 0
         Try
             cnn2.Close() : cnn2.Open()
@@ -299,6 +316,10 @@ Class frmVentasTouch2
     Private Sub Productos(ByVal depto As String, ByVal grupo As String)
         Dim prods As Integer = 1
         Dim cuantos As Integer = Math.Truncate(pProductos.Height / 70)
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
 
         Try
             cnn3.Close()
@@ -788,6 +809,12 @@ Class frmVentasTouch2
     Dim Min As Double = 0
 
     Public Sub ObtenerProducto(ByVal codigo As String)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -860,6 +887,11 @@ Class frmVentasTouch2
         Dim TiCambio As Double = 0
         Dim H_Actual As String = Format(Date.Now, "HH:mm")
         Dim ATemp1, ATemp2, ATemp3, ATemp4 As Double
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3, rd5 As MySqlDataReader
+        Dim cmd3, cmd5 As MySqlCommand
 
         Try
             cnn3.Close() : cnn3.Open()
@@ -1002,6 +1034,10 @@ Class frmVentasTouch2
     Private Sub btnProd_Click(sender As Object, e As EventArgs)
         On Error GoTo keseso
         Dim btnProducto As Button = CType(sender, Button)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         CodigoProducto = ""
         CodigoProducto = btnProducto.Tag
@@ -1455,9 +1491,13 @@ keseso:
 
     Public Sub GuardarVenta()
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
         Try
-
-
             Dim VarUser As String = "", VarIdUsuario As Integer = 0
             Dim DsctoProd As Single = 0, PorcentDscto As Single = 0, DsctoProdTod As Single = 0
             Dim IdCliente As Integer = 0, ConteoXD As Double = 0
@@ -2302,7 +2342,10 @@ Door:
 
     Private Sub ImprimeComanda(ByVal Folio As Integer)
         Dim impresora As String = ""
-
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3 As MySqlDataReader
+        Dim cmd2, cmd3 As MySqlCommand
         Try
             cnn2.Close() : cnn2.Open()
 
@@ -2365,6 +2408,9 @@ Door:
 
         Dim Pie As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             '[1]. Datos de la venta
             e.Graphics.DrawString("--------------------------------------------------------", New System.Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
@@ -2420,7 +2466,9 @@ Door:
             If txtbarras.Text = "" Then
                 Exit Sub
             End If
-
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -2465,6 +2513,9 @@ Door:
 
         Dim Pie As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             '[°]. Logotipo
@@ -2791,6 +2842,9 @@ Door:
         Dim Logotipo As Drawing.Image = Nothing
         Dim Pie As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             '[°]. Logotipo

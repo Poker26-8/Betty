@@ -1,4 +1,5 @@
 ﻿Imports System.Security.Cryptography
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepSeries
 
@@ -22,7 +23,9 @@ Public Class frmRepSeries
     End Sub
 
     Private Sub rbseries_Click(sender As Object, e As EventArgs) Handles rbseries.Click
-
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             If rbseries.Checked = True Then
                 grdseries.Rows.Clear()
@@ -165,6 +168,10 @@ Public Class frmRepSeries
 
         cbodatos.Items.Clear()
 
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             If rbproductos.Checked = True Then
                 cnn5.Close() : cnn5.Open()
@@ -210,6 +217,12 @@ Public Class frmRepSeries
         grdseries.Rows.Clear()
         desde = mcdesde.SelectionStart.ToShortDateString
         hasta = mchasta.SelectionStart.ToShortDateString
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             If rbventas.Checked = True Then

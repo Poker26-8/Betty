@@ -1,4 +1,5 @@
 ﻿Imports System.Web.Services
+Imports MySql.Data.MySqlClient
 
 Public Class frmSeries
     Private Sub frmSeries_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -6,6 +7,9 @@ Public Class frmSeries
     End Sub
 
     Private Sub cbodesc_DropDown(sender As Object, e As EventArgs) Handles cbodesc.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cbodesc.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -30,6 +34,9 @@ Public Class frmSeries
         If AscW(e.KeyChar) = Keys.Enter Then
 
             Dim query As String = ""
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             If cbodesc.Text <> "" Then
                 Try
@@ -68,6 +75,9 @@ Public Class frmSeries
     End Sub
 
     Private Sub cbodesc_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbodesc.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -92,6 +102,11 @@ Public Class frmSeries
 
     Private Sub txtClave_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtClave.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 Dim activo As Integer = 0
 
@@ -134,6 +149,9 @@ Public Class frmSeries
     End Sub
 
     Private Sub cboCodigo_DropDown(sender As Object, e As EventArgs) Handles cboCodigo.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboCodigo.Items.Clear()
 
@@ -161,6 +179,10 @@ Public Class frmSeries
                 Dim factor As Double = 0
                 Dim operad As Double = 0
                 Dim codigo As String = Mid(cboCodigo.Text, 1, 6)
+
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
 
                 Try
                     cnn1.Close() : cnn1.Open()
@@ -289,6 +311,10 @@ Public Class frmSeries
             txtClave.Focus().Equals(True)
             Exit Sub
         End If
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             Dim idUsu As Integer = 0
@@ -435,6 +461,11 @@ Public Class frmSeries
 
         If MsgBox("¿Desea guardar las series del producto " & cbodesc.Text & " ?", vbInformation + vbOKCancel, titulocentral) = vbCancel Then Exit Sub
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3 As MySqlDataReader
+        Dim cmd2, cmd3 As MySqlCommand
+
         Dim codigo As String = ""
         Dim serie As String = ""
         Dim nombre As String = ""
@@ -469,6 +500,10 @@ Public Class frmSeries
     Private Sub cbofactura_DropDown(sender As Object, e As EventArgs) Handles cbofactura.DropDown
         cbofactura.Items.Clear()
 
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand
@@ -488,6 +523,9 @@ Public Class frmSeries
     End Sub
 
     Private Sub cbofactura_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbofactura.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -521,6 +559,11 @@ Public Class frmSeries
         Dim cuadro_dialogo As New OpenFileDialog
         Dim ruta As String = ""
         Dim sheet As String = "hoja1"
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         With cuadro_dialogo
             .Filter = "Archivos de cálculo(*.xls;*.xlsx)|*.xls;*.xlsx"

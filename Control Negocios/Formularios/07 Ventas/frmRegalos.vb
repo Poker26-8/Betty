@@ -42,4 +42,7 @@
         Return regex.Replace(input, String.Empty)
     End Function
 
+    Private Sub frmRegalos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

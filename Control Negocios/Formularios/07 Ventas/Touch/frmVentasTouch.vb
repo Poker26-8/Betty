@@ -4,6 +4,7 @@ Imports System.IO.Ports
 Imports System.Threading.Tasks
 Imports System.Xml
 Imports System.Text
+Imports MySql.Data.MySqlClient
 
 Public Class frmVentasTouch
 
@@ -59,6 +60,10 @@ Public Class frmVentasTouch
     ' Número de controles a mostrar por clic
     Public controlsPerClick As Integer = 12
     Public Sub Folio()
+        Dim cnn9 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd9 As MySqlDataReader
+        Dim cmd9 As MySqlCommand
+
         If cnn9.State = 1 Then cnn9.Close()
         cnn9.Open()
 
@@ -99,6 +104,10 @@ Public Class frmVentasTouch
 
 
     Private Sub frmVentasTouch_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         DesglosaIVA = DatosRecarga("Desglosa")
         nLogo = DatosRecarga("LogoG")
@@ -183,6 +192,11 @@ Public Class frmVentasTouch
 
     Private Sub Departamentos()
         Dim deptos As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
 
             cnn1.Close() : cnn1.Open()
@@ -225,6 +239,9 @@ Public Class frmVentasTouch
     End Sub
 
     Private Sub btnDepto_Click(sender As Object, e As EventArgs)
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
         Dim btnDepartamento As Button = CType(sender, Button)
         btnDepartamento.Font.Bold.Equals(True)
         pGrupos.Controls.Clear()
@@ -239,6 +256,11 @@ Public Class frmVentasTouch
     Private Sub Grupos(ByVal depto As String)
         Dim grupos As Integer = 0
         TotGrupos = 0
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
 
@@ -292,6 +314,8 @@ Public Class frmVentasTouch
 
     Private Sub btnGrupo_Click(sender As Object, e As EventArgs)
         Dim btnGrupos As Button = CType(sender, Button)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
         pProductos.Controls.Clear()
         If cnn3.State = 1 Then
             cnn3.Close()
@@ -304,6 +328,9 @@ Public Class frmVentasTouch
         Dim prods As Integer = 1
         Dim cuantos As Integer = Math.Truncate(pProductos.Height / 130)
 
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
         Try
             cnn3.Close()
             cnn3.Open()
@@ -794,6 +821,12 @@ Public Class frmVentasTouch
     Dim Min As Double = 0
 
     Public Sub ObtenerProducto(ByVal codigo As String)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -867,9 +900,13 @@ Public Class frmVentasTouch
         Dim H_Actual As String = Format(Date.Now, "HH:mm")
         Dim ATemp1, ATemp2, ATemp3, ATemp4 As Double
 
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3, rd5 As MySqlDataReader
+        Dim cmd3, cmd5 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
-
             cmd3 = cnn3.CreateCommand
             cmd3.CommandText =
                 "select tipo_cambio from tb_moneda,Productos where Codigo='" & codigo & "' and Productos.id_tbMoneda=tb_moneda.id"
@@ -1014,6 +1051,10 @@ Public Class frmVentasTouch
         On Error GoTo keseso
         Dim btnProducto As Button = CType(sender, Button)
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         CodigoProducto = ""
         CodigoProducto = btnProducto.Tag
         Ajusta_Grid()
@@ -1032,127 +1073,127 @@ Public Class frmVentasTouch
             cantidad = 1
 
             Dim puertobascula As String = ""
-                Dim bascula As String = ""
+            Dim bascula As String = ""
 
-                cnn1.Close() : cnn1.Open()
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "Select NotasCred From Formatos Where Facturas='Pto-Bascula'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        puertobascula = rd1("NotasCred").ToString
-                    End If
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "Select NotasCred From Formatos Where Facturas='Pto-Bascula'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    puertobascula = rd1("NotasCred").ToString
                 End If
-                rd1.Close()
+            End If
+            rd1.Close()
 
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "Select NotasCred From Formatos Where Facturas='Bascula'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        bascula = rd1("NotasCred").ToString
-                    End If
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "Select NotasCred From Formatos Where Facturas='Bascula'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    bascula = rd1("NotasCred").ToString
                 End If
-                rd1.Close()
-                cnn1.Close()
+            End If
+            rd1.Close()
+            cnn1.Close()
 
-                If bascula = "SBascula" Then
-                    txtcantidad.Text = 1
+            If bascula = "SBascula" Then
+                txtcantidad.Text = 1
+            End If
+
+
+            If bascula = "Noval" Then
+
+                ' Configurar el puerto serie
+                With serialPortT
+                    .PortName = puertobascula ' Cambia esto al puerto correcto de tu báscula
+                    .BaudRate = 9600 ' Ajusta la velocidad según las especificaciones de tu báscula
+                    .DataBits = 8
+                    .StopBits = StopBits.One
+                    .Parity = Parity.None
+                End With
+
+                ' Abrir el puerto serie
+                If Not serialPortT.IsOpen Then
+                    serialPortT.Open()
+                    ' MessageBox.Show("Conectado a la báscula.")
                 End If
 
-
-                If bascula = "Noval" Then
-
-                    ' Configurar el puerto serie
-                    With serialPortT
-                        .PortName = puertobascula ' Cambia esto al puerto correcto de tu báscula
-                        .BaudRate = 9600 ' Ajusta la velocidad según las especificaciones de tu báscula
-                        .DataBits = 8
-                        .StopBits = StopBits.One
-                        .Parity = Parity.None
-                    End With
-
-                    ' Abrir el puerto serie
-                    If Not serialPortT.IsOpen Then
-                        serialPortT.Open()
-                        ' MessageBox.Show("Conectado a la báscula.")
-                    End If
-
-                    ' Leer datos de la báscula
-                    If serialPortT.IsOpen Then
-                        Dim data As Double = serialPortT.ReadLine()
+                ' Leer datos de la báscula
+                If serialPortT.IsOpen Then
+                    Dim data As Double = serialPortT.ReadLine()
 
                     cantidad = data
                     cantidad = FormatNumber(cantidad, 2)
                 Else
-                        MessageBox.Show("La báscula no está conectada.")
-                    End If
-
-                    ' Cerrar el puerto serie al cerrar la aplicación
-                    If serialPortT.IsOpen Then
-                        serialPortT.Close()
-                    End If
-
+                    MessageBox.Show("La báscula no está conectada.")
                 End If
 
-                If bascula = "Rhino" Then
+                ' Cerrar el puerto serie al cerrar la aplicación
+                If serialPortT.IsOpen Then
+                    serialPortT.Close()
+                End If
 
-                    Dim NUEVOPESO As Double = 0
-                    ' Configurar el puerto serie
-                    With serialPortT
-                        .PortName = puertobascula ' Cambia esto al puerto correcto de tu báscula
-                        .BaudRate = 9600 ' Ajusta la velocidad según las especificaciones de tu báscula
-                        .DataBits = 8
-                        .StopBits = StopBits.One
-                        .Parity = Parity.None
-                    End With
+            End If
 
-                    ' Abrir el puerto serie
-                    If Not serialPortT.IsOpen Then
-                        serialPortT.Open()
-                        'MessageBox.Show("Conectado a la báscula.")
+            If bascula = "Rhino" Then
+
+                Dim NUEVOPESO As Double = 0
+                ' Configurar el puerto serie
+                With serialPortT
+                    .PortName = puertobascula ' Cambia esto al puerto correcto de tu báscula
+                    .BaudRate = 9600 ' Ajusta la velocidad según las especificaciones de tu báscula
+                    .DataBits = 8
+                    .StopBits = StopBits.One
+                    .Parity = Parity.None
+                End With
+
+                ' Abrir el puerto serie
+                If Not serialPortT.IsOpen Then
+                    serialPortT.Open()
+                    'MessageBox.Show("Conectado a la báscula.")
+                End If
+
+                ' Lee los datos disponibles en el búfer de entrada del puerto serie
+                Dim data2 As String = serialPortT.ReadExisting()
+
+                ' Leer datos de la báscula
+                If serialPortT.IsOpen Then
+                    serialPortT.Write("P")
+
+                    ' Espera un momento para que la báscula procese el comando
+                    System.Threading.Thread.Sleep(100)
+
+                    'Dim Data As String = serialPortT.ReadLine()
+                    Dim Data As String = serialPortT.ReadExisting()
+
+                    ' Elimina los dos últimos caracteres (" kg") y convierte la cadena resultante en un número
+                    If Double.TryParse(Data.Substring(0, Data.Length - 3), NUEVOPESO) Then
+                        Console.WriteLine(NUEVOPESO)
+                    Else
+                        Console.WriteLine("No se pudo convertir el peso.")
                     End If
-
-                    ' Lee los datos disponibles en el búfer de entrada del puerto serie
-                    Dim data2 As String = serialPortT.ReadExisting()
-
-                    ' Leer datos de la báscula
-                    If serialPortT.IsOpen Then
-                        serialPortT.Write("P")
-
-                        ' Espera un momento para que la báscula procese el comando
-                        System.Threading.Thread.Sleep(100)
-
-                        'Dim Data As String = serialPortT.ReadLine()
-                        Dim Data As String = serialPortT.ReadExisting()
-
-                        ' Elimina los dos últimos caracteres (" kg") y convierte la cadena resultante en un número
-                        If Double.TryParse(Data.Substring(0, Data.Length - 3), NUEVOPESO) Then
-                            Console.WriteLine(NUEVOPESO)
-                        Else
-                            Console.WriteLine("No se pudo convertir el peso.")
-                        End If
                     cantidad = Trim(NUEVOPESO)
 
                 Else
-                        MessageBox.Show("La báscula no está conectada.")
-                    End If
-
-                    ' Cerrar el puerto serie al cerrar la aplicación
-                    If serialPortT.IsOpen Then
-                        serialPortT.Close()
-                    End If
-
-
+                    MessageBox.Show("La báscula no está conectada.")
                 End If
 
-                If bascula = "Metrologic" Then
-
+                ' Cerrar el puerto serie al cerrar la aplicación
+                If serialPortT.IsOpen Then
+                    serialPortT.Close()
                 End If
 
-                If bascula = "Torrey" Then
 
-                End If
+            End If
+
+            If bascula = "Metrologic" Then
+
+            End If
+
+            If bascula = "Torrey" Then
+
+            End If
 
 
             ObtenerProducto(btnProducto.Tag)
@@ -1469,9 +1510,14 @@ keseso:
 
     Public Sub GuardarVenta()
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
         Try
-
-
             Dim VarUser As String = "", VarIdUsuario As Integer = 0
             Dim DsctoProd As Single = 0, PorcentDscto As Single = 0, DsctoProdTod As Single = 0
             Dim IdCliente As Integer = 0, ConteoXD As Double = 0
@@ -1523,6 +1569,7 @@ keseso:
                 End If
             End If
             If grdcaptura.Rows.Count < 0 Then Exit Sub
+
             If Resta <> 0 Then
                 If modo_caja = "CAJA" Then
                     If Cliente = "" Then
@@ -2085,99 +2132,99 @@ Door:
                     If MyDepto <> "SERVICIOS" And Kit = False Then
 
 
-                            Dim existencia_inicial As Double = 0
-                            Dim opecantreal As Double = 0
-                            Dim opediferencia As Double = 0
+                        Dim existencia_inicial As Double = 0
+                        Dim opecantreal As Double = 0
+                        Dim opediferencia As Double = 0
 
-                            Dim codigoingre As String = ""
-                            Dim descripingre As String = ""
-                            Dim cantiingre As Double = 0
+                        Dim codigoingre As String = ""
+                        Dim descripingre As String = ""
+                        Dim cantiingre As Double = 0
 
-                            If modo_almacen = 1 Then
+                        If modo_almacen = 1 Then
 
 
 
-                                cnn4.Close() : cnn4.Open()
-                                cnn3.Close() : cnn3.Open()
+                            cnn4.Close() : cnn4.Open()
+                            cnn3.Close() : cnn3.Open()
 
-                                cmd4 = cnn4.CreateCommand
-                                cmd4.CommandText = "SELECT CodigoP,Codigo,Descrip,Cantidad FROM miprod WHERE CodigoP='" & mycode & "'"
-                                rd4 = cmd4.ExecuteReader
-                                Do While rd4.Read
-                                    If rd4.HasRows Then
+                            cmd4 = cnn4.CreateCommand
+                            cmd4.CommandText = "SELECT CodigoP,Codigo,Descrip,Cantidad FROM miprod WHERE CodigoP='" & mycode & "'"
+                            rd4 = cmd4.ExecuteReader
+                            Do While rd4.Read
+                                If rd4.HasRows Then
 
-                                        existencia_inicial = 0
-                                        opecantreal = 0
-                                        opediferencia = 0
+                                    existencia_inicial = 0
+                                    opecantreal = 0
+                                    opediferencia = 0
 
-                                        codigoingre = rd4("Codigo").ToString
-                                        descripingre = rd4("Descrip").ToString
-                                        cantiingre = rd4("Cantidad").ToString * mycant
+                                    codigoingre = rd4("Codigo").ToString
+                                    descripingre = rd4("Descrip").ToString
+                                    cantiingre = rd4("Cantidad").ToString * mycant
 
-                                        cmd3 = cnn3.CreateCommand
-                                        cmd3.CommandText = "select Existencia,Multiplo,PrecioCompra from Productos where Codigo = '" & codigoingre & "'"
-                                        rd3 = cmd3.ExecuteReader
-                                        If rd3.HasRows Then
-                                            If rd3.Read Then
-                                                existencia_inicial = rd3(0).ToString
-                                                opecantreal = cantiingre * CDec(rd3(1).ToString)
-                                                opediferencia = existencia_inicial + opecantreal
+                                    cmd3 = cnn3.CreateCommand
+                                    cmd3.CommandText = "select Existencia,Multiplo,PrecioCompra from Productos where Codigo = '" & codigoingre & "'"
+                                    rd3 = cmd3.ExecuteReader
+                                    If rd3.HasRows Then
+                                        If rd3.Read Then
+                                            existencia_inicial = rd3(0).ToString
+                                            opecantreal = cantiingre * CDec(rd3(1).ToString)
+                                            opediferencia = existencia_inicial + opecantreal
 
-                                                cnn2.Close() : cnn2.Open()
-                                                cmd2 = cnn2.CreateCommand
-                                                cmd2.CommandText = "INSERT INTO cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio) VALUES('" & codigoingre & "','" & descripingre & "','Venta - Ingrediente'," & existencia_inicial & "," & opecantreal & "," & opediferencia & "," & rd3(2).ToString & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & lblatiende.Text & "','" & MYFOLIO & "')"
-                                                cmd2.ExecuteNonQuery()
-                                                cnn2.Close()
+                                            cnn2.Close() : cnn2.Open()
+                                            cmd2 = cnn2.CreateCommand
+                                            cmd2.CommandText = "INSERT INTO cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio) VALUES('" & codigoingre & "','" & descripingre & "','Venta - Ingrediente'," & existencia_inicial & "," & opecantreal & "," & opediferencia & "," & rd3(2).ToString & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & lblatiende.Text & "','" & MYFOLIO & "')"
+                                            cmd2.ExecuteNonQuery()
+                                            cnn2.Close()
 
-                                            End If
                                         End If
-                                        rd3.Close()
-
-
-                                        cnn2.Close() : cnn2.Open()
-                                        cmd2 = cnn2.CreateCommand
-                                        cmd2.CommandText = "UPDATE Productos SET Existencia=Existencia-" & cantiingre * mycant & "*" & MyMulti2 & " WHERE Codigo='" & codigoingre & "'"
-                                        cmd2.ExecuteNonQuery()
-
-                                        cmd2 = cnn2.CreateCommand
-                                        cmd2.CommandText = "insert into Mov_Ingre(Codigo,Descripcion,Cantidad,Fecha)values('" & codigoingre & "','" & descripingre & "','" & cantiingre & "','" & Format(Date.Now, "yyyy-MM-dd") & "')"
-                                        cmd2.ExecuteNonQuery()
-                                        cnn2.Close()
-
-
                                     End If
-                                Loop
-                                rd4.Close()
-                                cnn4.Close()
-                                cnn3.Close()
+                                    rd3.Close()
 
-                            Else
-                                Dim nueva_existe As Double = 0
+
+                                    cnn2.Close() : cnn2.Open()
+                                    cmd2 = cnn2.CreateCommand
+                                    cmd2.CommandText = "UPDATE Productos SET Existencia=Existencia-" & cantiingre * mycant & "*" & MyMulti2 & " WHERE Codigo='" & codigoingre & "'"
+                                    cmd2.ExecuteNonQuery()
+
+                                    cmd2 = cnn2.CreateCommand
+                                    cmd2.CommandText = "insert into Mov_Ingre(Codigo,Descripcion,Cantidad,Fecha)values('" & codigoingre & "','" & descripingre & "','" & cantiingre & "','" & Format(Date.Now, "yyyy-MM-dd") & "')"
+                                    cmd2.ExecuteNonQuery()
+                                    cnn2.Close()
+
+
+                                End If
+                            Loop
+                            rd4.Close()
+                            cnn4.Close()
+                            cnn3.Close()
+
+                        Else
+                            Dim nueva_existe As Double = 0
                             nueva_existe = FormatNumber(existe - (mycant * MyMultiplo), 2)
 
                             cmd1 = cnn1.CreateCommand
-                                cmd1.CommandText =
-                            "update Productos set CargadoInv=0, Cargado=0, Existencia=" & nueva_existe & " where Codigo='" & Strings.Left(mycode, 6) & "'"
-                                cmd1.ExecuteNonQuery()
+                            cmd1.CommandText =
+                        "update Productos set CargadoInv=0, Cargado=0, Existencia=" & nueva_existe & " where Codigo='" & Strings.Left(mycode, 6) & "'"
+                            cmd1.ExecuteNonQuery()
 
-                                If Len(mycode) = 6 Then
-                                    cmd1 = cnn1.CreateCommand
+                            If Len(mycode) = 6 Then
+                                cmd1 = cnn1.CreateCommand
                                 cmd1.CommandText =
                                 "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & mycode & "','" & mydesc & "','Venta'," & Existencia & "," & mycant & "," & Existencia - mycant & "," & myprecio & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblatiende.Text & "','" & MYFOLIO & "','','','','','')"
                                 cmd1.ExecuteNonQuery()
-                                Else
-                                    cmd1 = cnn1.CreateCommand
+                            Else
+                                cmd1 = cnn1.CreateCommand
                                 cmd1.CommandText =
                                 "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & mycode & "','" & mydesc & "','Venta'," & Existencia & "," & mycant & "," & Existencia - mycant & "," & myprecio & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblatiende.Text & "','" & MYFOLIO & "','','','','','')"
                                 cmd1.ExecuteNonQuery()
-                                End If
-
                             End If
 
                         End If
-                    End If
 
-                    If Kit = True Then
+                    End If
+                End If
+
+                If Kit = True Then
                     cmd1 = cnn1.CreateCommand
                     cmd1.CommandText =
                         "select Codigo,Cantidad from Kits where Nombre='" & mydesc & "'"
@@ -2318,7 +2365,10 @@ Door:
 
     Private Sub ImprimeComanda(ByVal Folio As Integer)
         Dim impresora As String = ""
-
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3 As MySqlDataReader
+        Dim cmd2, cmd3 As MySqlCommand
         Try
             cnn2.Close() : cnn2.Open()
 
@@ -2381,6 +2431,11 @@ Door:
 
         Dim Pie As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+
         Try
             '[1]. Datos de la venta
             e.Graphics.DrawString("--------------------------------------------------------", New System.Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
@@ -2437,6 +2492,10 @@ Door:
                 Exit Sub
             End If
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -2480,6 +2539,9 @@ Door:
         Dim Logotipo As Drawing.Image = Nothing
         Dim Pie As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             '[°]. Logotipo
@@ -2806,6 +2868,9 @@ Door:
         Dim Logotipo As Drawing.Image = Nothing
         Dim Pie As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             '[°]. Logotipo

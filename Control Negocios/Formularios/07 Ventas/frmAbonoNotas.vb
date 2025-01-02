@@ -1,8 +1,14 @@
 ﻿Imports Core.DAL33
+Imports MySql.Data.MySqlClient
 
 Public Class frmAbonoNotas
     Private Sub cbonombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cbonombre.DropDown
         cbonombre.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -23,6 +29,9 @@ Public Class frmAbonoNotas
     End Sub
 
     Private Sub cbonombre_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cbonombre.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -61,6 +70,11 @@ Public Class frmAbonoNotas
     End Sub
 
     Private Sub txtfolios_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtfolios.KeyPress
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If AscW(e.KeyChar) = Keys.Enter Then
             Try
                 If Strings.Right(txtfolios.Text, 1) = "," Then txtfolios.Text = Mid(txtfolios.Text, 1, Len(txtfolios.Text) - 1)
@@ -178,6 +192,11 @@ Public Class frmAbonoNotas
 
     Private Sub cbobanco_DropDown(sender As System.Object, e As System.EventArgs) Handles cbobanco.DropDown
         cbobanco.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -197,6 +216,11 @@ Public Class frmAbonoNotas
     End Sub
 
     Private Sub cbobanco_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cbobanco.KeyPress
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If AscW(e.KeyChar) = Keys.Enter Then
             If cbobanco.Text = "" Then Exit Sub
             Try
@@ -226,6 +250,11 @@ Public Class frmAbonoNotas
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
             Dim MyPago As Double = 0
             Dim MySaldo As Double = 0
@@ -448,6 +477,9 @@ Public Class frmAbonoNotas
     End Sub
 
     Private Sub txtcontraseña_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcontraseña.KeyPress
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             If AscW(e.KeyChar) = Keys.Enter Then
                 cnn1.Close()
@@ -506,6 +538,9 @@ Public Class frmAbonoNotas
     End Sub
 
     Private Sub cbotipo_DropDown(sender As Object, e As EventArgs) Handles cbotipo.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cbotipo.Items.Clear()
 

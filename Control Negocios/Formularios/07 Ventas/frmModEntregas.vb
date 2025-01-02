@@ -1,4 +1,6 @@
-﻿Public Class frmModEntregas
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmModEntregas
 
     Dim folioentrega As Integer = 0
     Dim Busqueda As Boolean = False
@@ -11,6 +13,11 @@
 
     Private Sub btnreporte_Click(sender As System.Object, e As System.EventArgs) Handles btnreporte.Click
         grdcaptura.Rows.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         If (optpendientes.Checked) Then
             Try
@@ -444,6 +451,11 @@
     End Sub
 
     Private Sub ComboBox1_DropDown(sender As Object, e As EventArgs) Handles ComboBox1.DropDown
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If Busqueda = True Then
             Busqueda = False
         Else
@@ -474,6 +486,9 @@
     End Sub
 
     Private Sub cboFolio_DropDown(sender As Object, e As EventArgs) Handles cboFolio.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboFolio.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -582,7 +597,13 @@
     Private Sub cboFolio_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboFolio.SelectedValueChanged
         grdcaptura.Rows.Clear()
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         If (optpendientes.Checked) Or (optrealizadas.Checked) Then
+
             If (optpendientes.Checked) Then
                 Try
                     cnn1.Close() : cnn1.Open()
@@ -742,6 +763,13 @@
 
     Private Sub btnEntrega_Click(sender As Object, e As EventArgs) Handles btnEntrega.Click
         If (rbEntrega.Checked) Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+            Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
             Dim fecha As String = Format(dtpFecha.Value, "yyyy-MM-dd")
             cnn2.Close() : cnn2.Open()
 
@@ -804,7 +832,9 @@
     Private Sub txtNombreClave_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNombreClave.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             ComboBox1.Items.Clear()
-
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd2 As MySqlDataReader
+            Dim cmd2 As MySqlCommand
             Try
                 cnn2.Close() : cnn2.Open()
 

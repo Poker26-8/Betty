@@ -1,5 +1,6 @@
 ﻿
 Imports System.IO
+Imports MySql.Data.MySqlClient
 
 Public Class frmConsignacion
     Public id As Integer = 0
@@ -10,6 +11,9 @@ Public Class frmConsignacion
     Public unidad As String = ""
     Public nombre As String = ""
     Private Sub cbofolio_DropDown(sender As Object, e As EventArgs) Handles cbofolio.DropDown
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cbofolio.Items.Clear()
             cnn1.Close()
@@ -29,6 +33,9 @@ Public Class frmConsignacion
     End Sub
 
     Private Sub cbofolio_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbofolio.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()
@@ -215,6 +222,13 @@ perra:
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
+
         Try
             If MsgBox("¿Deseas registrar el abono de los productos seleccionados?", vbQuestion + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then
                 Exit Sub
@@ -484,6 +498,9 @@ perra:
     End Sub
 
     Private Sub ComboBox1_DropDown(sender As Object, e As EventArgs) Handles ComboBox1.DropDown
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             ComboBox1.Items.Clear()
             cnn1.Close()
@@ -503,6 +520,11 @@ perra:
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             If MsgBox("¿Deseas enviar a consignación el folio: " & ComboBox1.Text & "?", vbQuestion + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then
                 Exit Sub
@@ -537,6 +559,11 @@ perra:
 
     Private Sub cbotipo_DropDown(sender As Object, e As EventArgs) Handles cbotipo.DropDown
         cbotipo.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -556,6 +583,11 @@ perra:
 
     Private Sub cbobanco_DropDown(sender As Object, e As EventArgs) Handles cbobanco.DropDown
         cbobanco.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -575,6 +607,10 @@ perra:
     End Sub
 
     Private Sub cboCunetaRep_DropDown(sender As Object, e As EventArgs) Handles cboCunetaRep.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCunetaRep.Items.Clear()
 
@@ -626,6 +662,9 @@ perra:
     End Sub
 
     Private Sub ComboBox1_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             Dim voy As Integer = 0
             cnn1.Close()
@@ -668,6 +707,11 @@ perra:
         Dim tLogo As String = DatosRecarga("TipoLogo")
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
 
         Try
             '[°]. Logotipo
