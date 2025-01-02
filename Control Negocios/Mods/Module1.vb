@@ -461,7 +461,7 @@ Module Module1
     Public rd1, rd2, rd3, rd4, rd5, rd9, rd8, rd7, rdtimer, rdtimer2 As MySqlDataReader
 
     Public sTargetlocalmysql As String = ""
-    Dim asss As String = ""
+
 
     Structure datos_c
         Dim ip_configuracion As String

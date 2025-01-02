@@ -13526,6 +13526,10 @@ ecomoda:
     End Sub
 
     Private Sub chkFiscal_CheckedChanged(sender As Object, e As EventArgs) Handles chkFiscal.CheckedChanged
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
         If (chkFiscal.Checked) Then
 
             Dim dire(9) As String
