@@ -13607,6 +13607,10 @@ ecomoda:
 
     Private Sub cbocedula_DropDown(sender As Object, e As EventArgs) Handles cbocedula.DropDown
         cbocedula.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -13641,6 +13645,9 @@ ecomoda:
     End Sub
 
     Private Sub cbocedula_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbocedula.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -13718,6 +13725,10 @@ ecomoda:
         If cbocedula.Text = "" Then MsgBox("Introduce los datos del médico para continuar.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbocedula.Focus().Equals(True) : Exit Sub
         If txtreceta.Text = "" Then MsgBox("Introduce el número de la receta.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : txtreceta.Focus().Equals(True) : Exit Sub
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -13784,6 +13795,10 @@ ecomoda:
         If AscW(e.KeyChar) = Keys.Enter Then
             cbodesc.Focus().Equals(True)
 
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd2 As MySqlDataReader
+            Dim cmd2 As MySqlCommand
+
             Try
                 cnn2.Close() : cnn2.Open()
 
@@ -13832,6 +13847,10 @@ ecomoda:
 
         Dim autofact As String = DatosRecarga("LinkAuto")
         Dim siqr As String = DatosRecarga("LinkAuto")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If whats <> "" Then
             ligaqr = "http://wa.me/" & whats
@@ -14404,6 +14423,10 @@ ecomoda:
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             '[°]. Logotipo
             If tLogo <> "SIN" Then
@@ -14732,6 +14755,9 @@ ecomoda:
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             '[°]. Logotipo
             If tLogo <> "SIN" Then
@@ -15120,6 +15146,9 @@ ecomoda:
     End Sub
 
     Private Sub cboCuentaRecepcion_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCuentaRecepcion.SelectedValueChanged
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
         Try
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
@@ -15151,6 +15180,9 @@ ecomoda:
     End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()
@@ -15193,6 +15225,10 @@ ecomoda:
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Try
 
@@ -15294,6 +15330,9 @@ ecomoda:
     End Sub
 
     Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()
