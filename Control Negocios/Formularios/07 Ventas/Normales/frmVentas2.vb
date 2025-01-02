@@ -11590,6 +11590,11 @@ ecomoda:
 
             Dim IVAVENTA As Double = 0
             Dim SUBTOTALVENTA As Double = 0
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             '[°]. Logotipo
             If tLogo <> "SIN" Then
                 If File.Exists(My.Application.Info.DirectoryPath & "\" & nLogo) Then
@@ -11844,6 +11849,10 @@ ecomoda:
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
 
@@ -12146,6 +12155,10 @@ ecomoda:
         Dim clausu(10) As String
 
         Dim continua_en As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Y = 35
 
@@ -12715,6 +12728,11 @@ ecomoda:
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Y = 35
 
         Try
@@ -12972,6 +12990,10 @@ ecomoda:
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Y = 35
 
@@ -13290,6 +13312,10 @@ ecomoda:
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Y = 35
 
