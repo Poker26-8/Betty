@@ -2,6 +2,7 @@
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 Public Class frmRepInventario
 
     Dim Libreria As Boolean = False
@@ -257,6 +258,11 @@ Public Class frmRepInventario
             IniCosteo.Value = Now
         End If
         FinaCosteo.Value = Now
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             restaurante = Await ValidarAsync("Restaurante")
@@ -934,6 +940,12 @@ Public Class frmRepInventario
             Dim ValCompra As Double = 0
             Dim ValVenta As Double = 0
 
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd3 As MySqlDataReader
+            Dim cmd1, cmd3 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -989,16 +1001,15 @@ Public Class frmRepInventario
                         End If
                     Else
                         sumapedidos = "0"
-                            End If
-                            rd3.Close()
+                    End If
+                    rd3.Close()
                     cnn3.Close()
 
                     diferencia = CDbl(exitencia) - CDbl(sumapedidos)
 
                     If (Libreria) Then
-
-        Else
-            If (Partes) Then
+                    Else
+                        If (Partes) Then
                             grdcaptura.Rows.Add(codigo, barras, n_parte, nombre, unidad, FormatNumber(exitencia, 2), sumapedidos, FormatNumber(diferencia, 2), FormatNumber(pcompra, 2), FormatNumber(pventa, 2), FormatNumber(vcompra, 2), FormatNumber(vventa, 2))
                         Else
                             If restaurante = 1 And copeo = 1 Then
@@ -1052,6 +1063,10 @@ Public Class frmRepInventario
 
     Private Sub cbofiltro_DropDown(sender As System.Object, e As System.EventArgs) Handles cbofiltro.DropDown
         cbofiltro.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -1092,6 +1107,12 @@ Public Class frmRepInventario
         Dim ValVenta As Double = 0
         txtCompraTot.Text = "0.00"
         txtVentaTot.Text = "0.00"
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         If AscW(e.KeyChar) = Keys.Enter Then
             Try
@@ -1343,21 +1364,20 @@ Public Class frmRepInventario
                 worksheet.Columns().AdjustToContents()
                 ' Usa MemoryStream para guardar el archivo en memoria y abrirlo
                 Using memoryStream As New System.IO.MemoryStream()
-                ' Guarda el libro de trabajo en el MemoryStream
-                Workbook.SaveAs(memoryStream)
+                    ' Guarda el libro de trabajo en el MemoryStream
+                    workbook.SaveAs(memoryStream)
 
-                ' Guarda el MemoryStream en un archivo temporal para abrirlo
-                Dim tempFilePath As String = IO.Path.GetTempPath() & Guid.NewGuid().ToString() & ".xlsx"
-                System.IO.File.WriteAllBytes(tempFilePath, memoryStream.ToArray())
+                    ' Guarda el MemoryStream en un archivo temporal para abrirlo
+                    Dim tempFilePath As String = IO.Path.GetTempPath() & Guid.NewGuid().ToString() & ".xlsx"
+                    System.IO.File.WriteAllBytes(tempFilePath, memoryStream.ToArray())
 
-                ' Abre el archivo temporal en Excel
-                Process.Start(tempFilePath)
-            End Using
+                    ' Abre el archivo temporal en Excel
+                    Process.Start(tempFilePath)
+                End Using
 
-            'workbook.SaveAs(filePath)
+                'workbook.SaveAs(filePath)
             End Using
             MessageBox.Show("Datos exportados exitosamente")
-
         End If
     End Sub
 
@@ -1485,6 +1505,11 @@ Public Class frmRepInventario
             End With
 
             Dim rows As Integer = 0
+
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 cnn1.Close() : cnn1.Open()
@@ -1686,6 +1711,13 @@ Public Class frmRepInventario
 
     Public Sub Perdidas()
         Dim conteo As Double = 0
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             grdcaptura.Rows.Clear()
             cnn1.Close() : cnn1.Open()
@@ -1745,6 +1777,12 @@ Public Class frmRepInventario
         Dim CantVta As Single = 0
         Dim idL As Double = 0
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -1787,6 +1825,12 @@ Public Class frmRepInventario
     End Sub
 
     Public Sub Caducidad()
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -1814,6 +1858,11 @@ Public Class frmRepInventario
     End Sub
 
     Private Sub Caducos()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -2016,6 +2065,11 @@ Public Class frmRepInventario
         Dim Reporte As Boolean = False
         Dim FolReporte As Integer = 0
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         FechaInvInicial = DatosRecarga("FechaCosteo")
         If FechaInvInicial = "" Then
@@ -2333,6 +2387,11 @@ quepaso_wey:
         Dim dr As DataRow = Nothing
         Dim dt As New System.Data.DataTable
 
+
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
+
         With oData
             If .dbOpen(a_cnn, Direcc_Access, sinfo) Then
                 .runSp(a_cnn, "delete from RepoMen", sinfo)
@@ -2368,6 +2427,13 @@ quepaso_wey:
         Dim costoProd As Double = 0
         Dim totalCosto As Double = 0
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -2400,6 +2466,11 @@ quepaso_wey:
         Dim FCosteo As String = DatosRecarga("FechaCosteo")
         Dim fecha_consulta As Date = FCosteo
 
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -2425,6 +2496,12 @@ quepaso_wey:
 
     Private Function CompP(ByVal Cod As String, ByVal FFechaIni As Date, ByVal FFechaFin As Date) As Double
         CompP = 0
+
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -2448,6 +2525,10 @@ quepaso_wey:
 
     Private Function Canc_Dev(ByVal Cod As String, ByVal FFechaIni As Date, ByVal FFechaFin As Date) As Double
         Canc_Dev = 0
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -2472,6 +2553,10 @@ quepaso_wey:
 
     Private Function Efectivo_Dev(ByVal Cod As String, ByVal FFechaIni As Date, ByVal FFechaFin As Date) As Double
         Efectivo_Dev = 0
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -2494,6 +2579,11 @@ quepaso_wey:
     End Function
 
     Private Sub btnExistencia_Click(sender As Object, e As EventArgs) Handles btnExistencia.Click
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
 
             grdcaptura.Rows.Clear()
@@ -2684,6 +2774,12 @@ quepaso_wey:
 
     Private Sub Excel_Grid_SQL(ByVal tabla As DataGridView)
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Dim con As OleDb.OleDbConnection
         Dim dt As New System.Data.DataTable
         Dim ds As New DataSet
@@ -2788,6 +2884,10 @@ quepaso_wey:
     End Sub
 
     Private Function Comprueba(ByVal codigo As String) As Boolean
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
         Try
             Dim valida As Boolean = True
 
@@ -2829,6 +2929,10 @@ quepaso_wey:
     End Sub
 
     Private Sub rbAjuste_CheckedChanged(sender As Object, e As EventArgs) Handles rbAjuste.CheckedChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
 
             If (rbAjuste.Checked) Then
@@ -2940,6 +3044,11 @@ quepaso_wey:
             grdcaptura.Rows.Clear()
             grdcaptura.ColumnCount = 0
             My.Application.DoEvents()
+
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             If (Libreria) Then
             Else

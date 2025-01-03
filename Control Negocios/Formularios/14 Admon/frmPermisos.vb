@@ -1,7 +1,14 @@
-﻿Public Class frmPermisos
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmPermisos
     Public contraaa As String = ""
     Private Sub cboNombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cboNombre.DropDown
         cboNombre.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -22,6 +29,10 @@
     End Sub
 
     Public Sub cboNombre_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cboNombre.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -142,7 +153,7 @@
                     If rd1("ReimprimirTicket").ToString = True Then cbReimprimir.Checked = True Else cbReimprimir.Checked = False
 
                 End If
-                Else
+            Else
                 cat_Emp.Checked = False
                 cat_Cli.Checked = False
                 cat_Pro.Checked = False
@@ -222,6 +233,10 @@
 
     Private Async Sub frmPermisos_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         cnn1.Close() : cnn1.Open()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Dim limpiarventas As Integer = Await ValidarAsync("LimpiarV")
 
@@ -417,6 +432,11 @@
 
         cbReimprimir.Checked = False
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+
         cnn1.Close() : cnn1.Open()
 
         cmd1 = cnn1.CreateCommand
@@ -607,6 +627,11 @@
         Else
             Tipo = "CAJA"
         End If
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand
         cmd1.CommandText =
@@ -615,6 +640,11 @@
     End Sub
 
     Private Sub existencia_cero_Click(sender As System.Object, e As System.EventArgs) Handles existencia_cero.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (existencia_cero.Checked) Then
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -631,6 +661,11 @@
     End Sub
 
     Private Sub corte_ciego_Click(sender As System.Object, e As System.EventArgs) Handles corte_ciego.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (corte_ciego.Checked) Then
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -655,6 +690,12 @@
 
 
             Dim id_emp As Double = 0
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -769,6 +810,11 @@
     End Sub
 
     Private Sub chkaudita_Click(sender As System.Object, e As System.EventArgs) Handles chkaudita.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (chkaudita.Checked) Then
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -807,6 +853,9 @@
             If txtcontraseña.Text <> "" Then
                 Dim id_empleado As Integer = 0
 
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
                 Try
                     cnn1.Close() : cnn1.Open()
 
@@ -847,6 +896,10 @@
     End Sub
 
     Private Sub btneliminacat_Click(sender As Object, e As EventArgs) Handles btneliminacat.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
 
             If MsgBox("¿Desea eliminar el catálogo de productos?, Una vez realizado el proceso no se puede cancelar", vbQuestion + vbYesNo) = vbYes Then
@@ -869,6 +922,9 @@
     End Sub
 
     Private Sub btneliminainven_Click(sender As Object, e As EventArgs) Handles btneliminainven.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
 
             If MsgBox("Se colocara la existencia en 0 de todos los productos, Esta seguro de la accion", vbQuestion + vbYesNo) = vbYes Then
@@ -900,6 +956,10 @@
             selecicon = 0
         End If
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -939,6 +999,10 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close()
             cnn1.Open()
@@ -962,6 +1026,12 @@
     End Sub
 
     Private Sub cbLimpiarV_Click(sender As Object, e As EventArgs) Handles cbLimpiarV.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             Dim limpiarv As Integer = 0
 

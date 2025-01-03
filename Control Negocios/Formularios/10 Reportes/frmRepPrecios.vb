@@ -1,10 +1,15 @@
 ﻿Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepPrecios
     Private Sub cbonombre_DropDown(sender As Object, e As EventArgs) Handles cbonombre.DropDown
         Dim mc1 As Date = mCalendar1.SelectionStart.ToShortDateString
         Dim mc2 As Date = mCalendar2.SelectionStart.ToShortDateString
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         cbonombre.Items.Clear()
         Try
 
@@ -31,6 +36,10 @@ Public Class frmRepPrecios
     End Sub
 
     Private Sub cbonombre_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbonombre.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -56,6 +65,10 @@ Public Class frmRepPrecios
         Dim fechainicio As Date = Nothing
         Dim fechafin As Date = Nothing
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         fechainicio = mc1
         fechafin = mc2

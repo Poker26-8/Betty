@@ -3,6 +3,7 @@ Imports Core.DAL.DE
 
 Imports iTextSharp.text
 Imports iTextSharp.text.pdf
+Imports MySql.Data.MySqlClient
 Imports System.IO
 Imports System.Net.Mail
 Imports System.Text.RegularExpressions
@@ -348,6 +349,12 @@ Public Class frmMinMax
     Private Sub cbofiltro_DropDown(sender As Object, e As EventArgs) Handles cbofiltro.DropDown
         cbofiltro.Items.Clear()
         Limpia()
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 

@@ -1,4 +1,5 @@
 ﻿Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepTraspasos
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
@@ -6,6 +7,10 @@ Public Class frmRepTraspasos
         Dim m1 As Date = mcDesde.SelectionStart.ToShortDateString
         Dim m2 As Date = mcHasta.SelectionStart.ToShortDateString
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Dim fechanueva As String = ""
         Dim codigo As String = ""

@@ -1,6 +1,7 @@
 ﻿Imports System.Drawing.Printing
 Imports System.IO
 Imports System.Net
+Imports MySql.Data.MySqlClient
 
 Public Class frmCorte
 
@@ -31,6 +32,12 @@ Public Class frmCorte
 
     Private Sub btnSaldoGlobal_Click(sender As System.Object, e As System.EventArgs) Handles btnSaldoGlobal.Click
         Dim saldo_global As Double = txtSaldoGlobal.Text
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -87,6 +94,11 @@ Public Class frmCorte
     End Sub
 
     Private Sub C_Global()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -110,6 +122,11 @@ Public Class frmCorte
 
     Private Function TipoCorte() As Integer
         Dim tipo As Integer = 0
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -176,6 +193,11 @@ Public Class frmCorte
         If CorteGlobal = True Then
             Exit Sub
         End If
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -489,44 +511,44 @@ Public Class frmCorte
             End If
             rd2.Close()
 
-                    'Transferencia
-                    cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText =
-                "select sum(Transfe) from AbonoI where Concepto<>'ABONO' and Concepto<>'DEVOLUCION'and Fecha='" & Format(dtpFecha.Value, "yyyy-MM-dd") & "'"
-                    rd2 = cmd2.ExecuteReader
-                    If rd2.HasRows Then
-                        If rd2.Read Then
-                            EgrTran = CDec(EgrTran) + CDec(IIf(rd2(0).ToString = "", "0.00", rd2(0).ToString))
-                            CanceDevo = CDec(CanceDevo) + CDec(IIf(rd2(0).ToString = "", "0.00", rd2(0).ToString))
-                        End If
-                    End If
-                    rd2.Close()
+            'Transferencia
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText =
+        "select sum(Transfe) from AbonoI where Concepto<>'ABONO' and Concepto<>'DEVOLUCION'and Fecha='" & Format(dtpFecha.Value, "yyyy-MM-dd") & "'"
+            rd2 = cmd2.ExecuteReader
+            If rd2.HasRows Then
+                If rd2.Read Then
+                    EgrTran = CDec(EgrTran) + CDec(IIf(rd2(0).ToString = "", "0.00", rd2(0).ToString))
+                    CanceDevo = CDec(CanceDevo) + CDec(IIf(rd2(0).ToString = "", "0.00", rd2(0).ToString))
+                End If
+            End If
+            rd2.Close()
 
 
-                    cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText =
-                        "select sum(Tarjeta) from AbonoI where Concepto<>'ABONO' and Concepto<>'NOTA CANCELADA'and Fecha='" & Format(dtpFecha.Value, "yyyy-MM-dd") & "'"
-                    rd2 = cmd2.ExecuteReader
-                    If rd2.HasRows Then
-                        If rd2.Read Then
-                            EgrTarjeta = CDec(EgrTarjeta) + CDec(IIf(rd2(0).ToString = "", "0.00", rd2(0).ToString))
-                            CanceDevo = CDec(CanceDevo) + CDec(IIf(rd2(0).ToString = "", "0.00", rd2(0).ToString))
-                        End If
-                    End If
-                    rd2.Close()
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText =
+                "select sum(Tarjeta) from AbonoI where Concepto<>'ABONO' and Concepto<>'NOTA CANCELADA'and Fecha='" & Format(dtpFecha.Value, "yyyy-MM-dd") & "'"
+            rd2 = cmd2.ExecuteReader
+            If rd2.HasRows Then
+                If rd2.Read Then
+                    EgrTarjeta = CDec(EgrTarjeta) + CDec(IIf(rd2(0).ToString = "", "0.00", rd2(0).ToString))
+                    CanceDevo = CDec(CanceDevo) + CDec(IIf(rd2(0).ToString = "", "0.00", rd2(0).ToString))
+                End If
+            End If
+            rd2.Close()
 
 
-                    cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText =
-                        "select sum(Transfe) from AbonoI where Concepto<>'ABONO' and Concepto<>'NOTA CANCELADA'and Fecha='" & Format(dtpFecha.Value, "yyyy-MM-dd") & "'"
-                    rd2 = cmd2.ExecuteReader
-                    If rd2.HasRows Then
-                        If rd2.Read Then
-                            EgrTran = CDec(EgrTran) + CDec(IIf(rd2(0).ToString = "", "0.00", rd2(0).ToString))
-                            CanceDevo = CDec(CanceDevo) + CDec(IIf(rd2(0).ToString = "", "0.00", rd2(0).ToString))
-                        End If
-                    End If
-                    rd2.Close()
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText =
+                "select sum(Transfe) from AbonoI where Concepto<>'ABONO' and Concepto<>'NOTA CANCELADA'and Fecha='" & Format(dtpFecha.Value, "yyyy-MM-dd") & "'"
+            rd2 = cmd2.ExecuteReader
+            If rd2.HasRows Then
+                If rd2.Read Then
+                    EgrTran = CDec(EgrTran) + CDec(IIf(rd2(0).ToString = "", "0.00", rd2(0).ToString))
+                    CanceDevo = CDec(CanceDevo) + CDec(IIf(rd2(0).ToString = "", "0.00", rd2(0).ToString))
+                End If
+            End If
+            rd2.Close()
 
 
             cmd2 = cnn2.CreateCommand
@@ -647,6 +669,11 @@ Public Class frmCorte
 
     Private Sub cboUsuario_DropDown(sender As Object, e As EventArgs) Handles cboUsuario.DropDown
         cboUsuario.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -665,6 +692,12 @@ Public Class frmCorte
     End Sub
 
     Private Sub cboUsuario_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboUsuario.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             txtContrasena.Focus().Equals(True)
 
@@ -754,6 +787,11 @@ Public Class frmCorte
     Private Sub cboUsuario_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboUsuario.KeyPress
         Dim usu_alias As String = ""
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -796,6 +834,12 @@ Public Class frmCorte
         If txtContrasena.Text = "" Then MsgBox("Escribe la contraseña del usuario para continuar.", vbInformation + vbOKOnly, "Delsscom Control Negocios 2022") : txtContrasena.Focus().Equals(True) : Exit Sub
         If txtSaldoUsuario.Text = "" Then MsgBox("El saldo inicial no puede estar vacío.", vbInformation + vbOKOnly, "Delsscom Control Negocios 2022") : txtSaldoUsuario.Focus().Equals(True) : Exit Sub
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -835,6 +879,11 @@ Public Class frmCorte
         Dim Usu As String = cboUsuario.Text
         If cboUsuario.Text = "" Then MsgBox("Selecciona un ususario para calcular su corte.", vbInformation + vbOKOnly, "Delsscom Control Negocios 2022") : cboUsuario.Focus.Equals(True) : Exit Sub
         If txtContrasena.Text = "" Then MsgBox("Ingrese su contraseña por favor.", vbInformation + vbOKOnly, "Delsscom Control Negocios 2022") : txtContrasena.Focus() : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -957,55 +1006,55 @@ Public Class frmCorte
 
             'Monedero
             cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "select SUM(Monedero) from AbonoI where Monedero<>0 and Concepto<>'NOTA CANCELADA' and Concepto<>'DEVOLUCION' and Usuario='" & Usu & "' and CorteU=0"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.HasRows Then
-                        If rd1.Read Then
-                            txtIngMonederoU.Text = IIf(rd1(0).ToString = "", "0", rd1(0).ToString)
-                            txtIngMonederoU.Text = FormatNumber(txtIngMonederoU.Text, 2)
-                        End If
-                    End If
-                    rd1.Close()
+            cmd1.CommandText =
+                "select SUM(Monedero) from AbonoI where Monedero<>0 and Concepto<>'NOTA CANCELADA' and Concepto<>'DEVOLUCION' and Usuario='" & Usu & "' and CorteU=0"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    txtIngMonederoU.Text = IIf(rd1(0).ToString = "", "0", rd1(0).ToString)
+                    txtIngMonederoU.Text = FormatNumber(txtIngMonederoU.Text, 2)
+                End If
+            End If
+            rd1.Close()
 
-                    'Tarjeta
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "select SUM(Tarjeta) from AbonoI where Tarjeta<>0 and Concepto<>'NOTA CANCELADA' and Concepto<>'DEVOLUCION' and Usuario='" & Usu & "' and CorteU=0"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.HasRows Then
-                        If rd1.Read Then
-                            txtIngTarjetaU.Text = IIf(rd1(0).ToString = "", "0", rd1(0).ToString)
-                            txtIngTarjetaU.Text = FormatNumber(txtIngTarjetaU.Text, 2)
-                        End If
-                    End If
-                    rd1.Close()
+            'Tarjeta
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText =
+                "select SUM(Tarjeta) from AbonoI where Tarjeta<>0 and Concepto<>'NOTA CANCELADA' and Concepto<>'DEVOLUCION' and Usuario='" & Usu & "' and CorteU=0"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    txtIngTarjetaU.Text = IIf(rd1(0).ToString = "", "0", rd1(0).ToString)
+                    txtIngTarjetaU.Text = FormatNumber(txtIngTarjetaU.Text, 2)
+                End If
+            End If
+            rd1.Close()
 
-                    'Transferencia
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "select sum(Transfe) from AbonoI where Transfe<>0 and Concepto <> 'NOTA CANCELADA' and Concepto <> 'DEVOLUCION' and Usuario='" & Usu & "' and CorteU=0"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.HasRows Then
-                        If rd1.Read Then
-                            txtIngTransfeU.Text = IIf(rd1(0).ToString = "", "0", rd1(0).ToString)
-                            txtIngTransfeU.Text = FormatNumber(txtIngTransfeU.Text, 2)
-                        End If
-                    End If
-                    rd1.Close()
+            'Transferencia
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText =
+                "select sum(Transfe) from AbonoI where Transfe<>0 and Concepto <> 'NOTA CANCELADA' and Concepto <> 'DEVOLUCION' and Usuario='" & Usu & "' and CorteU=0"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    txtIngTransfeU.Text = IIf(rd1(0).ToString = "", "0", rd1(0).ToString)
+                    txtIngTransfeU.Text = FormatNumber(txtIngTransfeU.Text, 2)
+                End If
+            End If
+            rd1.Close()
 
-                    'Deposito
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "select SUM(Otro) from AbonoI where Otro<>0 and Concepto<>'NOTA CANCELADA' and Concepto<>'DEVOLUCION' and Usuario='" & Usu & "'and CorteU=0"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.HasRows Then
-                        If rd1.Read Then
-                            txtIngDepositoU.Text = IIf(rd1(0).ToString = "", "0", rd1(0).ToString)
-                            txtIngDepositoU.Text = FormatNumber(txtIngDepositoU.Text, 2)
-                        End If
-                    End If
-                    rd1.Close()
+            'Deposito
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText =
+                "select SUM(Otro) from AbonoI where Otro<>0 and Concepto<>'NOTA CANCELADA' and Concepto<>'DEVOLUCION' and Usuario='" & Usu & "'and CorteU=0"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    txtIngDepositoU.Text = IIf(rd1(0).ToString = "", "0", rd1(0).ToString)
+                    txtIngDepositoU.Text = FormatNumber(txtIngDepositoU.Text, 2)
+                End If
+            End If
+            rd1.Close()
 
             cnn3.Close()
             cnn1.Close()
@@ -1163,56 +1212,56 @@ Public Class frmCorte
 
             'Tarjeta
             cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText =
-                            "select SUM(Tarjeta) from AbonoI where Tarjeta<>0 and Concepto<>'ABONO' and Concepto<>'CARGO' and Concepto<>'NOTA VENTA' and Usuario='" & Usu & "' and CorteU=0"
-                    rd2 = cmd2.ExecuteReader
-                    If rd2.HasRows Then
-                        If rd2.Read Then
-                            Tarjeta = Tarjeta + IIf(rd2(0).ToString = "", "0", rd2(0).ToString)
-                            CanceDevo = CDec(CanceDevo) + CDec(IIf(rd2(0).ToString = "", "0", rd2(0).ToString))
-                        End If
-                    End If
-                    rd2.Close()
+            cmd2.CommandText =
+                    "select SUM(Tarjeta) from AbonoI where Tarjeta<>0 and Concepto<>'ABONO' and Concepto<>'CARGO' and Concepto<>'NOTA VENTA' and Usuario='" & Usu & "' and CorteU=0"
+            rd2 = cmd2.ExecuteReader
+            If rd2.HasRows Then
+                If rd2.Read Then
+                    Tarjeta = Tarjeta + IIf(rd2(0).ToString = "", "0", rd2(0).ToString)
+                    CanceDevo = CDec(CanceDevo) + CDec(IIf(rd2(0).ToString = "", "0", rd2(0).ToString))
+                End If
+            End If
+            rd2.Close()
 
-                    'Transferencia
-                    cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText =
-                            "select SUM(Transfe) from AbonoI where Transfe<>0 and Concepto<>'ABONO' and Concepto<>'CARGO' and Concepto<>'NOTA VENTA' and Usuario='" & Usu & "' and CorteU=0"
-                    rd2 = cmd2.ExecuteReader
-                    If rd2.HasRows Then
-                        If rd2.Read Then
-                            Transfe = Transfe + IIf(rd2(0).ToString = "", "0", rd2(0).ToString)
-                            CanceDevo = CDec(CanceDevo) + CDec(IIf(rd2(0).ToString = "", "0", rd2(0).ToString))
-                        End If
-                    End If
-                    rd2.Close()
+            'Transferencia
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText =
+                    "select SUM(Transfe) from AbonoI where Transfe<>0 and Concepto<>'ABONO' and Concepto<>'CARGO' and Concepto<>'NOTA VENTA' and Usuario='" & Usu & "' and CorteU=0"
+            rd2 = cmd2.ExecuteReader
+            If rd2.HasRows Then
+                If rd2.Read Then
+                    Transfe = Transfe + IIf(rd2(0).ToString = "", "0", rd2(0).ToString)
+                    CanceDevo = CDec(CanceDevo) + CDec(IIf(rd2(0).ToString = "", "0", rd2(0).ToString))
+                End If
+            End If
+            rd2.Close()
 
-                    'Monedero
-                    cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText =
-                            "select SUM(Monedero) from AbonoI where Monedero<>0 and Concepto<>'ABONO' and Concepto<>'CARGO' and Concepto<>'NOTA VENTA' and Usuario='" & Usu & "' and CorteU=0"
-                    rd2 = cmd2.ExecuteReader
-                    If rd2.HasRows Then
-                        If rd2.Read Then
-                            txtEgrMonederoU.Text = IIf(rd2(0).ToString = "", "0", rd2(0).ToString)
-                            txtEgrMonederoU.Text = FormatNumber(txtEgrMonederoU.Text, 2)
-                            CanceDevo = CDec(CanceDevo) + CDec(IIf(rd2(0).ToString = "", "0", rd2(0).ToString))
-                        End If
-                    End If
-                    rd2.Close()
+            'Monedero
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText =
+                    "select SUM(Monedero) from AbonoI where Monedero<>0 and Concepto<>'ABONO' and Concepto<>'CARGO' and Concepto<>'NOTA VENTA' and Usuario='" & Usu & "' and CorteU=0"
+            rd2 = cmd2.ExecuteReader
+            If rd2.HasRows Then
+                If rd2.Read Then
+                    txtEgrMonederoU.Text = IIf(rd2(0).ToString = "", "0", rd2(0).ToString)
+                    txtEgrMonederoU.Text = FormatNumber(txtEgrMonederoU.Text, 2)
+                    CanceDevo = CDec(CanceDevo) + CDec(IIf(rd2(0).ToString = "", "0", rd2(0).ToString))
+                End If
+            End If
+            rd2.Close()
 
-                    'Deposito
-                    cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText =
-                            "select SUM(Otro) from AbonoI where Otro<>0 and Concepto<>'ABONO' and Concepto<>'CARGO' and Concepto<>'NOTA VENTA' and Usuario='" & Usu & "' and CorteU=0"
-                    rd2 = cmd2.ExecuteReader
-                    If rd2.HasRows Then
-                        If rd2.Read Then
-                            Otros = Otros + IIf(rd2(0).ToString = "", "0", rd2(0).ToString)
-                            CanceDevo = CDec(CanceDevo) + CDec(IIf(rd2(0).ToString = "", "0", rd2(0).ToString))
-                        End If
-                    End If
-                    rd2.Close()
+            'Deposito
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText =
+                    "select SUM(Otro) from AbonoI where Otro<>0 and Concepto<>'ABONO' and Concepto<>'CARGO' and Concepto<>'NOTA VENTA' and Usuario='" & Usu & "' and CorteU=0"
+            rd2 = cmd2.ExecuteReader
+            If rd2.HasRows Then
+                If rd2.Read Then
+                    Otros = Otros + IIf(rd2(0).ToString = "", "0", rd2(0).ToString)
+                    CanceDevo = CDec(CanceDevo) + CDec(IIf(rd2(0).ToString = "", "0", rd2(0).ToString))
+                End If
+            End If
+            rd2.Close()
 
 
 
@@ -2008,6 +2057,10 @@ Public Class frmCorte
     Private Sub txtContrasena_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContrasena.KeyPress
         Dim usu_alias As String = ""
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -2053,6 +2106,10 @@ Public Class frmCorte
         If MsgBox("¿Desea realizar un corte de caja para el usuario: " & cboUsuario.Text & "?", vbInformation + vbOKCancel, "Delsscom Control Negocios 2022") = vbCancel Then
             Exit Sub
         End If
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -2134,6 +2191,10 @@ Public Class frmCorte
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             '[°]. Logotipo
@@ -2309,6 +2370,10 @@ Public Class frmCorte
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             '[°]. Logotipo
             If tLogo <> "SIN" Then
@@ -2479,6 +2544,11 @@ Public Class frmCorte
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             '[°]. Logotipo
@@ -2655,6 +2725,10 @@ Public Class frmCorte
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             '[°]. Logotipo

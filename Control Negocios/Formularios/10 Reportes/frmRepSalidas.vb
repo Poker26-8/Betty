@@ -1,5 +1,6 @@
 ﻿Imports ClosedXML.Excel
 Imports Microsoft.Office.Interop
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepSalidas
 
@@ -234,6 +235,11 @@ Public Class frmRepSalidas
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
 
@@ -655,6 +661,11 @@ Public Class frmRepSalidas
     End Sub
 
     Private Sub cboDatos_DropDown(sender As Object, e As EventArgs) Handles cboDatos.DropDown
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
 
         Try
             cboDatos.Items.Clear()

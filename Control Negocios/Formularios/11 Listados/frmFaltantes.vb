@@ -1,5 +1,6 @@
 ﻿
 Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 Public Class frmFaltantes
 
     Private Sub frmFaltantes_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
@@ -38,6 +39,11 @@ Public Class frmFaltantes
 
     Private Sub cbofiltro_DropDown(sender As System.Object, e As System.EventArgs) Handles cbofiltro.DropDown
         cbofiltro.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim consluta As String = ""
             If (optproveedor.Checked) Then consluta = "select distinct ProvPri from Productos where Codigo = Left(Codigo,6)"
@@ -67,6 +73,10 @@ Public Class frmFaltantes
         If (optgrupo.Checked) Then consulta = "select Codigo,CodBarra,Nombre,UCompra,Existencia,ProvPri,PrecioCompra,Min,Max from Productos where Grupo='" & cbofiltro.Text & "' order by Nombre"
 
         grdcaptura.Rows.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -101,6 +111,9 @@ Public Class frmFaltantes
 
     Private Sub opttodos_CheckedChanged(sender As Object, e As EventArgs) Handles opttodos.CheckedChanged
         If opttodos.Checked = True Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 grdcaptura.Rows.Clear()
                 cnn1.Close()

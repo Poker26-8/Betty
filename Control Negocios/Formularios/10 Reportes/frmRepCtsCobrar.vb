@@ -1,4 +1,6 @@
-﻿Public Class frmRepCtsCobrar
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmRepCtsCobrar
 
     Private Sub optestadocuenta_Click(sender As System.Object, e As System.EventArgs) Handles optestadocuenta.Click
         If (optestadocuenta.Checked) Then
@@ -406,6 +408,13 @@
         Dim M1 As Date = mCalendar1.SelectionStart.ToShortDateString
         Dim M2 As Date = mCalendar2.SelectionStart.ToShortDateString
         Dim querry As String = ""
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+
         cbo.Items.Clear()
         If (optestadocuenta.Checked) Then
             querry = "select distinct Cliente from AbonoI where Fecha between '" & Format(M1, "yyyy-MM-dd") & "' and '" & Format(M2, "yyyy-MM-dd") & "' and IdCliente<>0"
@@ -441,6 +450,13 @@
         Dim M1 As Date = mCalendar1.SelectionStart.ToShortDateString
         Dim M2 As Date = mCalendar2.SelectionStart.ToShortDateString
         Dim dias As Integer = 0
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
 
         grdcaptura.Rows.Clear()
 

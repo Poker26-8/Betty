@@ -1,4 +1,6 @@
-﻿Public Class frmOperadores
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmOperadores
     Private Sub frmOperadores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cboNombre.Focus.Equals(True)
     End Sub
@@ -7,6 +9,9 @@
     End Sub
 
     Private Sub cboNombre_DropDown(sender As Object, e As EventArgs) Handles cboNombre.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboNombre.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -151,6 +156,12 @@
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             If MsgBox("¿Desea guardar los datos de Operador?", vbInformation + vbOKCancel, titulocentral) = vbCancel Then
@@ -208,6 +219,10 @@
             Exit Sub
         End If
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand
         cmd1.CommandText = "DELETE FROM PorteOperador WHERE Nombre='" & cboNombre.Text & "'"
@@ -220,6 +235,9 @@
     End Sub
 
     Private Sub cboNombre_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboNombre.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand

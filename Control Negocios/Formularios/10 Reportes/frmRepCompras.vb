@@ -1,4 +1,5 @@
 ﻿Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepCompras
 
@@ -793,6 +794,13 @@ Public Class frmRepCompras
 
         Dim totpro As Double = 0
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
+
         barcarga.Visible = False
         barcarga.Value = 0
         grdcaptura.Rows.Clear()
@@ -1323,6 +1331,12 @@ Public Class frmRepCompras
         Dim m2 As Date = mCalendar2.SelectionStart.ToShortDateString
         Dim querry As String = ""
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+
         ComboBox1.Items.Clear()
         If (optproveedor.Checked) Then
             querry = "select distinct Proveedor from Compras where FechaC between '" & Format(m1, "yyyy-MM-dd 00:00:00") & "' and '" & Format(m2, "yyyy-MM-dd 23:59:59") & "' and NumRemision<>'' and Proveedor<>''"
@@ -1672,6 +1686,11 @@ Public Class frmRepCompras
         Dim remision As String = grdcaptura.Rows(id_fila).Cells(1).Value.ToString()
 
         If MsgBox("¿Deseas eliminar la compra con No. de Remisión: " & remision & "?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 Dim id_compra As Integer = 0
 

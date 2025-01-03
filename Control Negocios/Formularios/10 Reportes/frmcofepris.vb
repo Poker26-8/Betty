@@ -1,4 +1,5 @@
 ﻿Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmcofepris
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -7,6 +8,13 @@ Public Class frmcofepris
 
         Dim fcaduca As Date = Nothing
         Dim f As String = ""
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 

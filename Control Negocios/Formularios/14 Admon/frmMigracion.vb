@@ -3,6 +3,7 @@ Imports Microsoft.Office.Interop.Excel
 Imports System.IO
 Imports System.Net
 Imports MySql.Data
+Imports MySql.Data.MySqlClient
 
 Public Class frmMigracion
     Dim cnn As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
@@ -37,6 +38,11 @@ Public Class frmMigracion
     Private Sub btnauto_Click(sender As System.Object, e As System.EventArgs) Handles btnauto.Click
         Dim cuantos As Double = 0
         Dim seccion As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd As MySqlDataReader
+        Dim cmd1, cmd As MySqlCommand
 
         On Error GoTo queso
         'Primero hace una selección de registros para llenar el progress bar
@@ -366,6 +372,10 @@ queso:
     Private Sub btnmanual_Click(sender As System.Object, e As System.EventArgs) Handles btnmanual.Click
         Dim cuantos As Double = 0
         Dim seccion As String = ""
+
+        Dim cnn As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd As MySqlDataReader
+        Dim cmd As MySqlCommand
 
         On Error GoTo caca
 

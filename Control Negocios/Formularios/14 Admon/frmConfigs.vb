@@ -13,6 +13,12 @@ Public Class frmConfigs
         SFormatos("IMG_PDF", "")
         SFormatos("Porc_Mone", "")
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd4, rd5 As MySqlDataReader
+        Dim cmd1, cmd4, cmd5 As MySqlCommand
+
         Try
             cnn1.Close()
             cnn1.Open()
@@ -611,6 +617,12 @@ Public Class frmConfigs
 
     Private Sub btnGuardaFormatos_Click(sender As System.Object, e As System.EventArgs) Handles btnGuardaFormatos.Click
         If MsgBox("¿Deseas guardar estos datos?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -906,6 +918,10 @@ Public Class frmConfigs
     End Sub
 
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         With ofdLogo
             .Filter = "Archivo de imagen (*.jpg)|*.jpg"
             .Title = "Selecciona tu logotipo"
@@ -939,6 +955,9 @@ Public Class frmConfigs
 
     Private Sub optcuadra_Click(sender As Object, e As System.EventArgs) Handles optcuadra.Click
         If (optcuadra.Checked) Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -954,6 +973,9 @@ Public Class frmConfigs
 
     Private Sub optrecta_Click(sender As Object, e As System.EventArgs) Handles optrecta.Click
         If (optrecta.Checked) Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -969,6 +991,9 @@ Public Class frmConfigs
 
     Private Sub optnada_Click(sender As Object, e As System.EventArgs) Handles optnada.Click
         If (optnada.Checked) Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -985,6 +1010,9 @@ Public Class frmConfigs
 
     Private Sub opt80_Click(sender As Object, e As System.EventArgs) Handles opt80.Click
         If (opt80.Checked) Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -1000,6 +1028,9 @@ Public Class frmConfigs
 
     Private Sub opt58_Click(sender As Object, e As System.EventArgs) Handles opt58.Click
         If (opt58.Checked) Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -1014,6 +1045,12 @@ Public Class frmConfigs
     End Sub
 
     Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             Dim bascula As String = ""
 
@@ -1189,6 +1226,10 @@ Public Class frmConfigs
 
     Private Sub cboMoneda_DropDown(sender As System.Object, e As System.EventArgs) Handles cboMoneda.DropDown
         cboMoneda.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -1212,6 +1253,10 @@ Public Class frmConfigs
     End Sub
 
     Private Sub cboMoneda_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cboMoneda.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -1261,6 +1306,10 @@ Public Class frmConfigs
 
     Private Sub Button7_Click(sender As System.Object, e As System.EventArgs) Handles Button7.Click
         If cboMoneda.Tag = "" Then MsgBox("Para poder eliminar una moneda, necesitas seleccionarla.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -1335,6 +1384,10 @@ Public Class frmConfigs
         If MsgBox("¿Deseas actualizar la configuración de cambio de precios?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
             Dim tipo As String = IIf(optDiaNoche.Checked = True, "DIANOCHE", "NORMAL")
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 SFormatos("TipoPrecio", tipo)
 
@@ -1380,6 +1433,12 @@ Public Class frmConfigs
     Private Sub Button6_Click(sender As System.Object, e As System.EventArgs) Handles Button6.Click
         If cboMoneda.Text = "" Then MsgBox("Selecciona o escribe el tipo de moneda para continuar.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cboMoneda.Focus().Equals(True) : Exit Sub
         If MsgBox("¿Deseas guardar la configuración de moneda?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -1437,6 +1496,11 @@ Public Class frmConfigs
 
     Private Sub btnguarda_descuento_Click(sender As System.Object, e As System.EventArgs) Handles btnguarda_descuento.Click
         If MsgBox("¿Deseas actualizar el máximo de descuento permitido en las venta?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -1496,6 +1560,10 @@ Public Class frmConfigs
 
     Private Sub chkMinAlmacen_Click(sender As System.Object, e As System.EventArgs) Handles chkMinAlmacen.Click
         SFormatos("MinimoA", "")
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (chkMinAlmacen.Checked) Then
             Try
                 cnn1.Close() : cnn1.Open()
@@ -1534,6 +1602,11 @@ Public Class frmConfigs
     Private Sub Button16_Click(sender As System.Object, e As System.EventArgs) Handles Button16.Click
         crea_ruta(My.Application.Info.DirectoryPath & "\BinData\")
         Dim ruta_local As String = My.Application.Info.DirectoryPath & "\BinData\"
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         ofdLogo.FileName = ""
         Try
@@ -1610,6 +1683,11 @@ Public Class frmConfigs
 
         If MsgBox("¿Es correcta la información que estás a punto de guardar?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then Exit Sub
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             Dim idemisor As Integer = 0
 
@@ -1649,6 +1727,11 @@ Public Class frmConfigs
         If txtcertificado.Text = "" Then MsgBox("Selecciona tu certificado para seleccionar el archivo .key", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
         crea_ruta(My.Application.Info.DirectoryPath & "\BinData\")
         Dim ruta_local As String = My.Application.Info.DirectoryPath & "\BinData\"
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         txtllave.Text = ""
         Try
@@ -1700,6 +1783,12 @@ Public Class frmConfigs
 
     Private Sub Button18_Click(sender As System.Object, e As System.EventArgs) Handles Button18.Click
         picLogoFact.Image = Nothing
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             ofdLogo.Filter = "Archivos de Imagen(*.PNG)|*.png|Imagen(*.BMP)|*.bmp|Imagen (*.JPG)|*.jpg|Imagen(*.JPEG)|*jpeg"
 
@@ -1757,6 +1846,11 @@ Public Class frmConfigs
 
     Private Sub chkAcumula_Click(sender As System.Object, e As System.EventArgs) Handles chkAcumula.Click
         SFormatos("Acumula", "")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (chkAcumula.Checked) Then
             Try
                 cnn1.Close() : cnn1.Open()
@@ -1786,6 +1880,11 @@ Public Class frmConfigs
 
     Private Sub chkautofacturas_Click(sender As System.Object, e As System.EventArgs) Handles chkautofacturas.Click
         SFormatos("AutoFac", "")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (chkautofacturas.Checked) Then
             Try
                 pauto.Visible = True
@@ -1822,6 +1921,11 @@ Public Class frmConfigs
 
     Private Sub chkDesglosa_Click(sender As System.Object, e As System.EventArgs) Handles chkDesglosa.Click
         SFormatos("Desglosa", "")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (chkDesglosa.Checked) Then
             Try
                 cnn1.Close() : cnn1.Open()
@@ -1870,6 +1974,11 @@ Public Class frmConfigs
     Private Sub btnCosteo_Click(sender As System.Object, e As System.EventArgs) Handles btnCosteo.Click
         If optPEPS.Checked = False And optPromedio.Checked = False Then MsgBox("Selecciona alguno de los dos métodos para continuar.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
         If MsgBox("Es importante considerar que el método seleccionado (" & IIf(optPEPS.Checked = True, "PEPS", IIf(optPromedio.Checked = True, "Promedio", "")) & ") no podrá cambiarse posteriormente." & vbNewLine & "¿Deseas guardar ésta información?" & vbNewLine & "*El sistema se cerrará al guardar los datos*", MsgBoxStyle.Question + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -1891,6 +2000,11 @@ Public Class frmConfigs
 
     Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles Button3.Click
         If MsgBox("Es importante considerar que estas modificaciones son únicas, por lo que sólo podrán ser modificadas una sola vez." & vbNewLine & "¿Deseas continuar con la actualización?", vbQuestion + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd2 As MySqlDataReader
+            Dim cmd2 As MySqlCommand
+
             Try
                 cnn2.Close() : cnn2.Open()
 
@@ -1956,6 +2070,11 @@ Public Class frmConfigs
 
     Private Sub Button13_Click(sender As System.Object, e As System.EventArgs) Handles Button13.Click
         If MsgBox("¿Deseas eliminar tu configuración de envío de correos?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -2009,6 +2128,10 @@ Public Class frmConfigs
 
     Private Sub cborazon_social_DropDown(sender As System.Object, e As System.EventArgs) Handles cborazon_social.DropDown
         cborazon_social.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -2027,6 +2150,11 @@ Public Class frmConfigs
     End Sub
 
     Private Sub cborazon_social_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cborazon_social.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -2088,6 +2216,11 @@ Public Class frmConfigs
     End Sub
 
     Private Sub btnGuarda_fact_Click(sender As System.Object, e As System.EventArgs) Handles btnGuarda_fact.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim tipo_reg As String = ""
             If cborazon_social.Text = "" Then MsgBox("Escribe la razón social para continuar.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cborazon_social.Focus().Equals(True) : Exit Sub
@@ -2147,6 +2280,10 @@ Public Class frmConfigs
     Private Sub txtRFC_fact_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtRFC_fact.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             If Len(txtRFC_fact.Text) > 13 Then MsgBox("RFC inválido, revisa la información.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             If txtRFC_fact.Text <> "" Then
                 Try
                     cnn1.Close() : cnn1.Open()
@@ -2348,6 +2485,11 @@ Public Class frmConfigs
 
     Private Sub cboregfis_DropDown(sender As System.Object, e As System.EventArgs) Handles cboregfis.DropDown
         cboregfis.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -2390,9 +2532,13 @@ Public Class frmConfigs
     Private Sub btnElimina_fact_Click(sender As System.Object, e As System.EventArgs) Handles btnElimina_fact.Click
         If cborazon_social.Tag = "" Then cborazon_social.Focus().Equals(True) : Exit Sub
         If MsgBox("¿Deseas eliminar los datos del emisor?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
-
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
                      "delete from DatosNegocio where Emisor_id=" & cborazon_social.Tag
@@ -2458,6 +2604,11 @@ Public Class frmConfigs
 
     Private Sub Button19_Click(sender As Object, e As EventArgs) Handles Button19.Click
         If txtwhats.Text = "" Or Len(txtwhats.Text) < 10 Then MsgBox("Ingresa el número de teléfono de 10 dígitos (sin lada)", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : txtwhats.Focus().Equals(True) : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (chkwhats.Checked) Then
             If MsgBox("Al activar esta opción se mostrará un código QR en el pie de los tickets mediante el cuál tus clientes podrán escribirte por Whatsapp." & vbNewLine & "¿Deseas continuar?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
 
@@ -2505,6 +2656,11 @@ Public Class frmConfigs
     End Sub
 
     Private Sub Button22_Click(sender As Object, e As EventArgs) Handles Button22.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             If MsgBox("¿Deseas actualizar el texto de 'pagaré' para tus notas?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
                 cnn1.Close() : cnn1.Open()
@@ -2529,6 +2685,11 @@ Public Class frmConfigs
     End Sub
 
     Private Sub Button23_Click(sender As Object, e As EventArgs) Handles Button23.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             If MsgBox("¿Deseas actualizar las clausulas para tus notas?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
                 cnn1.Close() : cnn1.Open()
@@ -2609,6 +2770,11 @@ Public Class frmConfigs
 
     Private Sub chkDesc_Ventas_Click(sender As Object, e As EventArgs) Handles chkDesc_Ventas.Click
         SFormatos("Desc_Ventas", "")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (chkDesc_Ventas.Checked) Then
             Try
                 cnn1.Close() : cnn1.Open()
@@ -2638,6 +2804,11 @@ Public Class frmConfigs
 
     Private Sub cboGPrint_DropDown(sender As Object, e As EventArgs) Handles cboGPrint.DropDown
         cboGPrint.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -2669,6 +2840,10 @@ Public Class frmConfigs
     End Sub
 
     Private Sub cboGPrint_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboGPrint.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -2713,6 +2888,11 @@ Public Class frmConfigs
 
         Dim cadena As String = cboImpre_Comanda.Text
         Dim nuevaimpre As String = cadena.Replace("\", "\\")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         If MsgBox("¿Deseas actualizar la ruta de impresión?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
             Try
@@ -2761,6 +2941,11 @@ Public Class frmConfigs
     End Sub
 
     Private Sub chkFranquicia_Click(sender As Object, e As EventArgs) Handles chkFranquicia.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (chkFranquicia.Checked) Then
             Try
                 cnn1.Close() : cnn1.Open()
@@ -2806,6 +2991,11 @@ Public Class frmConfigs
         'If txtnumero.Text.Length >= 10 Then MsgBox("El número de télefono debe de ser de 10 digitos", vbCritical + vbOKOnly, "Delsscom Control Negocios Pro") : txtnumero.Focus.Equals(True) : Exit Sub
         If txtusuario.Text = "" Then MsgBox("El usuario no puede ir vacio", vbCritical + vbOKOnly, "Delsscom Control Negocios Pro") : txtusuario.Focus.Equals(True) : Exit Sub
         If txtcontra.Text = "" Then MsgBox("La contraseña no puede ir vacia", vbCritical + vbOKOnly, "Delsscom Control Negocios Pro") : txtcontra.Focus.Equals(True) : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
 
         If lblid.Text <> "" Then
             Try
@@ -2923,6 +3113,11 @@ Public Class frmConfigs
     End Sub
 
     Private Sub btnImgEtiq_Click(sender As Object, e As EventArgs) Handles btnImgEtiq.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         With ofdLogo
             .Filter = "Archivo de imagen (*.jpg)|*.jpg"
             .Title = "Selecciona tu logotipo"
@@ -2956,6 +3151,12 @@ Public Class frmConfigs
 
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             Dim medida As String = ""
@@ -3125,6 +3326,12 @@ Public Class frmConfigs
 
 
     Private Sub Button27_Click(sender As Object, e As EventArgs) Handles Button27.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             Dim soy As Integer = 0
             If chkauto.Checked = True Then
@@ -3172,6 +3379,9 @@ Public Class frmConfigs
         Else
             valor = 0
         End If
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -3185,6 +3395,10 @@ Public Class frmConfigs
     End Sub
 
     Private Sub chkImg_PDF_Click(sender As Object, e As EventArgs) Handles chkImg_PDF.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (chkImg_PDF.Checked) Then
             Try
                 cnn1.Close() : cnn1.Open()
@@ -3213,6 +3427,11 @@ Public Class frmConfigs
     End Sub
 
     Private Sub RadioButton1_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton1.CheckedChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (RadioButton1.Checked) Then
             GroupBox26.Enabled = True
 
@@ -3262,6 +3481,10 @@ Public Class frmConfigs
     End Sub
 
     Private Sub btnGPago_Click(sender As Object, e As EventArgs) Handles btnGPago.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()
@@ -3316,6 +3539,11 @@ Public Class frmConfigs
     Private Sub Button26_Click(sender As Object, e As EventArgs) Handles Button26.Click
         If txtporc_venta.Text = "" Or (CDbl(txtporc_venta.Text) = 0) Then MsgBox("Ingresa un porcentaje válido.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : txtporc_venta.Focus().Equals(True) : Exit Sub
         If MsgBox("¿Deseas actualizar el modo de abono por venta a monedero?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -3357,6 +3585,11 @@ Public Class frmConfigs
 
     Private Sub cbVerExistencias_Click(sender As Object, e As EventArgs) Handles cbVerExistencias.Click
         SFormatos("VerExistencias", "")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (cbVerExistencias.Checked) Then
             Try
                 cnn1.Close() : cnn1.Open()
@@ -3391,6 +3624,12 @@ Public Class frmConfigs
     End Sub
 
     Private Sub btnCorreo_Click(sender As Object, e As EventArgs) Handles btnCorreo.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -3408,7 +3647,7 @@ Public Class frmConfigs
 
 
                 End If
-                Else
+            Else
 
                 cnn2.Close() : cnn2.Open()
                 cmd2 = cnn2.CreateCommand

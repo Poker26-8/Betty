@@ -21,6 +21,9 @@
     Private Sub txtclave_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtclave.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             Dim id_usu As Integer = 0
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 cnn1.Close() : cnn1.Open()

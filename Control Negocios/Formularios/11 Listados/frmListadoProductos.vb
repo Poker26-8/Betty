@@ -1,5 +1,6 @@
 ﻿
 Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmListadoProductos
 
@@ -316,6 +317,11 @@ Public Class frmListadoProductos
 
             Dim order_by As String = ""
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
+
             If (optord_nombre.Checked) Then order_by = "Nombre"
             If (optord_depto.Checked) Then order_by = "Departamento"
             If (optord_grupo.Checked) Then order_by = "Grupo"
@@ -381,6 +387,11 @@ Public Class frmListadoProductos
 
     Private Sub cbofiltro_DropDown(sender As System.Object, e As System.EventArgs) Handles cbofiltro.DropDown
         cbofiltro.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -417,6 +428,11 @@ Public Class frmListadoProductos
     Public Sub LlenaGrid()
         If cbofiltro.Text = "" Then Exit Sub
         grdcaptura.Rows.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             Dim codigo As String = ""

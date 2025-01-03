@@ -1,6 +1,7 @@
 ﻿Imports System.Security.Cryptography
 Imports Core.Addendas
 Imports Microsoft.Office.Interop
+Imports MySql.Data.MySqlClient
 
 Public Class frmEstadoResultados
     Private Sub frmEstadoResultados_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -346,6 +347,10 @@ Public Class frmEstadoResultados
         Dim totall As Double = 0
         Dim fechaa As Date = Date.Now
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         dg1.Rows.Clear()
         dg2.Rows.Clear()
         lblIngresos.Text = ""
@@ -639,6 +644,11 @@ Public Class frmEstadoResultados
     End Sub
 
     Private Sub cboDatos_DropDown(sender As Object, e As EventArgs) Handles cboDatos.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboDatos.Items.Clear()
 

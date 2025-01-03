@@ -1,4 +1,6 @@
-﻿Public Class frmAjusteInv
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmAjusteInv
 
     Private Sub frmAjusteInv_Shown(sender As System.Object, e As System.EventArgs) Handles MyBase.Shown
         cbodesc.Focus().Equals(True)
@@ -6,6 +8,13 @@
 
     Private Sub cbodesc_DropDown(sender As System.Object, e As System.EventArgs) Handles cbodesc.DropDown
         cbodesc.Items.Clear()
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -29,6 +38,10 @@
         If AscW(e.KeyChar) = Keys.Enter Then
 
             Dim query As String = ""
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             If cbodesc.Text <> "" Then
                 Try
@@ -65,32 +78,46 @@
     End Sub
 
     Private Sub cbodesc_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cbodesc.SelectedValueChanged
-            Try
-                cnn1.Close() : cnn1.Open()
 
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText =
-                    "select Codigo from Productos where Nombre='" & cbodesc.Text & "'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        cbocodigo.Text = rd1(0).ToString
-                    End If
-                Else
-                    MsgBox("No se encuentra en la base de datos.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                    rd1.Close() : cnn1.Close()
-                    Exit Sub
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+
+        Try
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText =
+"select Codigo from Productos where Nombre='" & cbodesc.Text & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    cbocodigo.Text = rd1(0).ToString
                 End If
+            Else
+                MsgBox("No se encuentra en la base de datos.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
                 rd1.Close() : cnn1.Close()
-            Catch ex As Exception
-                MessageBox.Show(ex.ToString)
-                cnn1.Close()
-            End Try       
+                Exit Sub
+            End If
+
+            MsgBox("No se encuentra en la base de datos.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+            rd1.Close() : cnn1.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
     End Sub
 
     Private Sub cbocodigo_DropDown(sender As Object, e As System.EventArgs) Handles cbocodigo.DropDown
         cbocodigo.Items.Clear()
         If cbocodigo.Text <> "" Then
+
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -108,7 +135,7 @@
                 MessageBox.Show(ex.ToString)
                 cnn1.Close()
             End Try
-        End If        
+        End If
     End Sub
 
     Private Sub cbocodigo_GotFocus(sender As Object, e As System.EventArgs) Handles cbocodigo.GotFocus
@@ -151,6 +178,11 @@
                 Dim factor As Double = 0
                 Dim operad As Double = 0
                 Dim codigo As String = Mid(cbocodigo.Text, 1, 6)
+
+
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
 
                 Try
                     cnn1.Close() : cnn1.Open()
@@ -277,6 +309,11 @@
 
         If AscW(e.KeyChar) = Keys.Enter Then
             If txtcontraseña.Text <> "" Then
+
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
+
                 Try
                     cnn1.Close() : cnn1.Open()
 
@@ -327,6 +364,13 @@
     Private Sub EliminaLoteToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles EliminaLoteToolStripMenuItem.Click
         Dim idLote As Integer = grdcaptura.CurrentRow.Cells(0).Value.ToString
         If MsgBox("¿Deseas eliminar este registro de lote?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -334,7 +378,7 @@
                 cmd1.CommandText =
                     "delete from LoteCaducidad where Id=" & idLote & " and Codigo='" & cbocodigo.Text & "'"
                 If cmd1.ExecuteNonQuery Then
-                    MsgBox("Registro de lote eliminado correctamente.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")                    
+                    MsgBox("Registro de lote eliminado correctamente.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
                 End If
 
                 grdcaptura.Rows.Clear()
@@ -382,6 +426,11 @@
     End Sub
 
     Private Sub btnNuevo_Click(sender As System.Object, e As System.EventArgs) Handles btnNuevo.Click
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
 
         cnn1.Close() : cnn1.Open()
@@ -449,6 +498,12 @@
             txtcontraseña.Focus().Equals(True)
             Exit Sub
         End If
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
 
         Try
             Dim idUsu As Integer = 0
@@ -607,6 +662,13 @@
         If (GuardaLote()) Then
             MsgBox("Operación concluida.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
             btnlimpia_lote.PerformClick()
+
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -652,6 +714,11 @@
             Return False
             Exit Function
         End If
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             Dim idUsu As Integer = 0
@@ -735,6 +802,14 @@
     End Sub
 
     Private Sub Label12_DoubleClick(sender As Object, e As EventArgs) Handles Label12.DoubleClick
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
+
         Try
             Dim codig As String = ""
             Dim canti As Double = 0
@@ -775,6 +850,12 @@
     End Sub
 
     Private Sub frmAjusteInv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand

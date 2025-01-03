@@ -1,5 +1,6 @@
 ﻿Imports ClosedXML.Excel
 Imports Microsoft.Office.Interop
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepGastos
     Private Sub frmRepGastos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -42,6 +43,9 @@ Public Class frmRepGastos
             grdCaptura.Rows.Clear()
 
             Dim tot As Double = 0
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 cnn1.Close() : cnn1.Open()
@@ -104,6 +108,9 @@ Public Class frmRepGastos
     End Sub
 
     Private Sub cboDatos_DropDown(sender As Object, e As EventArgs) Handles cboDatos.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboDatos.Items.Clear()
 
@@ -134,6 +141,11 @@ Public Class frmRepGastos
     End Sub
 
     Private Sub cboDatos_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboDatos.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
             grdCaptura.Rows.Clear()
             Dim cuantos As Integer = 0

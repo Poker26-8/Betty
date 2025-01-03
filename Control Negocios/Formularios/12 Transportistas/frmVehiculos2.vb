@@ -1,4 +1,6 @@
-﻿Public Class frmVehiculos2
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmVehiculos2
     Private Sub frmVehiculos2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         grdCaptura.Rows.Clear()
@@ -9,6 +11,9 @@
     End Sub
 
     Private Sub cboMarca_DropDown(sender As Object, e As EventArgs) Handles cboMarca.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboMarca.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -30,6 +35,9 @@
     End Sub
 
     Private Sub cboSubmarca_DropDown(sender As Object, e As EventArgs) Handles cboSubmarca.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboSubmarca.Items.Clear()
 
@@ -51,6 +59,9 @@
     End Sub
 
     Private Sub cboPlacas_DropDown(sender As Object, e As EventArgs) Handles cboPlacas.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboPlacas.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -72,6 +83,9 @@
     End Sub
 
     Private Sub cboChofer_DropDown(sender As Object, e As EventArgs) Handles cboChofer.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboChofer.Items.Clear()
 
@@ -94,6 +108,9 @@
     End Sub
 
     Private Sub cboSeguro_DropDown(sender As Object, e As EventArgs) Handles cboSeguro.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboSeguro.Items.Clear()
 
@@ -310,7 +327,7 @@
         grdServicio.Rows.Clear()
         txtTotal.Text = ""
 
-        cargar
+        cargar()
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
@@ -330,13 +347,15 @@
         If cboArea.Text = "" Then MsgBox("Seleccione el área!!!", vbInformation + vbOKOnly, titulocentral) : cboArea.Focus() : Exit Sub
         If cboChofer.Text = "" Then MsgBox("Seleccione un chofer!!!", vbInformation + vbOKOnly, titulocentral) : cboChofer.Focus() : Exit Sub
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Try
-
             cnn2.Close() : cnn2.Open()
-                cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "INSERT INTO transporte(Modelo,Marca,Submarca,Placas,Area,Poliza,Seguro,Vence_Seguro,Contacto_Seguro,Tel_Emergencia,Agente,Contacto_Agente,Verifica1,Verifica2,NoCircula,Chofer) VALUES('" & txtModelo.Text & "','" & cboMarca.Text & "','" & cboSubmarca.Text & "','" & cboPlacas.Text & "','" & cboArea.Text & "','" & txtPoliza.Text & "','" & cboSeguro.Text & "','" & Format(dtpVencimiento.Value, "yyyy-MM-dd") & "','" & txtTelAseguradora.Text & "','" & txtTelEmergencia.Text & "','" & txtAgente.Text & "','" & txtTelAgente.Text & "','" & cboMes1.Text & "','" & cboMes2.Text & "','" & cboCircula.Text & "','" & cboChofer.Text & "')"
-                If cmd2.ExecuteNonQuery() Then
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText = "INSERT INTO transporte(Modelo,Marca,Submarca,Placas,Area,Poliza,Seguro,Vence_Seguro,Contacto_Seguro,Tel_Emergencia,Agente,Contacto_Agente,Verifica1,Verifica2,NoCircula,Chofer) VALUES('" & txtModelo.Text & "','" & cboMarca.Text & "','" & cboSubmarca.Text & "','" & cboPlacas.Text & "','" & cboArea.Text & "','" & txtPoliza.Text & "','" & cboSeguro.Text & "','" & Format(dtpVencimiento.Value, "yyyy-MM-dd") & "','" & txtTelAseguradora.Text & "','" & txtTelEmergencia.Text & "','" & txtAgente.Text & "','" & txtTelAgente.Text & "','" & cboMes1.Text & "','" & cboMes2.Text & "','" & cboCircula.Text & "','" & cboChofer.Text & "')"
+            If cmd2.ExecuteNonQuery() Then
                 MsgBox("Vehículo Agregado Correctamente.", vbInformation + vbOKOnly, titulocentral)
             End If
 
@@ -355,7 +374,7 @@
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn2.Close()
         End Try
     End Sub
 
@@ -374,6 +393,10 @@
     End Sub
 
     Public Sub cargar()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()

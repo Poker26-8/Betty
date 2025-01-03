@@ -1,5 +1,6 @@
 ﻿Imports ClosedXML.Excel
 Imports Microsoft.Office.Interop
+Imports MySql.Data.MySqlClient
 Public Class frmRepEntradas
 
 
@@ -113,6 +114,12 @@ Public Class frmRepEntradas
 
     Private Sub RadioButton2_CheckedChanged(sender As Object, e As EventArgs) Handles RadioButton2.CheckedChanged
         If RadioButton2.Checked = True Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
+
             ComboBox1.Text = ""
             ComboBox1.Visible = False
             grdcaptura.Rows.Clear()
@@ -850,6 +857,10 @@ Public Class frmRepEntradas
     End Sub
 
     Private Sub ComboBox1_DropDown(sender As Object, e As EventArgs) Handles ComboBox1.DropDown
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             ComboBox1.Items.Clear()
             Dim M1 As Date = MC1.SelectionStart.ToShortDateString
@@ -918,6 +929,11 @@ Public Class frmRepEntradas
         Dim devoluciones As Double = 0
         Dim sumadevoluciones As Double = 0
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         If optVendedor.Checked = True Then
 
@@ -1442,6 +1458,10 @@ Public Class frmRepEntradas
     End Sub
 
     Private Sub cboFormaPago_DropDown(sender As Object, e As EventArgs) Handles cboFormaPago.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboFormaPago.Items.Clear()
 

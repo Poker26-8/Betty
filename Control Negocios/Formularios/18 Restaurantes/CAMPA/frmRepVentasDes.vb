@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepVentasDes
 
@@ -7,6 +8,11 @@ Public Class frmRepVentasDes
     End Sub
 
     Private Sub btnConsultar_Click(sender As Object, e As EventArgs) Handles btnConsultar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
 
             Dim subtotal As Double = 0
@@ -153,5 +159,9 @@ Public Class frmRepVentasDes
         If tamimpresora = "58" Then
 
         End If
+    End Sub
+
+    Private Sub frmRepVentasDes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class

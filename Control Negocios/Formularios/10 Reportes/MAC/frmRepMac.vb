@@ -1,5 +1,6 @@
 ﻿Imports Core.DAL.DE
 Imports Microsoft.Office.Interop.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepMac
     Private Sub btnExcel_Click(sender As Object, e As EventArgs) Handles btnExcel.Click
@@ -112,6 +113,10 @@ Public Class frmRepMac
         Dim T_Descuento As Double = 0
         Dim T_Total As Double = 0
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (rbVentasTotales.Checked) Then
 
             subtotal = 0
@@ -143,7 +148,7 @@ Public Class frmRepMac
                 barcarga.Value = 0
                 barcarga.Maximum = cuantos
 
-                cnn2.Close() : cnn2.Open()
+
                 cmd1 = cnn1.CreateCommand
 
 
@@ -171,7 +176,6 @@ Public Class frmRepMac
                 Loop
                 rd1.Close()
                 cnn1.Close()
-                cnn2.Close()
 
                 txtSubtotal.Text = FormatNumber(T_Subtotal, 2)
                 txtIVA.Text = FormatNumber(T_IVA, 2)

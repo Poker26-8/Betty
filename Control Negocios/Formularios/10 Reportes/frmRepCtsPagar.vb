@@ -1,8 +1,15 @@
-﻿Public Class frmRepCtsPagar
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmRepCtsPagar
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Dim M1 As Date = mCalendar1.SelectionStart.ToShortDateString
         Dim M2 As Date = mCalendar2.SelectionStart.ToShortDateString
         Dim dias As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
 
         grdcaptura.Rows.Clear()
 
@@ -220,6 +227,9 @@
 
     Private Sub cbo_DropDown(sender As Object, e As EventArgs) Handles cbo.DropDown
         cbo.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -326,6 +336,10 @@
     Private Sub RadioButton6_Click(sender As Object, e As EventArgs) Handles RadioButton6.Click
         Dim M1 As Date = mCalendar1.SelectionStart.ToShortDateString
         Dim M2 As Date = mCalendar2.SelectionStart.ToShortDateString
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If (RadioButton6.Checked) Then
             grdcaptura.Rows.Clear()

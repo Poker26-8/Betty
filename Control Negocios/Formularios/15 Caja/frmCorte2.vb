@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.Net
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
+Imports MySql.Data.MySqlClient
 
 Public Class frmCorte2
 
@@ -17,6 +18,11 @@ Public Class frmCorte2
     Dim Folio2 As String = ""
 
     Private Sub C_Global()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -40,6 +46,12 @@ Public Class frmCorte2
 
     Private Function TipoCorte() As Integer
         Dim tipo As Integer = 0
+
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -87,6 +99,12 @@ Public Class frmCorte2
         If cboUsuario.Text = "" Then MsgBox("Selecciona un usuario para registrar su saldo inicial.", vbInformation + vbOKOnly, "Delsscom Control Negocios 2022") : cboUsuario.Focus().Equals(True) : Exit Sub
         If txtContrasena.Text = "" Then MsgBox("Escribe la contraseña del usuario para continuar.", vbInformation + vbOKOnly, "Delsscom Control Negocios 2022") : txtContrasena.Focus().Equals(True) : Exit Sub
         If txtSaldoUsuario.Text = "" Then MsgBox("El saldo inicial no puede estar vacío.", vbInformation + vbOKOnly, "Delsscom Control Negocios 2022") : txtSaldoUsuario.Focus().Equals(True) : Exit Sub
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -138,6 +156,13 @@ Public Class frmCorte2
         Dim Usu As String = cboUsuario.Text
         If cboUsuario.Text = "" Then MsgBox("Selecciona un ususario para calcular su corte.", vbInformation + vbOKOnly, "Delsscom Control Negocios 2022") : cboUsuario.Focus.Equals(True) : Exit Sub
         If txtContrasena.Text = "" Then MsgBox("Ingrese su contraseña por favor.", vbInformation + vbOKOnly, "Delsscom Control Negocios 2022") : txtContrasena.Focus() : Exit Sub
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -573,6 +598,12 @@ Public Class frmCorte2
 
     Private Sub cboUsuario_DropDown(sender As Object, e As EventArgs) Handles cboUsuario.DropDown
         cboUsuario.Items.Clear()
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
 
@@ -593,6 +624,12 @@ Public Class frmCorte2
     Private Sub cboUsuario_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboUsuario.KeyPress
         Dim usu_alias As String = ""
         If AscW(e.KeyChar) = Keys.Enter Then
+
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -623,6 +660,13 @@ Public Class frmCorte2
     End Sub
 
     Private Sub cboUsuario_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboUsuario.SelectedValueChanged
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             txtContrasena.Focus().Equals(True)
 
@@ -712,6 +756,12 @@ Public Class frmCorte2
     Private Sub txtContrasena_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContrasena.KeyPress
         Dim usu_alias As String = ""
         If AscW(e.KeyChar) = Keys.Enter Then
+
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -813,6 +863,7 @@ Public Class frmCorte2
         txtTotal200.Text = CDec(txtCant200.Text) * 200
         txtTotal200.Text = FormatNumber(txtTotal200.Text, 2)
     End Sub
+
     Private Sub txtTotal200_TextChanged(sender As Object, e As EventArgs) Handles txtTotal200.TextChanged
         If txtTotal500.Text = "" Then
             txtTotal500.Text = "0.00"
@@ -1407,6 +1458,11 @@ Public Class frmCorte2
             Exit Sub
         End If
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -1533,6 +1589,11 @@ Public Class frmCorte2
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             '[°]. Logotipo
@@ -1709,6 +1770,11 @@ Public Class frmCorte2
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             '[°]. Logotipo
             If tLogo <> "SIN" Then
@@ -1877,6 +1943,11 @@ Public Class frmCorte2
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             '[°]. Logotipo
@@ -2083,6 +2154,11 @@ Public Class frmCorte2
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             '[°]. Logotipo
@@ -2315,6 +2391,13 @@ Public Class frmCorte2
 
     Private Sub btnSaldoGlobal_Click(sender As Object, e As EventArgs) Handles btnSaldoGlobal.Click
         Dim saldo_global As Double = txtSaldoGlobal.Text
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -2384,6 +2467,14 @@ Public Class frmCorte2
         If CorteGlobal = True Then
             Exit Sub
         End If
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
+
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -3180,6 +3271,11 @@ Public Class frmCorte2
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             '[°]. Logotipo
             If tLogo <> "SIN" Then
@@ -3411,6 +3507,12 @@ Public Class frmCorte2
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
+
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             '[°]. Logotipo

@@ -1,4 +1,5 @@
 ﻿Imports AForge.Imaging.Filters
+Imports MySql.Data.MySqlClient
 
 Public Class frmEtiquetas2
     Private Sub btnImprime_Click(sender As Object, e As EventArgs) Handles btnImprime.Click
@@ -25,6 +26,12 @@ Public Class frmEtiquetas2
         Dim codigo2 As String = ""
         Dim contador As Integer = 1
         Dim numeroxd As Integer = 0
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close()
             cnn1.Open()
@@ -149,19 +156,18 @@ kakita:
 
 
         Y += 1
+        Dim caracteresPorLinea As Integer = 30
+        Dim texto As String = cbonombre.Text
+        Dim inicio As Integer = 0
+        Dim longitudTexto As Integer = texto.Length
 
-            Dim caracteresPorLinea As Integer = 30
-            Dim texto As String = cbonombre.Text
-            Dim inicio As Integer = 0
-            Dim longitudTexto As Integer = texto.Length
-
-            While inicio < longitudTexto
-                Dim longitudBloque As Integer = Math.Min(caracteresPorLinea, longitudTexto - inicio)
-                Dim bloque As String = texto.Substring(inicio, longitudBloque)
+        While inicio < longitudTexto
+            Dim longitudBloque As Integer = Math.Min(caracteresPorLinea, longitudTexto - inicio)
+            Dim bloque As String = texto.Substring(inicio, longitudBloque)
             e.Graphics.DrawString(bloque, fuentita, Brushes.Black, 95, Y)
             Y += 8
-                inicio += caracteresPorLinea
-            End While
+            inicio += caracteresPorLinea
+        End While
         '    Y += 20
         'e.Graphics.DrawString("Cantidad: " & FormatNumber(txtgrupo.Text, 2), fuentita, Brushes.Black, 95, Y)
         Y += 35
@@ -185,6 +191,11 @@ kakita:
 
     Private Sub cbonombre_DropDown(sender As Object, e As EventArgs) Handles cbonombre.DropDown
         cbonombre.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 

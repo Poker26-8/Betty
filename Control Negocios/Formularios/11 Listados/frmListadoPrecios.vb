@@ -2916,6 +2916,11 @@ Public Class frmListadoPrecios
     Private Sub cbofiltro_DropDown(sender As System.Object, e As System.EventArgs) Handles cbofiltro.DropDown
         cbofiltro.Items.Clear()
         grdcaptura.Rows.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -2952,6 +2957,11 @@ Public Class frmListadoPrecios
     Public Sub LlenaGrid()
         If cbofiltro.Text = "" Then Exit Sub
         grdcaptura.Rows.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             Dim codigo As String = ""
@@ -3281,6 +3291,12 @@ Public Class frmListadoPrecios
         Dim ruta As String = ""
         Dim sheet As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
+
         With file_dialog
             .Filter = "Archivos Excel(*.xls;*.xlsx)|*.xls;*xlsx"
             .Title = "Selecciona el archivo a importar"
@@ -3544,6 +3560,9 @@ Public Class frmListadoPrecios
     End Sub
 
     Private Sub frmListadoPrecios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -3746,6 +3765,11 @@ Public Class frmListadoPrecios
             Dim precioesp2 As Double = 0
             Dim cantesp3 As Double = 0
             Dim cantesp4 As Double = 0
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
 
             ProgressBar1.Value = 0
             ProgressBar1.Visible = True

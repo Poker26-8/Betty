@@ -1,8 +1,14 @@
-﻿Public Class frmConfigRecargas
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmConfigRecargas
     Private Sub Button25_Click(sender As Object, e As EventArgs) Handles Button25.Click
         If txtnumero.Text.Length <> 10 Then MsgBox("El número de télefono debe de ser de 10 digitos", vbCritical + vbOKOnly, "Delsscom Control Negocios Pro") : txtnumero.Focus.Equals(True) : Exit Sub
         If txtusuario.Text = "" Then MsgBox("El usuario no puede ir vacio", vbCritical + vbOKOnly, "Delsscom Control Negocios Pro") : txtusuario.Focus.Equals(True) : Exit Sub
         If txtcontra.Text = "" Then MsgBox("La contraseña no puede ir vacia", vbCritical + vbOKOnly, "Delsscom Control Negocios Pro") : txtcontra.Focus.Equals(True) : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If lblid.Text <> "" Then
             Try
@@ -71,6 +77,9 @@
     End Sub
 
     Private Sub frmConfigRecargas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()

@@ -1,4 +1,6 @@
-﻿Public Class frmBuscaRepts
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmBuscaRepts
 
     Public VieneDe As String = ""
 
@@ -58,6 +60,11 @@
 
     Private Sub ComboBox1_DropDown(sender As System.Object, e As System.EventArgs) Handles ComboBox1.DropDown
         Dim querry As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         ComboBox1.Items.Clear()
         If (optproveedor.Checked) Then
             querry = "select distinct ProvPri from Productos order by ProvPri"
@@ -89,6 +96,14 @@
 
     Private Sub ComboBox1_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles ComboBox1.SelectedValueChanged
         grdcaptura.Rows.Clear()
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
+
         Try
             Dim querry1 As String = ""
             Dim querry2 As String = ""
@@ -175,6 +190,13 @@
         If TextBox1.Text = "" Then Exit Sub
         grdcaptura.Rows.Clear()
         My.Application.DoEvents()
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
 
         Try
             cnn1.Close() : cnn1.Open()

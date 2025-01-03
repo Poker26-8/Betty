@@ -2,6 +2,7 @@
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Button
 Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmNuvRepVentas
     Dim idabono As Integer = 0
@@ -2390,6 +2391,12 @@ Public Class frmNuvRepVentas
 
         Dim PRECIOCOMPRA As Double = 0
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
+
         txtPropina.Text = "0.00"
         txtSuma.Text = "0.00"
         txtCosto.Text = "0.00"
@@ -2474,7 +2481,7 @@ Public Class frmNuvRepVentas
             fecha = Nothing
             fechanueva = ""
             facturado = 0
-            Dim fechaabono As Date=Date.now
+            Dim fechaabono As Date = Date.Now
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -2687,15 +2694,14 @@ Public Class frmNuvRepVentas
                         End If
 
                         grdCaptura.Rows.Add(folio, cliente, subtotal, Iva, total, propina, descuento, devolucion, acuenta, resta, ieps, formapago, status, fechanueva, facturado)
-
-                            T_Subtotal = T_Subtotal + subtotal
-                            T_IVA = T_IVA + Iva
-                            T_Total = T_Total + total
-                            T_Propina = T_Propina + propina
-                            T_Descuento = T_Descuento + descuento
-                            T_ACuenta = T_ACuenta + acuenta
-                            T_Resta = T_Resta + resta
-                            T_IEPS = T_IEPS + ieps
+                        T_Subtotal = T_Subtotal + subtotal
+                        T_IVA = T_IVA + Iva
+                        T_Total = T_Total + total
+                        T_Propina = T_Propina + propina
+                        T_Descuento = T_Descuento + descuento
+                        T_ACuenta = T_ACuenta + acuenta
+                        T_Resta = T_Resta + resta
+                        T_IEPS = T_IEPS + ieps
 
                         End If
                 Loop
@@ -4525,6 +4531,11 @@ Public Class frmNuvRepVentas
     End Sub
 
     Private Function CB(ByVal cod As String) As String
+
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
+
         Try
             cnn4.Close() : cnn4.Open()
             cmd4 = cnn4.CreateCommand
@@ -4545,6 +4556,9 @@ Public Class frmNuvRepVentas
     End Function
 
     Private Function DameUti(ByVal folio As Integer, ByVal codigo As String, ByVal cantidad As Double) As Double
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
         Try
             cnn4.Close() : cnn4.Open()
             cmd4 = cnn4.CreateCommand
@@ -4566,6 +4580,9 @@ Public Class frmNuvRepVentas
 
     Public Function Saca_NumParte(ByVal codix As String) As String
         Saca_NumParte = ""
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
         Try
             cnn4.Close() : cnn4.Open()
 
@@ -4591,6 +4608,9 @@ Public Class frmNuvRepVentas
     End Function
 
     Public Function Peso_Prod(ByVal codigo As String) As Double
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand
@@ -4612,6 +4632,11 @@ Public Class frmNuvRepVentas
         Dim M1 As Date = mcDesde.SelectionStart.ToShortDateString
         Dim M2 As Date = mcHasta.SelectionStart.ToShortDateString
         Dim querry As String = ""
+
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
+
         cboDatos.Items.Clear()
 
         Try
@@ -4792,6 +4817,12 @@ Public Class frmNuvRepVentas
     Private Sub btnAntibiotico_Click(sender As Object, e As EventArgs) Handles btnAntibiotico.Click
         Dim M1 As Date = mcDesde.SelectionStart.ToShortDateString
         Dim M2 As Date = mcHasta.SelectionStart.ToShortDateString
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             grdCaptura.Rows.Clear()
             grdCaptura.ColumnCount = 13
@@ -4973,6 +5004,12 @@ Public Class frmNuvRepVentas
     Private Sub btnControlado_Click(sender As Object, e As EventArgs) Handles btnControlado.Click
         Dim M1 As Date = mcDesde.SelectionStart.ToShortDateString
         Dim M2 As Date = mcHasta.SelectionStart.ToShortDateString
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             grdCaptura.Rows.Clear()
             grdCaptura.ColumnCount = 11
@@ -5130,7 +5167,9 @@ Public Class frmNuvRepVentas
     End Sub
 
     Public Function FEntrada(ByVal codigo As String)
-
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
         Try
             Dim fecha As Date = Nothing
 
@@ -5604,6 +5643,11 @@ Public Class frmNuvRepVentas
     Private Sub txtcantidad_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcantidad.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             grdCaptura.Rows(txtcodigo.Tag).Cells(4).Value = txtcantidad.Text
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close()
                 cnn1.Open()

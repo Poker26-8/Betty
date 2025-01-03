@@ -1,4 +1,5 @@
 ﻿Imports System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox
+Imports MySql.Data.MySqlClient
 
 Public Class frmVehiculos
 
@@ -36,6 +37,10 @@ Public Class frmVehiculos
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
 
             If MsgBox("¿Desea Guardar los datos del vehículo?", vbInformation + vbOKCancel, titulocentral) = vbCancel Then
@@ -112,6 +117,11 @@ Public Class frmVehiculos
 
     Private Sub txtplacas_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtplacas.KeyPress
         e.KeyChar = UCase(e.KeyChar)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If AscW(e.KeyChar) = Keys.Enter Then
 
             grdServicio.Rows.Clear()
@@ -243,6 +253,10 @@ Public Class frmVehiculos
     End Sub
 
     Private Sub cbomodelo_DropDown(sender As Object, e As EventArgs) Handles cbomodelo.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cbomodelo.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -264,6 +278,9 @@ Public Class frmVehiculos
     End Sub
 
     Private Sub cbomarca_DropDown(sender As Object, e As EventArgs) Handles cbomarca.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cbomarca.Items.Clear()
 
@@ -286,6 +303,9 @@ Public Class frmVehiculos
     End Sub
 
     Private Sub txtChofer_DropDown(sender As Object, e As EventArgs) Handles txtChofer.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             txtChofer.Items.Clear()
 
@@ -355,6 +375,9 @@ Public Class frmVehiculos
             MsgBox("Selecciona una placa para Eliminar!!!!", vbOKOnly + vbOKOnly, titulocentral)
             Exit Sub
         End If
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If MsgBox("¿Deseas Eliminar el Vehículo seleccionado?", vbOKCancel + vbOKOnly, titulocentral) = MsgBoxResult.Ok Then
             cnn1.Close()

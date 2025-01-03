@@ -1,10 +1,15 @@
 ﻿Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepProduccion
     Private Sub rbTodos_CheckedChanged(sender As Object, e As EventArgs) Handles rbTodos.CheckedChanged
         If (rbTodos.Checked) Then
             Dim fecha As Date = Nothing
             Dim f As String = ""
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             grddatos.Rows.Clear()
             rbEmpelado.Checked = False
@@ -53,6 +58,11 @@ Public Class frmRepProduccion
     End Sub
 
     Private Sub cboEmpleado_DropDown(sender As Object, e As EventArgs) Handles cboEmpleado.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboEmpleado.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -165,6 +175,11 @@ Public Class frmRepProduccion
     End Sub
 
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim fecha As Date = Nothing
             Dim f As String = ""
@@ -198,5 +213,9 @@ Public Class frmRepProduccion
         If AscW(e.KeyChar) = Keys.Enter Then
             btnReporte.Focus.Equals(True)
         End If
+    End Sub
+
+    Private Sub frmRepProduccion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class

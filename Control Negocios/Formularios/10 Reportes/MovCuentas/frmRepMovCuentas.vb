@@ -1,4 +1,5 @@
 ﻿Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepMovCuentas
     Private Sub frmRepMovCuentas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -35,6 +36,9 @@ Public Class frmRepMovCuentas
 
             Dim fechan As String = ""
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             If (rbTodos.Checked) Then
 

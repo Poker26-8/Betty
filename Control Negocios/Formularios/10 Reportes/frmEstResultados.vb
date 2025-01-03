@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports MySql.Data.MySqlClient
 Public Class frmEstResultados
 
     Dim nLogo As String = ""
@@ -23,6 +24,13 @@ Public Class frmEstResultados
         Dim cantidad As Double = 0
         Dim costo As Double = 0
         Dim compras As Double = 0
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
 
         On Error GoTo kaka
         'Primero va a sacar qué productos son los que se han vendido en el periodo de tiempo que se haya puesto
@@ -106,6 +114,11 @@ kaka:
 
 
     Private Function TotCantidad(ByVal COD As String) As Double
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -128,6 +141,13 @@ kaka:
     End Function
 
     Private Function TotDescuentos(ByVal COD As String) As Double
+
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -150,6 +170,12 @@ kaka:
     End Function
 
     Private Function TotVentas(ByVal COD As String) As Double
+
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -172,6 +198,11 @@ kaka:
     End Function
 
     Private Function TotDevolucion(ByVal COD As String) As Double
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -194,6 +225,11 @@ kaka:
     End Function
 
     Private Sub btnImprimir_Click(sender As Object, e As EventArgs) Handles btnImprimir.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim tam As Double = 0
             Dim impresora As String = ""
@@ -250,6 +286,10 @@ kaka:
         Dim Y As Double = 0
         Dim Logotipo As Drawing.Image = Nothing
 
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
 
         Try
@@ -398,6 +438,11 @@ kaka:
         Dim Y As Double = 0
 
         Dim Logotipo As Drawing.Image = Nothing
+
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
 
         Try

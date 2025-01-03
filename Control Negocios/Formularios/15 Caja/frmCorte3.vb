@@ -1,4 +1,6 @@
-﻿Public Class frmCorte3
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmCorte3
 
     Dim SUMATOTALEFECTIVO As Double = 0
     Dim SUMAEFECTIVOSINPROPINA As Double = 0
@@ -7,6 +9,11 @@
     Dim propinas As Double = 0
 
     Private Sub frmCorte3_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             dtpFecha.Value = Date.Now
             dtpFechaFin.Value = Date.Now
@@ -32,6 +39,11 @@
         End Try
     End Sub
     Private Sub btnCorteZ_Click(sender As Object, e As EventArgs) Handles btnCorteZ.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim tamticket As Integer = 0
             Dim impresora As String = ""
@@ -134,6 +146,13 @@
             Dim SUMAEGRESOS As Double = 0
 
             Dim folio As Integer = 0
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim CNN4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+            Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
 
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
@@ -697,6 +716,14 @@
 
             Dim folio As Integer = 0
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+            Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
+
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText = "select Pie1,Cab0,Cab1,Cab2,Cab3,Cab4,Cab5,Cab6 from Ticket"
@@ -1202,6 +1229,13 @@
     End Sub
 
     Private Sub btnSalIni_Click(sender As Object, e As EventArgs) Handles btnSalIni.Click
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close()
             cnn1.Open()
@@ -1237,6 +1271,12 @@
     End Sub
 
     Private Sub C_Global()
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -1263,6 +1303,12 @@
     End Sub
 
     Private Sub cboCajero_DropDown(sender As Object, e As EventArgs) Handles cboCajero.DropDown
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCajero.Items.Clear()
 
@@ -1306,6 +1352,12 @@
     End Sub
 
     Private Sub pMesa80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pMesa80.PrintPage
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             Dim tipografia As String = "Lucida Sans Typewriter"
@@ -1445,6 +1497,11 @@
     End Sub
 
     Private Sub pMesa58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pMesa58.PrintPage
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
 
             Dim tipografia As String = "Lucida Sans Typewriter"

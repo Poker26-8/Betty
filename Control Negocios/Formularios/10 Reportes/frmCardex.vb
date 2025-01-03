@@ -1,5 +1,6 @@
 ﻿
 Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmCardex
 
@@ -12,6 +13,10 @@ Public Class frmCardex
         Dim M1 As Date = mCalendar1.SelectionStart.ToShortDateString
         Dim M2 As Date = mCalendar2.SelectionStart.ToShortDateString
         cbonombre.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -35,6 +40,12 @@ Public Class frmCardex
     Public Sub cbonombre_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cbonombre.SelectedValueChanged
         txtcodigo.Text = ""
         lblExistencia.Text = ""
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -60,6 +71,12 @@ Public Class frmCardex
         Dim M1 As Date = mCalendar1.SelectionStart.ToShortDateString
         Dim M2 As Date = mCalendar2.SelectionStart.ToShortDateString
         grdcaptura.Rows.Clear()
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rrd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
 
@@ -245,6 +262,12 @@ Public Class frmCardex
         Dim M2 As Date = mCalendar2.SelectionStart.ToShortDateString
         cboCodigo.Items.Clear()
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -267,6 +290,13 @@ Public Class frmCardex
     Private Sub cboCodigo_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCodigo.SelectedValueChanged
         txtcodigo.Text = ""
         lblExistencia.Text = ""
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+
         Try
             cnn1.Close() : cnn1.Open()
 

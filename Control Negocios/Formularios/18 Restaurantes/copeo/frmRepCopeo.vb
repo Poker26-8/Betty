@@ -1,5 +1,12 @@
-﻿Public Class frmRepCopeo
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmRepCopeo
     Private Sub rbTodos_Click(sender As Object, e As EventArgs) Handles rbTodos.Click
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             Dim existencia As String = ""
@@ -92,12 +99,12 @@
                             If Len(f) = 2 Then
                                 'If f Then
                                 dx = c & "." & f
-                                Else
+                            Else
                                 'f = New String("0")
                                 dx = c & "." & f
-                                End If
                             End If
-                            Else
+                        End If
+                    Else
                         dx = existencia
                     End If
 
@@ -136,10 +143,10 @@
 
 
                     ValCompra = ValCompra + vcompra
-                        ValVenta = ValVenta + vventa
+                    ValVenta = ValVenta + vventa
 
-                        barCarga.Value = barCarga.Value + 1
-                    End If
+                    barCarga.Value = barCarga.Value + 1
+                End If
             Loop
             rd1.Close()
             cnn1.Close()
@@ -174,12 +181,10 @@
                 exSheet.Columns("B").NumberFormat = "@"
 
                 exSheet.Columns("F").NumberFormat = "$#,##0.00"
-                    exSheet.Columns("G").NumberFormat = "$#,##0.00"
-                    exSheet.Columns("H").NumberFormat = "$#,##0.00"
-                    exSheet.Columns("I").NumberFormat = "$#,##0.00"
-
-
-                    Dim Fila As Integer = 0
+                exSheet.Columns("G").NumberFormat = "$#,##0.00"
+                exSheet.Columns("H").NumberFormat = "$#,##0.00"
+                exSheet.Columns("I").NumberFormat = "$#,##0.00"
+                Dim Fila As Integer = 0
                 Dim Col As Integer = 0
 
                 Dim NCol As Integer = grdCaptura.ColumnCount
@@ -196,15 +201,12 @@
                 Next
 
                 Dim Fila2 As Integer = Fila + 2
-                    exSheet.Cells.Item(Fila2 + 2, Col - 1) = "Valor de Compra Total"
-                    exSheet.Cells.Item(Fila2 + 2, Col - 1).Font.Bold = 1
-                    exSheet.Cells.Item(Fila2 + 3, Col - 1) = "Valor de Venta Total"
-                    exSheet.Cells.Item(Fila2 + 3, Col - 1).Font.Bold = 1
-
-                    exSheet.Cells.Item(Fila2 + 2, Col) = FormatNumber(txtCompraTot.Text, 2)
-                    exSheet.Cells.Item(Fila2 + 3, Col) = FormatNumber(txtVentaTot.Text, 2)
-
-
+                exSheet.Cells.Item(Fila2 + 2, Col - 1) = "Valor de Compra Total"
+                exSheet.Cells.Item(Fila2 + 2, Col - 1).Font.Bold = 1
+                exSheet.Cells.Item(Fila2 + 3, Col - 1) = "Valor de Venta Total"
+                exSheet.Cells.Item(Fila2 + 3, Col - 1).Font.Bold = 1
+                exSheet.Cells.Item(Fila2 + 2, Col) = FormatNumber(txtCompraTot.Text, 2)
+                exSheet.Cells.Item(Fila2 + 3, Col) = FormatNumber(txtVentaTot.Text, 2)
                 exSheet.Rows.Item(1).Font.Bold = 1
                 exSheet.Rows.Item(1).HorizontalAlignment = 3
                 exSheet.Columns.AutoFit()
@@ -250,6 +252,12 @@
     End Sub
 
     Private Sub cbofiltro_DropDown(sender As Object, e As EventArgs) Handles cbofiltro.DropDown
+
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
 
         Try
             cbofiltro.Items.Clear()
@@ -352,6 +360,10 @@
             Dim exispunto As String = ""
             Dim existenciasincopas As String = ""
 
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 If (rbProveedor.Checked) Then
@@ -507,6 +519,13 @@
     End Sub
 
     Private Sub btnreporte_Click(sender As Object, e As EventArgs) Handles btnreporte.Click
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             'Producto
@@ -839,6 +858,11 @@
         Dim FCosteo As String = DatosRecarga("FechaCosteo")
         FCosteo = IIf(FCosteo = "", Format(Date.Now, "dd/MM/yyyy"), FCosteo)
 
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -872,6 +896,12 @@
         Dim costoProd As Double = 0
         Dim totalCosto As Double = 0
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -902,6 +932,10 @@
 
     Private Function CompP(ByVal Cod As String, ByVal FFechaIni As Date, ByVal FFechaFin As Date) As Double
         CompP = 0
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -925,6 +959,10 @@
 
     Private Function Canc_Dev(ByVal Cod As String, ByVal FFechaIni As Date, ByVal FFechaFin As Date) As Double
         Canc_Dev = 0
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -949,6 +987,11 @@
 
     Private Function Efectivo_Dev(ByVal Cod As String, ByVal FFechaIni As Date, ByVal FFechaFin As Date) As Double
         Efectivo_Dev = 0
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
