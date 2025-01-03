@@ -1,4 +1,6 @@
-﻿Public Class frmAsigna
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmAsigna
     Dim CFOLIO As Integer = 0
     Dim minutosTiempo As Double = 0
     Public nombrepc As String = ""
@@ -18,6 +20,11 @@
             Me.Close()
             frmMesas.txtUsuario.Focus.Equals(True)
         End If
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -138,6 +145,10 @@
 
         Dim foliocoma As Integer = 0
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         cnn2.Close() : cnn2.Open()
         cmd2 = cnn2.CreateCommand
         cmd2.CommandText = "select * from Ticket"
@@ -203,9 +214,13 @@
             frmMesas.txtUsuario.Focus.Equals(True)
         End If
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
+
         Try
-
-
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -324,6 +339,10 @@
         Dim Y As Double = 0
 
         Dim foliocoma As Integer = 0
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         cnn2.Close() : cnn2.Open()
         cmd2 = cnn2.CreateCommand

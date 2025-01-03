@@ -1,8 +1,15 @@
-﻿Public Class frmPermisosRestaurant
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmPermisosRestaurant
 
     Dim idmesa As Integer = 0
     Dim contraa As String = ""
     Private Sub frmPermisosRestaurant_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
 
             cnn2.Close() : cnn2.Open()
@@ -94,6 +101,13 @@
     End Sub
 
     Private Sub cboNombre_DropDown(sender As Object, e As EventArgs) Handles cboNombre.DropDown
+
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cboNombre.Items.Clear()
 
@@ -116,6 +130,12 @@
     End Sub
 
     Private Sub cboNombre_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboNombre.SelectedValueChanged
+
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -186,6 +206,10 @@
     Private Sub txtcontraseña_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcontraseña.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             If txtcontraseña.Text <> "" Then
+
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
 
                 Dim id_empleado As Integer = 0
                 Try
@@ -263,6 +287,11 @@
 
         If MsgBox("¿Deseas registrar los permisos de este empleado?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
             Dim id_emp As Double = 0
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
 
             Try
                 cnn1.Close() : cnn1.Open()
@@ -364,6 +393,11 @@
     Private Sub btnporcentage_Click(sender As Object, e As EventArgs) Handles btnporcentage.Click
         If txtPorcentage.Text = "" Then Exit Sub
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         cnn1.Close() : cnn1.Open()
         cnn2.Close() : cnn2.Open()
         cmd1 = cnn1.CreateCommand
@@ -391,6 +425,12 @@
     End Sub
 
     Private Sub btnguardartolerancia_Click(sender As Object, e As EventArgs) Handles btnguardartolerancia.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -422,6 +462,10 @@
 
     Public Sub CambioTipoBillar()
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
 
             If (rbhora.Checked) Then
@@ -499,7 +543,9 @@
 
 
         Catch ex As Exception
-
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+            cnn2.Close()
         End Try
 
     End Sub
@@ -513,6 +559,11 @@
     End Sub
 
     Private Sub chkSinComensal_CheckedChanged(sender As Object, e As EventArgs) Handles chkSinComensal.CheckedChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
             Dim sincomensal As Integer = 0
 
@@ -557,6 +608,12 @@
     End Sub
 
     Private Sub Button24_Click(sender As Object, e As EventArgs) Handles Button24.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -602,6 +659,11 @@
     End Sub
 
     Private Sub cbMesasPropias_CheckedChanged(sender As Object, e As EventArgs) Handles cbMesasPropias.CheckedChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             If (cbMesasPropias.Checked) Then
                 cnn1.Close() : cnn1.Open()
@@ -623,6 +685,9 @@
     End Sub
 
     Private Sub cbCopas_CheckedChanged(sender As Object, e As EventArgs) Handles cbCopas.CheckedChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             If (cbCopas.Checked) Then
                 cnn1.Close() : cnn1.Open()
@@ -645,6 +710,10 @@
 
 
     Public Sub CambiodeMesa()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
             If (rbM.Checked) Then
                 cnn1.Close() : cnn1.Open()
@@ -715,6 +784,9 @@
 
 
     Private Sub cboMesa_DropDown(sender As Object, e As EventArgs) Handles cboMesa.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboMesa.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -750,6 +822,10 @@
     End Sub
 
     Private Sub cboUbicacion_DropDown(sender As Object, e As EventArgs) Handles cboUbicacion.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboUbicacion.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -793,6 +869,11 @@
     End Sub
 
     Private Sub cboMesa_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboMesa.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim timepo As Integer = 0
             cnn1.Close() : cnn1.Open()
@@ -825,6 +906,12 @@
     End Sub
 
     Private Sub btnGM_Click(sender As Object, e As EventArgs) Handles btnGM.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             If cboMesa.Text = "" Then MsgBox("Debe ingresar el nombre de la mesa", vbInformation + vbOKOnly, titulorestaurante) : cboMesa.Focus.Equals(True) : Exit Sub
             If cboUbicacion.Text = "" Then MsgBox("Debe ingresar la ubiación de la mesa", vbInformation + vbOKOnly, titulorestaurante) : cboUbicacion.Focus.Equals(True) : Exit Sub
@@ -900,6 +987,13 @@
     Private Sub btnEM_Click(sender As Object, e As EventArgs) Handles btnEM.Click
 
         If MsgBox("¿Desea eliminar la mesa seleccionada?", vbInformation + vbYesNo, titulorestaurante) = vbYes Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -930,6 +1024,12 @@
     End Sub
 
     Private Sub cbCobroExacto_CheckedChanged(sender As Object, e As EventArgs) Handles cbCobroExacto.CheckedChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd3 As MySqlDataReader
+        Dim cmd1, cmd3 As MySqlCommand
+
         Try
             Dim cobro As Integer = 0
 
@@ -972,6 +1072,13 @@
     End Sub
 
     Private Sub cbCobroSimplificado_Click(sender As Object, e As EventArgs) Handles cbCobroSimplificado.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
+        Dim rd1, rd3 As MySqlDataReader
+        Dim cmd1, cmd3 As MySqlCommand
+
         Try
             Dim simple As Integer = 0
 
@@ -1015,6 +1122,12 @@
     End Sub
 
     Private Sub chkPantallaExtras_CheckedChanged(sender As Object, e As EventArgs) Handles chkPantallaExtras.CheckedChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             If (chkPantallaExtras.Checked) Then

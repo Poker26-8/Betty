@@ -4,6 +4,7 @@ Imports ClosedXML.Excel.XLPredefinedFormat
 Imports Core.DAL.DE
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
+Imports MySql.Data.MySqlClient
 Public Class frmNuevo
 
     Friend WithEvents btnMesa As System.Windows.Forms.Button
@@ -78,6 +79,12 @@ Public Class frmNuevo
 
     Private Sub btnPdf_Click(sender As Object, e As EventArgs) Handles btnPdf.Click
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
+
         DataGridView1.Rows.Clear()
 
         Dim id As String = ""
@@ -132,6 +139,11 @@ Public Class frmNuevo
     End Sub
 
     Private Sub ComboBox1_DropDown(sender As Object, e As EventArgs) Handles ComboBox1.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             ComboBox1.Items.Clear()
 
@@ -154,6 +166,10 @@ Public Class frmNuevo
     End Sub
 
     Private Sub ComboBox1_SelectedValueChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -201,6 +217,10 @@ Public Class frmNuevo
     End Sub
 
     Private Sub Departamentos()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
 

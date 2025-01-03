@@ -1,10 +1,17 @@
-﻿Public Class frmTraspasarProducto
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmTraspasarProducto
 
     Private filaSeleccionada As New Dictionary(Of Integer, Boolean)()
 
     Dim fecha As Date = Nothing
     Dim fechanueva As String = ""
     Private Sub frmTraspasarProducto_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -103,6 +110,9 @@
         Next
         My.Application.DoEvents()
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
 
         If grd2.Rows.Count > 0 Then

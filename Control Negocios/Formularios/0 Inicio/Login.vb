@@ -236,7 +236,7 @@ Public Class Login
             conexion.Close()
         End Try
 
-        sTargetlocalmysql = "server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300"
+        sTargetlocalmysql = "server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300"
 
         cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
         cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
@@ -292,6 +292,9 @@ Public Class Login
                 lector.Close()
 
                 If txtRuta.Text = "" Then
+
+                    sTargetlocalmysql = "server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300"
+
                     cnn1 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                     cnn2 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                     cnn3 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
@@ -317,6 +320,8 @@ Public Class Login
                         "update Server set Adicional=0"
                     comando.ExecuteNonQuery()
                 Else
+                    sTargetlocalmysql = "server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300"
+
                     cnn1 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                     cnn2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                     cnn3 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
@@ -643,6 +648,9 @@ Public Class Login
                 coma.ExecuteNonQuery()
 
                 If txtRuta.Text = "" Then
+
+                    sTargetlocalmysql = "server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300"
+
                     cnn1 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                     cnn2 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                     cnn3 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
@@ -662,6 +670,8 @@ Public Class Login
                     'cnn7 = New MySqlClient.MySqlConnection("Data source=" & MyIP & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22")
                     'cnn8 = New MySqlClient.MySqlConnection("Data source=" & MyIP & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22")
                 Else
+                    sTargetlocalmysql = "server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300"
+
                     cnn1 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                     cnn2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                     cnn3 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
@@ -672,14 +682,6 @@ Public Class Login
                     cnn7 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                     cnntimer = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                     cnntimer2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    'cnn1 = New MySqlClient.MySqlConnection("Data source=" & txtRuta.Text & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22")
-                    'cnn2 = New MySqlClient.MySqlConnection("Data source=" & txtRuta.Text & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22")
-                    'cnn3 = New MySqlClient.MySqlConnection("Data source=" & txtRuta.Text & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22")
-                    'cnn4 = New MySqlClient.MySqlConnection("Data source=" & txtRuta.Text & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22")
-                    'cnn5 = New MySqlClient.MySqlConnection("Data source=" & txtRuta.Text & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22")
-                    'cnn9 = New MySqlClient.MySqlConnection("Data source=" & txtRuta.Text & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22")
-                    'cnn8 = New MySqlClient.MySqlConnection("Data source=" & txtRuta.Text & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22")
-                    'cnn7 = New MySqlClient.MySqlConnection("Data source=" & txtRuta.Text & ";Integrated Security=False; initial catalog=CN1; user id=Delsscom; password=jipl22")
                 End If
 
                 If txtRuta.Text <> "" Then

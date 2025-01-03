@@ -5,6 +5,7 @@ Imports System.Threading.Tasks
 Imports System.Xml
 Imports Chilkat
 Imports Gma.QrCodeNet.Encoding.Windows.Forms
+Imports MySql.Data.MySqlClient
 Public Class frmNuevoPagarSencillo
 
     Public subtotalmapeo As Double = 0
@@ -79,6 +80,11 @@ Public Class frmNuevoPagarSencillo
 
     Private Sub frmNuevoPagarSencillo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             nLogo = DatosRecarga("LogoG")
             tLogo = DatosRecarga("TipoLogo")
@@ -152,6 +158,10 @@ Public Class frmNuevoPagarSencillo
     Private Sub Timer_Tick(sender As Object, e As EventArgs)
         tim.Stop()
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             grdComanda.Rows.Clear()
             sumacomandas = 0
@@ -215,6 +225,10 @@ Public Class frmNuevoPagarSencillo
 
     Private Sub TFolio_Tick(sender As Object, e As EventArgs) Handles TFolio.Tick
         TFolio.Stop()
+
+        Dim cnntimer As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rdtimer As MySqlDataReader
+        Dim cmdtimer As MySqlCommand
 
         cnntimer.Close() : cnntimer.Open()
         cmdtimer = cnntimer.CreateCommand
@@ -506,6 +520,10 @@ Public Class frmNuevoPagarSencillo
 
     Public Sub traercomanda()
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
@@ -540,6 +558,11 @@ Public Class frmNuevoPagarSencillo
     End Sub
 
     Private Sub cboComanda_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboComanda.SelectedValueChanged
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
 
             txtSubtotalmapeo.Text = "0.00"
@@ -577,6 +600,10 @@ Public Class frmNuevoPagarSencillo
     End Sub
 
     Private Sub cboComensal_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboComensal.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             txtSubtotalmapeo.Text = "0.00"
             grdComanda.Rows.Clear()
@@ -612,6 +639,10 @@ Public Class frmNuevoPagarSencillo
 
     Public Sub traernumerocomensal()
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         cnn2.Close() : cnn2.Open()
         cmd2 = cnn2.CreateCommand
         cmd2.CommandText = "SELECT NotasCred FROM Formatos WHERE Facturas='SinNumComensal'"
@@ -627,6 +658,11 @@ Public Class frmNuevoPagarSencillo
     End Sub
 
     Private Sub cboComanda_DropDown(sender As Object, e As EventArgs) Handles cboComanda.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboComanda.Items.Clear()
 
@@ -649,6 +685,11 @@ Public Class frmNuevoPagarSencillo
     End Sub
 
     Private Sub cboComensal_DropDown(sender As Object, e As EventArgs) Handles cboComensal.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboComensal.Items.Clear()
 
@@ -710,6 +751,14 @@ Public Class frmNuevoPagarSencillo
         Dim saldomonnuevo As Double = 0
 
         Dim idemp As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
 
         cnn1.Close() : cnn1.Open()
         cnn2.Close() : cnn2.Open()
@@ -1645,6 +1694,12 @@ deku:
     Private Sub btnPrecuenta_Click(sender As Object, e As EventArgs) Handles btnPrecuenta.Click
         If grdComanda.Rows.Count <> 0 Then
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2, rd3 As MySqlDataReader
+            Dim cmd1, cmd2, cmd3 As MySqlCommand
+
             If lblusuario2.Text = "" Then
                 MsgBox("Digite la clave de usuario", vbInformation + vbOKOnly, titulomensajes)
                 Exit Sub
@@ -1797,6 +1852,13 @@ deku:
     End Sub
 
     Private Sub Precuenta80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles Precuenta80.PrintPage
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
         Try
             Dim tipografia As String = "Lucida Sans Typewriter"
             Dim fuente_r As New Font("Lucida Sans Typewriter", 8, FontStyle.Regular)
@@ -2164,6 +2226,14 @@ deku:
     End Sub
 
     Private Sub Precuenta58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles Precuenta58.PrintPage
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
         Try
             Dim tipografia As String = "Lucida Sans Typewriter"
             Dim fuente_r As New Font("Lucida Sans Typewriter", 7, FontStyle.Regular)
@@ -2631,6 +2701,13 @@ deku:
         Dim DEPA As String = ""
         Dim GRUPO1 As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cnn2.Close() : cnn2.Open()
@@ -2838,6 +2915,10 @@ deku:
         Dim impresoracomanda As String = ""
         Dim tamimpre As Integer = 0
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3 As MySqlDataReader
+        Dim cmd2, cmd3 As MySqlCommand
 
         Try
             cnn2.Close() : cnn2.Open()
@@ -2897,6 +2978,12 @@ deku:
     End Function
 
     Private Sub Cancelacion80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles Cancelacion80.PrintPage
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd4 As MySqlDataReader
+        Dim cmd2, cmd4 As MySqlCommand
+
         Try
             Dim tipografia As String = "Lucida Sans Typewriter"
             Dim fuente_r As New Font("Lucida Sans Typewriter", 8, FontStyle.Regular)
@@ -3031,6 +3118,12 @@ deku:
     End Sub
 
     Private Sub Cancelacion58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles Cancelacion58.PrintPage
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd4 As MySqlDataReader
+        Dim cmd2, cmd4 As MySqlCommand
+
         Try
             Dim tipografia As String = "Lucida Sans Typewriter"
             Dim fuente_r As New Font("Lucida Sans Typewriter", 7, FontStyle.Regular)
@@ -3198,6 +3291,13 @@ deku:
         Dim autofact As String = DatosRecarga("LinkAuto")
         Dim whats As String = DatosRecarga("Whatsapp")
         Dim ligaqr As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
 
         If whats <> "" Then
             ligaqr = "http://wa.me/" & whats
@@ -3780,6 +3880,14 @@ deku:
 
         Dim autofact As String = DatosRecarga("LinkAuto")
         Dim siqr As String = DatosRecarga2("LinkAuto")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
 
         If whats <> "" Then
             ligaqr = "http://wa.me/" & whats
@@ -4574,6 +4682,12 @@ deku:
         Dim gprint As String = ""
         Dim existe As Double = 0
         Dim NEW_EXISTE As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             If codigoeliminar = "" Then MsgBox("Necesita seleccionar un producto", vbInformation + vbOKOnly, titulorestaurante) : Exit Sub
 
@@ -4911,6 +5025,10 @@ deku:
         Dim Pie3 As String = ""
         Dim articulos As Integer = 0
 
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
+
         '[°]. Logotipo
         If tLogo <> "SIN" Then
             If File.Exists(My.Application.Info.DirectoryPath & "\" & nLogo) Then
@@ -5009,24 +5127,20 @@ deku:
         e.Graphics.DrawString("--------------------------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
         Y += 15
 
-
-
-
-
         e.Graphics.DrawString(cantidadeliminar, fuente_b, Brushes.Black, 1, Y)
 
         Dim caracteresPorLinea As Integer = 30
         Dim texto As String = descripcioneliminar
         Dim inicio As Integer = 0
-                Dim longitudTexto As Integer = texto.Length
+        Dim longitudTexto As Integer = texto.Length
 
-                While inicio < longitudTexto
-                    Dim longitudBloque As Integer = Math.Min(caracteresPorLinea, longitudTexto - inicio)
-                    Dim bloque As String = texto.Substring(inicio, longitudBloque)
-                    e.Graphics.DrawString(bloque, New Font("Arial", 9, FontStyle.Regular), Brushes.Black, 25, Y)
-                    Y += 15
-                    inicio += caracteresPorLinea
-                End While
+        While inicio < longitudTexto
+            Dim longitudBloque As Integer = Math.Min(caracteresPorLinea, longitudTexto - inicio)
+            Dim bloque As String = texto.Substring(inicio, longitudBloque)
+            e.Graphics.DrawString(bloque, New Font("Arial", 9, FontStyle.Regular), Brushes.Black, 25, Y)
+            Y += 15
+            inicio += caracteresPorLinea
+        End While
 
         e.Graphics.DrawString(FormatNumber(precioeliminar, 2), fuente_b, Brushes.Black, 215, Y, derecha)
         e.Graphics.DrawString(FormatNumber(totaleliminar, 2), fuente_b, Brushes.Black, 270, Y, derecha)
@@ -5074,6 +5188,10 @@ deku:
         Dim Pie2 As String = ""
         Dim Pie3 As String = ""
         Dim articulos As Integer = 0
+
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
 
         '[°]. Logotipo
         If tLogo <> "SIN" Then
@@ -5180,23 +5298,23 @@ deku:
         Dim caracteresPorLinea As Integer = 25
         Dim texto As String = descripcioneliminar
         Dim inicio As Integer = 0
-                Dim longitudTexto As Integer = texto.Length
+        Dim longitudTexto As Integer = texto.Length
 
-                While inicio < longitudTexto
-                    Dim longitudBloque As Integer = Math.Min(caracteresPorLinea, longitudTexto - inicio)
-                    Dim bloque As String = texto.Substring(inicio, longitudBloque)
-                    e.Graphics.DrawString(bloque, New Font("Arial", 8, FontStyle.Regular), Brushes.Black, 20, Y)
-                    Y += 15
-                    inicio += caracteresPorLinea
-                End While
+        While inicio < longitudTexto
+            Dim longitudBloque As Integer = Math.Min(caracteresPorLinea, longitudTexto - inicio)
+            Dim bloque As String = texto.Substring(inicio, longitudBloque)
+            e.Graphics.DrawString(bloque, New Font("Arial", 8, FontStyle.Regular), Brushes.Black, 20, Y)
+            Y += 15
+            inicio += caracteresPorLinea
+        End While
 
 
         e.Graphics.DrawString(FormatNumber(precioeliminar, 2), fuente_b, Brushes.Black, 133, Y, derecha)
         e.Graphics.DrawString(FormatNumber(totaleliminar, 2), fuente_b, Brushes.Black, 180, Y, derecha)
         Y += 20
 
-                articulos = articulos + cantidadeliminar
-                e.Graphics.DrawString("--------------------------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
+        articulos = articulos + cantidadeliminar
+        e.Graphics.DrawString("--------------------------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
         Y += 16
 
         e.Graphics.DrawString("TOTAL: ", fuente_b, Brushes.Black, 1, Y)

@@ -1,4 +1,6 @@
-﻿Public Class frmPantallaExtras
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmPantallaExtras
     Dim totextras As Integer = 0
     Friend WithEvents btnExtra As System.Windows.Forms.Button
     Public CodigoProducto As String = 0
@@ -7,6 +9,10 @@
     End Sub
 
     Public Sub Extras(ByVal producto As String)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             Dim cuantosextras As UInteger = Math.Truncate(pExtras.Height / 90)

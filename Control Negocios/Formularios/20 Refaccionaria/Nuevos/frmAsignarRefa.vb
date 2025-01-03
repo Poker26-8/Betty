@@ -1,4 +1,6 @@
-﻿Public Class frmAsignarRefa
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmAsignarRefa
     Private Sub frmAsignarRefa_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
@@ -8,6 +10,11 @@
     End Sub
 
     Private Sub cboCodigo_DropDown(sender As Object, e As EventArgs) Handles cboCodigo.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCodigo.Items.Clear()
 
@@ -30,6 +37,10 @@
     End Sub
 
     Private Sub cboNombre_DropDown(sender As Object, e As EventArgs) Handles cboNombre.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboNombre.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -51,6 +62,11 @@
     End Sub
 
     Private Sub cboMarca_DropDown(sender As Object, e As EventArgs) Handles cboMarca.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboMarca.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -72,6 +88,10 @@
     End Sub
 
     Private Sub cboModelo_DropDown(sender As Object, e As EventArgs) Handles cboModelo.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboModelo.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -93,6 +113,10 @@
     End Sub
 
     Private Sub cboUbicaicon_DropDown(sender As Object, e As EventArgs) Handles cboUbicaicon.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboUbicaicon.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -144,6 +168,11 @@
     Private Sub txtnumparte_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtnumparte.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd2 As MySqlDataReader
+            Dim cmd2 As MySqlCommand
+
 
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
@@ -249,6 +278,13 @@
     End Sub
 
     Public Sub TraerDatos(ByVal dato As String)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -292,6 +328,12 @@
     End Sub
 
     Public Sub TraerDatos2(ByVal dato As String)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -317,6 +359,13 @@
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
+
         Try
 
             If cboMarca.Text = "" Then MsgBox("Seleccione la marca") : cboMarca.Focus.Equals(True) : Exit Sub
@@ -403,6 +452,11 @@
     End Sub
 
     Private Sub cboAno_DropDown(sender As Object, e As EventArgs) Handles cboAno.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboAno.Items.Clear()
 
@@ -425,6 +479,12 @@
     End Sub
 
     Private Sub cboServicio_DropDown(sender As Object, e As EventArgs) Handles cboServicio.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
+
         Try
             cboServicio.Items.Clear()
 
@@ -451,6 +511,11 @@
     End Sub
 
     Private Sub cboMotor_DropDown(sender As Object, e As EventArgs) Handles cboMotor.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboMotor.Items.Clear()
             cnn5.Close() : cnn5.Open()

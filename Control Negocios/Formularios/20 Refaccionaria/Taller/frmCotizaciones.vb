@@ -3,6 +3,7 @@ Imports System.IO
 Imports CrystalDecisions.CrystalReports.Engine
 Imports MySql.Data.MySqlClient.Memcached
 Imports System.Numerics
+Imports MySql.Data.MySqlClient
 
 Public Class frmCotizaciones
     Dim descuento As Integer = 0
@@ -15,6 +16,11 @@ Public Class frmCotizaciones
     Dim my_folio As Integer = 0
 
     Private Sub cboCotizaciones_DropDown(sender As Object, e As EventArgs) Handles cboCotizaciones.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCotizaciones.Items.Clear()
 
@@ -37,6 +43,10 @@ Public Class frmCotizaciones
     End Sub
 
     Private Sub cboCliente_DropDown(sender As Object, e As EventArgs) Handles cboCliente.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCliente.Items.Clear()
 
@@ -58,6 +68,11 @@ Public Class frmCotizaciones
     End Sub
 
     Private Sub cboVehiculo_DropDown(sender As Object, e As EventArgs) Handles cboVehiculo.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
 
             If cboCliente.Text = "" Then Exit Sub
@@ -82,6 +97,11 @@ Public Class frmCotizaciones
     End Sub
 
     Private Sub cboCotizaciones_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCotizaciones.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             grdCaptura.Rows.Clear()
             txtTotalVenta.Text = "0.00"
@@ -142,6 +162,11 @@ Public Class frmCotizaciones
 
     Private Sub txtUsuario_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUsuario.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             cnn1.Clone() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "SELECT Alias,Status FROM usuarios WHERE Clave='" & txtUsuario.Text & "'"
@@ -187,6 +212,10 @@ Public Class frmCotizaciones
         Dim descuento As Double = 0
         Dim subtotal As Double = 0
         Dim totreal As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -332,6 +361,11 @@ Door:
         Dim MyStatus As String = ""
         Dim tel_cliente As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd3 As MySqlDataReader
+        Dim cmd1, cmd3 As MySqlCommand
+
         With oData
             If .dbOpen(a_cnn, Direcc_Access, sInfo) Then
                 .runSp(a_cnn, "delete from CotPedDetalle", sInfo) : sInfo = ""
@@ -445,6 +479,11 @@ doorcita:
         Dim crConnectionInfo As New ConnectionInfo
         Dim CrTables As Tables
         Dim CrTable As Table
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
 
         crea_ruta(My.Application.Info.DirectoryPath & "\ARCHIVOSDL1\COTIZACIONES\")
         root_name_recibo = My.Application.Info.DirectoryPath & "\ARCHIVOSDL1\COTIZACIONES\" & MyFolio & ".pdf"
@@ -610,6 +649,10 @@ doorcita:
     End Sub
 
     Private Sub cboDescripcion_DropDown(sender As Object, e As EventArgs) Handles cboDescripcion.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboDescripcion.Items.Clear()
 
@@ -634,6 +677,10 @@ doorcita:
     Private Sub cboDescripcion_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboDescripcion.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "SELECT Codigo FROM productos WHERE Nombre='" & cboDescripcion.Text & "'"
@@ -653,6 +700,10 @@ doorcita:
 
     Private Sub cboCodigo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboCodigo.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -705,6 +756,10 @@ doorcita:
     End Sub
 
     Private Sub cboCodigo_DropDown(sender As Object, e As EventArgs) Handles cboCodigo.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCodigo.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -775,6 +830,10 @@ doorcita:
     Private Sub Timer_Tick(sender As Object, e As EventArgs)
         tim.Stop()
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
@@ -810,6 +869,11 @@ doorcita:
     End Sub
 
     Private Sub btnAsignar_Click(sender As Object, e As EventArgs) Handles btnAsignar.Click
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
 
             If lblUsuario.Text = "" Then MsgBox("Ingrese la contraseña de favor", vbInformation + vbOKOnly) : txtUsuario.Focus.Equals(True)
@@ -856,6 +920,10 @@ doorcita:
     End Sub
 
     Private Sub cboVehiculo_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboVehiculo.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -884,6 +952,9 @@ doorcita:
         Dim dr As DataRow = Nothing
         Dim dt As New DataTable
 
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
 
         Dim MyStatus As String = ""
 
@@ -983,6 +1054,10 @@ doorcita:
         Dim crConnectionInfo As New ConnectionInfo
         Dim CrTables As Tables
         Dim CrTable As Table
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         crea_ruta(My.Application.Info.DirectoryPath & "\ARCHIVOSDL1\ORDEN_SERVICIO\")
         root_name_recibo = My.Application.Info.DirectoryPath & "\ARCHIVOSDL1\ORDEN_SERVICIO\" & my_folio & ".pdf"
@@ -1117,6 +1192,10 @@ doorcita:
     End Sub
 
     Private Sub cboCliente_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCliente.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand

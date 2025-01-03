@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports MySql.Data.MySqlClient
 Public Class frmcortemesero
 
     Dim Folio1 As String = ""
@@ -29,6 +30,12 @@ Public Class frmcortemesero
     End Sub
 
     Private Sub cbomesero_DropDown(sender As Object, e As EventArgs) Handles cbomesero.DropDown
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cbomesero.Items.Clear()
 
@@ -51,6 +58,9 @@ Public Class frmcortemesero
 
     Private Sub btnImprimir_Click(sender As Object, e As EventArgs) Handles btnImprimir.Click
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
 
 
@@ -169,15 +179,20 @@ Public Class frmcortemesero
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn1.Close()
-
         End Try
 
     End Sub
 
     Private Sub PCorte80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PCorte80.PrintPage
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn9 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4, rd9 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4, cmd9 As MySqlCommand
 
         Try
-
 
             'Fuentes prederminadas
             Dim tipografia As String = "Lucida Sans Typewriter"
@@ -481,7 +496,12 @@ Public Class frmcortemesero
 
     Private Sub PCorteU80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PCorteU80.PrintPage
 
-
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
         'es corte por usuario y por turno
         Try
 
@@ -761,6 +781,15 @@ Public Class frmcortemesero
     End Sub
 
     Private Sub pCortePe80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pCortePe80.PrintPage
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn9 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4, rd9 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4, cmd9 As MySqlCommand
+
         Try
 
             'Fuentes prederminadas
@@ -1067,9 +1096,15 @@ Public Class frmcortemesero
     End Sub
 
     Private Sub PCortePU80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PCortePU80.PrintPage
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
         Try
-
-
             'Fuentes prederminadas
             Dim tipografia As String = "Lucida Sans Typewriter"
             Dim fuente_datos As New Drawing.Font(tipografia, 10, FontStyle.Bold)
@@ -1344,9 +1379,14 @@ Public Class frmcortemesero
 
     Private Sub PCorte58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PCorte58.PrintPage
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn9 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4, rd9 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4, cmd9 As MySqlCommand
         Try
-
-
             'Fuentes prederminadas
             Dim tipografia As String = "Lucida Sans Typewriter"
             Dim fuente_datos As New Drawing.Font(tipografia, 8, FontStyle.Bold)
@@ -1648,6 +1688,13 @@ Public Class frmcortemesero
 
     Private Sub PCorteU58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PCorteU58.PrintPage
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
         Try
             'Fuentes prederminadas
             Dim tipografia As String = "Lucida Sans Typewriter"
@@ -1921,6 +1968,13 @@ Public Class frmcortemesero
 
     Private Sub pCortePe58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pCortePe58.PrintPage
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn9 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4, rd9 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4, cmd9 As MySqlCommand
         Try
 
             'Fuentes prederminadas
@@ -2227,9 +2281,15 @@ Public Class frmcortemesero
     End Sub
 
     Private Sub PCortePU58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PCortePU58.PrintPage
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
         Try
-
-
             'Fuentes prederminadas
             Dim tipografia As String = "Lucida Sans Typewriter"
             Dim fuente_datos As New Drawing.Font(tipografia, 8, FontStyle.Bold)
@@ -2500,6 +2560,11 @@ Public Class frmcortemesero
 
 
     Private Sub cbomesero_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbomesero.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand

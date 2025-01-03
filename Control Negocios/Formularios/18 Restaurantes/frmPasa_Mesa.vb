@@ -1,4 +1,6 @@
-﻿Public Class frmPasa_Mesa
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmPasa_Mesa
     Public PAGARCOMANDA As Integer = 0
     Private Sub frmPasa_Mesa_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         txtclave.Focus.Equals(True)
@@ -19,6 +21,10 @@
 
             Dim id_usu As Integer = 0
             Dim sobrenombre As String = ""
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 cnn1.Close() : cnn1.Open()
@@ -53,10 +59,10 @@
 
             Catch ex As Exception
                 MessageBox.Show(ex.ToString())
-                    cnn1.Close()
-                End Try
+                cnn1.Close()
+            End Try
 
-            End If
+        End If
 
     End Sub
 

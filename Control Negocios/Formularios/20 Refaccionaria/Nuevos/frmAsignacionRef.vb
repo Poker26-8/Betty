@@ -3,6 +3,7 @@ Imports System.IO
 Imports CrystalDecisions.Shared
 Imports CrystalDecisions.CrystalReports.Engine
 Imports DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing
+Imports MySql.Data.MySqlClient
 
 Public Class frmAsignacionRef
     Dim idcliente As Integer = 0
@@ -28,6 +29,11 @@ Public Class frmAsignacionRef
             Dim codigopro As String = ""
             Dim preciopro As Double = 0
             Dim tot As Double = 0
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -67,6 +73,11 @@ Public Class frmAsignacionRef
     End Sub
 
     Private Sub cboDescripcion_DropDown(sender As Object, e As EventArgs) Handles cboDescripcion.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboDescripcion.Items.Clear()
 
@@ -109,6 +120,11 @@ Public Class frmAsignacionRef
     End Sub
 
     Private Sub btnEnviar_Click(sender As Object, e As EventArgs) Handles btnEnviar.Click
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             If grdRefaccion.Rows.Count > 0 Then
                 For luffy As Integer = 0 To grdRefaccion.Rows.Count - 1
@@ -154,6 +170,10 @@ Public Class frmAsignacionRef
         Dim totalp As Double = 0
         Dim ivaventa As Double = 0
         Dim totalventa As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
 
         Try
@@ -300,6 +320,11 @@ Door:
         Dim MyStatus As String = ""
         Dim tel_cliente As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd3 As MySqlDataReader
+        Dim cmd1, cmd3 As MySqlCommand
+
         With oData
             If .dbOpen(a_cnn, Direcc_Access, sInfo) Then
                 .runSp(a_cnn, "delete from CotPedDetalle", sInfo) : sInfo = ""
@@ -413,6 +438,10 @@ doorcita:
         Dim crConnectionInfo As New ConnectionInfo
         Dim CrTables As Tables
         Dim CrTable As Table
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         crea_ruta(My.Application.Info.DirectoryPath & "\ARCHIVOSDL1\COTIZACIONES\")
         root_name_recibo = My.Application.Info.DirectoryPath & "\ARCHIVOSDL1\COTIZACIONES\" & MyFolio & ".pdf"

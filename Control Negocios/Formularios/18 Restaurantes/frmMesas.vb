@@ -1,6 +1,7 @@
 ﻿
 Imports System.Net
 Imports System.IO
+Imports MySql.Data.MySqlClient
 Public Class frmMesas
 
     Dim tim As New Timer()
@@ -54,6 +55,10 @@ Public Class frmMesas
 
     Private Sub frmMesas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         tim.Interval = 15000
         AddHandler tim.Tick, AddressOf Timer_Tick
@@ -161,6 +166,11 @@ Public Class frmMesas
 
 
     Public Sub TRAERLUGAR()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
 
         Dim ubi As Integer = 1
         Dim cuantos As Integer = Math.Truncate(psuperior.Height / 100)
@@ -273,6 +283,12 @@ Public Class frmMesas
             pmesas.Controls.Clear()
             Exit Sub
         End If
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn9 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3, rd9 As MySqlDataReader
+        Dim cmd2, cmd3, cmd9 As MySqlCommand
 
         Try
 
@@ -503,6 +519,11 @@ Public Class frmMesas
 
         Dim mesapropia As Integer = DatosRecarga("MesasPropias")
 
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         cnn3.Close() : cnn3.Open()
 
         If mesapropia = 1 Then
@@ -574,6 +595,13 @@ Public Class frmMesas
 
         Dim usua As Integer = 0
         Dim esadminocaj As Integer = 0
+
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn9 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3, rd9 As MySqlDataReader
+        Dim cmd2, cmd3, cmd9 As MySqlCommand
         Try
             If idempleado = 0 Then
                 pmesaNM.Controls.Clear()
@@ -620,9 +648,7 @@ Public Class frmMesas
 
                         cmd2.CommandText = "SELECT Mesa.Nombre_mesa, Mesa.TempNom,Mesa.X,Mesa.Y,Mesa.Tipo,Mesa.IdEmpleado FROM Mesa, Mesasxempleados where Mesasxempleados.Mesa = Mesa.Nombre_mesa and Mesasxempleados.IdEmpleado = " & id_usu_log & " AND Mesa.Ubicacion='" & ubicacion & "'  order by Orden"
 
-
-
-                            Else
+                    Else
 
                         If esadminocaj = 1 Then
                             cmd2.CommandText = "SELECT Mesa.Nombre_mesa, Mesa.TempNom,Mesa.X,Mesa.Y,Mesa.Tipo,Mesa.IdEmpleado FROM Mesa, Mesasxempleados where Mesasxempleados.Mesa = Mesa.Nombre_mesa AND Mesa.Ubicacion='" & ubicacion & "' order by Orden"
@@ -832,10 +858,14 @@ Public Class frmMesas
         lbltotalmesa.Text = "0.00"
 
         Dim totalcomanda As Double = 0
-
         Dim total_billar As Double = 0
-
         Dim totalc As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         frmNuevoPagar.Close()
         frmNuevoPagarSencillo.Close()
 
@@ -995,6 +1025,7 @@ Public Class frmMesas
             Catch ex As Exception
                 MessageBox.Show(ex.ToString())
                 cnn1.Close()
+                cnn2.Close()
             End Try
         End If
 
@@ -1008,6 +1039,10 @@ Public Class frmMesas
     End Sub
 
     Private Sub btnMesa_MouseUp(sender As Object, e As MouseEventArgs)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Dim table As Button = CType(sender, Button)
         Dim x As Double = e.X + table.Left - inicial.X
@@ -1121,7 +1156,10 @@ Public Class frmMesas
 
     Private Sub KeyOP(ByVal valor As String)
 
-
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Select Case valor
             Case "USU"
 
@@ -1435,6 +1473,11 @@ Public Class frmMesas
 
     Private Sub btnjuntar_Click(sender As Object, e As EventArgs) Handles btnjuntar.Click
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3 As MySqlDataReader
+        Dim cmd2, cmd3 As MySqlCommand
+
         Try
             Dim IDEMPLEADO As Integer = 0
             cnn2.Close() : cnn2.Open()
@@ -1493,6 +1536,10 @@ Public Class frmMesas
             Exit Sub
         End If
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If lblusuario.Text = "" Then
             MsgBox("Ingrese la clave de Usuario", vbInformation + vbOKOnly, titulomensajes)
             Exit Sub
@@ -1527,6 +1574,11 @@ Public Class frmMesas
     End Sub
 
     Private Sub btncobro_Click(sender As Object, e As EventArgs) Handles btncobro.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If lbltotalmesa.Text = "0.00" Then
             Exit Sub
         Else
@@ -1606,6 +1658,11 @@ Public Class frmMesas
         Dim id_usu As Integer = 0
         Dim sobrenombre As String = ""
         If txtUsuario.Text = "" Then MsgBox("Ingrese la contraseña para asignar las mesas", vbInformation + vbOKOnly, titulorestaurante) : txtUsuario.Focus.Equals(True) : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -1657,6 +1714,10 @@ Public Class frmMesas
     End Sub
 
     Private Sub txtUsuario_TextChanged(sender As Object, e As EventArgs) Handles txtUsuario.TextChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             If txtUsuario.Text = "" Then Exit Sub
             idempleado = 0
@@ -1747,10 +1808,12 @@ Public Class frmMesas
         foco = "USU"
         lbltotalmesa.Text = "0.00"
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Dim totalcomanda As Double = 0
-
         Dim total_billar As Double = 0
-
         Dim totalc As Double = 0
         frmNuevoPagar.Close()
         frmNuevoPagarSencillo.Close()

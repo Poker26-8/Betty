@@ -1,4 +1,6 @@
-﻿Public Class frmTecladoVtaTouchEntrada
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmTecladoVtaTouchEntrada
 
     Public Respuesta As String = ""
     Public listado As Boolean
@@ -13,14 +15,17 @@
 
     Private Sub frmTecladoVtaTouchEntrada_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
 
-        Respuesta = IIf(listado, txtNombre.Text, txtNombre.Text)
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
+        Respuesta = IIf(listado, txtNombre.Text, txtNombre.Text)
         cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "select NotasCred from Formatos where Facturas='TomaContra'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
+        cmd1 = cnn1.CreateCommand
+        cmd1.CommandText = "select NotasCred from Formatos where Facturas='TomaContra'"
+        rd1 = cmd1.ExecuteReader
+        If rd1.HasRows Then
+            If rd1.Read Then
                 If rd1(0).ToString = 1 Then
                     txtNombre.Text = ClaveUsuario
                     Respuesta = txtNombre.Text
@@ -30,8 +35,8 @@
                     txtNombre.Focus.Equals(True)
                 End If
             End If
-            End If
-            rd1.Close()
+        End If
+        rd1.Close()
         cnn1.Close()
 
     End Sub
@@ -39,6 +44,10 @@
     Private Sub btnAceptar_Click(sender As Object, e As EventArgs) Handles btnAceptar.Click
 
         Dim Area_user As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If txtNombre.Text <> "" Then
 

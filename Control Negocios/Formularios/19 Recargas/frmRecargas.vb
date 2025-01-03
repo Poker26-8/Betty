@@ -2,6 +2,7 @@
 Imports Newtonsoft.Json
 Imports System.Text.RegularExpressions
 Imports Newtonsoft.Json.Linq
+Imports MySql.Data.MySqlClient
 Public Class frmRecargas
     Public Sub limpiaTodo()
         cboCompañia.Text = ""
@@ -51,6 +52,11 @@ Public Class frmRecargas
 
     End Function
     Private Sub cboCompañia_DropDown(sender As Object, e As EventArgs) Handles cboCompañia.DropDown
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cboCompañia.Items.Clear()
             cboTipo.Text = ""
@@ -71,6 +77,11 @@ Public Class frmRecargas
     End Sub
 
     Private Sub cboTipo_DropDown(sender As Object, e As EventArgs) Handles cboTipo.DropDown
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cboTipo.Items.Clear()
             cnn1.Close()
@@ -140,6 +151,11 @@ Public Class frmRecargas
     End Sub
 
     Private Sub cboTipo_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboTipo.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close()
             cnn1.Open()
@@ -186,6 +202,11 @@ Public Class frmRecargas
     End Function
 
     Private Sub MostrarJSONEnComboBox(jsonString As String)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim match As Match = Regex.Match(jsonString, "\[{.*}\]")
             If match.Success Then
@@ -214,6 +235,11 @@ Public Class frmRecargas
         End Try
     End Sub
     Public Sub eliminarecargas()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close()
             cnn1.Open()

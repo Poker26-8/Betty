@@ -1,4 +1,6 @@
-﻿Public Class frmVentaTouchT
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmVentaTouchT
 
     Public Respuesta As String = ""
     Public listado As Boolean
@@ -17,6 +19,10 @@
         framecampo.Text = "Clave del Vendedor"
 
         If framecampo.Text = "Clave del Vendedor" Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
 
             Respuesta = IIf(listado, txtClaveVendedor.Text, txtClaveVendedor.Text)
@@ -220,6 +226,10 @@
 
     Private Sub btnIntro_Click(sender As Object, e As EventArgs) Handles btnIntro.Click
         Dim Area_user As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If txtClaveVendedor.Text <> "" Then
 

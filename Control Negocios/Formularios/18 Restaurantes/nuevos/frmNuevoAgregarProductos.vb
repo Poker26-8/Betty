@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports Microsoft.VisualBasic.Devices
+Imports MySql.Data.MySqlClient
 Public Class frmNuevoAgregarProductos
 
     Friend WithEvents btnDepto, btnGrupo, btnProd, btnPrefe, btnExtra, btnPromo As System.Windows.Forms.Button
@@ -61,6 +62,11 @@ Public Class frmNuevoAgregarProductos
 
     Public Sub Departeamentos()
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+
         Dim deptos As Integer = 0
         Try
             cnn1.Close() : cnn1.Open()
@@ -106,6 +112,8 @@ Public Class frmNuevoAgregarProductos
     End Sub
 
     Public Sub btnDepto_Click(sender As Object, e As EventArgs)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
 
         Dim btnDepartamento As Button = CType(sender, Button)
         btnDepartamento.Font.Bold.Equals(True)
@@ -123,6 +131,11 @@ Public Class frmNuevoAgregarProductos
     Public Sub Grupos(ByVal depto As String)
         Dim grupos As Integer = 0
         TotGrupo = 0
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
@@ -176,6 +189,8 @@ Public Class frmNuevoAgregarProductos
 
     Private Sub btnGrupo_Click(sender As Object, e As EventArgs)
 
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
         Dim btnGrupos As Button = CType(sender, Button)
         pProductos.Controls.Clear()
 
@@ -189,6 +204,10 @@ Public Class frmNuevoAgregarProductos
     Public Sub Productos(ByVal depto As String, ByVal grupo As String)
         Dim prods As Integer = 1
         Dim cuantos As Integer = Math.Truncate(pProductos.Height / 70)
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
 
         Try
 
@@ -689,6 +708,9 @@ Public Class frmNuevoAgregarProductos
         '  pPreferencias.Controls.Clear()
         'pExtras.Controls.Clear()
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         CodigoProducto = ""
         CodigoProducto = btnProducto.Tag
@@ -756,6 +778,10 @@ Public Class frmNuevoAgregarProductos
     End Sub
     Public Sub ObtenerProducto(Codigo As String)
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -798,6 +824,9 @@ Public Class frmNuevoAgregarProductos
 
     Public Sub find_preciovta(codigo As String)
         Dim MyPrecio As Double = 0
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         cnn2.Close() : cnn2.Open()
         cmd2 = cnn2.CreateCommand
@@ -828,6 +857,12 @@ Public Class frmNuevoAgregarProductos
 
         Dim esta As String = ""
         Dim acumula As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
 
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand
@@ -1273,6 +1308,13 @@ deku:
 
     Public Sub EnviarComanda()
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
         For n As Integer = 0 To grdCaptura.Rows.Count - 1
             If grdCaptura.Rows(n).Cells(0).Value <> "" Then
 
@@ -1291,9 +1333,8 @@ deku:
                     rd1 = cmd1.ExecuteReader
                     If rd1.Read Then
                         If grdCaptura.Rows(n).Cells(3).Value.ToString <> "" Then
-
                             If rd1(0).ToString > 0 Then
-                                IVAPRODUCTO = CDbl(TOTAL) / (1 + rd1(0).ToString)
+                                ivaproducto = CDbl(TOTAL) / (1 + rd1(0).ToString)
                                 iva = CDbl(TOTAL) - CDbl(IVAPRODUCTO)
                                 totaliva = totaliva + CDbl(iva)
                             End If
@@ -1567,6 +1608,11 @@ safo:
         Dim Y As Double = 0
         Dim SinNumCoemensal As Integer = 0
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
@@ -1816,6 +1862,11 @@ safo:
         Dim conta As Integer = 0
         Dim contband As Integer = 0
         Dim comen_sal As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             cnn2.Close() : cnn2.Open()

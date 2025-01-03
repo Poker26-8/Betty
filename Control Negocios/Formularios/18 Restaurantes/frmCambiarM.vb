@@ -1,9 +1,15 @@
-﻿Public Class frmCambiarM
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmCambiarM
     Private Sub frmCambiarM_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 
     Private Sub cbomesa_DropDown(sender As Object, e As EventArgs) Handles cbomesa.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cbomesa.Items.Clear()
 
@@ -30,6 +36,13 @@
     End Sub
 
     Private Sub btnCambiar_Click(sender As Object, e As EventArgs) Handles btnCambiar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
+
         Try
             If cbomesa.Text = "" Then MsgBox("Necesita seleccionar la mesa de destino", vbInformation + vbOKOnly, titulorestaurante) : Exit Sub : cbomesa.Focus.Equals(True)
 

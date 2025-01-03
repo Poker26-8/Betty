@@ -1,4 +1,5 @@
 ﻿Imports iTextSharp.text
+Imports MySql.Data.MySqlClient
 
 Public Class frmTecladoMesas
 
@@ -8,6 +9,11 @@ Public Class frmTecladoMesas
     End Sub
 
     Public Sub CrearBD_MesaNM()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim totmesas As Double = 0
             Dim messa As New List(Of String)()
@@ -84,7 +90,7 @@ Public Class frmTecladoMesas
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn5.Close()
+            cnn1.Close()
         End Try
     End Sub
 
@@ -96,6 +102,11 @@ Public Class frmTecladoMesas
     End Sub
 
     Private Sub cboMesero_DropDown(sender As Object, e As EventArgs) Handles cboMesero.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboMesero.Items.Clear()
             cnn5.Close() : cnn5.Open()

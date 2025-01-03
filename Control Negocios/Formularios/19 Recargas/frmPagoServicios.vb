@@ -1,4 +1,5 @@
-﻿Imports Newtonsoft.Json
+﻿Imports MySql.Data.MySqlClient
+Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 Imports System.Net.Http
 Imports System.Text.RegularExpressions
@@ -70,6 +71,11 @@ Public Class frmPagoServicios
     End Function
 
     Private Sub MostrarJSONEnComboBox(jsonString As String)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim match As Match = Regex.Match(jsonString, "\[{.*}\]")
             If match.Success Then
@@ -96,6 +102,11 @@ Public Class frmPagoServicios
         End Try
     End Sub
     Public Sub eliminarecargas()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close()
             cnn1.Open()
@@ -110,6 +121,9 @@ Public Class frmPagoServicios
     End Sub
 
     Private Sub cboServicio_DropDown(sender As Object, e As EventArgs) Handles cboServicio.DropDown
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cboServicio.Items.Clear()
             cnn1.Close()
@@ -129,6 +143,9 @@ Public Class frmPagoServicios
     End Sub
 
     Private Sub cboServicio_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboServicio.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()

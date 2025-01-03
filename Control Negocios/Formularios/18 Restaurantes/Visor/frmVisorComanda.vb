@@ -1,4 +1,6 @@
-﻿Public Class frmVisorComanda
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmVisorComanda
 
     Friend WithEvents panelComanda As System.Windows.Forms.Panel
     Friend WithEvents labelComanda As System.Windows.Forms.Label
@@ -9,6 +11,12 @@
     End Sub
 
     Public Sub crear_paneles()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             'Información y características de cada panel / label
             Dim comanda As Integer = 0

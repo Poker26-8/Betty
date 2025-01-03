@@ -1,6 +1,11 @@
-﻿Public Class frmJuntarMesas
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmJuntarMesas
     Private Sub frmJuntarMesas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
 
             grdMesas.Rows.Clear()
@@ -72,6 +77,11 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             If MsgBox("¿Desea juntar las mesas?, ya no se podra revirtir", vbInformation + vbYesNo, titulomensajes) = vbYes Then
 

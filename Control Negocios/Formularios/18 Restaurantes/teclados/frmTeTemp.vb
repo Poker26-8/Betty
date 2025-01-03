@@ -1,4 +1,6 @@
-﻿Public Class frmTeTemp
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmTeTemp
     Public mesatemp As Integer = 0
     Private Sub frmTeTemp_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtNombre.Focus.Equals(True)
@@ -195,6 +197,11 @@
 
         txtNombre.Text = txtNombre.Text.TrimEnd()
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         If mesatemp = 1 Then
 
             If txtNombre.Text = "" Then MsgBox("Favor de escribir el nombre de la mesa", vbInformation + vbOKOnly, titulorestaurante) : Exit Sub : txtNombre.Focus.Equals(True)
@@ -265,17 +272,17 @@
                         End If
 
                         Me.Close()
-                        End If
-
-
                     End If
+
+
+                End If
                 rd1.Close()
                 cnn1.Close()
 
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
-                    cnn1.Close()
-                End Try
+                cnn1.Close()
+            End Try
             End If
 
     End Sub

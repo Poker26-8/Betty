@@ -1,5 +1,6 @@
 ﻿Imports System.Data.OleDb
 Imports System.Data.SqlClient
+Imports MySql.Data.MySqlClient
 
 Public Class frmDivProducto
 
@@ -11,6 +12,11 @@ Public Class frmDivProducto
 
     Public abecedario As List(Of Char) = ObtenerAbecedario()
     Private Sub frmDivProducto_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             totalventa = 0
 
@@ -255,6 +261,13 @@ Public Class frmDivProducto
     End Sub
 
     Private Sub btnAceptar_Click(sender As Object, e As EventArgs) Handles btnAceptar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
+
         Try
 
             Dim nuevonombre As String = ""
@@ -565,6 +578,12 @@ Public Class frmDivProducto
         Dim nuevoNombre As String = nombreBase
         Dim indice As Integer = 0
         Dim letra As Char = "A"
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
 
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand

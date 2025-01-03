@@ -1,4 +1,6 @@
-﻿Public Class frmVehiculoTa
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmVehiculoTa
 
     Dim idcliente As Integer = 0
     Private Sub frmVehiculoTa_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -54,6 +56,11 @@
     End Sub
 
     Private Sub cbomarca_DropDown(sender As Object, e As EventArgs) Handles cbomarca.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cbomarca.Items.Clear()
 
@@ -76,6 +83,10 @@
     End Sub
 
     Private Sub cbomodelo_DropDown(sender As Object, e As EventArgs) Handles cbomodelo.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cbomodelo.Items.Clear()
 
@@ -98,6 +109,11 @@
     End Sub
 
     Private Sub cboCliente_DropDown(sender As Object, e As EventArgs) Handles cboCliente.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCliente.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -135,6 +151,12 @@
     End Sub
 
     Private Sub btnguardar_Click(sender As Object, e As EventArgs) Handles btnguardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             Dim observaciones As String = ""
             observaciones = rtObservaciones.Text.TrimEnd(vbCrLf.ToCharArray)
@@ -199,6 +221,10 @@
     End Sub
 
     Private Sub cboCliente_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCliente.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             idcliente = 0
             cnn1.Close() : cnn1.Open()

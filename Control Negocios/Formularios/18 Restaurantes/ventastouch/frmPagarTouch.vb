@@ -1,4 +1,6 @@
-﻿Public Class frmPagarTouch
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmPagarTouch
 
     Dim propina As Double = 0
     Dim percent_propina As Double = 0
@@ -240,6 +242,11 @@
     End Sub
 
     Private Sub cboforma_DropDown(sender As Object, e As EventArgs) Handles cboforma.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboforma.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -267,6 +274,11 @@
     End Sub
 
     Private Sub cboBanco_DropDown(sender As Object, e As EventArgs) Handles cboBanco.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboBanco.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -312,6 +324,11 @@
     End Sub
 
     Private Sub cboCuenta_DropDown(sender As Object, e As EventArgs) Handles cboCuenta.DropDown
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCuenta.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -364,6 +381,10 @@
         Dim recepcion As String = txtRecepcion.Text
         Dim fecha As String = dtpfechapago.Text
         Dim totalpagos As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If tipo = "MONEDERO" Then
             If referencia = "" Then
@@ -419,9 +440,9 @@
         rd1 = cmd1.ExecuteReader
         If rd1.HasRows Then
             If rd1.Read Then
-                exacto = rd1(0).ToString
+                EXACTO = rd1(0).ToString
 
-                If exacto = 1 Then
+                If EXACTO = 1 Then
                     txtEfectivo.Text = "0.00"
                 Else
 
@@ -488,6 +509,11 @@
     End Sub
 
     Private Sub cboTelefono_DropDown(sender As Object, e As EventArgs) Handles cboTelefono.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboTelefono.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -509,6 +535,11 @@
     End Sub
 
     Private Sub cboNombre_DropDown(sender As Object, e As EventArgs) Handles cboNombre.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboNombre.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -530,6 +561,11 @@
     End Sub
 
     Private Sub cboNombre_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboNombre.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim MySaldo As Double = 0
 
@@ -574,6 +610,12 @@
     End Sub
 
     Private Sub btnIntro_Click(sender As Object, e As EventArgs) Handles btnIntro.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         If cboNombre.Text = "" Then
             frmVTouchR.lblCliente.Text = "MOSTRADOR"
@@ -1465,6 +1507,11 @@
 
     Private Sub txtmonedero_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtmonedero.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "SELECT Saldo,Cliente FROM monedero WHERE Barras='" & txtmonedero.Text & "'"
@@ -1483,6 +1530,10 @@
 
     Private Sub cboTelefono_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboTelefono.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 Dim MySaldo As Double = 0
@@ -1619,6 +1670,11 @@
     End Sub
 
     Private Sub cboCuenta_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCuenta.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand
         cmd1.CommandText = "SELECT Banco FROM cuentasbancarias WHERE CuentaBan='" & cboCuenta.Text & "'"

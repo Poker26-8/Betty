@@ -1,9 +1,15 @@
-﻿Public Class frmDividirCuenta
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmDividirCuenta
 
     Public mesa As String = ""
 
     Private Sub frmDividirCuenta_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lblmesa.Text = mesa
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -81,6 +87,10 @@
         Dim newcantidad As Double = 0
         Dim newproducto As String = ""
         Dim idcomanda As Integer = 0
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         For luffy As Integer = 0 To grdcomensal.Rows.Count - 1
             idcomanda = grdcomensal.Rows(luffy).Cells(0).Value.ToString

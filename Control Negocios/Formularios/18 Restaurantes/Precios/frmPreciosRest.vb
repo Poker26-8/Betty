@@ -1,9 +1,16 @@
-﻿Public Class frmPreciosRest
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmPreciosRest
 
     Dim ivaproducto As Double = 0
     Dim precioventaiva As Double = 0
 
     Private Sub cboNombre_DropDown(sender As Object, e As EventArgs) Handles cboNombre.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboNombre.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -24,6 +31,9 @@
     End Sub
 
     Private Sub cboCodigo_DropDown(sender As Object, e As EventArgs) Handles cboCodigo.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboCodigo.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -61,6 +71,9 @@
     Private Sub cboNombre_LostFocus(sender As Object, e As EventArgs) Handles cboNombre.LostFocus
 
         Dim iva As Double = 0
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand
@@ -81,6 +94,10 @@
 
 
     Public Sub TraerDato(ByVal DATO As String)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             ivaproducto = 0
             precioventaiva = 0
@@ -318,6 +335,11 @@
         If MsgBox("Desea Guardar Este Precio?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then Exit Sub
         txtPVI.Tag = Format(txtPVI.Text, 2)
         txtPV.Tag = Format(txtPV.Text, 2)
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             cnn2.Close() : cnn2.Open()

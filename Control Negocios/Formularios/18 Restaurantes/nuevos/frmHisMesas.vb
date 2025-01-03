@@ -1,4 +1,6 @@
-﻿Public Class frmHisMesas
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmHisMesas
     Private Sub frmHisMesas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         optMesero.Checked = True
     End Sub
@@ -7,6 +9,10 @@
 
         Dim m1 As Date = mcdesde.SelectionStart.ToShortDateString
         Dim m2 As Date = mchasta.SelectionStart.ToShortDateString
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If (optTodos.Checked) Then
 
@@ -50,6 +56,10 @@
     Private Sub cboDatos_DropDown(sender As Object, e As EventArgs) Handles cboDatos.DropDown
 
         If (optMesero.Checked) Then
+            Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd5 As MySqlDataReader
+            Dim cmd5 As MySqlCommand
+
             Try
                 cboDatos.Items.Clear()
                 cnn5.Close() : cnn5.Open()
@@ -75,6 +85,12 @@
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
         Dim m1 As Date = mcdesde.SelectionStart.ToShortDateString
         Dim m2 As Date = mchasta.SelectionStart.ToShortDateString
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+
         Try
             Dim dato As String = ""
             grdDatos.Rows.Clear()

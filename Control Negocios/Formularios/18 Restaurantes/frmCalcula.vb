@@ -1,4 +1,6 @@
-﻿Public Class frmCalcula
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmCalcula
 
     Dim VarMinutos As String = ""
     Dim varHoras As String = ""
@@ -17,6 +19,13 @@
     End Sub
 
     Private Sub frmCalcula_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         VarMinutos = "10.00"
         varHoras = "60.00"
@@ -415,6 +424,10 @@
 
     Private Sub txtPrecioHora_KeyDown(sender As Object, e As KeyEventArgs) Handles txtPrecioHora.KeyDown
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         VarMinutos = "10.00"
         If VarMinutos > txtTiempoUso.Text Then
             cnn1.Close() : cnn1.Open()
@@ -427,6 +440,12 @@
     End Sub
 
     Private Sub btnDesocupar_Click(sender As Object, e As EventArgs) Handles btnDesocupar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -532,6 +551,10 @@
         Dim hoja As New Pen(Brushes.Black, 1)
         Dim Y As Double = 0
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Dim pie1 As String = ""
         Dim pie2 As String = ""
         Dim pie3 As String = ""
@@ -601,10 +624,11 @@
         Dim pie2 As String = ""
         Dim pie3 As String = ""
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         cnn2.Close() : cnn2.Open()
-
-
-
         cmd2 = cnn2.CreateCommand
         cmd2.CommandText = "select * from Ticket"
         rd2 = cmd2.ExecuteReader
