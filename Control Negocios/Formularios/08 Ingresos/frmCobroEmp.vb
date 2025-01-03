@@ -1,4 +1,6 @@
-﻿Public Class frmCobroEmp
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmCobroEmp
     Private Sub frmCobroEmp_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         dtpfecha.Value = Date.Now
         dtppago.Value = Date.Now
@@ -10,6 +12,11 @@
 
     Private Sub cbonombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cbonombre.DropDown
         cbonombre.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -31,6 +38,10 @@
     Private Sub cbonombre_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cbonombre.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             Dim id_usu As Integer = 0
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 cnn1.Close() : cnn1.Open()
@@ -88,7 +99,9 @@
 
     Private Sub cbonombre_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cbonombre.SelectedValueChanged
         Dim id_usu As Integer = 0
-
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -142,6 +155,9 @@
 
     Private Sub cbofolio_DropDown(sender As System.Object, e As System.EventArgs) Handles cbofolio.DropDown
         cbofolio.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -163,6 +179,10 @@
     Private Sub cbofolio_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cbofolio.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             If cbofolio.Text = "" Then Exit Sub
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -205,6 +225,10 @@
     End Sub
 
     Private Sub cbofolio_SelectedValueChanged(sender As System.Object, e As System.EventArgs) Handles cbofolio.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -279,6 +303,11 @@
 
         If CDbl(total) > CDbl(txtprestamo.Text) Then MsgBox("El abono al préstamo no puede ser mayor al monto restante.", vbInformation + vbOKOnly, "")
         If ValidaPermisos(lblusuario.Text, "Ing_CEmp") = False Then MsgBox("No cuentas con permisos para realizar este movimiento.", vbInformation + vbOKOnly, "Delsscom Control Negocioss Pro") : txtcontraseña.Focus().Equals(True) : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         If MsgBox("¿Deseas guardar este abono a préstamo?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
             Try
@@ -370,6 +399,10 @@
 
     Private Sub txtcontraseña_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtcontraseña.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -475,6 +508,9 @@
     End Sub
 
     Private Sub cbotpago_DropDown(sender As Object, e As EventArgs) Handles cbotpago.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cbotpago.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -503,6 +539,9 @@
     End Sub
 
     Private Sub cbobanco_DropDown(sender As Object, e As EventArgs) Handles cbobanco.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cbobanco.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -552,6 +591,9 @@
     End Sub
 
     Private Sub cboCuentaRecepcion_DropDown(sender As Object, e As EventArgs) Handles cboCuentaRecepcion.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboCuentaRecepcion.Items.Clear()
 
@@ -580,6 +622,9 @@
     End Sub
 
     Private Sub cboCuentaRecepcion_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCuentaRecepcion.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -604,8 +649,8 @@
         Dim importe = grdpago.Rows(index).Cells(3).Value.ToString
 
         grdpago.Rows.Remove(grdpago.Rows(index))
-        txtpagos.Text = txtpagos.Text - CDec(importe)
-        txtpagos.Text = FormatNumber(txtpagos.Text, 2)
+        txtPagos.Text = txtPagos.Text - CDec(importe)
+        txtPagos.Text = FormatNumber(txtPagos.Text, 2)
     End Sub
 
     Private Sub txtPagos_TextChanged(sender As Object, e As EventArgs) Handles txtPagos.TextChanged

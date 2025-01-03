@@ -1,4 +1,6 @@
-﻿Public Class frmVentasKit
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmVentasKit
 
     Public Vienna As String = ""
     Private Sub frmVentasKit_Shown(sender As System.Object, e As System.EventArgs) Handles MyBase.Shown
@@ -7,6 +9,9 @@
 
     Private Sub cboNombre_DropDown(sender As System.Object, e As System.EventArgs) Handles cboNombre.DropDown
         cboNombre.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -51,6 +56,11 @@
         Dim nombre As String = ""
         Dim grupo As String = ""
         Dim existencia As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -140,6 +150,11 @@
     Private Sub txtcantid_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtcantid.KeyPress
         If Not IsNumeric(txtcantid.Text) Then txtcantid.Text = ""
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -247,6 +262,11 @@
     End Sub
 
     Private Sub EnviaVentas(ByVal Formulario As String)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If Formulario = "Ventas1" Then
             With frmVentas1_Partes
                 cnn1.Close() : cnn1.Open()
@@ -371,6 +391,10 @@
         Dim cod_prod As String = ""
         Dim cant_prod As Double = 0
         Dim pre_prod As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If Formulario = "frmVentas1" Then
             With frmVentas1_Partes

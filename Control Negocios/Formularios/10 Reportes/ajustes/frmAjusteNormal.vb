@@ -1,4 +1,6 @@
-﻿Public Class frmAjusteNormal
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmAjusteNormal
     Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
         cbocodigo.Text = ""
         cbodesc.Text = ""
@@ -13,6 +15,12 @@
 
         If AscW(e.KeyChar) = Keys.Enter Then
             If txtcontraseña.Text <> "" Then
+
+
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
+
                 Try
                     cnn1.Close() : cnn1.Open()
 
@@ -62,6 +70,10 @@
 
     Private Sub cbodesc_DropDown(sender As Object, e As EventArgs) Handles cbodesc.DropDown
         cbodesc.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -88,6 +100,10 @@
     Private Sub cbodesc_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbodesc.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             If cbodesc.Text <> "" Then
+
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
                 Try
                     cnn1.Close() : cnn1.Open()
 
@@ -116,6 +132,10 @@
     End Sub
 
     Private Sub cbodesc_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbodesc.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -142,9 +162,12 @@
     Private Sub cbocodigo_DropDown(sender As Object, e As EventArgs) Handles cbocodigo.DropDown
         cbocodigo.Items.Clear()
         If cbocodigo.Text <> "" Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
-
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
                     "select Codigo from Productos where LEFT(Codigo, 6)='" & cbocodigo.Text & "' order by Codigo"
@@ -175,6 +198,11 @@
                 Dim factor As Double = 0
                 Dim operad As Double = 0
                 Dim codigo As String = Mid(cbocodigo.Text, 1, 6)
+
+
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
 
                 Try
                     cnn1.Close() : cnn1.Open()
@@ -261,6 +289,11 @@
             txtcontraseña.Focus().Equals(True)
             Exit Sub
         End If
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             Dim idUsu As Integer = 0

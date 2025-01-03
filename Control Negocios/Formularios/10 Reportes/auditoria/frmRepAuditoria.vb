@@ -1,4 +1,5 @@
 ﻿Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepAuditoria
     Private Sub frmRepAuditoria_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -6,6 +7,10 @@ Public Class frmRepAuditoria
     End Sub
 
     Private Sub cbofiltro_DropDown(sender As Object, e As EventArgs) Handles cbofiltro.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cbofiltro.Items.Clear()
 
@@ -36,6 +41,10 @@ Public Class frmRepAuditoria
     End Sub
 
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             grdCaptura.Rows.Clear()
 

@@ -1,4 +1,5 @@
 ﻿Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmReporte_CS
     Private Sub opttotales_Click(sender As Object, e As EventArgs) Handles opttotales.Click
@@ -291,6 +292,11 @@ Public Class frmReporte_CS
 
         ComboBox1.Items.Clear()
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -317,6 +323,10 @@ Public Class frmReporte_CS
 
         grdcaptura.Rows.Clear()
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         If (opttotales.Checked) Then
             Try
                 cnn1.Close() : cnn1.Open()
@@ -429,6 +439,11 @@ Public Class frmReporte_CS
             pProcesos.Visible = True
             grdpendientes.Rows.Clear()
             grdconcluidos.Rows.Clear()
+
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 cnn1.Close() : cnn1.Open()

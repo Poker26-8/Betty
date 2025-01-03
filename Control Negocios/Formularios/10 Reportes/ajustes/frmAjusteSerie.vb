@@ -1,4 +1,6 @@
-﻿Public Class frmAjusteSerie
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmAjusteSerie
 
     Dim serieseleccionadfa As String = ""
 
@@ -15,8 +17,6 @@
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
 
-
-
         If cbocodigo.Text = "" Or cbodesc.Text = "" Or txtunidad.Text = "" Or txtsistema.Text = "" Or txtfisica.Text = "" Or txtdiferencia.Text = "" Then
             MsgBox("Faltan datos del producto para poder guardar el ajuste de inventario.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
             cbodesc.Focus().Equals(True)
@@ -26,6 +26,11 @@
             txtcontraseña.Focus().Equals(True)
             Exit Sub
         End If
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             Dim idUsu As Integer = 0
@@ -145,6 +150,12 @@
 
         If AscW(e.KeyChar) = Keys.Enter Then
             If txtcontraseña.Text <> "" Then
+
+
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
+
                 Try
                     cnn1.Close() : cnn1.Open()
 
@@ -194,6 +205,12 @@
 
     Private Sub cbodesc_DropDown(sender As Object, e As EventArgs) Handles cbodesc.DropDown
         cbodesc.Items.Clear()
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -220,6 +237,12 @@
     Private Sub cbodesc_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbodesc.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             If cbodesc.Text <> "" Then
+
+
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
+
                 Try
                     cnn1.Close() : cnn1.Open()
 
@@ -248,6 +271,10 @@
     End Sub
 
     Private Sub cbodesc_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbodesc.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -274,6 +301,10 @@
     Private Sub cbocodigo_DropDown(sender As Object, e As EventArgs) Handles cbocodigo.DropDown
         cbocodigo.Items.Clear()
         If cbocodigo.Text <> "" Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -302,6 +333,11 @@
                 Dim factor As Double = 0
                 Dim operad As Double = 0
                 Dim codigo As String = Mid(cbocodigo.Text, 1, 6)
+
+
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1 As MySqlDataReader
+                Dim cmd1 As MySqlCommand
 
                 Try
                     cnn1.Close() : cnn1.Open()
@@ -448,6 +484,12 @@
 
     Private Sub btnguarda_lote_Click(sender As Object, e As EventArgs) Handles btnguarda_lote.Click
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3 As MySqlDataReader
+        Dim cmd2, cmd3 As MySqlCommand
+
         Try
             If grdSerie.Rows.Count = 0 Then
                 MsgBox("Debe de ingresar una serie", vbInformation + vbOKOnly, "Delsscom® Control Negocios 2023")
@@ -524,6 +566,11 @@
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cnn2.Close() : cnn2.Open()

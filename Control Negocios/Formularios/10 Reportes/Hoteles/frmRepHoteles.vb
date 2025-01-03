@@ -1,4 +1,5 @@
 ﻿Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepHoteles
     Private Sub frmRepHoteles_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -29,6 +30,11 @@ Public Class frmRepHoteles
     End Sub
 
     Private Sub cboDatos_DropDown(sender As Object, e As EventArgs) Handles cboDatos.DropDown
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboDatos.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -60,6 +66,12 @@ Public Class frmRepHoteles
     End Sub
 
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim m1 As Date = mcDesde.SelectionStart.ToShortDateString
             Dim m2 As Date = mcHasta.SelectionStart.ToShortDateString
