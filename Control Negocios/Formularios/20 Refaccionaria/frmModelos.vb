@@ -1,9 +1,16 @@
-﻿Public Class frmModelos
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmModelos
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
 
     Private Sub cboMarca_DropDown(sender As Object, e As EventArgs) Handles cboMarca.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboMarca.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -47,6 +54,12 @@
     End Sub
 
     Private Sub btnAlmacenar_Click(sender As Object, e As EventArgs) Handles btnAlmacenar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             If cboAno.Text = "" Then MsgBox("Seleccione el año del modelo", vbInformation + vbOKOnly, titulorefaccionaria) : cboAno.Focus.Equals(True) : Exit Sub
@@ -123,6 +136,11 @@
     End Sub
 
     Private Sub cboAno_DropDown(sender As Object, e As EventArgs) Handles cboAno.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboAno.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -158,6 +176,11 @@
     End Sub
 
     Private Sub cboModelo_DropDown(sender As Object, e As EventArgs) Handles cboModelo.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboModelo.Items.Clear()
 

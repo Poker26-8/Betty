@@ -1,9 +1,17 @@
-﻿Public Class frmVehiculoR
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmVehiculoR
     Private Sub frmVehiculoR_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 
     Private Sub btnguardar_Click(sender As Object, e As EventArgs) Handles btnguardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             Dim taller As Integer = 0
@@ -176,6 +184,11 @@
     End Sub
 
     Private Sub cbodescripcion_DropDown(sender As Object, e As EventArgs) Handles cbodescripcion.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cbodescripcion.Items.Clear()
 
@@ -198,6 +211,11 @@
     End Sub
 
     Private Sub cbodescripcion_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbodescripcion.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -246,6 +264,11 @@
     End Sub
 
     Private Sub cboCliente_DropDown(sender As Object, e As EventArgs) Handles cboCliente.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCliente.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -274,6 +297,11 @@
     End Sub
 
     Private Sub cbomarca_DropDown(sender As Object, e As EventArgs) Handles cbomarca.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cbomarca.Items.Clear()
 

@@ -1,6 +1,7 @@
 ﻿
 Imports System.IO
 Imports Core.DAL.Addendas
+Imports MySql.Data.MySqlClient
 Public Class frmTallerR
 
     Dim var_placa As String = ""
@@ -34,6 +35,11 @@ Public Class frmTallerR
 
     Public Sub vehiculos()
         Dim vehi As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd4 As MySqlDataReader
+        Dim cmd1, cmd4 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -105,6 +111,12 @@ Public Class frmTallerR
         Dim modelo As String = ""
         Dim cliente As String = ""
         Dim observaciones As String = ""
+
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
 
         If btnVehiculo.BackColor = Color.FromArgb(255, 255, 255) Then
 
@@ -248,6 +260,10 @@ Public Class frmTallerR
 
     Public Sub Ventas()
 
+        Dim cnntimer As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rdtimer As MySqlDataReader
+        Dim cmdtimer As MySqlCommand
+
         cnntimer.Close() : cnntimer.Open()
         cmdtimer = cnntimer.CreateCommand
         cmdtimer.CommandText = "SELECT MAX(Folio) FROM ventas"
@@ -273,6 +289,11 @@ Public Class frmTallerR
 
     Private Sub txtclave_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtclave.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -309,6 +330,12 @@ Public Class frmTallerR
     End Sub
 
     Private Sub btnpagar_Click(sender As Object, e As EventArgs) Handles btnpagar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             Dim Cliente As String = ""
             Dim dias_credito As Double = 0
@@ -893,12 +920,16 @@ Door:
     End Sub
 
     Private Sub lblcliente_TextChanged(sender As Object, e As EventArgs) Handles lblcliente.TextChanged
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             Dim MySaldo As Double = 0
 
 
             cnn3.Close() : cnn3.Open()
-
             cmd3 = cnn3.CreateCommand
             cmd3.CommandText = "SELECT Id,Credito FROM Clientes WHERE Nombre='" & lblcliente.Text & "'"
             rd3 = cmd3.ExecuteReader
@@ -959,6 +990,9 @@ Door:
 
         Dim Pie As String = ""
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Try
             '[°]. Logotipo
@@ -1260,6 +1294,10 @@ Door:
         Dim Logotipo As Drawing.Image = Nothing
         Dim Pie As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd3 As MySqlDataReader
+        Dim cmd1, cmd3 As MySqlCommand
 
         Try
             '[°]. Logotipo
@@ -1561,6 +1599,10 @@ Door:
         If txtclave.Text = "" Then MsgBox("Debe ingresar la contraseña por favor", vbInformation + vbOKOnly, titulorefaccionaria) : txtclave.Focus.Equals(True) : Exit Sub
 
         If grdProductos.Rows.Count = 0 Then MsgBox("Debe seleccionar un vehiculo", vbInformation + vbOKOnly, titulorefaccionaria) : Exit Sub
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Dim id As Integer = 0
         var_vehiculo = btnVehiculo.Text

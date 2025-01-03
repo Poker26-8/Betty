@@ -2,6 +2,7 @@
 Imports System.IO
 Imports AForge.Controls
 Imports QRCoder.PayloadGenerator
+Imports MySql.Data.MySqlClient
 Public Class frmConsultarRefaccion
 
     ' Variable para alternar entre el tamaño original y el tamaño ampliado
@@ -27,6 +28,12 @@ Public Class frmConsultarRefaccion
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             grdProductos.Rows.Clear()
             Dim unidad As String = ""
@@ -83,6 +90,10 @@ Public Class frmConsultarRefaccion
     End Sub
 
     Private Sub cboMarca_DropDown(sender As Object, e As EventArgs) Handles cboMarca.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboMarca.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -103,6 +114,9 @@ Public Class frmConsultarRefaccion
     End Sub
 
     Private Sub cboModelo_DropDown(sender As Object, e As EventArgs) Handles cboModelo.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboModelo.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -212,6 +226,11 @@ Public Class frmConsultarRefaccion
     End Sub
 
     Private Sub cboMotor_DropDown(sender As Object, e As EventArgs) Handles cboMotor.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboMotor.Items.Clear()
 
@@ -258,10 +277,10 @@ Public Class frmConsultarRefaccion
 
 
             varcodigo = grdProductos.Rows(index).Cells(0).Value.ToString
-                numparte = grdProductos.Rows(index).Cells(1).Value.ToString
-                vardescripcion = grdProductos.Rows(index).Cells(2).Value.ToString
-                varunidad = grdProductos.Rows(index).Cells(3).Value.ToString
-                varprecio = grdProductos.Rows(index).Cells(4).Value.ToString
+            numparte = grdProductos.Rows(index).Cells(1).Value.ToString
+            vardescripcion = grdProductos.Rows(index).Cells(2).Value.ToString
+            varunidad = grdProductos.Rows(index).Cells(3).Value.ToString
+            varprecio = grdProductos.Rows(index).Cells(4).Value.ToString
                 varcantidad = "1"
             vartotal = CDec(varcantidad) * CDec(varprecio)
             frmVentas_refa.txtparte.Text = numparte

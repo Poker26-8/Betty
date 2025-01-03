@@ -1,4 +1,6 @@
-﻿Public Class frmAsignaRefaccion
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmAsignaRefaccion
 
     Public idvehiculo As Integer = 0
     Public placa As String = ""
@@ -6,6 +8,11 @@
 
     Private Sub frmAsignaRefaccion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
 
             Dim codigopro As String = ""
@@ -84,6 +91,11 @@
     End Sub
 
     Private Sub btnEnviar_Click(sender As Object, e As EventArgs) Handles btnEnviar.Click
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
 
             If grdAsignar.Rows.Count > 0 Then

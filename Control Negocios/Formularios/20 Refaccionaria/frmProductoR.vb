@@ -1,6 +1,7 @@
 ﻿
 Imports System.Security.Cryptography
 Imports System.IO
+Imports MySql.Data.MySqlClient
 Public Class frmProductoR
     Private Sub frmProductoR_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = "Delsscom® Control Negocios -  Relaciones Crusada Vehiculo/Refacción" & Strings.Space(40) & Date.Now
@@ -8,6 +9,12 @@ Public Class frmProductoR
     End Sub
 
     Private Sub btnguardar_Click(sender As Object, e As EventArgs) Handles btnguardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd3 As MySqlDataReader
+        Dim cmd1, cmd3 As MySqlCommand
+
         Try
 
             Dim codigo As String = ""
@@ -122,6 +129,11 @@ Public Class frmProductoR
     End Sub
 
     Private Sub cboCodigo_DropDown(sender As Object, e As EventArgs) Handles cboCodigo.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCodigo.Items.Clear()
 
@@ -143,6 +155,10 @@ Public Class frmProductoR
     End Sub
 
     Private Sub cboNombre_DropDown(sender As Object, e As EventArgs) Handles cboNombre.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboNombre.Items.Clear()
 
@@ -165,6 +181,11 @@ Public Class frmProductoR
     End Sub
 
     Private Sub cboservicio_DropDown(sender As Object, e As EventArgs) Handles cboservicio.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
 
             cboservicio.Items.Clear()
@@ -195,6 +216,11 @@ Public Class frmProductoR
     End Sub
 
     Public Sub datosentrada(ByVal dato As String)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -255,6 +281,10 @@ Public Class frmProductoR
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -286,6 +316,10 @@ Public Class frmProductoR
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -314,6 +348,11 @@ Public Class frmProductoR
     End Sub
 
     Private Sub cbovehiculo_DropDown(sender As Object, e As EventArgs) Handles cbovehiculo.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cbovehiculo.Items.Clear()
 
@@ -336,6 +375,11 @@ Public Class frmProductoR
     End Sub
 
     Private Sub cbovehiculo_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbovehiculo.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
 
             grd.Rows.Clear()
@@ -384,6 +428,11 @@ Public Class frmProductoR
     End Sub
 
     Private Sub Tid_Tick(sender As Object, e As EventArgs) Handles Tid.Tick
+
+        Dim cnn9 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd9 As MySqlDataReader
+        Dim cmd9 As MySqlCommand
+
         cnn9.Close() : cnn9.Open()
         cmd9 = cnn9.CreateCommand
         cmd9.CommandText = "select IdVehiculo from Vehiculo where Descripcion='" & cbovehiculo.Text & "'"
@@ -400,6 +449,12 @@ Public Class frmProductoR
     Private Sub cbovehiculo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbovehiculo.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
+
 
             If cbovehiculo.Text = "" Then
                 MsgBox("Ingrese o seleccione un vehiculo", vbInformation + vbOKOnly, titulorefaccionaria)
@@ -540,6 +595,12 @@ Public Class frmProductoR
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             If cboCodigo.Text = "" Then MsgBox("Debe de seleccionar un codigo de producto", vbInformation + vbOKOnly, titulorefaccionaria) : cboNombre.Focus.Equals(True) : Exit Sub
@@ -637,6 +698,10 @@ nopaso:
     Private Sub txtSerie2_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtSerie2.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 cnn1.Close() : cnn1.Open()

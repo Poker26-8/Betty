@@ -1,5 +1,13 @@
-﻿Public Class frmMarcas
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmMarcas
     Private Sub btnAlmacenar_Click(sender As Object, e As EventArgs) Handles btnAlmacenar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -20,11 +28,11 @@
             Else
                 cnn2.Close() : cnn2.Open()
                 cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "INSERT INTO marcas(Nombre) VALUES('" & txtmarca.Text & "')"
+                cmd2.CommandText = "INSERT INTO marcas(Nombre) VALUES('" & txtMarca.Text & "')"
                 If cmd2.ExecuteNonQuery() Then
                     MsgBox("Marca agregada correctamente", vbInformation + vbInformation, titulorefaccionaria)
-                    txtmarca.Text = ""
-                    txtmarca.Focus.Equals(True)
+                    txtMarca.Text = ""
+                    txtMarca.Focus.Equals(True)
                 End If
                 cnn2.Close()
             End If
@@ -38,6 +46,11 @@
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
 
             If MsgBox("¿Desea continuar con el proceso?", vbInformation + vbYesNo) = vbYes Then
@@ -61,6 +74,11 @@
     End Sub
 
     Private Sub txtMarca_DropDown(sender As Object, e As EventArgs) Handles txtMarca.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             txtMarca.Items.Clear()
 
@@ -94,6 +112,11 @@
     End Sub
 
     Private Sub txtMarca_SelectedValueChanged(sender As Object, e As EventArgs) Handles txtMarca.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -128,6 +151,11 @@
         Dim cuadro_dialogo As New OpenFileDialog
         Dim ruta As String = ""
         Dim sheet As String = "hoja1"
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
 
         With cuadro_dialogo
             .Filter = "Archivos de cálculo(*.xls;*.xlsx)|*.xls;*.xlsx"
@@ -202,6 +230,11 @@
     End Sub
 
     Private Function Comprueba(ByVal nombre As String) As Boolean
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             Dim valida As Boolean = True
 

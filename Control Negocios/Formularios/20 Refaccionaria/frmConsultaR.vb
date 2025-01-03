@@ -1,6 +1,7 @@
 ﻿
 Imports System.IO
 Imports System.Web.Services
+Imports MySql.Data.MySqlClient
 
 Public Class frmConsultaR
     Private Sub frmConsultaR_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -8,6 +9,10 @@ Public Class frmConsultaR
     End Sub
 
     Private Sub cbovehiculo_DropDown(sender As Object, e As EventArgs) Handles cbovehiculo.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
 
         Try
             cbovehiculo.Items.Clear()
@@ -32,6 +37,11 @@ Public Class frmConsultaR
     End Sub
 
     Private Sub cboservicio_DropDown(sender As Object, e As EventArgs) Handles cboservicio.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboservicio.Items.Clear()
 
@@ -53,6 +63,11 @@ Public Class frmConsultaR
     End Sub
 
     Private Sub cboservicio_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboservicio.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand
         cmd1.CommandText = "SELECT IdVehiculo FROM vehiculo WHERE Descripcion='" & cbovehiculo.Text & "'"
@@ -67,6 +82,12 @@ Public Class frmConsultaR
     End Sub
 
     Private Sub btnbuscar_Click(sender As Object, e As EventArgs) Handles btnbuscar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             grdcaptura.Rows.Clear()
 
@@ -169,6 +190,11 @@ Public Class frmConsultaR
             cboservicio.Text = ""
             cbodatos.Visible = False
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
+
             Try
                 Dim vehiculo As Integer = 0
                 Dim descirpcion As String = ""
@@ -226,6 +252,11 @@ Public Class frmConsultaR
     End Sub
 
     Private Sub cbodatos_DropDown(sender As Object, e As EventArgs) Handles cbodatos.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
 
             cbodatos.Items.Clear()
@@ -234,7 +265,7 @@ Public Class frmConsultaR
 
             If (rbmarca.Checked) Then
                 cmd5.CommandText = "SELECT DISTINCT Marca FROM refaccionaria WHERE Marca<>'' ORDER BY Marca"
-            rd5 = cmd5.ExecuteReader
+                rd5 = cmd5.ExecuteReader
                 Do While rd5.Read
                     If rd5.HasRows Then
                         cbodatos.Items.Add(rd5(0).ToString)
@@ -269,6 +300,10 @@ Public Class frmConsultaR
     Private Sub cbovehiculo_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbovehiculo.SelectedValueChanged
         lblservicio.Visible = True
         cboservicio.Visible = True
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()

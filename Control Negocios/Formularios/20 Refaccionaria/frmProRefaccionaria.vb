@@ -1,11 +1,17 @@
 ﻿
 Imports System.IO
+Imports MySql.Data.MySqlClient
 Public Class frmProRefaccionaria
     Private Sub frmProRefaccionaria_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 
     Private Sub ShowData(ByVal tipo As String)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -104,6 +110,10 @@ Public Class frmProRefaccionaria
     Private Sub cboCodigo_DropDown(sender As Object, e As EventArgs) Handles cboCodigo.DropDown
         cboCodigo.Items.Clear()
 
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand
@@ -154,6 +164,11 @@ Public Class frmProRefaccionaria
 
     Private Sub cboNombre_DropDown(sender As Object, e As EventArgs) Handles cboNombre.DropDown
         cboNombre.Items.Clear()
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand
@@ -190,6 +205,10 @@ Public Class frmProRefaccionaria
 
     Private Sub cboIVA_DropDown(sender As Object, e As EventArgs) Handles cboIVA.DropDown
         cboIVA.Items.Clear()
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
 
         Try
             cnn5.Close() : cnn5.Open()
@@ -274,6 +293,11 @@ Public Class frmProRefaccionaria
 
     Private Sub cboProvP_DropDown(sender As Object, e As EventArgs) Handles cboProvP.DropDown
         cboProvP.Items.Clear()
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand
@@ -306,6 +330,11 @@ Public Class frmProRefaccionaria
 
     Private Sub cboDepto_DropDown(sender As Object, e As EventArgs) Handles cboDepto.DropDown
         cboDepto.Items.Clear()
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand
@@ -339,6 +368,11 @@ Public Class frmProRefaccionaria
 
     Private Sub cboGrupo_DropDown(sender As Object, e As EventArgs) Handles cboGrupo.DropDown
         cboGrupo.Items.Clear()
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand
@@ -422,6 +456,11 @@ Public Class frmProRefaccionaria
     End Sub
 
     Private Sub btnImagen_Click(sender As Object, e As EventArgs) Handles btnImagen.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             If cboCodigo.Text = "" Then MsgBox("Necesitas seleccionar un producto para asignar una imagne.", vbInformation + vbOKOnly, titulocentral) : cboCodigo.Focus().Equals(True) : Exit Sub
             txtrutaimagen.Text = ""
@@ -480,6 +519,12 @@ Public Class frmProRefaccionaria
         Dim fecha As String = Format(Date.Now, "yyyy-MM-dd")
 
         Dim img As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
 
         crea_ruta("C:\ControlNegociosPro\ProductosImg" & baseseleccionada)
         If varrutabase <> "" Then
@@ -597,6 +642,11 @@ Public Class frmProRefaccionaria
 
     Private Sub cboubicacion_DropDown(sender As Object, e As EventArgs) Handles cboubicacion.DropDown
         cboubicacion.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -616,6 +666,10 @@ Public Class frmProRefaccionaria
 
     Private Sub cboComanda_DropDown(sender As Object, e As EventArgs) Handles cboComanda.DropDown
         cboComanda.Items.Clear()
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
 
         Try
             cnn5.Close() : cnn5.Open()
@@ -690,6 +744,10 @@ Public Class frmProRefaccionaria
         If cboCodigo.Text = "" Then MsgBox("Selecciona un producto para poder eliminarlo.", vbInformation + vbOKOnly, titulocentral) : cboCodigo.Focus().Equals(True) : Exit Sub
         If cboNombre.Text = "" Then MsgBox("Selecciona un producto para poder eliminarlo.", vbInformation + vbOKOnly, titulocentral) : cboNombre.Focus().Equals(True) : Exit Sub
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim elimina As Boolean = False
 
@@ -762,6 +820,10 @@ Public Class frmProRefaccionaria
         Dim cuadro_dialogo As New OpenFileDialog
         Dim ruta As String = ""
         Dim sheet As String = "hoja1"
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         With cuadro_dialogo
             .Filter = "Archivos de cálculo(*.xls;*.xlsx)|*.xls;*.xlsx"
@@ -852,6 +914,12 @@ Public Class frmProRefaccionaria
     End Sub
 
     Private Function Comprueba(ByVal codigo As String, ByVal nombre As String, ByVal barras As String, ByVal barras2 As String, ByVal barras3 As String, ByVal provee As String, ByVal n_serie As String) As Boolean
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3 As MySqlDataReader
+        Dim cmd2, cmd3 As MySqlCommand
+
         Try
             Dim valida As Boolean = True
             cnn2.Close() : cnn2.Open()
