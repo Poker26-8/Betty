@@ -203,6 +203,10 @@ Public Class frmCotizaciones
     Private Sub btnCotizacion_Click(sender As Object, e As EventArgs) Handles btnCotizacion.Click
         If grdCaptura.Rows.Count = 0 Then MsgBox("Captura productos para guardar la cotización.", vbInformation + vbOKOnly, titulorefaccionaria) : cboDescripcion.Focus().Equals(True) : Exit Sub
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If MsgBox("¿Deseas guardar los datos de esta cotización?", vbInformation + vbOKCancel, titulorefaccionaria) = vbCancel Then cnn1.Close() : Exit Sub
 
         Dim MySubtotal As Double = 0
@@ -213,9 +217,7 @@ Public Class frmCotizaciones
         Dim subtotal As Double = 0
         Dim totreal As Double = 0
 
-        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
+
 
         Try
             cnn1.Close() : cnn1.Open()

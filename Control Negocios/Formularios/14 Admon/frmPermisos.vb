@@ -232,11 +232,12 @@ Public Class frmPermisos
     End Sub
 
     Private Async Sub frmPermisos_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-        cnn1.Close() : cnn1.Open()
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd1 As MySqlDataReader
         Dim cmd1 As MySqlCommand
+
+        cnn1.Close() : cnn1.Open()
 
         Dim limpiarventas As Integer = Await ValidarAsync("LimpiarV")
 

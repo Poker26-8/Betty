@@ -1,4 +1,6 @@
-﻿Public Class frmPasa_Corte
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmPasa_Corte
 
     Private Sub frmPasa_Corte_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
 

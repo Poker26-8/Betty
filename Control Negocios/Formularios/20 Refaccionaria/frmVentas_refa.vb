@@ -14132,6 +14132,12 @@ ecomoda:
     End Sub
 
     Private Sub cbovehiculo_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbovehiculo.SelectedValueChanged
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -14152,6 +14158,12 @@ ecomoda:
     End Sub
 
     Private Sub cboservicio_DropDown(sender As Object, e As EventArgs) Handles cboservicio.DropDown
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
 
             cboservicio.Items.Clear()
@@ -14181,6 +14193,12 @@ ecomoda:
     End Sub
 
     Private Sub txtparte_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtparte.KeyPress
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         If AscW(e.KeyChar) = Keys.Enter Then
 
@@ -14232,6 +14250,11 @@ ecomoda:
     Private Sub cbonota_LostFocus(sender As Object, e As EventArgs) Handles cbonota.LostFocus
         If cbonota.Text <> "" Then
 
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -14269,6 +14292,12 @@ ecomoda:
     End Sub
 
     Private Sub Valida_Datos_Cliente(ByVal nombre As String)
+
+
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
+
         Try
             cnn4.Close() : cnn4.Open()
 
@@ -14376,6 +14405,12 @@ ecomoda:
     Private Function GetCantLote(ByVal cod As String, ByVal lote As String) As Double
         GetCantLote = 0
         If cod = "" Then GetCantLote = 0 : Exit Function
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
 
@@ -14411,6 +14446,11 @@ ecomoda:
         Dim Y As Double = 0
         Dim Logotipo As Drawing.Image = Nothing
         Dim Pie As String = ""
+
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
 
         Try
@@ -14517,6 +14557,10 @@ ecomoda:
         Dim Pie As String = ""
 
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
 
             e.Graphics.DrawString("--S A L I D A  D E  A L M A C E N---", New Drawing.Font(tipografia, 10, FontStyle.Regular), Brushes.Black, 1, Y)
@@ -14593,6 +14637,12 @@ ecomoda:
 
     Private Sub grdcaptura_KeyDown(sender As Object, e As KeyEventArgs) Handles grdcaptura.KeyDown
         If e.KeyCode = Keys.Delete Then
+
+
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Dim totaleliminado As Double = 0
             Dim cantidadeliminada As Double = 0
@@ -14814,6 +14864,11 @@ ecomoda:
         If donde_va = "Descuento Moneda" Then
             Dim resta As Double = 0
 
+
+            Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd5 As MySqlDataReader
+            Dim cmd5 As MySqlCommand
+
             If txtdescuento1.Enabled = True Then
                 If txtdescu.Text = "" Then
                     txtdescu.Text = "0"
@@ -14911,6 +14966,11 @@ ecomoda:
     End Sub
 
     Private Sub cboCuentaRecepcion_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCuentaRecepcion.SelectedValueChanged
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
@@ -14939,6 +14999,11 @@ ecomoda:
         Dim crConnectionInfo As New ConnectionInfo
         Dim CrTables As Tables
         Dim CrTable As Table
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         crea_ruta("C:\ControlNegociosPro\ARCHIVOSDL1\VENTAS\")
         root_name_recibo = "C:\ControlNegociosPro\ARCHIVOSDL1\VENTAS\Venta_" & MyFolio & ".pdf"
