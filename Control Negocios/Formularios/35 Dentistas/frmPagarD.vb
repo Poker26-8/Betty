@@ -182,13 +182,12 @@ Public Class frmPagarD
 
     Private Sub btnAceptar_Click(sender As Object, e As EventArgs) Handles btnAceptar.Click
 
-        If MsgBox("¿Deseas guardar los datos de esta venta?", vbInformation + vbOKCancel, titulocentral) = vbCancel Then cnn1.Close() : Exit Sub
-
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd1, rd2 As MySqlDataReader
         Dim cmd1, cmd2 As MySqlCommand
 
+        If MsgBox("¿Deseas guardar los datos de esta venta?", vbInformation + vbOKCancel, titulocentral) = vbCancel Then cnn1.Close() : Exit Sub
 
         Dim total As Double = 0
         Dim acuenta As Double = 0
