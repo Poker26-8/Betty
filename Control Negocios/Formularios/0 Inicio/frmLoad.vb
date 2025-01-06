@@ -2676,7 +2676,6 @@ Public Class frmLoad
     Public Sub ActualizaCampos()
         Try
             Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd2 As MySqlDataReader
             Dim cmd2 As MySqlCommand
 
             cnn2.Close() : cnn2.Open()

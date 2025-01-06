@@ -188,7 +188,6 @@ Public Class frmEntregas
 
 
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd2 As MySqlDataReader
         Dim cmd2 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()

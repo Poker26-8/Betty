@@ -1,4 +1,6 @@
-﻿Public Class frmDetalleCita
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmDetalleCita
 
     Dim id_consulta As Integer = 0
 
