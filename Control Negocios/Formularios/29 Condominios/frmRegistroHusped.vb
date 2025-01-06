@@ -1,4 +1,6 @@
-﻿Public Class frmRegistroHusped
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmRegistroHusped
     Private Sub frmRegistroHusped_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cboCliente.Focus.Equals(True)
     End Sub
@@ -8,6 +10,11 @@
     End Sub
 
     Private Sub txtClave_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtClave.KeyPress
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             If AscW(e.KeyChar) = Keys.Enter Then
 
@@ -53,6 +60,11 @@
     End Sub
 
     Private Sub cboCliente_DropDown(sender As Object, e As EventArgs) Handles cboCliente.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCliente.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -132,6 +144,12 @@
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             If lblEmpleado.Text = "" Then MsgBox("Ingrese la contraseña del empleado") : txtClave.Focus.Equals(True) : Exit Sub
 

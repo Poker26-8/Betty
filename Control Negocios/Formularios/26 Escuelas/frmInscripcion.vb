@@ -1,6 +1,7 @@
 ﻿Imports System.IO
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
+Imports MySql.Data.MySqlClient
 
 Public Class frmInscripcion
 
@@ -11,6 +12,11 @@ Public Class frmInscripcion
     End Sub
 
     Private Sub matricula()
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -34,6 +40,11 @@ Public Class frmInscripcion
     End Sub
 
     Private Sub folio_ins()
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
 
@@ -59,6 +70,10 @@ Public Class frmInscripcion
     Private Sub cbogrupo_DropDown(sender As Object, e As EventArgs) Handles cbogrupo.DropDown
         cbogrupo.Items.Clear()
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -81,6 +96,10 @@ Public Class frmInscripcion
     Private Sub cbogrupo_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbogrupo.SelectedValueChanged
         Dim cupo As Integer = 0
         Dim conteo_grupo As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -121,6 +140,11 @@ Public Class frmInscripcion
 
     Private Sub txtmatricula_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtmatricula.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -282,6 +306,12 @@ Public Class frmInscripcion
         If MsgBox("¿Deseas inscribir a este alumno?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
             Dim id_grupo As Integer = 0
             Dim fecha_inscripcion As String = ""
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim CNN2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, RD2 As MySqlDataReader
+            Dim cmd1, CMD2 As MySqlCommand
+
 
             Try
                 cnn1.Close() : cnn1.Open()
@@ -576,6 +606,11 @@ Public Class frmInscripcion
     End Sub
 
     Private Sub cbocuota_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbocuota.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -596,6 +631,11 @@ Public Class frmInscripcion
 
     Private Sub cbocuota_DropDown(sender As Object, e As EventArgs) Handles cbocuota.DropDown
         cbocuota.Items.Clear()
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
 
@@ -662,9 +702,12 @@ Public Class frmInscripcion
 
         Call cbocuota_KeyPress(cbocuota, New KeyPressEventArgs(ChrW(Keys.Enter)))
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
-
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select distinct Nombre from Kits where Grupo='PAGO ESCUELA'"
@@ -684,6 +727,10 @@ Public Class frmInscripcion
     Private Sub ComboBox1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ComboBox1.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd2 As MySqlDataReader
+            Dim cmd2 As MySqlCommand
+
             Try
                 cnn2.Close() : cnn2.Open()
 
@@ -743,6 +790,11 @@ Public Class frmInscripcion
 
     Private Sub txtNombre_DropDown(sender As Object, e As EventArgs) Handles txtNombre.DropDown
         txtNombre.Items.Clear()
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
 
@@ -763,6 +815,11 @@ Public Class frmInscripcion
     End Sub
 
     Private Sub txtNombre_SelectedValueChanged(sender As Object, e As EventArgs) Handles txtNombre.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -808,6 +865,10 @@ Public Class frmInscripcion
     Private Sub txtNombre_KeyPress_1(sender As Object, e As KeyPressEventArgs) Handles txtNombre.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 

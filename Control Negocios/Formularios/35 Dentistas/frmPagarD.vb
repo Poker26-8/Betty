@@ -1,6 +1,7 @@
 ﻿Imports System.Runtime.InteropServices.ComTypes
 Imports Chilkat
 Imports Core.DAL.Addendas
+Imports MySql.Data.MySqlClient
 
 Public Class frmPagarD
 
@@ -12,6 +13,11 @@ Public Class frmPagarD
     Public resta As Double = 0
 
     Private Sub frmPagarD_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim MYSALDO As Double = 0
             cnn1.Close() : cnn1.Open()
@@ -177,6 +183,12 @@ Public Class frmPagarD
     Private Sub btnAceptar_Click(sender As Object, e As EventArgs) Handles btnAceptar.Click
 
         If MsgBox("¿Deseas guardar los datos de esta venta?", vbInformation + vbOKCancel, titulocentral) = vbCancel Then cnn1.Close() : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
 
         Dim total As Double = 0
         Dim acuenta As Double = 0

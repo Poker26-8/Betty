@@ -9,6 +9,11 @@ Public Class FrmDentistas
     End Sub
 
     Public Sub MostrarResultadosLike()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             grdCaptura.Rows.Clear()
             cnn1.Close()
@@ -28,6 +33,11 @@ Public Class FrmDentistas
     End Sub
 
     Public Sub MostrarTodo()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             grdCaptura.Rows.Clear()
             cnn1.Close()

@@ -1,4 +1,6 @@
-﻿Public Class frmAddCita
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmAddCita
     Private Sub frmAddCita_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         rtbAsunto.Focus()
         cboHora.Text = Format(Now, "HH")
@@ -98,6 +100,10 @@
     Private Sub cboUsuario_DropDown(sender As Object, e As EventArgs) Handles cboUsuario.DropDown
 
         cboUsuario.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()
@@ -231,6 +237,12 @@
                 End If
             End If
         End If
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             cnn1.Close()

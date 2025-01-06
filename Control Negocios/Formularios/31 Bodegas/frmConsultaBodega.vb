@@ -1,8 +1,14 @@
-﻿Public Class frmConsultaBodega
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmConsultaBodega
     Private Sub frmConsultaBodega_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Timer1.Start()
         Dim pago As Date = Nothing, actual As Date = Nothing
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -47,6 +53,11 @@
     Private Sub cbovisitas_DropDown(sender As Object, e As EventArgs) Handles cbovisitas.DropDown
         cbovisitas.Items.Clear()
         cbovisitas.Items.Add(txtdueño.Text)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -70,6 +81,10 @@
         If cbovisitas.Text = "" Then MsgBox("Selecciona un visitante para conceder la entrada.", vbInformation + vbOKOnly, titulocentral) : cbovisitas.Focus().Equals(True) : Exit Sub
         If txtUsuario.Text = "" Then MsgBox("Escribe tu contraseña de usuario para continuar.", vbInformation + vbOKOnly, titulocentral) : txtUsuario.Focus().Equals(True) : Exit Sub
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -92,6 +107,9 @@
     Private Sub txtUsuario_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUsuario.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             If txtUsuario.Text = "" Then Exit Sub
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
             Try
 
                 Dim usuario As String = TraerUsuarioIngresado(txtUsuario.Text)
@@ -115,6 +133,11 @@
         If txtUsuario.Text = "" Then MsgBox("Escribe tu contraseña de usuario para continuar.", vbInformation + vbOKOnly, titulocentral) : txtUsuario.Focus().Equals(True) : Exit Sub
 
         Dim id_mov As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -163,6 +186,10 @@
             End If
 
             Dim termina As Boolean = False
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 cnn1.Close()

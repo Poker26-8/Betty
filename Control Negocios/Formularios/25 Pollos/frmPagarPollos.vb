@@ -1,4 +1,5 @@
 ﻿Imports Core.DAL
+Imports MySql.Data.MySqlClient
 Imports System.IO
 Public Class frmPagarPollos
 
@@ -27,6 +28,10 @@ Public Class frmPagarPollos
     Dim facLinea As Integer = 0
 
     Private Sub frmPagarPollos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         nLogo = DatosRecarga("LogoG")
         tLogo = DatosRecarga("TipoLogo")
@@ -69,6 +74,10 @@ Public Class frmPagarPollos
 
     Private Sub TFolioP_Tick(sender As Object, e As EventArgs) Handles TFolioP.Tick
         TFolioP.Stop()
+
+        Dim cnntimer As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rdtimer As MySqlDataReader
+        Dim cmdtimer As MySqlCommand
 
         cnntimer.Close() : cnntimer.Open()
         cmdtimer = cnntimer.CreateCommand
@@ -152,6 +161,10 @@ Public Class frmPagarPollos
 
     Private Sub btnPrecuenta_Click(sender As Object, e As EventArgs) Handles btnPrecuenta.Click
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd3 As MySqlDataReader
+        Dim cmd1, cmd3 As MySqlCommand
 
         If grdComandas.Rows.Count <> 0 Then
 
@@ -280,6 +293,13 @@ Public Class frmPagarPollos
 
         Dim ope As Double = 0
         Dim TotalIVA As Double = 0
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd2, cmd3, cmd4 As MySqlCommand
+
         Try
 
             cnn2.Close() : cnn2.Open()
@@ -514,6 +534,11 @@ Public Class frmPagarPollos
     End Function
 
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             If MsgBox("¿Desea elimianr el pedidod de este cliente?", vbInformation + vbYesNo, titulocentral) = vbYes Then
 
@@ -548,6 +573,11 @@ Public Class frmPagarPollos
     End Sub
 
     Private Sub cboComanda_DropDown(sender As Object, e As EventArgs) Handles cboComanda.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboComanda.Items.Clear()
 
@@ -570,6 +600,11 @@ Public Class frmPagarPollos
     End Sub
 
     Private Sub cboComanda_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboComanda.SelectedValueChanged
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
 
             grdComandas.Rows.Clear()
@@ -605,6 +640,10 @@ Public Class frmPagarPollos
     End Sub
 
     Public Sub traercomanda()
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Try
             grdComandas.Rows.Clear()
@@ -650,6 +689,13 @@ Public Class frmPagarPollos
     Public Function GuardarVenta(ByVal formapago) As String
 
         Dim mypago As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
 
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand
@@ -1119,6 +1165,12 @@ Public Class frmPagarPollos
         Dim cantidadpro As Double = 0
         Dim usuario As String = ""
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd2, cmd3, cmd4 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
@@ -1356,6 +1408,10 @@ Public Class frmPagarPollos
     End Sub
 
     Private Sub grdComandas_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles grdComandas.CellDoubleClick
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Dim index As Integer = grdComandas.CurrentRow.Index
 

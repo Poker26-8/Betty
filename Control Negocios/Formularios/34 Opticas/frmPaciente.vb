@@ -1,11 +1,17 @@
 ﻿
 Imports System.IO
+Imports MySql.Data.MySqlClient
 Public Class frmPaciente
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
 
     Private Sub cboCliente_DropDown(sender As Object, e As EventArgs) Handles cboCliente.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCliente.Items.Clear()
 
@@ -114,6 +120,11 @@ Public Class frmPaciente
     End Sub
 
     Private Sub cboMedico_DropDown(sender As Object, e As EventArgs) Handles cboMedico.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboMedico.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -142,6 +153,14 @@ Public Class frmPaciente
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
+        If lblUsuario.Text = "" Then MsgBox("Debe ingresar la contraseña.", vbInformation + vbOKOnly, titulocentral) : txtContraseña.Focus.Equals(True) : Exit Sub
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -237,6 +256,11 @@ Public Class frmPaciente
     End Sub
 
     Private Sub POptica80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles POptica80.PrintPage
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             Dim tipografia As String = "Lucida Sans Typewriter"
             Dim fuente_r As New Font("Lucida Sans Typewriter", 8, FontStyle.Regular)
@@ -392,7 +416,7 @@ Public Class frmPaciente
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn2.Close()
         End Try
     End Sub
 

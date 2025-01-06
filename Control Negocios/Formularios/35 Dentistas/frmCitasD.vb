@@ -1,4 +1,6 @@
-﻿Public Class frmCitasD
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmCitasD
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub
@@ -12,6 +14,10 @@
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
 
             Dim motivo As String = ""

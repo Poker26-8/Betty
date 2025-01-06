@@ -1,5 +1,13 @@
-﻿Public Class frmVehP
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmVehP
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             Dim STADO As Integer = 0
 
@@ -93,6 +101,11 @@
     End Sub
 
     Private Sub cboPlaca_DropDown(sender As Object, e As EventArgs) Handles cboPlaca.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboPlaca.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -114,6 +127,10 @@
     End Sub
 
     Private Sub cboPlaca_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboPlaca.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
 
             Dim activo As Integer = 0
@@ -145,6 +162,12 @@
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand

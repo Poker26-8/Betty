@@ -1,4 +1,5 @@
 ﻿Imports Core.DAL.Addendas
+Imports MySql.Data.MySqlClient
 Imports System.IO
 Public Class frmHisClinica
 
@@ -10,6 +11,10 @@ Public Class frmHisClinica
     Dim DesglosaIVA As String = ""
 
     Private Sub frmHisClinica_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         nLogo = DatosRecarga("LogoG")
         tLogo = DatosRecarga("TipoLogo")
@@ -39,6 +44,11 @@ Public Class frmHisClinica
     End Sub
 
     Private Sub cboMedicos_DropDown(sender As Object, e As EventArgs) Handles cboMedicos.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboMedicos.Items.Clear()
 
@@ -61,6 +71,11 @@ Public Class frmHisClinica
     End Sub
 
     Private Sub cboDescripcion_DropDown(sender As Object, e As EventArgs) Handles cboDescripcion.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboDescripcion.Items.Clear()
 
@@ -126,6 +141,11 @@ Public Class frmHisClinica
     End Sub
 
     Private Sub cboDescripcion_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboDescripcion.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -365,6 +385,12 @@ Public Class frmHisClinica
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             If txtdiente.Text = "" Then MsgBox("Seleccione un diente", vbInformation + vbOKOnly, titulocentral) : Exit Sub
@@ -720,6 +746,11 @@ Public Class frmHisClinica
         Dim Logotipo As Drawing.Image = Nothing
 
         Dim total_prods As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
 
             '[°]. Logotipo
@@ -972,6 +1003,11 @@ Public Class frmHisClinica
 
     Private Sub txtCodigo_DropDown(sender As Object, e As EventArgs) Handles txtCodigo.DropDown
         txtCodigo.Items.Clear()
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
 
@@ -1004,6 +1040,11 @@ Public Class frmHisClinica
     End Sub
 
     Private Sub cboMedicos_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboMedicos.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand

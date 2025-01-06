@@ -1,4 +1,6 @@
-﻿Public Class frmRegistroBodega
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmRegistroBodega
 
     Dim fechacatual As Date = Nothing
 
@@ -47,6 +49,10 @@
 
         Dim id As Integer = 0
         Dim estado As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             If MsgBox("¿Deseas guadar esta información e iniciar el periodo de renta de la bodega " & lblbodega.Text & "?", vbInformation + vbOKCancel, titulocentral) = vbOK Then
@@ -155,6 +161,11 @@
     End Sub
 
     Private Sub cboCliente_DropDown(sender As Object, e As EventArgs) Handles cboCliente.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCliente.Items.Clear()
 
@@ -177,6 +188,10 @@
     End Sub
 
     Private Sub cboCliente_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCliente.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -218,6 +233,7 @@
         End Try
 
     End Sub
+
     Private Sub cboPeriodo_DropDown(sender As Object, e As EventArgs) Handles cboPeriodo.DropDown
         cboPeriodo.Items.Clear()
         cboPeriodo.Items.Add("Mensual")

@@ -1,5 +1,12 @@
-﻿Public Class frmCitas
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmCitas
     Private Sub frmCitas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim fecha As Date = Nothing
             Dim fecham As String = ""
@@ -32,6 +39,11 @@
     End Sub
 
     Private Sub cboMedico_DropDown(sender As Object, e As EventArgs) Handles cboMedico.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboMedico.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -53,6 +65,11 @@
     End Sub
 
     Private Sub cboMedico_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboMedico.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -83,6 +100,11 @@
     End Sub
 
     Private Sub cboPaciente_DropDown(sender As Object, e As EventArgs) Handles cboPaciente.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboPaciente.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -103,6 +125,11 @@
     End Sub
 
     Private Sub cboPaciente_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboPaciente.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -123,6 +150,10 @@
     End Sub
 
     Private Sub btnAgendar_Click(sender As Object, e As EventArgs) Handles btnAgendar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             If cboPaciente.Text = "" Then MsgBox("Debe seleccionar un paciente") : cboPaciente.Focus.Equals(True) : Exit Sub
 
@@ -147,6 +178,11 @@
 
     Private Sub txtClave_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtClave.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand

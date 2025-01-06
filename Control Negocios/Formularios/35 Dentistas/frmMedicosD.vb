@@ -1,4 +1,6 @@
-﻿Public Class frmMedicosD
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmMedicosD
 
     Dim logor As String = ""
     Private Sub frmMedicosD_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
@@ -27,6 +29,12 @@
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -223,6 +231,10 @@
     End Sub
 
     Private Sub frmMedicosD_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             Dim logo As String = ""
 

@@ -1,4 +1,5 @@
 ﻿Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepCuentas
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
@@ -7,9 +8,19 @@ Public Class frmRepCuentas
         Dim m1 As Date = mCalendar1.SelectionStart.ToShortDateString()
         Dim m2 As Date = mCalendar2.SelectionStart.ToShortDateString()
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
+
         Dim cuantas As Integer = 0
         txtcobrar.Text = "0.00"
         If (opttodos.Checked) Then
+
+
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -607,6 +618,10 @@ Public Class frmRepCuentas
 
     Private Sub cbo_DropDown(sender As Object, e As EventArgs) Handles cbo.DropDown
         cbo.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If (optpendientes_grupo.Checked) Or (optgrupo.Checked) Then
             Try

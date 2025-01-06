@@ -24,10 +24,10 @@ Partial Class frmCompras
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmCompras))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.grdcaptura = New System.Windows.Forms.DataGridView()
@@ -219,7 +219,7 @@ Partial Class frmCompras
         Me.grdcaptura.ReadOnly = True
         Me.grdcaptura.RowHeadersVisible = False
         Me.grdcaptura.RowTemplate.Height = 26
-        Me.grdcaptura.Size = New System.Drawing.Size(836, 432)
+        Me.grdcaptura.Size = New System.Drawing.Size(836, 341)
         Me.grdcaptura.TabIndex = 5
         '
         'Column1
@@ -245,8 +245,8 @@ Partial Class frmCompras
         '
         'Column4
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Column4.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Column4.DefaultCellStyle = DataGridViewCellStyle11
         Me.Column4.HeaderText = "Cantidad"
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
@@ -254,8 +254,8 @@ Partial Class frmCompras
         '
         'Column5
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle12
         Me.Column5.HeaderText = "Precio"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
@@ -263,8 +263,8 @@ Partial Class frmCompras
         '
         'Column6
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column6.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle13
         Me.Column6.HeaderText = "Total"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
@@ -272,8 +272,8 @@ Partial Class frmCompras
         '
         'Column7
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Column7.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Column7.DefaultCellStyle = DataGridViewCellStyle14
         Me.Column7.HeaderText = "Existencia"
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
@@ -1312,7 +1312,7 @@ Partial Class frmCompras
         '
         'barraExcel
         '
-        Me.barraExcel.Location = New System.Drawing.Point(7, 608)
+        Me.barraExcel.Location = New System.Drawing.Point(7, 508)
         Me.barraExcel.Name = "barraExcel"
         Me.barraExcel.Size = New System.Drawing.Size(836, 19)
         Me.barraExcel.TabIndex = 181
@@ -1677,7 +1677,7 @@ Partial Class frmCompras
         '
         Me.Panel2.Controls.Add(Me.GroupBox2)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel2.Location = New System.Drawing.Point(0, 633)
+        Me.Panel2.Location = New System.Drawing.Point(0, 533)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(917, 111)
         Me.Panel2.TabIndex = 88
@@ -1749,7 +1749,7 @@ Partial Class frmCompras
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(917, 744)
+        Me.ClientSize = New System.Drawing.Size(917, 644)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.btnprod)
         Me.Controls.Add(Me.panpago_compra)
@@ -1791,9 +1791,8 @@ Partial Class frmCompras
         Me.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.Margin = New System.Windows.Forms.Padding(4, 3, 4, 3)
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
         Me.MinimumSize = New System.Drawing.Size(923, 557)
         Me.Name = "frmCompras"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

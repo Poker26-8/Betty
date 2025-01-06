@@ -1,4 +1,5 @@
 ﻿Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepCitas
     Private Sub frmRepCitas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -7,6 +8,10 @@ Public Class frmRepCitas
     End Sub
 
     Private Sub cboDatos_DropDown(sender As Object, e As EventArgs) Handles cboDatos.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboDatos.Items.Clear()
 
@@ -36,6 +41,11 @@ Public Class frmRepCitas
 
         Dim fecha As Date = Nothing
         Dim fechac As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
 
             If (optClientes.Checked) Then
@@ -77,6 +87,11 @@ Public Class frmRepCitas
     End Sub
 
     Private Sub optTodos_Click(sender As Object, e As EventArgs) Handles optTodos.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (optTodos.Checked) Then
             grdCaptura.Rows.Clear()
             cboDatos.Text = ""

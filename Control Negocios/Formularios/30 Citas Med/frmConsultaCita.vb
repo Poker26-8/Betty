@@ -1,4 +1,6 @@
-﻿Public Class frmConsultaCita
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmConsultaCita
     Private Sub frmConsultaCita_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
@@ -127,6 +129,12 @@
     End Sub
 
     Private Sub btnConsultar_Click(sender As Object, e As EventArgs) Handles btnConsultar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         If (optMes.Checked) Then
             If cboAño.Text = "" Or cboMes.Text = "" Then
                 MsgBox("Seleccione una fecha válida para consultar.", vbInformation + vbOKOnly, "Delsscom Agenda de citas")
@@ -186,6 +194,8 @@
             Dim dia As Integer = 0
             Dim hora As String = ""
             Dim minu As String = ""
+
+
 
             Try
                 cnn1.Close()

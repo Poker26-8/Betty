@@ -1,4 +1,6 @@
-﻿Public Class frmDetalleEntregado
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmDetalleEntregado
     Public cliente As String = ""
     Dim Mytotal As Double = 0
     Dim MyPrecio As Double = 0
@@ -16,6 +18,12 @@
         Dim fech As Date = frmEntregaPedidos.dtpAsignacion.Value
         fech = FormatDateTime(fech, DateFormat.ShortDate)
         fech = Format(fech, "yyyy-MM-dd")
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         Try
             grdCaptura.Rows.Clear()
@@ -139,6 +147,12 @@
                 boxcantidad.Visible = False
                 Exit Sub
             End If
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2 As MySqlCommand
+
             Try
                 If txtcantidad.Text = "" Or txtcantidad.Text = "0" Then
                     Exit Sub

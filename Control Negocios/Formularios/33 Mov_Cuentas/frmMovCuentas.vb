@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports MySql.Data.MySqlClient
 Public Class frmMovCuentas
 
     Dim nLogo As String = ""
@@ -13,6 +14,10 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub TFolio_Tick(sender As Object, e As EventArgs) Handles TFolio.Tick
+        Dim cnntimer As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rdtimer As MySqlDataReader
+        Dim cmdtimer As MySqlCommand
+
         Try
             cnntimer.Close() : cnntimer.Open()
             cmdtimer = cnntimer.CreateCommand
@@ -73,6 +78,11 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub cboForma_DropDown(sender As Object, e As EventArgs) Handles cboForma.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboForma.Items.Clear()
 
@@ -96,6 +106,10 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub cboBanco_DropDown(sender As Object, e As EventArgs) Handles cboBanco.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboBanco.Items.Clear()
 
@@ -118,6 +132,11 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub cboCuneta_DropDown(sender As Object, e As EventArgs) Handles cboCuneta.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCuneta.Items.Clear()
 
@@ -140,6 +159,9 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub cboCuneta_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCuneta.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -160,6 +182,10 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub cboNombre_DropDown(sender As Object, e As EventArgs) Handles cboNombre.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboNombre.Items.Clear()
 
@@ -182,6 +208,10 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub cboFolio_DropDown(sender As Object, e As EventArgs) Handles cboFolio.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboFolio.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -254,6 +284,13 @@ Public Class frmMovCuentas
 
 
     Private Sub btnguardar_Click(sender As Object, e As EventArgs) Handles btnguardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
+
         Try
             Dim saldocuenta As Double = 0
             Dim retiro As Double = 0
@@ -422,6 +459,11 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub cboFolio_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboFolio.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -458,6 +500,13 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
+
         Try
             Dim monto As Double = 0
             Dim saldo As Double = 0
@@ -526,6 +575,10 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub cboFolioE_DropDown(sender As Object, e As EventArgs) Handles cboFolioE.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboFolioE.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -554,6 +607,9 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub cboNombreE_DropDown(sender As Object, e As EventArgs) Handles cboNombreE.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboNombreE.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -582,6 +638,11 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub cboFormaE_DropDown(sender As Object, e As EventArgs) Handles cboFormaE.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboFormaE.Items.Clear()
 
@@ -611,6 +672,11 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub cboBancoE_DropDown(sender As Object, e As EventArgs) Handles cboBancoE.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboBancoE.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -654,6 +720,11 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub cboCuentaE_DropDown(sender As Object, e As EventArgs) Handles cboCuentaE.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCuentaE.Items.Clear()
 
@@ -683,6 +754,10 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub cboCuentaE_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCuentaE.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -720,6 +795,11 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub cboFolioE_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboFolioE.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim fecha As Date = Nothing
             Dim fechan As String = ""
@@ -754,6 +834,13 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub btnGuardarE_Click(sender As Object, e As EventArgs) Handles btnGuardarE.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
+
         Try
 
             Dim monto As Double = 0
@@ -932,6 +1019,11 @@ Public Class frmMovCuentas
     End Sub
 
     Private Sub pIngreso80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pIngreso80.PrintPage
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
 
             Dim tipografia As String = "Lucida Sans Typewriter"
@@ -1068,12 +1160,17 @@ Public Class frmMovCuentas
             Y += 20
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn2.Close()
 
         End Try
     End Sub
 
     Private Sub PIngreso58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PIngreso58.PrintPage
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
 
             Dim tipografia As String = "Lucida Sans Typewriter"
@@ -1209,12 +1306,17 @@ Public Class frmMovCuentas
             Y += 20
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn2.Close()
 
         End Try
     End Sub
 
     Private Sub pEgresos80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pEgresos80.PrintPage
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
 
             Dim tipografia As String = "Lucida Sans Typewriter"
@@ -1351,12 +1453,16 @@ Public Class frmMovCuentas
             Y += 20
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
-
+            cnn2.Close()
         End Try
     End Sub
 
     Private Sub pEgresos58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pEgresos58.PrintPage
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
 
             Dim tipografia As String = "Lucida Sans Typewriter"
@@ -1492,7 +1598,7 @@ Public Class frmMovCuentas
             Y += 20
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn2.Close()
 
         End Try
     End Sub

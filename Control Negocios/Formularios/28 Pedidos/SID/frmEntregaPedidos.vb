@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports MySql.Data.MySqlClient
 Public Class frmEntregaPedidos
 
     Dim id_cliente As Integer = 0
@@ -17,6 +18,10 @@ Public Class frmEntregaPedidos
         buscaFolio()
     End Sub
     Public Sub buscaFolio()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()
@@ -45,6 +50,9 @@ Public Class frmEntregaPedidos
     End Sub
 
     Private Sub cboProveedor_DropDown(sender As Object, e As EventArgs) Handles cboProveedor.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboProveedor.Items.Clear()
 
@@ -66,6 +74,11 @@ Public Class frmEntregaPedidos
     End Sub
 
     Private Sub cboCliente_DropDown(sender As Object, e As EventArgs) Handles cboCliente.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCliente.Items.Clear()
 
@@ -88,6 +101,11 @@ Public Class frmEntregaPedidos
     End Sub
 
     Private Sub cboFolio_DropDown(sender As Object, e As EventArgs) Handles cboFolio.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboFolio.Items.Clear()
 
@@ -124,6 +142,11 @@ Public Class frmEntregaPedidos
     Private Sub cboFolio_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboFolio.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
 
             grdCaptura.Rows.Clear()
             cnn1.Close() : cnn1.Open()
@@ -170,6 +193,11 @@ Public Class frmEntregaPedidos
     End Sub
 
     Private Sub cboCliente_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCliente.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -239,6 +267,11 @@ Public Class frmEntregaPedidos
         End Try
     End Sub
     Public Sub recargaDatos()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             grdCaptura.Rows.Clear()
             cnn1.Close() : cnn1.Open()
@@ -277,6 +310,12 @@ Public Class frmEntregaPedidos
     End Sub
 
     Private Sub btnPedido_Click(sender As Object, e As EventArgs) Handles btnPedido.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             totalxd = txtTotal.Text
             Dim subtotal As Double = 0
@@ -464,6 +503,11 @@ Public Class frmEntregaPedidos
 
             Dim precio As Double = 0
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
+
             cnn1.Close()
             cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -539,6 +583,11 @@ Public Class frmEntregaPedidos
 
     Private Sub txtcontraseña_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcontraseña.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close()
                 cnn1.Open()
@@ -605,6 +654,9 @@ Public Class frmEntregaPedidos
         Dim Y As Double = 0
         Dim Logotipo As Drawing.Image = Nothing
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             '[°]. Logotipo

@@ -2,6 +2,7 @@
 Imports System.Net
 Imports System.Web.Services
 Imports Gma.QrCodeNet.Encoding.Windows.Forms
+Imports MySql.Data.MySqlClient
 Public Class frmPedidos_Tienda
 
     Public Viene_De As String = ""
@@ -17,6 +18,10 @@ Public Class frmPedidos_Tienda
     Private Sub cbonombre_DropDown(sender As Object, e As EventArgs) Handles cbonombre.DropDown
         Limpiar_datos()
         cbonombre.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -50,6 +55,11 @@ Public Class frmPedidos_Tienda
     Private Sub cbofolio_DropDown(sender As Object, e As EventArgs) Handles cbofolio.DropDown
         Limpiar_datos()
         cbofolio.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -207,6 +217,12 @@ Public Class frmPedidos_Tienda
         txtacuenta.Text = "0.00"
         txt_resta.Text = "0.00"
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3 As MySqlDataReader
+        Dim cmd2, cmd3 As MySqlCommand
+
+
         Try
             cnn2.Close() : cnn2.Open()
 
@@ -348,6 +364,10 @@ Public Class frmPedidos_Tienda
     Private Function get_id_cliente(ByVal id_tienda As Integer) As Integer
         Dim id_cliente As Integer = 0
 
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -445,6 +465,10 @@ Public Class frmPedidos_Tienda
             Exit Sub
         End If
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         txtSubTotal.Text = FormatNumber(txt_total.Text, 2)
         If CDbl(txtdescuento1.Text) > 0 Then
             txtSubTotal.Tag = 1
@@ -502,6 +526,10 @@ Public Class frmPedidos_Tienda
         If grdcaptura.Rows.Count < 1 Then
             Exit Sub
         End If
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
 
         If lbltipo_envio.Text = "Envío a domicilio" Then
             Envia_Produccion()
@@ -562,6 +590,14 @@ Public Class frmPedidos_Tienda
     End Sub
 
     Private Sub Envia_Produccion()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cnn2.Close() : cnn2.Open()
@@ -725,6 +761,10 @@ Public Class frmPedidos_Tienda
 
         Dim Y As Double = 0
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             e.Graphics.DrawString("-------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
             Y += 15
@@ -809,6 +849,9 @@ Public Class frmPedidos_Tienda
 
     Private Sub txtusuario_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtusuario.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -858,6 +901,11 @@ Public Class frmPedidos_Tienda
         Dim simbolo As String = DatosRecarga("Simbolo")
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
         Dim Pie As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             '[°]. Logotipo
@@ -1288,6 +1336,11 @@ Public Class frmPedidos_Tienda
 
     Private Sub cbotpago_DropDown(sender As System.Object, e As System.EventArgs) Handles cbotpago.DropDown
         cbotpago.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -1318,6 +1371,10 @@ Public Class frmPedidos_Tienda
     End Sub
 
     Private Sub cbotpago_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbotpago.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()
@@ -1343,6 +1400,11 @@ Public Class frmPedidos_Tienda
 
     Private Sub cbobanco_DropDown(sender As System.Object, e As System.EventArgs) Handles cbobanco.DropDown
         cbobanco.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -1380,6 +1442,11 @@ Public Class frmPedidos_Tienda
     Private Sub txtnumref_KeyPress(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtnumref.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             Dim saldo As Double = 0
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             If cbotpago.Text = "TARJETA" Then
                 Try
                     cnn1.Close() : cnn1.Open()
@@ -1452,6 +1519,10 @@ Public Class frmPedidos_Tienda
     End Sub
 
     Private Sub cboCuentaRecepcion_DropDown(sender As Object, e As EventArgs) Handles cboCuentaRecepcion.DropDown
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cboCuentaRecepcion.Items.Clear()
 
@@ -1473,6 +1544,10 @@ Public Class frmPedidos_Tienda
     End Sub
 
     Private Sub cboCuentaRecepcion_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCuentaRecepcion.SelectedValueChanged
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
@@ -1633,6 +1708,10 @@ Public Class frmPedidos_Tienda
         If donde_va = "Descuento Moneda" Then
             Dim resta As Double = 0
 
+            Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd5 As MySqlDataReader
+            Dim cmd5 As MySqlCommand
+
             If txtdescuento1.Enabled = True Then
                 If txtdescu.Text = "" Then
                     txtdescu.Text = "0"
@@ -1746,6 +1825,11 @@ Public Class frmPedidos_Tienda
                 If grdpago.Rows.Count > 0 Then grdpago.Rows.Clear() : txtMontoP.Text = "0.00"
             End If
 
+            Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd5 As MySqlDataReader
+            Dim cmd5 As MySqlCommand
+
+
             Dim CampoDsct As Double = IIf(txtdescuento1.Text = "", "0", txtdescuento1.Text)
             Dim Desc As Double = 0
 
@@ -1802,6 +1886,11 @@ Public Class frmPedidos_Tienda
     End Sub
 
     Public Function IvaDSC(ByVal cod As String) As Double
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -1845,6 +1934,12 @@ Public Class frmPedidos_Tienda
         If grdcaptura.Rows.Count < 1 Then
             Exit Sub
         End If
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         'Cálculo del subtotal
         Try
@@ -2538,6 +2633,11 @@ Door:
     End Sub
 
     Private Sub Termina_Error()
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -2587,6 +2687,9 @@ Door:
         Dim pie As String = ""
         Dim TOTALPRODUCTOS As Double = 0
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If whats <> "" Then
             ligaqr = "http://wa.me/" & whats
@@ -2617,7 +2720,7 @@ Door:
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then
-                    Pie = rd1("Pie1").ToString
+                    pie = rd1("Pie1").ToString
 
 
                     'Razón social
@@ -2956,6 +3059,9 @@ Door:
         Dim pie As String = ""
         Dim TOTALPRODUCTOS As Double = 0
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If whats <> "" Then
             ligaqr = "http://wa.me/" & whats

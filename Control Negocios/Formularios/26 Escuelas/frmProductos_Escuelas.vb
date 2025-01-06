@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.Data.OleDb
 Imports Microsoft.Office.Interop.Excel
 Imports MySql.Data
+Imports MySql.Data.MySqlClient
 
 Public Class frmProductos_Escuelas
     Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
@@ -18,6 +19,11 @@ Public Class frmProductos_Escuelas
 
     Private Sub cboNombre_DropDown(sender As Object, e As EventArgs) Handles cboNombre.DropDown
         cboNombre.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -49,6 +55,11 @@ Public Class frmProductos_Escuelas
         Dim total As Double = 0
         Dim regisros As Double = 0
         grdcaptura.Rows.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -82,6 +93,11 @@ Public Class frmProductos_Escuelas
         Dim total As Double = 0
         Dim regisros As Double = 0
         grdcaptura.Rows.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -159,6 +175,11 @@ Public Class frmProductos_Escuelas
 
         Dim codigo As String = ""
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
+
         Try
             cnn2.Close() : cnn2.Open()
 
@@ -221,6 +242,11 @@ Public Class frmProductos_Escuelas
         Dim fila As Integer = grdcaptura.CurrentRow.Index
 
         If MsgBox("¿Deseas eliminar el concepto '" & grdcaptura.Rows(fila).Cells(1).Value.ToString() & "'?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -252,6 +278,11 @@ Public Class frmProductos_Escuelas
         If txtnuevo_concepto.Text = "" Then MsgBox("El concepto de pago no puede estar vacío.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
 
         If MsgBox("¿Deseas actualizar el concepto de pago?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -289,6 +320,10 @@ Public Class frmProductos_Escuelas
     Private Sub btn_fecha_Click(sender As Object, e As EventArgs) Handles btn_fecha.Click
         If MsgBox("¿Deseas actualizar la fecha de pago?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
             Dim fecha As Date = dtpnuevo_fecha.Value
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 cnn1.Close() : cnn1.Open()
@@ -332,6 +367,10 @@ Public Class frmProductos_Escuelas
         If MsgBox("¿Deseas actualizar el monto de pago?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
             Dim monto As Double = txtnuevo_monto.Text
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -366,6 +405,11 @@ Public Class frmProductos_Escuelas
         Dim id_abono As Integer = 0
         Dim saldo As Double = 0
         Dim status As String = ""
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, RD3 As MySqlDataReader
+        Dim cmd2, CMD3 As MySqlCommand
 
         Try
             cnn2.Close() : cnn2.Open()
@@ -443,4 +487,6 @@ Public Class frmProductos_Escuelas
     Private Sub frmProductos_Escuelas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
+
 End Class

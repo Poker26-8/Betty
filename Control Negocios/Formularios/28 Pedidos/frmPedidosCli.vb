@@ -1,4 +1,5 @@
 ﻿Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+Imports MySql.Data.MySqlClient
 
 Public Class frmPedidosCli
 
@@ -6,6 +7,11 @@ Public Class frmPedidosCli
     Dim idcliente As Integer = 0
 
     Private Sub cboCliente_DropDown(sender As Object, e As EventArgs) Handles cboCliente.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCliente.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -27,6 +33,11 @@ Public Class frmPedidosCli
     End Sub
 
     Private Sub cboPedido_DropDown(sender As Object, e As EventArgs) Handles cboPedido.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboPedido.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -151,6 +162,11 @@ Public Class frmPedidosCli
     End Sub
 
     Private Sub cboPedido_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboPedido.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             grdCaptura.Rows.Clear()
 
@@ -341,6 +357,11 @@ Public Class frmPedidosCli
     End Sub
 
     Private Sub btnreporte_Click(sender As Object, e As EventArgs) Handles btnreporte.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             If (rbPendientes.Checked) Then
 
@@ -383,11 +404,15 @@ Public Class frmPedidosCli
     End Sub
 
     Private Sub btnEntrega_Click(sender As Object, e As EventArgs) Handles btnEntrega.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             If cboVehiculo.Text = "" Then MsgBox("Debe seleccionar un vehiculo") : cboVehiculo.Focus.Equals(True) : Exit Sub
             If cboChofer.Text = "" Then MsgBox("") : cboChofer.Focus.Equals(True) : Exit Sub
-
-
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -428,6 +453,11 @@ Public Class frmPedidosCli
     End Sub
 
     Private Sub cboVehiculo_DropDown(sender As Object, e As EventArgs) Handles cboVehiculo.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboVehiculo.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -449,6 +479,11 @@ Public Class frmPedidosCli
     End Sub
 
     Private Sub cboChofer_DropDown(sender As Object, e As EventArgs) Handles cboChofer.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboChofer.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -469,6 +504,11 @@ Public Class frmPedidosCli
     End Sub
 
     Private Sub cboCliente_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCliente.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand

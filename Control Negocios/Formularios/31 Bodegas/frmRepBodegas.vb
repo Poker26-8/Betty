@@ -1,5 +1,6 @@
 ﻿
 Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepBodegas
     Private Sub frmRepBodegas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -170,6 +171,11 @@ Public Class frmRepBodegas
 
     Private Sub cbogeneral_DropDown(sender As Object, e As EventArgs) Handles cbogeneral.DropDown
         cbogeneral.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (optbodega.Checked) Or (optvisitas.Checked) Then
             Try
                 cnn1.Close() : cnn1.Open()
@@ -220,6 +226,11 @@ Public Class frmRepBodegas
 
     Private Sub cbobodega_DropDown(sender As Object, e As EventArgs) Handles cbobodega.DropDown
         cbobodega.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If cbogeneral.Text <> "" Then
             Try
                 cnn1.Close() : cnn1.Open()
@@ -256,6 +267,10 @@ Public Class frmRepBodegas
         Dim conteo As Integer = 0
         Dim Month1 As Date = mCalendar1.SelectionStart.ToShortDateString
         Dim Month2 As Date = mCalendar2.SelectionStart.ToShortDateString
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         On Error GoTo mensaje
 

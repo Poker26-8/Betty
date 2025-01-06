@@ -56,6 +56,7 @@ Partial Class frmAjusteInv
         Me.lblusuario = New System.Windows.Forms.Label()
         Me.txtcontraseña = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.txtfinal = New System.Windows.Forms.TextBox()
         Me.GroupBox2.SuspendLayout()
         CType(Me.grdcaptura, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.cmsElimina.SuspendLayout()
@@ -267,6 +268,8 @@ Partial Class frmAjusteInv
         Me.txtid.Name = "txtid"
         Me.txtid.Size = New System.Drawing.Size(41, 23)
         Me.txtid.TabIndex = 131
+        Me.txtid.Text = "0"
+        Me.txtid.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'grdcaptura
         '
@@ -411,12 +414,24 @@ Partial Class frmAjusteInv
         Me.Label12.TabIndex = 183
         Me.Label12.Text = "Usuario:"
         '
+        'txtfinal
+        '
+        Me.txtfinal.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtfinal.Location = New System.Drawing.Point(383, 242)
+        Me.txtfinal.Name = "txtfinal"
+        Me.txtfinal.ReadOnly = True
+        Me.txtfinal.Size = New System.Drawing.Size(56, 23)
+        Me.txtfinal.TabIndex = 186
+        Me.txtfinal.Text = "0"
+        Me.txtfinal.Visible = False
+        '
         'frmAjusteInv
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(450, 325)
         Me.ContextMenuStrip = Me.cmsElimina
+        Me.Controls.Add(Me.txtfinal)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.txtcontraseña)
         Me.Controls.Add(Me.lblusuario)
@@ -485,4 +500,5 @@ Partial Class frmAjusteInv
     Friend WithEvents cmsElimina As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents EliminaLoteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents txtid As System.Windows.Forms.TextBox
+    Friend WithEvents txtfinal As TextBox
 End Class

@@ -1,9 +1,16 @@
-﻿Public Class frmCatGrupos
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmCatGrupos
     Private Sub DateTimePicker2_ValueChanged(sender As Object, e As EventArgs) Handles dtpTermino.ValueChanged
 
     End Sub
 
     Private Sub Id_Grupo()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -30,6 +37,11 @@
 
     Private Sub cbogrupo_DropDown(sender As Object, e As EventArgs) Handles cbogrupo.DropDown
         cbogrupo.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -52,6 +64,11 @@
     Private Sub cbogrupo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbogrupo.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd2 As MySqlDataReader
+            Dim cmd2 As MySqlCommand
+
             Try
                 cnn2.Close() : cnn2.Open()
 
@@ -100,6 +117,11 @@
 
         If cbogrupo.Text = "" Then MsgBox("Ingresa el nombre dle grupo.", vbInformation + vbOKOnly, titulocentral) : cbogrupo.Focus().Equals(True) : Exit Sub
         If CDbl(txtcupo.Text) = 0 Then MsgBox("El cupo del grupo debe de ser mayor a 0.", vbInformation + vbOKOnly, titulocentral) : txtcupo.Focus().Equals(True) : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -160,6 +182,11 @@
         If cbogrupo.Text = "" Then MsgBox("Necesitas seleccionar un grupo para poder eliminarlo.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbogrupo.Focus().Equals(True) : Exit Sub
 
         If MsgBox("¿Deseas eliminar el grupo " & cbogrupo.Text & "?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd2 As MySqlDataReader
+            Dim cmd2 As MySqlCommand
+
             Try
                 cnn2.Close() : cnn2.Open()
 

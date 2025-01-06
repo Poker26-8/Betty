@@ -1,4 +1,5 @@
 ﻿Imports System.Security
+Imports MySql.Data.MySqlClient
 
 Public Class frmMapa
 
@@ -36,6 +37,9 @@ Public Class frmMapa
 
         Dim bodega As String = "", ubicacion As String = "", cliente As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -94,6 +98,11 @@ Public Class frmMapa
 
     Public Sub Crea_Plantas()
         Dim plantas As Integer = 0
+
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
+
         Try
             cnn4.Close() : cnn4.Open()
             cmd4 = cnn4.CreateCommand
@@ -169,6 +178,10 @@ Public Class frmMapa
         Dim fecha_pago4 As Date = Format(DateAdd(DateInterval.Day, 2, fecha_hoy), "dd/MM/yyyy")
         Dim fecha_pago5 As Date = Format(DateAdd(DateInterval.Day, 1, fecha_hoy), "dd/MM/yyyy")
         Dim fecha_consulta As Date = Nothing
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
 
         Try
             cnn3.Close() : cnn3.Open()
@@ -279,6 +292,11 @@ Public Class frmMapa
     End Sub
 
     Public Sub btnbodega_Click(sender As Object, e As EventArgs)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If btnHabilitar.Text = "Guardar cambios" Then
         Else
             Dim bode As Button = CType(sender, Button)
@@ -339,6 +357,12 @@ Public Class frmMapa
     End Sub
 
     Private Sub btnAddBodega_Click(sender As Object, e As EventArgs) Handles btnAddBodega.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             If cboplantas.Text = "" Then MsgBox("Seleccione una planta.", vbInformation + vbOKOnly, titulocentral) : cboplantas.Focus.Equals(True) : Exit Sub

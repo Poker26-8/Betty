@@ -1,6 +1,12 @@
-﻿Public Class frmModificar
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmModificar
     Private Sub frmModificar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         rtbAsunto.Focus()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If txtID.Text = "" Then
             FrmAgenda.tActuales.Start()
@@ -94,6 +100,9 @@
 
     Private Sub cboUsuario_DropDown(sender As Object, e As EventArgs) Handles cboUsuario.DropDown
         cboUsuario.Items.Clear()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()
@@ -277,6 +286,11 @@
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         If MsgBox("¿Desea eliminar éste evento de manera permanente?" + vbNewLine + "Esta acción no se puede deshacer", vbInformation + vbOKCancel, titulocentral) = vbOK Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close()
                 cnn1.Open()
@@ -357,6 +371,10 @@
                 End If
             End If
         End If
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close()

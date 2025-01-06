@@ -1,10 +1,17 @@
-﻿Public Class frmAlumnos
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmAlumnos
     Private Sub frmAlumnos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 
     Private Sub cboNombre_DropDown(sender As Object, e As EventArgs) Handles cboNombre.DropDown
         cboNombre.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -25,6 +32,11 @@
     End Sub
 
     Private Sub cboNombre_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboNombre.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -68,6 +80,10 @@
     End Sub
 
     Private Sub Dame_Horario(ByVal grupo As String)
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -90,6 +106,11 @@
     Private Sub cboNombre_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboNombre.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             If cboNombre.Text <> "" Then
                 Try
                     cnn1.Close() : cnn1.Open()
@@ -138,6 +159,11 @@
 
     Private Sub cboMatricula_DropDown(sender As Object, e As EventArgs) Handles cboMatricula.DropDown
         cboMatricula.Items.Clear()
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
 
@@ -158,6 +184,11 @@
     End Sub
 
     Private Sub cboMatricula_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboMatricula.SelectedValueChanged
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
 
@@ -187,7 +218,7 @@
                     If rd2("Viernes").ToString() = 1 Then optviernes.Checked = True
                     If rd2("Sabado").ToString() = 1 Then optsabado.Checked = True
                     txtinscripcion.Text = rd2("Inscripcion").ToString()
-                    TextBox1.Text = rd1("Baja").ToString()
+                    TextBox1.Text = rd2("Baja").ToString()
                     If txtgrupo.Text <> "" Then
                         Dame_Horario(txtgrupo.Text)
                     End If
@@ -203,6 +234,11 @@
     Private Sub cboMatricula_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboMatricula.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd2 As MySqlDataReader
+            Dim cmd2 As MySqlCommand
+
             If cboMatricula.Text <> "" Then
                 Try
                     cnn2.Close() : cnn2.Open()
@@ -233,7 +269,7 @@
                             If rd2("Viernes").ToString() = 1 Then optviernes.Checked = True
                             If rd2("Sabado").ToString() = 1 Then optsabado.Checked = True
                             txtinscripcion.Text = rd2("Inscripcion").ToString()
-                            TextBox1.Text = rd1("Baja").ToString()
+                            TextBox1.Text = rd2("Baja").ToString()
                             If txtgrupo.Text <> "" Then
                                 Dame_Horario(txtgrupo.Text)
                             End If
@@ -311,6 +347,11 @@
 
     Private Sub txtgrupo_DropDown(sender As Object, e As EventArgs) Handles txtgrupo.DropDown
         txtgrupo.Items.Clear()
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -331,6 +372,11 @@
     End Sub
 
     Private Sub txtgrupo_SelectedValueChanged(sender As Object, e As EventArgs) Handles txtgrupo.SelectedValueChanged
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -392,6 +438,10 @@
         If MsgBox("¿Deseas actualizar la información del alumno?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
             Dim id_grupo As Integer = 0
             Dim id_alumno As Integer = LBLID.Text
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 cnn1.Close() : cnn1.Open()
@@ -466,6 +516,11 @@
         If lblusuario.Text = "" Then MsgBox("Escribe tu contraseña paara continuar.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : txtcontraseña.Focus().Equals(True) : Exit Sub
 
         If MsgBox("¿Deseas dar de baja al alumno?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
 
@@ -493,6 +548,14 @@
         Dim monto_transfe As Double = 0
         Dim monto_monedero As Double = 0
         Dim monto_otro As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4, rd5 As MySqlDataReader
+        Dim cmd1, CMD2, CMD3, cmd4, cmd5 As MySqlCommand
 
         Try
             cnn5.Close() : cnn5.Open()

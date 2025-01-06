@@ -4,6 +4,7 @@ Imports System.Net
 Imports System.IO
 Imports Microsoft.VisualBasic.Devices
 Imports System.IO.Ports
+Imports MySql.Data.MySqlClient
 
 Public Class frmPolleria
 
@@ -43,6 +44,10 @@ Public Class frmPolleria
     Public WithEvents serialPortT As New SerialPort()
     Private Sub frmPolleria_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         cnn2.Close() : cnn2.Open()
         cmd2 = cnn2.CreateCommand
         cmd2.CommandText = "SELECT Clave,Alias FROM Usuarios WHERE IdEmpleado=" & id_usu_log
@@ -68,6 +73,10 @@ Public Class frmPolleria
     End Sub
 
     Public Sub Empleados()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand
@@ -287,6 +296,11 @@ Public Class frmPolleria
 
         Dim deptos As Integer = 1
         Dim cuantos As Integer = Math.Truncate(pDepartamento.Height / 40)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
 
             cnn1.Close() : cnn1.Open()
@@ -433,6 +447,7 @@ Public Class frmPolleria
     Public Sub btnDepto_Click(sender As Object, e As EventArgs)
 
         Dim btnDepartamento As Button = CType(sender, Button)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         btnDepartamento.Font.Bold.Equals(True)
         pgrupo.Controls.Clear()
         pProductos.Controls.Clear()
@@ -448,6 +463,11 @@ Public Class frmPolleria
 
         Dim grupos As Integer = 1
         Dim cuantos As Integer = Math.Truncate(pgrupo.Height / 40)
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         cantidadgrupos = 0
         Try
             cnn2.Close() : cnn2.Open()
@@ -593,6 +613,9 @@ Public Class frmPolleria
 
     Private Sub btnGrupo_Click(sender As Object, e As EventArgs)
         Dim btnGrupos As Button = CType(sender, Button)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
+
         pProductos.Controls.Clear()
 
         If cnn3.State = 1 Then
@@ -606,6 +629,10 @@ Public Class frmPolleria
 
         Dim prods As Integer = 1
         Dim cuantos As Integer = Math.Truncate(pProductos.Height / 130)
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
 
         Try
             cnn3.Close() : cnn3.Open()
@@ -1105,6 +1132,9 @@ Public Class frmPolleria
         CodigoProducto = ""
         CodigoProducto = btnProducto.Tag
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Dim puertoba As String = ""
         Dim bascula As String = ""
@@ -1207,6 +1237,11 @@ Public Class frmPolleria
     End Sub
 
     Public Sub ObtenerProducto(Codigo As String)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -1254,6 +1289,13 @@ Public Class frmPolleria
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
 
         If lblAtiende.Text = "" Then MsgBox("Debe seleccionar un empleado", vbInformation + vbOKOnly, titulorestaurante) : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
+
         Try
             Dim idemp As Integer = 0
             cnn2.Close() : cnn2.Open()
@@ -1334,6 +1376,10 @@ Public Class frmPolleria
     Public Sub find_preciovta(codigo As String)
         Dim MyPrecio As Double = 0
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         cnn2.Close() : cnn2.Open()
         cmd2 = cnn2.CreateCommand
         cmd2.CommandText = "SELECT PrecioVentaIVA,PecioVentaMinIVA FROM Productos WHERE Codigo='" & codigo & "'"
@@ -1401,6 +1447,12 @@ Public Class frmPolleria
     End Sub
 
     Public Sub EnviarComanda()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         Try
 

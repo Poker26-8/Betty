@@ -1,4 +1,6 @@
-﻿Public Class FrmAgenda
+﻿Imports MySql.Data.MySqlClient
+
+Public Class FrmAgenda
 
     Dim id_cita As Integer = 0
     Dim tipo As Integer = 0
@@ -25,6 +27,11 @@
     End Sub
 
     Private Sub cboUsuario_DropDown(sender As Object, e As EventArgs) Handles cboUsuario.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboUsuario.Items.Clear()
 
@@ -222,6 +229,10 @@
             Exit Sub
         End If
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         'Ajusta el grid
         grdCaptura.ColumnCount = 4
         With grdCaptura.Columns(0)
@@ -325,6 +336,10 @@
         grdCaptura.ColumnCount = 0
         tipo = 2
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3 As MySqlDataReader
+        Dim cmd2, cmd3 As MySqlCommand
         If cboUsuario.Text = "" Then
             MsgBox("Seleccione un usuario por consultar.", vbInformation + vbOKOnly, titulocentral)
             cboUsuario.Focus()
@@ -446,6 +461,12 @@
             optMes.Checked = True
             Exit Sub
         End If
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd4 As MySqlDataReader
+        Dim cmd2, cmd4 As MySqlCommand
+
 
         'Ajusta el grid
         grdCaptura.ColumnCount = 4

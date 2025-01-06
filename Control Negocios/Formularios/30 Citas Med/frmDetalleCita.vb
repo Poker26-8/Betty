@@ -4,6 +4,11 @@
 
     Private Sub frmDetalleCita_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (FrmAgenda.optDia.Checked) Then
             grdCaptura.Rows.Clear()
             grdCaptura.ColumnCount = 0
@@ -218,6 +223,10 @@
     End Sub
 
     Private Sub frmDetalleCita_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If (FrmAgenda.optDia.Checked) Then
             grdCaptura.Rows.Clear()
