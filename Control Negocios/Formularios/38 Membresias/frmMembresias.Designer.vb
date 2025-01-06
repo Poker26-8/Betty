@@ -33,9 +33,9 @@ Partial Class frmMembresias
         Me.lblMembresia = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.lblCodigo = New System.Windows.Forms.Label()
-        Me.dtpVigencia = New System.Windows.Forms.DateTimePicker()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.picMembresia = New System.Windows.Forms.PictureBox()
+        Me.dtpVigencia = New System.Windows.Forms.DateTimePicker()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtBarras = New System.Windows.Forms.TextBox()
@@ -163,15 +163,6 @@ Partial Class frmMembresias
         Me.lblCodigo.Text = "000001"
         Me.lblCodigo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'dtpVigencia
-        '
-        Me.dtpVigencia.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpVigencia.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpVigencia.Location = New System.Drawing.Point(283, 103)
-        Me.dtpVigencia.Name = "dtpVigencia"
-        Me.dtpVigencia.Size = New System.Drawing.Size(103, 21)
-        Me.dtpVigencia.TabIndex = 8
-        '
         'Panel2
         '
         Me.Panel2.Controls.Add(Me.picMembresia)
@@ -190,6 +181,15 @@ Partial Class frmMembresias
         Me.picMembresia.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picMembresia.TabIndex = 0
         Me.picMembresia.TabStop = False
+        '
+        'dtpVigencia
+        '
+        Me.dtpVigencia.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpVigencia.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpVigencia.Location = New System.Drawing.Point(283, 103)
+        Me.dtpVigencia.Name = "dtpVigencia"
+        Me.dtpVigencia.Size = New System.Drawing.Size(103, 21)
+        Me.dtpVigencia.TabIndex = 8
         '
         'Label4
         '

@@ -1,7 +1,13 @@
 ﻿Imports System.IO
+Imports MySql.Data.MySqlClient
 
 Public Class frmMembresias
     Private Sub cboCliente_DropDown(sender As Object, e As EventArgs) Handles cboCliente.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCliente.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -23,6 +29,12 @@ Public Class frmMembresias
     End Sub
 
     Private Sub cboCliente_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCliente.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -81,6 +93,10 @@ Public Class frmMembresias
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -105,5 +121,9 @@ Public Class frmMembresias
             MessageBox.Show(ex.ToString)
             cnn1.Close()
         End Try
+    End Sub
+
+    Private Sub frmMembresias_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class

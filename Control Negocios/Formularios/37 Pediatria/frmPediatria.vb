@@ -1,4 +1,5 @@
 ﻿Imports System.Windows.Forms.DataVisualization.Charting
+Imports MySql.Data.MySqlClient
 
 Public Class frmPediatria
     Private Sub frmPediatria_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -6,6 +7,11 @@ Public Class frmPediatria
     End Sub
 
     Private Sub cboCliente_DropDown(sender As Object, e As EventArgs) Handles cboCliente.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCliente.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -26,6 +32,11 @@ Public Class frmPediatria
     End Sub
 
     Private Sub cboMedico_DropDown(sender As Object, e As EventArgs) Handles cboMedico.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboMedico.Items.Clear()
 
@@ -48,6 +59,11 @@ Public Class frmPediatria
     End Sub
 
     Private Sub cboUrgencia_DropDown(sender As Object, e As EventArgs) Handles cboUrgencia.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboUrgencia.Items.Clear()
 
@@ -88,7 +104,7 @@ Public Class frmPediatria
 
                 PESO = txtPeso.Text
                 If PESO > 10 Then
-                    RESULTADO = (PESO * 4 )+ 7
+                    RESULTADO = (PESO * 4) + 7
                     DIV = (PESO + 90)
                     MSC = RESULTADO / DIV
                 Else
@@ -99,7 +115,7 @@ Public Class frmPediatria
                 txtCorporal.Focus.Equals(True)
                 txtCorporal.Text = FormatNumber(MSC, 2)
             End If
-            End If
+        End If
     End Sub
 
     Private Sub txtTemperatura_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtTemperatura.KeyPress
@@ -279,6 +295,10 @@ Public Class frmPediatria
         Dim ruta As String = ""
         Dim sheet As String = "hoja1"
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         With cuadro_dialogo
             .Filter = "Archivos de cálculo(*.xls;*.xlsx)|*.xls;*.xlsx"
             .Title = "Selecciona el archivo a importar"
@@ -410,7 +430,10 @@ Public Class frmPediatria
 
         If cboUrgencia.Text = "" Then MsgBox("Selecciona o ingresa la urgencia de la consulta.", vbInformation + vbOKOnly, titulocentral) : cboUrgencia.Focus.Equals(True) : Exit Sub
 
-
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         ' ---------------------------------------------variables------------------------------------------
         Dim sex As Integer = 0
