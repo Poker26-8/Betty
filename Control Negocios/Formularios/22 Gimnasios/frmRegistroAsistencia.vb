@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports MySql.Data.MySqlClient
 
 Public Class frmRegistroAsistencia
     Dim WithEvents FpVer As FlexCodeSDK.FinFPVer
@@ -25,6 +26,11 @@ Public Class frmRegistroAsistencia
         lblhora.Text = FormatDateTime(Date.Now, DateFormat.LongTime)
     End Sub
     Private Sub cargadatos()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         FpVer = New FlexCodeSDK.FinFPVer
         FpVer.AddDeviceInfo("C700F001339", "1SX-J98-067-81L-40X", "VLT1-FF2F-6C40-5A20-4058-62GV")
         FpVer.PictureSamplePath = VarRuta & "\temp.bmp"
@@ -44,6 +50,11 @@ Public Class frmRegistroAsistencia
         TimerFecha.Start()
     End Sub
     Public Sub GuardaRegistro()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close()
         cnn1.Open()
         cmd1 = cnn1.CreateCommand
@@ -99,6 +110,11 @@ Public Class frmRegistroAsistencia
 
     Private Sub FpVer_FPVerificationStatus(ByVal Status As FlexCodeSDK.VerificationStatus) Handles FpVer.FPVerificationStatus
         If Status = FlexCodeSDK.VerificationStatus.v_OK Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             cnn1.Close()
             cnn1.Open()
             cmd1 = cnn1.CreateCommand

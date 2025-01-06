@@ -7258,12 +7258,13 @@ doorcita:
     End Sub
 
     Private Sub Valida_Datos_Cliente(ByVal nombre As String)
-        Try
-            Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd4 As MySqlDataReader
-            Dim cmd4 As MySqlCommand
 
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
+        Try
             Dim MySaldo As Double = 0
+            cnn4.Close() : cnn4.Open()
 
             For valida_cli As Integer = 1 To 6
                 cmd4 = cnn4.CreateCommand

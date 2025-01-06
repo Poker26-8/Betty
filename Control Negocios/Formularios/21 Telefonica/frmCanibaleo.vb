@@ -1,4 +1,6 @@
-﻿Public Class frmCanibaleo
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmCanibaleo
     Private Sub frmCanibaleo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
@@ -63,6 +65,10 @@
     End Sub
 
     Private Sub cbocodigo_DropDown(sender As Object, e As EventArgs) Handles cbocodigo.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cbocodigo.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -94,6 +100,12 @@
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             If grdPiezas.Rows.Count > 0 Then

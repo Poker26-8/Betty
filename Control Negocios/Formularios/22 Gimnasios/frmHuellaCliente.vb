@@ -1,5 +1,6 @@
 ﻿Imports AForge.Video.DirectShow
 Imports DPFP
+Imports MySql.Data.MySqlClient
 Imports System.IO
 
 Public Class frmHuellaCliente
@@ -20,6 +21,11 @@ Public Class frmHuellaCliente
         btnguardar.Enabled = False
     End Sub
     Private Sub txtnombre_DropDown(sender As Object, e As EventArgs) Handles txtnombre.DropDown
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             txtnombre.Items.Clear()
             cnn1.Close()
@@ -39,6 +45,11 @@ Public Class frmHuellaCliente
     End Sub
 
     Private Sub txtnombre_SelectedValueChanged(sender As Object, e As EventArgs) Handles txtnombre.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close()
         cnn1.Open()
         cmd1 = cnn1.CreateCommand
@@ -77,6 +88,11 @@ Public Class frmHuellaCliente
     End Sub
 
     Private Sub btnguardar_Click(sender As Object, e As EventArgs) Handles btnguardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close()
         cnn1.Open()
         cmd1 = cnn1.CreateCommand

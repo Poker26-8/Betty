@@ -1,5 +1,6 @@
 ﻿
 Imports System.IO
+Imports MySql.Data.MySqlClient
 Public Class frmIngreso
 
     Dim ordenfolio As Integer = 0
@@ -19,6 +20,12 @@ Public Class frmIngreso
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Dim idtelefono As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             If lblusuario.Text = "" Then MsgBox("ingrese la contraseña para realizar esta operación", vbInformation + vbOKOnly, titulotaller) : txtcontra.Focus.Equals(True) : Exit Sub
@@ -260,6 +267,11 @@ Public Class frmIngreso
     End Sub
 
     Private Sub cboCliente_DropDown(sender As Object, e As EventArgs) Handles cboCliente.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCliente.Items.Clear()
 
@@ -282,6 +294,11 @@ Public Class frmIngreso
     End Sub
 
     Private Sub cboTecnico_DropDown(sender As Object, e As EventArgs) Handles cboTecnico.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboTecnico.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -367,6 +384,11 @@ Public Class frmIngreso
     Private Sub cboSerie_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboSerie.SelectedValueChanged
         grdaccesorio.Rows.Clear()
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand
         cmd1.CommandText = "SELECT Tipo,Marca,Modelo,Comentario,Color FROM dispositivos WHERE Serie='" & cboSerie.Text & "'"
@@ -417,6 +439,11 @@ Public Class frmIngreso
     End Sub
 
     Private Sub cboSerie_DropDown(sender As Object, e As EventArgs) Handles cboSerie.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboSerie.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -458,7 +485,9 @@ Public Class frmIngreso
         Dim Pie As String = ""
         Dim Logotipo As Drawing.Image = Nothing
 
-
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Try
 
@@ -627,6 +656,10 @@ Public Class frmIngreso
     Private Sub txtcontra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcontra.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "SELECT IdEmpleado,Alias FROM Usuarios WHERE Clave='" & txtcontra.Text & "'"
@@ -671,6 +704,9 @@ Public Class frmIngreso
         Dim Logotipo As Drawing.Image = Nothing
         Dim Pie As String = ""
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Try
 

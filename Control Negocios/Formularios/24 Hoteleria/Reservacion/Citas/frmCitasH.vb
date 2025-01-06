@@ -1,4 +1,6 @@
-﻿Public Class frmCitasH
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmCitasH
     Dim id_cita As Integer = 0
     Dim tipo As Integer = 0
 
@@ -138,6 +140,12 @@
         Dim HORX As String = ""
         Dim EVENTO As String = ""
         Dim min As String = ""
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3 As MySqlDataReader
+        Dim cmd2, cmd3 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
             cnn3.Close() : cnn3.Open()
@@ -215,6 +223,11 @@
         Dim minuto As String = ""
         Dim hora As String = ""
         Dim valortiem As String = ""
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
             For field As Integer = 0 To 60
@@ -287,6 +300,10 @@
         Dim dia As String = ""
         Dim evento As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         Try
             cnn2.Close() : cnn2.Open()
             cnn1.Close() : cnn1.Open()

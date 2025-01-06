@@ -1,4 +1,6 @@
-﻿Public Class frmConsultarCitaH
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmConsultarCitaH
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         Me.Close()
         frmCitasH.Show()
@@ -126,6 +128,11 @@
     End Sub
 
     Private Sub btnConsultar_Click(sender As Object, e As EventArgs) Handles btnConsultar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (optMes.Checked) Then
             If cboAño.Text = "" Or cboMes.Text = "" Then
                 MsgBox("Seleccione una fecha válida para consultar.", vbInformation + vbOKOnly, titulohotelriaa)

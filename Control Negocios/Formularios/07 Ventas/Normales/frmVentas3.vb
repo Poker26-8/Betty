@@ -508,6 +508,11 @@ Public Class frmVentas3
 
 #Region "Funciones"
     Public Sub Folio()
+
+        Dim cnn9 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd9 As MySqlDataReader
+        Dim cmd9 As MySqlCommand
+
         Try
             If cnn9.State = 1 Then cnn9.Close()
             cnn9.Open()
@@ -548,6 +553,9 @@ Public Class frmVentas3
     Public Sub CodBar()
         If cbocodigo.Text = "" And cbodesc.Text = "" Then Exit Sub
 
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
         'Código de barras 1
         Try
             cnn3.Close() : cnn3.Open()
@@ -631,20 +639,14 @@ Public Class frmVentas3
         Dim Acumula As Boolean = False
         Dim minimo As Double = 0
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn7 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd3, rd7 As MySqlDataReader
+        Dim cmd1, cmd3, cmd7 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
-
-            'cmd3 = cnn3.CreateCommand
-            'cmd3.CommandText =
-            '    "select NotasCred from Formatos where Facturas='TPapelV'"
-            'rd3 = cmd3.ExecuteReader
-            'If rd3.HasRows Then
-            '    If rd3.Read Then
-            '        TPapel = rd3(0).ToString
-            '    End If
-            'End If
-            'rd3.Close()
-
             cmd3 = cnn3.CreateCommand
             cmd3.CommandText =
                 "select NotasCred from Formatos where Facturas='MinimoA'"
@@ -734,6 +736,7 @@ Public Class frmVentas3
             Dim acumulaxd As Integer = 0
             cnn1.Close()
             cnn1.Open()
+            cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "Select NumPart from Formatos where Facturas='Acumula'"
             rd1 = cmd1.ExecuteReader
             If rd1.Read Then
@@ -823,13 +826,18 @@ kak:
         donde_va = "Descuento Porcentaje"
     End Sub
     Public Sub agregaR(ByVal soy As String, ByVal xd As Integer)
+
+        Dim cnn7 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd7 As MySqlDataReader
+        Dim cmd7 As MySqlCommand
+
         Try
             frmRegalos.grdRegalo.Rows.Clear()
             cnn7.Close()
             cnn7.Open()
             cmd7 = cnn7.CreateCommand
             cmd7.CommandText = "Select Codigo, CodBarra, nombre, PrecioVentaIVA from Productos where Grupo='" & soy & "'"
-                rd7 = cmd7.ExecuteReader
+            rd7 = cmd7.ExecuteReader
             Do While rd7.Read
                 frmRegalos.grdRegalo.Rows.Add(xd, rd7(0).ToString, rd7(1).ToString, rd7(2).ToString, False, rd7(3).ToString)
             Loop
@@ -867,6 +875,11 @@ kak:
     End Function
     Private Function ConsultaPrecio(ByVal codigo As String, ByVal cantidad As Double) As Double
         Dim precio_base As Double = 0
+
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4, rd5 As MySqlDataReader
+        Dim cmd4, cmd5 As MySqlCommand
 
         Try
             cnn4.Close() : cnn4.Open()
@@ -1008,6 +1021,10 @@ kak:
     Private Function CalPreDevo(ByVal folio As Integer, ByVal cod As String) As Double
         Dim precio As Double = 0
 
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -1032,6 +1049,11 @@ kak:
         Return precio
     End Function
     Public Function IvaDSC(ByVal cod As String) As Double
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -1076,6 +1098,11 @@ kak:
     Private Sub Cant(ByVal codigo As String, ByRef paso As Boolean)
         Dim canti As Double = 0
         If txtcantidad.Text = "" Then Exit Sub
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
 
@@ -1108,6 +1135,11 @@ kak:
     End Sub
     Private Function CantLte() As Double
         If cboLote.Tag <> 0 Then
+
+            Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd5 As MySqlDataReader
+            Dim cmd5 As MySqlCommand
+
             Try
                 cnn5.Close() : cnn5.Open()
 
@@ -1129,6 +1161,11 @@ kak:
     End Function
     Private Function Cambio(ByVal Moneda As Double) As Double
         Cambio = 0
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -1268,6 +1305,12 @@ kak:
         Return Cambio
     End Function
     Private Sub Fn()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             Dim Imprime As Boolean = False
             Dim TPrint As String = ""
@@ -1470,6 +1513,11 @@ kak:
         Dim p_nombre As String = ""
         Dim p_unidad As String = ""
 
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
+
+
         Try
             cnn4.Close() : cnn4.Open()
 
@@ -1542,6 +1590,11 @@ kak:
         End Try
     End Sub
     Private Function TotCantBase(ByVal FOL As Integer, ByVal COD As String) As Double
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -1564,6 +1617,11 @@ kak:
     End Function
     Private Function TCantProd(ByVal fol As Integer) As Double
         Dim resultado As Double = 0
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
             cmd3 = cnn3.CreateCommand
@@ -1588,6 +1646,10 @@ kak:
     Private Function DESuni(ByVal FOL As Integer, ByVal COD As String) As Double
         Dim Cant As Double = 0
         Dim TotDesc As Double = 0
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
 
         Try
             cnn3.Close() : cnn3.Open()
@@ -1626,6 +1688,11 @@ kak:
     Private Function GetCantLote(ByVal cod As String, ByVal lote As String) As Double
         GetCantLote = 0
         If cod = "" Then GetCantLote = 0 : Exit Function
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
 
@@ -1651,6 +1718,11 @@ kak:
         ReviewLote = True
         If cboLote.Text <> "" Then
             ReviewLote = False
+
+            Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd5 As MySqlDataReader
+            Dim cmd5 As MySqlCommand
+
             Try
                 cnn5.Close() : cnn5.Open()
                 cmd5 = cnn5.CreateCommand

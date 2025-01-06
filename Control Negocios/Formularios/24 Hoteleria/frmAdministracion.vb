@@ -1,10 +1,17 @@
-﻿Public Class frmAdministracion
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmAdministracion
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         Me.Close()
         frmMenuHabitaciones.Show()
     End Sub
 
     Private Sub cbousuario_DropDown(sender As Object, e As EventArgs) Handles cbousuario.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cbousuario.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -26,6 +33,9 @@
     End Sub
 
     Private Sub cbousuario_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbousuario.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -58,6 +68,11 @@
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
 
@@ -95,6 +110,10 @@
     Private Sub txtContra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContra.KeyPress
 
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 Dim area As String = ""
 
@@ -155,6 +174,9 @@
     End Sub
 
     Private Sub frmAdministracion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
 
             cnn1.Close() : cnn1.Open()
@@ -196,6 +218,11 @@
     End Sub
 
     Private Sub btng2_Click(sender As Object, e As EventArgs) Handles btng2.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             If lblusuario.Text = "" Then MsgBox("Ingrese la contraseña del administrador") : txtContra.Focus.Equals(True) : Exit Sub

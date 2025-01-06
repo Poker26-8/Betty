@@ -1,4 +1,6 @@
-﻿Public Class frmEquiposTaller
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmEquiposTaller
     Private Sub frmEquiposTaller_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         rbTodos.Checked = True
     End Sub
@@ -29,6 +31,11 @@
     End Sub
 
     Private Sub cboOpciones_DropDown(sender As Object, e As EventArgs) Handles cboOpciones.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
 
             cboOpciones.Items.Clear()
@@ -77,6 +84,12 @@
     End Sub
 
     Private Sub cboOpciones_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboOpciones.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             grdCaptura.Rows.Clear()
 
@@ -174,6 +187,12 @@
     End Sub
 
     Private Sub rbTodos_CheckedChanged(sender As Object, e As EventArgs) Handles rbTodos.CheckedChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             grdCaptura.Rows.Clear()

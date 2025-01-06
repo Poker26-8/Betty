@@ -1,4 +1,5 @@
 ﻿Imports ClosedXML.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepReservaciones
     Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
@@ -17,6 +18,11 @@ Public Class frmRepReservaciones
             Dim fsalida As Date = Nothing
             Dim fe As String = ""
             Dim fs As String = ""
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
 
             Try
                 cnn1.Close() : cnn1.Open()
@@ -72,6 +78,10 @@ Public Class frmRepReservaciones
 
     Private Sub cboFiltro_DropDown(sender As Object, e As EventArgs) Handles cboFiltro.DropDown
 
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboFiltro.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -93,6 +103,11 @@ Public Class frmRepReservaciones
     End Sub
 
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim m1 As Date = dtpdesde.SelectionStart.ToShortDateString
             Dim m2 As Date = dtphasta.SelectionStart.ToShortDateString
@@ -128,7 +143,7 @@ Public Class frmRepReservaciones
                                             fs,
                                             rd1("Asigno").ToString,
                                             rd1("Reservo").ToString,
-                                            Estado
+                                            estado
 )
                     End If
                 Loop
@@ -204,5 +219,9 @@ Public Class frmRepReservaciones
             MessageBox.Show("Datos exportados exitosamente")
 
         End If
+    End Sub
+
+    Private Sub frmRepReservaciones_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class

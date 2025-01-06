@@ -1,9 +1,15 @@
-﻿Public Class frmDetalleCH
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmDetalleCH
 
     Dim id_consulta As Integer = 0
     Dim cli As String = ""
     Dim hab As String = ""
     Private Sub frmDetalleCH_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If (frmCitasH.optDia.Checked) Then
             grdCaptura.Rows.Clear()
@@ -225,6 +231,11 @@
     End Sub
 
     Private Sub frmDetalleCH_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If (frmCitasH.optDia.Checked) Then
             grdCaptura.Rows.Clear()
             grdCaptura.ColumnCount = 0

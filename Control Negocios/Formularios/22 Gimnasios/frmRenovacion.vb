@@ -1,4 +1,6 @@
-﻿Public Class frmRenovacion
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmRenovacion
     Public folVentaFact As Integer = 0
     Public lic As String = ""
     Private Sub frmRenovacion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -10,6 +12,10 @@
     Public Sub busca()
         grdcaptura.Rows.Clear()
         If rbtodas.Checked = True Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 txtPrecio.Text = "0.00"
                 grdcaptura.Rows.Clear()
@@ -30,6 +36,9 @@
         End If
 
         If rbvencidas.Checked = True Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 Dim fecha As Date = Date.Now
                 txtPrecio.Text = "0.00"
@@ -72,6 +81,11 @@
     End Sub
 
     Private Sub txtservicio_DropDown(sender As Object, e As EventArgs) Handles txtservicio.DropDown
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+
         txtservicio.Items.Clear()
         cnn1.Close()
         cnn1.Open()
@@ -115,6 +129,11 @@
         MessageBoxTimer()
     End Sub
     Private Sub txtservicio_SelectedValueChanged(sender As Object, e As EventArgs) Handles txtservicio.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close()
         cnn1.Open()
         cmd1 = cnn1.CreateCommand
@@ -129,6 +148,10 @@
 
     Private Sub txtusuario_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtusuario.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             cnn1.Close()
             cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -188,6 +211,10 @@
         Dim existencias As Double = 0
 
         Dim saldofinal As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         If lblid.Text = "" Then
             If rbvencidas.Checked = True Then
@@ -499,6 +526,10 @@
         Dim derecha As New StringFormat With {.Alignment = StringAlignment.Far}
         Dim centro As New StringFormat With {.Alignment = StringAlignment.Center}
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close()
         cnn1.Open()
         cmd1 = cnn1.CreateCommand
@@ -540,6 +571,9 @@
     End Sub
 
     Private Sub txtcliente_DropDown(sender As Object, e As EventArgs) Handles txtcliente.DropDown
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             txtcliente.Items.Clear()
             cnn1.Close()

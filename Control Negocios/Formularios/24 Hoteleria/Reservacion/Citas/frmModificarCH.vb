@@ -1,4 +1,6 @@
-﻿Public Class frmModificarCH
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmModificarCH
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
         frmCitasH.tActuales.Start()
         Me.Close()
@@ -15,6 +17,10 @@
         Dim fsalida As Date = Nothing
         Dim fs As String = ""
         Dim hsalida As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -106,6 +112,10 @@
     End Sub
 
     Private Sub cboUsuario_DropDown(sender As Object, e As EventArgs) Handles cboUsuario.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboUsuario.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -280,6 +290,11 @@
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         If MsgBox("¿Desea eliminar éste evento de manera permanente?" + vbNewLine + "Esta acción no se puede deshacer", vbInformation + vbOKCancel, titulohotelriaa) = vbOK Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -343,6 +358,10 @@
                 End If
             End If
         End If
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close()

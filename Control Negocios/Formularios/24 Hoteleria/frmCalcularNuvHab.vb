@@ -1,4 +1,6 @@
-﻿Public Class frmCalcularNuvHab
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmCalcularNuvHab
 
     Dim VarMinutos As String = ""
     Dim varHoras As String = ""
@@ -19,6 +21,12 @@
 
         Dim ESTATUSP As String = ""
         Dim idreservacion As Integer = 0
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd2, cmd3, cmd4 As MySqlCommand
 
         Try
             cnn2.Close() : cnn2.Open()
@@ -125,34 +133,34 @@
 
 
                             cmd4 = cnn4.CreateCommand
-                                cmd4.CommandText = "Select SUM(Abono) FROM abonoi  WHERE Cliente='" & lblCliente.Text & "' AND Comentario='" & idreservacion & "'"
-                                rd4 = cmd4.ExecuteReader
-                                If rd4.HasRows Then
-                                    If rd4.Read Then
-                                        saldocliente = IIf(rd4(0).ToString = "", 0, rd4(0).ToString)
+                            cmd4.CommandText = "Select SUM(Abono) FROM abonoi  WHERE Cliente='" & lblCliente.Text & "' AND Comentario='" & idreservacion & "'"
+                            rd4 = cmd4.ExecuteReader
+                            If rd4.HasRows Then
+                                If rd4.Read Then
+                                    saldocliente = IIf(rd4(0).ToString = "", 0, rd4(0).ToString)
 
-                                    End If
-                                Else
-                                    saldocliente = "0.00"
                                 End If
-                                rd4.Close()
-                                lblAnticipo.Text = FormatNumber(saldocliente, 2)
-
-
-
-
-                                fsalidareservacion = rd3("FSalida").ToString
-                                dsalidare = Format(fsalidareservacion, "yyyy-MM-dd HH:mm:ss")
-
-                                If ToleHab > 0 Then
-                                    Dim fechatolerancia As DateTime = fsalidareservacion.AddMinutes(ToleHab)
-                                    lblsalida.Text = Format(fechatolerancia, "yyyy/MM/dd HH:mm")
-                                Else
-                                    lblsalida.Text = Format(fsalidareservacion, "yyyy/MM/dd HH:mm")
-                                End If
-
+                            Else
+                                saldocliente = "0.00"
                             End If
-                        Else
+                            rd4.Close()
+                            lblAnticipo.Text = FormatNumber(saldocliente, 2)
+
+
+
+
+                            fsalidareservacion = rd3("FSalida").ToString
+                            dsalidare = Format(fsalidareservacion, "yyyy-MM-dd HH:mm:ss")
+
+                            If ToleHab > 0 Then
+                                Dim fechatolerancia As DateTime = fsalidareservacion.AddMinutes(ToleHab)
+                                lblsalida.Text = Format(fechatolerancia, "yyyy/MM/dd HH:mm")
+                            Else
+                                lblsalida.Text = Format(fsalidareservacion, "yyyy/MM/dd HH:mm")
+                            End If
+
+                        End If
+                    Else
                         If ToleHab > 0 Then
                             Dim fechatolerancia As DateTime = fechasalida.AddMinutes(ToleHab)
                             lblsalida.Text = Format(fechatolerancia, "yyyy/MM/dd HH:mm")
@@ -163,10 +171,10 @@
                     rd3.Close()
 
                     If lblHorFin.Text >= lblsalida.Text Then
-                            MsgBox("El tiempo de renta de la habitación termino.", vbInformation + vbOKOnly, titulohotelriaa)
-                            lblPagar.Text = CDbl(lblPrecio.Text)
+                        MsgBox("El tiempo de renta de la habitación termino.", vbInformation + vbOKOnly, titulohotelriaa)
+                        lblPagar.Text = CDbl(lblPrecio.Text)
 
-                            Dim precioxhora As Double = 0
+                        Dim precioxhora As Double = 0
                         Dim precionuevo As Double = 0
 
 
@@ -178,8 +186,8 @@
 
                         lblPagar.Text = CDbl(precioaumento + precionuevo) - CDbl(lblAnticipo.Text)
 
-                        Else
-                            lblPagar.Text = CDbl(lblPrecio.Text) - CDbl(lblAnticipo.Text)
+                    Else
+                        lblPagar.Text = CDbl(lblPrecio.Text) - CDbl(lblAnticipo.Text)
                     End If
 
 
@@ -204,6 +212,13 @@
 
     Private Sub btnDesocupar_Click(sender As Object, e As EventArgs) Handles btnDesocupar.Click
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
         Try
 
             cnn1.Close() : cnn1.Open()
@@ -219,7 +234,7 @@
                         Exit Sub
                     End If
                 End If
-                End If
+            End If
             rd1.Close()
             cnn1.Close()
 
@@ -363,7 +378,7 @@
             frmManejo.primerBoton()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-        cnn1.Close()
+            cnn1.Close()
         End Try
 
     End Sub

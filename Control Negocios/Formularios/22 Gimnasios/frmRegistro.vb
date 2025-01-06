@@ -1,10 +1,16 @@
-﻿Public Class frmRegistro
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmRegistro
     Public folVentaFact As Integer = 0
     Public lic As String = ""
     Private Sub frmRegistro_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
     Private Sub cboCliente_DropDown(sender As Object, e As EventArgs) Handles cboCliente.DropDown
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cboCliente.Items.Clear()
             cnn1.Close()
@@ -25,6 +31,10 @@
     End Sub
 
     Private Sub cboProducto_DropDown(sender As Object, e As EventArgs) Handles cboProducto.DropDown
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cboProducto.Items.Clear()
             cnn1.Close()
@@ -44,6 +54,9 @@
     End Sub
 
     Private Sub cboProducto_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboProducto.SelectedValueChanged
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close()
             cnn1.Open()
@@ -63,6 +76,9 @@
 
     Private Sub txtusuario_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtusuario.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
             Try
                 cnn1.Close()
                 cnn1.Open()
@@ -138,6 +154,10 @@
         Dim grupo As String = ""
         Dim existencias As Double = 0
         Dim saldofinal As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         precio = FormatNumber(txtPrecio.Text, 2)
         If cboCliente.Text = "" Then
@@ -301,6 +321,10 @@
         Dim Y As Double = 0
         Dim derecha As New StringFormat With {.Alignment = StringAlignment.Far}
         Dim centro As New StringFormat With {.Alignment = StringAlignment.Center}
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         cnn1.Close()
         cnn1.Open()

@@ -1,5 +1,6 @@
 ﻿
 Imports System.IO
+Imports MySql.Data.MySqlClient
 Public Class frmIngresoDispositivo
 
     Public idempleado As Integer = 0
@@ -23,6 +24,10 @@ Public Class frmIngresoDispositivo
 
     Private Sub cboSerie_DropDown(sender As Object, e As EventArgs) Handles cboSerie.DropDown
 
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboSerie.Items.Clear()
 
@@ -45,6 +50,11 @@ Public Class frmIngresoDispositivo
     End Sub
 
     Private Sub cboSerie_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboSerie.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -139,6 +149,11 @@ Public Class frmIngresoDispositivo
     End Sub
 
     Private Sub UpGrid()
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
 
             Dim TPapel As String = ""
@@ -306,6 +321,11 @@ Public Class frmIngresoDispositivo
     End Sub
 
     Public Function IvaDSC(ByVal cod As String) As Double
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -409,6 +429,12 @@ Public Class frmIngresoDispositivo
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             Dim MySubtotal As Double = 0
             Dim TotalIVAPrint As Double = 0
@@ -1015,6 +1041,10 @@ Door:
 
     Private Sub txtcontra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcontra.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -1035,6 +1065,10 @@ Door:
     End Sub
 
     Private Sub btnCoti_Click(sender As Object, e As EventArgs) Handles btnCoti.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
 
@@ -1295,7 +1329,9 @@ Door:
         Dim Pie As String = ""
         Dim Logotipo As Drawing.Image = Nothing
 
-
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             '[°]. Logotipo
@@ -1567,6 +1603,9 @@ Door:
         Dim Logotipo As Drawing.Image = Nothing
         Dim Pie As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             '[°]. Logotipo
@@ -1832,6 +1871,11 @@ Door:
     End Sub
 
     Private Sub btnstatus_Click(sender As Object, e As EventArgs) Handles btnstatus.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -1852,6 +1896,11 @@ Door:
     End Sub
 
     Public Sub Foliov()
+
+        Dim cnn9 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd9 As MySqlDataReader
+        Dim cmd9 As MySqlCommand
+
         Try
             If cnn9.State = 1 Then cnn9.Close()
             cnn9.Open()
@@ -1889,6 +1938,9 @@ Door:
         Dim Logotipo As Drawing.Image = Nothing
         Dim Pie As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             '[°]. Logotipo
@@ -2158,6 +2210,10 @@ Door:
         Dim Y As Double = 0
         Dim Logotipo As Drawing.Image = Nothing
         Dim Pie As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             '[°]. Logotipo
@@ -2437,6 +2493,11 @@ Door:
     End Sub
 
     Private Sub cboDescripcion_DropDown(sender As Object, e As EventArgs) Handles cboDescripcion.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboDescripcion.Items.Clear()
 
@@ -2468,6 +2529,12 @@ Door:
             Dim ticambio As Double = 0
             Dim PreLst As Double = 0
             Dim PreEsp As Double = 0
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim CNN2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, RD2 As MySqlDataReader
+            Dim cmd1, CMD2 As MySqlCommand
+
 
             cnn1.Close() : cnn1.Open()
             cnn2.Close() : cnn2.Open()
@@ -2530,6 +2597,12 @@ Door:
             Dim Minimo As Double = 0
             Dim TiCambio As Double = 0
             Dim PreLst As Double = 0, PreEsp As Double = 0
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim CNN2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, RD2 As MySqlDataReader
+            Dim cmd1, CMD2 As MySqlCommand
+
 
             If cboCodigo.Text <> "" Then
                 Try
@@ -2601,6 +2674,10 @@ Door:
     End Sub
 
     Private Sub cboCodigo_DropDown(sender As Object, e As EventArgs) Handles cboCodigo.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCodigo.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -2625,6 +2702,11 @@ Door:
         If txtCantidad.Text = "" Then Exit Sub
         If AscW(e.KeyChar) = Keys.Enter And cboDescripcion.Text = "" Then cboDescripcion.Focus().Equals(True)
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Dim Edita As Boolean = False
             Try
                 cnn1.Close() : cnn1.Open()
@@ -2685,6 +2767,12 @@ Door:
         Dim TiCambio As Double = 0
         Dim H_Actual As String = Format(Date.Now, "HH:mm")
         If txtCantidad.Text = "" Or txtCantidad.Text = "." Then Exit Sub
+
+
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim CNN5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4, RD5 As MySqlDataReader
+        Dim cmd4, CMD5 As MySqlCommand
 
         Try
             cnn4.Close() : cnn4.Open()
@@ -2803,6 +2891,11 @@ Door:
         Dim editap As Boolean = False
         If Not IsNumeric(txtPrecio.Text) Then txtPrecio.Text = ""
         If cboCodigo.Text = "" Then MsgBox("Necesitas seleccionar un producto.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cboDescripcion.Focus().Equals(True) : Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim CNN2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, RD2 As MySqlDataReader
+        Dim cmd1, CMD2 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -2927,6 +3020,10 @@ Door:
         Dim chec As Boolean = False
         Dim renta As Boolean = False
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If AscW(e.KeyChar) = Keys.Enter Then
             cnn1.Close() : cnn1.Open()
 
@@ -3008,6 +3105,10 @@ Door:
     End Sub
 
     Private Sub cboSerieP_DropDown(sender As Object, e As EventArgs) Handles cboSerieP.DropDown
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         cboSerieP.Items.Clear()
         cnn1.Close() : cnn1.Open()

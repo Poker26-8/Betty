@@ -1,4 +1,6 @@
-﻿Public Class frmCancelarHab
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmCancelarHab
     Private Sub frmCancelarHab_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
@@ -8,6 +10,10 @@
     End Sub
 
     Private Sub cboHabitacion_DropDown(sender As Object, e As EventArgs) Handles cboHabitacion.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboHabitacion.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -29,37 +35,37 @@
     End Sub
 
     Private Sub btndesocupar_Click(sender As Object, e As EventArgs) Handles btndesocupar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             If MsgBox("¿Desea eliminar el tiempo de la habitación " & cboHabitacion.Text & "?", vbInformation + vbYesNo, titulohotelriaa) = vbYes Then
 
                 If lblusuario.Text = "" Then MsgBox("Necesita ingresar la contraseña", vbInformation + vbOKOnly, titulohotelriaa) : txtContra.Focus.Equals(True) : Exit Sub
-
                 cnn1.Close() : cnn1.Open()
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "DELETE FROM asigpc WHERE Nombre='" & cboHabitacion.Text & "'"
-                    cmd1.ExecuteNonQuery()
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "DELETE FROM asigpc WHERE Nombre='" & cboHabitacion.Text & "'"
+                cmd1.ExecuteNonQuery()
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "DELETE FROM comanda1 WHERE Nombre='" & cboHabitacion.Text & "'"
+                cmd1.ExecuteNonQuery()
 
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "DELETE FROM comanda1 WHERE Nombre='" & cboHabitacion.Text & "'"
-                    cmd1.ExecuteNonQuery()
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "DELETE FROM comandas WHERE Nmesa='" & cboHabitacion.Text & "' AND Codigo='xc3'"
+                cmd1.ExecuteNonQuery()
 
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "DELETE FROM comandas WHERE Nmesa='" & cboHabitacion.Text & "' AND Codigo='xc3'"
-                    cmd1.ExecuteNonQuery()
-
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "DELETE FROM detallehotel WHERE Habitacion='" & cboHabitacion.Text & "'"
-                    cmd1.ExecuteNonQuery()
-
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "UPDATE habitacion SET Estado='Desocupada' WHERE N_Habitacion='" & cboHabitacion.Text & "'"
-                    cmd1.ExecuteNonQuery()
-
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "UPDATE rep_comandas SET Status='CANCELADA' WHERE NMesa='" & cboHabitacion.Text & "' AND Codigo='xc3'"
-                    If cmd1.ExecuteNonQuery() Then
-                        MsgBox("Habitación actualizada correctamente", vbInformation + vbOKOnly, titulohotelriaa)
-                    End If
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "DELETE FROM detallehotel WHERE Habitacion='" & cboHabitacion.Text & "'"
+                cmd1.ExecuteNonQuery()
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "UPDATE habitacion SET Estado='Desocupada' WHERE N_Habitacion='" & cboHabitacion.Text & "'"
+                cmd1.ExecuteNonQuery()
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "UPDATE rep_comandas SET Status='CANCELADA' WHERE NMesa='" & cboHabitacion.Text & "' AND Codigo='xc3'"
+                If cmd1.ExecuteNonQuery() Then
+                    MsgBox("Habitación actualizada correctamente", vbInformation + vbOKOnly, titulohotelriaa)
+                End If
                 cnn1.Close()
                 Me.Close()
                 frmManejo.TRAERUBICACION()
@@ -71,6 +77,11 @@
     End Sub
 
     Private Sub txtContra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContra.KeyPress
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             If AscW(e.KeyChar) = Keys.Enter Then
                 cnn1.Close() : cnn1.Open()

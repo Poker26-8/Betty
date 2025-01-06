@@ -1,4 +1,5 @@
 ﻿Imports Microsoft.Office.Interop.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class frmReporte
     Private Sub frmReporte_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -6,6 +7,11 @@ Public Class frmReporte
     End Sub
     Private Sub ComboBox1_DropDown(sender As Object, e As EventArgs) Handles cbocliente.DropDown
         cbocliente.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close()
         cnn1.Open()
         cmd1 = cnn1.CreateCommand
@@ -32,6 +38,10 @@ Public Class frmReporte
         grdcaptura.Rows.Clear()
         Dim fechadehoy As Date = Date.Now
         Dim fechafinal As Date = Nothing
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         fechadehoy = FormatDateTime(fechadehoy, DateFormat.ShortDate)
 

@@ -1,4 +1,6 @@
-﻿Public Class frmAddCitaH
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmAddCitaH
     Private Sub frmAddCitaH_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         rtAsunto.Focus.Equals(True)
 
@@ -75,27 +77,27 @@
     Public Sub cboMessaTag()
         If cboMesSa.Text = "Enero" Then
             cboMesSa.Tag = 1
-        ElseIf cboMessa.Text = "Febrero" Then
+        ElseIf cboMesSa.Text = "Febrero" Then
             cboMesSa.Tag = 2
-        ElseIf cboMessa.Text = "Marzo" Then
+        ElseIf cboMesSa.Text = "Marzo" Then
             cboMesSa.Tag = 3
-        ElseIf cboMessa.Text = "Abril" Then
+        ElseIf cboMesSa.Text = "Abril" Then
             cboMesSa.Tag = 4
-        ElseIf cboMessa.Text = "Mayo" Then
+        ElseIf cboMesSa.Text = "Mayo" Then
             cboMesSa.Tag = 5
-        ElseIf cboMessa.Text = "Junio" Then
+        ElseIf cboMesSa.Text = "Junio" Then
             cboMesSa.Tag = 6
-        ElseIf cboMessa.Text = "Julio" Then
+        ElseIf cboMesSa.Text = "Julio" Then
             cboMesSa.Tag = 7
-        ElseIf cboMessa.Text = "Agosto" Then
+        ElseIf cboMesSa.Text = "Agosto" Then
             cboMesSa.Tag = 8
-        ElseIf cboMessa.Text = "Septiembre" Then
+        ElseIf cboMesSa.Text = "Septiembre" Then
             cboMesSa.Tag = 9
-        ElseIf cboMessa.Text = "Octubre" Then
+        ElseIf cboMesSa.Text = "Octubre" Then
             cboMesSa.Tag = 10
-        ElseIf cboMessa.Text = "Noviembre" Then
+        ElseIf cboMesSa.Text = "Noviembre" Then
             cboMesSa.Tag = 11
-        ElseIf cboMessa.Text = "Diciembre" Then
+        ElseIf cboMesSa.Text = "Diciembre" Then
             cboMesSa.Tag = 12
         End If
     End Sub
@@ -175,6 +177,10 @@
         Dim fechaentera As String = cboAño.Text & "/" & cboMes.Tag & "/" & txtDia.Text & " " & cboHora.Text & ":" & cboMinuto.Text
         Dim fechasalida As String = cboAñoSa.Text & "/" & cboMesSa.Tag & "/" & txtDiaSa.Text & " " & cboHoraSA.Text & ":" & cboMinutoSa.Text
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim CNN2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, RD2 As MySqlDataReader
+        Dim cmd1, CMD2 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -246,6 +252,10 @@
     End Sub
 
     Private Sub cbocliente_DropDown(sender As Object, e As EventArgs) Handles cbocliente.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cbocliente.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -274,6 +284,10 @@
     End Sub
 
     Private Sub cboUsuario_DropDown(sender As Object, e As EventArgs) Handles cboUsuario.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboUsuario.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -302,6 +316,10 @@
     End Sub
 
     Private Sub cboHabitacion_DropDown(sender As Object, e As EventArgs) Handles cboHabitacion.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboHabitacion.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -489,6 +507,11 @@
     End Sub
 
     Private Sub cbocliente_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbocliente.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand
         cmd1.CommandText = "SELECT Telefono FROM clientes WHERE Nombre='" & cbocliente.Text & "'"

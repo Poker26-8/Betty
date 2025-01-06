@@ -1,4 +1,5 @@
 ﻿Imports DocumentFormat.OpenXml.Drawing.Charts
+Imports MySql.Data.MySqlClient
 
 Public Class frmAnticiposReservaciones
 
@@ -14,6 +15,11 @@ Public Class frmAnticiposReservaciones
     End Sub
 
     Private Sub cboFolio_DropDown(sender As Object, e As EventArgs) Handles cboFolio.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboFolio.Items.Clear()
 
@@ -37,6 +43,11 @@ Public Class frmAnticiposReservaciones
 
     Private Sub txtContra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContra.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "SELECT Alias,Status FROM Usuarios WHERE Clave='" & txtContra.Text & "'"
@@ -71,6 +82,10 @@ Public Class frmAnticiposReservaciones
     End Sub
 
     Private Sub cboClIente_DropDown(sender As Object, e As EventArgs) Handles cboClIente.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboClIente.Items.Clear()
 
@@ -93,6 +108,11 @@ Public Class frmAnticiposReservaciones
     End Sub
 
     Public Sub cboFolio_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboFolio.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim simon As Integer = 0
             Dim varhoras As Integer = 0
@@ -179,6 +199,9 @@ Public Class frmAnticiposReservaciones
     End Sub
 
     Private Sub cboTipo_DropDown(sender As Object, e As EventArgs) Handles cboTipo.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboTipo.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -200,6 +223,11 @@ Public Class frmAnticiposReservaciones
     End Sub
 
     Private Sub cboPrecio_DropDown(sender As Object, e As EventArgs) Handles cboPrecio.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboPrecio.Items.Clear()
 
@@ -258,6 +286,10 @@ Public Class frmAnticiposReservaciones
             txtTransfe.Text = "0.00"
             txtOtro.Text = "0.00"
         End If
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
 
         Dim descuento As Double = txtDescuento.Text
         Dim pordescuento As Double = 0
@@ -401,6 +433,12 @@ Public Class frmAnticiposReservaciones
     End Sub
 
     Private Sub btnAbonar_Click(sender As Object, e As EventArgs) Handles btnAbonar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             Dim idcliente As Integer = 0
             Dim saldo As Double = 0
@@ -726,6 +764,10 @@ deku:
         Dim Logotipo As Drawing.Image = Nothing
         Dim Pie As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand
         cmd1.CommandText =
@@ -733,7 +775,7 @@ deku:
         rd1 = cmd1.ExecuteReader
         If rd1.HasRows Then
             If rd1.Read Then
-                pie = rd1("Pie1").ToString
+                Pie = rd1("Pie1").ToString
 
                 'Razón social
                 If rd1("Cab0").ToString() <> "" Then

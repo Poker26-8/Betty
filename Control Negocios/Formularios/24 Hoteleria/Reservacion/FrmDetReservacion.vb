@@ -1,6 +1,7 @@
 ﻿
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
+Imports MySql.Data.MySqlClient
 Imports System.IO
 
 Public Class FrmDetReservacion
@@ -14,6 +15,10 @@ Public Class FrmDetReservacion
     End Sub
 
     Private Sub cboTipo_DropDown(sender As Object, e As EventArgs) Handles cboTipo.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cboTipo.Items.Clear()
 
@@ -36,6 +41,11 @@ Public Class FrmDetReservacion
     End Sub
 
     Private Sub cboPrecio_DropDown(sender As Object, e As EventArgs) Handles cboPrecio.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboPrecio.Items.Clear()
 
@@ -69,6 +79,10 @@ Public Class FrmDetReservacion
     Private Sub cboCLientes_DropDown(sender As Object, e As EventArgs) Handles cboCLientes.DropDown
         cboCLientes.Items.Clear()
 
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         cnn5.Close() : cnn5.Open()
         cmd5 = cnn5.CreateCommand
         cmd5.CommandText = "SELECT DISTINCT Cliente FROM reservaciones WHERE Cliente<>'' AND Habitacion='" & lblHabitacion.Text & "' AND Status=0 ORDER BY Cliente"
@@ -84,6 +98,11 @@ Public Class FrmDetReservacion
     End Sub
 
     Private Sub cboFolio_DropDown(sender As Object, e As EventArgs) Handles cboFolio.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboFolio.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -111,6 +130,11 @@ Public Class FrmDetReservacion
     End Sub
 
     Private Sub cboCLientes_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCLientes.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
 
             Dim precio As Double = 0
@@ -279,6 +303,10 @@ Public Class FrmDetReservacion
         If cboPrecio.Text <= 0 Then MsgBox("Debe ingresar el precio total de la habitación.", vbInformation + vbOKOnly, titulohotelriaa) : Exit Sub
 
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         If ESTADO = "Ocupada" Then
             Try
@@ -511,6 +539,11 @@ Public Class FrmDetReservacion
 
     Private Sub txtcontra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtcontra.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
@@ -535,7 +568,6 @@ Public Class FrmDetReservacion
                 End If
                 rd1.Close()
                 cnn1.Close()
-                cnn2.Close()
 
                 If txtEfectivo.Text > 0 Then
                     btnAbonar.Focus.Equals(True)
@@ -553,12 +585,15 @@ Public Class FrmDetReservacion
     End Sub
 
     Private Sub cboFolio_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboFolio.SelectedValueChanged
+
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
+
         Try
             Dim anticipo As Double = 0
             Dim precio As Double = 0
             Dim resta As Double = 0
-
-
 
             cnn4.Close() : cnn4.Open()
             cmd4 = cnn4.CreateCommand
@@ -855,6 +890,12 @@ Public Class FrmDetReservacion
     End Sub
 
     Private Sub btnAbonar_Click(sender As Object, e As EventArgs) Handles btnAbonar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             btnAbonar.Enabled = False

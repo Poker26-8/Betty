@@ -1,5 +1,11 @@
-﻿Public Class frmCambiarHab
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmCambiarHab
     Private Sub cbohabitacion_DropDown(sender As Object, e As EventArgs) Handles cbohabitacion.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
 
         Try
             cbohabitacion.Items.Clear()
@@ -34,6 +40,11 @@
     End Sub
 
     Private Sub btnCambiar_Click(sender As Object, e As EventArgs) Handles btnCambiar.Click
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3, rd4 As MySqlDataReader
+        Dim cmd3, cmd4 As MySqlCommand
 
         Try
 
@@ -95,7 +106,8 @@
             frmManejo.TRAERUBICACION()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn3.Close()
+            cnn4.Close()
         End Try
 
     End Sub

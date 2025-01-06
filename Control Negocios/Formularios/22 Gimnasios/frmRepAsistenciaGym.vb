@@ -1,4 +1,5 @@
 ﻿Imports Microsoft.Office.Interop
+Imports MySql.Data.MySqlClient
 
 Public Class frmRepAsistenciaGym
     Private Sub frmRepAsistenciaGym_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -6,6 +7,11 @@ Public Class frmRepAsistenciaGym
     End Sub
     Private Sub CboEmpleado_DropDown(sender As Object, e As EventArgs) Handles CboEmpleado.DropDown
         CboEmpleado.Items.Clear()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         cnn1.Close()
         cnn1.Open()
         cmd1 = cnn1.CreateCommand
@@ -71,6 +77,11 @@ Public Class frmRepAsistenciaGym
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Button1.Enabled = False
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             Dim MonthV1 As Date = Nothing
             Dim MonthV2 As Date = Nothing
