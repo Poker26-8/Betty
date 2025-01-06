@@ -1,4 +1,6 @@
-﻿Public Class frmHabitaciones
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmHabitaciones
     Private Sub frmHabitaciones_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
@@ -25,7 +27,7 @@
         End If
     End Sub
 
-    Private Sub txtprecio_KeyPress(sender As Object, e As KeyPressEventArgs) 
+    Private Sub txtprecio_KeyPress(sender As Object, e As KeyPressEventArgs)
         If AscW(e.KeyChar) = Keys.Enter Then
             rtbCaracteristicas.Focus.Equals(True)
         End If
@@ -43,6 +45,11 @@
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             If cbonumero.Text = "" Then MsgBox("Debe de asignarle un número o nombre a la habitación", vbInformation + vbOKOnly, titulohotelriaa) : cbonumero.Focus.Equals(True) : Exit Sub
@@ -107,6 +114,11 @@
     End Sub
 
     Private Sub cbonumero_DropDown(sender As Object, e As EventArgs) Handles cbonumero.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cbonumero.Items.Clear()
 
@@ -128,6 +140,13 @@
     End Sub
 
     Private Sub cbonumero_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbonumero.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd4 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -155,6 +174,11 @@
     End Sub
 
     Private Sub cboUbicacion_DropDown(sender As Object, e As EventArgs) Handles cboUbicacion.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboUbicacion.Items.Clear()
 
@@ -189,6 +213,10 @@
         Dim cuadro_dialogo As New OpenFileDialog
         Dim ruta As String = ""
         Dim sheet As String = "hoja1"
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         With cuadro_dialogo
             .Filter = "Archivos de cálculo(*.xls;*.xlsx)|*.xls;*.xlsx"
@@ -277,6 +305,11 @@
     End Sub
 
     Private Function Comprueba(ByVal habi As String) As Boolean
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             Dim valida As Boolean = True
             cnn2.Close() : cnn2.Open()

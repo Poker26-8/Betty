@@ -1,6 +1,7 @@
 ﻿
 Imports System.IO
 Imports System.Web.Services
+Imports MySql.Data.MySqlClient
 
 Public Class frmPagarH
 
@@ -29,6 +30,11 @@ Public Class frmPagarH
 
     Private Sub frmPagarH_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         simbolo = DatosRecarga("Simbolo")
         nLogo = DatosRecarga("LogoG")
@@ -142,6 +148,10 @@ Public Class frmPagarH
     End Sub
 
     Public Sub foliov()
+
+        Dim cnntimer As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rdtimer As MySqlDataReader
+        Dim cmdtimer As MySqlCommand
 
         Try
             cnntimer.Close() : cnntimer.Open()
@@ -282,6 +292,10 @@ Public Class frmPagarH
             If grdpago.Rows.Count > 0 Then grdpago.Rows.Clear() : txtMontoP.Text = "0.00"
         End If
 
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Dim CampoDsct As Double = IIf(txtdescuento1.Text = "", "0", txtdescuento1.Text)
         Dim Desc As Double = 0
 
@@ -365,6 +379,10 @@ Public Class frmPagarH
 
     Private Sub txtContra_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContra.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             Try
                 cnn1.Close() : cnn1.Open()
@@ -475,6 +493,9 @@ Public Class frmPagarH
     End Sub
 
     Private Sub cbotpago_DropDown(sender As Object, e As EventArgs) Handles cbotpago.DropDown
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cbotpago.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -507,6 +528,10 @@ Public Class frmPagarH
     End Sub
 
     Private Sub cbobanco_DropDown(sender As Object, e As EventArgs) Handles cbobanco.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
         Try
             cbobanco.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -543,6 +568,10 @@ Public Class frmPagarH
     Private Sub txtnumref_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtnumref.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             Dim saldo As Double = 0
+
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
 
             If IsNumeric(txtnumref.Text) Then
 
@@ -588,6 +617,11 @@ Public Class frmPagarH
     End Sub
 
     Private Sub cboCuentaRecepcion_DropDown(sender As Object, e As EventArgs) Handles cboCuentaRecepcion.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboCuentaRecepcion.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -615,6 +649,11 @@ Public Class frmPagarH
     End Sub
 
     Private Sub cboCuentaRecepcion_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCuentaRecepcion.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -694,6 +733,14 @@ Public Class frmPagarH
 
         Dim codigo As String = ""
         Dim cantidad As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd4 As MySqlCommand
+
 
         If txtEfectivo.Text > 0 Then
             btnCobrar.Enabled = False
@@ -1069,29 +1116,29 @@ Public Class frmPagarH
 
 
             cnn1.Close() : cnn1.Open()
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "SELECT Saldo FROM Abonoi WHERE Id=(SELECT MAX(Id) FROM Abonoi WHERE IdCliente=" & lblTipoVenta.Text & ")"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT Saldo FROM Abonoi WHERE Id=(SELECT MAX(Id) FROM Abonoi WHERE IdCliente=" & lblTipoVenta.Text & ")"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
                     MYSALDO = FormatNumber(IIf(rd1(0).ToString = "", 0, rd1(0).ToString), 2) + CDbl(txtTotal.Text)
                 End If
-                Else
-                    MYSALDO = FormatNumber(txtTotal.Text, 2)
-                End If
-                rd1.Close()
-
-                If RESTAVENTA > 0 And afavor_cliente > 0 And CDbl(TOTALVENTA) = txtResta.Text Then
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "insert into Abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,Propina,FormaPago,Monto,Banco,Referencia,Usuario,MontoSF) values(" & folioventa & "," & lblTipoVenta.Text & ",'" & lblCliente.Text & "','NOTA VENTA','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & TOTALVENTA & ",0," & MYSALDO & ",0,'',0,'','','" & lblAtendio.Text & "'," & txtResta.Text & ")"
-                    cmd1.ExecuteNonQuery()
-                Else
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "insert into Abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,Propina,FormaPago,Monto,Banco,Referencia,Usuario) values(" & folioventa & "," & lblTipoVenta.Text & ",'" & lblCliente.Text & "','NOTA VENTA','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & TOTALVENTA & ",0," & MYSALDO & ",0,'',0,'','','" & lblAtendio.Text & "')"
-                    cmd1.ExecuteNonQuery()
-                End If
-
+            Else
+                MYSALDO = FormatNumber(txtTotal.Text, 2)
             End If
+            rd1.Close()
+
+            If RESTAVENTA > 0 And afavor_cliente > 0 And CDbl(TOTALVENTA) = txtResta.Text Then
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "insert into Abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,Propina,FormaPago,Monto,Banco,Referencia,Usuario,MontoSF) values(" & folioventa & "," & lblTipoVenta.Text & ",'" & lblCliente.Text & "','NOTA VENTA','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & TOTALVENTA & ",0," & MYSALDO & ",0,'',0,'','','" & lblAtendio.Text & "'," & txtResta.Text & ")"
+                cmd1.ExecuteNonQuery()
+            Else
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "insert into Abonoi(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,Propina,FormaPago,Monto,Banco,Referencia,Usuario) values(" & folioventa & "," & lblTipoVenta.Text & ",'" & lblCliente.Text & "','NOTA VENTA','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & TOTALVENTA & ",0," & MYSALDO & ",0,'',0,'','','" & lblAtendio.Text & "')"
+                cmd1.ExecuteNonQuery()
+            End If
+
+        End If
 
 
         If ACUENTA > 0 Then
@@ -1526,6 +1573,11 @@ deku:
         Dim fechaentra As String = ""
         Dim fechasal As String = ""
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
+
         Try
 
             If tLogo <> "SIN" Then
@@ -1823,6 +1875,10 @@ deku:
         Dim fechasalida As Date = Nothing
         Dim fechaentra As String = ""
         Dim fechasal As String = ""
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Try
 
@@ -2198,6 +2254,14 @@ deku:
     End Sub
 
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
         Try
             Dim CantidadP As String = ""
             Dim canc As String = ""
@@ -2380,11 +2444,11 @@ deku:
 
                     cnn2.Close() : cnn2.Open()
                     cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "UPDATE Comandas SET Cantidad=" & cantidadeliminar - CantidadP & " WHERE IDC=" & comandaeliminar & ""
+                    cmd2.CommandText = "UPDATE Comandas SET Cantidad=" & cantidadeliminar - CantidadP & " WHERE IDC=" & COMANDAELIMINAR & ""
                     cmd2.ExecuteNonQuery()
 
                     cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "UPDATE Comandas SET Total= Cantidad * Precio  WHERE IDC=" & comandaeliminar & ""
+                    cmd2.CommandText = "UPDATE Comandas SET Total= Cantidad * Precio  WHERE IDC=" & COMANDAELIMINAR & ""
                     cmd2.ExecuteNonQuery()
                     cnn2.Close()
 
@@ -2406,6 +2470,12 @@ deku:
         Dim tam As String = TamImpre()
         Dim impresora As String = ""
         Dim impre As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd3 As MySqlDataReader
+        Dim cmd1, cmd3 As MySqlCommand
+
         Try
 
             cnn1.Close() : cnn1.Open()
@@ -2455,6 +2525,12 @@ deku:
     End Function
 
     Private Sub Cancelacion80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles Cancelacion80.PrintPage
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd4 As MySqlDataReader
+        Dim cmd2, cmd4 As MySqlCommand
+
         Try
             Dim tipografia As String = "Lucida Sans Typewriter"
             Dim fuente_r As New Font("Lucida Sans Typewriter", 8, FontStyle.Regular)
@@ -2588,6 +2664,12 @@ deku:
     End Sub
 
     Private Sub Cancelacion58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs)
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd4 As MySqlDataReader
+        Dim cmd2, cmd4 As MySqlCommand
+
         Try
             Dim tipografia As String = "Lucida Sans Typewriter"
             Dim fuente_r As New Font("Lucida Sans Typewriter", 7, FontStyle.Regular)

@@ -1,5 +1,6 @@
 ﻿
 Imports System.IO
+Imports MySql.Data.MySqlClient
 Public Class frmServicioCuarto
 
     Dim TotDeptosh As Integer = 0
@@ -28,6 +29,10 @@ Public Class frmServicioCuarto
     Dim banderaprecio As Integer = 0
 
     Private Sub frmServicioCuarto_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         TFecha.Start()
         TFolio.Start()
@@ -75,6 +80,10 @@ Public Class frmServicioCuarto
     Public Sub Departamentos()
 
         Dim deptosh As Integer = 0
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -137,6 +146,9 @@ Public Class frmServicioCuarto
     Public Sub Grupos(ByVal depto As String)
         Dim grupos As Integer = 0
         TotGruposh = 0
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
         Try
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
@@ -196,6 +208,9 @@ Public Class frmServicioCuarto
 
     Private Sub btnGrupo_Click(sender As Object, e As EventArgs)
         Dim btnGrupos As Button = CType(sender, Button)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
+
         pproductos.Controls.Clear()
         If cnn3.State = 1 Then
             cnn3.Close()
@@ -208,6 +223,10 @@ Public Class frmServicioCuarto
 
         Dim prods As Integer = 1
         Dim cuantos As UInteger = Math.Truncate(pproductos.Height / 70)
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
 
         Try
             cnn3.Close() : cnn3.Open()
@@ -733,6 +752,10 @@ Public Class frmServicioCuarto
 
     Private Sub TFolio_Tick(sender As Object, e As EventArgs) Handles TFolio.Tick
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         TFolio.Stop()
 
         TFolio.Interval = 5000
@@ -766,6 +789,9 @@ Public Class frmServicioCuarto
     Public Sub find_preciovta(codigo As String)
 
         Dim MyPrecio As Double = 0
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Try
 
@@ -822,6 +848,11 @@ nopaso:
     End Sub
 
     Public Sub ObtenerProducto(Codigo As String)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -893,6 +924,10 @@ nopaso:
         Dim comensall As String = ""
         Dim comentario As String = ""
         Dim idc As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -1040,6 +1075,11 @@ nopaso:
         Dim comensall As String = ""
         Dim comentario As String = ""
         Dim idc As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -1238,6 +1278,12 @@ nopaso:
         foliocomanda = lblfolio.Text
 
         Dim mysubtotal As Double = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         For excesos As Integer = 0 To grdCaptura.Rows.Count - 1
             If grdCaptura.Rows(excesos).Cells(0).Value <> "" Then
@@ -1555,6 +1601,12 @@ deku:
     Private Sub txtRespuesta_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtRespuesta.KeyPress
         e.KeyChar = UCase(e.KeyChar)
         If AscW(e.KeyChar) = Keys.Enter Then
+
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd2, rd3 As MySqlDataReader
+            Dim cmd2, cmd3 As MySqlCommand
+
             If IsNumeric(txtRespuesta.Text) Then
 
                 Dim totaldeventa As Double = 0

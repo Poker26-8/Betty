@@ -524,6 +524,12 @@ Public Class frmDetalleH
     End Sub
 
     Private Sub btnDesocupar_Click(sender As Object, e As EventArgs) Handles btnDesocupar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
 
             If MsgBox("¿Desea realizar este cambio?", vbQuestion + vbYesNo + vbDefaultButton1, titulohotelriaa) = vbNo Then
@@ -601,6 +607,11 @@ Public Class frmDetalleH
     End Sub
 
     Private Sub cboTipo_DropDown(sender As Object, e As EventArgs) Handles cboTipo.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboTipo.Items.Clear()
 
@@ -623,6 +634,11 @@ Public Class frmDetalleH
     End Sub
 
     Private Sub cboPrecio_DropDown(sender As Object, e As EventArgs) Handles cboPrecio.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboPrecio.Items.Clear()
 
@@ -649,6 +665,11 @@ Public Class frmDetalleH
     End Sub
 
     Private Sub cboTipo_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboTipo.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -698,6 +719,10 @@ Public Class frmDetalleH
         Dim Y As Double = 0
         Dim Logotipo As Drawing.Image = Nothing
         Dim Pie As String = ""
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Try
 
@@ -825,6 +850,10 @@ Public Class frmDetalleH
         Dim Y As Double = 0
         Dim Logotipo As Drawing.Image = Nothing
         Dim Pie As String = ""
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Try
 

@@ -1,6 +1,7 @@
 ﻿
 Imports System.IO
 Imports System.Net
+Imports MySql.Data.MySqlClient
 Public Class frmManejo
 
     Dim focou As String = ""
@@ -25,6 +26,10 @@ Public Class frmManejo
 
     Private Sub frmManejo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         tim.Interval = 15000
         AddHandler tim.Tick, AddressOf Timer_Tick
@@ -100,6 +105,9 @@ Public Class frmManejo
 
     Public Sub TRAERUBICACION()
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Dim ubi As Integer = 1
         Dim cuantos As Integer = Math.Truncate(psuperior.Height / 100)
@@ -184,6 +192,14 @@ Public Class frmManejo
         Dim estado As String = ""
         Dim cuantos As UInteger = Math.Truncate(pHab.Height / 100)
         Dim cuantoslaterales As Double = Math.Truncate(pHab.Width / 75)
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
             cmd3 = cnn3.CreateCommand
@@ -873,6 +889,12 @@ Public Class frmManejo
     Private Sub btnHabitacionn_Click(sender As Object, e As EventArgs)
         Dim nhab As Button = CType(sender, Button)
         focou = "USU"
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
         Try
 
             txtHabitacion.Text = nhab.Text
@@ -1242,6 +1264,10 @@ Public Class frmManejo
 
     Private Sub KeyOP(ByVal valor As String)
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Select Case valor
             Case "USU"
                 Dim usuarioo As Integer = 0
@@ -1328,6 +1354,11 @@ Public Class frmManejo
     End Sub
 
     Private Sub btnPagar_Click(sender As Object, e As EventArgs) Handles btnPagar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
 
 
@@ -1379,6 +1410,11 @@ Public Class frmManejo
     End Sub
 
     Private Sub btnCambiarH_Click(sender As Object, e As EventArgs) Handles btnCambiarH.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             If txtHabitacion.Text = "" Then
