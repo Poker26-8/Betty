@@ -138,6 +138,10 @@ Module Module1
     End Function
 
     Public Sub Estado()
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
 
@@ -167,6 +171,10 @@ Module Module1
         grid.Rows.Clear()
         Dim minuto As String = ""
         Dim hora As String = ""
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Try
             cnn2.Close() : cnn2.Open()
@@ -224,10 +232,14 @@ Module Module1
         Dim horx As String = ""
         Dim evento As String = ""
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3 As MySqlDataReader
+        Dim cmd2, cmd3 As MySqlCommand
+
         Try
             cnn2.Close() : cnn2.Open()
-            cnn3.Close()
-            cnn3.Open()
+            cnn3.Close() : cnn3.Open()
 
             For field As Integer = 0 To 23
                 If field < 10 Then
@@ -285,6 +297,11 @@ Module Module1
         grid.Rows.Clear()
         Dim dia As String = ""
         Dim evento As String = ""
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3 As MySqlDataReader
+        Dim cmd2, cmd3 As MySqlCommand
 
         Try
             cnn2.Close() : cnn2.Open()
@@ -443,6 +460,9 @@ Module Module1
 
     Public PrimeraConfig As String = ""
 
+
+    Public Direcc_Access As String = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & My.Application.Info.DirectoryPath & "\DL1.mdb;Persist Security Info=True;Jet OLEDB:Database Password=jipl22"
+
     Public cnn1 As MySqlConnection = New MySqlConnection()
     Public cnn2 As MySqlConnection = New MySqlConnection()
     Public cnn3 As MySqlConnection = New MySqlConnection()
@@ -455,7 +475,6 @@ Module Module1
     Public cnntimer As MySqlConnection = New MySqlConnection()
     Public cnntimer2 As MySqlConnection = New MySqlConnection()
 
-    Public Direcc_Access As String = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & My.Application.Info.DirectoryPath & "\DL1.mdb;Persist Security Info=True;Jet OLEDB:Database Password=jipl22"
 
     Public cmd1, cmd2, cmd3, cmd4, cmd5, cmd9, cmd8, cmd7, cmdtimer, cmdtimer2 As MySqlCommand
     Public rd1, rd2, rd3, rd4, rd5, rd9, rd8, rd7, rdtimer, rdtimer2 As MySqlDataReader
@@ -765,6 +784,11 @@ Module Module1
     End Function
 
     Public Function TamImpre()
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             Dim tam As Integer = 0
             cnn5.Close() : cnn5.Open()
@@ -786,6 +810,11 @@ Module Module1
     End Function
 
     Public Function PreguntaImprime()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim preg As Integer = 0
             cnn1.Close() : cnn1.Open()
@@ -807,6 +836,11 @@ Module Module1
     End Function
 
     Public Function ImpresoraImprimir()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim impre As String = ""
             cnn1.Close() : cnn1.Open()
@@ -828,6 +862,11 @@ Module Module1
     End Function
 
     Public Function TraerNumCopias()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim copias As String = ""
             cnn1.Close() : cnn1.Open()
@@ -849,6 +888,11 @@ Module Module1
     End Function
 
     Public Function efectivocompleto()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim impre As Integer = 0
             cnn1.Close() : cnn1.Open()
@@ -870,6 +914,11 @@ Module Module1
     End Function
 
     Public Function TraerSimbolo()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim simbo As String = ""
             cnn1.Close() : cnn1.Open()
@@ -1371,8 +1420,8 @@ Module Module1
         Try
             Dim sql As String = $"SHOW TABLES LIKE '{tableName}'"
 
-            Using command As MySqlClient.MySqlCommand = New MySqlClient.MySqlCommand(sql, connection)
-                Using reader As MySqlClient.MySqlDataReader = command.ExecuteReader()
+            Using commanddd As MySqlClient.MySqlCommand = New MySqlClient.MySqlCommand(sql, connection)
+                Using reader As MySqlClient.MySqlDataReader = commanddd.ExecuteReader()
                     Return reader.HasRows
                 End Using
             End Using

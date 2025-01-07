@@ -1,4 +1,6 @@
-﻿Public Class frmUnidadSat
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmUnidadSat
     Private Sub txtClavePro_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtClavePro.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
             txtDescripcion.Focus.Equals(True)
@@ -22,6 +24,13 @@
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             If txtClavePro.Text = "" Then MsgBox("Ingrese la unidad", vbInformation + vbOKOnly, titulocentral) : Exit Sub
             If txtDescripcion.Text = "" Then MsgBox("Ingrese la descripción", vbInformation + vbOKOnly, titulocentral) : Exit Sub

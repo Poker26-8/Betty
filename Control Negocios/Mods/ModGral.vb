@@ -8,6 +8,7 @@ Imports System.Data.SqlClient
 Imports System.Management
 Imports System.Security.Cryptography
 Imports System.Text
+Imports MySql.Data.MySqlClient
 
 Module ModGral
 
@@ -121,6 +122,10 @@ Module ModGral
     Public Function TraerUsuarioIngresado(ByVal passw As String) As String
         Dim miusuario As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -150,6 +155,10 @@ Module ModGral
     Public Function TraerFormatoImpresion() As String
 
         Dim respuesta As String = ""
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -175,6 +184,11 @@ Module ModGral
     Public Function DatosRecarga(ByVal valor As String) As String
         Dim respuesta As String = ""
         Dim siono As Integer = 0
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
 
@@ -205,6 +219,11 @@ Module ModGral
     Public Function DatosRecarga2(ByVal valor As String) As String
         Dim respuesta As String = ""
         Dim siono As Integer = 0
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
 
@@ -238,6 +257,11 @@ Module ModGral
 
     'ProdIEPS
     Public Function ProdsIEPS(ByVal cod As String) As Double
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         If cod <> "" Then
             cnn5.Close() : cnn5.Open()
 
@@ -261,6 +285,11 @@ Module ModGral
     End Function
 
     Public Function IvaDSC(ByVal cod As String) As Double
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
             cnn3.Close() : cnn3.Open()
 
@@ -286,6 +315,11 @@ Module ModGral
 
     'BorraLotes
     Public Sub BorraLotes()
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand
@@ -302,6 +336,11 @@ Module ModGral
     'SFormatos
     Public Function SFormatos(ByVal campo As String, ByVal valor As String)
         Dim existe As Boolean = False
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
 
@@ -340,6 +379,11 @@ Module ModGral
 
     Public Function SFormatos2(ByVal campo As String, ByVal valor As String)
         Dim existe As Boolean = False
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
 
@@ -380,6 +424,11 @@ Module ModGral
 
     Public Function Dame_Regimen(ByVal pepito As String) As String
         Dim respuesta As String = ""
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
 
@@ -403,6 +452,11 @@ Module ModGral
 
     Public Function Dame_ClaveReg(ByVal pipeto As String) As String
         Dim respuesta As String = ""
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
 
@@ -427,6 +481,10 @@ Module ModGral
 
     Public Function ValidaPermisos(ByVal user As String, ByVal permiso As String) As Boolean
         Dim id_usu As Integer = 0
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
 
         Try
             cnn5.Close() : cnn5.Open()
@@ -471,6 +529,10 @@ Module ModGral
         Dim FechaI As Date = Nothing, FechaF As Date = Nothing
         Dim DescPromo As Double = 0
         Dim INI As Integer = 0, FIN As Integer = 0
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
 
         Try
             cnn3.Close() : cnn3.Open()

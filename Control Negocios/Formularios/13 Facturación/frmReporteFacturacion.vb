@@ -1,9 +1,15 @@
 ﻿Imports Core.DAL.CFDI
 Imports Microsoft.Office.Interop.Excel
+Imports MySql.Data.MySqlClient
 Imports Org.BouncyCastle.Cms
 
 Public Class frmReporteFacturacion
     Private Sub cbo_DropDown(sender As Object, e As EventArgs) Handles cbo.DropDown
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Dim inicio As Date = Nothing
         Dim final As Date = Nothing
         inicio = Format(mc1.SelectionStart.ToShortDateString)
@@ -52,6 +58,12 @@ Public Class frmReporteFacturacion
         inicio = Format(mc1.SelectionStart.ToShortDateString)
         final = Format(mc2.SelectionStart.ToShortDateString)
         Dim idEvento As Integer = 0
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         If optTotal.Checked = True Then
             Dim fecha As Date = Nothing
             Dim varFolioDx As String = ""
@@ -990,6 +1002,11 @@ Public Class frmReporteFacturacion
     End Sub
 
     Private Sub cboParci_DropDown(sender As Object, e As EventArgs) Handles cboParci.DropDown
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             If optParCli.Checked = True Then
                 cboParci.Items.Clear()

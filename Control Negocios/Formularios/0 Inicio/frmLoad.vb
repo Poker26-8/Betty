@@ -22,8 +22,9 @@ Public Class frmLoad
     Public Sub cargaTodo()
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
         PrimeraConfig = ""
         Login.Hide()
 
@@ -510,7 +511,7 @@ Public Class frmLoad
             rd1.Close()
             cnn1.Close()
         Catch ex As Exception
-
+            rd1.Close()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "ALTER TABLE productos add column DMembre VARCHAR(50) DEFAULT ''"
             cmd1.ExecuteNonQuery()
@@ -2676,7 +2677,6 @@ Public Class frmLoad
     Public Sub ActualizaCampos()
         Try
             Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim cmd2 As MySqlCommand
 
             cnn2.Close() : cnn2.Open()
 
@@ -3881,14 +3881,16 @@ Public Class frmLoad
     End Sub
 
     Public Sub VerificarVentasDetalle()
-        Try
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
 
-            Dim rd1, rd2, rd3, rd4 As MySqlDataReader
-            Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
+        Try
 
             Dim foliovd As Integer = 0
             Dim codunico As String = ""

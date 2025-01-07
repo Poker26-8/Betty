@@ -911,7 +911,7 @@ kak:
         Cambio = 0
 
         Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rr3 As MySqlDataReader
+        Dim rd3 As MySqlDataReader
         Dim cmd3 As MySqlCommand
 
         Try

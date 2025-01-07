@@ -1,8 +1,14 @@
-﻿Public Class frmDeducciones
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmDeducciones
     Private Sub frmDeducciones_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Dim fila As Integer = 0 ' para matriz de grid
         DTHoy.Value = Date.Now ' para calculos necesarios de fecha 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()

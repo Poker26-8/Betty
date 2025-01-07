@@ -381,6 +381,9 @@ Public Class frmPermisosRestaurant
         Else
             valor = 0
         End If
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cmd1 As MySqlCommand
+
 
         cnn1.Close() : cnn1.Open()
         cmd1 = cnn1.CreateCommand

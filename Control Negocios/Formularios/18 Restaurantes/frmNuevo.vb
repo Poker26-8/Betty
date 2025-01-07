@@ -267,6 +267,9 @@ Public Class frmNuevo
     Private Sub btnDepto_Click(sender As Object, e As EventArgs)
         Dim btnDepartamento As Button = CType(sender, Button)
         btnDepartamento.Font.Bold.Equals(True)
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
         ' pGrupos.Controls.Clear()
         ' pProductos.Controls.Clear()
         If cnn2.State = 1 Then

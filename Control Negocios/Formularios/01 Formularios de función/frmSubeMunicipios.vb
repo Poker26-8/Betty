@@ -1,4 +1,5 @@
 ﻿Imports System.Data.OleDb
+Imports MySql.Data.MySqlClient
 
 Public Class frmSubeMunicipios
     Private Sub btnMunicipios_Click(sender As Object, e As EventArgs) Handles btnMunicipios.Click
@@ -7,6 +8,11 @@ Public Class frmSubeMunicipios
         Dim cmd1 As OleDbCommand = New OleDbCommand
         Dim rd1 As OleDbDataReader
         Dim cuantos As Integer = 0
+
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Dim clavemun As String = ""
         Dim claveedo As String = ""
@@ -62,6 +68,10 @@ Public Class frmSubeMunicipios
         Dim cmd1 As OleDbCommand = New OleDbCommand
         Dim rd1 As OleDbDataReader
         Dim cuantos As Integer = 0
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Dim clavecol As String = ""
         Dim cp As String = ""

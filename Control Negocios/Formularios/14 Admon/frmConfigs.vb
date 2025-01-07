@@ -729,6 +729,9 @@ Public Class frmConfigs
 
     Private Sub optPregunta_Click(sender As Object, e As System.EventArgs) Handles optPregunta.Click
         Dim valor As Integer = 0
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cmd1 As MySqlCommand
+
         If (optPregunta.Checked) Then
             valor = 1
         Else

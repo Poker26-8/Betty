@@ -1,4 +1,6 @@
-﻿Public Class frmSubeUsuarios
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmSubeUsuarios
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Me.Close()
     End Sub
@@ -41,6 +43,10 @@
             .InitialDirectory = My.Application.Info.DirectoryPath & "\Archivos de importación"
             .ShowDialog()
         End With
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
         Try
             If cuadro_dialogo.FileName.ToString() <> "" Then
@@ -120,6 +126,12 @@
         End Try
     End Sub
     Private Function Comprueba(ByVal nombre As String) As Boolean
+
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             Dim valida As Boolean = True
             cnn2.Close() : cnn2.Open()

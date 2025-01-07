@@ -1,4 +1,6 @@
-﻿Public Class frmEmpleadosN
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmEmpleadosN
 
     Dim idregimen As String = ""
     Dim idperiodo As String = ""
@@ -12,6 +14,12 @@
     Dim claveestado As String = ""
 
     Private Sub cboRegimen_DropDown(sender As Object, e As EventArgs) Handles cboRegimen.DropDown
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboRegimen.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -32,6 +40,12 @@
     End Sub
 
     Private Sub cboRegimen_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboRegimen.SelectedValueChanged
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -51,6 +65,12 @@
     End Sub
 
     Private Sub cboPeriodo_DropDown(sender As Object, e As EventArgs) Handles cboPeriodo.DropDown
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboPeriodo.Items.Clear()
 
@@ -73,6 +93,11 @@
     End Sub
 
     Private Sub cboPeriodo_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboPeriodo.SelectedValueChanged
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -93,6 +118,12 @@
     End Sub
 
     Private Sub cboJornada_DropDown(sender As Object, e As EventArgs) Handles cboJornada.DropDown
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboJornada.Items.Clear()
 
@@ -114,6 +145,12 @@
     End Sub
 
     Private Sub cboJornada_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboJornada.SelectedValueChanged
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -134,6 +171,12 @@
     End Sub
 
     Private Sub cboContrato_DropDown(sender As Object, e As EventArgs) Handles cboContrato.DropDown
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboContrato.Items.Clear()
 
@@ -155,6 +198,12 @@
     End Sub
 
     Private Sub cboContrato_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboContrato.SelectedValueChanged
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -175,6 +224,12 @@
     End Sub
 
     Private Sub cboDepartamento_DropDown(sender As Object, e As EventArgs) Handles cboDepartamento.DropDown
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboDepartamento.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -196,6 +251,12 @@
     End Sub
 
     Private Sub cboPuesto_DropDown(sender As Object, e As EventArgs) Handles cboPuesto.DropDown
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboPuesto.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -216,6 +277,12 @@
     End Sub
 
     Private Sub cboRiesgo_DropDown(sender As Object, e As EventArgs) Handles cboRiesgo.DropDown
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboRiesgo.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -237,6 +304,12 @@
     End Sub
 
     Private Sub cboRiesgo_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboRiesgo.SelectedValueChanged
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -257,6 +330,12 @@
     End Sub
 
     Private Sub cboTipoPago_DropDown(sender As Object, e As EventArgs) Handles cboTipoPago.DropDown
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboTipoPago.Items.Clear()
 
@@ -278,6 +357,12 @@
     End Sub
 
     Private Sub cboTipoPago_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboTipoPago.SelectedValueChanged
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -298,6 +383,12 @@
     End Sub
 
     Private Sub cboBancos_DropDown(sender As Object, e As EventArgs) Handles cboBancos.DropDown
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboBancos.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -319,6 +410,12 @@
     End Sub
 
     Private Sub cboBancos_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboBancos.SelectedValueChanged
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -338,6 +435,12 @@
     End Sub
 
     Private Sub cboEmpresa_DropDown(sender As Object, e As EventArgs) Handles cboEmpresa.DropDown
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cboEmpresa.Items.Clear()
             cnn5.Close() : cnn5.Open()
@@ -349,16 +452,22 @@
                     cboEmpresa.Items.Add(rd5(0).ToString)
                 End If
             Loop
-            rd1.Close()
-            cnn1.Close()
+            rd5.Close()
+            cnn5.Close()
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn5.Close()
         End Try
     End Sub
 
     Private Sub cboEmpresa_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboEmpresa.SelectedValueChanged
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -379,9 +488,13 @@
     End Sub
 
     Private Sub cboempleado_DropDown(sender As Object, e As EventArgs) Handles cboempleado.DropDown
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
-
-
             cboempleado.Items.Clear()
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand
@@ -408,6 +521,13 @@
     End Sub
 
     Private Sub cboempleado_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboempleado.SelectedValueChanged
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             Dim claveregimen As String = ""
             Dim claveestado As String = ""
@@ -544,6 +664,12 @@
     End Sub
 
     Private Sub cboEstado_DropDown(sender As Object, e As EventArgs) Handles cboEstado.DropDown
+
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand
@@ -563,6 +689,12 @@
     End Sub
 
     Private Sub cboEstado_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboEstado.SelectedValueChanged
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -582,6 +714,13 @@
     End Sub
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             If verifica() Then
                 cnn1.Close() : cnn1.Open()

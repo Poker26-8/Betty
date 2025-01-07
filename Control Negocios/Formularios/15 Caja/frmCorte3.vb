@@ -106,6 +106,14 @@ Public Class frmCorte3
     End Sub
 
     Private Sub PCorte80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PCorte80.PrintPage
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim CNN4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
         Try
             Dim tipografia As String = "Lucida Sans Typewriter"
             Dim fuente_r As New Font("Lucida Sans Typewriter", 8, FontStyle.Regular)
@@ -147,12 +155,7 @@ Public Class frmCorte3
 
             Dim folio As Integer = 0
 
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim CNN4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1, rd2, rd3, rd4 As MySqlDataReader
-            Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
 
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
@@ -651,7 +654,7 @@ Public Class frmCorte3
             e.Graphics.DrawString("-----------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
             Y += 11
             e.Graphics.DrawString("ACUMULADO DIARIO Z", fuente_b, Brushes.Black, 10, Y)
-            e.Graphics.DrawString(simbolo & FormatNumber(CDbl(ACUMULADO2 - SUMAEGRESOS)+txtInicial.Text, 2), fuente_b, Brushes.Black, 270, Y, derecha)
+            e.Graphics.DrawString(simbolo & FormatNumber(CDbl(ACUMULADO2 - SUMAEGRESOS) + txtInicial.Text, 2), fuente_b, Brushes.Black, 270, Y, derecha)
             Y += 20
 
             cnn1.Close() : cnn1.Open()
@@ -675,6 +678,15 @@ Public Class frmCorte3
     End Sub
 
     Private Sub pCorte58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pCorte58.PrintPage
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
         Try
             Dim tipografia As String = "Lucida Sans Typewriter"
             Dim fuente_r As New Font("Lucida Sans Typewriter", 7, FontStyle.Regular)
@@ -716,12 +728,7 @@ Public Class frmCorte3
 
             Dim folio As Integer = 0
 
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1, rd2, rd3, rd4 As MySqlDataReader
-            Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+
 
 
             cnn2.Close() : cnn2.Open()

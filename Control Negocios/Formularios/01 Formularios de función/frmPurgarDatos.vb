@@ -1,5 +1,13 @@
-﻿Public Class frmPurgarDatos
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmPurgarDatos
     Private Sub btnVentas_Click(sender As Object, e As EventArgs) Handles btnVentas.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             If MsgBox("¿Desea eliminar los registros, al continuar ya no podrán recuperar los datos?", vbInformation + vbYesNo, titulocentral) = vbYes Then
 
@@ -48,6 +56,12 @@
     End Sub
 
     Private Sub btnCompras_Click(sender As Object, e As EventArgs) Handles btnCompras.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             If MsgBox("¿Desea eliminar los registros, al continuar ya no podrán recuperar los datos?", vbInformation + vbYesNo) = vbYes Then
 
@@ -102,6 +116,12 @@
     End Sub
 
     Private Sub btnProductos_Click(sender As Object, e As EventArgs) Handles btnProductos.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             If MsgBox("¿Desea eliminar los registros, al continuar ya no podrán recuperar los datos?", vbInformation + vbYesNo, titulocentral) = vbYes Then
 
@@ -136,6 +156,12 @@
     End Sub
 
     Private Sub btnExistencias_Click(sender As Object, e As EventArgs) Handles btnExistencias.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             If MsgBox("¿Desea actualizar las existencias a 0, al continuar no podrán recuperar los datos?", vbInformation + vbYesNo, titulocentral) = vbYes Then
 

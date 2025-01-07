@@ -437,7 +437,6 @@ Public Class Inicio
             frmProduccion.BringToFront()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
         End Try
 
 
@@ -826,7 +825,6 @@ Public Class Inicio
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
-            cnn1.Close()
         End Try
     End Sub
 

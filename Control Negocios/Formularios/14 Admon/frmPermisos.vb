@@ -609,6 +609,10 @@ Public Class frmPermisos
 
     Private Sub optmostrador_Click(sender As System.Object, e As System.EventArgs) Handles optmostrador.Click
         Dim Tipo As String = ""
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cmd1 As MySqlCommand
+
         If (optmostrador.Checked) Then
             Tipo = "CAJA"
         Else
@@ -630,7 +634,6 @@ Public Class frmPermisos
         End If
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
         Dim cmd1 As MySqlCommand
 
         cnn1.Close() : cnn1.Open()

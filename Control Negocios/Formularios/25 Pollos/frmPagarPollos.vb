@@ -471,7 +471,9 @@ Public Class frmPagarPollos
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn2.Close()
+            cnn3.Close()
+            cnn4.Close()
         End Try
 
     End Sub
@@ -635,7 +637,7 @@ Public Class frmPagarPollos
             lblsubtotalmapeo.Text = FormatNumber(lblsubtotalmapeo.Text, 2)
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn2.Close()
         End Try
     End Sub
 

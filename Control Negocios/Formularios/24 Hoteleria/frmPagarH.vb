@@ -738,8 +738,8 @@ Public Class frmPagarH
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1, rd2, rd4 As MySqlDataReader
-        Dim cmd1, cmd2, cmd4 As MySqlCommand
+        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
 
 
         If txtEfectivo.Text > 0 Then
@@ -2520,7 +2520,8 @@ deku:
             cnn1.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn2.Close()
+            cnn1.Close()
+            cnn3.Close()
         End Try
     End Function
 

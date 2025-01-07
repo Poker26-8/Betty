@@ -1007,7 +1007,7 @@ Public Class frmProducirQ
             e.Graphics.DrawString("____________________________________", fuente_b, Brushes.Black, 140, Y, sc)
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+
         End Try
     End Sub
 
@@ -1273,7 +1273,7 @@ Public Class frmProducirQ
             e.Graphics.DrawString("____________________________________", fuente_b, Brushes.Black, 90, Y, sc)
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+
         End Try
     End Sub
 

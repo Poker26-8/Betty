@@ -60,6 +60,11 @@ Public Class frmTraspasosAndroid
         llena_Usuarios(cboRuta)
     End Sub
     Public Sub validaInfo()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cnn1.Close()
             cnn1.Open()

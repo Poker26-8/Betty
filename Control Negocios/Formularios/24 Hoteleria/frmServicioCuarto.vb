@@ -132,6 +132,9 @@ Public Class frmServicioCuarto
         Dim btnDepartamento As Button = CType(sender, Button)
         btnDepartamento.Font.Bold.Equals(True)
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
+
         PGrupo.Controls.Clear()
         pproductos.Controls.Clear()
 
