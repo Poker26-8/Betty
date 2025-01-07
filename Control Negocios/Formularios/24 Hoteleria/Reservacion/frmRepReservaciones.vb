@@ -153,7 +153,7 @@ Public Class frmRepReservaciones
             End If
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn5.Close()
+            cnn1.Close()
         End Try
     End Sub
 

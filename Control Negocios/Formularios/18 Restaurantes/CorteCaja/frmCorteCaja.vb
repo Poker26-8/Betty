@@ -2073,6 +2073,11 @@ Public Class frmCorteCaja
         Dim Pie As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+
         Try
             '[°]. Logotipo
             If tLogo <> "SIN" Then

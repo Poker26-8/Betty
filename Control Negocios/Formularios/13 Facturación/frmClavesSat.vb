@@ -1,4 +1,6 @@
-﻿Public Class frmClavesSat
+﻿Imports MySql.Data.MySqlClient
+
+Public Class frmClavesSat
     Private Sub frmClavesSat_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
@@ -26,6 +28,12 @@
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             If txtClavePro.Text = "" Then MsgBox("Ingrese la clave", vbInformation + vbOKOnly, titulocentral) : txtClavePro.Focus.Equals(True) : Exit Sub
             If txtDescripcion.Text = "" Then MsgBox("Ingrese la descripción", vbInformation + vbOKOnly, titulocentral) : txtDescripcion.Focus.Equals(True) : Exit Sub

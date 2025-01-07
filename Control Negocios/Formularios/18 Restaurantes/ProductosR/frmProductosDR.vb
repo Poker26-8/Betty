@@ -955,8 +955,9 @@ Public Class frmProductosDR
 
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
 
@@ -992,8 +993,9 @@ Public Class frmProductosDR
 
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
 

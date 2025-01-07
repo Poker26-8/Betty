@@ -91,30 +91,30 @@ Public Class Login
 
                 sTargetlocalmysql = "server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300"
 
-                cnn1 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnn2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnn3 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnn4 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnn5 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnn9 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnn8 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnn7 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnntimer = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnntimer2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnn1 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnn2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnn3 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnn4 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnn5 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnn9 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnn8 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnn7 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnntimer = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnntimer2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
             Else
 
                 sTargetlocalmysql = "server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300"
 
-                cnn1 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnn2 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnn3 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnn4 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnn5 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnn9 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnn8 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnn7 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnntimer = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                cnntimer2 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnn1 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnn2 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnn3 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnn4 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnn5 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnn9 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnn8 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnn7 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnntimer = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                'cnntimer2 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
             End If
 
             varrutabase = txtRuta.Text
@@ -239,16 +239,16 @@ Public Class Login
 
         sTargetlocalmysql = "server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300"
 
-        cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-        cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-        cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-        cnn4 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-        cnn5 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-        cnn9 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-        cnn8 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-        cnn7 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-        cnntimer = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-        cnntimer2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+        'cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+        'cnn2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+        'cnn3 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+        'cnn4 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+        'cnn5 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+        'cnn9 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+        'cnn8 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+        'cnn7 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+        'cnntimer = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+        'cnntimer2 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
 
         My.Application.DoEvents()
         txtContrasena.Focus.Equals(True)
@@ -296,16 +296,16 @@ Public Class Login
 
                     sTargetlocalmysql = "server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300"
 
-                    cnn1 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn2 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn3 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn4 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn5 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn9 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn8 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn7 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnntimer = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnntimer2 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn1 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn2 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn3 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn4 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn5 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn9 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn8 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn7 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnntimer = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnntimer2 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
 
 
 
@@ -316,16 +316,16 @@ Public Class Login
                 Else
                     sTargetlocalmysql = "server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300"
 
-                    cnn1 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn3 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn4 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn5 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn9 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn8 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn7 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnntimer = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnntimer2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn1 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn3 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn4 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn5 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn9 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn8 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn7 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnntimer = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnntimer2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
 
 
                     comando = conexion.CreateCommand
@@ -643,30 +643,30 @@ Public Class Login
 
                     sTargetlocalmysql = "server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300"
 
-                    cnn1 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn2 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn3 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn4 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn5 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn9 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn7 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn8 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnntimer = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnntimer2 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn1 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn2 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn3 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn4 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn5 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn9 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn7 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn8 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnntimer = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnntimer2 = New MySqlClient.MySqlConnection("server=" & MyIP & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
 
                 Else
                     sTargetlocalmysql = "server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300"
 
-                    cnn1 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn3 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn4 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn5 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn9 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn8 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnn7 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnntimer = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
-                    cnntimer2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn1 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn3 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn4 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn5 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn9 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn8 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnn7 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnntimer = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
+                    'cnntimer2 = New MySqlClient.MySqlConnection("server=" & txtRuta.Text & ";uid=Delsscom;password=jipl22;database=cn" & cboEmpresa.Text & ";persist security info=false;connect timeout=300")
                 End If
 
                 If txtRuta.Text <> "" Then

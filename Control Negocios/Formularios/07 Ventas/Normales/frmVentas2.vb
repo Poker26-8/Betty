@@ -2524,7 +2524,6 @@ doorcita:
                 End With
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
-                cnn1.Close()
             End Try
         End If
     End Sub
@@ -3297,8 +3296,9 @@ doorcita:
 
             Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
             Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1, rd2 As MySqlDataReader
-            Dim cmd1, cmd2 As MySqlCommand
+            Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2, rd3 As MySqlDataReader
+            Dim cmd1, cmd2, CMD3 As MySqlCommand
 
             Try
                 Dim noprefijo As String = ""
@@ -7712,8 +7712,6 @@ Door:
                     cboNombre.SelectionStart = 0
                     cboNombre.SelectionLength = Len(cboNombre.Text)
                     MyIdCliente = 0
-                    rd1.Close()
-                    cnn1.Close()
                     txtdireccion.Focus().Equals(True)
                 End If
                 rd4.Close()
@@ -11668,6 +11666,11 @@ ecomoda:
     End Sub
 
     Private Sub pPedido80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pPedido80.PrintPage
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             'Fuentes prederminadas
             Dim tipografia As String = "Lucida Sans Typewriter"
@@ -11688,10 +11691,6 @@ ecomoda:
 
             Dim IVAVENTA As Double = 0
             Dim SUBTOTALVENTA As Double = 0
-
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
 
             '[°]. Logotipo
             If tLogo <> "SIN" Then
@@ -15224,6 +15223,10 @@ ecomoda:
     End Sub
 
     Private Sub cboCuentaRecepcion_DropDown(sender As Object, e As EventArgs) Handles cboCuentaRecepcion.DropDown
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cboCuentaRecepcion.Items.Clear()
 
@@ -15423,8 +15426,7 @@ ecomoda:
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
-
+            cnn2.Close()
         End Try
     End Sub
 
@@ -16159,6 +16161,11 @@ rayos2:
         Dim my_folio As Integer = 0
         Dim MyStatus As String = ""
         Dim tel_cliente As String = ""
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
 
         With oData
             If .dbOpen(a_cnn, Direcc_Access, sInfo) Then

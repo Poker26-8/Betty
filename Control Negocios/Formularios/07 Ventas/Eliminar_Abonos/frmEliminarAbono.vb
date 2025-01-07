@@ -214,8 +214,9 @@ Public Class frmEliminarAbono
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd1, rd2 As MySqlDataReader
-        Dim cmd1, cmd2 As MySqlCommand
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         Try
             Dim mysaldo As Double = 0
@@ -562,6 +563,12 @@ Public Class frmEliminarAbono
     End Sub
 
     Private Sub pEliminar58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pEliminar58.PrintPage
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             'Fuentes prederminadas
             Dim tipografia As String = "Lucida Sans Typewriter"
@@ -579,9 +586,6 @@ Public Class frmEliminarAbono
             Dim simbolo As String = DatosRecarga("Simbolo")
             Dim Pie As String = ""
 
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
 
             '[°]. Logotipo
             If tLogo <> "SIN" Then

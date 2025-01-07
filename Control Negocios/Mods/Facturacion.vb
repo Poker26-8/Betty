@@ -9406,7 +9406,6 @@ puertaXD1:
         Dim conector As New Conector(x)
         Dim idError As Integer
         Dim NError As String
-        Dim uuid As String
         Dim xmlTimbrado As String
 
         Dim id As String

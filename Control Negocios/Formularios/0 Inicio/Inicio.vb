@@ -184,11 +184,11 @@ Public Class Inicio
     End Sub
 
     Public Sub Nuevos_Pedidos()
-        Try
-            Dim cnn4 As MySqlConnection = New MySqlConnection(sTarget)
-            Dim rd4 As MySqlDataReader
-            Dim cmd4 As MySqlCommand
 
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTarget)
+        Dim rd4 As MySqlDataReader
+        Dim cmd4 As MySqlCommand
+        Try
             cnn4.Close() : cnn4.Open()
             cmd4 = cnn4.CreateCommand
             cmd4.CommandText =
@@ -208,11 +208,11 @@ Public Class Inicio
     End Sub
 
     Private Async Sub Inicio_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-        Try
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
 
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
+        Try
 
             cnn1.Close()
             cnn1.Open()
@@ -1755,7 +1755,6 @@ Public Class Inicio
             End If
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
         End Try
     End Sub
 

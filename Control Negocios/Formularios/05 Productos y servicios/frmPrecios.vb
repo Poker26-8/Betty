@@ -455,6 +455,7 @@ Public Class frmPrecios
         If AscW(e.KeyChar) = Keys.Enter Then
 
             Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
             Dim rd2 As MySqlDataReader
             Dim cmd2 As MySqlCommand
 

@@ -40,9 +40,10 @@ Public Class frmMigracion
         Dim seccion As String = ""
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1, rd As MySqlDataReader
-        Dim cmd1, cmd As MySqlCommand
+        Dim rd1, rd, rd2 As MySqlDataReader
+        Dim cmd1, cmd, cmd2 As MySqlCommand
 
         On Error GoTo queso
         'Primero hace una selección de registros para llenar el progress bar
@@ -442,7 +443,7 @@ queso:
 
 caca:
         MsgBox(seccion & " - " & Err.Number & " - " & Err.Description & vbNewLine & "No se pudo completar la migración de datos, inténtelo de nuevo más tarde. Sí el problema persiste comuníquese con su proveedor de software.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-        cnn.Close() : cnn1.Close() : cnn2.Close()
+        cnn.Close()
         Exit Sub
     End Sub
 

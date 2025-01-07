@@ -158,8 +158,9 @@ Public Class frmProductosS
 
     Private Sub ShowData2(ByVal tipo As String)
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd2 As MySqlDataReader
-        Dim cmd2 As MySqlCommand
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3 As MySqlDataReader
+        Dim cmd2, cmd3 As MySqlCommand
         Try
             Dim TiCambio As Double = 0
 

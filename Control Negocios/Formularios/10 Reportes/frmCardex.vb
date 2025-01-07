@@ -75,7 +75,7 @@ Public Class frmCardex
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1, rrd2 As MySqlDataReader
+        Dim rd1, rd2 As MySqlDataReader
         Dim cmd1, cmd2 As MySqlCommand
 
         Try

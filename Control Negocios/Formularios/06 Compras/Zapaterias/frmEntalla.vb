@@ -66,8 +66,9 @@ Public Class frmEntalla
 
             Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
             Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1, rd3 As MySqlDataReader
-            Dim cmd1, cmd3 As MySqlCommand
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2 As MySqlDataReader
+            Dim cmd1, cmd2, cmd3 As MySqlCommand
 
             If Len(cboModelo.Text) > 0 And Len(cboRemision.Text) > 0 Then
                 cnn1.Close() : cnn1.Open()
@@ -372,7 +373,7 @@ Public Class frmEntalla
             Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
             Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
             Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1, rd2, rd3 As MySqlDataReader
+            Dim rd1, rd2 As MySqlDataReader
             Dim cmd1, cmd2, cmd3 As MySqlCommand
 
             cnn1.Close() : cnn1.Open()

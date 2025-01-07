@@ -1589,6 +1589,9 @@ kaka:
         Dim Pi As Double = 0
         Dim Pil As Double = 0
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTarget)
+        Dim cmd1 As MySqlCommand
+
         If Trim(txtlote.Text) <> "" Then
             grdcaptura.Rows.Add(
                 txtcodigo.Text,
@@ -4910,7 +4913,6 @@ kaka:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
-            cnn2.Close()
         End Try
     End Sub
 
@@ -5498,8 +5500,9 @@ caca:
         Dim saldo_fav As Double = 0
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         On Error GoTo caca
 

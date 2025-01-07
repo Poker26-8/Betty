@@ -767,7 +767,8 @@ Public Class frmModEntregas
             Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
             Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
             Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+            Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1, rd2, rd4 As MySqlDataReader
             Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
 
             Dim fecha As String = Format(dtpFecha.Value, "yyyy-MM-dd")

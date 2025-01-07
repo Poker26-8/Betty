@@ -518,6 +518,10 @@ Public Class frmEmpleados
             .ShowDialog()
         End With
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             If cuadro_dialogo.FileName.ToString() <> "" Then
                 ruta = cuadro_dialogo.FileName.ToString()
@@ -539,9 +543,7 @@ Public Class frmEmpleados
             Dim nombre, aliass, area, puesto, clave As String
             Dim conteo As Integer = 0
 
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
+
 
             barsube.Value = 0
             barsube.Maximum = DataGridView1.Rows.Count

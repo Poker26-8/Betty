@@ -4386,6 +4386,12 @@ Public Class frmRepVentas
     Private Sub btnAntibiotico_Click(sender As Object, e As EventArgs) Handles btnAntibiotico.Click
         Dim M1 As Date = mCalendar1.SelectionStart.ToShortDateString
         Dim M2 As Date = mCalendar2.SelectionStart.ToShortDateString
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             grdcaptura.Rows.Clear()
             grdcaptura.ColumnCount = 13
@@ -4504,10 +4510,7 @@ Public Class frmRepVentas
             Dim fechanuv As String = ""
             Dim fechanuv2 As String = ""
 
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1, rd2 As MySqlDataReader
-            Dim cmd1, cmd2 As MySqlCommand
+
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand

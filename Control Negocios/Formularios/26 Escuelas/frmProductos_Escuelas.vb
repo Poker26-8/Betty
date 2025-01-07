@@ -176,8 +176,9 @@ Public Class frmProductos_Escuelas
         Dim codigo As String = ""
 
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd2 As MySqlDataReader
-        Dim cmd2 As MySqlCommand
+        Dim cmd2, cmd3 As MySqlCommand
 
 
         Try

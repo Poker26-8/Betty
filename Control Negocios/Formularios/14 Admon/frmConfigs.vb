@@ -3266,7 +3266,6 @@ Public Class frmConfigs
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
         End Try
 
     End Sub
@@ -3278,7 +3277,6 @@ Public Class frmConfigs
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
         End Try
     End Sub
 
@@ -3289,8 +3287,6 @@ Public Class frmConfigs
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
-
         End Try
     End Sub
 

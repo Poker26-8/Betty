@@ -251,7 +251,6 @@ Public Class frmPaciente
             End If
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
         End Try
     End Sub
 
@@ -412,7 +411,7 @@ Public Class frmPaciente
             e.Graphics.DrawString("Lo atendio: " & lblUsuario.Text, fuente_r, Brushes.Black, 5, Y)
 
             e.HasMorePages = False
-            cnn1.Close()
+            cnn2.Close()
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)

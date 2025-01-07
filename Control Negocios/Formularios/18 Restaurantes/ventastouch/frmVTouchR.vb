@@ -1019,6 +1019,9 @@ deku:
     End Sub
 
     Public Sub btnDepto_Click(sender As Object, e As EventArgs)
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
         Dim btnDepartamento As Button = CType(sender, Button)
         btnDepartamento.Font.Bold.Equals(True)
 
@@ -1327,6 +1330,9 @@ deku:
     End Sub
 
     Private Sub btnGrupo_Click(sender As Object, e As EventArgs)
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
         Dim btnGrupos As Button = CType(sender, Button)
         pproductos.Controls.Clear()
         If cnn3.State = 1 Then

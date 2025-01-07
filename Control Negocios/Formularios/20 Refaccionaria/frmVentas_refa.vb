@@ -408,7 +408,7 @@ Public Class frmVentas_refa
             If rd3.HasRows Then
                 If rd3.Read Then
                     cbocodigo.Text = rd3("Codigo").ToString
-                    Anti = rd1("Grupo").ToString
+                    Anti = rd3("Grupo").ToString
                 End If
             End If
             rd3.Close()
@@ -1946,7 +1946,7 @@ kak:
                 cnn5.Close()
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
-                cnn1.Close()
+                cnn5.Close()
             End Try
         End If
     End Sub
@@ -3758,6 +3758,11 @@ kaka:
             txtPagar.Text = txtSubTotal.Text
             Exit Sub
         End If
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
 
         If CDbl(IIf(txtdescuento1.Text = "", "0.00", txtdescuento1.Text)) > 0 Then
             If grdpago.Rows.Count > 0 Then grdpago.Rows.Clear() : txtMontoP.Text = "0.00"
@@ -13543,7 +13548,7 @@ ecomoda:
         Dim continua_en As String = ""
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd As MySqlDataReader
+        Dim rd1 As MySqlDataReader
         Dim cmd1 As MySqlCommand
 
         Y = 35
@@ -14295,7 +14300,8 @@ ecomoda:
 
 
         Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd4 As MySqlDataReader
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd4 As MySqlDataReader
         Dim cmd4 As MySqlCommand
 
         Try
@@ -14537,7 +14543,7 @@ ecomoda:
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn2.Close()
 
         End Try
     End Sub
@@ -14626,8 +14632,7 @@ ecomoda:
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
-
+            cnn2.Close()
         End Try
     End Sub
 
@@ -14636,13 +14641,12 @@ ecomoda:
     End Sub
 
     Private Sub grdcaptura_KeyDown(sender As Object, e As KeyEventArgs) Handles grdcaptura.KeyDown
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         If e.KeyCode = Keys.Delete Then
-
-
-
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
 
             Dim totaleliminado As Double = 0
             Dim cantidadeliminada As Double = 0

@@ -1798,7 +1798,6 @@ kak:
                 End With
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
-                cnn1.Close()
             End Try
         End If
     End Sub
@@ -2171,7 +2170,7 @@ kak:
                     End If
                 End With
             Catch ex As Exception
-                cnn1.Close()
+                MessageBox.Show(ex.ToString)
             End Try
         End If
     End Sub
@@ -7326,7 +7325,8 @@ doorcita:
     Private Sub Valida_Datos_Cliente(ByVal nombre As String)
 
         Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd4 As MySqlDataReader
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd4 As MySqlDataReader
         Dim cmd4 As MySqlCommand
 
         Try
@@ -7609,6 +7609,7 @@ doorcita:
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd1, rd2, rd3 As MySqlDataReader
         Dim cmd1, cmd2, cmd3 As MySqlCommand
 
@@ -17406,8 +17407,7 @@ ecomoda:
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
-
+            cnn2.Close()
         End Try
     End Sub
 

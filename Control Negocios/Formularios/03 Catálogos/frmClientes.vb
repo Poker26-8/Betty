@@ -142,11 +142,12 @@ Public Class frmClientes
 
     Private Sub cboRazon_DropDown(sender As System.Object, e As System.EventArgs) Handles cboRazon.DropDown
         cboRazon.Items.Clear()
-        Try
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+        Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
@@ -222,10 +223,12 @@ Public Class frmClientes
 
     Private Sub cboRazon_SelectedValueChanged(sender As Object, e As System.EventArgs) Handles cboRazon.SelectedValueChanged
         If cboRazon.Text = "" Then Exit Sub
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -485,11 +488,13 @@ Public Class frmClientes
             Exit Sub
         Else
             If MsgBox("¿Deseas eliminar los datos de éste cliente?" & vbNewLine & "Ésta acción no se puede deshacer.", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+
+                Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+                Dim rd1, rd2 As MySqlDataReader
+                Dim cmd1, cmd2 As MySqlCommand
+
                 Try
-                    Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-                    Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-                    Dim rd1, rd2 As MySqlDataReader
-                    Dim cmd1, cmd2 As MySqlCommand
 
                     cnn1.Close() : cnn1.Open()
                     cnn2.Close() : cnn2.Open()
@@ -535,11 +540,12 @@ Public Class frmClientes
 
     Private Sub frmClientes_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         txtId.Text = ""
-        Try
 
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+        Try
 
             Dim taller As Integer = DatosRecarga2("Taller")
 
@@ -693,10 +699,12 @@ Public Class frmClientes
     End Sub
 
     Private Sub cboregimen_SelectedValueChanged(sender As System.Object, e As System.EventArgs) Handles cboregimen.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -717,10 +725,12 @@ Public Class frmClientes
 
     Private Sub txtClaveRegFis_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtClaveRegFis.TextChanged
         If txtClaveRegFis.Text <> "" Then
+
+            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd2 As MySqlDataReader
+            Dim cmd2 As MySqlCommand
+
             Try
-                Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-                Dim rd2 As MySqlDataReader
-                Dim cmd2 As MySqlCommand
 
                 cnn2.Close() : cnn2.Open()
                 cmd2 = cnn2.CreateCommand
@@ -787,6 +797,10 @@ Public Class frmClientes
         Dim cnn1 As OleDb.OleDbConnection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & My.Application.Info.DirectoryPath & "\BaseExportar\DL1.mdb;;Persist Security Info=True;Jet OLEDB:Database Password=jipl22")
         Dim cmd1 As OleDbCommand = New OleDbCommand
         Dim rd1 As OleDbDataReader
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Dim idacc As Integer = 0
         Dim nombre As String = ""
@@ -984,10 +998,12 @@ Public Class frmClientes
     End Sub
 
     Private Function Comprueba(ByVal nombre As String) As Boolean
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
-            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd2 As MySqlDataReader
-            Dim cmd2 As MySqlCommand
 
             Dim valida As Boolean = True
             cnn2.Close() : cnn2.Open()
@@ -1041,6 +1057,10 @@ Public Class frmClientes
         openFileDialog.Filter = "Archivos de Excel|*.xlsx"
         openFileDialog.Title = "Seleccionar archivo Excel"
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         ' Si el usuario selecciona un archivo
         If openFileDialog.ShowDialog() = DialogResult.OK Then
             ' Ruta del archivo Excel seleccionado
@@ -1081,10 +1101,7 @@ Public Class frmClientes
             Dim suspender As Integer = 0
             Dim conteo As Integer = 0
 
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1, rd2 As MySqlDataReader
-            Dim cmd1, cmd2 As MySqlCommand
+
 
             barsube.Value = 0
             barsube.Visible = True
@@ -1092,7 +1109,6 @@ Public Class frmClientes
 
 
             cnn1.Close() : cnn1.Open()
-            cnn2.Close() : cnn2.Open()
 
             Dim contadorconexion As Integer = 0
             For dX As Integer = 0 To DataGridView1.Rows.Count - 1
@@ -1148,7 +1164,7 @@ Public Class frmClientes
             Next
 
         End If
-        cnn2.Close()
+        cnn1.Close()
         MsgBox("Datos importados correctamente.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
 
         barsube.Visible = False
@@ -1161,10 +1177,13 @@ Public Class frmClientes
     End Sub
 
     Private Sub cboCFDI_DropDown(sender As Object, e As EventArgs) Handles cboCFDI.DropDown
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         Try
-            Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd5 As MySqlDataReader
-            Dim cmd5 As MySqlCommand
+
 
             cboCFDI.Items.Clear()
             cnn5.Close() : cnn5.Open()

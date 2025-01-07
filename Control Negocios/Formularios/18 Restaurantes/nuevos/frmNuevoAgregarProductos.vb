@@ -709,6 +709,7 @@ Public Class frmNuevoAgregarProductos
         'pExtras.Controls.Clear()
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd1 As MySqlDataReader
         Dim cmd1 As MySqlCommand
 

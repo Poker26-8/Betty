@@ -599,6 +599,11 @@ Public Class frmProveedores
         Dim rd1 As OleDbDataReader
         Dim cuantos As Integer = 0
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
+
         Dim nombre As String = ""
         Dim compania As String = ""
         Dim rfc As String = ""

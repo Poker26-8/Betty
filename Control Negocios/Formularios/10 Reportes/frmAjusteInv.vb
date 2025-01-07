@@ -1140,4 +1140,8 @@ Public Class frmAjusteInv
             cnn1.Close()
         End Try
     End Sub
+
+    Private Sub cmsElimina_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cmsElimina.Opening
+
+    End Sub
 End Class

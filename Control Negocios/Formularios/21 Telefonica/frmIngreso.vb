@@ -261,8 +261,6 @@ Public Class frmIngreso
         Dim index As String = grdaccesorio.CurrentRow.Index
         Dim accesorio As String = grdaccesorio.Rows(index).Cells(0).Value.ToString
 
-        cnn1.Close()
-
         grdaccesorio.Rows.Remove(grdaccesorio.CurrentRow)
     End Sub
 
@@ -648,7 +646,7 @@ Public Class frmIngreso
 
         Catch ex As Exception
             MessageBox.Show("No se pudo generar el docuemnto, a continuación se muestra la descripción del error." & vbNewLine & ex.ToString())
-            cnn1.Close()
+            cnn2.Close()
         End Try
 
     End Sub
@@ -868,7 +866,7 @@ Public Class frmIngreso
 
         Catch ex As Exception
             MessageBox.Show("No se pudo generar el docuemnto, a continuación se muestra la descripción del error." & vbNewLine & ex.ToString())
-            cnn1.Close()
+            cnn2.Close()
         End Try
     End Sub
 End Class

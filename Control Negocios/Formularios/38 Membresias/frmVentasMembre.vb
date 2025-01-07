@@ -68,8 +68,9 @@ Public Class frmVentasMembre
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1, rd2 As MySqlDataReader
-        Dim cmd1, cmd2 As MySqlCommand
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2, rd4 As MySqlDataReader
+        Dim cmd1, cmd2, cmd4 As MySqlCommand
 
         nLogo = DatosRecarga("LogoG")
         tLogo = DatosRecarga("TipoLogo")
@@ -7157,8 +7158,6 @@ doorcita:
                     cboNombre.SelectionStart = 0
                     cboNombre.SelectionLength = Len(cboNombre.Text)
                     MyIdCliente = 0
-                    rd1.Close()
-                    cnn1.Close()
                     txtdireccion.Focus().Equals(True)
                 End If
                 rd4.Close()
@@ -7367,6 +7366,7 @@ doorcita:
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd1, rd2, rd3 As MySqlDataReader
         Dim cmd1, cmd2, cmd3 As MySqlCommand
 
@@ -9733,6 +9733,7 @@ safo:
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd1, rd2, rd3 As MySqlDataReader
         Dim cmd1, cmd2, cmd3 As MySqlCommand
 
@@ -14116,8 +14117,7 @@ ecomoda:
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
-
+            cnn2.Close()
         End Try
 
     End Sub
@@ -14926,6 +14926,12 @@ doorcita:
     End Sub
 
     Private Sub PPedido80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PPedido80.PrintPage
+
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             'Fuentes prederminadas
             Dim tipografia As String = "Lucida Sans Typewriter"
@@ -14947,9 +14953,6 @@ doorcita:
             Dim IVAVENTA As Double = 0
             Dim SUBTOTALVENTA As Double = 0
 
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
 
             '[°]. Logotipo
             If tLogo <> "SIN" Then

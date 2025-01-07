@@ -52,7 +52,7 @@ Public Class frmComparador
 
     Private Sub cboDescripcion_DropDown(sender As Object, e As EventArgs) Handles cboDescripcion.DropDown
         Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd15 As MySqlDataReader
+        Dim rd5 As MySqlDataReader
         Dim cmd5 As MySqlCommand
         Try
             cboDescripcion.Items.Clear()
@@ -70,7 +70,7 @@ Public Class frmComparador
             cnn5.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn5.Close()
         End Try
     End Sub
 

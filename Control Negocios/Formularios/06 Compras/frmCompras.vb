@@ -194,8 +194,9 @@ Public Class frmCompras
         Dim Bool As Boolean = False
         If cbonombre.Text = "" And txtcodigo.Text = "" Then CodBarra = False : Exit Function
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd2 As MySqlDataReader
-        Dim cmd2 As MySqlCommand
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2, rd3 As MySqlDataReader
+        Dim cmd2, cmd3 As MySqlCommand
         'Descripción
         If txtcodigo.Text = "" Then
             cnn2.Close() : cnn2.Open()
@@ -2088,6 +2089,9 @@ kaka:
         Dim Pi As Double = 0
         Dim Pil As Double = 0
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTarget)
+        Dim cmd1 As MySqlCommand
+
         Dim index As Integer = grdcaptura.CurrentRow.Index
         If grdcaptura.Rows.Count > 0 Then
             If grdcaptura.DefaultCellStyle.ForeColor = Color.DarkGoldenrod Then Exit Sub
@@ -2778,8 +2782,6 @@ kaka:
             'cboproveedor.Focus().Equals(True)
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
-            cnn1.Close()
-            cnn2.Close()
         End Try
     End Sub
 
@@ -4917,7 +4919,6 @@ kaka:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
-            cnn2.Close()
         End Try
     End Sub
 
@@ -4940,8 +4941,9 @@ kaka:
         Dim saldo_fav As Double = 0
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         On Error GoTo caca
 

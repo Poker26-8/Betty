@@ -963,7 +963,7 @@ Door:
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn2.Close()
+            cnn3.Close()
         End Try
     End Sub
 

@@ -238,7 +238,6 @@ kakita:
                 txtcopias.Focus.Equals(True)
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
-                cnn1.Close()
             End Try
         End If
     End Sub

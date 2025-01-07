@@ -410,7 +410,7 @@ Public Class frmVentas1_Partes
             If rd3.HasRows Then
                 If rd3.Read Then
                     cbocodigo.Text = rd3("Codigo").ToString
-                    Anti = rd1("Grupo").ToString
+                    Anti = rd3("Grupo").ToString
                 End If
             Else
                 If IsNumeric(cbodesc.Text) Then
@@ -1877,7 +1877,7 @@ Public Class frmVentas1_Partes
                     End If
                 End With
             Catch ex As Exception
-                cnn1.Close()
+                MessageBox.Show(ex.ToString)
             End Try
         End If
     End Sub
@@ -4283,7 +4283,7 @@ kaka:
         If cbocodigo.Text = "" Then MsgBox("Necesitas seleccionar un producto.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbodesc.Focus().Equals(True) : Exit Sub
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd1, rd2 As MySqlDataReader
         Dim cmd1, cmd2 As MySqlCommand
 

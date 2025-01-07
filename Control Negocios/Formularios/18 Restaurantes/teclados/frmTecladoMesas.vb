@@ -83,7 +83,7 @@ Public Class frmTecladoMesas
                         mesa += 1
                     Next
                 Next
-                cnn2.Close()
+                cnn1.Close()
             Else
 
             End If

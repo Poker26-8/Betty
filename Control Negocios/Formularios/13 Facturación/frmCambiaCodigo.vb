@@ -1,6 +1,7 @@
 ﻿Imports System.Data.OleDb
 Imports System.Data.SqlClient
 Imports MySql.Data
+Imports MySql.Data.MySqlClient
 Public Class frmCambiaCodigo
 
     Public respuesta As MySqlClient.MySqlDataReader
@@ -210,6 +211,10 @@ Public Class frmCambiaCodigo
         Dim rd1 As OleDbDataReader
         Dim cuantos As Integer = 0
 
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cmd2 As MySqlCommand
+
+
         Dim claveprod As String = ""
         Dim descripcion As String = ""
         Dim palabra As String = ""
@@ -278,6 +283,11 @@ Public Class frmCambiaCodigo
         Dim cuadro_dialogo As New OpenFileDialog
         Dim ruta As String = ""
         Dim sheet As String = "hoja1"
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
 
         With cuadro_dialogo
             .Filter = "Archivos de cálculo(*.xls;*.xlsx)|*.xls;*.xlsx"

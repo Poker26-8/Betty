@@ -595,7 +595,7 @@ Public Class frmNuevoPagarSencillo
             txtSubtotalmapeo.Text = FormatNumber(txtSubtotalmapeo.Text, 2)
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn2.Close()
         End Try
     End Sub
 
@@ -703,7 +703,7 @@ Public Class frmNuevoPagarSencillo
                 End If
             Loop
             rd5.Close()
-            cnn1.Close()
+            cnn5.Close()
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)

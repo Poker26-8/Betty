@@ -1237,7 +1237,6 @@ Public Class frmNuevoPagarComandas
             e.HasMorePages = False
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
         End Try
     End Sub
 
@@ -1304,7 +1303,6 @@ Public Class frmNuevoPagarComandas
             e.HasMorePages = False
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
         End Try
 
     End Sub
@@ -4421,7 +4419,7 @@ deku:
             cnn2.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn2.Close()
         End Try
 
     End Sub
@@ -4586,7 +4584,7 @@ deku:
             cnn2.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn2.Close()
         End Try
 
     End Sub

@@ -230,6 +230,9 @@ Public Class frmVentasTouch3
     End Sub
 
     Private Sub btnDepto_Click(sender As Object, e As EventArgs)
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
         Dim btnDepartamento As Button = CType(sender, Button)
         btnDepartamento.Font.Bold.Equals(True)
         pGrupos.Controls.Clear()
@@ -807,8 +810,9 @@ Public Class frmVentasTouch3
     Public Sub ObtenerProducto(ByVal codigo As String)
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -980,7 +984,7 @@ Public Class frmVentasTouch3
                             End If
                             rd5.Close()
                             cnn5.Close()
-                            rd3.Close() : cnn4.Close()
+                            rd3.Close() : cnn3.Close()
                             Exit Sub
                         End If
                     End If
@@ -1490,6 +1494,7 @@ keseso:
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd1, rd2, rd3, rd4 As MySqlDataReader
         Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
 

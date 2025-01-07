@@ -244,6 +244,9 @@ Public Class frmAutoservicio
     End Sub
 
     Private Sub btnDepto_Click(sender As Object, e As EventArgs)
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
         Dim btnDepartamento As Button = CType(sender, Button)
         btnDepartamento.Font.Bold.Equals(True)
         pGrupos.Controls.Clear()
@@ -325,6 +328,9 @@ Public Class frmAutoservicio
     End Sub
 
     Private Sub btnGrupo_Click(sender As Object, e As EventArgs)
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
         Dim btnGrupos As Button = CType(sender, Button)
         pProductos.Controls.Clear()
         If cnn3.State = 1 Then
@@ -1219,7 +1225,7 @@ Public Class frmAutoservicio
                             End If
                             rd5.Close()
                             cnn5.Close()
-                            rd3.Close() : cnn4.Close()
+                            rd3.Close() : cnn3.Close()
                             Exit Sub
                         End If
                     End If

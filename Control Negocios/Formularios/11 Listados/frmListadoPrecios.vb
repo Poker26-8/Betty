@@ -3659,6 +3659,11 @@ Public Class frmListadoPrecios
         openFileDialog.Filter = "Archivos de Excel|*.xlsx"
         openFileDialog.Title = "Seleccionar archivo Excel"
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         ' Si el usuario selecciona un archivo
         If openFileDialog.ShowDialog() = DialogResult.OK Then
             ' Ruta del archivo Excel seleccionado
@@ -3765,11 +3770,6 @@ Public Class frmListadoPrecios
             Dim precioesp2 As Double = 0
             Dim cantesp3 As Double = 0
             Dim cantesp4 As Double = 0
-
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1, rd2 As MySqlDataReader
-            Dim cmd1, cmd2 As MySqlCommand
 
             ProgressBar1.Value = 0
             ProgressBar1.Visible = True

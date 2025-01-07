@@ -996,7 +996,7 @@ Public Class frmVentasTouch
                             End If
                             rd5.Close()
                             cnn5.Close()
-                            rd3.Close() : cnn4.Close()
+                            rd3.Close() : cnn3.Close()
                             Exit Sub
                         End If
                     End If

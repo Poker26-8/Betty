@@ -185,6 +185,9 @@ Public Class frmProductos
 
     Private Sub cboCodigo_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cboCodigo.KeyPress
         e.KeyChar = UCase(e.KeyChar)
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
         If Len(cboCodigo.Text) > 7 Then
             cboCodigo.Text = Strings.Left(cboCodigo.Text, Len(cboCodigo.Text) - 1)
             cboCodigo.SelectionStart = 0
@@ -1302,8 +1305,9 @@ Public Class frmProductos
         Dim valida As Boolean = True
 
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd2 As MySqlDataReader
-        Dim cmd2 As MySqlCommand
+        Dim cmd2, cmd3 As MySqlCommand
 
         cnn2.Close() : cnn2.Open()
 
@@ -1633,16 +1637,16 @@ Public Class frmProductos
     End Sub
 
     Private Sub Sube_Lotes()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             Dim codigo, lote As String
             Dim caducidad As Date
             Dim cantidad As Double
             Dim conteo As Integer = 0
-
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
-
 
             barsube.Value = 0
             barsube.Maximum = grdcaptura.Rows.Count
@@ -1677,6 +1681,11 @@ Public Class frmProductos
     End Sub
 
     Private Sub Sube_Productos()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             'Variables para alojar los datos de archivo de Excel
             Dim codigo, barras, nombrec, nombrel, proveedorp, proveedore, depto, grupo, unidad, clave_sat, unidad_sat As String
@@ -1684,11 +1693,6 @@ Public Class frmProductos
             Dim pormin, pormay, pormm, poresp, premay, premm, preesp, cantmiin1, cantmay1, cantmm1, cantesp1, cantlta1, cantmin2, cantmay2, cantmm2, cantesp2, cantlta2 As Double
             Dim fecha As String = Format(Date.Now, "yyyy-MM-dd")
             Dim conteo As Integer = 0
-
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
-
 
             barsube.Value = 0
             barsube.Maximum = grdcaptura.Rows.Count

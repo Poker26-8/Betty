@@ -625,6 +625,11 @@ Public Class frmPagoNomina
     End Sub
 
     Private Sub PNomina80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PNomina80.PrintPage
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             Dim tipografia As String = "Lucida Sans Typewriter"
             Dim fuente_r As New Font("Lucida Sans Typewriter", 8, FontStyle.Regular)
@@ -643,9 +648,7 @@ Public Class frmPagoNomina
             Dim tLogo As String = DatosRecarga("TipoLogo")
             Dim simbolo As String = DatosRecarga("Simbolo")
 
-            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd2 As MySqlDataReader
-            Dim cmd2 As MySqlCommand
+
 
 
             Dim pie1 As String = ""
@@ -760,6 +763,11 @@ Public Class frmPagoNomina
     End Sub
 
     Private Sub pNomina58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pNomina58.PrintPage
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
+
         Try
             Dim tipografia As String = "Lucida Sans Typewriter"
             Dim fuente_r As New Font("Lucida Sans Typewriter", 7, FontStyle.Regular)
@@ -778,9 +786,7 @@ Public Class frmPagoNomina
             Dim tLogo As String = DatosRecarga("TipoLogo")
             Dim simbolo As String = DatosRecarga("Simbolo")
 
-            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd2 As MySqlDataReader
-            Dim cmd2 As MySqlCommand
+
 
             Dim pie1 As String = ""
 

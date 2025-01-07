@@ -13,6 +13,11 @@ Public Class frmRepMovCuentas
     End Sub
 
     Private Sub btnReporte_Click(sender As Object, e As EventArgs) Handles btnReporte.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             grdCaptura.Rows.Clear()
             Dim m1 As Date = mcdesde.SelectionStart.ToShortDateString
@@ -36,9 +41,7 @@ Public Class frmRepMovCuentas
 
             Dim fechan As String = ""
 
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
+
 
             If (rbTodos.Checked) Then
 

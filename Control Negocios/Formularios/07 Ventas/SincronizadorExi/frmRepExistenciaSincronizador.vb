@@ -32,7 +32,7 @@ Public Class frmRepExistenciaSincronizador
                 End If
             End With
         Catch ex As Exception
-            cnn1.Close()
+            MessageBox.Show(ex.ToString)
         End Try
     End Sub
 

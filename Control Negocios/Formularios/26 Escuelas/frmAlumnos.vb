@@ -503,7 +503,6 @@ Public Class frmAlumnos
 
                 Catch ex As Exception
                     MessageBox.Show(ex.ToString())
-                    cnn1.Close()
                 End Try
             End If
             btnguardar.Focus().Equals(True)

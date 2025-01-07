@@ -1055,8 +1055,6 @@ Public Class frmCorte
                 End If
             End If
             rd1.Close()
-
-            cnn3.Close()
             cnn1.Close()
             '--------------------------------------------------------------------------------------------------------------------------------------------------------------------
         Catch ex As Exception
@@ -1396,7 +1394,6 @@ Public Class frmCorte
         End If
         cnn1.Close()
         cnn2.Close()
-        cnn3.Close()
     End Sub
 
     'Quinientos

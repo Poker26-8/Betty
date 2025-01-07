@@ -839,7 +839,7 @@ Public Class frmPedidos_Tienda
             Y += 3
             e.Graphics.DrawString(lblusuario.Text, fuente_prods, Brushes.Black, 285, Y, sf)
 
-            cnn2.Close()
+            cnn1.Close()
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
@@ -1288,7 +1288,6 @@ Public Class frmPedidos_Tienda
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
-            cnn2.Close()
         End Try
 
     End Sub

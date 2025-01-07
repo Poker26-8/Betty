@@ -311,7 +311,7 @@ Public Class frmVentas3_Descuentos
             If rd3.HasRows Then
                 If rd3.Read Then
                     cbocodigo.Text = rd3("Codigo").ToString
-                    Anti = rd1("Grupo").ToString
+                    Anti = rd3("Grupo").ToString
                 End If
             Else
                 If IsNumeric(cbodesc.Text) Then
@@ -2546,8 +2546,10 @@ Public Class frmVentas3_Descuentos
         Dim H_Actual As String = Format(Date.Now, "HH:mm")
         If txtcantidad.Text = "" Or txtcantidad.Text = "." Then Exit Sub
         Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd4 As MySqlDataReader
-        Dim cmd4 As MySqlCommand
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4, rd5 As MySqlDataReader
+        Dim cmd4, cmd5 As MySqlCommand
+
         Try
             cnn4.Close() : cnn4.Open()
 

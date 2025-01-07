@@ -338,6 +338,7 @@ Public Class FrmAgenda
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd2, rd3 As MySqlDataReader
         Dim cmd2, cmd3 As MySqlCommand
         If cboUsuario.Text = "" Then

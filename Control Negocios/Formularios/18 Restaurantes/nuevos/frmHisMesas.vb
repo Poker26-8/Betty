@@ -76,7 +76,7 @@ Public Class frmHisMesas
 
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
-                cnn1.Close()
+                cnn5.Close()
             End Try
         End If
 

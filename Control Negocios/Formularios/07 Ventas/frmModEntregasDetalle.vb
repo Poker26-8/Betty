@@ -1099,10 +1099,11 @@ Public Class frmModEntregasDetalle
         Dim Resta As Double = 0
         Dim tel_cliente As String = ""
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd2, rd3 As MySqlDataReader
-        Dim cmd2, cmd3 As MySqlCommand
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         With oData
             If .dbOpen(a_cnn, Direcc_Access, sinfo) Then

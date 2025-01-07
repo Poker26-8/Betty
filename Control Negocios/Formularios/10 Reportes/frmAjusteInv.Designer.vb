@@ -290,13 +290,13 @@ Partial Class frmAjusteInv
         '
         Me.cmsElimina.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EliminaLoteToolStripMenuItem})
         Me.cmsElimina.Name = "cmsElimina"
-        Me.cmsElimina.Size = New System.Drawing.Size(137, 26)
+        Me.cmsElimina.Size = New System.Drawing.Size(181, 48)
         '
         'EliminaLoteToolStripMenuItem
         '
         Me.EliminaLoteToolStripMenuItem.BackColor = System.Drawing.Color.White
         Me.EliminaLoteToolStripMenuItem.Name = "EliminaLoteToolStripMenuItem"
-        Me.EliminaLoteToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
+        Me.EliminaLoteToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.EliminaLoteToolStripMenuItem.Text = "Elimina lote"
         '
         'btnlimpia_lote

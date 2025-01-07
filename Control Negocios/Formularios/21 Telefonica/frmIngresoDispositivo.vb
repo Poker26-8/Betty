@@ -316,7 +316,7 @@ Public Class frmIngresoDispositivo
             cboDescripcion.Focus.Equals(True)
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn3.Close()
         End Try
     End Sub
 

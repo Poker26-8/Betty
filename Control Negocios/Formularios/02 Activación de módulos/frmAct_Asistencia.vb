@@ -6,6 +6,11 @@ Public Class frmAct_Asistencia
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If MsgBox("¿Deseas activar el módulo de asistencia para empleados?", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") = vbOK Then
 
+            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim rd1 As MySqlDataReader
+            Dim cmd1 As MySqlCommand
+
+
             If txtcontra.Text = "" Then MsgBox("Escribe la contraseña de activación." & vbNewLine & "Para generarla conmunícate con tu proveedor de software.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
 
             If txtcontra.Text = "jipl2211*" Then

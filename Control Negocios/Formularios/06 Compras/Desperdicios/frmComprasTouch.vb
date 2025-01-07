@@ -28,6 +28,11 @@ Public Class frmComprasTouch
     End Sub
 
     Public Sub Folio()
+
+        Dim cnn9 As MySqlConnection = New MySqlConnection(sTarget)
+        Dim rd9 As MySqlDataReader
+        Dim cmd9 As MySqlCommand
+
         Try
             cnn9.Close() : cnn9.Open()
 
@@ -156,6 +161,9 @@ Public Class frmComprasTouch
     End Sub
 
     Private Sub btnDepto_Click(sender As Object, e As EventArgs)
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTarget)
+
         Dim btnDepartamento As Button = CType(sender, Button)
         btnDepartamento.Font.Bold.Equals(True)
         pGrupos.Controls.Clear()
@@ -231,6 +239,9 @@ Public Class frmComprasTouch
     End Sub
 
     Private Sub btnGrupo_Click(sender As Object, e As EventArgs)
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTarget)
+
         Dim btnGrupos As Button = CType(sender, Button)
         pProductos.Controls.Clear()
         If cnn3.State = 1 Then
@@ -733,7 +744,8 @@ Public Class frmComprasTouch
     Public Sub ObtenerProducto(ByVal codigo As String)
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
         Dim cmd1 As MySqlCommand
 
         Try

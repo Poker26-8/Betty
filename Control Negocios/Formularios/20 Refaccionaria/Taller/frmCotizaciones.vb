@@ -995,7 +995,7 @@ doorcita:
                 Dim ruta_imagen As String = ""
 
 
-                cnn1.Close() : cnn1.Open()
+
 
                 For pipo As Integer = 0 To grdCaptura.Rows.Count - 1
                     Dim myund As String = ""
@@ -1037,7 +1037,6 @@ doorcita:
 
 
                 Next
-                cnn1.Close()
                 a_cnn.Close()
             End If
         End With

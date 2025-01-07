@@ -200,7 +200,6 @@ Public Class frmMonederos
         If MsgBox("¿Deseas eliminar el monedero con folio " & txtFolio.Text & "?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
 
             Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
             Dim cmd1 As MySqlCommand
 
             Try

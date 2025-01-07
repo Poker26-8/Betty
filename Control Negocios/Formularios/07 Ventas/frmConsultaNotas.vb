@@ -2674,7 +2674,6 @@ Public Class frmConsultaNotas
                     formato = "TICKET"
                 Catch ex As Exception
                     MessageBox.Show(ex.ToString())
-                    cnn2.Close()
                 End Try
             End If
         End If
@@ -3319,6 +3318,10 @@ doorcita:
         Dim my_folio As Integer = 0
         Dim MyStatus As String = ""
         Dim tel_cliente As String = ""
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
 
         With oData
             If .dbOpen(a_cnn, Direcc_Access, sInfo) Then
@@ -8926,6 +8929,11 @@ doorcita:
     End Sub
 
     Private Sub pCancelacion80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pCancelacion80.PrintPage
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             'Fuentes prederminadas
             Dim tipografia As String = "Lucida Sans Typewriter"
@@ -8945,10 +8953,6 @@ doorcita:
             Dim DesglosaIVA As String = DatosRecarga("Desglosa")
 
             Dim total_prods As Double = 0
-
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
 
             '[°]. Logotipo
             If tLogo <> "SIN" Then
@@ -9152,6 +9156,11 @@ doorcita:
     End Sub
 
     Private Sub pCancelacion58_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pCancelacion58.PrintPage
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             'Fuentes prederminadas
             Dim tipografia As String = "Lucida Sans Typewriter"
@@ -9172,9 +9181,7 @@ doorcita:
 
             Dim total_prods As Double = 0
 
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
+
 
             '[°]. Logotipo
             If tLogo <> "SIN" Then

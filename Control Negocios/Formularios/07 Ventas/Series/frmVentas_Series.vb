@@ -141,7 +141,7 @@ Public Class frmVentas_Series
             If rd3.HasRows Then
                 If rd3.Read Then
                     cbocodigo.Text = rd3("Codigo").ToString
-                    Anti = rd1("Grupo").ToString
+                    Anti = rd3("Grupo").ToString
                 End If
             Else
                 'cnn4.Close() : cnn4.Open()
@@ -10394,7 +10394,7 @@ Door:
             e.HasMorePages = False
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn2.Close()
         End Try
     End Sub
 

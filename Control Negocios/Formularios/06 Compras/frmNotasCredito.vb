@@ -121,7 +121,7 @@ Public Class frmNotasCredito
         rd2 = cmd2.ExecuteReader
         If rd2.HasRows Then
             If rd2.Read Then
-                txtexistencia.Text = FormatNumber(IIf(rd1(0).ToString = "", 0, rd1(0).ToString), 2)
+                txtexistencia.Text = FormatNumber(IIf(rd2(0).ToString = "", 0, rd2(0).ToString), 2)
                 txtexis_f.Text = CDbl(txtexistencia.Text) - CDec(txtcantidad.Text)
                 txtexis_f.Text = FormatNumber(txtexis_f.Text, 2)
             End If

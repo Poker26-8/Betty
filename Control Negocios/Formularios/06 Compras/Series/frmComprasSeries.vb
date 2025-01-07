@@ -4594,7 +4594,6 @@ lolkiller:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
-            cnn2.Close()
         End Try
     End Sub
 
@@ -4614,8 +4613,9 @@ lolkiller:
         Dim saldo_fav As Double = 0
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         On Error GoTo nopaso
 
@@ -4882,8 +4882,9 @@ nopaso:
         Dim saldo_fav As Double = 0
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         On Error GoTo nopaso
         '[°]. Logotipo

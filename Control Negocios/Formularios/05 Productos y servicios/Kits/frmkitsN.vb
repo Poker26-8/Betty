@@ -230,6 +230,12 @@ Public Class frmkitsN
     End Sub
 
     Private Sub cboKit_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboKit.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             txtUtilidad.Text = "0.00"
             txtPrecio.Text = "0.00"
@@ -242,11 +248,6 @@ Public Class frmkitsN
 
             Dim preciokit As Double = 0
             Dim utilidad As Double = 0
-
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1, rd2 As MySqlDataReader
-            Dim cmd1, cmd2 As MySqlCommand
 
             cnn1.Close() : cnn1.Open()
             cnn2.Close() : cnn2.Open()
@@ -318,6 +319,13 @@ Public Class frmkitsN
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
+
         Try
             If cboKit.Text = "" Or txtCodigoKit.Text = "" Then
                 MsgBox("Selecciona un producto para continuar", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
@@ -328,10 +336,7 @@ Public Class frmkitsN
                 MsgBox("Agrega productos al Kit para continuar", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
                 Exit Sub
             End If
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1, rd2 As MySqlDataReader
-            Dim cmd1, cmd2 As MySqlCommand
+
 
             If MsgBox("¿Desea guardar la información?", vbInformation + vbYesNo, titulocentral) Then
                 cnn1.Close()

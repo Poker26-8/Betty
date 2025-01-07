@@ -179,11 +179,13 @@ Public Class frmCuentabANCARIA
     End Sub
 
     Private Sub cbocuenta_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbocuenta.SelectedValueChanged
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1, rd2 As MySqlDataReader
-            Dim cmd1, cmd2 As MySqlCommand
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -212,6 +214,7 @@ Public Class frmCuentabANCARIA
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn1.Close()
+            cnn2.Close()
         End Try
     End Sub
 

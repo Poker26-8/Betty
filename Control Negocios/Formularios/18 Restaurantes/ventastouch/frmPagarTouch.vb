@@ -325,7 +325,7 @@ Public Class frmPagarTouch
 
     Private Sub cboCuenta_DropDown(sender As Object, e As EventArgs) Handles cboCuenta.DropDown
 
-        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd5 As MySqlDataReader
         Dim cmd5 As MySqlCommand
 

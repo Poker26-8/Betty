@@ -137,7 +137,7 @@ Public Class frmRepAsistenciaGym
             End If
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn2.Close()
         End Try
     End Sub
     Private Sub btnexportar_Click(sender As Object, e As EventArgs) Handles btnexportar.Click

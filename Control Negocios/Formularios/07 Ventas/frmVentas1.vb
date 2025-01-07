@@ -494,11 +494,12 @@ Public Class frmVentas1
 
 #Region "Funciones"
     Public Sub Folio()
-        Try
-            Dim cnn19 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd9 As MySqlDataReader
-            Dim cmd9 As MySqlCommand
 
+        Dim cnn9 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd9 As MySqlDataReader
+        Dim cmd9 As MySqlCommand
+
+        Try
 
             If cnn9.State = 1 Then cnn9.Close()
             cnn9.Open()
@@ -961,10 +962,12 @@ kak:
     End Function
 
     Public Function IvaDSC(ByVal cod As String) As Double
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
         Try
-            Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd3 As MySqlDataReader
-            Dim cmd3 As MySqlCommand
 
             cnn3.Close() : cnn3.Open()
             cmd3 = cnn3.CreateCommand
@@ -1213,6 +1216,12 @@ kak:
     End Function
 
     Private Sub Fn()
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
         Try
             Dim Imprime As Boolean = False
             Dim TPrint As String = ""
@@ -1222,13 +1231,6 @@ kak:
             Dim Pasa_Print As Boolean = False
 
             Dim pide As String = "", contra As String = txtcontraseña.Text, usu As String = lblusuario.Text
-
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1, rd2 As MySqlDataReader
-            Dim cmd1, cmd2 As MySqlCommand
-
-
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -1497,11 +1499,13 @@ kak:
     End Sub
 
     Private Function TotCantBase(ByVal FOL As Integer, ByVal COD As String) As Double
-        Try
-            Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd3 As MySqlDataReader
-            Dim cmd3 As MySqlCommand
 
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd3 As MySqlDataReader
+        Dim cmd3 As MySqlCommand
+
+        Try
             cnn3.Close() : cnn3.Open()
             cmd3 = cnn3.CreateCommand
             cmd3.CommandText =
@@ -1708,7 +1712,6 @@ kak:
                 End With
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
-                cnn1.Close()
             End Try
         End If
     End Sub
@@ -2080,7 +2083,7 @@ kak:
                     End If
                 End With
             Catch ex As Exception
-                cnn1.Close()
+
             End Try
         End If
     End Sub
@@ -2164,11 +2167,12 @@ kak:
     End Sub
 
     Private Sub cboDomi_SelectedValueChanged1(sender As Object, e As System.EventArgs) Handles cboDomi.SelectedValueChanged
-        Try
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+        Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
@@ -2505,6 +2509,7 @@ kak:
 
             Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
             Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
             Dim rd1, rd2, rd3 As MySqlDataReader
             Dim cmd1, cmd2, cmd3 As MySqlCommand
 
@@ -5264,11 +5269,12 @@ kaka:
 
     Private Sub cbobanco_DropDown(sender As System.Object, e As System.EventArgs) Handles cbobanco.DropDown
         cbobanco.Items.Clear()
-        Try
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
+        Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
@@ -7259,8 +7265,9 @@ doorcita:
 
     Private Sub Valida_Datos_Cliente(ByVal nombre As String)
 
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd4 As MySqlDataReader
+        Dim rd4, rd1 As MySqlDataReader
         Dim cmd4 As MySqlCommand
         Try
             Dim MySaldo As Double = 0
@@ -7523,6 +7530,7 @@ doorcita:
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd1, rd2, rd3 As MySqlDataReader
         Dim cmd1, cmd2, cmd3 As MySqlCommand
 
@@ -15411,12 +15419,13 @@ ecomoda:
     End Sub
 
     Private Sub cboCuentaRecepcion_DropDown(sender As Object, e As EventArgs) Handles cboCuentaRecepcion.DropDown
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             cboCuentaRecepcion.Items.Clear()
-
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -15521,6 +15530,7 @@ ecomoda:
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd2 As MySqlDataReader
         Dim cmd2 As MySqlCommand
+
         Try
 
             e.Graphics.DrawString("--S A L I D A  D E  A L M A C E N---", New Drawing.Font(tipografia, 10, FontStyle.Regular), Brushes.Black, 1, Y)
@@ -15615,8 +15625,7 @@ ecomoda:
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
-
+            cnn2.Close()
         End Try
 
     End Sub
@@ -16453,6 +16462,11 @@ doorcita:
     End Sub
 
     Private Sub PPedido80_PrintPage_1(sender As Object, e As Printing.PrintPageEventArgs) Handles PPedido80.PrintPage
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             'Fuentes prederminadas
             Dim tipografia As String = "Lucida Sans Typewriter"
@@ -16474,9 +16488,7 @@ doorcita:
             Dim IVAVENTA As Double = 0
             Dim SUBTOTALVENTA As Double = 0
 
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
+
             '[°]. Logotipo
             If tLogo <> "SIN" Then
                 If File.Exists(My.Application.Info.DirectoryPath & "\" & nLogo) Then
@@ -16718,6 +16730,11 @@ doorcita:
     End Sub
 
     Private Sub PPedido58_PrintPage_1(sender As Object, e As Printing.PrintPageEventArgs) Handles PPedido58.PrintPage
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             'Fuentes prederminadas
             Dim tipografia As String = "Lucida Sans Typewriter"
@@ -16739,9 +16756,7 @@ doorcita:
             Dim IVAVENTA As Double = 0
             Dim SUBTOTALVENTA As Double = 0
 
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
+
 
             '[°]. Logotipo
             If tLogo <> "SIN" Then

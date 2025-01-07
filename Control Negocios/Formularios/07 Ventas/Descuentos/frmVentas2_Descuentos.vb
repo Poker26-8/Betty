@@ -311,7 +311,7 @@ Public Class frmVentas2_Descuentos
             If rd3.HasRows Then
                 If rd3.Read Then
                     cbocodigo.Text = rd3("Codigo").ToString
-                    Anti = rd1("Grupo").ToString
+                    Anti = rd3("Grupo").ToString
                 End If
             Else
                 If IsNumeric(cbodesc.Text) Then
@@ -3964,7 +3964,7 @@ doorcita:
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim rd1, rd2 As MySqlDataReader
         Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         If Me.Text = "Ventas (2)" Or Me.Text = "Pedidos (2)" Then

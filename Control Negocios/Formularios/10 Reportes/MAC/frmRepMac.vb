@@ -92,7 +92,6 @@ Public Class frmRepMac
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
         End Try
     End Sub
 
@@ -189,7 +188,6 @@ Public Class frmRepMac
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
                 cnn1.Close()
-                cnn2.Close()
             End Try
 
         End If

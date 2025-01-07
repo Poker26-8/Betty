@@ -1,5 +1,6 @@
 ﻿Imports System.Data.OleDb
 Imports System.Runtime.Remoting.Contexts
+Imports MySql.Data.MySqlClient
 
 Public Class frmSubeMonedero
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -8,6 +9,11 @@ Public Class frmSubeMonedero
         Dim cnn As OleDb.OleDbConnection = New OleDb.OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & My.Application.Info.DirectoryPath & "\BaseExportar\DL1.mdb;;Persist Security Info=True;Jet OLEDB:Database Password=jipl22")
         Dim cmd As OleDbCommand = New OleDbCommand
         Dim rd As OleDbDataReader
+
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd2 As MySqlDataReader
+        Dim cmd2 As MySqlCommand
 
         Try
 

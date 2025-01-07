@@ -1,4 +1,5 @@
 ﻿Imports System.Threading.Tasks
+Imports MySql.Data.MySqlClient
 
 Module FunAsync
 
@@ -6,6 +7,10 @@ Module FunAsync
     Dim siono As Integer = 0
 
     Public Async Function ValidarAsync(valor As String) As Task(Of Integer)
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
 
         cnn5.Close() : cnn5.Open()
         cmd5 = cnn5.CreateCommand
@@ -118,6 +123,10 @@ Module FunAsync
     '------------------------------------------PANTALLA DE VENTAS MEMBRESIA-------------------------------------------------
     Public Async Function FunctionVentasMembreAsync() As Task(Of String)
 
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         frmVentasMembre.cbodesc.Items.Clear()
 
         cnn5.Close() : cnn5.Open()
@@ -141,6 +150,10 @@ Module FunAsync
     End Function
     Public Async Function FunctionClientesMembreAsync() As Task(Of String)
 
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         frmVentasMembre.cboNombre.Items.Clear()
         cnn5.Close() : cnn5.Open()
         cmd5 = cnn5.CreateCommand
@@ -157,6 +170,10 @@ Module FunAsync
     End Function
     '------------------------------------------PANTALLA DE VENTAS 3-------------------------------------------------
     Public Async Function FunctionVentas3Async() As Task(Of String)
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
 
         frmVentas3.cbodesc.Items.Clear()
 
@@ -181,6 +198,10 @@ Module FunAsync
     End Function
     Public Async Function FunctionClinetes3Async() As Task(Of String)
 
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         frmVentas3.cboNombre.Items.Clear()
         cnn5.Close() : cnn5.Open()
         cmd5 = cnn5.CreateCommand
@@ -197,6 +218,10 @@ Module FunAsync
     End Function
     '------------------------------------------PANTALLA DE VENTAS 2-------------------------------------------------
     Public Async Function FunctionVentas2Async() As Task(Of String)
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
 
         frmVentas2.cbodesc.Items.Clear()
 
@@ -222,6 +247,10 @@ Module FunAsync
 
     Public Async Function FunctionClinetes2Async() As Task(Of String)
 
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
         frmVentas2.cboNombre.Items.Clear()
         cnn5.Close() : cnn5.Open()
         cmd5 = cnn5.CreateCommand
@@ -239,6 +268,10 @@ Module FunAsync
 
     '-----------------------------------------PAANTALLA DE VENTAS 1-------------------------------------------------
     Public Async Function FunctionVentasAsync() As Task(Of String)
+
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
 
         frmVentas1.cbodesc.Items.Clear()
         cnn5.Close() : cnn5.Open()
@@ -264,8 +297,12 @@ Module FunAsync
 
     Public Async Function FunctionClinetesAsync() As Task(Of String)
 
-        frmVentas1.cboNombre.Items.Clear()
 
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
+
+        frmVentas1.cboNombre.Items.Clear()
 
         cnn5.Close() : cnn5.Open()
         cmd5 = cnn5.CreateCommand
@@ -287,6 +324,9 @@ Module FunAsync
         frmProductosS.cboNombre.Items.Clear()
         frmProductos.cboNombre.Items.Clear()
 
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd5 As MySqlDataReader
+        Dim cmd5 As MySqlCommand
 
         cnn5.Close() : cnn5.Open()
         cmd5 = cnn5.CreateCommand

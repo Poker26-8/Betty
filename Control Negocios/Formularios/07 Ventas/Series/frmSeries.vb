@@ -463,7 +463,7 @@ Public Class frmSeries
 
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd2, rd3 As MySqlDataReader
+        Dim rd2 As MySqlDataReader
         Dim cmd2, cmd3 As MySqlCommand
 
         Dim codigo As String = ""

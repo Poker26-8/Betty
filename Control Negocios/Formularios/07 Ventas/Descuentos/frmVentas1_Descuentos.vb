@@ -297,7 +297,7 @@ Public Class frmVentas1_Descuentos
             If rd3.HasRows Then
                 If rd3.Read Then
                     cbocodigo.Text = rd3("Codigo").ToString
-                    Anti = rd1("Grupo").ToString
+                    Anti = rd3("Grupo").ToString
                 End If
             Else
                 If IsNumeric(cbodesc.Text) Then
@@ -483,8 +483,9 @@ Public Class frmVentas1_Descuentos
         Dim precio_base As Double = 0
 
         Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd4 As MySqlDataReader
-        Dim cmd4 As MySqlCommand
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4, rd5 As MySqlDataReader
+        Dim cmd4, cmd5 As MySqlCommand
         Try
             cnn4.Close() : cnn4.Open()
 

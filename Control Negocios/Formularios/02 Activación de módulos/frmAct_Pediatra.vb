@@ -80,7 +80,6 @@ Public Class frmAct_Pediatra
             If txtcontra.Text = "" Then MsgBox("Escribe la contraseña de activación." & vbNewLine & "Para generarla conmunícate con tu proveedor de software.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Exit Sub
 
             Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
             Dim cmd1 As MySqlCommand
 
             If txtcontra.Text = "jipl2211*" Then

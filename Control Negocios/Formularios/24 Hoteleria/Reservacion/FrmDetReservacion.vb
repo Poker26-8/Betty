@@ -231,7 +231,6 @@ Public Class FrmDetReservacion
             End If
             rd1.Close()
             cnn1.Close()
-            cnn2.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn1.Close()
@@ -667,13 +666,12 @@ Public Class FrmDetReservacion
                     Else
                         MsgBox("Esta reservación aun no esta disponible", vbInformation + vbOKOnly, titulohotelriaa)
                         btnLimpiar.PerformClick()
-                        cnn3.Close()
                         cnn4.Close()
                         Exit Sub
                     End If
                 End If
             End If
-            rd3.Close()
+            rd4.Close()
             cnn4.Close()
 
             If txtResta.Text > 0 Then
@@ -703,7 +701,6 @@ Public Class FrmDetReservacion
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn3.Close()
             cnn4.Close()
         End Try
     End Sub

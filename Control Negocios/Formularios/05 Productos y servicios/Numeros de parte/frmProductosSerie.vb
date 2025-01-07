@@ -897,14 +897,15 @@ Public Class frmProductosSerie
     End Sub
 
     Private Sub btnImagen_Click(sender As System.Object, e As System.EventArgs) Handles btnImagen.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1 As MySqlDataReader
+        Dim cmd1 As MySqlCommand
+
         Try
             If cboCodigo.Text = "" Then MsgBox("Necesitas seleccionar un producto para asignar una imagne.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cboCodigo.Focus().Equals(True) : Exit Sub
             txtrutaimagen.Text = ""
             My.Application.DoEvents()
-
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
 
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -1239,8 +1240,9 @@ Public Class frmProductosSerie
         Dim valida As Boolean = True
 
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd2 As MySqlDataReader
-        Dim cmd2 As MySqlCommand
+        Dim cmd2, cmd3 As MySqlCommand
 
         cnn2.Close() : cnn2.Open()
 

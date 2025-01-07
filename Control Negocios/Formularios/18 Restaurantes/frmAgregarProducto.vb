@@ -280,6 +280,10 @@ Public Class frmAgregarProducto
     End Sub
 
     Public Sub btnDepto_Click(sender As Object, e As EventArgs)
+
+
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
         Dim btnDepartamento As Button = CType(sender, Button)
         btnDepartamento.Font.Bold.Equals(True)
 
@@ -368,6 +372,8 @@ Public Class frmAgregarProducto
 
     Private Sub btnGrupo_Click(sender As Object, e As EventArgs)
 
+
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim btnGrupos As Button = CType(sender, Button)
         pProductos.Controls.Clear()
         pPreferencias.Controls.Clear()
@@ -890,6 +896,7 @@ Public Class frmAgregarProducto
     Private Sub btnProd_Click(sender As Object, e As EventArgs)
 
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd1 As MySqlDataReader
         Dim cmd1 As MySqlCommand
 

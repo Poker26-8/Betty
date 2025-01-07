@@ -25,8 +25,9 @@ Public Class frmComprasS
 
     Private Sub frmComprasS_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
 
         nLogo = DatosRecarga("LogoG")
         tLogo = DatosRecarga("TipoLogo")
@@ -2397,7 +2398,6 @@ Public Class frmComprasS
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
-            cnn2.Close()
         End Try
     End Sub
 
@@ -3164,7 +3164,6 @@ kakita:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
-            cnn2.Close()
         End Try
     End Sub
 
