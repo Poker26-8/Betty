@@ -188,7 +188,7 @@ Public Class frmDetalleCH
             Dim minuto As String = ""
 
             Try
-                cnn1.Clone() : cnn1.Open()
+                cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
                 If cboHabi.Text = "" Then
                     cmd1.CommandText = "select Hora,Minuto,Id,Asunto,Activo,Cliente,Habitacion FROM Agenda where Dia=" & refc & " AND Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " AND Usuario='" & cbousu.Text & "' order by Hora,Minuto"
@@ -413,7 +413,7 @@ Public Class frmDetalleCH
             Dim minuto As String = ""
 
             Try
-                cnn1.Clone() : cnn1.Open()
+                cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
                 If cboHabi.Text = "" Then
                     cmd1.CommandText = "select Hora,Minuto,Id,Asunto,Activo,Cliente,Habitacion FROM Agenda where Dia=" & refc & " AND Mes=" & Fechita(2) & " and Anio=" & Fechita(3) & " AND Usuario='" & cbousu.Text & "' order by Hora,Minuto"

@@ -31,7 +31,7 @@ Public Class frmCalcularNuvHab
         Try
             cnn2.Close() : cnn2.Open()
             cnn3.Close() : cnn3.Open()
-            cnn4.Clone() : cnn4.Open()
+            cnn4.Close() : cnn4.Open()
 
             'cmd2 = cnn2.CreateCommand
             'cmd2.CommandText = "SELECT NotasCred FROM formatos WHERE Facturas='SalidaHab'"

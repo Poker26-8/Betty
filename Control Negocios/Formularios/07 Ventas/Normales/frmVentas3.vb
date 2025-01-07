@@ -7398,8 +7398,7 @@ doorcita:
                     cboNombre.SelectionStart = 0
                     cboNombre.SelectionLength = Len(cboNombre.Text)
                     MyIdCliente = 0
-                    rd1.Close()
-                    cnn1.Close()
+
                     txtdireccion.Focus().Equals(True)
                 End If
                 rd4.Close()

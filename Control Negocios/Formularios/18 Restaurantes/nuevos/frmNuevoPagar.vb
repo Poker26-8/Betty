@@ -6193,7 +6193,7 @@ deku:
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Clone()
+            cnn1.Close()
         End Try
 
 

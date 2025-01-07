@@ -580,7 +580,7 @@ Public Class frmProduccion
         Try
             cboEmpleado.Items.Clear()
 
-            cnn5.Clone() : cnn5.Open()
+            cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand
             cmd5.CommandText = "SELECT DISTINCT Nombre FROM usuarios WHERE Nombre<>'' ORDER BY Nombre"
             rd5 = cmd5.ExecuteReader

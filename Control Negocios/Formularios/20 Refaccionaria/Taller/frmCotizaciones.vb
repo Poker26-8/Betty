@@ -167,7 +167,7 @@ Public Class frmCotizaciones
             Dim rd1 As MySqlDataReader
             Dim cmd1 As MySqlCommand
 
-            cnn1.Clone() : cnn1.Open()
+            cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText = "SELECT Alias,Status FROM usuarios WHERE Clave='" & txtUsuario.Text & "'"
             rd1 = cmd1.ExecuteReader

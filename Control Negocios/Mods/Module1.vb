@@ -463,21 +463,21 @@ Module Module1
 
     Public Direcc_Access As String = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & My.Application.Info.DirectoryPath & "\DL1.mdb;Persist Security Info=True;Jet OLEDB:Database Password=jipl22"
 
-    'Public cnn1 As MySqlConnection = New MySqlConnection()
-    'Public cnn2 As MySqlConnection = New MySqlConnection()
-    'Public cnn3 As MySqlConnection = New MySqlConnection()
-    'Public cnn4 As MySqlConnection = New MySqlConnection()
-    'Public cnn5 As MySqlConnection = New MySqlConnection()
+    Public cnn1 As MySqlConnection = New MySqlConnection()
+    Public cnn2 As MySqlConnection = New MySqlConnection()
+    Public cnn3 As MySqlConnection = New MySqlConnection()
+    Public cnn4 As MySqlConnection = New MySqlConnection()
+    Public cnn5 As MySqlConnection = New MySqlConnection()
 
-    'Public cnn7 As MySqlConnection = New MySqlConnection()
-    'Public cnn8 As MySqlConnection = New MySqlConnection()
-    'Public cnn9 As MySqlConnection = New MySqlConnection()
-    'Public cnntimer As MySqlConnection = New MySqlConnection()
-    'Public cnntimer2 As MySqlConnection = New MySqlConnection()
+    Public cnn7 As MySqlConnection = New MySqlConnection()
+    Public cnn8 As MySqlConnection = New MySqlConnection()
+    Public cnn9 As MySqlConnection = New MySqlConnection()
+    Public cnntimer As MySqlConnection = New MySqlConnection()
+    Public cnntimer2 As MySqlConnection = New MySqlConnection()
 
 
-    'Public cmd1, cmd2, cmd3, cmd4, cmd5, cmd9, cmd8, cmd7, cmdtimer, cmdtimer2 As MySqlCommand
-    'Public rd1, rd2, rd3, rd4, rd5, rd9, rd8, rd7, rdtimer, rdtimer2 As MySqlDataReader
+    Public cmd1, cmd2, cmd3, cmd4, cmd5, cmd9, cmd8, cmd7, cmdtimer, cmdtimer2 As MySqlCommand
+    Public rd1, rd2, rd3, rd4, rd5, rd9, rd8, rd7, rdtimer, rdtimer2 As MySqlDataReader
 
     Public sTargetlocalmysql As String = ""
 

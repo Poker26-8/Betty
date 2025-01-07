@@ -21,10 +21,10 @@ Public Class frmLoad
 
     Public Sub cargaTodo()
 
-        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1, rd2 As MySqlDataReader
-        Dim cmd1, cmd2 As MySqlCommand
+        'Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim rd1, rd2 As MySqlDataReader
+        'Dim cmd1, cmd2 As MySqlCommand
         PrimeraConfig = ""
         Login.Hide()
 
@@ -496,9 +496,9 @@ Public Class frmLoad
     Public Sub verif()
         'cumpleaños monedero
 
-        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
+        'Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim rd1 As MySqlDataReader
+        'Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close()
@@ -2676,7 +2676,7 @@ Public Class frmLoad
 
     Public Sub ActualizaCampos()
         Try
-            Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            'Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
 
             cnn2.Close() : cnn2.Open()
 
@@ -3882,13 +3882,13 @@ Public Class frmLoad
 
     Public Sub VerificarVentasDetalle()
 
-        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
 
-        Dim rd1, rd2, rd3, rd4 As MySqlDataReader
-        Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
+        'Dim rd1, rd2, rd3, rd4 As MySqlDataReader
+        'Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
 
         Try
 
