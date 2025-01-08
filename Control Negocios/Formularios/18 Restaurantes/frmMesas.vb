@@ -574,7 +574,8 @@ Public Class frmMesas
 
             End If
         Else
-            cmd3.CommandText = "SELECT COUNT(Nombre_mesa) FROM Mesa where ubicacion='" & nombreubicacion & "'"
+            cmd3 = cnn3.CreateCommand
+            cmd3.CommandText = "SELECT COUNT(IdMesa) FROM Mesa where ubicacion='" & nombreubicacion & "'"
         End If
         rd3 = cmd3.ExecuteReader
         If rd3.Read Then
