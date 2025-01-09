@@ -185,49 +185,46 @@ Module ModGral
         Dim respuesta As String = ""
         Dim siono As Integer = 0
 
-        Dim cnn As MySqlConnection = New MySqlConnection
-        Dim serror As String = ""
-        Dim dr As DataRow
-        Dim odata As New ToolKitSQL.myssql
-        Dim sql As String = ""
+        'Dim cnn As MySqlConnection = New MySqlConnection
+        'Dim serror As String = ""
+        'Dim dr As DataRow
+        'Dim odata As New ToolKitSQL.myssql
+        'Dim sql As String = ""
 
         Try
 
-            If odata.dbOpen(cnn, sTarget, serror) Then
-                sql = "select Facturas, NotasCred, NumPart from Formatos where Facturas='" & valor & "'"
-                If odata.getDr(cnn, dr, sql, serror) = True Then
-                    respuesta = dr("NotasCred").ToString
-                    siono = dr("NumPart").ToString
-                Else
-                    respuesta = ""
-                End If
-            End If
-            cnn.Close()
-
-            Return respuesta
-
-            'cnn5.Close() : cnn5.Open()
-            'cmd5 = cnn5.CreateCommand
-            'cmd5.CommandText =
-            '    "select Facturas, NotasCred, NumPart from Formatos where Facturas='" & valor & "'"
-            'rd5 = cmd5.ExecuteReader
-            'If rd5.HasRows Then
-            '    If rd5.Read Then
-            '        respuesta = rd5("NotasCred").ToString
-            '        siono = rd5("NumPart").ToString
+            'If odata.dbOpen(cnn, sTarget, serror) Then
+            '    sql = "select Facturas, NotasCred, NumPart from Formatos where Facturas='" & valor & "'"
+            '    If odata.getDr(cnn, dr, sql, serror) = True Then
+            '        respuesta = dr("NotasCred").ToString
+            '        siono = dr("NumPart").ToString
+            '    Else
+            '        respuesta = ""
             '    End If
-            'Else
-            '    respuesta = ""
             'End If
-            ''If siono = 0 Then
-            ''    respuesta = ""
-            ''End If
-            'rd5.Close() : cnn5.Close()
+            'cnn.Close()
+
+
+
+            cnn5.Close() : cnn5.Open()
+            cmd5 = cnn5.CreateCommand
+            cmd5.CommandText =
+                "select Facturas, NotasCred, NumPart from Formatos where Facturas='" & valor & "'"
+            rd5 = cmd5.ExecuteReader
+            If rd5.HasRows Then
+                If rd5.Read Then
+                    respuesta = rd5("NotasCred").ToString
+                    siono = rd5("NumPart").ToString
+                End If
+            Else
+                respuesta = ""
+            End If
+            rd5.Close() : cnn5.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn5.Close()
         End Try
-
+        Return respuesta
 
     End Function
 
@@ -273,9 +270,9 @@ Module ModGral
     'ProdIEPS
     Public Function ProdsIEPS(ByVal cod As String) As Double
 
-        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd5 As MySqlDataReader
-        Dim cmd5 As MySqlCommand
+        'Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim rd5 As MySqlDataReader
+        'Dim cmd5 As MySqlCommand
 
         If cod <> "" Then
             cnn5.Close() : cnn5.Open()

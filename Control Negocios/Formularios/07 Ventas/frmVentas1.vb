@@ -82,6 +82,7 @@ Public Class frmVentas1
     Dim siqr As String = ""
 
 
+    Dim banderasalirvaluechange As Integer = 0
 
     Private Sub frmVentas1_Activated(sender As Object, e As System.EventArgs) Handles Me.Activated
         txtdia.Text = Weekday(Date.Now)
@@ -226,14 +227,14 @@ Public Class frmVentas1
 
     Private Async Sub frmVentas1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
 
-        Dim cnn11 As MySqlConnection = New MySqlConnection()
-        Dim serror As String = ""
-        Dim dr11 As DataRow
-        Dim odata11 As New ToolKitSQL.myssql
-        Dim sql As String = ""
-        Dim sql1 As String = ""
-        Dim sql2 As String = ""
-        Dim sql3 As String = ""
+        'Dim cnn11 As MySqlConnection = New MySqlConnection()
+        'Dim serror As String = ""
+        'Dim dr11 As DataRow
+        'Dim odata11 As New ToolKitSQL.myssql
+        'Dim sql As String = ""
+        'Dim sql1 As String = ""
+        'Dim sql2 As String = ""
+        'Dim sql3 As String = ""
 
         Dim log As String = ""
 
@@ -247,24 +248,47 @@ Public Class frmVentas1
 
         Me.KeyPreview = True
         txtResta.ReadOnly = True
+
         Try
-            If odata11.dbOpen(cnn11, sTarget, serror) = True Then
-                sql = "Select Terminal,Clave,Solicitud,Resultado from DatosProsepago"
-                If odata11.getDr(cnn11, dr11, sql, serror) = True Then
-                    hayTerminal = 1
-                    numTerminal = dr11("Terminal").ToString
-                    numClave = dr11("Clave").ToString
-                    URLsolicitud = dr11("Solicitud").ToString
-                    URLresultado = dr11("Resultado").ToString
-                Else
-                    hayTerminal = 0
-                End If
+            cnn1.Close()
+            cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "Select Terminal,Clave,Solicitud,Resultado from DatosProsepago"
+            rd1 = cmd1.ExecuteReader
+            If rd1.Read Then
+                hayTerminal = 1
+                numTerminal = rd1("Terminal").ToString
+                numClave = rd1("Clave").ToString
+                URLsolicitud = rd1("Solicitud").ToString
+                URLresultado = rd1("Resultado").ToString
+            Else
+                hayTerminal = 0
             End If
-            cnn11.Close()
+            rd1.Close()
+            cnn1.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn11.Close()
+            cnn1.Close()
         End Try
+
+        'Try
+        '    If odata11.dbOpen(cnn11, sTarget, serror) = True Then
+        '        sql = "Select Terminal,Clave,Solicitud,Resultado from DatosProsepago"
+        '        If odata11.getDr(cnn11, dr11, sql, serror) = True Then
+        '            hayTerminal = 1
+        '            numTerminal = dr11("Terminal").ToString
+        '            numClave = dr11("Clave").ToString
+        '            URLsolicitud = dr11("Solicitud").ToString
+        '            URLresultado = dr11("Resultado").ToString
+        '        Else
+        '            hayTerminal = 0
+        '        End If
+        '    End If
+        '    cnn11.Close()
+        'Catch ex As Exception
+        '    MessageBox.Show(ex.ToString)
+        '    cnn11.Close()
+        'End Try
 
         Dim orden As Integer = Await ValidarAsync("Ordenes")
         Dim verexistencia As Integer = Await ValidarAsync("VerExistencias")
@@ -289,17 +313,36 @@ Public Class frmVentas1
 
         If tomarcontra = 1 Then
 
-            If odata11.dbOpen(cnn11, sTarget, serror) = True Then
-                sql1 = "SELECT Clave,Alias FROM Usuarios WHERE IdEmpleado=" & id_usu_log
-                If odata11.getDr(cnn11, dr11, sql1, serror) = True Then
-                    txtcontraseña.Text = dr11(0).ToString
-                    lblusuario.Text = dr11(1).ToString
+            cnn2.Close() : cnn2.Open()
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText = "SELECT Clave,Alias FROM Usuarios WHERE IdEmpleado=" & id_usu_log
+            rd2 = cmd2.ExecuteReader
+            If rd2.HasRows Then
+                If rd2.Read Then
+                    txtcontraseña.Text = rd2(0).ToString
+                    lblusuario.Text = rd2(1).ToString
                     txtcontraseña.PasswordChar = "*"
                     txtcontraseña.ForeColor = Color.Black
                 End If
             End If
+            rd2.Close()
+
         End If
-        cnn11.Close()
+        cnn2.Close()
+
+        'If tomarcontra = 1 Then
+
+        '    If odata11.dbOpen(cnn11, sTarget, serror) = True Then
+        '        sql1 = "SELECT Clave,Alias FROM Usuarios WHERE IdEmpleado=" & id_usu_log
+        '        If odata11.getDr(cnn11, dr11, sql1, serror) = True Then
+        '            txtcontraseña.Text = dr11(0).ToString
+        '            lblusuario.Text = dr11(1).ToString
+        '            txtcontraseña.PasswordChar = "*"
+        '            txtcontraseña.ForeColor = Color.Black
+        '        End If
+        '    End If
+        'End If
+        'cnn11.Close()
 
         If IO.File.Exists(ARCHIVO_DE_CONFIGURACION) Then
 
@@ -350,24 +393,34 @@ Public Class frmVentas1
         grdcaptura.DefaultCellStyle.SelectionForeColor = Color.Blue
 
 
-
-        If odata11.dbOpen(cnn11, sTarget, serror) = True Then
-            sql2 = "select NotasCred from Formatos where Facturas='LogoG'"
-            If odata11.getDr(cnn11, dr11, sql2, serror) = True Then
-                log = dr11(0).ToString
+        cnn4.Close() : cnn4.Open()
+        cmd4 = cnn4.CreateCommand
+        cmd4.CommandText = "select NotasCred from Formatos where Facturas='LogoG'"
+        rd4 = cmd4.ExecuteReader
+        If rd4.HasRows Then
+            If rd4.Read Then
+                log = rd4(0).ToString
             End If
         End If
-        cnn11.Close()
+        rd4.Close()
 
-        If odata11.dbOpen(cnn11, sTarget, serror) = True Then
-            sql3 = "select Formato from RutasImpresion where Equipo='" & ObtenerNombreEquipo() & "' and Tipo='Venta'"
-            If odata11.getDr(cnn11, dr11, sql3, serror) = True Then
-                cboimpresion.Text = dr11(0).ToString()
-            Else
-                cboimpresion.Text = "TICKET"
-            End If
-        End If
-        cnn11.Close()
+        'If odata11.dbOpen(cnn11, sTargetlocal, serror) = True Then
+        '    sql2 = "select NotasCred from Formatos where Facturas='LogoG'"
+        '    If odata11.getDr(cnn11, dr11, sql2, serror) = True Then
+        '        log = dr11(0).ToString
+        '    End If
+        'End If
+        'cnn11.Close()
+
+        'If odata11.dbOpen(cnn11, sTargetlocal, serror) = True Then
+        '    sql3 = "select Formato from RutasImpresion where Equipo='" & ObtenerNombreEquipo() & "' and Tipo='Venta'"
+        '    If odata11.getDr(cnn11, dr11, sql3, serror) = True Then
+        '        cboimpresion.Text = dr11(0).ToString()
+        '    Else
+        '        cboimpresion.Text = "TICKET"
+        '    End If
+        'End If
+        'cnn11.Close()
 
         If log <> "" Then
             If File.Exists(My.Application.Info.DirectoryPath & "\" & log) Then
@@ -377,6 +430,26 @@ Public Class frmVentas1
                 'Panel8.Controls.Add(PictureBox2)
             End If
         End If
+
+        Try
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText =
+                "select Formato from RutasImpresion where Equipo='" & ObtenerNombreEquipo() & "' and Tipo='Venta'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    cboimpresion.Text = rd1(0).ToString()
+                End If
+            Else
+                cboimpresion.Text = "TICKET"
+            End If
+            rd1.Close()
+            cnn1.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString())
+            cnn1.Close()
+        End Try
 
         DondeVoy = ""
         cbonombretag = ""
@@ -403,7 +476,32 @@ Public Class frmVentas1
         Entrega = False
         cbotipo.Text = "Lista"
         txtdia.Text = Weekday(Date.Now)
-        RunAsyncFunctions()
+
+        Dim sInfo As String = ""
+        Dim cnn_c As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+        Dim odata As New ToolKitSQL.myssql
+        Dim dt As New DataTable
+        Dim Sql111 As String = "select * from Productos where Grupo<>'INSUMO' and ProvRes<>1 order by Nombre"
+        Dim dr As DataRow
+        With odata
+            If .dbOpen(cnn_c, sTargetlocal, sInfo) Then
+                If .getDt(cnn_c, dt, Sql111, sInfo) Then
+                    DataGridView1.DataSource = dt
+                    cbodesc.DataSource = dt
+                    ' Establecemos la columna a mostrar en el ComboBox (por ejemplo, "Nombre")
+                    cbodesc.DisplayMember = "Nombre"
+
+                    ' Establecemos la columna que se usará como valor asociado (por ejemplo, "ID")
+                    cbodesc.ValueMember = "Nombre"
+                    cbodesc.SelectedIndex = -1
+                End If
+                cnn_c.Close()
+            End If
+        End With
+
+        banderasalirvaluechange = 1
+
+        '  RunAsyncFunctions()
         My.Application.DoEvents()
         Timer1.Start()
         cbodesc.Focus().Equals(True)
@@ -448,8 +546,7 @@ Public Class frmVentas1
     Private Sub txtcontraseña_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtcontraseña.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
 
-            Dim cnn11 As MySqlConnection = New MySqlConnection
-            cnn11 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
+            Dim cnn11 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
             Dim rd11 As MySqlDataReader
             Dim cmd11 As MySqlCommand
 
@@ -495,9 +592,9 @@ Public Class frmVentas1
 #Region "Funciones"
     Public Sub Folio()
 
-        Dim cnn9 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd9 As MySqlDataReader
-        Dim cmd9 As MySqlCommand
+        'Dim cnn9 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim rd9 As MySqlDataReader
+        'Dim cmd9 As MySqlCommand
 
         Try
 
@@ -537,9 +634,9 @@ Public Class frmVentas1
     Public Sub CodBar()
         If cbocodigo.Text = "" And cbodesc.Text = "" Then Exit Sub
 
-        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd3 As MySqlDataReader
-        Dim cmd3 As MySqlCommand
+        'Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim rd3 As MySqlDataReader
+        'Dim cmd3 As MySqlCommand
 
         'Código de barras 1
         Try
@@ -620,12 +717,6 @@ Public Class frmVentas1
         Dim Acumula As Boolean = False
         Dim minimo As Double = 0
 
-
-
-        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1, rd3 As MySqlDataReader
-        Dim cmd1, cmd3 As MySqlCommand
 
         Try
             cnn3.Close() : cnn3.Open()
@@ -963,9 +1054,7 @@ kak:
 
     Public Function IvaDSC(ByVal cod As String) As Double
 
-        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd3 As MySqlDataReader
-        Dim cmd3 As MySqlCommand
+
 
         Try
 
@@ -3543,10 +3632,10 @@ kaka:
     Private Sub cbocodigo_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cbocodigo.KeyPress
         e.KeyChar = UCase(e.KeyChar)
 
-        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1, rd2 As MySqlDataReader
-        Dim cmd1, cmd2 As MySqlCommand
+        'Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim rd1, rd2 As MySqlDataReader
+        'Dim cmd1, cmd2 As MySqlCommand
 
 
         If AscW(e.KeyChar) = Keys.Enter And (cbocodigo.Text <> "" Or cbodesc.Text <> "") Then
@@ -5120,9 +5209,9 @@ kaka:
     Public Sub txtdescuento1_TextChanged(sender As System.Object, e As System.EventArgs) Handles txtdescuento1.TextChanged
         If donde_va = "Descuento Porcentaje" Then
 
-            Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd5 As MySqlDataReader
-            Dim cmd5 As MySqlCommand
+            'Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            'Dim rd5 As MySqlDataReader
+            'Dim cmd5 As MySqlCommand
 
             If txtdescuento1.Text = "" Then
                 txtdescuento1.Text = "0"
@@ -17517,9 +17606,9 @@ doorcita:
         If Serchi = True Then
             Serchi = False
         Else
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
+            'Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+            'Dim rd1 As MySqlDataReader
+            'Dim cmd1 As MySqlCommand
 
             ' cbodesc.Items.Clear()
             Try
@@ -17573,6 +17662,13 @@ doorcita:
     End Sub
 
     Private Sub cbodesc_KeyPress_1(sender As Object, e As KeyPressEventArgs) Handles cbodesc.KeyPress
+
+        'Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim rd1, rd2, rd3 As MySqlDataReader
+        'Dim cmd1, cmd2, cmd3 As MySqlCommand
+
         e.KeyChar = UCase(e.KeyChar)
         Dim Multiplica As String = ""
         Dim VSE As Boolean = False
@@ -17582,12 +17678,6 @@ doorcita:
         Dim Minimo As Double = 0
         Dim TiCambio As Double = 0
         Dim PreLst As Double = 0, PreEsp As Double = 0
-
-        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1, rd2, rd3 As MySqlDataReader
-        Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         If AscW(e.KeyChar) = Keys.Enter And cbodesc.Text = "" Then cbocodigo.Focus().Equals(True) : Exit Sub
         If AscW(e.KeyChar) = Keys.Enter Then
@@ -17909,404 +17999,426 @@ kaka:
                 End If
                 rd1.Close()
 
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText =
-                    "select Status_Promocion,Grupo,Departamento,Codigo,Nombre,UVenta,Multiplo,Min,Ubicacion from Productos where Nombre='" & cbodesc.Text & "'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        Promo = IIf(rd1("Status_Promocion").ToString = False, False, True)
-                        Anti = rd1("Grupo").ToString
-                        If Anti = "ANTIBIOTICO" Or Anti = "CONTROLADO" Then
-                            If MsgBox("Este en un " & Anti & " ¿deseas continuar con el proceso?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then
-                                cbocodigo.Text = ""
-                                cbodesc.Text = ""
-                                txtunidad.Text = ""
-                                txtcantidad.Text = ""
-                                txtprecio.Text = "0.00"
-                                txtprecio.Tag = 0
-                                txttotal.Text = "0.00"
-                                txtexistencia.Text = ""
-                                cboLote.Text = ""
-                                cboLote.Tag = 0
-                                txtfechacad.Text = ""
-                                txtubicacion.Text = ""
-                                cbodesc.Focus().Equals(True)
-                                rd1.Close() : cnn1.Close()
-                                Exit Sub
-                            End If
-                        End If
-                        If CStr(rd1("Departamento").ToString) = "SERVICIOS" Then
-                            cbocodigo.Text = rd1("Codigo").ToString
-                            cbocodigo.Focus().Equals(True)
-                            rd1.Close()
-                            cnn1.Close()
+                Dim varnom As String = cbodesc.Text
+                Dim index As Integer = -1
+                Dim row As DataGridViewRow
+                For Each row In DataGridView1.Rows
+
+                    If IsNothing(row.Cells("Nombre").Value) Then
+                        Exit For
+                    End If
+
+                    If row.Cells("Nombre").Value.ToString() = varnom Then
+                        index = row.Index
+                        Exit For
+                    End If
+                Next
+
+                If index <> -1 Then
+                    Promo = IIf(DataGridView1.Rows(index).Cells("Status_Promocion").Value.ToString() = False, False, True)
+                    Anti = DataGridView1.Rows(index).Cells("Grupo").Value.ToString()
+                    If Anti = "ANTIBIOTICO" Or Anti = "CONTROLADO" Then
+                        If MsgBox("Este en un " & Anti & " ¿deseas continuar con el proceso?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then
+                            cbocodigo.Text = ""
+                            cbodesc.Text = ""
+                            txtunidad.Text = ""
+                            txtcantidad.Text = ""
+                            txtprecio.Text = "0.00"
+                            txtprecio.Tag = 0
+                            txttotal.Text = "0.00"
+                            txtexistencia.Text = ""
+                            cboLote.Text = ""
+                            cboLote.Tag = 0
+                            txtfechacad.Text = ""
+                            txtubicacion.Text = ""
+                            cbodesc.Focus().Equals(True)
+                            rd1.Close() : cnn1.Close()
                             Exit Sub
                         End If
+                    End If
 
-                        cbocodigo.Text = rd1("Codigo").ToString()
-                        cbodesc.Text = rd1("Nombre").ToString()
-                        txtunidad.Text = rd1("UVenta").ToString()
-                        Multiplo = rd1("Multiplo").ToString()
-                        Minimo = rd1("Min").ToString()
-                        txtubicacion.Text = rd1("Ubicacion").ToString()
-
-                        cnn2.Close() : cnn2.Open() : cmd2 = cnn2.CreateCommand
-                        cmd2.CommandText =
-                            "select Existencia from Productos where Codigo='" & Strings.Left(cbocodigo.Text, 6) & "'"
-                        rd2 = cmd2.ExecuteReader
-                        If rd2.HasRows Then
-                            If rd2.Read Then
-                                txtexistencia.Text = CDbl(IIf(rd2(0).ToString = "", "0", rd2(0).ToString)) / Multiplo
-                            End If
-                        End If
-                        rd2.Close()
-
-                        cmd2 = cnn2.CreateCommand
-                        cmd2.CommandText =
-                            "select FechaC from ComprasDet where Codigo='" & cbocodigo.Text & "' LIMIT 1"
-                        rd2 = cmd2.ExecuteReader
-                        If rd2.HasRows Then
-                            If rd2.Read Then
-                                Label2.Text = "DescrIpción " & FormatDateTime(rd2(0).ToString, DateFormat.ShortDate)
-                            End If
-                        Else
-                            Label2.Text = "DescrIpción"
-                        End If
-                        rd2.Close()
-
-                        cmd2 = cnn2.CreateCommand
-                        cmd2.CommandText =
-                            "select tipo_cambio from tb_moneda,Productos where Codigo='" & cbocodigo.Text & "' and Productos.id_tbMoneda=tb_moneda.id"
-                        rd2 = cmd2.ExecuteReader
-                        If rd2.HasRows Then
-                            If rd2.Read Then
-                                TiCambio = rd2(0).ToString
-                                If TiCambio = 0 Then TiCambio = 1
-                            End If
-                        Else
-                            TiCambio = 1
-                        End If
-                        rd2.Close()
-
-                        cmd2 = cnn2.CreateCommand
-                        cmd2.CommandText =
-                            "select PrecioVentaIVA, PreEsp from Productos where Codigo='" & cbocodigo.Text & "'"
-                        rd2 = cmd2.ExecuteReader
-                        If rd2.HasRows Then
-                            If rd2.Read Then
-                                PreLst = rd2(0).ToString
-                                PreEsp = rd2(1).ToString
-                            End If
-                        End If
-                        rd2.Close()
-
-                        If cbotipo.Visible = False Then
-                            If T_Precio = "DIA_NOCHE" And (H_Actual > H_Inicia Or H_Actual < H_Final) Then
-                                txtprecio.Text = FormatNumber(PreEsp * TiCambio, 4)
-                                txtprecio.Tag = FormatNumber(PreEsp * TiCambio, 4)
-                            Else
-                                txtprecio.Text = FormatNumber(PreLst * TiCambio, 4)
-                                txtprecio.Tag = FormatNumber(PreLst * TiCambio, 4)
-                            End If
-                            txtprecio.ReadOnly = False
-                            If (Promo) Then
-                                txtprecio.Text = Promos(cbocodigo.Text, txtprecio.Text)
-                                txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                txtprecio.ReadOnly = False
-                            End If
-                        Else
-                            If (Promo) Then
-                                txtprecio.Text = Promos(cbocodigo.Text, txtprecio.Text)
-                                txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                txtprecio.ReadOnly = False
-                            Else
-                                If cbonota.Text = "" Then
-                                    txtprecio.Text = Cambio(TiCambio)
-                                    txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                    txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                    txtprecio.ReadOnly = False
-                                Else
-                                    cmd2 = cnn2.CreateCommand
-                                    cmd2.CommandText =
-                                        "select Precio from VentasDetalle where Codigo='" & cbocodigo.Text & "' and Folio=" & cbonota.Text & ""
-                                    rd2 = cmd2.ExecuteReader
-                                    If rd2.HasRows Then
-                                        If rd2.Read Then
-                                            txtprecio.Text = IIf(rd2(0).ToString = "", "0", rd2(0).ToString)
-                                            txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                            txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                            txtprecio.ReadOnly = True
-                                        End If
-                                    Else
-                                        txtprecio.Text = Cambio(TiCambio)
-                                        txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                        txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                        txtprecio.ReadOnly = False
-                                    End If
-                                    rd2.Close()
-                                End If
-                            End If
-                        End If
-                        cnn2.Close()
-
+                    If CStr(DataGridView1.Rows(index).Cells("Departamento").Value.ToString()) = "SERVICIOS" Then
+                        cbocodigo.Text = DataGridView1.Rows(index).Cells("Codigo").Value.ToString()
                         cbocodigo.Focus().Equals(True)
                         rd1.Close()
                         cnn1.Close()
                         Exit Sub
                     End If
-                End If
-                rd1.Close()
 
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText =
-                        "select Status_Promocion,Grupo,Departamento,Codigo,Nombre,UVenta,Multiplo,Min,Ubicacion from Productos where CodBarra='" & cbodesc.Text & "'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
+                    cbocodigo.Text = DataGridView1.Rows(index).Cells("Codigo").Value.ToString()
+                    cbodesc.Text = DataGridView1.Rows(index).Cells("Nombre").Value.ToString()
+                    txtunidad.Text = DataGridView1.Rows(index).Cells("UVenta").Value.ToString()
+                    Multiplo = DataGridView1.Rows(index).Cells("Multiplo").Value.ToString()
+                    Minimo = DataGridView1.Rows(index).Cells("Min").Value.ToString()
+                    txtubicacion.Text = DataGridView1.Rows(index).Cells("Ubicacion").Value.ToString()
 
-                        Promo = IIf(rd1("Status_Promocion").ToString = False, False, True)
-                        Anti = rd1("Grupo").ToString
-                        If Anti = "ANTIBIOTICO" Or Anti = "CONTROLADO" Then
-                            If MsgBox("Este en un " & Anti & " ¿deseas continuar con el proceso?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then
-                                cbocodigo.Text = ""
-                                cbodesc.Text = ""
-                                txtunidad.Text = ""
-                                txtcantidad.Text = ""
-                                txtprecio.Text = "0.00"
-                                txtprecio.Tag = 0
-                                txttotal.Text = "0.00"
-                                txtexistencia.Text = ""
-                                cboLote.Text = ""
-                                cboLote.Tag = 0
-                                txtfechacad.Text = ""
-                                txtubicacion.Text = ""
-                                cbodesc.Focus().Equals(True)
-                                rd1.Close() : cnn1.Close()
-                                Exit Sub
-                            End If
+                    cnn2.Close() : cnn2.Open() : cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText =
+                        "select Existencia from Productos where Codigo='" & Strings.Left(cbocodigo.Text, 6) & "'"
+                    rd2 = cmd2.ExecuteReader
+                    If rd2.HasRows Then
+                        If rd2.Read Then
+                            txtexistencia.Text = CDbl(IIf(rd2(0).ToString = "", "0", rd2(0).ToString)) / Multiplo
                         End If
-                        If CStr(rd1("Departamento").ToString) = "SERVICIOS" Then
-                            cbocodigo.Text = rd1("Codigo").ToString
-                            cbocodigo.Focus().Equals(True)
-                            rd1.Close()
-                            cnn1.Close()
-                            Exit Sub
+                    End If
+                    rd2.Close()
+
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText =
+                        "select FechaC from ComprasDet where Codigo='" & cbocodigo.Text & "' LIMIT 1"
+                    rd2 = cmd2.ExecuteReader
+                    If rd2.HasRows Then
+                        If rd2.Read Then
+                            Label2.Text = "DescrIpción " & FormatDateTime(rd2(0).ToString, DateFormat.ShortDate)
                         End If
+                    Else
+                        Label2.Text = "DescrIpción"
+                    End If
+                    rd2.Close()
 
-                        cbocodigo.Text = rd1("Codigo").ToString()
-                        cbodesc.Text = rd1("Nombre").ToString()
-                        txtunidad.Text = rd1("UVenta").ToString()
-                        Multiplo = rd1("Multiplo").ToString()
-                        Minimo = rd1("Min").ToString()
-                        txtubicacion.Text = rd1("Ubicacion").ToString()
-
-                        If File.Exists(My.Application.Info.DirectoryPath & "\ProductosImg" & base & "\" & cbocodigo.Text & ".jpg") Then
-                            picProd.Image = System.Drawing.Image.FromFile(My.Application.Info.DirectoryPath & "\ProductosImg" & base & "\" & cbocodigo.Text & ".jpg")
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText =
+                        "select tipo_cambio from tb_moneda,Productos where Codigo='" & cbocodigo.Text & "' and Productos.id_tbMoneda=tb_moneda.id"
+                    rd2 = cmd2.ExecuteReader
+                    If rd2.HasRows Then
+                        If rd2.Read Then
+                            TiCambio = rd2(0).ToString
+                            If TiCambio = 0 Then TiCambio = 1
                         End If
+                    Else
+                        TiCambio = 1
+                    End If
+                    rd2.Close()
 
-                        cnn2.Close() : cnn2.Open() : cmd2 = cnn2.CreateCommand
-                        cmd2.CommandText =
-                            "select Existencia from Productos where Codigo='" & Strings.Left(cbocodigo.Text, 6) & "'"
-                        rd2 = cmd2.ExecuteReader
-                        If rd2.HasRows Then
-                            If rd2.Read Then
-                                txtexistencia.Text = CDbl(IIf(rd2(0).ToString = "", "0", rd2(0).ToString)) / Multiplo
-                            End If
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText =
+                        "select PrecioVentaIVA, PreEsp from Productos where Codigo='" & cbocodigo.Text & "'"
+                    rd2 = cmd2.ExecuteReader
+                    If rd2.HasRows Then
+                        If rd2.Read Then
+                            PreLst = rd2(0).ToString
+                            PreEsp = rd2(1).ToString
                         End If
-                        rd2.Close()
+                    End If
+                    rd2.Close()
 
-                        cmd2 = cnn2.CreateCommand
-                        cmd2.CommandText =
-                            "select tipo_cambio from tb_moneda,Productos where Codigo='" & cbocodigo.Text & "' and Productos.id_tbMoneda=tb_moneda.id"
-                        rd2 = cmd2.ExecuteReader
-                        If rd2.HasRows Then
-                            If rd2.Read Then
-                                TiCambio = rd2(0).ToString
-                                If TiCambio = 0 Then TiCambio = 1
-                            End If
+                    If cbotipo.Visible = False Then
+                        If T_Precio = "DIA_NOCHE" And (H_Actual > H_Inicia Or H_Actual < H_Final) Then
+                            txtprecio.Text = FormatNumber(PreEsp * TiCambio, 4)
+                            txtprecio.Tag = FormatNumber(PreEsp * TiCambio, 4)
                         Else
-                            TiCambio = 1
+                            txtprecio.Text = FormatNumber(PreLst * TiCambio, 4)
+                            txtprecio.Tag = FormatNumber(PreLst * TiCambio, 4)
                         End If
-                        rd2.Close()
-
-                        cmd2 = cnn2.CreateCommand
-                        cmd2.CommandText =
-                            "select PrecioVentaIVA, PreEsp from Productos where Codigo='" & cbocodigo.Text & "'"
-                        rd2 = cmd2.ExecuteReader
-                        If rd2.HasRows Then
-                            If rd2.Read Then
-                                PreLst = rd2(0).ToString
-                                PreEsp = rd2(1).ToString
-                            End If
+                        txtprecio.ReadOnly = False
+                        If (Promo) Then
+                            txtprecio.Text = Promos(cbocodigo.Text, txtprecio.Text)
+                            txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                            txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                            txtprecio.ReadOnly = False
                         End If
-                        rd2.Close()
-
-                        cboLote.Items.Clear()
-                        cmd2 = cnn2.CreateCommand
-                        If btndevo.Text = "GUARDAR DEVOLUCIÓN" Then
-                            cmd2.CommandText =
-                                    "select DISTINCT(Lote) from LoteCaducidad where Codigo='" & cbocodigo.Text & "'"
-                            rd2 = cmd2.ExecuteReader
-                            Do While rd2.Read
-                                If rd2.HasRows Then cboLote.Items.Add(rd2("Lote").ToString())
-                            Loop
-                            rd2.Close()
-                        Else
-                            If cbocodigo.Text = "" Then Exit Sub
-                            cmd2.CommandText =
-                                    "select distinct(Lote) as Lt from LoteCaducidad where Codigo='" & cbocodigo.Text & "' and Cantidad>0"
-                            rd2 = cmd2.ExecuteReader
-                            Do While rd2.Read
-                                If rd2.HasRows Then cboLote.Items.Add(rd2("Lt").ToString())
-                            Loop
-                            rd2.Close()
-                        End If
-
-                        If cbotipo.Visible = False Then
-                            If T_Precio = "DIA_NOCHE" And (H_Actual > H_Inicia Or H_Actual < H_Final) Then
-                                txtprecio.Text = FormatNumber(PreEsp * TiCambio, 4)
-                                txtprecio.Tag = FormatNumber(PreEsp * TiCambio, 4)
-                            Else
-                                txtprecio.Text = FormatNumber(PreLst * TiCambio, 4)
-                                txtprecio.Tag = FormatNumber(PreLst * TiCambio, 4)
-                            End If
-                            If (Promo) Then
-                                txtprecio.Text = Promos(cbocodigo.Text, txtprecio.Text)
-                                txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                            End If
+                    Else
+                        If (Promo) Then
+                            txtprecio.Text = Promos(cbocodigo.Text, txtprecio.Text)
+                            txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                            txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
                             txtprecio.ReadOnly = False
                         Else
-                            If (Promo) Then
-                                txtprecio.Text = Promos(cbocodigo.Text, txtprecio.Text)
+                            If cbonota.Text = "" Then
+                                txtprecio.Text = Cambio(TiCambio)
                                 txtprecio.Text = FormatNumber(txtprecio.Text, 4)
                                 txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
                                 txtprecio.ReadOnly = False
                             Else
-                                If cbonota.Text = "" Then
+                                cmd2 = cnn2.CreateCommand
+                                cmd2.CommandText =
+                                    "select Precio from VentasDetalle where Codigo='" & cbocodigo.Text & "' and Folio=" & cbonota.Text & ""
+                                rd2 = cmd2.ExecuteReader
+                                If rd2.HasRows Then
+                                    If rd2.Read Then
+                                        txtprecio.Text = IIf(rd2(0).ToString = "", "0", rd2(0).ToString)
+                                        txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                                        txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                                        txtprecio.ReadOnly = True
+                                    End If
+                                Else
                                     txtprecio.Text = Cambio(TiCambio)
                                     txtprecio.Text = FormatNumber(txtprecio.Text, 4)
                                     txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
                                     txtprecio.ReadOnly = False
-                                Else
-                                    cmd2 = cnn2.CreateCommand
-                                    cmd2.CommandText =
-                                        "select Precio from VentasDetalle where Codigo='" & cbocodigo.Text & "' and Folio=" & cbonota.Text & ""
-                                    rd2 = cmd2.ExecuteReader
-                                    If rd2.HasRows Then
-                                        If rd2.Read Then
-                                            txtprecio.Text = rd2(0).ToString
-                                            txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                            txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                            txtprecio.ReadOnly = True
-                                        End If
-                                    Else
-                                        txtprecio.Text = Cambio(TiCambio)
-                                        txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                        txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                        txtprecio.ReadOnly = False
-                                    End If
-                                    rd2.Close()
                                 End If
+                                rd2.Close()
                             End If
                         End If
-                        cnn2.Close()
+                    End If
+                    cnn2.Close()
 
-                        If Multiplica = "" Then
-                            txtcantidad.Text = "1"
-                            If CDbl(txtexistencia.Text) - CDbl(txtcantidad.Text) < 0 Then
-                                If VSE = True Then
-                                    If Me.Text = "Ventas (1)" Then
-                                        MsgBox("No se puede vender sin existencias.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                                        rd1.Close() : cnn1.Close()
-                                        cbocodigo.Text = ""
-                                        cbodesc.Text = ""
-                                        txtunidad.Text = ""
-                                        txtcantidad.Text = ""
-                                        txtprecio.Text = "0.00"
-                                        txtprecio.Tag = 0
-                                        txttotal.Text = "0.00"
-                                        txtexistencia.Text = ""
-                                        cboLote.Text = ""
-                                        cboLote.Tag = 0
-                                        txtfechacad.Text = ""
-                                        txtubicacion.Text = ""
-                                        txtprecio.ReadOnly = False
-                                        cbodesc.Focus().Equals(True)
-                                        Exit Sub
-                                    End If
-                                End If
-                            End If
-                            txttotal.Text = CDbl(txtcantidad.Text) * CDbl(txtprecio.Text)
-                            txttotal.Text = FormatNumber(txttotal.Text, 4)
-                            My.Application.DoEvents()
+                    cbocodigo.Focus().Equals(True)
+                    rd1.Close()
+                    cnn1.Close()
+                    Exit Sub
 
-                            'Si hay lote se detiene
-                            cnn2.Close() : cnn2.Open()
-                            cmd2 = cnn2.CreateCommand
-                            cmd2.CommandText =
-                                "select Codigo from LoteCaducidad where Codigo='" & cbocodigo.Text & "' and Cantidad>0"
-                            rd2 = cmd2.ExecuteReader
-                            If rd2.HasRows Then
-                                If rd2.Read Then
-                                    cboLote.Focus.Equals(True)
-                                    rd2.Close() : cnn2.Close()
-                                    Exit Sub
-                                End If
-                            End If
-                            rd2.Close() : cnn2.Close()
+                End If
 
-                            Call UpGrid()
-                            My.Application.DoEvents()
-                            Dim voy2 As Double = 0
-                            Dim VarSumXD As Double = 0
-                            For w = 0 To grdcaptura.Rows.Count - 1
-                                If grdcaptura.Rows(w).Cells(6).Value.ToString = "" Then
-                                Else
-                                    VarSumXD = VarSumXD + CDbl(grdcaptura.Rows(w).Cells(5).Value.ToString)
-                                    voy2 = voy2 + CDec(grdcaptura.Rows(w).Cells(3).Value)
-                                End If
-                                txtSubTotal.Text = FormatNumber(VarSumXD, 2)
-                            Next
-                            txtcant_productos.Text = FormatNumber(voy2, 2)
-                            If CDbl(txtdescuento1.Text) > 0 Then
-                                txtSubTotal.Tag = 1
-                            End If
-                            txtcoment.Text = ""
+
+                Dim codbarra As String = cbodesc.Text
+                index = -1
+                For Each row In DataGridView1.Rows
+
+                    If IsNothing(row.Cells("CodBarra").Value) Then
+                        Exit For
+                    End If
+
+                    If row.Cells("CodBarra").Value.ToString() = codbarra Then
+                        index = row.Index
+                        Exit For
+                    End If
+                Next
+
+                ' Si encontramos el valor, usamos el índice para llenar los TextBox
+                If index <> -1 Then
+
+                    Promo = IIf(DataGridView1.Rows(index).Cells("Status_Promocion").Value.ToString() = False, False, True)
+                    Anti = DataGridView1.Rows(index).Cells("Grupo").Value.ToString()
+                    If Anti = "ANTIBIOTICO" Or Anti = "CONTROLADO" Then
+                        If MsgBox("Este en un " & Anti & " ¿deseas continuar con el proceso?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then
                             cbocodigo.Text = ""
-                            ' cbocodigo.Items.Clear()
                             cbodesc.Text = ""
-                            ' cbodesc.Items.Clear()
                             txtunidad.Text = ""
-                            txtcantidad.Text = "1"
+                            txtcantidad.Text = ""
                             txtprecio.Text = "0.00"
                             txtprecio.Tag = 0
                             txttotal.Text = "0.00"
                             txtexistencia.Text = ""
-                            txtfechacad.Text = ""
                             cboLote.Text = ""
                             cboLote.Tag = 0
+                            txtfechacad.Text = ""
                             txtubicacion.Text = ""
-                            cnn1.Close()
-
-                            If CDbl(txtdescuento1.Text) <= 0 Then
-                                txtPagar.Text = CDbl(txtSubTotal.Text) - CDbl(txtdescuento2.Text)
-                                txtPagar.Text = FormatNumber(txtPagar.Text, 2)
-                            End If
-
-                            Call txtdescuento1_TextChanged(txtdescuento1, New EventArgs())
-
                             cbodesc.Focus().Equals(True)
-                            txtprecio.ReadOnly = False
-                        Else
-                            txtcantidad.Focus().Equals(True)
+                            rd1.Close() : cnn1.Close()
+                            Exit Sub
                         End If
-                        rd1.Close() : cnn1.Close()
+                    End If
+
+                    If CStr(DataGridView1.Rows(index).Cells("Departamento").Value.ToString()) = "SERVICIOS" Then
+                        cbocodigo.Text = DataGridView1.Rows(index).Cells("Codigo").Value.ToString()
+                        cbocodigo.Focus().Equals(True)
+                        rd1.Close()
+                        cnn1.Close()
                         Exit Sub
                     End If
+
+                    cbocodigo.Text = DataGridView1.Rows(index).Cells("Codigo").Value.ToString()
+                    cbodesc.Text = DataGridView1.Rows(index).Cells("Nombre").Value.ToString()
+                    txtunidad.Text = DataGridView1.Rows(index).Cells("UVenta").Value.ToString()
+                    Multiplo = DataGridView1.Rows(index).Cells("Multiplo").Value.ToString()
+                    Minimo = DataGridView1.Rows(index).Cells("Min").Value.ToString()
+                    txtubicacion.Text = DataGridView1.Rows(index).Cells("Ubicacion").Value.ToString()
+
+                    If File.Exists(My.Application.Info.DirectoryPath & "\ProductosImg" & base & "\" & cbocodigo.Text & ".jpg") Then
+                        picProd.Image = System.Drawing.Image.FromFile(My.Application.Info.DirectoryPath & "\ProductosImg" & base & "\" & cbocodigo.Text & ".jpg")
+                    End If
+
+                    cnn2.Close() : cnn2.Open() : cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText =
+                        "select Existencia from Productos where Codigo='" & Strings.Left(cbocodigo.Text, 6) & "'"
+                    rd2 = cmd2.ExecuteReader
+                    If rd2.HasRows Then
+                        If rd2.Read Then
+                            txtexistencia.Text = CDbl(IIf(rd2(0).ToString = "", "0", rd2(0).ToString)) / Multiplo
+                        End If
+                    End If
+                    rd2.Close()
+
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText =
+                        "select tipo_cambio from tb_moneda,Productos where Codigo='" & cbocodigo.Text & "' and Productos.id_tbMoneda=tb_moneda.id"
+                    rd2 = cmd2.ExecuteReader
+                    If rd2.HasRows Then
+                        If rd2.Read Then
+                            TiCambio = rd2(0).ToString
+                            If TiCambio = 0 Then TiCambio = 1
+                        End If
+                    Else
+                        TiCambio = 1
+                    End If
+                    rd2.Close()
+
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText =
+                        "select PrecioVentaIVA, PreEsp from Productos where Codigo='" & cbocodigo.Text & "'"
+                    rd2 = cmd2.ExecuteReader
+                    If rd2.HasRows Then
+                        If rd2.Read Then
+                            PreLst = rd2(0).ToString
+                            PreEsp = rd2(1).ToString
+                        End If
+                    End If
+                    rd2.Close()
+
+                    cboLote.Items.Clear()
+                    cmd2 = cnn2.CreateCommand
+                    If btndevo.Text = "GUARDAR DEVOLUCIÓN" Then
+                        cmd2.CommandText =
+                                "select DISTINCT(Lote) from LoteCaducidad where Codigo='" & cbocodigo.Text & "'"
+                        rd2 = cmd2.ExecuteReader
+                        Do While rd2.Read
+                            If rd2.HasRows Then cboLote.Items.Add(rd2("Lote").ToString())
+                        Loop
+                        rd2.Close()
+                    Else
+                        If cbocodigo.Text = "" Then Exit Sub
+                        cmd2.CommandText =
+                                "select distinct(Lote) as Lt from LoteCaducidad where Codigo='" & cbocodigo.Text & "' and Cantidad>0"
+                        rd2 = cmd2.ExecuteReader
+                        Do While rd2.Read
+                            If rd2.HasRows Then cboLote.Items.Add(rd2("Lt").ToString())
+                        Loop
+                        rd2.Close()
+                    End If
+
+                    If cbotipo.Visible = False Then
+                        If T_Precio = "DIA_NOCHE" And (H_Actual > H_Inicia Or H_Actual < H_Final) Then
+                            txtprecio.Text = FormatNumber(PreEsp * TiCambio, 4)
+                            txtprecio.Tag = FormatNumber(PreEsp * TiCambio, 4)
+                        Else
+                            txtprecio.Text = FormatNumber(PreLst * TiCambio, 4)
+                            txtprecio.Tag = FormatNumber(PreLst * TiCambio, 4)
+                        End If
+                        If (Promo) Then
+                            txtprecio.Text = Promos(cbocodigo.Text, txtprecio.Text)
+                            txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                            txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                        End If
+                        txtprecio.ReadOnly = False
+                    Else
+                        If (Promo) Then
+                            txtprecio.Text = Promos(cbocodigo.Text, txtprecio.Text)
+                            txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                            txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                            txtprecio.ReadOnly = False
+                        Else
+                            If cbonota.Text = "" Then
+                                txtprecio.Text = Cambio(TiCambio)
+                                txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                                txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                                txtprecio.ReadOnly = False
+                            Else
+                                cmd2 = cnn2.CreateCommand
+                                cmd2.CommandText =
+                                    "select Precio from VentasDetalle where Codigo='" & cbocodigo.Text & "' and Folio=" & cbonota.Text & ""
+                                rd2 = cmd2.ExecuteReader
+                                If rd2.HasRows Then
+                                    If rd2.Read Then
+                                        txtprecio.Text = rd2(0).ToString
+                                        txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                                        txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                                        txtprecio.ReadOnly = True
+                                    End If
+                                Else
+                                    txtprecio.Text = Cambio(TiCambio)
+                                    txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                                    txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                                    txtprecio.ReadOnly = False
+                                End If
+                                rd2.Close()
+                            End If
+                        End If
+                    End If
+                    cnn2.Close()
+
+                    If Multiplica = "" Then
+                        txtcantidad.Text = "1"
+                        If CDbl(txtexistencia.Text) - CDbl(txtcantidad.Text) < 0 Then
+                            If VSE = True Then
+                                If Me.Text = "Ventas (1)" Then
+                                    MsgBox("No se puede vender sin existencias.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                                    rd1.Close() : cnn1.Close()
+                                    cbocodigo.Text = ""
+                                    cbodesc.Text = ""
+                                    txtunidad.Text = ""
+                                    txtcantidad.Text = ""
+                                    txtprecio.Text = "0.00"
+                                    txtprecio.Tag = 0
+                                    txttotal.Text = "0.00"
+                                    txtexistencia.Text = ""
+                                    cboLote.Text = ""
+                                    cboLote.Tag = 0
+                                    txtfechacad.Text = ""
+                                    txtubicacion.Text = ""
+                                    txtprecio.ReadOnly = False
+                                    cbodesc.Focus().Equals(True)
+                                    Exit Sub
+                                End If
+                            End If
+                        End If
+                        txttotal.Text = CDbl(txtcantidad.Text) * CDbl(txtprecio.Text)
+                        txttotal.Text = FormatNumber(txttotal.Text, 4)
+                        My.Application.DoEvents()
+
+                        'Si hay lote se detiene
+                        cnn2.Close() : cnn2.Open()
+                        cmd2 = cnn2.CreateCommand
+                        cmd2.CommandText =
+                            "select Codigo from LoteCaducidad where Codigo='" & cbocodigo.Text & "' and Cantidad>0"
+                        rd2 = cmd2.ExecuteReader
+                        If rd2.HasRows Then
+                            If rd2.Read Then
+                                cboLote.Focus.Equals(True)
+                                rd2.Close() : cnn2.Close()
+                                Exit Sub
+                            End If
+                        End If
+                        rd2.Close() : cnn2.Close()
+
+                        Call UpGrid()
+                        My.Application.DoEvents()
+                        Dim voy2 As Double = 0
+                        Dim VarSumXD As Double = 0
+                        For w = 0 To grdcaptura.Rows.Count - 1
+                            If grdcaptura.Rows(w).Cells(6).Value.ToString = "" Then
+                            Else
+                                VarSumXD = VarSumXD + CDbl(grdcaptura.Rows(w).Cells(5).Value.ToString)
+                                voy2 = voy2 + CDec(grdcaptura.Rows(w).Cells(3).Value)
+                            End If
+                            txtSubTotal.Text = FormatNumber(VarSumXD, 2)
+                        Next
+                        txtcant_productos.Text = FormatNumber(voy2, 2)
+                        If CDbl(txtdescuento1.Text) > 0 Then
+                            txtSubTotal.Tag = 1
+                        End If
+                        txtcoment.Text = ""
+                        cbocodigo.Text = ""
+                        ' cbocodigo.Items.Clear()
+                        cbodesc.Text = ""
+                        ' cbodesc.Items.Clear()
+                        txtunidad.Text = ""
+                        txtcantidad.Text = "1"
+                        txtprecio.Text = "0.00"
+                        txtprecio.Tag = 0
+                        txttotal.Text = "0.00"
+                        txtexistencia.Text = ""
+                        txtfechacad.Text = ""
+                        cboLote.Text = ""
+                        cboLote.Tag = 0
+                        txtubicacion.Text = ""
+                        cnn1.Close()
+
+                        If CDbl(txtdescuento1.Text) <= 0 Then
+                            txtPagar.Text = CDbl(txtSubTotal.Text) - CDbl(txtdescuento2.Text)
+                            txtPagar.Text = FormatNumber(txtPagar.Text, 2)
+                        End If
+
+                        Call txtdescuento1_TextChanged(txtdescuento1, New EventArgs())
+
+                        cbodesc.Focus().Equals(True)
+                        txtprecio.ReadOnly = False
+                    Else
+                        txtcantidad.Focus().Equals(True)
+                    End If
+                    rd1.Close() : cnn1.Close()
+                    Exit Sub
+
                 Else
                     CodBar()
 
@@ -18562,7 +18674,9 @@ kaka:
                         End If
                         cnn2.Close()
                     End If
+
                 End If
+
                 rd1.Close()
                 cnn1.Close()
             Catch ex As Exception
@@ -18573,74 +18687,77 @@ kaka:
     End Sub
 
     Private Sub cbodesc_SelectedValueChanged_1(sender As Object, e As EventArgs) Handles cbodesc.SelectedValueChanged
+
+        If banderasalirvaluechange = 0 Then Exit Sub
+
         Dim tasm_impre As String = DatosRecarga("TPapelV")
         Dim MyCode As String = ""
 
         If tasm_impre = "MEDIA CARTA" And grdcaptura.Rows.Count > 12 Then MsgBox("Se establecen 13 partidas como máximo para el formato de impresión 'MEDIA CARTA'", vbInformation + vbOK, "Delsscom Control Negocios Pro") : cbodesc.Text = "" : Exit Sub
 
-        Dim cnn4 As MySqlConnection = New MySqlConnection()
-        Dim serror As String = ""
-        Dim dr4 As DataRow
-        Dim dt4 As New DataTable
-        Dim odata4 As New ToolKitSQL.myssql
-        Dim sql As String = ""
-        Dim sql1 As String = ""
+        'Dim cnn4 As MySqlConnection = New MySqlConnection()
+        'Dim serror As String = ""
+        'Dim dr4 As DataRow
+        'Dim dt4 As New DataTable
+        'Dim odata4 As New ToolKitSQL.myssql
+        'Dim sql As String = ""
+        'Dim sql1 As String = ""
         Try
 
 
-            If odata4.dbOpen(cnn4, sTarget, serror) = True Then
-                Sql = "select Codigo,Grupo from Productos where Nombre='" & cbodesc.Text & "'"
-                If odata4.getDr(cnn4, dr4, Sql, serror) = True Then
-                    MyCode = dr4(0).ToString
-                    cbocodigo.Text = MyCode
-                End If
-            Else
-                MsgBox("Producto no registrado en la base de datos.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                cnn4.Close()
-                Exit Sub
-            End If
-            cnn4.Close()
-
-            If odata4.dbOpen(cnn4, sTarget, serror) = True Then
-                sql1 = "select Codigo from Productos where Left(Codigo, 6)='" & MyCode & "'"
-                If odata4.getDt(cnn4, dt4, sql, serror) = True Then
-                    For Each dr4 In dt4.Rows
-                        cbocodigo.Items.Add(dr4(0).ToString)
-                    Next
-                End If
-                cnn4.Close()
-            End If
-
-            'cnn4.Close() : cnn4.Open()
-            'cmd4 = cnn4.CreateCommand
-            'cmd4.CommandText =
-            '    "select Codigo,Grupo from Productos where Nombre='" & cbodesc.Text & "'"
-            'rd4 = cmd4.ExecuteReader
-            'If rd4.HasRows Then
-            '    If rd4.Read Then
-            '        MyCode = rd4(0).ToString
-            '        ' cbocodigo.Text = ""
+            'If odata4.dbOpen(cnn4, sTarget, serror) = True Then
+            '    sql = "select Codigo,Grupo from Productos where Nombre='" & cbodesc.Text & "'"
+            '    If odata4.getDr(cnn4, dr4, sql, serror) = True Then
+            '        MyCode = dr4(0).ToString
             '        cbocodigo.Text = MyCode
             '    End If
             'Else
             '    MsgBox("Producto no registrado en la base de datos.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-            '    rd4.Close()
             '    cnn4.Close()
             '    Exit Sub
             'End If
-            'rd4.Close()
-
-            'cmd4 = cnn4.CreateCommand
-            'cmd4.CommandText =
-            '    "select Codigo from Productos where Left(Codigo, 6)='" & MyCode & "'"
-            'rd4 = cmd4.ExecuteReader
-            'Do While rd4.Read
-            '    If rd4.HasRows Then cbocodigo.Items.Add(
-            '        rd4(0).ToString
-            '        )
-            'Loop
-            'rd4.Close()
             'cnn4.Close()
+
+            'If odata4.dbOpen(cnn4, sTarget, serror) = True Then
+            '    sql1 = "select Codigo from Productos where Left(Codigo, 6)='" & MyCode & "'"
+            '    If odata4.getDt(cnn4, dt4, sql, serror) = True Then
+            '        For Each dr4 In dt4.Rows
+            '            cbocodigo.Items.Add(dr4(0).ToString)
+            '        Next
+            '    End If
+            '    cnn4.Close()
+            'End If
+
+            cnn4.Close() : cnn4.Open()
+            cmd4 = cnn4.CreateCommand
+            cmd4.CommandText =
+                "select Codigo,Grupo from Productos where Nombre='" & cbodesc.Text & "'"
+            rd4 = cmd4.ExecuteReader
+            If rd4.HasRows Then
+                If rd4.Read Then
+                    MyCode = rd4(0).ToString
+                    ' cbocodigo.Text = ""
+                    cbocodigo.Text = MyCode
+                End If
+            Else
+                MsgBox("Producto no registrado en la base de datos.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                rd4.Close()
+                cnn4.Close()
+                Exit Sub
+            End If
+            rd4.Close()
+
+            cmd4 = cnn4.CreateCommand
+            cmd4.CommandText =
+                "select Codigo from Productos where Left(Codigo, 6)='" & MyCode & "'"
+            rd4 = cmd4.ExecuteReader
+            Do While rd4.Read
+                If rd4.HasRows Then cbocodigo.Items.Add(
+                    rd4(0).ToString
+                    )
+            Loop
+            rd4.Close()
+            cnn4.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn4.Close()
