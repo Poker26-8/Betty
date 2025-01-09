@@ -18578,44 +18578,76 @@ kaka:
 
         If tasm_impre = "MEDIA CARTA" And grdcaptura.Rows.Count > 12 Then MsgBox("Se establecen 13 partidas como máximo para el formato de impresión 'MEDIA CARTA'", vbInformation + vbOK, "Delsscom Control Negocios Pro") : cbodesc.Text = "" : Exit Sub
 
-        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd4 As MySqlDataReader
-        Dim cmd4 As MySqlCommand
-
+        Dim cnn4 As MySqlConnection = New MySqlConnection()
+        Dim serror As String = ""
+        Dim dr4 As DataRow
+        Dim dt4 As New DataTable
+        Dim odata4 As New ToolKitSQL.myssql
+        Dim sql As String = ""
+        Dim sql1 As String = ""
         Try
-            cnn4.Close() : cnn4.Open()
-            cmd4 = cnn4.CreateCommand
-            cmd4.CommandText =
-                "select Codigo,Grupo from Productos where Nombre='" & cbodesc.Text & "'"
-            rd4 = cmd4.ExecuteReader
-            If rd4.HasRows Then
-                If rd4.Read Then
-                    MyCode = rd4(0).ToString
-                    ' cbocodigo.Text = ""
+
+
+            If odata4.dbOpen(cnn4, sTarget, serror) = True Then
+                Sql = "select Codigo,Grupo from Productos where Nombre='" & cbodesc.Text & "'"
+                If odata4.getDr(cnn4, dr4, Sql, serror) = True Then
+                    MyCode = dr4(0).ToString
                     cbocodigo.Text = MyCode
                 End If
             Else
                 MsgBox("Producto no registrado en la base de datos.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                rd4.Close()
                 cnn4.Close()
                 Exit Sub
             End If
-            rd4.Close()
-
-            cmd4 = cnn4.CreateCommand
-            cmd4.CommandText =
-                "select Codigo from Productos where Left(Codigo, 6)='" & MyCode & "'"
-            rd4 = cmd4.ExecuteReader
-            Do While rd4.Read
-                If rd4.HasRows Then cbocodigo.Items.Add(
-                    rd4(0).ToString
-                    )
-            Loop
-            rd4.Close()
             cnn4.Close()
+
+            If odata4.dbOpen(cnn4, sTarget, serror) = True Then
+                sql1 = "select Codigo from Productos where Left(Codigo, 6)='" & MyCode & "'"
+                If odata4.getDt(cnn4, dt4, sql, serror) = True Then
+                    For Each dr4 In dt4.Rows
+                        cbocodigo.Items.Add(dr4(0).ToString)
+                    Next
+                End If
+                cnn4.Close()
+            End If
+
+            'cnn4.Close() : cnn4.Open()
+            'cmd4 = cnn4.CreateCommand
+            'cmd4.CommandText =
+            '    "select Codigo,Grupo from Productos where Nombre='" & cbodesc.Text & "'"
+            'rd4 = cmd4.ExecuteReader
+            'If rd4.HasRows Then
+            '    If rd4.Read Then
+            '        MyCode = rd4(0).ToString
+            '        ' cbocodigo.Text = ""
+            '        cbocodigo.Text = MyCode
+            '    End If
+            'Else
+            '    MsgBox("Producto no registrado en la base de datos.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+            '    rd4.Close()
+            '    cnn4.Close()
+            '    Exit Sub
+            'End If
+            'rd4.Close()
+
+            'cmd4 = cnn4.CreateCommand
+            'cmd4.CommandText =
+            '    "select Codigo from Productos where Left(Codigo, 6)='" & MyCode & "'"
+            'rd4 = cmd4.ExecuteReader
+            'Do While rd4.Read
+            '    If rd4.HasRows Then cbocodigo.Items.Add(
+            '        rd4(0).ToString
+            '        )
+            'Loop
+            'rd4.Close()
+            'cnn4.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn4.Close()
         End Try
+    End Sub
+
+    Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs) Handles Panel3.Paint
+
     End Sub
 End Class

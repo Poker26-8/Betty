@@ -489,45 +489,45 @@ Public Class frmVentas2
 #Region "Funciones"
     Public Sub Folio()
 
-        Dim cnn9 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd9 As MySqlDataReader
-        Dim cmd9 As MySqlCommand
+        'Dim cnn9 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim rd9 As MySqlDataReader
+        'Dim cmd9 As MySqlCommand
 
-        Try
-            If cnn9.State = 1 Then cnn9.Close()
-            cnn9.Open()
+        'Try
+        '    If cnn9.State = 1 Then cnn9.Close()
+        '    cnn9.Open()
 
-            cmd9 = cnn9.CreateCommand
-            If Me.Text = "Ventas (2)" Then
-                cmd9.CommandText =
-                    "select MAX(Folio) from Ventas"
-            End If
-            If Me.Text = "Cotización (2)" Then
-                cmd9.CommandText =
-                    "select MAX(Folio) from CotPed"
-            End If
+        '    cmd9 = cnn9.CreateCommand
+        '    If Me.Text = "Ventas (2)" Then
+        '        cmd9.CommandText =
+        '            "select MAX(Folio) from Ventas"
+        '    End If
+        '    If Me.Text = "Cotización (2)" Then
+        '        cmd9.CommandText =
+        '            "select MAX(Folio) from CotPed"
+        '    End If
 
-            If Me.Text = "Pedidos (2)" Then
-                cmd9.CommandText =
-                   "select MAX(Folio) from CotPed"
-            End If
+        '    If Me.Text = "Pedidos (2)" Then
+        '        cmd9.CommandText =
+        '           "select MAX(Folio) from CotPed"
+        '    End If
 
-            If Me.Text = "" Then Exit Sub
-            rd9 = cmd9.ExecuteReader
-            If rd9.HasRows Then
-                If rd9.Read Then
-                    lblfolio.Text = CDbl(IIf(rd9(0).ToString = "", "0", rd9(0).ToString)) + 1
-                Else
-                    lblfolio.Text = "1"
-                End If
-            Else
-                lblfolio.Text = "1"
-            End If
-            rd9.Close() : cnn9.Close()
-        Catch ex As Exception
-            MessageBox.Show(ex.ToString())
-            cnn9.Close()
-        End Try
+        '    If Me.Text = "" Then Exit Sub
+        '    rd9 = cmd9.ExecuteReader
+        '    If rd9.HasRows Then
+        '        If rd9.Read Then
+        '            lblfolio.Text = CDbl(IIf(rd9(0).ToString = "", "0", rd9(0).ToString)) + 1
+        '        Else
+        '            lblfolio.Text = "1"
+        '        End If
+        '    Else
+        '        lblfolio.Text = "1"
+        '    End If
+        '    rd9.Close() : cnn9.Close()
+        'Catch ex As Exception
+        '    MessageBox.Show(ex.ToString())
+        '    cnn9.Close()
+        'End Try
     End Sub
 
     Public Sub CodBar()
