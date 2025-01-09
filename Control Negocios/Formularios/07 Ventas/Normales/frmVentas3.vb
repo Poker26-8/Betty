@@ -755,6 +755,8 @@ Public Class frmVentas3
             Dim varcodunico As String = Format(CDate(Date.Now), "yyyy/MM/ddHH:mm:ss.fff") & codigo
             varcodunico = QuitarCaracteresEspeciales(varcodunico)
 
+            grdcaptura.SuspendLayout()
+
             If acumulaxd = 1 Then
                 For xxx As Integer = 0 To grdcaptura.Rows.Count - 1
                     If codigo = grdcaptura.Rows(xxx).Cells(0).Value.ToString Then
@@ -769,6 +771,8 @@ Public Class frmVentas3
             End If
 
             grdcaptura.FirstDisplayedScrollingRowIndex = grdcaptura.RowCount - 1
+
+            grdcaptura.ResumeLayout()
 
 kak:
 
@@ -2688,13 +2692,13 @@ kak:
 
 
 
-                            cnn2.Close() : cnn2.Open() : cmd2 = cnn2.CreateCommand
+                            cnn2.Close() : cnn2.Open()
+                            cmd2 = cnn2.CreateCommand
                             cmd2.CommandText =
                                 "select Existencia from Productos where Codigo='" & Strings.Left(cbocodigo.Text, 6) & "'"
                             rd2 = cmd2.ExecuteReader
                             If rd2.HasRows Then
                                 If rd2.Read Then
-
                                     txtexistencia.Text = CDbl(IIf(rd2(0).ToString = "", "0", rd2(0).ToString)) / Multiplo
                                 End If
                             End If
@@ -2782,7 +2786,7 @@ kak:
                                     If VSE = False Then
                                         If Me.Text = "Ventas (3)" Then
                                             MsgBox("No se puede vender sin existencias.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                                            rd1.Close() : cnn1.Close()
+                                            ' rd1.Close() : cnn1.Close()
                                             cbocodigo.Text = ""
                                             cbodesc.Text = ""
                                             txtunidad.Text = ""
