@@ -526,7 +526,7 @@ Public Class frmVentas3
 
                 If odata11.dbOpen(cnn11, sTargetlocal, serror) = True Then
                     sql = "select Alias from Usuarios where Clave='" & txtcontraseña.Text & "'"
-                    If odata11.getDr(cnn1, dr11, sql, serror) = True Then
+                    If odata11.getDr(cnn11, dr11, sql, serror) = True Then
                         lblusuario.Text = dr11("Alias").ToString
                         btnventa.Focus().Equals(True)
                     End If
@@ -7702,6 +7702,7 @@ doorcita:
         End If
 
         btnventa.Enabled = False
+        btnnuevo.Enabled = False
         My.Application.DoEvents()
 
         Dim TotalIEPSPrint As Double = 0
@@ -7728,6 +7729,7 @@ doorcita:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+            btnnuevo.Enabled = True
         End Try
 
 
@@ -7856,6 +7858,7 @@ doorcita:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+            btnnuevo.Enabled = True
         End Try
 
         If grdcaptura.Rows.Count < 1 Then txtdescuento1.Focus().Equals(True) : cnn1.Close() : btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
@@ -7920,6 +7923,7 @@ doorcita:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+            btnnuevo.Enabled = True
         End Try
         My.Application.DoEvents()
 
@@ -8319,6 +8323,7 @@ kakaxd:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+            btnnuevo.Enabled = True
         End Try
 
         'Obtiene el folio que se acaba de insertar
@@ -8440,6 +8445,7 @@ kakaxd:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+            btnnuevo.Enabled = True
         End Try
 
         'Llenado de variables de pago (Tarjeta, Transferencia, Saldo, Efectivo y Otro)
@@ -8680,6 +8686,7 @@ kakaxd:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+            btnnuevo.Enabled = True
         End Try
 
 
@@ -8714,6 +8721,7 @@ kakaxd:
             Catch ex As Exception
                 MessageBox.Show(ex.ToString())
                 cnn1.Close()
+                btnnuevo.Enabled = True
             End Try
         End If
 
@@ -9300,6 +9308,8 @@ Door:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close() : cnn2.Close()
+
+            btnnuevo.Enabled = True
         End Try
 
         Call BorraLotes()
@@ -9519,6 +9529,7 @@ Door:
             Catch ex As Exception
                 MessageBox.Show(ex.ToString())
                 cnn1.Close()
+                btnnuevo.Enabled = True
             End Try
         End If
         rd3.Close()
@@ -9895,6 +9906,7 @@ safo:
         btnnuevo.PerformClick()
 
         btnventa.Enabled = True : My.Application.DoEvents()
+        btnnuevo.Enabled = True : My.Application.DoEvents()
 
         If pide = "1" Then
             lblusuario.Text = usu

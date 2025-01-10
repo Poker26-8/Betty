@@ -6301,9 +6301,13 @@ quepasowey:
 
             If tPapel = "TICKET" Then
                 If tMilimetros = "80" Then
+
+
+
+                    pTicket80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
                     Dim ps As New System.Drawing.Printing.PaperSize("Custom", 305, 3000)
                     pTicket80.DefaultPageSettings.PaperSize = ps
-                    pTicket80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
+
                     pTicket80.Print()
                 End If
                 If tMilimetros = "58" Then

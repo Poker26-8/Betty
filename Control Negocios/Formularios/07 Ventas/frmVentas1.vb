@@ -7665,6 +7665,7 @@ doorcita:
         End If
 
         btnventa.Enabled = False
+        btnnuevo.Enabled = False
         My.Application.DoEvents()
 
         Dim TotalIEPSPrint As Double = 0
@@ -7684,6 +7685,8 @@ doorcita:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+
+            btnnuevo.Enabled = True
         End Try
 
 
@@ -7812,6 +7815,8 @@ doorcita:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+
+            btnnuevo.Enabled = True
         End Try
 
         If grdcaptura.Rows.Count < 1 Then txtdescuento1.Focus().Equals(True) : cnn1.Close() : btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
@@ -7876,6 +7881,9 @@ doorcita:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+
+            btnnuevo.Enabled = True
+
         End Try
         My.Application.DoEvents()
 
@@ -8275,6 +8283,9 @@ kakaxd:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+
+            btnnuevo.Enabled = True
+
         End Try
 
         'Obtiene el folio que se acaba de insertar
@@ -8395,6 +8406,9 @@ kakaxd:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+
+            btnnuevo.Enabled = True
+
         End Try
 
         'Llenado de variables de pago (Tarjeta, Transferencia, Saldo, Efectivo y Otro)
@@ -8635,6 +8649,9 @@ kakaxd:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+
+            btnnuevo.Enabled = True
+
         End Try
 
 
@@ -9238,6 +9255,9 @@ Door:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close() : cnn2.Close()
+
+            btnnuevo.Enabled = True
+
         End Try
 
         Call BorraLotes()
@@ -9833,6 +9853,7 @@ safo:
         btnnuevo.PerformClick()
 
         btnventa.Enabled = True : My.Application.DoEvents()
+        btnnuevo.Enabled = True : My.Application.DoEvents()
 
         If pide = "1" Then
             lblusuario.Text = usu
@@ -11038,9 +11059,9 @@ ecomoda:
         Dim pagare As String = ""
         Dim ligaqr As String = ""
 
-        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
+        'Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim rd1 As MySqlDataReader
+        'Dim cmd1 As MySqlCommand
 
 
         If whats <> "" Then

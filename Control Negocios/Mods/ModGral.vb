@@ -232,9 +232,9 @@ Module ModGral
         Dim respuesta As String = ""
         Dim siono As Integer = 0
 
-        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd5 As MySqlDataReader
-        Dim cmd5 As MySqlCommand
+        'Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim rd5 As MySqlDataReader
+        'Dim cmd5 As MySqlCommand
 
         Try
             cnn5.Close() : cnn5.Open()

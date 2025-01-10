@@ -7995,6 +7995,8 @@ Door:
         End If
 
         btnventa.Enabled = False
+        btnnuevo.Enabled = False
+
         My.Application.DoEvents()
 
         Dim TotalIEPSPrint As Double = 0
@@ -10188,6 +10190,7 @@ safo:
         btnnuevo.PerformClick()
 
         btnventa.Enabled = True : My.Application.DoEvents()
+        btnnuevo.Enabled = True : My.Application.DoEvents()
 
         If pide = "1" Then
             lblusuario.Text = usu
