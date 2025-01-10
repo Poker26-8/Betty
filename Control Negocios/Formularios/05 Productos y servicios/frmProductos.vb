@@ -1583,6 +1583,7 @@ Public Class frmProductos
     End Sub
 
     Private Sub Sube_Clientes()
+
         Dim nombre, razon, tipo, rfc, calle, colonia, delegacion, entidad, cp, telefono, correo, interior, exterior, pais, regfis As String
         Dim credito As Double = 0
         Dim diascred As Integer = 0

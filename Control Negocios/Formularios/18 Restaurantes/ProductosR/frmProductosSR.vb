@@ -54,6 +54,7 @@ Public Class frmProductosSR
         If AscW(e.KeyChar) = Keys.Enter Then
 
             Dim modoalmacen As Integer = 0
+            Dim siespromo As Integer = 0
 
             Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
             Dim rd1 As MySqlDataReader
@@ -61,7 +62,7 @@ Public Class frmProductosSR
             Try
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "SELECT Codigo,IVA,UVenta,PrecioCompra,PrecioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,ProvRes,Modo_Almacen,CodBarra FROM Productos WHERE Nombre='" & cboDescripcion.Text & "'"
+                cmd1.CommandText = "SELECT Codigo,IVA,UVenta,PrecioCompra,PrecioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,ProvRes,Modo_Almacen,CodBarra,Promociones FROM Productos WHERE Nombre='" & cboDescripcion.Text & "'"
                 rd1 = cmd1.ExecuteReader
                 If rd1.HasRows Then
                     If rd1.Read Then
@@ -80,11 +81,18 @@ Public Class frmProductosSR
                         chkKit.Checked = IIf(rd1(11).ToString, 1, 0)
                         modoalmacen = rd1(12).ToString
                         txtCodBarras.Text = rd1(13).ToString
+                        siespromo = rd1(14).ToString
 
                         If modoalmacen = 1 Then
                             rboDescIngredientes.Checked = True
                         Else
                             rboDescProductos.Checked = True
+                        End If
+
+                        If siespromo = 1 Then
+                            cbPromociones.Checked = True
+                        Else
+                            cbPromociones.Checked = False
                         End If
 
                     End If
@@ -255,6 +263,14 @@ Public Class frmProductosSR
 
 
             Dim modo_almacen As Integer = 0
+            Dim promocion As Integer = 0
+            If cbPromociones.Checked = True Then
+                promocion = 1
+            End If
+
+            If cbPromociones.Checked = False Then
+                promocion = 0
+            End If
 
             If rboDescProductos.Checked = True Then
                 modo_almacen = 0
@@ -274,7 +290,7 @@ Public Class frmProductosSR
                 If rd1.Read Then
 
                     cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText = "UPDATE Productos SET CodBarra='" & txtCodBarras.Text & "',Nombre='" & cboDescripcion.Text & "',IVA=" & cboIva.Text & ",UCompra='" & txtUnidad.Text & "',PrecioCompra=" & p_compra & ",PrecioVenta=" & p_venta & ",PrecioVentaIVA=" & p_venta & ",PrecioDomicilio=" & p_domicilio & ",PrecioDomicilioIVA=" & p_domicilio & ",ProvPri='" & cboProveedores.Text & "',Departamento='" & cboDepartamento.Text & "',Grupo='" & cboGrupo.Text & "',GPrint='" & cboComanda.Text & "',Existencia=" & txtExistencia.Text & ",ProvRes=" & IIf(chkKit.Checked, 1, 0) & ",Modo_Almacen=" & modo_almacen & ",Actu=0,Resumen='" & txt_resumen.Text & "', Descripcion_Tienda='" & txt_descripcion.Text & "',IIEPS=" & TXTieps.Text & " WHERE Codigo='" & cboCodCorto.Text & "'"
+                    cmd2.CommandText = "UPDATE Productos SET CodBarra='" & txtCodBarras.Text & "',Nombre='" & cboDescripcion.Text & "',IVA=" & cboIva.Text & ",UCompra='" & txtUnidad.Text & "',PrecioCompra=" & p_compra & ",PrecioVenta=" & p_venta & ",PrecioVentaIVA=" & p_venta & ",PrecioDomicilio=" & p_domicilio & ",PrecioDomicilioIVA=" & p_domicilio & ",ProvPri='" & cboProveedores.Text & "',Departamento='" & cboDepartamento.Text & "',Grupo='" & cboGrupo.Text & "',GPrint='" & cboComanda.Text & "',Existencia=" & txtExistencia.Text & ",ProvRes=" & IIf(chkKit.Checked, 1, 0) & ",Modo_Almacen=" & modo_almacen & ",Actu=0,Resumen='" & txt_resumen.Text & "', Descripcion_Tienda='" & txt_descripcion.Text & "',IIEPS=" & TXTieps.Text & ",Promociones='" & promocion & "' WHERE Codigo='" & cboCodCorto.Text & "'"
                     If cmd2.ExecuteNonQuery() Then
                         My.Application.DoEvents()
 
@@ -296,7 +312,7 @@ Public Class frmProductosSR
                 End If
             Else
                 cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "INSERT INTO Productos(Codigo,CodBarra,Nombre,NombreLargo,ProvPri,ProvEme,UCompra,UVenta,UMInima,MCD,Multiplo,Departamento,Grupo,Ubicacion,Min,Max,Comision,PrecioCompra,PrecioVenta,PrecioVentaIVA,PrecioDomicilio,PrecioDomicilioIVA,IVA,Existencia,id_tbMoneda,Almacen3,GPrint,Fecha,Fecha_Inicial,Fecha_Final,ProvRes,Modo_Almacen,Resumen,Descripcion_Tienda,IIEPS)VALUES('" & cboCodCorto.Text & "','" & txtCodBarras.Text & "','" & cboDescripcion.Text & "','" & cboDescripcion.Text & "','" & cboProveedores.Text & "','" & cboProveedores.Text & "','" & txtUnidad.Text & "','" & txtUnidad.Text & "','" & txtUnidad.Text & "',1,1,'" & cboDepartamento.Text & "','" & cboGrupo.Text & "','',1,1,0," & p_compra & "," & p_venta & "," & p_venta & "," & p_domicilio & "," & p_domicilio & "," & cboIva.Text & "," & txtExistencia.Text & ",1," & p_venta & ",'" & cboComanda.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd") & "'," & IIf(chkKit.Checked, 1, 0) & "," & modo_almacen & ",'" & txt_resumen.Text & "','" & txt_descripcion.Text & "'," & TXTieps.Text & ")"
+                cmd2.CommandText = "INSERT INTO Productos(Codigo,CodBarra,Nombre,NombreLargo,ProvPri,ProvEme,UCompra,UVenta,UMInima,MCD,Multiplo,Departamento,Grupo,Ubicacion,Min,Max,Comision,PrecioCompra,PrecioVenta,PrecioVentaIVA,PrecioDomicilio,PrecioDomicilioIVA,IVA,Existencia,id_tbMoneda,Almacen3,GPrint,Fecha,Fecha_Inicial,Fecha_Final,ProvRes,Modo_Almacen,Resumen,Descripcion_Tienda,IIEPS,Promociones)VALUES('" & cboCodCorto.Text & "','" & txtCodBarras.Text & "','" & cboDescripcion.Text & "','" & cboDescripcion.Text & "','" & cboProveedores.Text & "','" & cboProveedores.Text & "','" & txtUnidad.Text & "','" & txtUnidad.Text & "','" & txtUnidad.Text & "',1,1,'" & cboDepartamento.Text & "','" & cboGrupo.Text & "','',1,1,0," & p_compra & "," & p_venta & "," & p_venta & "," & p_domicilio & "," & p_domicilio & "," & cboIva.Text & "," & txtExistencia.Text & ",1," & p_venta & ",'" & cboComanda.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd") & "'," & IIf(chkKit.Checked, 1, 0) & "," & modo_almacen & ",'" & txt_resumen.Text & "','" & txt_descripcion.Text & "'," & TXTieps.Text & "," & promocion & ")"
                 If cmd2.ExecuteNonQuery() Then
 
 
@@ -799,7 +815,7 @@ Public Class frmProductosSR
             cbopromociones.Items.Clear()
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand
-            cmd5.CommandText = "SELECT DISTINCT Nombre FROM productos WHERE Grupo='PROMOCIONES' AND Nombre<>'' ORDER BY Nombre"
+            cmd5.CommandText = "SELECT DISTINCT Nombre FROM productos WHERE Promociones=1 AND Nombre<>'' ORDER BY Nombre"
             rd5 = cmd5.ExecuteReader
             Do While rd5.Read
                 If rd5.HasRows Then
@@ -1189,6 +1205,8 @@ nopasowey:
         Try
 
             Dim almacen As Integer = 0
+            Dim siespromo As Integer = 0
+
             grdextras.Rows.Clear()
             grdpreferencia.Rows.Clear()
             grdpromociones.Rows.Clear()
@@ -1196,7 +1214,7 @@ nopasowey:
 
             cnn4.Close() : cnn4.Open()
             cmd4 = cnn4.CreateCommand
-            cmd4.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,IIEPS,Modo_Almacen FROM Productos WHERE Codigo='" & cboCodCorto.Text & "'"
+            cmd4.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,IIEPS,Modo_Almacen,Promociones FROM Productos WHERE Codigo='" & cboCodCorto.Text & "'"
             rd4 = cmd4.ExecuteReader
             If rd4.HasRows Then
                 If rd4.Read Then
@@ -1215,6 +1233,13 @@ nopasowey:
                     txtExistencia.Text = rd4("Existencia").ToString
                     TXTieps.Text = rd4("IIEPS").ToString
                     almacen = rd4("Modo_Almacen").ToString
+                    siespromo = rd4("Promociones").ToString
+
+                    If siespromo = 1 Then
+                        cbPromociones.Checked = True
+                    Else
+                        cbPromociones.Checked = False
+                    End If
 
                     If almacen = 1 Then
                         rboDescIngredientes.Checked = True
@@ -1301,21 +1326,23 @@ nopasowey:
             txtcantidadpromo.Text = "0"
 
             Dim modo_almacen As Integer = 0
+            Dim siespromo As Integer = 0
+
             Dim v As Integer = 0
             cnn3.Close() : cnn3.Open()
             cmd3 = cnn3.CreateCommand
             If dato = "barra" Then
-                cmd3.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Resumen,Descripcion_Tienda,IIEPS,Modo_Almacen FROM Productos WHERE CodBarra='" & txtCodBarras.Text & "'"
+                cmd3.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Resumen,Descripcion_Tienda,IIEPS,Modo_Almacen,Promociones FROM Productos WHERE CodBarra='" & txtCodBarras.Text & "'"
                 v = 1
             End If
 
             If dato = "NOMBRE" Then
-                cmd3.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Resumen,Descripcion_Tienda,IIEPS,Modo_Almacen FROM Productos WHERE Nombre='" & cboDescripcion.Text & "'"
+                cmd3.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Resumen,Descripcion_Tienda,IIEPS,Modo_Almacen,Promociones FROM Productos WHERE Nombre='" & cboDescripcion.Text & "'"
                 v = 2
             End If
 
             If dato = "CODIGO" Then
-                cmd3.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Resumen,Descripcion_Tienda,IIEPS,Modo_Almacen FROM Productos WHERE Codigo='" & cboCodCorto.Text & "'"
+                cmd3.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Resumen,Descripcion_Tienda,IIEPS,Modo_Almacen,Promociones FROM Productos WHERE Codigo='" & cboCodCorto.Text & "'"
                 v = 2
             End If
 
@@ -1344,6 +1371,15 @@ nopasowey:
                     txt_descripcion.Text = rd3("Descripcion_Tienda").ToString
                     TXTieps.Text = rd3("IIEPS").ToString
                     modo_almacen = rd3("Modo_Almacen").ToString
+                    siespromo = rd3("Promociones").ToString
+
+                    If siespromo = 1 Then
+                        cbPromociones.Checked = True
+                    End If
+
+                    If siespromo = 0 Then
+                        cbPromociones.Checked = False
+                    End If
 
                     If modo_almacen = 1 Then
                         rboDescIngredientes.Checked = True
@@ -1430,24 +1466,26 @@ nopasowey:
             txtcantidadpromo.Text = "0"
 
             Dim alma As Integer = 0
+            Dim sipromo As Integer = 0
+
             Dim a As Integer = 0
             Dim b As Integer = 0
             cnn4.Close() : cnn4.Open()
             cmd4 = cnn4.CreateCommand
             If dato = "barra" Then
-                cmd4.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Modo_Almacen FROM Productos WHERE CodBarra='" & txtCodBarras.Text & "'"
+                cmd4.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Modo_Almacen,Promociones FROM Productos WHERE CodBarra='" & txtCodBarras.Text & "'"
                 a = 1
                 b = 2
             End If
 
             If dato = "NOMBRE" Then
-                cmd4.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Modo_Almacen FROM Productos WHERE Nombre='" & cboDescripcion.Text & "'"
+                cmd4.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Modo_Almacen,Promociones FROM Productos WHERE Nombre='" & cboDescripcion.Text & "'"
                 a = 2
                 b = 1
             End If
 
             If dato = "CODIGO" Then
-                cmd4.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Modo_Almacen FROM Productos WHERE Codigo='" & cboCodCorto.Text & "'"
+                cmd4.CommandText = "SELECT Codigo,CodBarra,Nombre,IVA,UCompra,PrecioCompra,precioVentaIVA,PrecioDomicilioIVA,ProvPri,Departamento,Grupo,GPrint,Existencia,Modo_Almacen,Promociones FROM Productos WHERE Codigo='" & cboCodCorto.Text & "'"
                 a = 2
                 b = 2
             End If
@@ -1477,6 +1515,13 @@ nopasowey:
                     cboComanda.Text = rd4("GPrint").ToString
                     txtExistencia.Text = rd4("Existencia").ToString
                     alma = rd4("Modo_Almacen").ToString
+                    sipromo = rd4("Promociones").ToString
+
+                    If sipromo = 1 Then
+                        cbPromociones.Checked = True
+                    Else
+                        cbPromociones.Checked = False
+                    End If
 
                     If alma = 1 Then
                         rboDescIngredientes.Checked = True

@@ -47,6 +47,7 @@ Public Class frmAgregarProducto
     Dim existencia As Double = 0
     Dim departamento As String = ""
     Dim GRUPO As String = ""
+    Dim sipromo As Integer = 0
 
     Dim min As Double = 0
     Dim PU As Double = 0
@@ -70,6 +71,8 @@ Public Class frmAgregarProducto
 
     Public currentIndex As Integer = 0
     Public controlsPerClick As Integer = 12
+
+    Public statusPromo As Integer = 0
     Private Sub Actualiza_Promos()
         Dim dia_hoy As Integer = Date.Now.DayOfWeek
         Dim dia_tex As String = ""
@@ -1551,6 +1554,7 @@ Public Class frmAgregarProducto
         Dim cmd1 As MySqlCommand
 
         If cantpromo < cantidadPromo Then
+            statusPromo = 1
             pteclado.Show()
             gteclas.Enabled = True
             txtRespuesta.Focus.Equals(True)
@@ -1688,7 +1692,7 @@ Public Class frmAgregarProducto
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
-                "SELECT Departamento,Nombre,UVenta,Min,Ubicacion,Multiplo,Existencia,Grupo,E1,E2 FROM Productos WHERE Codigo='" & Codigo & "'"
+                "SELECT Departamento,Nombre,UVenta,Min,Ubicacion,Multiplo,Existencia,Grupo,E1,E2,Promociones FROM Productos WHERE Codigo='" & Codigo & "'"
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 If rd1.Read Then
@@ -1703,7 +1707,8 @@ Public Class frmAgregarProducto
                     ubicacion = rd1("Ubicacion").ToString()
                     multiplo = rd1("Multiplo").ToString()
                     existencia = rd1("Existencia").ToString()
-                    GRUPO = rd1("Grupo").ToString()
+                    sipromo = rd1("Promociones").ToString
+                    '  GRUPO = rd1("Grupo").ToString()
                     'Consulta sí hay 2x1
                     doxuno = rd1("E1").ToString()
                     'Consulta sí hay 3x2
@@ -1718,7 +1723,8 @@ Public Class frmAgregarProducto
             PU = (PU)
             Importe = cantidad * PU
 
-            If GRUPO = "PROMOCIONES" Then
+            'If GRUPO = "PROMOCIONES" Then
+            If sipromo = 1 Then
                 UpGridCaptura()
             Else
                 ' If Importe <> 0 Then
@@ -1763,7 +1769,14 @@ Public Class frmAgregarProducto
                         MyPrecio = rd2("PrecioVentaIVA").ToString()
                     End If
                 End If
-                PU = MyPrecio
+                If statusPromo = 1 Then
+                    PU = 0.0
+                    statusPromo = 0
+                Else
+                    PU = MyPrecio
+                    statusPromo = 0
+                End If
+
             End If
         End If
         rd2.Close() : cnn2.Close()
@@ -2848,6 +2861,8 @@ SAFO:
     End Sub
 
     Private Sub btnnuevo_Click(sender As Object, e As EventArgs) Handles btnnuevo.Click
+
+        statusPromo = 0
 
         grdCaptura.Rows.Clear()
         pExtras.Controls.Clear()

@@ -99,6 +99,7 @@ Partial Class frmProductosSR
         Me.btn_tienda = New System.Windows.Forms.Button()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.TXTieps = New System.Windows.Forms.TextBox()
+        Me.cbPromociones = New System.Windows.Forms.CheckBox()
         Me.GroupBox2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl2.SuspendLayout()
@@ -132,7 +133,7 @@ Partial Class frmProductosSR
         Me.BTNpORMOCIONES.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNpORMOCIONES.Image = CType(resources.GetObject("BTNpORMOCIONES.Image"), System.Drawing.Image)
         Me.BTNpORMOCIONES.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.BTNpORMOCIONES.Location = New System.Drawing.Point(619, 396)
+        Me.BTNpORMOCIONES.Location = New System.Drawing.Point(620, 424)
         Me.BTNpORMOCIONES.Name = "BTNpORMOCIONES"
         Me.BTNpORMOCIONES.Size = New System.Drawing.Size(136, 74)
         Me.BTNpORMOCIONES.TabIndex = 233
@@ -146,7 +147,7 @@ Partial Class frmProductosSR
         Me.txtrutaimagen.BackColor = System.Drawing.Color.White
         Me.txtrutaimagen.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtrutaimagen.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtrutaimagen.Location = New System.Drawing.Point(832, 438)
+        Me.txtrutaimagen.Location = New System.Drawing.Point(833, 466)
         Me.txtrutaimagen.Name = "txtrutaimagen"
         Me.txtrutaimagen.Size = New System.Drawing.Size(65, 23)
         Me.txtrutaimagen.TabIndex = 232
@@ -189,7 +190,7 @@ Partial Class frmProductosSR
         'pbimportar
         '
         Me.pbimportar.BackColor = System.Drawing.Color.White
-        Me.pbimportar.Location = New System.Drawing.Point(619, 476)
+        Me.pbimportar.Location = New System.Drawing.Point(620, 504)
         Me.pbimportar.Name = "pbimportar"
         Me.pbimportar.Size = New System.Drawing.Size(136, 12)
         Me.pbimportar.TabIndex = 219
@@ -204,7 +205,7 @@ Partial Class frmProductosSR
         Me.btnImportar.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnImportar.Image = CType(resources.GetObject("btnImportar.Image"), System.Drawing.Image)
         Me.btnImportar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnImportar.Location = New System.Drawing.Point(903, 326)
+        Me.btnImportar.Location = New System.Drawing.Point(904, 354)
         Me.btnImportar.Name = "btnImportar"
         Me.btnImportar.Size = New System.Drawing.Size(65, 67)
         Me.btnImportar.TabIndex = 218
@@ -254,7 +255,7 @@ Partial Class frmProductosSR
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button1.Location = New System.Drawing.Point(974, 327)
+        Me.Button1.Location = New System.Drawing.Point(975, 355)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(65, 67)
         Me.Button1.TabIndex = 34
@@ -497,7 +498,7 @@ Partial Class frmProductosSR
         Me.btnSalir.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSalir.Image = CType(resources.GetObject("btnSalir.Image"), System.Drawing.Image)
         Me.btnSalir.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnSalir.Location = New System.Drawing.Point(1045, 327)
+        Me.btnSalir.Location = New System.Drawing.Point(1046, 355)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(65, 67)
         Me.btnSalir.TabIndex = 30
@@ -513,7 +514,7 @@ Partial Class frmProductosSR
         Me.btnGuardar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), System.Drawing.Image)
         Me.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnGuardar.Location = New System.Drawing.Point(690, 326)
+        Me.btnGuardar.Location = New System.Drawing.Point(691, 354)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(65, 67)
         Me.btnGuardar.TabIndex = 29
@@ -529,7 +530,7 @@ Partial Class frmProductosSR
         Me.btnEliminar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEliminar.Image = CType(resources.GetObject("btnEliminar.Image"), System.Drawing.Image)
         Me.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnEliminar.Location = New System.Drawing.Point(761, 326)
+        Me.btnEliminar.Location = New System.Drawing.Point(762, 354)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(65, 67)
         Me.btnEliminar.TabIndex = 28
@@ -545,7 +546,7 @@ Partial Class frmProductosSR
         Me.btnNuevo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNuevo.Image = CType(resources.GetObject("btnNuevo.Image"), System.Drawing.Image)
         Me.btnNuevo.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnNuevo.Location = New System.Drawing.Point(619, 326)
+        Me.btnNuevo.Location = New System.Drawing.Point(620, 354)
         Me.btnNuevo.Name = "btnNuevo"
         Me.btnNuevo.Size = New System.Drawing.Size(65, 67)
         Me.btnNuevo.TabIndex = 27
@@ -852,7 +853,7 @@ Partial Class frmProductosSR
         Me.grdsql.AllowUserToDeleteRows = False
         Me.grdsql.BackgroundColor = System.Drawing.Color.White
         Me.grdsql.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdsql.Location = New System.Drawing.Point(832, 396)
+        Me.grdsql.Location = New System.Drawing.Point(833, 424)
         Me.grdsql.Name = "grdsql"
         Me.grdsql.ReadOnly = True
         Me.grdsql.Size = New System.Drawing.Size(28, 36)
@@ -867,7 +868,7 @@ Partial Class frmProductosSR
         Me.btnMigrar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMigrar.Image = CType(resources.GetObject("btnMigrar.Image"), System.Drawing.Image)
         Me.btnMigrar.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnMigrar.Location = New System.Drawing.Point(832, 326)
+        Me.btnMigrar.Location = New System.Drawing.Point(833, 354)
         Me.btnMigrar.Name = "btnMigrar"
         Me.btnMigrar.Size = New System.Drawing.Size(65, 67)
         Me.btnMigrar.TabIndex = 234
@@ -949,7 +950,7 @@ Partial Class frmProductosSR
         Me.btn_tienda.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_tienda.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_tienda.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btn_tienda.Location = New System.Drawing.Point(761, 396)
+        Me.btn_tienda.Location = New System.Drawing.Point(762, 424)
         Me.btn_tienda.Name = "btn_tienda"
         Me.btn_tienda.Size = New System.Drawing.Size(65, 74)
         Me.btn_tienda.TabIndex = 256
@@ -980,12 +981,24 @@ Partial Class frmProductosSR
         Me.TXTieps.Text = "0"
         Me.TXTieps.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'cbPromociones
+        '
+        Me.cbPromociones.AutoSize = True
+        Me.cbPromociones.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbPromociones.Location = New System.Drawing.Point(651, 324)
+        Me.cbPromociones.Name = "cbPromociones"
+        Me.cbPromociones.Size = New System.Drawing.Size(120, 24)
+        Me.cbPromociones.TabIndex = 259
+        Me.cbPromociones.Text = "Promociones"
+        Me.cbPromociones.UseVisualStyleBackColor = True
+        '
         'frmProductosSR
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(251, Byte), Integer), CType(CType(187, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1114, 560)
+        Me.Controls.Add(Me.cbPromociones)
         Me.Controls.Add(Me.box_tienda)
         Me.Controls.Add(Me.btn_tienda)
         Me.Controls.Add(Me.btnMigrar)
@@ -1137,4 +1150,5 @@ Partial Class frmProductosSR
     Friend WithEvents btn_tienda As Button
     Friend WithEvents Label18 As Label
     Friend WithEvents TXTieps As TextBox
+    Friend WithEvents cbPromociones As CheckBox
 End Class

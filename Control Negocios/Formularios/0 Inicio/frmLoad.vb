@@ -651,6 +651,26 @@ Public Class frmLoad
             cnn1.Close()
         End Try
         'n_serie2
+
+        'promociones
+        Try
+            cnn1.Close()
+            cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "SELECT Promociones FROM productos"
+            rd1 = cmd1.ExecuteReader
+            If rd1.Read Then
+            End If
+            rd1.Close()
+            cnn1.Close()
+        Catch ex As Exception
+            rd1.Close()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "ALTER TABLE productos add column Promociones int(1) DEFAULT '0'"
+            cmd1.ExecuteNonQuery()
+            cnn1.Close()
+        End Try
+
         'trasladosdet
         Try
             cnn1.Close()

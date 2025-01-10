@@ -342,13 +342,13 @@ Public Class frmkitsN
                 cnn1.Close()
                 cnn1.Open()
                 cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "Delete from Kits where Nombre='" & cboKit.Text & "' and Cod='" & txtCodigoKit.Text & "'"
+                cmd1.CommandText = "Delete from Kits where Cod='" & txtCodigoKit.Text & "'"
                 If cmd1.ExecuteNonQuery Then
 
                 Else
-                    MsgBox("Ocurrio un error", vbCritical + vbOKOnly, "Delsscom Control Negocios Pro")
-                    Exit Sub
+
                 End If
+                cnn1.Close()
 
                 Dim precion As Double = txtPrecio.Text
                 cnn2.Close() : cnn2.Open()

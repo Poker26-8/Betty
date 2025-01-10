@@ -6391,7 +6391,8 @@
                                                   `Mililitros` float DEFAULT '0',
                                                   `Copas` float DEFAULT '0',
                                                   `PecioVentaMinIVA` float DEFAULT '0',
-                                                  `DMembre` varchar(50) DEFAULT ''
+                                                  `DMembre` varchar(50) DEFAULT '',
+                                                  `Promociones` int(1) DEFAULT '0'
                                                 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 
 

@@ -93,6 +93,8 @@ Public Class frmVTouchR
     Dim autofac As Integer = 0
     Dim linkauto As String = ""
 
+    Dim SIPASOAPROMO As Integer = 0
+
     Private Sub TFolio_Tick(sender As Object, e As EventArgs) Handles TFolio.Tick
 
         TFolio.Stop()
@@ -287,6 +289,8 @@ Public Class frmVTouchR
     End Sub
 
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+
+        SIPASOAPROMO = 0
         lblRestaPagar.Text = "0.00"
         lblImporteEfectivo.Text = "0.00"
         lblCambio.Text = "0.00"
@@ -646,11 +650,14 @@ nopaso:
 
             importe = cantidad * precio
 
-            If grupo = "PROMOCIONES" Then
+            ' If grupo = "PROMOCIONES" Then
+            If SIPASOAPROMO = 1 Then
                 UpGridCaptura()
+                SIPASOAPROMO = 0
             Else
                 If importe <> 0 Then
                     UpGridCaptura()
+                    SIPASOAPROMO = 0
                 Else
                     MsgBox("Este producto no tiene precio de venta, no se agregara en la comanda", vbInformation + vbOKOnly, "Delsscom® Restaurant")
                 End If
@@ -698,7 +705,13 @@ nopaso:
                         End If
 
                     End If
-                    precio = FormatNumber(MyPrecio, 2)
+
+                    If SIPASOAPROMO = 1 Then
+                        precio = 0
+                    Else
+                        precio = FormatNumber(MyPrecio, 2)
+                    End If
+
                 End If
             End If
             rd2.Close()
@@ -4291,7 +4304,7 @@ Door:
                     If (txtRespuesta.Text + cantpromo) <= cantidadPromo Then
                         cantpromo = CDec(cantpromo) + CDec(txtRespuesta.Text)
 
-
+                        SIPASOAPROMO = 1
                         cantidad = txtRespuesta.Text
                         ObtenerProducto(CodigoProducto)
                     Else
