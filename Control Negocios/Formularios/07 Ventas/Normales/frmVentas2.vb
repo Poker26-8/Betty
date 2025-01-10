@@ -6653,7 +6653,7 @@ kaka:
         boxcomentario.Visible = False
         txtcomentario.Text = ""
         ordetrabajo = 0
-        FunctionVentas2Async()
+      '  FunctionVentas2Async()
         Timer1.Start()
     End Sub
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click

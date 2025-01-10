@@ -6024,9 +6024,8 @@ kaka:
         txtcomentario.Text = ""
         ordetrabajo = 0
 
-        FunctionVentas3Async()
-        'FunctionVentasAsync()
-        'FunctionClinetesAsync()
+        'FunctionVentas3Async()
+
         Timer1.Start()
     End Sub
 

@@ -5969,8 +5969,8 @@ kaka:
         txtcomentario.Text = ""
         ordetrabajo = 0
 
-        FunctionVentasAsync()
-        FunctionClinetesAsync()
+        'FunctionVentasAsync()
+        'FunctionClinetesAsync()
         Timer1.Start()
 
     End Sub
@@ -8807,7 +8807,7 @@ kakaxd:
 
 
                 mytotal = FormatNumber(mycant * myprecio - descuentotal, 4)
-                mypreciodescuento = myprecio - DsctoProd
+                mypreciodescuento = FormatNumber(myprecio - DsctoProd, 4)
 
                 Dim ieps As Double = 0
                 Dim tasaieps As Double = 0
@@ -8888,14 +8888,6 @@ Door:
                         grdcaptura.Rows(R).Cells(16).Value = creainsert
 
 
-
-                        '    cnn2.Close() : cnn2.Open()
-                        '    cmd2 = cnn2.CreateCommand
-                        '    cmd2.CommandText =
-                        '"insert into VentasDetalle(Folio,Codigo,Nombre,Unidad,Cantidad,CostoVP,CostoVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,FechaCompleta,Comisionista,Facturado,Depto,Grupo,CostVR,Descto,VDCosteo,TotalIEPS,TasaIEPS,Caducidad,Lote,CantidadE,Promo_Monedero,Unico,Descuento,Gprint,CodUnico) values(" & MYFOLIO & ",'" & mycode & "','" & mydesc & "','" & myunid & "'," & mycant & "," & MyProm & "," & MyCostVUE & "," & mypreciodescuento & "," & mytotal & "," & myprecioS & "," & mytotalS & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & cbocomisionista.Text & "','0','" & MyDepto & "','" & MyGrupo & "','0'," & descuentoproducto & ",0," & ieps & "," & tasaieps & ",'" & caduca & "','" & lote & "',0," & monedero & "," & IIf(Unico = False, 0, 1) & "," & descuentoproducto & ",'" & gprint & "','" & codunico & "')"
-                        '    cmd2.ExecuteNonQuery()
-                        '    cnn2.Close()
-
                     Else
 
                         cnn2.Close()
@@ -8908,8 +8900,8 @@ Door:
                             mydesc = rd2("Descrip").ToString
                             myunid = rd2("UVenta").ToString
                             mycant = mycant * CDec(rd2("Cantidad").ToString)
-                            myprecio = rd2("Precio").ToString
-                            mytotal = rd2("PrecioIVA").ToString
+                            myprecio = FormatNumber(rd2("Precio").ToString, 4)
+                            mytotal = FormatNumber(rd2("PrecioIVA").ToString, 4)
 
 
                             Dim myiv As Double = 0
@@ -8983,14 +8975,6 @@ Door:
                             creainsert = "insert into VentasDetalle(Folio,Codigo,Nombre,Unidad,Cantidad,CostoVP,CostoVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,FechaCompleta,Comisionista,Facturado,Depto,Grupo,CostVR,Descto,VDCosteo,TotalIEPS,TasaIEPS,Caducidad,Lote,CantidadE,Promo_Monedero,Unico,Descuento,Gprint,CodUnico) values(" & MYFOLIO & ",'" & mycodd & "','" & mydesc & "','" & myunid & "'," & mycant & "," & MyProm & "," & MyCostVUE & "," & myprecio & "," & mytotal & "," & myprecioS & "," & mytotalS & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & cbocomisionista.Text & "','0','" & MyDepto & "','" & MyGrupo & "','0'," & DsctoProd & ",0," & ieps & "," & tasaieps & ",'" & caduca & "','" & lote & "',0," & monedero & "," & IIf(Unico = False, 0, 1) & "," & DsctoProd & ",'" & gprint & "','" & codunico & "')"
 
                             grdcaptura.Rows(R).Cells(16).Value = creainsert
-
-
-                            ' cnn2.Close() : cnn2.Open()
-                            '     cmd2 = cnn2.CreateCommand
-                            '     cmd2.CommandText =
-                            '"insert into VentasDetalle(Folio,Codigo,Nombre,Unidad,Cantidad,CostoVP,CostoVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,FechaCompleta,Comisionista,Facturado,Depto,Grupo,CostVR,Descto,VDCosteo,TotalIEPS,TasaIEPS,Caducidad,Lote,CantidadE,Promo_Monedero,Unico,Descuento,Gprint,CodUnico) values(" & MYFOLIO & ",'" & mycodd & "','" & mydesc & "','" & myunid & "'," & mycant & "," & MyProm & "," & MyCostVUE & "," & myprecio & "," & mytotal & "," & myprecioS & "," & mytotalS & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & cbocomisionista.Text & "','0','" & MyDepto & "','" & MyGrupo & "','0'," & DsctoProd & ",0," & ieps & "," & tasaieps & ",'" & caduca & "','" & lote & "',0," & monedero & "," & IIf(Unico = False, 0, 1) & "," & DsctoProd & ",'" & gprint & "','" & codunico & "')"
-                            '     cmd2.ExecuteNonQuery()
-                            '     cnn2.Close()
 
                         Loop
 
