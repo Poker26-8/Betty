@@ -74,7 +74,7 @@ Public Class frmVentas2
     Public cadenafact As String = ""
 
     Dim banderasalirvaluechange As Integer = 0
-
+    Dim banderaclientevalue As Integer = 0
 
     Private Sub frmVentas2_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         txtdia.Text = Weekday(Date.Now)
@@ -432,6 +432,29 @@ Public Class frmVentas2
         End With
 
         banderasalirvaluechange = 1
+
+        Dim sinfo2 As String = ""
+        Dim cnn_c2 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+        Dim odata2 As New ToolKitSQL.myssql
+        Dim dt2 As New DataTable
+        Dim sql22 As String = "SELECT distinct Nombre FROM Clientes WHERE Nombre<>'' order by Nombre asc"
+        Dim dr2 As DataRow
+        With odata2
+            If .dbOpen(cnn_c2, sTargetlocal, sinfo2) Then
+                If .getDt(cnn_c2, dt, sql22, sinfo2) Then
+                    DataGridView2.DataSource = dt
+                    cboNombre.DataSource = dt
+                    ' Establecemos la columna a mostrar en el ComboBox (por ejemplo, "Nombre")
+                    cboNombre.DisplayMember = "Nombre"
+                    ' Establecemos la columna que se usará como valor asociado (por ejemplo, "ID")
+                    cboNombre.ValueMember = "Nombre"
+                    cboNombre.SelectedIndex = -1
+
+                End If
+                cnn_c2.Clone()
+            End If
+        End With
+        banderaclientevalue = 1
 
         My.Application.DoEvents()
         Timer1.Start()
@@ -2735,6 +2758,9 @@ doorcita:
         End If
     End Sub
     Private Sub cboNombre_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboNombre.SelectedValueChanged
+
+        If banderaclientevalue = 0 Then Exit Sub
+
         Dim MySaldo As Double = 0
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd1 As MySqlDataReader
