@@ -8023,6 +8023,8 @@ Door:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+
+            btnnuevo.Enabled = True
         End Try
 
 
@@ -8077,6 +8079,9 @@ Door:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+
+            btnnuevo.Enabled = True
+
         End Try
 
         'Cálculo de Subtotal e IVA
@@ -8151,6 +8156,9 @@ Door:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+
+            btnnuevo.Enabled = True
+
         End Try
 
         If grdcaptura.Rows.Count < 1 Then txtdescuento1.Focus().Equals(True) : cnn1.Close() : btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
@@ -8215,6 +8223,9 @@ Door:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+
+            btnnuevo.Enabled = True
+
         End Try
         My.Application.DoEvents()
 
@@ -8614,6 +8625,9 @@ kakaxd:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+
+            btnnuevo.Enabled = True
+
         End Try
 
         'Obtiene el folio que se acaba de insertar
@@ -8735,6 +8749,9 @@ kakaxd:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+
+            btnnuevo.Enabled = True
+
         End Try
 
         'Llenado de variables de pago (Tarjeta, Transferencia, Saldo, Efectivo y Otro)
@@ -8975,6 +8992,9 @@ kakaxd:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
+
+            btnnuevo.Enabled = True
+
         End Try
 
 
@@ -9009,6 +9029,9 @@ kakaxd:
             Catch ex As Exception
                 MessageBox.Show(ex.ToString())
                 cnn1.Close()
+
+                btnnuevo.Enabled = True
+
             End Try
         End If
 
@@ -9595,6 +9618,9 @@ Door:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close() : cnn2.Close()
+
+            btnnuevo.Enabled = True
+
         End Try
 
         Call BorraLotes()
@@ -9814,6 +9840,9 @@ Door:
             Catch ex As Exception
                 MessageBox.Show(ex.ToString())
                 cnn1.Close()
+
+                btnnuevo.Enabled = True
+
             End Try
         End If
         rd3.Close()
