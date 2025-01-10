@@ -9146,7 +9146,7 @@ kakaxd:
 
 
                 mytotal = FormatNumber(mycant * myprecio - descuentotal, 4)
-                mypreciodescuento = myprecio - DsctoProd
+                mypreciodescuento = FormatNumber(myprecio - DsctoProd, 4)
 
                 Dim ieps As Double = 0
                 Dim tasaieps As Double = 0
@@ -9247,8 +9247,8 @@ Door:
                             mydesc = rd2("Descrip").ToString
                             myunid = rd2("UVenta").ToString
                             mycant = mycant * CDec(rd2("Cantidad").ToString)
-                            myprecio = rd2("Precio").ToString
-                            mytotal = rd2("PrecioIVA").ToString
+                            myprecio = FormatNumber(rd2("Precio").ToString, 4)
+                            mytotal = FormatNumber(rd2("PrecioIVA").ToString, 4)
 
 
                             Dim myiv As Double = 0
