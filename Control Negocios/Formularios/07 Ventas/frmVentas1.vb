@@ -9849,11 +9849,12 @@ safo:
             End If
 
         Next
+        btnnuevo.Enabled = True : My.Application.DoEvents()
 
         btnnuevo.PerformClick()
 
         btnventa.Enabled = True : My.Application.DoEvents()
-        btnnuevo.Enabled = True : My.Application.DoEvents()
+
 
         If pide = "1" Then
             lblusuario.Text = usu
