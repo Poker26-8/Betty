@@ -106,7 +106,7 @@ Module ModGral
                 Return serialNumber.Trim()
             Next
         Catch ex As Exception
-            MessageBox.Show("Error obteniendo el número de serie: " & ex.Message)
+            ' MessageBox.Show("Error obteniendo el número de serie: " & ex.Message)
         End Try
         Return String.Empty
     End Function
