@@ -8535,10 +8535,7 @@ kakaxd:
                         End If
                     End With
 
-                    'cmd1 = cnn1.CreateCommand
-                    'cmd1.CommandText =
-                    '    "insert into AbonoI(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Comentario,Comisiones) values(" & MYFOLIO & "," & IdCliente & ",'" & IIf(cboNombre.Text = "", "PUBLICO EN GENERAL", cboNombre.Text) & "','ABONO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & EfectivoX & "," & (MySaldo) & ",'EFECTIVO'," & EfectivoX & ",'','','" & lblusuario.Text & "',''," & totalcomision & ")"
-                    'cmd1.ExecuteNonQuery()
+
                 End If
 
                 If grdpago.Rows.Count > 0 Then
@@ -8931,14 +8928,6 @@ Door:
                         grdcaptura.Rows(R).Cells(16).Value = creainsert
 
 
-
-                        '    cnn2.Close() : cnn2.Open()
-                        '    cmd2 = cnn2.CreateCommand
-                        '    cmd2.CommandText =
-                        '"insert into VentasDetalle(Folio,Codigo,Nombre,Unidad,Cantidad,CostoVP,CostoVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,FechaCompleta,Comisionista,Facturado,Depto,Grupo,CostVR,Descto,VDCosteo,TotalIEPS,TasaIEPS,Caducidad,Lote,CantidadE,Promo_Monedero,Unico,Descuento,Gprint,CodUnico) values(" & MYFOLIO & ",'" & mycode & "','" & mydesc & "','" & myunid & "'," & mycant & "," & MyProm & "," & MyCostVUE & "," & mypreciodescuento & "," & mytotal & "," & myprecioS & "," & mytotalS & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & cbocomisionista.Text & "','0','" & MyDepto & "','" & MyGrupo & "','0'," & descuentoproducto & ",0," & ieps & "," & tasaieps & ",'" & caduca & "','" & lote & "',0," & monedero & "," & IIf(Unico = False, 0, 1) & "," & descuentoproducto & ",'" & gprint & "','" & codunico & "')"
-                        '    cmd2.ExecuteNonQuery()
-                        '    cnn2.Close()
-
                     Else
 
                         cnn2.Close()
@@ -9026,14 +9015,6 @@ Door:
                             creainsert = "insert into VentasDetalle(Folio,Codigo,Nombre,Unidad,Cantidad,CostoVP,CostoVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,FechaCompleta,Comisionista,Facturado,Depto,Grupo,CostVR,Descto,VDCosteo,TotalIEPS,TasaIEPS,Caducidad,Lote,CantidadE,Promo_Monedero,Unico,Descuento,Gprint,CodUnico) values(" & MYFOLIO & ",'" & mycodd & "','" & mydesc & "','" & myunid & "'," & mycant & "," & MyProm & "," & MyCostVUE & "," & myprecio & "," & mytotal & "," & myprecioS & "," & mytotalS & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & cbocomisionista.Text & "','0','" & MyDepto & "','" & MyGrupo & "','0'," & DsctoProd & ",0," & ieps & "," & tasaieps & ",'" & caduca & "','" & lote & "',0," & monedero & "," & IIf(Unico = False, 0, 1) & "," & DsctoProd & ",'" & gprint & "','" & codunico & "')"
 
                             grdcaptura.Rows(R).Cells(16).Value = creainsert
-
-
-                            ' cnn2.Close() : cnn2.Open()
-                            '     cmd2 = cnn2.CreateCommand
-                            '     cmd2.CommandText =
-                            '"insert into VentasDetalle(Folio,Codigo,Nombre,Unidad,Cantidad,CostoVP,CostoVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,FechaCompleta,Comisionista,Facturado,Depto,Grupo,CostVR,Descto,VDCosteo,TotalIEPS,TasaIEPS,Caducidad,Lote,CantidadE,Promo_Monedero,Unico,Descuento,Gprint,CodUnico) values(" & MYFOLIO & ",'" & mycodd & "','" & mydesc & "','" & myunid & "'," & mycant & "," & MyProm & "," & MyCostVUE & "," & myprecio & "," & mytotal & "," & myprecioS & "," & mytotalS & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & cbocomisionista.Text & "','0','" & MyDepto & "','" & MyGrupo & "','0'," & DsctoProd & ",0," & ieps & "," & tasaieps & ",'" & caduca & "','" & lote & "',0," & monedero & "," & IIf(Unico = False, 0, 1) & "," & DsctoProd & ",'" & gprint & "','" & codunico & "')"
-                            '     cmd2.ExecuteNonQuery()
-                            '     cnn2.Close()
 
                         Loop
 
@@ -9622,8 +9603,20 @@ Door:
                         rd3.Close()
 
                         If Tamaño = 80 Then
+
                             pComanda80.DefaultPageSettings.PrinterSettings.PrinterName = impresoracomanda
-                            pComanda80.Print()
+                            Dim ps As New System.Drawing.Printing.PaperSize("Custom", 297, 3000)
+                            pComanda80.DefaultPageSettings.PaperSize = ps
+
+                            If pComanda80.DefaultPageSettings.PrinterSettings.PrinterName = impresoracomanda Then
+                                pComanda80.Print()
+                            Else
+                                MsgBox("La impresora no esta configurada", vbInformation + vbOKOnly, titulocentral)
+                                GoTo safo
+                            End If
+
+                            'pComanda80.DefaultPageSettings.PrinterSettings.PrinterName = impresoracomanda
+                            'pComanda80.Print()
                         End If
 
                         If Tamaño = 58 Then

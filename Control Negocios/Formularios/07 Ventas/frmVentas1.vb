@@ -9543,8 +9543,20 @@ Door:
                         rd3.Close()
 
                         If Tamaño = 80 Then
+
                             pComanda80.DefaultPageSettings.PrinterSettings.PrinterName = impresoracomanda
-                            pComanda80.Print()
+                            Dim ps As New System.Drawing.Printing.PaperSize("Custom", 297, 3000)
+                            pComanda80.DefaultPageSettings.PaperSize = ps
+
+                            If pComanda80.DefaultPageSettings.PrinterSettings.PrinterName = impresoracomanda Then
+                                pComanda80.Print()
+                            Else
+                                MsgBox("La impresora no esta configurada", vbInformation + vbOKOnly, titulocentral)
+                                GoTo safo
+                            End If
+
+                            'pComanda80.DefaultPageSettings.PrinterSettings.PrinterName = impresoracomanda
+                            'pComanda80.Print()
                         End If
 
                         If Tamaño = 58 Then

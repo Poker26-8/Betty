@@ -8548,12 +8548,6 @@ kakaxd:
                         End With
 
 
-                        'cnn1.Close() : cnn1.Open()
-                        'cmd1 = cnn1.CreateCommand
-                        'cmd1.CommandText =
-                        '    "insert into Ventas(IdCliente,Cliente,Direccion,Subtotal,IVA,Totales,Descuento,Devolucion,ACuenta,Resta,Usuario,FVenta,HVenta,FPago,FCancelado,Status,Comisionista,Comision,Concepto,MontoSinDesc,FEntrega,Entrega,Comentario,StatusE,FolMonedero,CodFactura,IP,Formato,Franquicia,Pedido,Fecha) values(" & IdCliente & ",'" & IIf(cboNombre.Text = "", "PUBLICO EN GENERAL", cboNombre.Text) & "','" & nuvdire & "'," & SubTotal & "," & IVA_Vent & "," & Total_Ve & "," & Descuento & ",0," & ACuenta & "," & Resta & ",'" & lblusuario.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & fecha_pago & "','','" & MyStatus & "','" & cbocomisionista.Text & "'," & totalcomision & ",''," & MontoSDesc & ",'" & Format(dtpFecha_E.Value, "dd/MM/yyyy") & "',0,'" & observaciones & "',0,'" & txttel.Text & "','" & cadenafact & "','" & dameIP2() & "','" & cboimpresion.Text & "'," & validafranquicia & "," & IIf(lblpedido.Text = "", 0, lblpedido.Text) & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "')"
-                        'cmd1.ExecuteNonQuery()
-                        'cnn1.Close()
                     End If
 
                 Case Is <> "MOSTRADOR"
@@ -8643,12 +8637,6 @@ kakaxd:
                         End If
                     End With
 
-                    'cnn1.Close() : cnn1.Open()
-                    'cmd1 = cnn1.CreateCommand
-                    'cmd1.CommandText =
-                    '    "insert into Ventas(IdCliente,Cliente,Direccion,Subtotal,IVA,Totales,Descuento,Devolucion,ACuenta,Resta,Usuario,FVenta,HVenta,FPago,FCancelado,Status,Comisionista,Comision,Concepto,MontoSinDesc,FEntrega,Entrega,Comentario,StatusE,FolMonedero,CodFactura,IP,Formato,Franquicia,Pedido,Fecha) values(" & IdCliente & ",'" & IIf(cboNombre.Text = "", "PUBLICO EN GENERAL", cboNombre.Text) & "','" & nuvdire & "'," & SubTotal & "," & IVA_Vent & "," & Total_Ve & "," & sumadescuento & ",0," & ACUenta2 & "," & Resta & ",'" & lblusuario.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & fecha_pago & "','','" & MyStatus & "','" & cbocomisionista.Text & "'," & totalcomision & ",''," & MontoSDesc & ",'" & Format(dtpFecha_E.Value, "dd/MM/yyyy") & "',0,'" & observaciones & "',0,'" & txttel.Text & "','" & cadenafact & "','" & dameIP2() & "','" & cboimpresion.Text & "'," & validafranquicia & "," & IIf(lblpedido.Text = "", 0, lblpedido.Text) & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "')"
-                    'cmd1.ExecuteNonQuery()
-                    'cnn1.Close()
             End Select
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
@@ -9974,8 +9962,20 @@ Door:
                         rd3.Close()
 
                         If Tamaño = 80 Then
+
                             pComanda80.DefaultPageSettings.PrinterSettings.PrinterName = impresoracomanda
-                            pComanda80.Print()
+                            Dim ps As New System.Drawing.Printing.PaperSize("Custom", 297, 3000)
+                            pComanda80.DefaultPageSettings.PaperSize = ps
+
+                            If pComanda80.DefaultPageSettings.PrinterSettings.PrinterName = impresoracomanda Then
+                                pComanda80.Print()
+                            Else
+                                MsgBox("La impresora no esta configurada", vbInformation + vbOKOnly, titulocentral)
+                                GoTo safo
+                            End If
+
+                            'pComanda80.DefaultPageSettings.PrinterSettings.PrinterName = impresoracomanda
+                            'pComanda80.Print()
                         End If
 
                         If Tamaño = 58 Then
