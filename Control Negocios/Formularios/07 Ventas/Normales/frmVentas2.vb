@@ -3230,25 +3230,53 @@ doorcita:
         Else
             ' cbodesc.Items.Clear()
             Try
-                cnn1.Close() : cnn1.Open()
-                cmd1 = cnn1.CreateCommand
+                'cnn1.Close() : cnn1.Open()
+                'cmd1 = cnn1.CreateCommand
                 If cbonota.Text = "" Then
                     'cmd1.CommandText =
                     '"select distinct Nombre from Productos where Grupo<>'INSUMO' and ProvRes<>1 order by Nombre"
                     Exit Sub
                 Else
-                    cbodesc.Items.Clear()
-                    cmd1.CommandText =
-                        "select distinct Nombre from VentasDetalle where Folio=" & cbonota.Text & " order by Nombre"
+
+                    banderasalirvaluechange = 0
+
+                    Dim sInfo69 As String = ""
+                    Dim cnn_c69 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+                    Dim odata69 As New ToolKitSQL.myssql
+                    Dim dt69 As New DataTable
+                    ' Dim Sql69 As String = "Select * from VentasDetalle where Folio=" & cbonota.Text & " order by Nombre"
+                    Dim sql69 As String = "Select * from ventasdetalle inner JOIN productos  ON ventasdetalle.codigo=productos.codigo where Folio=" & cbonota.Text & " order by ventasdetalle.Nombre"
+                    Dim dr69 As DataRow
+                    With odata69
+                        If .dbOpen(cnn_c69, sTargetlocal, sInfo69) Then
+                            If .getDt(cnn_c69, dt69, sql69, sInfo69) Then
+                                DataGridView1.DataSource = dt69
+                                cbodesc.DataSource = dt69
+                                ' Establecemos la columna a mostrar en el ComboBox (por ejemplo, "Nombre")
+                                cbodesc.DisplayMember = "Nombre"
+
+                                ' Establecemos la columna que se usará como valor asociado (por ejemplo, "ID")
+                                cbodesc.ValueMember = "Nombre"
+                                cbodesc.SelectedIndex = -1
+                            End If
+                            cnn_c69.Close()
+                        End If
+                    End With
+
+                    banderasalirvaluechange = 1
+
+                    'cbodesc.Items.Clear()
+                    'cmd1.CommandText =
+                    '    "select distinct Nombre from VentasDetalle where Folio=" & cbonota.Text & " order by Nombre"
                 End If
-                rd1 = cmd1.ExecuteReader
-                Do While rd1.Read
-                    If rd1.HasRows Then cbodesc.Items.Add(
-                        rd1(0).ToString
-                        )
-                Loop
-                rd1.Close()
-                cnn1.Close()
+                'rd1 = cmd1.ExecuteReader
+                'Do While rd1.Read
+                '    If rd1.HasRows Then cbodesc.Items.Add(
+                '        rd1(0).ToString
+                '        )
+                'Loop
+                'rd1.Close()
+                'cnn1.Close()
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
                 cnn1.Close()
