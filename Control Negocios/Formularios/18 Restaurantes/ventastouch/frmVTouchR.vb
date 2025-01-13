@@ -1385,10 +1385,10 @@ deku:
         Dim ligaqr As String = ""
 
 
-        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd3, rd4 As MySqlDataReader
-        Dim cmd3, cmd4 As MySqlCommand
+        'Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim rd3, rd4 As MySqlDataReader
+        'Dim cmd3, cmd4 As MySqlCommand
 
         If whats <> "" Then
             ligaqr = "http://wa.me/" & whats
@@ -1510,7 +1510,7 @@ deku:
         e.Graphics.DrawString("Folio: " & MYFOLIO, fuente_b, Brushes.Black, 1, Y)
         Y += 15
 
-        e.Graphics.DrawString("Fecha: " & Format(Date.Now, "yyyy/MM/dd"), fuente_r, Brushes.Black, 1, Y)
+        e.Graphics.DrawString("Fecha: " & Format(Date.Now, "dd/MM/yyyy"), fuente_r, Brushes.Black, 1, Y)
         e.Graphics.DrawString("Hora: " & Format(Date.Now, "HH:mm"), fuente_r, Brushes.Black, 270, Y, derecha)
         Y += 11
         e.Graphics.DrawString("--------------------------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
@@ -4362,10 +4362,10 @@ Door:
 
 
 
-        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd3, rd4 As MySqlDataReader
-        Dim cmd3, cmd4 As MySqlCommand
+        'Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim rd3, rd4 As MySqlDataReader
+        'Dim cmd3, cmd4 As MySqlCommand
 
         If whats <> "" Then
             ligaqr = "http://wa.me/" & whats
@@ -4480,7 +4480,7 @@ Door:
         e.Graphics.DrawString("Folio: " & MYFOLIO, fuente_b, Brushes.Black, 1, Y)
         Y += 12
 
-        e.Graphics.DrawString("Fecha: " & Format(Date.Now, "yyyy/MM/dd"), fuente_r, Brushes.Black, 1, Y)
+        e.Graphics.DrawString("Fecha: " & Format(Date.Now, "dd/MM/yyyy"), fuente_r, Brushes.Black, 1, Y)
         e.Graphics.DrawString("Hora: " & Format(Date.Now, "HH:mm"), fuente_r, Brushes.Black, 180, Y, derecha)
         Y += 11
         e.Graphics.DrawString("-----------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
@@ -4722,7 +4722,7 @@ Door:
 
         e.Graphics.DrawString("FOLIO:" & MYFOLIO, fuente_b, Brushes.Black, 1, Y)
         Y += 15
-        e.Graphics.DrawString("Fecha: " & Format(Date.Now, "yyyy/MM/dd"), fuente_c, Brushes.Black, 1, Y)
+        e.Graphics.DrawString("Fecha: " & Format(Date.Now, "dd/MM/yyyy"), fuente_c, Brushes.Black, 1, Y)
         e.Graphics.DrawString("Hora: " & Format(Date.Now, "HH:mm"), fuente_c, Brushes.Black, 270, Y, derecha)
         Y += 11
         e.Graphics.DrawString("--------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
@@ -4812,7 +4812,7 @@ Door:
 
         e.Graphics.DrawString("FOLIO:" & MYFOLIO, fuente_b, Brushes.Black, 1, Y)
         Y += 11
-        e.Graphics.DrawString("Fecha: " & Format(Date.Now, "yyyy/MM/dd"), fuente_r, Brushes.Black, 1, Y)
+        e.Graphics.DrawString("Fecha: " & Format(Date.Now, "dd/MM/yyyy"), fuente_r, Brushes.Black, 1, Y)
         e.Graphics.DrawString("Hora: " & Format(Date.Now, "HH:mm"), fuente_r, Brushes.Black, 180, Y, derecha)
         Y += 11
         e.Graphics.DrawString("--------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
@@ -4867,9 +4867,9 @@ Door:
         Dim Logotipo As Drawing.Image = Nothing
         Dim Pie As String = ""
 
-        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd4 As MySqlDataReader
-        Dim cmd4 As MySqlCommand
+        'Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim rd4 As MySqlDataReader
+        'Dim cmd4 As MySqlCommand
 
         '[°]. Logotipo
         If tLogo <> "SIN" Then
@@ -4948,7 +4948,7 @@ Door:
         Y += 11
         e.Graphics.DrawString("--------------------------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
         Y += 15
-        e.Graphics.DrawString("Fecha: " & Format(Date.Now, "dd/MM/dd"), fuente_r, Brushes.Black, 1, Y)
+        e.Graphics.DrawString("Fecha: " & Format(Date.Now, "dd/MM/yyyy"), fuente_r, Brushes.Black, 1, Y)
         e.Graphics.DrawString("Hora: " & Format(Date.Now, "HH:mm"), fuente_r, Brushes.Black, 270, Y, derecha)
         Y += 11
         e.Graphics.DrawString("--------------------------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
@@ -5051,9 +5051,9 @@ Door:
         Dim Logotipo As Drawing.Image = Nothing
         Dim Pie As String = ""
 
-        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd4 As MySqlDataReader
-        Dim cmd4 As MySqlCommand
+        'Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        'Dim rd4 As MySqlDataReader
+        'Dim cmd4 As MySqlCommand
 
         '[°]. Logotipo
         If tLogo <> "SIN" Then
@@ -5132,7 +5132,7 @@ Door:
         Y += 11
         e.Graphics.DrawString("-----------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
         Y += 15
-        e.Graphics.DrawString("Fecha: " & Format(Date.Now, "dd/MM/dd"), fuente_r, Brushes.Black, 1, Y)
+        e.Graphics.DrawString("Fecha: " & Format(Date.Now, "dd/MM/yyyy"), fuente_r, Brushes.Black, 1, Y)
         e.Graphics.DrawString("Hora: " & Format(Date.Now, "HH:mm"), fuente_r, Brushes.Black, 180, Y, derecha)
         Y += 11
         e.Graphics.DrawString("-----------------------------------------------------------------------------", fuente_b, Brushes.Black, 1, Y)
