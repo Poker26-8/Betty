@@ -53,6 +53,7 @@ Partial Class frmVisorComanda
         Me.Name = "frmVisorComanda"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Visor de Comandas"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.ResumeLayout(False)
 
     End Sub

@@ -2022,4 +2022,9 @@ Public Class Inicio
         frmCumple.Show()
         frmCumple.BringToFront()
     End Sub
+
+    Private Sub btnVisor_Click(sender As Object, e As EventArgs) Handles btnVisor.Click
+        frmVisorComanda.BringToFront()
+        frmVisorComanda.Show()
+    End Sub
 End Class

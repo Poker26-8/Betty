@@ -325,12 +325,14 @@ Public Class frmLoad
             Inicio.CORTEMESERO.Visible = True
             Inicio.pMod_Produccion.Visible = True
             Inicio.pMod_Produccion.Enabled = True
+            Inicio.btnVisor.Visible = True
             frmPermisos.btnPermisosRestaurante.Visible = True
             Inicio.repHistorialMesas.Visible = True
         Else
             Inicio.btnComandera.Visible = False
             Inicio.btnPagarComandas.Visible = False
             Inicio.btnvtatouch.Visible = False
+            Inicio.btnVisor.Visible = False
             Inicio.CORTEMESERO.Visible = False
             frmPermisos.btnPermisosRestaurante.Visible = False
             Inicio.repHistorialMesas.Visible = False

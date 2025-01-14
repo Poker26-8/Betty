@@ -7809,7 +7809,7 @@ doorcita:
                     End If
                 Next
             End If
-
+            cnn1.Close()
             TotalIVAPrint = FormatNumber(TotalIVAPrint, 6)
             totalcomision = FormatNumber(totalcomision, 2)
         Catch ex As Exception
