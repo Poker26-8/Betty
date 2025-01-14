@@ -186,6 +186,7 @@ Partial Class Inicio
         Me.btnBodegas = New System.Windows.Forms.Button()
         Me.btnDentista = New System.Windows.Forms.Button()
         Me.btnPediatra = New System.Windows.Forms.Button()
+        Me.btnVisor = New System.Windows.Forms.Button()
         Me.btnPagarComandas = New System.Windows.Forms.Button()
         Me.btnvtatouch = New System.Windows.Forms.Button()
         Me.btnComandera = New System.Windows.Forms.Button()
@@ -196,7 +197,6 @@ Partial Class Inicio
         Me.Button3 = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.btnPagarComa = New System.Windows.Forms.Button()
-        Me.btnVisor = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -1522,6 +1522,24 @@ Partial Class Inicio
         Me.btnPediatra.UseVisualStyleBackColor = True
         Me.btnPediatra.Visible = False
         '
+        'btnVisor
+        '
+        Me.btnVisor.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnVisor.FlatAppearance.BorderSize = 0
+        Me.btnVisor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray
+        Me.btnVisor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnVisor.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnVisor.Image = CType(resources.GetObject("btnVisor.Image"), System.Drawing.Image)
+        Me.btnVisor.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnVisor.Location = New System.Drawing.Point(0, 283)
+        Me.btnVisor.Name = "btnVisor"
+        Me.btnVisor.Size = New System.Drawing.Size(90, 90)
+        Me.btnVisor.TabIndex = 192
+        Me.btnVisor.Text = "Visor de comandas"
+        Me.btnVisor.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnVisor.UseVisualStyleBackColor = True
+        Me.btnVisor.Visible = False
+        '
         'btnPagarComandas
         '
         Me.btnPagarComandas.Dock = System.Windows.Forms.DockStyle.Top
@@ -1660,24 +1678,6 @@ Partial Class Inicio
         Me.btnPagarComa.Size = New System.Drawing.Size(90, 90)
         Me.btnPagarComa.TabIndex = 185
         Me.btnPagarComa.UseVisualStyleBackColor = True
-        '
-        'btnVisor
-        '
-        Me.btnVisor.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnVisor.FlatAppearance.BorderSize = 0
-        Me.btnVisor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray
-        Me.btnVisor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnVisor.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVisor.Image = CType(resources.GetObject("btnVisor.Image"), System.Drawing.Image)
-        Me.btnVisor.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnVisor.Location = New System.Drawing.Point(0, 283)
-        Me.btnVisor.Name = "btnVisor"
-        Me.btnVisor.Size = New System.Drawing.Size(90, 90)
-        Me.btnVisor.TabIndex = 192
-        Me.btnVisor.Text = "Visor de comandas"
-        Me.btnVisor.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.btnVisor.UseVisualStyleBackColor = True
-        Me.btnVisor.Visible = False
         '
         'Inicio
         '

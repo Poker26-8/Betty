@@ -320,7 +320,8 @@ Public Class frmMesas
                     cmd2.CommandText = "SELECT COUNT(Mesa) FROM Mesasxempleados  WHERE IdEmpleado=" & id_usu_log & ""
                 End If
             Else
-                cmd2.CommandText = "SELECT COUNT(Nombre_mesa) FROM Mesa"
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "SELECT COUNT(IdMesa) FROM Mesa"
             End If
             rd2 = cmd2.ExecuteReader
             If rd2.Read Then
