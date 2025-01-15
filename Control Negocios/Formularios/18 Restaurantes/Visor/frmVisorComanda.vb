@@ -44,7 +44,7 @@ Public Class frmVisorComanda
             cnn1.Open()
 
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "select distinct id from Comandas where Estado=0"
+            cmd1.CommandText = "select distinct id from Comandas where Estado=0 AND GPrint<>'BARRA' OR GPrint='VISOR'"
             rd1 = cmd1.ExecuteReader
 
             Do While rd1.Read
@@ -86,7 +86,7 @@ Public Class frmVisorComanda
 
                     cmd2 = cnn2.CreateCommand
                     ' cmd2.CommandText = "select * from Comandas where id=" & id_panel & " and (GPrint='MONITOR' or GPrint='EXTRAS') and Estado=0 order by IDC"
-                    cmd2.CommandText = "select * from Comandas where id=" & id_panel & " and Estado=0 order by IDC"
+                    cmd2.CommandText = "select * from Comandas where id=" & id_panel & " and Estado=0 AND GPrint<>'BARRA' OR  GPrint='VISOR' order by IDC"
                     rd2 = cmd2.ExecuteReader
 
                     Do While rd2.Read

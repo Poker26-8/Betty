@@ -7381,36 +7381,28 @@ doorcita:
 
     Private Sub Valida_Datos_Cliente(ByVal nombre As String)
 
-        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd4, rd1 As MySqlDataReader
-        Dim cmd4 As MySqlCommand
+        Dim cnn1000 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn4000 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd4000, rd1000 As MySqlDataReader
+        Dim cmd4000 As MySqlCommand
         Try
             Dim MySaldo As Double = 0
-            cnn4.Close() : cnn4.Open()
+            cnn4000.Close() : cnn4000.Open()
 
             For valida_cli As Integer = 1 To 6
-                cmd4 = cnn4.CreateCommand
-                cmd4.CommandText =
+                cmd4000 = cnn4000.CreateCommand
+                cmd4000.CommandText =
                     "select Suspender,Tipo,Id,Credito,Comisionista,SaldoFavor from Clientes where Nombre='" & nombre & "'"
-                rd4 = cmd4.ExecuteReader
-                If rd4.HasRows Then
-                    If rd4.Read Then
-                        If (rd4("Suspender").ToString) Then MsgBox("Venta suspendida a este cliente." & vbNewLine & "Consulta con el administrador.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : rd4.Close() : cnn4.Close() : Exit Sub
+                rd4000 = cmd4.ExecuteReader
+                If rd4000.HasRows Then
+                    If rd4000.Read Then
+                        If (rd4000("Suspender").ToString) Then MsgBox("Venta suspendida a este cliente." & vbNewLine & "Consulta con el administrador.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : rd4000.Close() : cnn4000.Close() : Exit Sub
 
-                        cbotipo.Text = rd4("Tipo").ToString
-                        MyIdCliente = rd4("Id").ToString
+                        cbotipo.Text = rd4000("Tipo").ToString
+                        MyIdCliente = rd4000("Id").ToString
                         lblNumCliente.Text = MyIdCliente
-                        txtcredito.Text = FormatNumber(rd4("Credito").ToString, 4)
-                        'cbocomisionista.Text = rd4("Comisionista").ToString
-                        ' txttel.Text = rd4("Telefono").ToString
-                        'If Trim(cbocomisionista.Text) <> "" Then
-                        '    cbocomisionista.Enabled = True
-                        'Else
-                        '    cbocomisionista.Enabled = False
-                        'End If
-
-                        txtafavor.Text = FormatNumber(rd4("SaldoFavor").ToString(), 4)
+                        txtcredito.Text = FormatNumber(rd4000("Credito").ToString, 4)
+                        txtafavor.Text = FormatNumber(rd4000("SaldoFavor").ToString(), 4)
 
                         Label12121.Visible = True
                         cboDomi.Visible = True
@@ -7456,16 +7448,16 @@ doorcita:
 
                     txtdireccion.Focus().Equals(True)
                 End If
-                rd4.Close()
+                rd4000.Close()
 
                 If lblNumCliente.Text <> "MOSTRADOR" Then
-                    cmd4 = cnn4.CreateCommand
-                    cmd4.CommandText =
+                    cmd4000 = cnn4000.CreateCommand
+                    cmd4000.CommandText =
                         "select Saldo from AbonoI where Id=(select max(Id) from AbonoI where Cliente='" & cboNombre.Text & "')"
-                    rd4 = cmd4.ExecuteReader
-                    If rd4.HasRows Then
-                        If rd4.Read Then
-                            MySaldo = CDbl(IIf(rd4(0).ToString = "", "0", rd4(0).ToString))
+                    rd4000 = cmd4.ExecuteReader
+                    If rd4000.HasRows Then
+                        If rd4000.Read Then
+                            MySaldo = CDbl(IIf(rd4000(0).ToString = "", "0", rd4000(0).ToString))
 
                             If MySaldo > 0 Then
                                 txtadeuda.Text = Math.Abs(MySaldo)
@@ -7477,13 +7469,13 @@ doorcita:
                     Else
                         txtadeuda.Text = "0.00"
                     End If
-                    rd4.Close()
+                    rd4000.Close()
                 End If
             Next
-            cnn4.Close()
+            cnn4000.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
-            cnn4.Close()
+            cnn4000.Close()
         End Try
     End Sub
 
@@ -7749,14 +7741,17 @@ doorcita:
 
         Dim comision As Double = 0
         Dim totalcomision As Double = 0
+
+        Dim sqlselectiva As String = ""
+
         Try
             txtefectivo.Text = FormatNumber(txtefectivo.Text, 2)
             If txtefectivo.Text = "" Then txtefectivo.Text = "0.00"
 
             cnn1.Close() : cnn1.Open()
 
-            If ordetrabajo = 1 Then
-                For N As Integer = 0 To grdcaptura.Rows.Count - 1
+            'If ordetrabajo = 1 Then
+            For N As Integer = 0 To grdcaptura.Rows.Count - 1
                     If CStr(grdcaptura.Rows(N).Cells(0).Value.ToString) <> "" Then
 
                         Dim ca As Double = grdcaptura.Rows(N).Cells(3).Value.ToString
@@ -7782,33 +7777,33 @@ doorcita:
                         rd1.Close()
                     End If
                 Next
-            Else
-                For N As Integer = 0 To grdcaptura.Rows.Count - 1
-                    If CStr(grdcaptura.Rows(N).Cells(0).Value.ToString) <> "" Then
-                        Dim ca As Double = grdcaptura.Rows(N).Cells(3).Value.ToString
-                        cmd1 = cnn1.CreateCommand
-                        cmd1.CommandText =
-                            "select IVA,Comision from Productos where Codigo='" & CStr(grdcaptura.Rows(N).Cells(0).Value.ToString) & "'"
-                        rd1 = cmd1.ExecuteReader
-                        If rd1.HasRows Then
-                            If rd1.Read Then
-                                If rd1(0).ToString > 0 Then
+            ' Else
+            'For N As Integer = 0 To grdcaptura.Rows.Count - 1
+            '    If CStr(grdcaptura.Rows(N).Cells(0).Value.ToString) <> "" Then
+            '        Dim ca As Double = grdcaptura.Rows(N).Cells(3).Value.ToString
+            '        cmd1 = cnn1.CreateCommand
+            '        cmd1.CommandText =
+            '            "select IVA,Comision from Productos where Codigo='" & CStr(grdcaptura.Rows(N).Cells(0).Value.ToString) & "'"
+            '        rd1 = cmd1.ExecuteReader
+            '        If rd1.HasRows Then
+            '            If rd1.Read Then
+            '                If rd1(0).ToString > 0 Then
 
-                                    ivaporproducto = CDbl(grdcaptura.Rows(N).Cells(5).Value.ToString) / (1 + rd1(0).ToString)
-                                    ivaporproducto = FormatNumber(ivaporproducto, 2)
-                                    ivaporproda = CDbl(grdcaptura.Rows(N).Cells(5).Value.ToString) - CDbl(ivaporproducto)
-                                    ivaporproda = FormatNumber(ivaporproda, 2)
+            '                    ivaporproducto = CDbl(grdcaptura.Rows(N).Cells(5).Value.ToString) / (1 + rd1(0).ToString)
+            '                    ivaporproducto = FormatNumber(ivaporproducto, 2)
+            '                    ivaporproda = CDbl(grdcaptura.Rows(N).Cells(5).Value.ToString) - CDbl(ivaporproducto)
+            '                    ivaporproda = FormatNumber(ivaporproda, 2)
 
-                                    TotalIVAPrint = TotalIVAPrint + CDbl(ivaporproda)
-                                End If
-                                comision = rd1(1).ToString * CDec(ca)
-                                totalcomision = totalcomision + CDec(comision)
-                            End If
-                        End If
-                        rd1.Close()
-                    End If
-                Next
-            End If
+            '                    TotalIVAPrint = TotalIVAPrint + CDbl(ivaporproda)
+            '                End If
+            '                comision = rd1(1).ToString * CDec(ca)
+            '                totalcomision = totalcomision + CDec(comision)
+            '            End If
+            '        End If
+            '        rd1.Close()
+            '    End If
+            'Next
+            '    End If
             cnn1.Close()
             TotalIVAPrint = FormatNumber(TotalIVAPrint, 6)
             totalcomision = FormatNumber(totalcomision, 2)
@@ -8295,8 +8290,9 @@ kakaxd:
             cmd2.CommandText =
                 "update Ventas set FolMonedero='" & txttel.Text & "' where Folio=" & MYFOLIO
             cmd2.ExecuteNonQuery()
+            cnn2.Close()
         End If
-        cnn2.Close()
+
 
         'Actualiza [Monedero] / [MovMonedero]
         Try

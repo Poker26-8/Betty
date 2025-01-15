@@ -1,8 +1,10 @@
-﻿Imports Microsoft.Office.Interop.Excel
+﻿Imports Microsoft.Office.Interop
 Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports ClosedXML.Excel
 Imports MySql.Data.MySqlClient
+
+
 Public Class frmRepInventario
 
     Dim Libreria As Boolean = False
@@ -2719,7 +2721,7 @@ quepaso_wey:
 
                 ' Escribe los encabezados solo de las columnas 0, 2 y 4
                 Dim columnCounter As Integer = 1  ' Controla la posición de las columnas en Excel
-                For Each colIndex As Integer In {0, 2, 4}
+                For Each colIndex As Integer In {0, 1, 2, 4}
                     Dim headerCell As IXLCell = worksheet.Cell(1, columnCounter)
                     headerCell.Value = dgv.Columns(colIndex).HeaderText
                     headerCell.Style.Font.Bold = True  ' Aplica negrita a los encabezados
@@ -2730,7 +2732,7 @@ quepaso_wey:
                 ' Llena los datos solo de las columnas 0, 2 y 4
                 For rowIndex As Integer = 0 To dgv.Rows.Count - 1
                     columnCounter = 1
-                    For Each colIndex As Integer In {0, 2, 4}
+                    For Each colIndex As Integer In {0, 1, 2, 4}
                         Dim cellValue As Object = dgv.Rows(rowIndex).Cells(colIndex).Value
                         Dim cellValueString As String = If(cellValue Is Nothing, String.Empty, cellValue.ToString())
                         Dim cell As IXLCell = worksheet.Cell(rowIndex + 2, columnCounter)
@@ -2765,10 +2767,117 @@ quepaso_wey:
 
     Private Sub btnImpExis_Click(sender As Object, e As EventArgs) Handles btnImpExis.Click
 
-        If MsgBox("Estas apunto de importar tu catálogo desde un archivo de Excel, para evitar errores asegúrate de que la hoja de Excel tiene el nombre de 'Hoja1' y cerciórate de que el archivo está guardado y cerrado.", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
-            Excel_Grid_SQL(DataGridView1)
-        End If
+        'If MsgBox("Estas apunto de importar tu catálogo desde un archivo de Excel, para evitar errores asegúrate de que la hoja de Excel tiene el nombre de 'Hoja1' y cerciórate de que el archivo está guardado y cerrado.", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
+        '    Excel_Grid_SQL(DataGridView1)
+        'End If
 
+        CargarDatosDesdeExcel()
+    End Sub
+
+    ' Función para cargar datos de Excel a un DataGridView
+    Private Sub CargarDatosDesdeExcel()
+        ' Crear el OpenFileDialog para seleccionar el archivo Excel
+        Dim openFileDialog As New OpenFileDialog()
+        openFileDialog.Filter = "Archivos de Excel|*.xlsx"
+        openFileDialog.Title = "Seleccionar archivo Excel"
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
+        ' Si el usuario selecciona un archivo
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
+            ' Ruta del archivo Excel seleccionado
+            Dim filePath As String = openFileDialog.FileName
+
+            ' Crear un DataTable para almacenar los datos
+            Dim dt As New DataTable()
+
+            ' Abrir el archivo de Excel usando ClosedXML
+            Using workbook As New XLWorkbook(filePath)
+                ' Asumimos que los datos están en la primera hoja
+                Dim worksheet As IXLWorksheet = workbook.Worksheet(1)
+
+                ' Obtener la primera fila como encabezados y añadir columnas al DataTable
+                Dim firstRow As IXLRow = worksheet.Row(1)
+                For Each cell As IXLCell In firstRow.CellsUsed()
+                    dt.Columns.Add(cell.Value.ToString())
+                Next
+
+                ' Recorrer las filas restantes y añadirlas al DataTable
+                For rowIndex As Integer = 2 To worksheet.RowsUsed().Count()
+                    Dim row As DataRow = dt.NewRow()
+                    Dim currentRow As IXLRow = worksheet.Row(rowIndex)
+
+                    For colIndex As Integer = 1 To dt.Columns.Count
+                        row(colIndex - 1) = currentRow.Cell(colIndex).GetValue(Of String)()
+                    Next
+
+                    dt.Rows.Add(row)
+                Next
+            End Using
+
+            ' Asignar el DataTable al DataGridView para mostrar los datos
+            DataGridView1.DataSource = dt
+
+            Dim NOMBRE, CODIGO, codbarra As String
+            Dim EXISTENCIA, existenciacardex, existencia_final, diferencia, mcd, MyPreci As Double
+            Dim conteo As Integer = 0
+
+            cnn1.Close() : cnn1.Open()
+            cnn2.Close() : cnn2.Open()
+
+            For X As Integer = 0 To DataGridView1.Rows.Count - 1
+
+
+                CODIGO = Convert.ToString(DataGridView1.Rows.Item(X).Cells(0).Value)
+                codbarra = (DataGridView1.Rows.Item(X).Cells(1).Value)
+                NOMBRE = (DataGridView1.Rows.Item(X).Cells(2).Value)
+                EXISTENCIA = (DataGridView1.Rows.Item(X).Cells(3).Value)
+
+
+                If CODIGO = "" Then Exit For
+
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "SELECT Existencia,Multiplo,PrecioVentaIVA FROM productos WHERE Codigo='" & CODIGO & "'"
+                cmd1.Parameters.AddWithValue("@Codigo", CODIGO)
+                rd1 = cmd1.ExecuteReader
+                If rd1.HasRows Then
+                    If rd1.Read Then
+
+                        existenciacardex = If(IsDBNull(rd1("Existencia")), 0, CDbl(rd1("Existencia")))
+                        mcd = If(IsDBNull(rd1("Multiplo")), 1, CDbl(rd1("Multiplo")))
+                        MyPreci = If(IsDBNull(rd1("PrecioVentaIVA")), 0, CDbl(rd1("PrecioVentaIVA")))
+
+
+                        diferencia = existenciacardex - EXISTENCIA
+                        existencia_final = EXISTENCIA * mcd
+
+                        cnn2.Close() : cnn2.Open()
+                        cmd2 = cnn2.CreateCommand
+                        cmd2.CommandText = "INSERT INTO cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario) VALUES('" & CODIGO & "','" & NOMBRE & "','Ajuste de inventario Excel'," & existenciacardex & "," & diferencia & ", " & EXISTENCIA & "," & MyPreci & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','')"
+                        cmd2.ExecuteNonQuery()
+
+                        cmd2 = cnn2.CreateCommand
+                        cmd2.CommandText = "UPDATE productos SET Cargado='0',CargadoInv='0',Existencia=" & existencia_final & " WHERE codigo='" & Strings.Left(CODIGO, 6) & "'"
+                        cmd2.ExecuteNonQuery()
+                        cnn2.Close()
+
+                    End If
+                End If
+                rd1.Close()
+
+                My.Application.DoEvents()
+
+            Next
+            cnn1.Close()
+            cnn2.Close()
+
+        End If
+        cnn1.Close()
+        cnn2.Close()
+        MsgBox("Datos importados correctamente.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
 
     End Sub
 
@@ -2814,7 +2923,7 @@ quepaso_wey:
                 con.Close()
             End If
 
-            Dim NOMBRE, CODIGO As String
+            Dim NOMBRE, CODIGO, codbarra As String
             Dim EXISTENCIA, existenciacardex, existencia_final, diferencia, mcd, MyPreci As Double
             Dim conteo As Integer = 0
 
@@ -2827,8 +2936,9 @@ quepaso_wey:
                 contadorconexion += 1
 
                 CODIGO = If(String.IsNullOrEmpty(row.Cells(0).Value?.ToString()), "", row.Cells(0).Value.ToString())
-                NOMBRE = row.Cells(1).Value?.ToString()
-                EXISTENCIA = If(String.IsNullOrEmpty(row.Cells(2).Value?.ToString()), 0, CDbl(row.Cells(2).Value))
+                codbarra = row.Cells(1).Value?.ToString
+                NOMBRE = row.Cells(2).Value?.ToString()
+                EXISTENCIA = If(String.IsNullOrEmpty(row.Cells(3).Value?.ToString()), 0, CDbl(row.Cells(3).Value))
 
                 If String.IsNullOrEmpty(CODIGO) Then Continue For
 

@@ -328,20 +328,20 @@ Module ModGral
     'BorraLotes
     Public Sub BorraLotes()
 
-        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd5 As MySqlDataReader
-        Dim cmd5 As MySqlCommand
+        Dim cnn50000 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd500000 As MySqlDataReader
+        Dim cmd50000 As MySqlCommand
 
         Try
-            cnn5.Close() : cnn5.Open()
-            cmd5 = cnn5.CreateCommand
-            cmd5.CommandText =
+            cnn50000.Close() : cnn50000.Open()
+            cmd50000 = cnn50000.CreateCommand
+            cmd50000.CommandText =
                 "delete from LoteCaducidad where Cantidad<=0"
-            cmd5.ExecuteNonQuery()
-            cnn5.Close()
+            cmd50000.ExecuteNonQuery()
+            cnn50000.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
-            cnn5.Close()
+            cnn50000.Close()
         End Try
     End Sub
 
