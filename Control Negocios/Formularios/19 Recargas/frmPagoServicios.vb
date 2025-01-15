@@ -268,7 +268,19 @@ Public Class frmPagoServicios
     End Function
 
     Private Sub btnPagar_Click(sender As Object, e As EventArgs) Handles btnPagar.Click
-        reservarServicioAsync()
+        Dim monto As Double = 0
+        Dim saldo As Double = 0
+
+        monto = txtMonto.Text
+        saldo = lblSaldo.Text
+
+        If monto > saldo Then
+            MsgBox("Saldo insuficiente para realizar el pago del servicio seleccionado", vbCritical + vbOKOnly, "Delsscom Control Negocios PRO")
+            Exit Sub
+        Else
+            reservarServicioAsync()
+        End If
+
     End Sub
     Public Sub limpiaTodo()
         cboServicio.Text = ""
