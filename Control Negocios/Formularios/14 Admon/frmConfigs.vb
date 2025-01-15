@@ -2998,6 +2998,7 @@ Public Class frmConfigs
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd1 As MySqlDataReader
         Dim cmd1 As MySqlCommand
+        Dim fecha As String = Format(Date.Now, "yyyy-MM-dd")
 
 
         If lblid.Text <> "" Then
@@ -3044,15 +3045,15 @@ Public Class frmConfigs
                     Else
                         rd1.Close()
                         cmd1 = cnn1.CreateCommand
-                        cmd1.CommandText = "Insert into Productos(Codigo,Nombre,ProvPri,ProvEme,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Min,Max) values('RECARG','RECARGA TELEFONICA','DELSSCOM','DELSSCOM','SERV','SERV','SERV',1,1,'RECARGAS','RECARGAS',1,1)"
+                        cmd1.CommandText = "Insert into Productos(Codigo,Nombre,ProvPri,ProvEme,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Min,Max,Fecha,Fecha_Inicial,Fecha_Final) values('RECARG','RECARGA TELEFONICA','DELSSCOM','DELSSCOM','SERV','SERV','SERV',1,1,'RECARGAS','RECARGAS',1,1,'" & fecha & "','" & fecha & "','" & fecha & "')"
                         If cmd1.ExecuteNonQuery Then
                             rd1.Close()
                             cmd1 = cnn1.CreateCommand
-                            cmd1.CommandText = "Insert into Productos(Codigo,Nombre,ProvPri,ProvEme,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Min,Max) values('PAGOSE','PAGO DE SERVICIOS','DELSSCOM','DELSSCOM','SERV','SERV','SERV',1,1,'PAGOS','PAGOS',1,1)"
+                            cmd1.CommandText = "Insert into Productos(Codigo,Nombre,ProvPri,ProvEme,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Min,Max,Fecha,Fecha_Inicial,Fecha_Final) values('PAGOSE','PAGO DE SERVICIOS','DELSSCOM','DELSSCOM','SERV','SERV','SERV',1,1,'PAGOS','PAGOS',1,1,'" & fecha & "','" & fecha & "','" & fecha & "')"
                             If cmd1.ExecuteNonQuery Then
                                 rd1.Close()
                                 cmd1 = cnn1.CreateCommand
-                                cmd1.CommandText = "Insert into Productos(Codigo,Nombre,ProvPri,ProvEme,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Min,Max) values('COMISI','COMISION PAGO DE SERVICIOS','DELSSCOM','DELSSCOM','SERV','SERV','SERV',1,1,'COMISION','COMISION',1,1)"
+                                cmd1.CommandText = "Insert into Productos(Codigo,Nombre,ProvPri,ProvEme,UCompra,UVenta,UMinima,MCD,Multiplo,Departamento,Grupo,Min,Max,Fecha,Fecha_Inicial,Fecha_Final) values('COMISI','COMISION PAGO DE SERVICIOS','DELSSCOM','DELSSCOM','SERV','SERV','SERV',1,1,'COMISION','COMISION',1,1,'" & fecha & "','" & fecha & "','" & fecha & "')"
                                 cmd1.ExecuteNonQuery()
                                 rd1.Close()
                                 MsgBox("Datos registrados correctamente", vbInformation + vbOKOnly, "Delsscom COntrol Negocios Pro")

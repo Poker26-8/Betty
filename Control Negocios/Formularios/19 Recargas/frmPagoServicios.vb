@@ -256,8 +256,16 @@ Public Class frmPagoServicios
                     Dim respuestaComoTexto As String = Await respuesta.Content.ReadAsStringAsync()
                     Dim jsonParsed As JObject = JObject.Parse(respuestaComoTexto)
                     Dim requestID As String = jsonParsed("data")("requestid").ToString()
-                    MsgBox("Pago de servicio realizado Correctamente", vbInformation + vbOKOnly, "Delsscom Control Negocios PRO")
-                    finaliza()
+                    Dim message As String = jsonParsed("message").ToString()
+                    Dim estatus As String = jsonParsed("status").ToString()
+                    If estatus = "False" Then
+                        MsgBox(message & " " & "Intenta mas tarde", vbCritical + vbOKOnly, "Delsscom Control Negocios Pro")
+                        lblrequest.Text = ""
+                    Else
+                        MsgBox("Pago de servicio realizado Correctamente", vbInformation + vbOKOnly, "Delsscom Control Negocios PRO")
+                        finaliza()
+                    End If
+
                 Else
                     MsgBox("Error: " & respuesta.StatusCode.ToString())
                 End If
@@ -268,7 +276,19 @@ Public Class frmPagoServicios
     End Function
 
     Private Sub btnPagar_Click(sender As Object, e As EventArgs) Handles btnPagar.Click
-        reservarServicioAsync()
+        Dim monto As Double = 0
+        Dim saldo As Double = 0
+
+        monto = txtMonto.Text
+        saldo = lblSaldo.Text
+
+        If monto > saldo Then
+            MsgBox("Saldo insuficiente para realizar el pago del servicio seleccionado", vbCritical + vbOKOnly, "Delsscom Control Negocios PRO")
+            Exit Sub
+        Else
+            reservarServicioAsync()
+        End If
+
     End Sub
     Public Sub limpiaTodo()
         cboServicio.Text = ""
