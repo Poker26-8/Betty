@@ -256,8 +256,16 @@ Public Class frmPagoServicios
                     Dim respuestaComoTexto As String = Await respuesta.Content.ReadAsStringAsync()
                     Dim jsonParsed As JObject = JObject.Parse(respuestaComoTexto)
                     Dim requestID As String = jsonParsed("data")("requestid").ToString()
-                    MsgBox("Pago de servicio realizado Correctamente", vbInformation + vbOKOnly, "Delsscom Control Negocios PRO")
-                    finaliza()
+                    Dim message As String = jsonParsed("message").ToString()
+                    Dim estatus As String = jsonParsed("status").ToString()
+                    If estatus = "False" Then
+                        MsgBox(message & " " & "Intenta mas tarde", vbCritical + vbOKOnly, "Delsscom Control Negocios Pro")
+                        lblrequest.Text = ""
+                    Else
+                        MsgBox("Pago de servicio realizado Correctamente", vbInformation + vbOKOnly, "Delsscom Control Negocios PRO")
+                        finaliza()
+                    End If
+
                 Else
                     MsgBox("Error: " & respuesta.StatusCode.ToString())
                 End If
