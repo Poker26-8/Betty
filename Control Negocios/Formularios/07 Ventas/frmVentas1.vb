@@ -8338,8 +8338,9 @@ kakaxd:
         End If
 
         Try
-            cnn1.Close() : cnn1.Open()
+
             For R As Integer = 0 To grdcaptura.Rows.Count - 1
+                cnn1.Close() : cnn1.Open()
 
                 If grdcaptura.Rows(R).Cells(0).Value.ToString = "" Then GoTo Door
                 DsctoProd = 0
@@ -8731,8 +8732,10 @@ Door:
                     End If
 
                 End If
+
+                cnn1.Close()
             Next
-            cnn1.Close()
+
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close() : cnn2.Close()
