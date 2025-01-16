@@ -17296,7 +17296,11 @@ doorcita:
                                 End If
                             End If
                             rd2.Close()
+                            cnn2.Close()
 
+
+                            '''HAY QUE METRLO AL DATA GRID----------------------------------------------------'
+                            cnn2.Close() : cnn2.Open()
                             cmd2 = cnn2.CreateCommand
                             cmd2.CommandText =
                                 "select tipo_cambio from tb_moneda,Productos where Codigo='" & cbocodigo.Text & "' and Productos.id_tbMoneda=tb_moneda.id"
@@ -17310,6 +17314,7 @@ doorcita:
                                 TiCambio = 1
                             End If
                             rd2.Close()
+                            '-------------------------------------------------------------------------
 
                             cmd2 = cnn2.CreateCommand
                             cmd2.CommandText =
