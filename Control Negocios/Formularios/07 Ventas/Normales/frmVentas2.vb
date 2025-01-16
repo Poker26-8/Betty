@@ -3419,12 +3419,11 @@ doorcita:
     End Sub
     Private Sub cbodesc_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbodesc.KeyPress
 
-
         'Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         'Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         'Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         'Dim rd1, rd2, rd3 As MySqlDataReader
-        'Dim cmd1, cmd2, CMD3 As MySqlCommand
+        'Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         e.KeyChar = UCase(e.KeyChar)
         Dim Multiplica As String = ""
@@ -3772,6 +3771,7 @@ kaka:
                 Next
 
                 If index <> -1 Then
+
                     Promo = IIf(DataGridView1.Rows(index).Cells("Status_Promocion").Value.ToString() = False, False, True)
                     Anti = DataGridView1.Rows(index).Cells("Grupo").Value.ToString()
                     If Anti = "ANTIBIOTICO" Or Anti = "CONTROLADO" Then
@@ -3930,7 +3930,6 @@ kaka:
                         index = row.Index
                         Exit For
                     End If
-
                 Next
 
                 ' Si encontramos el valor, usamos el índice para llenar los TextBox
@@ -4225,10 +4224,10 @@ kaka:
                                 Minimo = rd2("Min").ToString()
                                 txtubicacion.Text = rd2("Ubicacion").ToString()
 
-                                cnn3.Close() : cnn3.Open() : CMD3 = cnn3.CreateCommand
-                                CMD3.CommandText =
+                                cnn3.Close() : cnn3.Open() : cmd3 = cnn3.CreateCommand
+                                cmd3.CommandText =
                                     "select Existencia from Productos where Codigo='" & Strings.Left(cbocodigo.Text, 6) & "'"
-                                rd3 = CMD3.ExecuteReader
+                                rd3 = cmd3.ExecuteReader
                                 If rd3.HasRows Then
                                     If rd3.Read Then
                                         txtexistencia.Text = CDbl(IIf(rd3(0).ToString = "", "0", rd3(0).ToString)) / Multiplo
@@ -4236,10 +4235,10 @@ kaka:
                                 End If
                                 rd3.Close()
 
-                                CMD3 = cnn3.CreateCommand
-                                CMD3.CommandText =
+                                cmd3 = cnn3.CreateCommand
+                                cmd3.CommandText =
                                     "select tipo_cambio from tb_moneda,Productos where Codigo='" & cbocodigo.Text & "' and Productos.id_tbMoneda=tb_moneda.id"
-                                rd3 = CMD3.ExecuteReader
+                                rd3 = cmd3.ExecuteReader
                                 If rd3.HasRows Then
                                     If rd3.Read Then
                                         TiCambio = rd3(0).ToString
@@ -4250,10 +4249,10 @@ kaka:
                                 End If
                                 rd3.Close()
 
-                                CMD3 = cnn3.CreateCommand
-                                CMD3.CommandText =
+                                cmd3 = cnn3.CreateCommand
+                                cmd3.CommandText =
                                     "select PrecioVentaIVA, PreEsp from Productos where Codigo='" & cbocodigo.Text & "'"
-                                rd3 = CMD3.ExecuteReader
+                                rd3 = cmd3.ExecuteReader
                                 If rd3.HasRows Then
                                     If rd3.Read Then
                                         PreLst = rd3(0).ToString
@@ -4263,20 +4262,20 @@ kaka:
                                 rd3.Close()
 
                                 cboLote.Items.Clear()
-                                CMD3 = cnn3.CreateCommand
+                                cmd3 = cnn3.CreateCommand
                                 If btndevo.Text = "GUARDAR DEVOLUCIÓN" Then
-                                    CMD3.CommandText =
+                                    cmd3.CommandText =
                                     "select DISTINCT(Lote) from LoteCaducidad where Codigo='" & cbocodigo.Text & "'"
-                                    rd3 = CMD3.ExecuteReader
+                                    rd3 = cmd3.ExecuteReader
                                     Do While rd3.Read
                                         If rd3.HasRows Then cboLote.Items.Add(rd3("Lote").ToString())
                                     Loop
                                     rd3.Close()
                                 Else
                                     If cbocodigo.Text = "" Then Exit Sub
-                                    CMD3.CommandText =
+                                    cmd3.CommandText =
                                     "select distinct(Lote) as Lt from LoteCaducidad where Codigo='" & cbocodigo.Text & "' and Cantidad>0"
-                                    rd3 = CMD3.ExecuteReader
+                                    rd3 = cmd3.ExecuteReader
                                     Do While rd3.Read
                                         If rd3.HasRows Then cboLote.Items.Add(rd3("Lt").ToString())
                                     Loop
@@ -4310,10 +4309,10 @@ kaka:
                                             txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
                                             txtprecio.ReadOnly = False
                                         Else
-                                            CMD3 = cnn3.CreateCommand
-                                            CMD3.CommandText =
+                                            cmd3 = cnn3.CreateCommand
+                                            cmd3.CommandText =
                                                 "select Precio from VentasDetalle where Codigo='" & cbocodigo.Text & "' and Folio=" & cbonota.Text & ""
-                                            rd3 = CMD3.ExecuteReader
+                                            rd3 = cmd3.ExecuteReader
                                             If rd3.HasRows Then
                                                 If rd3.Read Then
                                                     txtprecio.Text = rd3(0).ToString
@@ -4364,10 +4363,10 @@ kaka:
 
                                     'Si hay lote se detiene
                                     cnn3.Close() : cnn3.Open()
-                                    CMD3 = cnn3.CreateCommand
-                                    CMD3.CommandText =
+                                    cmd3 = cnn3.CreateCommand
+                                    cmd3.CommandText =
                                 "select Codigo from LoteCaducidad where Codigo='" & cbocodigo.Text & "' and Cantidad>0"
-                                    rd3 = CMD3.ExecuteReader
+                                    rd3 = cmd3.ExecuteReader
                                     If rd3.HasRows Then
                                         If rd3.Read Then
                                             cboLote.Focus.Equals(True)

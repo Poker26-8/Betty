@@ -2651,14 +2651,11 @@ kak:
 
     Private Sub cbodesc_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbodesc.KeyPress
 
-
-        'Dim cnn As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         'Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         'Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         'Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        'Dim cnn23 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        'Dim rd, rd1, rd2, rd3, rd23 As MySqlDataReader
-        'Dim cmd, cmd1, cmd2, cmd3, cmd23 As MySqlCommand
+        'Dim rd1, rd2, rd3 As MySqlDataReader
+        'Dim cmd1, cmd2, cmd3 As MySqlCommand
 
         e.KeyChar = UCase(e.KeyChar)
         Dim Multiplica As String = ""
@@ -3006,6 +3003,7 @@ kaka:
                 Next
 
                 If index <> -1 Then
+
                     Promo = IIf(DataGridView1.Rows(index).Cells("Status_Promocion").Value.ToString() = False, False, True)
                     Anti = DataGridView1.Rows(index).Cells("Grupo").Value.ToString()
                     If Anti = "ANTIBIOTICO" Or Anti = "CONTROLADO" Then
