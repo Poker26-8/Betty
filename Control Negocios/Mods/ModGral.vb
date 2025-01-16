@@ -193,18 +193,6 @@ Module ModGral
 
         Try
 
-            'If odata.dbOpen(cnn, sTarget, serror) Then
-            '    sql = "select Facturas, NotasCred, NumPart from Formatos where Facturas='" & valor & "'"
-            '    If odata.getDr(cnn, dr, sql, serror) = True Then
-            '        respuesta = dr("NotasCred").ToString
-            '        siono = dr("NumPart").ToString
-            '    Else
-            '        respuesta = ""
-            '    End If
-            'End If
-            'cnn.Close()
-
-
 
             cnn5.Close() : cnn5.Open()
             cmd5 = cnn5.CreateCommand

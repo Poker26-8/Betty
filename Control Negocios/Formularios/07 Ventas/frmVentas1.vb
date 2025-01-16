@@ -97,6 +97,14 @@ Public Class frmVentas1
 
     Dim banderasalirvaluechange As Integer = 0
     Dim banderaclientevalue As Integer = 0
+
+    Dim imprimeorden As Integer = 0
+    Dim Tamaño As String = ""
+    Dim log As String = ""
+    Dim Imprime As Boolean = False
+    Dim Copias As Integer = 0
+    Dim Impresora As String = ""
+
     Private Sub frmVentas1_Activated(sender As Object, e As System.EventArgs) Handles Me.Activated
         txtdia.Text = Weekday(Date.Now)
     End Sub
@@ -248,60 +256,11 @@ Public Class frmVentas1
         'Dim sql1 As String = ""
         'Dim sql2 As String = ""
         'Dim sql3 As String = ""
-        Try
-            cnn1.Close()
-            cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
-                "select VSE from Ticket"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    VSE = rd1(0).ToString
-                End If
-            End If
-            rd1.Close()
-            cnn1.Close()
 
-        Catch ex As Exception
-            MessageBox.Show(ex.ToString)
-            cnn1.Close()
-        End Try
 
-        Try
-            cnn3.Close() : cnn3.Open()
-            cmd3 = cnn3.CreateCommand
-            cmd3.CommandText =
-                "select NotasCred from Formatos where Facturas='MinimoA'"
-            rd3 = cmd3.ExecuteReader
-            If rd3.HasRows Then
-                If rd3.Read Then
-                    Alerta_Min = IIf(rd3(0).ToString() = "1", True, False)
-                End If
-            End If
-            rd3.Close()
-            cnn3.Close()
-        Catch ex As Exception
-            MessageBox.Show(ex.ToString)
-            cnn3.Close()
-        End Try
-
-        Try
-            cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Acumula'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.Read Then
-                acumulaxd = rd1(0).ToString
-            End If
-            rd1.Close()
-            cnn1.Close()
-        Catch ex As Exception
-            MessageBox.Show(ex.ToString)
-            cnn1.Close()
-        End Try
-
-        Dim log As String = ""
+        Tamaño = DatosRecarga("TamImpre")
+        Alerta_Min = DatosRecarga("MinimoA")
+        acumulaxd = DatosRecarga("Acumula")
 
         nLogo = DatosRecarga("LogoG")
         tLogo = DatosRecarga("TipoLogo")
@@ -310,6 +269,60 @@ Public Class frmVentas1
         whats = DatosRecarga("Whatsapp")
         autofact = DatosRecarga("LinkAuto")
         siqr = DatosRecarga2("LinkAuto")
+
+
+
+
+
+        Try
+            cnn1.Close()
+            cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText =
+                "select VSE,NoPrintCom,Copias from Ticket"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    VSE = rd1(0).ToString
+                    imprimeorden = rd1(1).ToString
+                    Copias = rd1(2).ToString
+                End If
+            End If
+            rd1.Close()
+
+
+
+            'Dim cnn10 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+            'Dim sinfo10 As String = ""
+            'Dim odata10 As New ToolKitSQL.myssql
+            'Dim dt10 As New DataTable
+            'Dim dr10 As DataRow
+            'If odata10.dbOpen(cnn10, sTarget, sinfo10) Then
+            '    If odata10.getDr(cnn10, dr10, "select NoPrint,Copias from Ticket", sinfo10) Then
+            '        Imprime = dr10("NoPrint").ToString
+            '        Copias = dr10("Copias").ToString
+            '    End If
+            '    cnn10.Close()
+            'End If
+
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText =
+                    "select Formato from RutasImpresion where Equipo='" & ObtenerNombreEquipo() & "' and Tipo='Venta'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    cboimpresion.Text = rd1(0).ToString()
+                End If
+            Else
+                cboimpresion.Text = "TICKET"
+            End If
+            rd1.Close()
+            cnn1.Close()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
 
         Me.KeyPreview = True
         txtResta.ReadOnly = True
@@ -335,25 +348,6 @@ Public Class frmVentas1
             MessageBox.Show(ex.ToString)
             cnn1.Close()
         End Try
-
-        'Try
-        '    If odata11.dbOpen(cnn11, sTarget, serror) = True Then
-        '        sql = "Select Terminal,Clave,Solicitud,Resultado from DatosProsepago"
-        '        If odata11.getDr(cnn11, dr11, sql, serror) = True Then
-        '            hayTerminal = 1
-        '            numTerminal = dr11("Terminal").ToString
-        '            numClave = dr11("Clave").ToString
-        '            URLsolicitud = dr11("Solicitud").ToString
-        '            URLresultado = dr11("Resultado").ToString
-        '        Else
-        '            hayTerminal = 0
-        '        End If
-        '    End If
-        '    cnn11.Close()
-        'Catch ex As Exception
-        '    MessageBox.Show(ex.ToString)
-        '    cnn11.Close()
-        'End Try
 
         Dim orden As Integer = Await ValidarAsync("Ordenes")
         Dim verexistencia As Integer = Await ValidarAsync("VerExistencias")
@@ -394,20 +388,6 @@ Public Class frmVentas1
 
         End If
         cnn2.Close()
-
-        'If tomarcontra = 1 Then
-
-        '    If odata11.dbOpen(cnn11, sTarget, serror) = True Then
-        '        sql1 = "SELECT Clave,Alias FROM Usuarios WHERE IdEmpleado=" & id_usu_log
-        '        If odata11.getDr(cnn11, dr11, sql1, serror) = True Then
-        '            txtcontraseña.Text = dr11(0).ToString
-        '            lblusuario.Text = dr11(1).ToString
-        '            txtcontraseña.PasswordChar = "*"
-        '            txtcontraseña.ForeColor = Color.Black
-        '        End If
-        '    End If
-        'End If
-        'cnn11.Close()
 
         If IO.File.Exists(ARCHIVO_DE_CONFIGURACION) Then
 
@@ -458,63 +438,16 @@ Public Class frmVentas1
         grdcaptura.DefaultCellStyle.SelectionForeColor = Color.Blue
 
 
-        cnn4.Close() : cnn4.Open()
-        cmd4 = cnn4.CreateCommand
-        cmd4.CommandText = "select NotasCred from Formatos where Facturas='LogoG'"
-        rd4 = cmd4.ExecuteReader
-        If rd4.HasRows Then
-            If rd4.Read Then
-                log = rd4(0).ToString
-            End If
-        End If
-        rd4.Close()
-
-        'If odata11.dbOpen(cnn11, sTargetlocal, serror) = True Then
-        '    sql2 = "select NotasCred from Formatos where Facturas='LogoG'"
-        '    If odata11.getDr(cnn11, dr11, sql2, serror) = True Then
-        '        log = dr11(0).ToString
-        '    End If
-        'End If
-        'cnn11.Close()
-
-        'If odata11.dbOpen(cnn11, sTargetlocal, serror) = True Then
-        '    sql3 = "select Formato from RutasImpresion where Equipo='" & ObtenerNombreEquipo() & "' and Tipo='Venta'"
-        '    If odata11.getDr(cnn11, dr11, sql3, serror) = True Then
-        '        cboimpresion.Text = dr11(0).ToString()
-        '    Else
-        '        cboimpresion.Text = "TICKET"
-        '    End If
-        'End If
-        'cnn11.Close()
-
-        If log <> "" Then
-            If File.Exists(My.Application.Info.DirectoryPath & "\" & log) Then
-                PictureBox2.Image = System.Drawing.Image.FromFile(My.Application.Info.DirectoryPath & "\" & log)
+        If nLogo <> "" Then
+            If File.Exists(My.Application.Info.DirectoryPath & "\" & nLogo) Then
+                PictureBox2.Image = System.Drawing.Image.FromFile(My.Application.Info.DirectoryPath & "\" & nLogo)
                 PictureBox2.SizeMode = PictureBoxSizeMode.Zoom
                 'PictureBox2.Dock = DockStyle.Fill
                 'Panel8.Controls.Add(PictureBox2)
             End If
         End If
 
-        Try
-            cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
-                "select Formato from RutasImpresion where Equipo='" & ObtenerNombreEquipo() & "' and Tipo='Venta'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    cboimpresion.Text = rd1(0).ToString()
-                End If
-            Else
-                cboimpresion.Text = "TICKET"
-            End If
-            rd1.Close()
-            cnn1.Close()
-        Catch ex As Exception
-            MessageBox.Show(ex.ToString())
-            cnn1.Close()
-        End Try
+
 
         DondeVoy = ""
         cbonombretag = ""
@@ -7337,7 +7270,7 @@ doorcita:
                 cmd4000 = cnn4000.CreateCommand
                 cmd4000.CommandText =
                     "select Suspender,Tipo,Id,Credito,Comisionista,SaldoFavor from Clientes where Nombre='" & nombre & "'"
-                rd4000 = cmd4.ExecuteReader
+                rd4000 = cmd4000.ExecuteReader
                 If rd4000.HasRows Then
                     If rd4000.Read Then
                         If (rd4000("Suspender").ToString) Then MsgBox("Venta suspendida a este cliente." & vbNewLine & "Consulta con el administrador.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : rd4000.Close() : cnn4000.Close() : Exit Sub
@@ -7398,7 +7331,7 @@ doorcita:
                     cmd4000 = cnn4000.CreateCommand
                     cmd4000.CommandText =
                         "select Saldo from AbonoI where Id=(select max(Id) from AbonoI where Cliente='" & cboNombre.Text & "')"
-                    rd4000 = cmd4.ExecuteReader
+                    rd4000 = cmd4000.ExecuteReader
                     If rd4000.HasRows Then
                         If rd4000.Read Then
                             MySaldo = CDbl(IIf(rd4000(0).ToString = "", "0", rd4000(0).ToString))
@@ -7582,6 +7515,7 @@ doorcita:
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
         Dim rd1, rd2, rd3 As MySqlDataReader
         Dim cmd1, cmd2, cmd3 As MySqlCommand
 
@@ -7701,7 +7635,7 @@ doorcita:
         'Validación de los datos del cliente
         Valida_Datos_Cliente(cboNombre.Text)
 
-        Dim per_venta As Boolean = False
+
         If lblusuario.Text = "" Then
             MsgBox("Escribe/Revisa tu contraseña para continuar.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
             cnn1.Close()
@@ -7936,7 +7870,6 @@ kakaxd:
                                 cnn12.Close()
                             End If
                         End With
-
                     End If
 
                 Case Is <> "MOSTRADOR"
@@ -8286,31 +8219,31 @@ kakaxd:
                         '    cnn1.Close()
                         'End If
 
-                        If FormaPago = "SALDO A FAVOR" Then
-                            If TotFormaPago > 0 Then
-                                TotSaldo = TotFormaPago
+                        'If FormaPago = "SALDO A FAVOR" Then
+                        '    If TotFormaPago > 0 Then
+                        '        TotSaldo = TotFormaPago
 
-                                'Dim saldofav As Double = 0
-                                'cnn1.Close() : cnn1.Open()
-                                'cmd1 = cnn1.CreateCommand
-                                'cmd1.CommandText = "SELECT SaldoFavor FROM clientes WHERE Nombre='" & cboNombre.Text & "'"
-                                'rd1 = cmd1.ExecuteReader
-                                'If rd1.HasRows Then
-                                '    If rd1.Read Then
-                                '        saldofav = rd1(0).ToString
+                        '        'Dim saldofav As Double = 0
+                        '        'cnn1.Close() : cnn1.Open()
+                        '        'cmd1 = cnn1.CreateCommand
+                        '        'cmd1.CommandText = "SELECT SaldoFavor FROM clientes WHERE Nombre='" & cboNombre.Text & "'"
+                        '        'rd1 = cmd1.ExecuteReader
+                        '        'If rd1.HasRows Then
+                        '        '    If rd1.Read Then
+                        '        '        saldofav = rd1(0).ToString
 
-                                '        cnn2.Close() : cnn2.Open()
-                                '        cmd2 = cnn2.CreateCommand
-                                '        cmd2.CommandText = "UPDATE clientes SET SaldoFavor=SaldoFavor - " & saldofav & " WHERE Nombre='" & cboNombre.Text & "'"
-                                '        cmd2.ExecuteNonQuery()
-                                '        cnn2.Close()
-                                '    End If
-                                'End If
-                                'rd1.Close()
-                                'cnn1.Close()
-                            End If
+                        '        '        cnn2.Close() : cnn2.Open()
+                        '        '        cmd2 = cnn2.CreateCommand
+                        '        '        cmd2.CommandText = "UPDATE clientes SET SaldoFavor=SaldoFavor - " & saldofav & " WHERE Nombre='" & cboNombre.Text & "'"
+                        '        '        cmd2.ExecuteNonQuery()
+                        '        '        cnn2.Close()
+                        '        '    End If
+                        '        'End If
+                        '        'rd1.Close()
+                        '        'cnn1.Close()
+                        '    End If
 
-                        End If
+                        'End If
 
                         If TotFormaPago > 0 Then
 
@@ -8578,6 +8511,28 @@ Door:
                     grdcaptura.Rows(R).Cells(16).Value = creainsert
 
 
+                    If grdcaptura.Rows(R).Cells(0).Value.ToString = "" And grdcaptura.Rows(R).Cells(1).Value.ToString <> "" Then
+
+                        Dim sqlcomentario As String = ""
+                        sqlcomentario = "update VentasDetalle set Comentario='" & grdcaptura.Rows(R).Cells(1).Value.ToString & "' where Codigo='" & mycode & "' and Folio=" & MYFOLIO
+
+
+                        Dim cnn120 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+                        Dim sinfo120 As String = ""
+                        Dim odata120 As New ToolKitSQL.myssql
+                        Dim dt120 As New DataTable
+                        Dim dr120 As DataRow
+                        With odata120
+                            If .dbOpen(cnn120, sTarget, sinfo120) Then
+                                If .runSp(cnn120, sqlcomentario, sinfo120) Then
+                                Else
+                                    MsgBox(sinfo120)
+                                End If
+                                cnn120.Close()
+                            End If
+                        End With
+
+                    End If
 
 
                     Dim necesito As Double = mycant / MyMCD
@@ -8761,12 +8716,7 @@ Door:
                     End If
                 End If
 
-                If grdcaptura.Rows(R).Cells(0).Value.ToString = "" And grdcaptura.Rows(R).Cells(1).Value.ToString <> "" Then
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "update VentasDetalle set Comentario='" & grdcaptura.Rows(R).Cells(1).Value.ToString & "' where Codigo='" & mycode & "' and Folio=" & MYFOLIO
-                    cmd1.ExecuteNonQuery()
-                End If
+
 
                 If lote <> "" Then
                     Dim IdVD As Integer = 0
@@ -8952,26 +8902,27 @@ Door:
         rd3.Close()
         cnn3.Close()
 
-        Dim Imprime As Boolean = False
-        Dim Copias As Integer = 0
+
+
         Dim TPrint As String = ""
         Dim Imprime_En As String = ""
-        Dim Impresora As String = ""
-        Dim Tamaño As String = ""
-        Dim Pasa_Print As Boolean = False
 
+
+        Dim Pasa_Print As Boolean = False
         Dim pide As String = "", contra As String = txtcontraseña.Text, usu As String = lblusuario.Text
 
 
-        Dim imprimeorden As Integer = 0
+
 
         '---------------------------------------FUNCION PARA ELIMINAR DETALLES DE VENTAS DUPLICADOS-----------
         Dim sumac As Integer = 0
         Dim ideli As Integer = 0
         Dim cunico As String = ""
 
-        cnn2.Close() : cnn2.Open()
+
         For luffy As Integer = 0 To grdcaptura.Rows.Count - 1
+            cnn2.Close() : cnn2.Open()
+
             cunico = IIf(grdcaptura.Rows(luffy).Cells(15).Value = "", "", grdcaptura.Rows(luffy).Cells(15).Value)
 
             If cunico = "" Then
@@ -8996,34 +8947,15 @@ Door:
                 End If
                 rd2.Close()
             End If
-
+            cnn2.Close()
         Next
-        cnn2.Close()
+
 
         '---------------------------------------imprimir comandas---------------------------------------------
 
+
         cnn1.Close() : cnn1.Open()
         cnn3.Close() : cnn3.Open()
-        cmd1 = cnn1.CreateCommand
-        cmd1.CommandText =
-                "select NotasCred from Formatos where Facturas='TamImpre'"
-        rd1 = cmd1.ExecuteReader
-        If rd1.HasRows Then
-            If rd1.Read Then
-                Tamaño = rd1(0).ToString
-            End If
-        End If
-        rd1.Close()
-
-        cmd1 = cnn1.CreateCommand
-        cmd1.CommandText = "SELECT NoPrintCom FROM ticket"
-        rd1 = cmd1.ExecuteReader
-        If rd1.HasRows Then
-            If rd1.Read Then
-                imprimeorden = rd1(0).ToString
-            End If
-        End If
-        rd1.Close()
 
         If imprimeorden = 1 Then
 
@@ -9083,18 +9015,7 @@ Door:
         End If
 
 
-        Dim cnn10 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
-        Dim sinfo10 As String = ""
-        Dim odata10 As New ToolKitSQL.myssql
-        Dim dt10 As New DataTable
-        Dim dr10 As DataRow
-        If odata10.dbOpen(cnn10, sTarget, sinfo10) Then
-            If odata10.getDr(cnn10, dr10, "select NoPrint,Copias from Ticket", sinfo10) Then
-                Imprime = dr10("NoPrint").ToString
-                Copias = dr10("Copias").ToString
-            End If
-            cnn10.Close()
-        End If
+
 
         If (Imprime) Then
             If MsgBox("¿Deseas imprimir nota de venta?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
@@ -9110,15 +9031,7 @@ Door:
 
             TPrint = cboimpresion.Text
 
-            cnn10 = New MySqlClient.MySqlConnection
-            sinfo10 = ""
-            dt10 = New DataTable
-            If odata10.dbOpen(cnn10, sTarget, sinfo10) Then
-                If odata10.getDr(cnn10, dr10, "select NotasCred from Formatos where Facturas='TamImpre'", sinfo10) Then
-                    Tamaño = dr10(0).ToString
-                End If
-                cnn10.Close()
-            End If
+
 
             If TPrint = "PDF - CARTA 1" Then
 
@@ -9210,15 +9123,18 @@ Door:
 
             ElseIf TPrint = "TICKET MATRIZ DE PUNTO" Then
 
-                cnn10 = New MySqlClient.MySqlConnection
-                sinfo10 = ""
-                dt10 = New DataTable
-                If odata10.dbOpen(cnn10, sTarget, sinfo10) Then
-                    If odata10.getDr(cnn10, dr10, "select Impresora from RutasImpresion where Equipo='" & ObtenerNombreEquipo() & "' and Tipo='Venta' and Formato='" & TPrint & "'", sinfo10) Then
-                        Impresora = rd1(0).ToString
+                Dim cnn160 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+                Dim sinfo160 As String = ""
+                Dim odata160 As New ToolKitSQL.myssql
+                Dim dt160 As New DataTable
+                Dim dr160 As DataRow
+                If odata160.dbOpen(cnn160, sTarget, sinfo160) Then
+                    If odata160.getDr(cnn160, dr160, "select Impresora from RutasImpresion where Equipo='" & ObtenerNombreEquipo() & "' and Tipo='Venta' and Formato='" & TPrint & "'", sinfo160) Then
+                        Impresora = dr160(0).ToString
                     End If
-                    cnn10.Close()
+                    cnn160.Close()
                 End If
+
 
             End If
 
@@ -9273,29 +9189,40 @@ Door:
         End If
 
 safo:
-        cnn1.Close() : cnn1.Open()
+
+
         If txtcotped.Text <> "" Then
-            cnn10 = New MySqlClient.MySqlConnection
-            sinfo10 = ""
-            dt10 = New DataTable
-            If odata10.dbOpen(cnn10, sTarget, sinfo10) Then
-                odata10.runSp(cnn10, "delete from CotPed where Folio=" & txtcotped.Text, sinfo10)
-                odata10.runSp(cnn10, "delete from CotPedDet where Folio=" & txtcotped.Text, sinfo10)
-                cnn10.Close()
+            Dim cnn100 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+            Dim sinfo100 As String = ""
+            Dim odata100 As New ToolKitSQL.myssql
+            Dim dt100 As New DataTable
+            Dim dr100 As DataRow
+            If odata100.dbOpen(cnn100, sTarget, sinfo100) Then
+                odata100.runSp(cnn100, "delete from CotPed where Folio=" & txtcotped.Text, sinfo100)
+                odata100.runSp(cnn100, "delete from CotPedDet where Folio=" & txtcotped.Text, sinfo100)
+                cnn100.Close()
             End If
         End If
 
         If lblpedido.Text <> "0" Then
-            cnn10 = New MySqlClient.MySqlConnection
-            sinfo10 = ""
-            dt10 = New DataTable
-            If odata10.dbOpen(cnn10, sTarget, sinfo10) Then
-                odata10.runSp(cnn10, "DELETE FROM pedidosven WHERE Folio='" & lblpedido.Text & "'", sinfo10)
-                odata10.runSp(cnn10, "DELETE FROM pedidosvendet WHERE Folio='" & lblpedido.Text & "'", sinfo10)
-                cnn10.Close()
+            Dim cnn150 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+            Dim sinfo150 As String = ""
+            Dim odata150 As New ToolKitSQL.myssql
+            Dim dt150 As New DataTable
+            Dim dr150 As DataRow
+
+            If odata150.dbOpen(cnn150, sTarget, sinfo150) Then
+                odata150.runSp(cnn150, "DELETE FROM pedidosven WHERE Folio='" & lblpedido.Text & "'", sinfo150)
+                odata150.runSp(cnn150, "DELETE FROM pedidosvendet WHERE Folio='" & lblpedido.Text & "'", sinfo150)
+                cnn150.Close()
             End If
         End If
 
+        Dim cnn10 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+        Dim sinfo10 As String = ""
+        Dim odata10 As New ToolKitSQL.myssql
+        Dim dt10 As New DataTable
+        Dim dr10 As DataRow
         cnn10 = New MySqlClient.MySqlConnection
         sinfo10 = ""
         dt10 = New DataTable
@@ -9317,11 +9244,6 @@ safo:
                 Dim dr11 As DataRow
                 If odata11.dbOpen(cnn11, sTarget, sinfo11) Then
                     If odata11.getDr(cnn11, dr11, " SELECT Id FROM ventasdetalle WHERE CodUnico = '" & grdcaptura.Rows(R).Cells(15).Value.ToString & "'", sinfo11) Then
-                        'If IsNothing(dr11("Id").ToString) = False Then
-                        '    If IsNumeric(dr11("Id").ToString) = False Then
-                        '        odata11.runSp(cnn11, grdcaptura.Rows(R).Cells(16).Value.ToString, sinfo11)
-                        '    End If
-                        'End If
                     Else
                         odata11.runSp(cnn11, grdcaptura.Rows(R).Cells(16).Value.ToString, sinfo11)
                     End If
@@ -18314,6 +18236,6 @@ kaka:
     End Sub
 
     Private Sub txtcontraseña_TextChanged(sender As Object, e As EventArgs) Handles txtcontraseña.TextChanged
-        txtcontraseña_KeyPress(txtcontraseña, New KeyPressEventArgs(ControlChars.Cr))
+        'txtcontraseña_KeyPress(txtcontraseña, New KeyPressEventArgs(ControlChars.Cr))
     End Sub
 End Class
