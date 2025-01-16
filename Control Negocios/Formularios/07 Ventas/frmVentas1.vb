@@ -21,6 +21,12 @@ Public Class frmVentas1
     Dim dias_credito As Double = 0
     Dim fecha_pago As String = ""
 
+    'upgrid
+    Dim Alerta_Min As Boolean = False
+    Dim acumulaxd As Integer = 0
+    Dim VSE As Boolean = False
+
+
     ''' variablesm para terminal bancaria
     Public valorxd As Integer = 0
     Public SiPago As Integer = 0
@@ -242,6 +248,58 @@ Public Class frmVentas1
         'Dim sql1 As String = ""
         'Dim sql2 As String = ""
         'Dim sql3 As String = ""
+        Try
+            cnn1.Close()
+            cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText =
+                "select VSE from Ticket"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    VSE = rd1(0).ToString
+                End If
+            End If
+            rd1.Close()
+            cnn1.Close()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
+
+        Try
+            cnn3.Close() : cnn3.Open()
+            cmd3 = cnn3.CreateCommand
+            cmd3.CommandText =
+                "select NotasCred from Formatos where Facturas='MinimoA'"
+            rd3 = cmd3.ExecuteReader
+            If rd3.HasRows Then
+                If rd3.Read Then
+                    Alerta_Min = IIf(rd3(0).ToString() = "1", True, False)
+                End If
+            End If
+            rd3.Close()
+            cnn3.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn3.Close()
+        End Try
+
+        Try
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Acumula'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.Read Then
+                acumulaxd = rd1(0).ToString
+            End If
+            rd1.Close()
+            cnn1.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
 
         Dim log As String = ""
 
@@ -761,24 +819,13 @@ Public Class frmVentas1
     Private Sub UpGrid()
         Dim TPapel As String = ""
         Dim Conteo As Double = 0
-        Dim Alerta_Min As Boolean = False
         Dim Acumula As Boolean = False
+
         Dim minimo As Double = 0
 
 
         Try
-            cnn3.Close() : cnn3.Open()
-            cmd3 = cnn3.CreateCommand
-            cmd3.CommandText =
-                "select NotasCred from Formatos where Facturas='MinimoA'"
-            rd3 = cmd3.ExecuteReader
-            If rd3.HasRows Then
-                If rd3.Read Then
-                    Alerta_Min = IIf(rd3(0).ToString() = "1", True, False)
-                End If
-            End If
-            rd3.Close()
-            cnn3.Close()
+
 
             If TPapel = "MEDIA CARTA" Then
                 If grdcaptura.Rows.Count > 13 Then
@@ -827,7 +874,7 @@ Public Class frmVentas1
             Dim desucentoiva As Double = 0
             Dim total1 As Double = 0
             Dim monedero As Double = 0
-            Dim acumulaxd As Integer = 0
+
 
             cnn3.Close() : cnn3.Open()
             cmd3 = cnn3.CreateCommand
@@ -854,15 +901,7 @@ Public Class frmVentas1
             cnn3.Close()
 
 
-            cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Acumula'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.Read Then
-                acumulaxd = rd1(0).ToString
-            End If
-            rd1.Close()
-            cnn1.Close()
+
 
             Dim varcodunico As String = Format(CDate(Date.Now), "yyyy/MM/ddHH:mm:ss.fff") & codigo
             varcodunico = QuitarCaracteresEspeciales(varcodunico)
@@ -3791,20 +3830,6 @@ kaka:
             Dim cmd1 As MySqlCommand
 
             Try
-                Dim VSE As Boolean = False
-                cnn1.Close()
-                cnn1.Open()
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText =
-                "select VSE from Ticket"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        VSE = rd1(0).ToString
-                    End If
-                End If
-                rd1.Close()
-                cnn1.Close()
 
                 If VSE = True Then
                     If txtunidad.Text <> "N/A" Then
@@ -4107,7 +4132,7 @@ kaka:
     End Sub
 
     Public Sub txtprecio_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtprecio.KeyPress
-        Dim chec As Boolean = False
+        'Dim chec As Boolean = False
         Dim editap As Boolean = False
         If Not IsNumeric(txtprecio.Text) Then txtprecio.Text = ""
         If cbocodigo.Text = "" Then MsgBox("Necesitas seleccionar un producto.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbodesc.Focus().Equals(True) : Exit Sub
@@ -4119,20 +4144,20 @@ kaka:
         Dim cmd1, cmd2 As MySqlCommand
 
         Try
-            Dim VSE As Boolean = False
-            cnn1.Close()
-            cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
-                "select VSE from Ticket"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    VSE = rd1(0).ToString
-                End If
-            End If
-            rd1.Close()
-            cnn1.Close()
+            'Dim VSE As Boolean = False
+            'cnn1.Close()
+            'cnn1.Open()
+            'cmd1 = cnn1.CreateCommand
+            'cmd1.CommandText =
+            '    "select VSE from Ticket"
+            'rd1 = cmd1.ExecuteReader
+            'If rd1.HasRows Then
+            '    If rd1.Read Then
+            '        VSE = rd1(0).ToString
+            '    End If
+            'End If
+            'rd1.Close()
+            'cnn1.Close()
 
             If VSE = True Then
                 If txtunidad.Text <> "N/A" Then
@@ -4156,16 +4181,16 @@ kaka:
         Try
             cnn1.Close() : cnn1.Open()
 
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
-                "select VSE from Ticket"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    chec = rd1(0).ToString
-                End If
-            End If
-            rd1.Close()
+            'cmd1 = cnn1.CreateCommand
+            'cmd1.CommandText =
+            '    "select VSE from Ticket"
+            'rd1 = cmd1.ExecuteReader
+            'If rd1.HasRows Then
+            '    If rd1.Read Then
+            '        chec = rd1(0).ToString
+            '    End If
+            'End If
+            'rd1.Close()
 
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
@@ -4202,7 +4227,7 @@ kaka:
                             rd2.Close() : cnn2.Close()
                         End If
                     Else
-                        If chec = True Then
+                        If VSE = True Then
                             Dim existencia As Double = rd1("Existencia").ToString
                             Dim TExiste As Double = existencia - CDbl(txtcantidad.Text)
 
@@ -4328,7 +4353,7 @@ kaka:
 
     Private Sub cboLote_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboLote.KeyPress
         e.KeyChar = UCase(e.KeyChar)
-        Dim chec As Boolean = False
+        'Dim chec As Boolean = False
         Dim renta As Boolean = False
 
         If cboLote.Text = "" Then
@@ -4345,16 +4370,16 @@ kaka:
         If AscW(e.KeyChar) = Keys.Enter Then
             cnn1.Close() : cnn1.Open()
 
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
-                "select VSE from Ticket"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    chec = rd1(0).ToString()
-                End If
-            End If
-            rd1.Close()
+            'cmd1 = cnn1.CreateCommand
+            'cmd1.CommandText =
+            '    "select VSE from Ticket"
+            'rd1 = cmd1.ExecuteReader
+            'If rd1.HasRows Then
+            '    If rd1.Read Then
+            '        chec = rd1(0).ToString()
+            '    End If
+            'End If
+            'rd1.Close()
 
             Dim cant_lotes As Double = 0
 
@@ -4399,7 +4424,7 @@ kaka:
                     ElseIf CStr(rd1("Grupo").ToString()) = "RENTAS" Then
                         renta = True
                     Else
-                        If chec = True Then
+                        If VSE = True Then
                             If btndevo.Text <> "GUARDAR DEVOLUCIÓN" Then
                                 Dim Existe As Double = rd1("Existencia").ToString()
                                 Dim TExiste As Double = Existe - CDbl(txtcantidad.Text)
@@ -4460,17 +4485,36 @@ kaka:
             Dim decu As String = ""
             Dim pre_ini As Double = txtprecio.Text, pre_fini As Double = 0
 
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
-                "select Dia,Descu from Productos where Codigo='" & cbocodigo.Text & "'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    dia = rd1(0).ToString
-                    decu = rd1(1).ToString
+            Dim varnom As String = cbocodigo.Text
+            Dim index As Integer = -1
+            Dim row As DataGridViewRow
+            For Each row In DataGridView1.Rows
+
+                If IsNothing(row.Cells("Codigo").Value) Then
+                    Exit For
                 End If
+
+                If row.Cells("Codigo").Value.ToString() = varnom Then
+                    index = row.Index
+                    Exit For
+                End If
+            Next
+            If index <> -1 Then
+                dia = DataGridView1.Rows(index).Cells("Dia").Value.ToString()
+                decu = DataGridView1.Rows(index).Cells("Descu").Value.ToString()
             End If
-            rd1.Close()
+
+            'cmd1 = cnn1.CreateCommand
+            'cmd1.CommandText =
+            '    "select Dia,Descu from Productos where Codigo='" & cbocodigo.Text & "'"
+            'rd1 = cmd1.ExecuteReader
+            'If rd1.HasRows Then
+            '    If rd1.Read Then
+            '        dia = rd1(0).ToString
+            '        decu = rd1(1).ToString
+            '    End If
+            'End If
+            'rd1.Close()
 
             If dia = 0 Then
             Else
@@ -4487,33 +4531,56 @@ kaka:
             If CDbl(IIf(txtcantidad.Text = "", "0", txtcantidad.Text)) = 0 Or txtcantidad.Text = "" Then cbocodigo.Focus().Equals(True) : cnn1.Close() : Exit Sub
             If CDbl(IIf(txtprecio.Text = "", "0", txtprecio.Text)) = 0 Or txtprecio.Text = "" Then cbocodigo.Focus().Equals(True) : cnn1.Close() : Exit Sub
 
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
-                "select PreMin,PreMin2 from Productos where Codigo='" & cbocodigo.Text & "'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    If Promo = False Then
+            If index <> -1 Then
+                If Promo = False Then
+                    Dim premin1 As Double = 0
+                    Dim premin2 As Double = 0
+                    Dim premasbajo As Double = 0
 
-                        Dim premin1 As Double = 0
-                        Dim premin2 As Double = 0
-                        Dim premasbajo As Double = 0
+                    premin1 = DataGridView1.Rows(index).Cells("PreMin").Value.ToString()
+                    premin2 = DataGridView1.Rows(index).Cells("PreMin2").Value.ToString()
 
-                        premin1 = rd1(0).ToString
-                        premin2 = rd1(1).ToString
-                        premasbajo = Math.Min(premin1, premin2)
-                        If CDbl(txtprecio.Text) < CDbl(IIf(premasbajo = 0, 0, premasbajo)) Then
-                            If btndevo.Text <> "GUARDAR DEVOLUCIÓN" Then
-                                MsgBox("El precio de venta mínimo establecido es de " & FormatNumber(premasbajo, 4) & ".", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                                txtprecio.Focus().Equals(True)
-                                rd1.Close() : cnn1.Close()
-                                Exit Sub
-                            End If
+                    premasbajo = Math.Min(premin1, premin2)
+                    If CDbl(txtprecio.Text) < CDbl(IIf(premasbajo = 0, 0, premasbajo)) Then
+                        If btndevo.Text <> "GUARDAR DEVOLUCIÓN" Then
+                            MsgBox("El precio de venta mínimo establecido es de " & FormatNumber(premasbajo, 4) & ".", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+                            txtprecio.Focus().Equals(True)
+                            rd1.Close() : cnn1.Close()
+                            Exit Sub
                         End If
                     End If
                 End If
             End If
-            rd1.Close()
+
+
+
+            'cmd1 = cnn1.CreateCommand
+            'cmd1.CommandText =
+            '    "select PreMin,PreMin2 from Productos where Codigo='" & cbocodigo.Text & "'"
+            'rd1 = cmd1.ExecuteReader
+            'If rd1.HasRows Then
+            '    If rd1.Read Then
+            '        If Promo = False Then
+
+            '            Dim premin1 As Double = 0
+            '            Dim premin2 As Double = 0
+            '            Dim premasbajo As Double = 0
+
+            '            premin1 = rd1(0).ToString
+            '            premin2 = rd1(1).ToString
+            '            premasbajo = Math.Min(premin1, premin2)
+            '            If CDbl(txtprecio.Text) < CDbl(IIf(premasbajo = 0, 0, premasbajo)) Then
+            '                If btndevo.Text <> "GUARDAR DEVOLUCIÓN" Then
+            '                    MsgBox("El precio de venta mínimo establecido es de " & FormatNumber(premasbajo, 4) & ".", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
+            '                    txtprecio.Focus().Equals(True)
+            '                    rd1.Close() : cnn1.Close()
+            '                    Exit Sub
+            '                End If
+            '            End If
+            '        End If
+            '    End If
+            'End If
+            'rd1.Close()
 
             txtefectivo.Text = "0.00"
             txtCambio.Text = "0.00"
@@ -17136,7 +17203,6 @@ doorcita:
     End Sub
 
     Private Sub cbodesc_KeyPress_1(sender As Object, e As KeyPressEventArgs) Handles cbodesc.KeyPress
-
         'Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         'Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         'Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
@@ -17202,18 +17268,16 @@ doorcita:
                     End If
                     rd1.Close()
 
-
-
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                    "select VSE from Ticket"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.HasRows Then
-                        If rd1.Read Then
-                            VSE = rd1(0).ToString
-                        End If
-                    End If
-                    rd1.Close()
+                    'cmd1 = cnn1.CreateCommand
+                    'cmd1.CommandText =
+                    '"select VSE from Ticket"
+                    'rd1 = cmd1.ExecuteReader
+                    'If rd1.HasRows Then
+                    '    If rd1.Read Then
+                    '        VSE = rd1(0).ToString
+                    '    End If
+                    'End If
+                    'rd1.Close()
                     Dim codrecortado As String = ""
                     Dim pesofinal As String = ""
                     Dim primervalor As String = ""
@@ -17296,11 +17360,7 @@ doorcita:
                                 End If
                             End If
                             rd2.Close()
-                            cnn2.Close()
 
-
-                            '''HAY QUE METRLO AL DATA GRID----------------------------------------------------'
-                            cnn2.Close() : cnn2.Open()
                             cmd2 = cnn2.CreateCommand
                             cmd2.CommandText =
                                 "select tipo_cambio from tb_moneda,Productos where Codigo='" & cbocodigo.Text & "' and Productos.id_tbMoneda=tb_moneda.id"
@@ -17314,7 +17374,6 @@ doorcita:
                                 TiCambio = 1
                             End If
                             rd2.Close()
-                            '-------------------------------------------------------------------------
 
                             cmd2 = cnn2.CreateCommand
                             cmd2.CommandText =
@@ -17467,16 +17526,16 @@ doorcita:
 kaka:
 
                 cnn1.Close() : cnn1.Open()
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText =
-                    "select VSE from Ticket"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        VSE = rd1(0).ToString
-                    End If
-                End If
-                rd1.Close()
+                'cmd1 = cnn1.CreateCommand
+                'cmd1.CommandText =
+                '    "select VSE from Ticket"
+                'rd1 = cmd1.ExecuteReader
+                'If rd1.HasRows Then
+                '    If rd1.Read Then
+                '        VSE = rd1(0).ToString
+                '    End If
+                'End If
+                'rd1.Close()
 
                 Dim varnom As String = cbodesc.Text
                 Dim index As Integer = -1
@@ -18164,6 +18223,8 @@ kaka:
                 cnn1.Close()
             End Try
         End If
+
+
 
     End Sub
 
