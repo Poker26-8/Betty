@@ -13,7 +13,7 @@ Public Class frmPermisosRestaurant
         Try
             lblEquipo.Text = ObtenerNombreEquipo()
             txtToleranciaV.Text = DatosRecarga2("ToleVisor")
-
+            txtTolerancia2.Text = DatosRecarga2("ToleVisor2")
             cnn2.Close() : cnn2.Open()
 
             cmd2 = cnn2.CreateCommand
@@ -1224,12 +1224,20 @@ Public Class frmPermisosRestaurant
                         cmd2 = cnn2.CreateCommand
                         cmd2.CommandText = "UPDATE formatos SET NumPart=" & txtToleranciaV.Text & " WHERE Facturas='ToleVisor'"
                         cmd2.ExecuteNonQuery()
+
+                        cmd2 = cnn2.CreateCommand
+                        cmd2.CommandText = "UPDATE formatos SET NumPart=" & txtToleranciaV.Text & " WHERE Facturas='ToleVisor2'"
+                        cmd2.ExecuteNonQuery()
                         cnn2.Close()
                     End If
                 Else
                     cnn2.Close() : cnn2.Open()
                     cmd2 = cnn2.CreateCommand
                     cmd2.CommandText = "INSERT INTO formatos(Facturas,NotasCred,NumPart) VALUES('ToleVisor','0'," & txtToleranciaV.Text & ")"
+                    cmd2.ExecuteNonQuery()
+
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "INSERT INTO formatos(Facturas,NotasCred,NumPart) VALUES('ToleVisor2','0'," & txtToleranciaV.Text & ")"
                     cmd2.ExecuteNonQuery()
                     cnn2.Close()
                 End If

@@ -39,6 +39,9 @@ Public Class frmVisorComanda
             Dim condicion_left As Double = 0
             Dim TIPOCOMANDA As String = ""
             Dim horaregisto As DateTime = Nothing
+            Dim fechaaentrada As Date = Nothing
+            Dim fechacompleta As Date = Nothing
+
             Dim tolerancia As Integer = DatosRecarga2("ToleVisor")
 
 
@@ -111,34 +114,31 @@ Public Class frmVisorComanda
                             labelComanda = New Label
 
                             nombre_mesa = rd2("NMESA").ToString
+                            fechaaentrada = rd2("Fecha").ToString
                             horaregisto = rd2("Hr").ToString
-
-                            nuevotiempo = horaregisto.AddMinutes(tolerancia)
+                            fechacompleta = fechaaentrada & " " & horaregisto
+                            nuevotiempo = fechacompleta.AddMinutes(tolerancia)
 
                             Dim soyminutos As Double = 0
+                            Dim actual As Date = Date.Now
+                            Dim factual As Date = Format(actual, "HH:mm:ss")
+                            soyminutos = DateDiff(DateInterval.Minute, CDate(nuevotiempo), CDate(Date.Now))
 
-                            'soyminutos = DateDiff(DateInterval.Minute, CDate(nuevotiempo), CDate(Date.Now))
-
-                            'MsgBox(soyminutos)
-
-                            'If soyminutos > Format(Date.Now, "yyyy-MM-dd") Then
-                            '    MsgBox("se paso")
-                            'End If
 
                             labelComanda.Name = rd2("IDC").ToString & "_" & rd2("Nombre").ToString
-                            labelComanda.Width = panelComanda.Width
-                            labelComanda.Height = 23
+                                labelComanda.Width = panelComanda.Width
+                                labelComanda.Height = 23
 
-                            labelComanda.Top = top_label
-                            labelComanda.TextAlign = ContentAlignment.MiddleLeft
-                            labelComanda.Font = New Font("Lucida Sans Typewriter", 12, FontStyle.Regular)
-                            If rd2("Grupo").ToString = "EXTRAS" Then
-                                labelComanda.Text = "     " & rd2("Nombre").ToString
-                            Else
-                                labelComanda.Text = rd2("Cantidad").ToString & "   " & rd2("Nombre").ToString
-                            End If
-                            AddHandler labelComanda.Click, AddressOf labelComanda_Click
-                            panelComanda.Controls.Add(labelComanda)
+                                labelComanda.Top = top_label
+                                labelComanda.TextAlign = ContentAlignment.MiddleLeft
+                                labelComanda.Font = New Font("Lucida Sans Typewriter", 12, FontStyle.Regular)
+                                If rd2("Grupo").ToString = "EXTRAS" Then
+                                    labelComanda.Text = "     " & rd2("Nombre").ToString
+                                Else
+                                    labelComanda.Text = rd2("Cantidad").ToString & "   " & rd2("Nombre").ToString
+                                End If
+                                AddHandler labelComanda.Click, AddressOf labelComanda_Click
+                                panelComanda.Controls.Add(labelComanda)
 
                             If rd2("Comentario").ToString <> "" Then
                                 top_label += 23
@@ -156,9 +156,19 @@ Public Class frmVisorComanda
                                 AddHandler labelComanda.Click, AddressOf labelComanda_Click
                                 panelComanda.Controls.Add(labelComanda)
                                 top_label += 46
+
+
+
                             Else
                                 top_label += 23
+
+
                             End If
+
+                            If soyminutos > tolerancia Then
+                                labelComanda.BackColor = Color.Red
+                            End If
+
                         End If
                     Loop
                     top_label = 0

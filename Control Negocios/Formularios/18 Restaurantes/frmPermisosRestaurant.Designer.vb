@@ -76,6 +76,9 @@ Partial Class frmPermisosRestaurant
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.txtToleranciaV = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.btnVisor = New System.Windows.Forms.Button()
         Me.lblcomanda = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -98,9 +101,9 @@ Partial Class frmPermisosRestaurant
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.txtToleranciaV = New System.Windows.Forms.TextBox()
-        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.txtTolerancia2 = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.GroupBox7.SuspendLayout()
         Me.GroupBox19.SuspendLayout()
         Me.GroupBox20.SuspendLayout()
@@ -391,7 +394,7 @@ Partial Class frmPermisosRestaurant
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel2.Location = New System.Drawing.Point(0, 103)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(467, 553)
+        Me.Panel2.Size = New System.Drawing.Size(467, 595)
         Me.Panel2.TabIndex = 240
         '
         'GroupBox5
@@ -707,13 +710,16 @@ Partial Class frmPermisosRestaurant
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox3.Location = New System.Drawing.Point(473, 318)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(556, 331)
+        Me.GroupBox3.Size = New System.Drawing.Size(556, 378)
         Me.GroupBox3.TabIndex = 248
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Agregar mesas fijas"
         '
         'GroupBox6
         '
+        Me.GroupBox6.Controls.Add(Me.Label16)
+        Me.GroupBox6.Controls.Add(Me.txtTolerancia2)
+        Me.GroupBox6.Controls.Add(Me.Label15)
         Me.GroupBox6.Controls.Add(Me.Label14)
         Me.GroupBox6.Controls.Add(Me.txtToleranciaV)
         Me.GroupBox6.Controls.Add(Me.Label11)
@@ -725,10 +731,40 @@ Partial Class frmPermisosRestaurant
         Me.GroupBox6.Controls.Add(Me.Label10)
         Me.GroupBox6.Location = New System.Drawing.Point(6, 138)
         Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(299, 184)
+        Me.GroupBox6.Size = New System.Drawing.Size(299, 230)
         Me.GroupBox6.TabIndex = 252
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Visor de comandas"
+        '
+        'Label14
+        '
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(112, 159)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(60, 17)
+        Me.Label14.TabIndex = 255
+        Me.Label14.Text = "Minutos"
+        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtToleranciaV
+        '
+        Me.txtToleranciaV.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtToleranciaV.Location = New System.Drawing.Point(7, 157)
+        Me.txtToleranciaV.Name = "txtToleranciaV"
+        Me.txtToleranciaV.Size = New System.Drawing.Size(99, 22)
+        Me.txtToleranciaV.TabIndex = 3
+        Me.txtToleranciaV.Text = "0"
+        Me.txtToleranciaV.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label11
+        '
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(7, 140)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(165, 17)
+        Me.Label11.TabIndex = 254
+        Me.Label11.Text = "Tolerancia Uno"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'btnVisor
         '
@@ -963,42 +999,43 @@ Partial Class frmPermisosRestaurant
         Me.Panel1.Size = New System.Drawing.Size(1030, 66)
         Me.Panel1.TabIndex = 250
         '
-        'Label11
+        'Label15
         '
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(7, 140)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(165, 17)
-        Me.Label11.TabIndex = 254
-        Me.Label11.Text = "Tolerancia"
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label15.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(7, 182)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(165, 17)
+        Me.Label15.TabIndex = 256
+        Me.Label15.Text = "Tolerancia Dos"
+        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'txtToleranciaV
+        'txtTolerancia2
         '
-        Me.txtToleranciaV.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtToleranciaV.Location = New System.Drawing.Point(7, 157)
-        Me.txtToleranciaV.Name = "txtToleranciaV"
-        Me.txtToleranciaV.Size = New System.Drawing.Size(99, 22)
-        Me.txtToleranciaV.TabIndex = 3
-        Me.txtToleranciaV.Text = "0"
-        Me.txtToleranciaV.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtTolerancia2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTolerancia2.Location = New System.Drawing.Point(7, 202)
+        Me.txtTolerancia2.Name = "txtTolerancia2"
+        Me.txtTolerancia2.Size = New System.Drawing.Size(99, 22)
+        Me.txtTolerancia2.TabIndex = 257
+        Me.txtTolerancia2.Text = "0"
+        Me.txtTolerancia2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'Label14
+        'Label16
         '
-        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(112, 159)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(60, 17)
-        Me.Label14.TabIndex = 255
-        Me.Label14.Text = "Minutos"
-        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(112, 205)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(60, 17)
+        Me.Label16.TabIndex = 258
+        Me.Label16.Text = "Minutos"
+        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'frmPermisosRestaurant
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(251, Byte), Integer), CType(CType(187, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1030, 656)
+        Me.ClientSize = New System.Drawing.Size(1030, 698)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.GroupBox3)
@@ -1114,4 +1151,7 @@ Partial Class frmPermisosRestaurant
     Friend WithEvents Label14 As Label
     Friend WithEvents txtToleranciaV As TextBox
     Friend WithEvents Label11 As Label
+    Friend WithEvents Label16 As Label
+    Friend WithEvents txtTolerancia2 As TextBox
+    Friend WithEvents Label15 As Label
 End Class
