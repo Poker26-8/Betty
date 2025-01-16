@@ -121,7 +121,9 @@ Public Class frmVisorComanda
 
                             'MsgBox(soyminutos)
 
-
+                            'If soyminutos > Format(Date.Now, "yyyy-MM-dd") Then
+                            '    MsgBox("se paso")
+                            'End If
 
                             labelComanda.Name = rd2("IDC").ToString & "_" & rd2("Nombre").ToString
                             labelComanda.Width = panelComanda.Width
