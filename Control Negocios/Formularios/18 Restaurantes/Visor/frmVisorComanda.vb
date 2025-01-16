@@ -37,14 +37,31 @@ Public Class frmVisorComanda
             Dim conteo_panes As Integer = 0
 
             Dim condicion_left As Double = 0
+            Dim TIPOCOMANDA As String = ""
+            Dim horaregisto As DateTime = Nothing
+            Dim tolerancia As Integer = DatosRecarga2("ToleVisor")
+
+
+            Dim nuevotiempo As Date = Nothing
 
             cnn1.Close()
             PComandas.Controls.Clear()
             cnn1.Close()
             cnn1.Open()
 
+
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "select distinct id from Comandas where Estado=0 AND GPrint<>'BARRA' OR GPrint='VISOR'"
+            cmd1.CommandText = "SELECT Tipo FROM rutasimpresion WHERE Equipo='" & ObtenerNombreEquipo() & "' AND Formato='VISOR'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    TIPOCOMANDA = rd1(0).ToString
+                End If
+            End If
+            rd1.Close()
+
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "select distinct id from Comandas where Estado=0 AND GPrint<>'BARRA' AND Gprint='" & TIPOCOMANDA & "'"
             rd1 = cmd1.ExecuteReader
 
             Do While rd1.Read
@@ -86,7 +103,7 @@ Public Class frmVisorComanda
 
                     cmd2 = cnn2.CreateCommand
                     ' cmd2.CommandText = "select * from Comandas where id=" & id_panel & " and (GPrint='MONITOR' or GPrint='EXTRAS') and Estado=0 order by IDC"
-                    cmd2.CommandText = "select * from Comandas where id=" & id_panel & " and Estado=0 AND GPrint<>'BARRA' OR  GPrint='VISOR' order by IDC"
+                    cmd2.CommandText = "select * from Comandas where id=" & id_panel & " and Estado=0 AND GPrint<>'BARRA' AND Gprint='" & TIPOCOMANDA & "' order by IDC"
                     rd2 = cmd2.ExecuteReader
 
                     Do While rd2.Read
@@ -94,6 +111,17 @@ Public Class frmVisorComanda
                             labelComanda = New Label
 
                             nombre_mesa = rd2("NMESA").ToString
+                            horaregisto = rd2("Hr").ToString
+
+                            nuevotiempo = horaregisto.AddMinutes(tolerancia)
+
+                            Dim soyminutos As Double = 0
+
+                            'soyminutos = DateDiff(DateInterval.Minute, CDate(nuevotiempo), CDate(Date.Now))
+
+                            'MsgBox(soyminutos)
+
+
 
                             labelComanda.Name = rd2("IDC").ToString & "_" & rd2("Nombre").ToString
                             labelComanda.Width = panelComanda.Width

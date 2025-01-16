@@ -31,6 +31,7 @@ Module FunAsync
     Public Function SformatosInicio()
 
         Try
+            SFormatos("ToleVisor", "0")
             SFormatos("Membresias", "0")
             SFormatos("Bodegas", "0")
             SFormatos("VentasRuta", "0")

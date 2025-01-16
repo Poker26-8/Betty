@@ -2562,6 +2562,7 @@ deku:
 
                     End If
 
+
                     If grdCaptura.Rows(zi).Cells(0).Value.ToString <> "" Then
 
                         cnn3.Close() : cnn3.Open()

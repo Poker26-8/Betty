@@ -11,8 +11,21 @@ Public Class frmPermisosRestaurant
         Dim cmd2 As MySqlCommand
 
         Try
+            lblEquipo.Text = ObtenerNombreEquipo()
+            txtToleranciaV.Text = DatosRecarga2("ToleVisor")
 
             cnn2.Close() : cnn2.Open()
+
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText = "SELECT Tipo FROM rutasimpresion WHERE Equipo='" & lblEquipo.Text & "' AND Formato='VISOR'"
+            rd2 = cmd2.ExecuteReader
+            If rd2.HasRows Then
+                If rd2.Read Then
+                    lblcomanda.Text = rd2("Tipo").ToString
+                End If
+            End If
+            rd2.Close()
+
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText = "SELECT Comensal FROM Ticket"
             rd2 = cmd2.ExecuteReader
@@ -1184,6 +1197,74 @@ Public Class frmPermisosRestaurant
                 cnn1.Close()
 
             End If
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
+    End Sub
+
+    Private Sub btnVisor_Click(sender As Object, e As EventArgs) Handles btnVisor.Click
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1, rd2 As MySqlDataReader
+        Dim cmd1, cmd2 As MySqlCommand
+
+        Try
+            cnn1.Close() : cnn1.Open()
+
+            If txtToleranciaV.Text = "" Then
+            Else
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText = "SELECT NumPart FROM formatos WHERE Facturas='ToleVisor'"
+                rd1 = cmd1.ExecuteReader
+                If rd1.HasRows Then
+                    If rd1.Read Then
+                        cnn2.Close() : cnn2.Open()
+                        cmd2 = cnn2.CreateCommand
+                        cmd2.CommandText = "UPDATE formatos SET NumPart=" & txtToleranciaV.Text & " WHERE Facturas='ToleVisor'"
+                        cmd2.ExecuteNonQuery()
+                        cnn2.Close()
+                    End If
+                Else
+                    cnn2.Close() : cnn2.Open()
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "INSERT INTO formatos(Facturas,NotasCred,NumPart) VALUES('ToleVisor','0'," & txtToleranciaV.Text & ")"
+                    cmd2.ExecuteNonQuery()
+                    cnn2.Close()
+                End If
+                rd1.Close()
+
+            End If
+
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText = "select Equipo from RutasImpresion where Equipo='" & ObtenerNombreEquipo() & "' and Tipo='" & cbonombrecomanda.Text & "'"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    cnn2.Close() : cnn2.Open()
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText = "UPDATE rutasimpresion SET Tipo='" & cbonombrecomanda.Text & "' WHERE Equipo='" & ObtenerNombreEquipo() & "' AND Formato='VISOR'"
+                    If cmd2.ExecuteNonQuery Then
+                        MsgBox("Ruta agregada correctamente", vbInformation + vbOKOnly, titulorestaurante)
+                        cbonombrecomanda.Text = ""
+                    End If
+
+                End If
+            Else
+                cnn2.Close() : cnn2.Open()
+                cmd2 = cnn2.CreateCommand
+                cmd2.CommandText = "INSERT INTO rutasimpresion(Equipo,Tipo,Formato) VALUES('" & ObtenerNombreEquipo() & "','" & cbonombrecomanda.Text & "','VISOR')"
+                If cmd2.ExecuteNonQuery Then
+                    MsgBox("Ruta agregada correctamente", vbInformation + vbOKOnly, titulorestaurante)
+                    lblcomanda.Text = cbonombrecomanda.Text
+                    cbonombrecomanda.Text = ""
+                End If
+
+            End If
+            rd1.Close()
+            cnn1.Close()
+
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
             cnn1.Close()
