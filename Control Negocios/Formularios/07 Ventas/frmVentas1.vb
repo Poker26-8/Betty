@@ -104,6 +104,7 @@ Public Class frmVentas1
     Dim Imprime As Boolean = False
     Dim Copias As Integer = 0
     Dim Impresora As String = ""
+    Dim pide As String = ""
 
     Private Sub frmVentas1_Activated(sender As Object, e As System.EventArgs) Handles Me.Activated
         txtdia.Text = Weekday(Date.Now)
@@ -257,7 +258,7 @@ Public Class frmVentas1
         'Dim sql2 As String = ""
         'Dim sql3 As String = ""
 
-
+        pide = DatosRecarga("TomaContra")
         Tamaño = DatosRecarga("TamImpre")
         Alerta_Min = DatosRecarga("MinimoA")
         acumulaxd = DatosRecarga("Acumula")
@@ -351,7 +352,7 @@ Public Class frmVentas1
 
         Dim orden As Integer = Await ValidarAsync("Ordenes")
         Dim verexistencia As Integer = Await ValidarAsync("VerExistencias")
-        Dim tomarcontra As Integer = Await ValidarAsync("TomaContra")
+
         ' franquicia = Await ValidarAsync("Franquicia")
 
         If orden = 1 Then
@@ -370,7 +371,7 @@ Public Class frmVentas1
             txtexistencia.Visible = True
         End If
 
-        If tomarcontra = 1 Then
+        If pide = 1 Then
 
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
@@ -1427,16 +1428,16 @@ kak:
                                     cmd1.ExecuteNonQuery()
                                 End If
 
-                                cmd1 = cnn1.CreateCommand
-                                cmd1.CommandText =
-                                "select NotasCred from Formatos where Facturas='PedirContra'"
-                                rd1 = cmd1.ExecuteReader
-                                If rd1.HasRows Then
-                                    If rd1.Read Then
-                                        pide = rd1(0).ToString
-                                    End If
-                                End If
-                                rd1.Close() : cnn1.Close()
+                                'cmd1 = cnn1.CreateCommand
+                                'cmd1.CommandText =
+                                '"select NotasCred from Formatos where Facturas='PedirContra'"
+                                'rd1 = cmd1.ExecuteReader
+                                'If rd1.HasRows Then
+                                '    If rd1.Read Then
+                                '        pide = rd1(0).ToString
+                                '    End If
+                                'End If
+                                'rd1.Close() : cnn1.Close()
 
                                 btnnuevo.PerformClick()
                                 If pide = "1" Then
@@ -5736,23 +5737,28 @@ kaka:
         validaTarjeta = 0
 
         'limpiar contraseña
-        cnn1.Close() : cnn1.Open()
-        cmd1 = cnn1.CreateCommand
-        cmd1.CommandText = "SELECT NotasCred FROM Formatos WHERE Facturas='TomaContra'"
-        rd1 = cmd1.ExecuteReader
-        If rd1.HasRows Then
-            If rd1.Read Then
-                tomacontralog = rd1(0).ToString
+        'cnn1.Close() : cnn1.Open()
+        'cmd1 = cnn1.CreateCommand
+        'cmd1.CommandText = "SELECT NotasCred FROM Formatos WHERE Facturas='TomaContra'"
+        'rd1 = cmd1.ExecuteReader
+        'If rd1.HasRows Then
+        '    If rd1.Read Then
+        '        tomacontralog = rd1(0).ToString
 
-                If tomacontralog = "1" Then
-                Else
-                    txtcontraseña.Text = ""
-                    lblusuario.Text = ""
-                End If
-            End If
+        '        If tomacontralog = "1" Then
+        '        Else
+        '            txtcontraseña.Text = ""
+        '            lblusuario.Text = ""
+        '        End If
+        '    End If
+        'End If
+        'rd1.Close()
+        'cnn1.Close()
+        If pide = 1 Then
+        Else
+            txtcontraseña.Text = ""
+            lblusuario.Text = ""
         End If
-        rd1.Close()
-        cnn1.Close()
 
         lblfolio.Text = ""
         lblNumCliente.Text = "MOSTRADOR"
@@ -8761,7 +8767,7 @@ Door:
 
         End Try
 
-        Call BorraLotes()
+        'Call BorraLotes()
 
         If grdantis.Rows.Count > 0 Then
             boxAntis.Visible = True
@@ -8909,7 +8915,7 @@ Door:
 
 
         Dim Pasa_Print As Boolean = False
-        Dim pide As String = "", contra As String = txtcontraseña.Text, usu As String = lblusuario.Text
+        Dim contra As String = txtcontraseña.Text, usu As String = lblusuario.Text
 
 
 
@@ -9090,19 +9096,8 @@ Door:
                                     "delete from CotPedDet where Folio=" & txtcotped.Text
                                 cmd1.ExecuteNonQuery()
                             End If
+                            cnn1.Close()
 
-                            cmd1 = cnn1.CreateCommand
-                            cmd1.CommandText =
-                                "select NotasCred from Formatos where Facturas='PedirContra'"
-                            rd1 = cmd1.ExecuteReader
-                            If rd1.HasRows Then
-                                If rd1.Read Then
-                                    pide = rd1(0).ToString
-                                End If
-                            End If
-                            rd1.Close() : cnn1.Close()
-
-                            btnnuevo.PerformClick()
                             If pide = "1" Then
                                 lblusuario.Text = usu
                                 txtcontraseña.Text = contra
@@ -9111,6 +9106,7 @@ Door:
                             Else
                                 cboNombre.Text = "MOSTRADOR"
                             End If
+                            btnnuevo.PerformClick()
                             cbodesc.Focus().Equals(True)
                             MYFOLIO = 0
                             btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
@@ -9218,21 +9214,6 @@ safo:
             End If
         End If
 
-        Dim cnn10 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
-        Dim sinfo10 As String = ""
-        Dim odata10 As New ToolKitSQL.myssql
-        Dim dt10 As New DataTable
-        Dim dr10 As DataRow
-        cnn10 = New MySqlClient.MySqlConnection
-        sinfo10 = ""
-        dt10 = New DataTable
-        If odata10.dbOpen(cnn10, sTarget, sinfo10) Then
-            If odata10.getDr(cnn10, dr10, "select NotasCred from Formatos where Facturas='PedirContra'", sinfo10) Then
-                pide = dr10(0).ToString
-            End If
-            cnn10.Close()
-        End If
-
         For R As Integer = 0 To grdcaptura.Rows.Count - 1
 
             If grdcaptura.Rows(R).Cells(0).Value.ToString <> "" And grdcaptura.Rows(R).Cells(15).Value.ToString <> "" And grdcaptura.Rows(R).Cells(16).Value.ToString <> "" Then
@@ -9255,7 +9236,7 @@ safo:
         Next
         btnnuevo.Enabled = True : My.Application.DoEvents()
 
-        btnnuevo.PerformClick()
+
 
         btnventa.Enabled = True : My.Application.DoEvents()
 
@@ -9268,6 +9249,7 @@ safo:
         Else
             cboNombre.Text = "MOSTRADOR"
         End If
+        btnnuevo.PerformClick()
         cbodesc.Focus().Equals(True)
         MYFOLIO = 0
     End Sub
