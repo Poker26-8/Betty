@@ -5948,7 +5948,7 @@ kaka:
         'cnn1.Close()
         If pide = 1 Then
         Else
-            txtcontraseña = ""
+            txtcontraseña.Text = ""
             lblusuario.Text = ""
         End If
 
