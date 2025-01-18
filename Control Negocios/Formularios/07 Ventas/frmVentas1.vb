@@ -106,6 +106,8 @@ Public Class frmVentas1
     Dim Impresora As String = ""
     Dim pide As String = ""
 
+    Dim Edita As Boolean = False
+
     Private Sub frmVentas1_Activated(sender As Object, e As System.EventArgs) Handles Me.Activated
         txtdia.Text = Weekday(Date.Now)
     End Sub
@@ -249,15 +251,6 @@ Public Class frmVentas1
 
     Private Async Sub frmVentas1_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
 
-        'Dim cnn11 As MySqlConnection = New MySqlConnection()
-        'Dim serror As String = ""
-        'Dim dr11 As DataRow
-        'Dim odata11 As New ToolKitSQL.myssql
-        'Dim sql As String = ""
-        'Dim sql1 As String = ""
-        'Dim sql2 As String = ""
-        'Dim sql3 As String = ""
-
         pide = DatosRecarga("TomaContra")
         Tamaño = DatosRecarga("TamImpre")
         Alerta_Min = DatosRecarga("MinimoA")
@@ -271,9 +264,23 @@ Public Class frmVentas1
         autofact = DatosRecarga("LinkAuto")
         siqr = DatosRecarga2("LinkAuto")
 
-
-
-
+        Try
+            cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText =
+                "select Vent_EPrec from Permisos where IdEmpleado=" & id_usu_log
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    Edita = rd1("Vent_EPrec").ToString
+                End If
+            End If
+            rd1.Close()
+            cnn1.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+            cnn1.Close()
+        End Try
 
         Try
             cnn1.Close()
@@ -290,21 +297,6 @@ Public Class frmVentas1
                 End If
             End If
             rd1.Close()
-
-
-
-            'Dim cnn10 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
-            'Dim sinfo10 As String = ""
-            'Dim odata10 As New ToolKitSQL.myssql
-            'Dim dt10 As New DataTable
-            'Dim dr10 As DataRow
-            'If odata10.dbOpen(cnn10, sTarget, sinfo10) Then
-            '    If odata10.getDr(cnn10, dr10, "select NoPrint,Copias from Ticket", sinfo10) Then
-            '        Imprime = dr10("NoPrint").ToString
-            '        Copias = dr10("Copias").ToString
-            '    End If
-            '    cnn10.Close()
-            'End If
 
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
@@ -350,16 +342,10 @@ Public Class frmVentas1
             cnn1.Close()
         End Try
 
-        Dim orden As Integer = Await ValidarAsync("Ordenes")
+        'Dim orden As Integer = Await ValidarAsync("Ordenes")
         Dim verexistencia As Integer = Await ValidarAsync("VerExistencias")
 
         ' franquicia = Await ValidarAsync("Franquicia")
-
-        If orden = 1 Then
-            btnOrdenes.Visible = True
-        Else
-            btnOrdenes.Visible = False
-        End If
 
         If verexistencia = 1 Then
             lblExistencia.Visible = False
@@ -372,7 +358,6 @@ Public Class frmVentas1
         End If
 
         If pide = 1 Then
-
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText = "SELECT Clave,Alias FROM Usuarios WHERE IdEmpleado=" & id_usu_log
@@ -386,9 +371,10 @@ Public Class frmVentas1
                 End If
             End If
             rd2.Close()
-
+            cnn2.Close()
+            txtcontraseña_KeyPress(txtcontraseña, New KeyPressEventArgs(ControlChars.Cr))
         End If
-        cnn2.Close()
+
 
         If IO.File.Exists(ARCHIVO_DE_CONFIGURACION) Then
 
@@ -3509,11 +3495,6 @@ kaka:
     Private Sub cbocodigo_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles cbocodigo.KeyPress
         e.KeyChar = UCase(e.KeyChar)
 
-        'Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        'Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        'Dim rd1, rd2 As MySqlDataReader
-        'Dim cmd1, cmd2 As MySqlCommand
-
 
         If AscW(e.KeyChar) = Keys.Enter And (cbocodigo.Text <> "" Or cbodesc.Text <> "") Then
 
@@ -3524,186 +3505,184 @@ kaka:
             Dim PreLst As Double = 0, PreEsp As Double = 0
             Dim H_Actual As String = Format(Date.Now, "HH:mm")
 
+
             If cbocodigo.Text <> "" Then
                 Try
-                    cnn1.Close() : cnn1.Open()
 
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "select Status_Promocion,Grupo,Departamento,Nombre,PrecioVentaIVA,UVenta,Codigo,Existencia,MCD,Multiplo,Min,Ubicacion from Productos where Codigo='" & cbocodigo.Text & "'"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.HasRows Then
-                        If rd1.Read Then
-                            Promo = IIf(rd1("Status_Promocion").ToString = True, True, False)
-                            Anti = rd1("Grupo").ToString
-                            If CStr(rd1("Departamento").ToString) = "SERVICIOS" Then
-                                cbodesc.Text = rd1("Nombre").ToString
-                                txtprecio.Text = rd1("PrecioVentaIVA").ToString
-                                txtprecio.Tag = rd1("PrecioVentaIVA").ToString
+                    Dim varcod As String = cbocodigo.Text
+                    Dim index As Integer = -1
+                    Dim row As DataGridViewRow
+                    For Each row In DataGridView1.Rows
+
+                        If IsNothing(row.Cells("Codigo").Value) Then
+                            Exit For
+                        End If
+
+                        If row.Cells("Codigo").Value.ToString() = varcod Then
+                            index = row.Index
+                            Exit For
+                        End If
+                    Next
+                    If index <> -1 Then
+                        Promo = IIf(DataGridView1.Rows(index).Cells("Status_Promocion").Value.ToString() = True, True, False)
+                        Anti = DataGridView1.Rows(index).Cells("Grupo").Value.ToString()
+                        If DataGridView1.Rows(index).Cells("Departamento").Value.ToString() = "SERVICIOS" Then
+                            cbodesc.Text = DataGridView1.Rows(index).Cells("Nombre").Value.ToString()
+                            txtprecio.Text = DataGridView1.Rows(index).Cells("PrecioVentaIVA").Value.ToString()
+                            txtprecio.Tag = DataGridView1.Rows(index).Cells("PrecioVentaIVA").Value.ToString()
+                            txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+
+                            txtunidad.Text = DataGridView1.Rows(index).Cells("UVenta").Value.ToString()
+                            txtexistencia.Text = IIf(DataGridView1.Rows(index).Cells("Existencia").Value.ToString() = "", "0", DataGridView1.Rows(index).Cells("Existencia").Value.ToString())
+                            txtcantidad.Focus.Equals(True)
+                        End If
+                        txtunidad.Text = DataGridView1.Rows(index).Cells("UVenta").Value.ToString()
+                        cbocodigo.Text = DataGridView1.Rows(index).Cells("Codigo").Value.ToString()
+                        cbodesc.Text = DataGridView1.Rows(index).Cells("Nombre").Value.ToString()
+                        MCD = DataGridView1.Rows(index).Cells("MCD").Value.ToString()
+                        Multiplo = DataGridView1.Rows(index).Cells("Multiplo").Value.ToString()
+                        Minimo = DataGridView1.Rows(index).Cells("Min").Value.ToString()
+                        txtubicacion.Text = DataGridView1.Rows(index).Cells("Ubicacion").Value.ToString()
+
+                        PreLst = DataGridView1.Rows(index).Cells("PrecioVentaIVA").Value.ToString()
+                        PreEsp = DataGridView1.Rows(index).Cells("PreEsp").Value.ToString()
+                    End If
+
+                    If File.Exists(My.Application.Info.DirectoryPath & "\ProductosImg" & base & "\" & cbocodigo.Text & ".jpg") Then
+                        picProd.Image = System.Drawing.Image.FromFile(My.Application.Info.DirectoryPath & "\ProductosImg" & base & "\" & cbocodigo.Text & ".jpg")
+                    End If
+
+                    Dim varcod2 As String = Strings.Left(cbocodigo.Text, 6)
+                    Dim index2 As Integer = -1
+                    Dim row2 As DataGridViewRow
+                    For Each row2 In DataGridView1.Rows
+
+                        If IsNothing(row2.Cells("Codigo").Value) Then
+                            Exit For
+                        End If
+
+                        If row2.Cells("Codigo").Value.ToString() = varcod2 Then
+                            index2 = row2.Index
+                            Exit For
+                        End If
+                    Next
+
+                    If index2 <> -1 Then
+                        txtexistencia.Text = FormatNumber(CDbl(IIf(DataGridView1.Rows(index2).Cells("Existencia").Value.ToString() = "", "0", DataGridView1.Rows(index2).Cells("Existencia").Value.ToString())) / Multiplo, 2)
+                    End If
+
+                    cnn2.Close() : cnn2.Open()
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText =
+                        "select FechaC from ComprasDet where Codigo='" & cbocodigo.Text & "' LIMIT 1"
+                    rd2 = cmd2.ExecuteReader
+                    If rd2.HasRows Then
+                        If rd2.Read Then
+                            Label2.Text = "Descripción " & FormatDateTime(rd2(0).ToString, DateFormat.ShortDate)
+                        End If
+                    Else
+                        Label2.Text = "Descripción"
+                    End If
+                    rd2.Close()
+
+                    cmd2 = cnn2.CreateCommand
+                    cmd2.CommandText =
+                        "select tipo_cambio from tb_moneda,Productos where Codigo='" & cbocodigo.Text & "' and Productos.id_tbMoneda=tb_moneda.id"
+                    rd2 = cmd2.ExecuteReader
+                    If rd2.HasRows Then
+                        If rd2.Read Then
+                            TiCambio = rd2(0).ToString
+                            If TiCambio = 0 Then TiCambio = 1
+                        End If
+                    Else
+                        TiCambio = 1
+                    End If
+                    rd2.Close()
+
+
+                    cboLote.Items.Clear()
+                    cmd2 = cnn2.CreateCommand
+                    If btndevo.Text = "GUARDAR DEVOLUCIÓN" Then
+                        cmd2.CommandText =
+                            "select distinct lote from LoteCaducidad where Codigo='" & cbocodigo.Text & "'"
+                        rd2 = cmd2.ExecuteReader
+                        Do While rd2.Read
+                            If rd2.HasRows Then cboLote.Items.Add(rd2("Lote").ToString())
+                        Loop
+                        rd2.Close()
+                    Else
+                        If cbocodigo.Text = "" Then Exit Sub
+                        cmd2.CommandText =
+                            "select distinct(Lote) as Lt from LoteCaducidad where Codigo='" & cbocodigo.Text & "' and Cantidad>0"
+                        rd2 = cmd2.ExecuteReader
+                        Do While rd2.Read
+                            If rd2.HasRows Then cboLote.Items.Add(rd2("Lt").ToString())
+                        Loop
+                        rd2.Close()
+                    End If
+
+                    If cbotipo.Visible = False Then
+                        If T_Precio = "DIA_NOCHE" And (H_Actual > H_Inicia Or H_Actual < H_Final) Then
+                            txtprecio.Text = FormatNumber(PreEsp * TiCambio, 4)
+                            txtprecio.Tag = FormatNumber(PreEsp * TiCambio, 4)
+                        Else
+                            txtprecio.Text = FormatNumber(PreLst * TiCambio, 4)
+                            txtprecio.Tag = FormatNumber(PreLst * TiCambio, 4)
+                        End If
+                        If (Promo) Then
+                            txtprecio.Text = Promos(cbocodigo.Text, txtprecio.Text)
+                            txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                            txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                        End If
+                        txtprecio.ReadOnly = False
+                    Else
+                        If (Promo) Then
+                            txtprecio.Text = Promos(cbocodigo.Text, txtprecio.Text)
+                            txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                            txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                            txtprecio.ReadOnly = False
+                        Else
+                            If cbonota.Text = "" Then
+                                txtprecio.Text = Cambio(TiCambio)
                                 txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-
-                                txtunidad.Text = rd1("UVenta").ToString
-                                txtexistencia.Text = CDbl(IIf(rd1("Existencia").ToString = "", "0", rd1("Existencia").ToString))
-                                txtcantidad.Focus().Equals(True)
-                                rd1.Close()
-                                cnn1.Close()
-                                Exit Sub
-                            End If
-
-                            If File.Exists(My.Application.Info.DirectoryPath & "\ProductosImg" & base & "\" & cbocodigo.Text & ".jpg") Then
-                                picProd.Image = System.Drawing.Image.FromFile(My.Application.Info.DirectoryPath & "\ProductosImg" & base & "\" & cbocodigo.Text & ".jpg")
-                            End If
-
-                            txtunidad.Text = rd1("UVenta").ToString()
-                            cbocodigo.Text = rd1("Codigo").ToString()
-                            cbodesc.Text = rd1("Nombre").ToString()
-                            MCD = rd1("MCD").ToString()
-                            Multiplo = rd1("Multiplo").ToString()
-                            Minimo = rd1("Min").ToString()
-                            txtubicacion.Text = rd1("Ubicacion").ToString()
-
-                            cnn2.Close() : cnn2.Open()
-
-                            cmd2 = cnn2.CreateCommand
-                            cmd2.CommandText =
-                            "select Existencia from Productos where Codigo='" & Strings.Left(cbocodigo.Text, 6) & "'"
-                            rd2 = cmd2.ExecuteReader
-                            If rd2.HasRows Then
-                                If rd2.Read Then
-                                    txtexistencia.Text = FormatNumber(CDbl(IIf(rd2(0).ToString = "", "0", rd2(0).ToString)) / Multiplo, 2)
-                                End If
-                            End If
-                            rd2.Close()
-
-                            cmd2 = cnn2.CreateCommand
-                            cmd2.CommandText =
-                                "select FechaC from ComprasDet where Codigo='" & cbocodigo.Text & "' LIMIT 1"
-                            rd2 = cmd2.ExecuteReader
-                            If rd2.HasRows Then
-                                If rd2.Read Then
-                                    Label2.Text = "Descripción " & FormatDateTime(rd2(0).ToString, DateFormat.ShortDate)
-                                End If
-                            Else
-                                Label2.Text = "Descripción"
-                            End If
-                            rd2.Close()
-
-                            cmd2 = cnn2.CreateCommand
-                            cmd2.CommandText =
-                                "select tipo_cambio from tb_moneda,Productos where Codigo='" & cbocodigo.Text & "' and Productos.id_tbMoneda=tb_moneda.id"
-                            rd2 = cmd2.ExecuteReader
-                            If rd2.HasRows Then
-                                If rd2.Read Then
-                                    TiCambio = rd2(0).ToString
-                                    If TiCambio = 0 Then TiCambio = 1
-                                End If
-                            Else
-                                TiCambio = 1
-                            End If
-                            rd2.Close()
-
-                            cmd2 = cnn2.CreateCommand
-                            cmd2.CommandText =
-                                "select PrecioVentaIVA, PreEsp from Productos where Codigo='" & cbocodigo.Text & "'"
-                            rd2 = cmd2.ExecuteReader
-                            If rd2.HasRows Then
-                                If rd2.Read Then
-                                    PreLst = rd2(0).ToString
-                                    PreEsp = rd2(1).ToString
-                                End If
-                            End If
-                            rd2.Close()
-
-                            cboLote.Items.Clear()
-                            cmd2 = cnn2.CreateCommand
-                            If btndevo.Text = "GUARDAR DEVOLUCIÓN" Then
-                                cmd2.CommandText =
-                                    "select distinct lote from LoteCaducidad where Codigo='" & cbocodigo.Text & "'"
-                                rd2 = cmd2.ExecuteReader
-                                Do While rd2.Read
-                                    If rd2.HasRows Then cboLote.Items.Add(rd2("Lote").ToString())
-                                Loop
-                                rd2.Close()
-                            Else
-                                If cbocodigo.Text = "" Then Exit Sub
-                                cmd2.CommandText =
-                                    "select distinct(Lote) as Lt from LoteCaducidad where Codigo='" & cbocodigo.Text & "' and Cantidad>0"
-                                rd2 = cmd2.ExecuteReader
-                                Do While rd2.Read
-                                    If rd2.HasRows Then cboLote.Items.Add(rd2("Lt").ToString())
-                                Loop
-                                rd2.Close()
-                            End If
-
-                            If cbotipo.Visible = False Then
-                                If T_Precio = "DIA_NOCHE" And (H_Actual > H_Inicia Or H_Actual < H_Final) Then
-                                    txtprecio.Text = FormatNumber(PreEsp * TiCambio, 4)
-                                    txtprecio.Tag = FormatNumber(PreEsp * TiCambio, 4)
-                                Else
-                                    txtprecio.Text = FormatNumber(PreLst * TiCambio, 4)
-                                    txtprecio.Tag = FormatNumber(PreLst * TiCambio, 4)
-                                End If
-                                If (Promo) Then
-                                    txtprecio.Text = Promos(cbocodigo.Text, txtprecio.Text)
-                                    txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                    txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                End If
+                                txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
                                 txtprecio.ReadOnly = False
                             Else
-                                If (Promo) Then
-                                    txtprecio.Text = Promos(cbocodigo.Text, txtprecio.Text)
+                                cmd2 = cnn2.CreateCommand
+                                cmd2.CommandText =
+                                    "select Precio from VentasDetalle where Codigo='" & cbocodigo.Text & "' and Folio=" & cbonota.Text & ""
+                                rd2 = cmd2.ExecuteReader
+                                If rd2.HasRows Then
+                                    If rd2.Read Then
+                                        txtprecio.Text = rd2(0).ToString
+                                        txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                                        txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                                        txtprecio.ReadOnly = True
+                                    End If
+                                Else
+                                    txtprecio.Text = Cambio(TiCambio)
                                     txtprecio.Text = FormatNumber(txtprecio.Text, 4)
                                     txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
                                     txtprecio.ReadOnly = False
-                                Else
-                                    If cbonota.Text = "" Then
-                                        txtprecio.Text = Cambio(TiCambio)
-                                        txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                        txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                        txtprecio.ReadOnly = False
-                                    Else
-                                        cmd2 = cnn2.CreateCommand
-                                        cmd2.CommandText =
-                                            "select Precio from VentasDetalle where Codigo='" & cbocodigo.Text & "' and Folio=" & cbonota.Text & ""
-                                        rd2 = cmd2.ExecuteReader
-                                        If rd2.HasRows Then
-                                            If rd2.Read Then
-                                                txtprecio.Text = rd2(0).ToString
-                                                txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                                txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                                txtprecio.ReadOnly = True
-                                            End If
-                                        Else
-                                            txtprecio.Text = Cambio(TiCambio)
-                                            txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                            txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                            txtprecio.ReadOnly = False
-                                        End If
-                                        rd2.Close()
-                                    End If
                                 End If
+                                rd2.Close()
                             End If
-                            cnn2.Close()
                         End If
-                    Else
-                        MsgBox("El código no se encuentra en la base de datos.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                        rd1.Close()
-                        cnn1.Close()
-                        cbocodigo.Focus().Equals(True)
-                        Exit Sub
                     End If
-                    rd1.Close()
-                    cnn1.Close()
+                    cnn2.Close()
                 Catch ex As Exception
                     MessageBox.Show(ex.ToString)
-                    cnn1.Close()
                 End Try
+            Else
+                cbocodigo.Focus().Equals(True)
+                Exit Sub
             End If
-            txtcantidad.Focus().Equals(True)
-            My.Application.DoEvents()
-            leePeso()
-            My.Application.DoEvents()
         End If
+        txtcantidad.Focus().Equals(True)
+        My.Application.DoEvents()
+        leePeso()
+        My.Application.DoEvents()
+
 
         If AscW(e.KeyChar) = Keys.Enter And (cbocodigo.Text = "" And cbodesc.Text = "") Then
             If btndevo.Text = "GUARDAR DEVOLUCIÓN" Then
@@ -3759,12 +3738,7 @@ kaka:
         If AscW(e.KeyChar) = Keys.Enter And cbodesc.Text = "" Then cbodesc.Focus().Equals(True)
         If AscW(e.KeyChar) = Keys.Enter Then
 
-            Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
-
             Try
-
                 If VSE = True Then
                     If txtunidad.Text <> "N/A" Then
                         Dim canti As Double = txtcantidad.Text
@@ -3777,30 +3751,12 @@ kaka:
                     End If
                 End If
 
-
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
-                cnn1.Close()
             End Try
 
             If Not IsNumeric(txtcantidad.Text) Then txtcantidad.Text = ""
-
-            Dim Edita As Boolean = False
             Try
-                cnn1.Close() : cnn1.Open()
-
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText =
-                    "select Vent_EPrec from Permisos where IdEmpleado=" & id_usu_log
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        Edita = rd1("Vent_EPrec").ToString
-                    End If
-                End If
-
-                rd1.Close()
-
                 If Edita = False Then
                     If cbocodigo.Text = "" Then cbodesc.Focus().Equals(True) : Exit Sub
                     If ValCantDev(13) = False Then
@@ -3810,46 +3766,49 @@ kaka:
                     If CDbl(IIf(txtcantidad.Text = "", "0", txtcantidad.Text)) = 0 Or txtcantidad.Text = "" Then cbocodigo.Focus().Equals(True) : Exit Sub
                     If CDbl(IIf(txtprecio.Text = "", "0", txtprecio.Text)) = 0 Or txtprecio.Text = "" Then cbocodigo.Focus().Equals(True) : Exit Sub
 
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "select PreMin,PreMin2 from Productos where Codigo='" & cbocodigo.Text & "'"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.HasRows Then
-                        If rd1.Read Then
+                    Dim varcod As String = cbocodigo.Text
+                    Dim index As Integer = -1
+                    Dim row As DataGridViewRow
+                    For Each row In DataGridView1.Rows
 
-                            Dim premin1 As Double = 0
-                            Dim premin2 As Double = 0
-                            Dim premasbajo As Double = 0
+                        If IsNothing(row.Cells("Codigo").Value) Then
+                            Exit For
+                        End If
 
-                            premin1 = IIf(rd1(0).ToString = "", 0, rd1(0).ToString)
-                            premin2 = IIf(rd1(1).ToString = "", 0, rd1(1).ToString)
+                        If row.Cells("Codigo").Value.ToString() = varcod Then
+                            index = row.Index
+                            Exit For
+                        End If
+                    Next
+                    If index <> -1 Then
+                        Dim premin1 As Double = 0
+                        Dim premin2 As Double = 0
+                        Dim premasbajo As Double = 0
 
-                            premasbajo = Math.Min(premin1, premin2)
-                            Dim precioxd As Double = txtprecio.Text
-                            'CDbl(IIf(rd1(0).ToString = "", "0", rd1(0).ToString)) 
-                            If CDbl(precioxd) < CDbl(premasbajo) Then
-                                MsgBox("El precio de venta mínimo para el producto es de " & FormatNumber(CDbl(rd1(0).ToString), 4) & ".", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : txtprecio.SelectionStart = 0 : txtprecio.SelectionLength = Len(txtprecio.Text) : Exit Sub
-                                rd1.Close() : cnn1.Close()
-                                Exit Sub
-                            End If
+                        premin1 = DataGridView1.Rows(index).Cells("PreMin").Value.ToString()
+                        premin2 = DataGridView1.Rows(index).Cells("PreMin2").Value.ToString()
+
+                        premasbajo = Math.Min(premin1, premin2)
+                        Dim precioxd As Double = txtprecio.Text
+
+                        If CDbl(precioxd) < CDbl(premasbajo) Then
+                            MsgBox("El precio de venta mínimo para el producto es de " & FormatNumber(CDbl(premin1), 4) & ".", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : txtprecio.SelectionStart = 0 : txtprecio.SelectionLength = Len(txtprecio.Text) : Exit Sub
+                            Exit Sub
                         End If
                     End If
-                    rd1.Close()
 
                     txttotal.Text = CDbl(txtcantidad.Text) * CDbl(txtprecio.Text)
                     txttotal.Text = FormatNumber(txttotal.Text, 4)
                     txtprecio.Focus().Equals(True)
                 Else
                     If ValCantDev(13) = False Then
-                        cnn1.Close()
                         Exit Sub
                     End If
                     txtprecio.Focus().Equals(True)
                 End If
-                cnn1.Close()
+
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
-                cnn1.Close()
             End Try
 
         End If
@@ -3865,9 +3824,6 @@ kaka:
         Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd4, rd5 As MySqlDataReader
         Dim cmd4, cmd5 As MySqlCommand
-
-
-
 
         Try
             cnn4.Close() : cnn4.Open()
@@ -3895,146 +3851,156 @@ kaka:
                 End If
 
                 Dim ATemp1, ATemp2, ATemp3, ATemp4 As Double
+                ''''''''''''
+                Dim varcod1 As String = cbocodigo.Text
+                Dim index1 As Integer = -1
+                Dim row1 As DataGridViewRow
+                For Each row1 In DataGridView1.Rows
+                    If IsNothing(row1.Cells("Codigo").Value) Then
+                        Exit For
+                    End If
 
-                cmd4 = cnn4.CreateCommand
-                cmd4.CommandText =
-                    "select PreEsp,PrecioVentaIVA,CantLst1,CantLst2,CantLst3,CantLst4,PrecioVentaIVA2,CantEsp1,CantEsp2,PreEsp,CantEsp3,CantEsp4,PreEsp2,CantMM1,CantMM2,PreMM,CantMM3,CantMM4,PreMM2,CantMay1,CantMay2,PreMay,CantMay3,CantMay4,PreMay2,CantMin1,CantMin2,PreMin,CantMin3,CantMin4,PreMin2 from Productos where Codigo='" & cbocodigo.Text & "'"
-                rd4 = cmd4.ExecuteReader
-                If rd4.HasRows Then
-                    If rd4.Read Then
-                        If T_Precio = "DIA_NOCHE" And (H_Actual > H_Inicia Or H_Actual < H_Final) Then
-                            txtprecio.Text = CDbl(IIf(rd4("PreEsp").ToString = "", "0", rd4("PreEsp").ToString)) * TiCambio
-                            txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                            txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                        Else
-                            txtprecio.Text = CDbl(IIf(rd4("PrecioVentaIVA").ToString = "", "0", rd4("PrecioVentaIVA").ToString)) * TiCambio
-                            txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                            txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                    If row1.Cells("Codigo").Value.ToString() = varcod1 Then
+                        index1 = row1.Index
+                        Exit For
+                    End If
+                Next
+                If index1 <> -1 Then
+                    If T_Precio = "DIA_NOCHE" And (H_Actual > H_Inicia Or H_Actual < H_Final) Then
+                        txtprecio.Text = CDbl(IIf(DataGridView1.Rows(index1).Cells("PreEsp").Value.ToString() = "", "0", DataGridView1.Rows(index1).Cells("PreEsp").Value.ToString())) * TiCambio
+                        txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                        txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                    Else
+                        txtprecio.Text = CDbl(IIf(DataGridView1.Rows(index1).Cells("PrecioVentaIVA").Value.ToString() = "", "0", DataGridView1.Rows(index1).Cells("PrecioVentaIVA").Value.ToString())) * TiCambio
+                        txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                        txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
 
-                            If Not IsDBNull(rd4("CantLst1").ToString) And Not IsDBNull(rd4("CantLst2").ToString) Then
-                                If CDbl(txtcantidad.Text) >= CDbl(rd4("CantLst1").ToString) And CDbl(txtcantidad.Text) <= CDbl(rd4("CantLst2").ToString) Then
-                                    txtprecio.Text = CDbl(IIf(rd4("PrecioVentaIVA").ToString = "", "0", rd4("PrecioVentaIVA").ToString))
-                                    txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                    txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                    temp = 1
-                                End If
+                        If Not IsDBNull(DataGridView1.Rows(index1).Cells("CantLst1").Value.ToString()) And Not IsDBNull(DataGridView1.Rows(index1).Cells("CantLst2").Value.ToString()) Then
+                            If CDbl(txtcantidad.Text) >= CDbl(DataGridView1.Rows(index1).Cells("CantLst1").Value.ToString()) And CDbl(txtcantidad.Text) <= CDbl(DataGridView1.Rows(index1).Cells("CantLst2").Value.ToString()) Then
+                                txtprecio.Text = CDbl(IIf(DataGridView1.Rows(index1).Cells("PrecioVentaIVA").Value.ToString() = "", "0", DataGridView1.Rows(index1).Cells("PrecioVentaIVA").Value.ToString()))
+                                txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                                txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                                temp = 1
                             End If
-
-                            If Not IsDBNull(rd4("CantLst3").ToString) And Not IsDBNull(rd4("CantLst4").ToString) Then
-                                If CDbl(txtcantidad.Text) >= CDbl(rd4("CantLst3").ToString) And CDbl(txtcantidad.Text) <= CDbl(rd4("CantLst4").ToString) Then
-                                    txtprecio.Text = CDbl(IIf(rd4("PrecioVentaIVA2").ToString = "", "0", rd4("PrecioVentaIVA2").ToString))
-                                    txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                    txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                    temp = 1
-                                End If
-                            End If
-
-                            If Not IsDBNull(rd4("CantEsp1").ToString) And Not IsDBNull(rd4("CantEsp2").ToString) Then
-                                ATemp1 = rd4("CantEsp1").ToString
-                                If CDbl(txtcantidad.Text) >= CDbl(rd4("CantEsp1").ToString) And CDbl(txtcantidad.Text) <= CDbl(rd4("CantEsp2").ToString) Then
-                                    txtprecio.Text = CDbl(IIf(rd4("PreEsp").ToString = "", "0", rd4("PreEsp").ToString))
-                                    txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                    txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                    temp = 1
-                                End If
-                            End If
-
-                            If Not IsDBNull(rd4("CantEsp3").ToString) And Not IsDBNull(rd4("CantEsp4").ToString) Then
-                                ATemp1 = rd4("CantEsp3").ToString
-                                If CDbl(txtcantidad.Text) >= CDbl(rd4("CantEsp3").ToString) And CDbl(txtcantidad.Text) <= CDbl(rd4("CantEsp4").ToString) Then
-                                    txtprecio.Text = CDbl(IIf(rd4("PreEsp2").ToString = "", "0", rd4("PreEsp2").ToString))
-                                    txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                    txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                    temp = 1
-                                End If
-                            End If
-
-                            If Not IsDBNull(rd4("CantMM1").ToString) And Not IsDBNull(rd4("CantMM2").ToString) Then
-                                ATemp2 = rd4("CantMM1").ToString
-                                If CDbl(txtcantidad.Text) >= CDbl(rd4("CantMM1").ToString) And CDbl(txtcantidad.Text) <= CDbl(rd4("CantMM2").ToString) Then
-                                    txtprecio.Text = CDbl(IIf(rd4("PreMM").ToString = "", "0", rd4("PreMM").ToString))
-                                    txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                    txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                    temp = 1
-                                End If
-                            End If
-
-                            If Not IsDBNull(rd4("CantMM3").ToString) And Not IsDBNull(rd4("CantMM4").ToString) Then
-                                ATemp2 = rd4("CantMM3").ToString
-                                If CDbl(txtcantidad.Text) >= CDbl(rd4("CantMM3").ToString) And CDbl(txtcantidad.Text) <= CDbl(rd4("CantMM4").ToString) Then
-                                    txtprecio.Text = CDbl(IIf(rd4("PreMM2").ToString = "", "0", rd4("PreMM2").ToString))
-                                    txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                    txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                    temp = 1
-                                End If
-                            End If
-
-                            If Not IsDBNull(rd4("CantMay1").ToString) And Not IsDBNull(rd4("CantMay2").ToString) Then
-                                ATemp3 = rd4("CantMay1").ToString
-                                If CDbl(txtcantidad.Text) >= CDbl(rd4("CantMay1").ToString) And CDbl(txtcantidad.Text) <= CDbl(rd4("CantMay2").ToString) Then
-                                    txtprecio.Text = CDbl(IIf(rd4("PreMay").ToString = "", "0", rd4("PreMay").ToString))
-                                    txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                    txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                    temp = 1
-                                End If
-                            End If
-
-                            If Not IsDBNull(rd4("CantMay3").ToString) And Not IsDBNull(rd4("CantMay4").ToString) Then
-                                ATemp3 = rd4("CantMay3").ToString
-                                If CDbl(txtcantidad.Text) >= CDbl(rd4("CantMay3").ToString) And CDbl(txtcantidad.Text) <= CDbl(rd4("CantMay4").ToString) Then
-                                    txtprecio.Text = CDbl(IIf(rd4("PreMay2").ToString = "", "0", rd4("PreMay2").ToString))
-                                    txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                    txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                    temp = 1
-                                End If
-                            End If
-
-                            If Not IsDBNull(rd4("CantMin1").ToString) And Not IsDBNull(rd4("CantMin2").ToString) Then
-                                ATemp4 = rd4("CantMin1").ToString
-                                If CDbl(txtcantidad.Text) >= CDbl(rd4("CantMin1").ToString) And CDbl(txtcantidad.Text) <= CDbl(rd4("CantMin2").ToString) Then
-                                    txtprecio.Text = CDbl(IIf(rd4("PreMin").ToString = "", "0", rd4("PreMin").ToString))
-                                    txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                    txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                    temp = 1
-                                End If
-                            End If
-
-                            If Not IsDBNull(rd4("CantMin3").ToString) And Not IsDBNull(rd4("CantMin4").ToString) Then
-                                ATemp4 = rd4("CantMin3").ToString
-                                If CDbl(txtcantidad.Text) >= CDbl(rd4("CantMin3").ToString) And CDbl(txtcantidad.Text) <= CDbl(rd4("CantMin4").ToString) Then
-                                    txtprecio.Text = CDbl(IIf(rd4("PreMin2").ToString = "", "0", rd4("PreMin2").ToString))
-                                    txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                    txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                    temp = 1
-                                End If
-                            End If
-
                         End If
 
-                        If ATemp1 <> 0 Or ATemp2 <> 0 Or ATemp3 <> 0 Or ATemp4 <> 0 Then
-                            If temp = 0 Then
-                                cnn5.Close() : cnn5.Open()
-                                cmd5 = cnn5.CreateCommand
-                                cmd5.CommandText =
-                                    "select PrecioVentaIVA from Productos where Codigo='" & cbocodigo.Text & "'"
-                                rd5 = cmd5.ExecuteReader
-                                If rd5.HasRows Then
-                                    If rd5.Read Then
-                                        txtprecio.Text = CDbl(IIf(rd5("PrecioVentaIVA").ToString = "", "0", rd5("PrecioVentaIVA").ToString))
-                                        txtprecio.Text = FormatNumber(txtprecio.Text, 4)
-                                        txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
-                                    End If
-                                Else
-                                    MsgBox("El producto no se encuentra en la base de datos.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                                End If
-                                rd5.Close()
-                                cnn5.Close()
-                                rd4.Close() : cnn4.Close()
-                                Exit Sub
+                        If Not IsDBNull(DataGridView1.Rows(index1).Cells("CantLst3").Value.ToString()) And Not IsDBNull(DataGridView1.Rows(index1).Cells("CantLst4").Value.ToString()) Then
+                            If CDbl(txtcantidad.Text) >= CDbl(DataGridView1.Rows(index1).Cells("CantLst3").Value.ToString()) And CDbl(txtcantidad.Text) <= CDbl(DataGridView1.Rows(index1).Cells("CantLst4").Value.ToString()) Then
+                                txtprecio.Text = CDbl(IIf(DataGridView1.Rows(index1).Cells("PrecioVentaIVA").Value.ToString() = "", "0", DataGridView1.Rows(index1).Cells("PrecioVentaIVA").Value.ToString()))
+                                txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                                txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                                temp = 1
+                            End If
+                        End If
+
+                        If Not IsDBNull(DataGridView1.Rows(index1).Cells("CantEsp1").Value.ToString()) And Not IsDBNull(DataGridView1.Rows(index1).Cells("CantEsp2").Value.ToString()) Then
+                            ATemp1 = DataGridView1.Rows(index1).Cells("CantEsp1").Value.ToString()
+                            If CDbl(txtcantidad.Text) >= CDbl(DataGridView1.Rows(index1).Cells("CantEsp1").Value.ToString()) And CDbl(txtcantidad.Text) <= CDbl(DataGridView1.Rows(index1).Cells("CantEsp2").Value.ToString()) Then
+                                txtprecio.Text = CDbl(IIf(DataGridView1.Rows(index1).Cells("PreEsp").Value.ToString() = "", "0", DataGridView1.Rows(index1).Cells("PreEsp").Value.ToString()))
+                                txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                                txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                                temp = 1
+                            End If
+                        End If
+
+                        If Not IsDBNull(DataGridView1.Rows(index1).Cells("CantEsp3").Value.ToString()) And Not IsDBNull(DataGridView1.Rows(index1).Cells("CantEsp4").Value.ToString()) Then
+                            ATemp1 = DataGridView1.Rows(index1).Cells("CantEsp3").Value.ToString()
+                            If CDbl(txtcantidad.Text) >= CDbl(DataGridView1.Rows(index1).Cells("CantEsp3").Value.ToString()) And CDbl(txtcantidad.Text) <= CDbl(DataGridView1.Rows(index1).Cells("CantEsp4").Value.ToString()) Then
+                                txtprecio.Text = CDbl(IIf(DataGridView1.Rows(index1).Cells("PreEsp2").Value.ToString() = "", "0", DataGridView1.Rows(index1).Cells("PreEsp2").Value.ToString()))
+                                txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                                txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                                temp = 1
+                            End If
+                        End If
+
+                        If Not IsDBNull(DataGridView1.Rows(index1).Cells("CantMM1").Value.ToString()) And Not IsDBNull(DataGridView1.Rows(index1).Cells("CantMM2").Value.ToString()) Then
+                            ATemp2 = DataGridView1.Rows(index1).Cells("CantMM1").Value.ToString()
+                            If CDbl(txtcantidad.Text) >= CDbl(DataGridView1.Rows(index1).Cells("CantMM1").Value.ToString()) And CDbl(txtcantidad.Text) <= CDbl(DataGridView1.Rows(index1).Cells("CantMM2").Value.ToString()) Then
+                                txtprecio.Text = CDbl(IIf(DataGridView1.Rows(index1).Cells("PreMM").Value.ToString() = "", "0", DataGridView1.Rows(index1).Cells("PreMM").Value.ToString()))
+                                txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                                txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                                temp = 1
+                            End If
+                        End If
+
+                        If Not IsDBNull(DataGridView1.Rows(index1).Cells("CantMM3").Value.ToString()) And Not IsDBNull(DataGridView1.Rows(index1).Cells("CantMM4").Value.ToString()) Then
+                            ATemp2 = DataGridView1.Rows(index1).Cells("CantMM3").Value.ToString()
+                            If CDbl(txtcantidad.Text) >= CDbl(DataGridView1.Rows(index1).Cells("CantMM3").Value.ToString()) And CDbl(txtcantidad.Text) <= CDbl(DataGridView1.Rows(index1).Cells("CantMM4").Value.ToString()) Then
+                                txtprecio.Text = CDbl(IIf(DataGridView1.Rows(index1).Cells("PreMM2").Value.ToString() = "", "0", DataGridView1.Rows(index1).Cells("PreMM2").Value.ToString()))
+                                txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                                txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                                temp = 1
+                            End If
+                        End If
+
+                        If Not IsDBNull(DataGridView1.Rows(index1).Cells("CantMay1").Value.ToString()) And Not IsDBNull(DataGridView1.Rows(index1).Cells("CantMay2").Value.ToString()) Then
+                            ATemp3 = DataGridView1.Rows(index1).Cells("CantMay1").Value.ToString()
+                            If CDbl(txtcantidad.Text) >= CDbl(DataGridView1.Rows(index1).Cells("CantMay1").Value.ToString()) And CDbl(txtcantidad.Text) <= CDbl(DataGridView1.Rows(index1).Cells("CantMay2").Value.ToString()) Then
+                                txtprecio.Text = CDbl(IIf(DataGridView1.Rows(index1).Cells("PreMay").Value.ToString() = "", "0", DataGridView1.Rows(index1).Cells("PreMay").Value.ToString()))
+                                txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                                txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                                temp = 1
+                            End If
+                        End If
+
+                        If Not IsDBNull(DataGridView1.Rows(index1).Cells("CantMay3").Value.ToString()) And Not IsDBNull(DataGridView1.Rows(index1).Cells("CantMay4").Value.ToString()) Then
+                            ATemp3 = DataGridView1.Rows(index1).Cells("CantMay3").Value.ToString()
+                            If CDbl(txtcantidad.Text) >= CDbl(DataGridView1.Rows(index1).Cells("CantMay3").Value.ToString()) And CDbl(txtcantidad.Text) <= CDbl(DataGridView1.Rows(index1).Cells("CantMay4").Value.ToString()) Then
+                                txtprecio.Text = CDbl(IIf(DataGridView1.Rows(index1).Cells("PreMay2").Value.ToString() = "", "0", DataGridView1.Rows(index1).Cells("PreMay2").Value.ToString()))
+                                txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                                txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                                temp = 1
+                            End If
+                        End If
+
+                        If Not IsDBNull(DataGridView1.Rows(index1).Cells("CantMin1").Value.ToString()) And Not IsDBNull(DataGridView1.Rows(index1).Cells("CantMin2").Value.ToString()) Then
+                            ATemp4 = DataGridView1.Rows(index1).Cells("CantMin1").Value.ToString()
+                            If CDbl(txtcantidad.Text) >= CDbl(DataGridView1.Rows(index1).Cells("CantMin1").Value.ToString()) And CDbl(txtcantidad.Text) <= CDbl(DataGridView1.Rows(index1).Cells("CantMin2").Value.ToString()) Then
+                                txtprecio.Text = CDbl(IIf(DataGridView1.Rows(index1).Cells("PreMin").Value.ToString() = "", "0", DataGridView1.Rows(index1).Cells("PreMin").Value.ToString()))
+                                txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                                txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                                temp = 1
+                            End If
+                        End If
+
+                        If Not IsDBNull(DataGridView1.Rows(index1).Cells("CantMin3").Value.ToString()) And Not IsDBNull(DataGridView1.Rows(index1).Cells("CantMin4").Value.ToString()) Then
+                            ATemp4 = DataGridView1.Rows(index1).Cells("CantMin3").Value.ToString()
+                            If CDbl(txtcantidad.Text) >= CDbl(DataGridView1.Rows(index1).Cells("CantMin3").Value.ToString()) And CDbl(txtcantidad.Text) <= CDbl(DataGridView1.Rows(index1).Cells("CantMin4").Value.ToString()) Then
+                                txtprecio.Text = CDbl(IIf(DataGridView1.Rows(index1).Cells("PreMin2").Value.ToString() = "", "0", DataGridView1.Rows(index1).Cells("PreMin2").Value.ToString()))
+                                txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                                txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                                temp = 1
                             End If
                         End If
                     End If
+                    If ATemp1 <> 0 Or ATemp2 <> 0 Or ATemp3 <> 0 Or ATemp4 <> 0 Then
+                        If temp = 0 Then
+                            Dim varcod As String = cbocodigo.Text
+                            Dim index As Integer = -1
+                            Dim row As DataGridViewRow
+                            For Each row In DataGridView1.Rows
+
+                                If IsNothing(row.Cells("Codigo").Value) Then
+                                    Exit For
+                                End If
+
+                                If row.Cells("Codigo").Value.ToString() = varcod Then
+                                    index = row.Index
+                                    Exit For
+                                End If
+                            Next
+                            If index <> -1 Then
+                                txtprecio.Text = DataGridView1.Rows(index).Cells("PrecioVentaIVA").Value.ToString()
+                                txtprecio.Text = FormatNumber(txtprecio.Text, 4)
+                                txtprecio.Tag = FormatNumber(txtprecio.Text, 4)
+                            End If
+
+                            rd4.Close() : cnn4.Close()
+                            Exit Sub
+                        End If
+                    End If
                 End If
+
                 rd4.Close()
             End If
             cnn4.Close()
@@ -4304,20 +4270,7 @@ kaka:
         If AscW(e.KeyChar) = Keys.Enter Then
             cnn1.Close() : cnn1.Open()
 
-            'cmd1 = cnn1.CreateCommand
-            'cmd1.CommandText =
-            '    "select VSE from Ticket"
-            'rd1 = cmd1.ExecuteReader
-            'If rd1.HasRows Then
-            '    If rd1.Read Then
-            '        chec = rd1(0).ToString()
-            '    End If
-            'End If
-            'rd1.Close()
-
             Dim cant_lotes As Double = 0
-
-
 
             If cboLote.Text <> "" Then
                 cmd1 = cnn1.CreateCommand
@@ -7988,99 +7941,7 @@ kakaxd:
 
         Loop
 
-        'If txttel.Text <> "" Then
-        '    cnn2.Close() : cnn2.Open()
-        '    cmd2 = cnn2.CreateCommand
-        '    cmd2.CommandText =
-        '        "update Ventas set FolMonedero='" & txttel.Text & "' where Folio=" & MYFOLIO
-        '    cmd2.ExecuteNonQuery()
-        '    cnn2.Close()
-        'End If
 
-
-        'Actualiza [Monedero] / [MovMonedero]
-        'Try
-        '    If txttel.Text <> "" Then
-        '        Dim sal_monedero As Double = 0
-        '        Dim tipo_mone As Integer = 0
-        '        Dim porcentaje_mone As Double = 0
-
-        '        cnn1.Close() : cnn1.Open()
-        '        cmd1 = cnn1.CreateCommand
-        '        cmd1.CommandText =
-        '            "select NumPart,NotasCred from Formatos where Facturas='Porc_Mone'"
-        '        rd1 = cmd1.ExecuteReader
-        '        If rd1.HasRows Then
-        '            If rd1.Read Then
-        '                tipo_mone = rd1("NumPart").ToString()
-        '                porcentaje_mone = IIf(rd1("NotasCred").ToString() = "", 0, rd1("NotasCred").ToString())
-        '            End If
-        '        End If
-        '        rd1.Close()
-
-        '        cmd1 = cnn1.CreateCommand
-        '        ' cmd1.CommandText =
-        '        '"select Saldo from MovMonedero where Id=(select MAX(Id) from MovMonedero where Monedero='" & txttel.Text & "')"
-        '        cmd1.CommandText = "select Saldo from Monedero WHERE Barras='" & txttel.Text & "'"
-        '        rd1 = cmd1.ExecuteReader
-        '        If rd1.HasRows Then
-        '            If rd1.Read Then
-        '                sal_monedero = IIf(rd1(0).ToString = "", 0, rd1(0).ToString)
-        '            End If
-        '        End If
-        '        rd1.Close()
-
-        '        Dim porc_mone As Double = 0
-        '        Dim precio_prod As Double = 0
-        '        Dim cantid_prod As Double = 0
-        '        Dim nvo_saldo As Double = 0
-        '        Dim porcentaje As Double = 0
-        '        Dim ope As Double = 0
-
-        '        Dim total_venta As Double = 0
-        '        Dim total_bono As Double = 0
-        '        Dim total_abonoo As Double = 0
-        '        'Por venta
-        '        If tipo_mone = 1 Then
-        '            total_venta = Total_Ve
-        '            total_abonoo = (porcentaje_mone * total_venta) / 100
-
-        '            nvo_saldo = total_abonoo + sal_monedero
-        '        End If
-
-        '        'Por producto
-        '        If tipo_mone = 0 Then
-        '            For denji As Integer = 0 To grdcaptura.Rows.Count - 1
-        '                porc_mone = grdcaptura(14, denji).Value
-        '                precio_prod = grdcaptura(4, denji).Value
-        '                cantid_prod = grdcaptura(3, denji).Value
-
-        '                total_bono = (porc_mone * precio_prod) / 100
-        '                ope = ope + (total_bono * cantid_prod)
-        '            Next
-        '            nvo_saldo = ope + sal_monedero
-        '        End If
-
-        '        cmd1 = cnn1.CreateCommand
-        '        cmd1.CommandText =
-        '            "update Monedero set Saldo=" & nvo_saldo & " where Barras='" & txttel.Text & "'"
-        '        cmd1.ExecuteNonQuery()
-
-        '        nuevo_saldo_monedero = nvo_saldo
-
-        '        cmd1 = cnn1.CreateCommand
-        '        cmd1.CommandText =
-        '            "insert into MovMonedero(Monedero,Concepto,Abono,Cargo,Saldo,Fecha,Hora,Folio) values('" & txttel.Text & "','Venta'," & total_abonoo & "," & total_bono & "," & nvo_saldo & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "'," & MYFOLIO & ")"
-        '        cmd1.ExecuteNonQuery()
-        '        cnn1.Close()
-        '    End If
-        'Catch ex As Exception
-        '    MessageBox.Show(ex.ToString())
-        '    cnn1.Close()
-
-        '    btnnuevo.Enabled = True
-
-        'End Try
 
         'Llenado de variables de pago (Tarjeta, Transferencia, Saldo, Efectivo y Otro)
 
@@ -8193,63 +8054,7 @@ kakaxd:
                             BancoCFP = grdpago.Rows(R).Cells(7).Value.ToString
                         End If
 
-                        'If FormaPago = "MONEDERO" Then
 
-                        '    Dim saldomonedero As Double = 0
-                        '    Dim saldonuevo As Double = 0
-
-                        '    cnn1.Close() : cnn1.Open()
-                        '    cmd1 = cnn1.CreateCommand
-                        '    cmd1.CommandText = "SELECT Saldo from monedero where Barras='" & txttel.Text & "'"
-                        '    rd1 = cmd1.ExecuteReader
-                        '    If rd1.HasRows Then
-                        '        If rd1.Read Then
-                        '            saldomonedero = rd1(0).ToString
-                        '            saldonuevo = saldomonedero - TotFormaPago
-                        '            saldonuevo = FormatNumber(saldonuevo, 2)
-                        '            cnn2.Close() : cnn2.Open()
-                        '            cmd2 = cnn2.CreateCommand
-                        '            cmd2.CommandText = "UPDATE monedero set Saldo=" & saldonuevo & " WHERE Barras='" & txttel.Text & "'"
-                        '            cmd2.ExecuteNonQuery()
-
-                        '            cmd2 = cnn2.CreateCommand
-                        '            cmd2.CommandText = "INSERT INTO movmonedero(Monedero,Concepto,Abono,Cargo,Saldo,Fecha,Hora,Folio) VALUES('" & txttel.Text & "','Venta',0," & TotFormaPago & "," & saldonuevo & ",'" & Format(Date.Now, "yyyy/MM/dd") & "','" & Format(Date.Now, "HH:mm:ss") & "'," & MYFOLIO & ")"
-                        '            cmd2.ExecuteNonQuery()
-
-                        '            cnn2.Close()
-
-
-                        '        End If
-                        '    End If
-                        '    rd1.Close()
-                        '    cnn1.Close()
-                        'End If
-
-                        'If FormaPago = "SALDO A FAVOR" Then
-                        '    If TotFormaPago > 0 Then
-                        '        TotSaldo = TotFormaPago
-
-                        '        'Dim saldofav As Double = 0
-                        '        'cnn1.Close() : cnn1.Open()
-                        '        'cmd1 = cnn1.CreateCommand
-                        '        'cmd1.CommandText = "SELECT SaldoFavor FROM clientes WHERE Nombre='" & cboNombre.Text & "'"
-                        '        'rd1 = cmd1.ExecuteReader
-                        '        'If rd1.HasRows Then
-                        '        '    If rd1.Read Then
-                        '        '        saldofav = rd1(0).ToString
-
-                        '        '        cnn2.Close() : cnn2.Open()
-                        '        '        cmd2 = cnn2.CreateCommand
-                        '        '        cmd2.CommandText = "UPDATE clientes SET SaldoFavor=SaldoFavor - " & saldofav & " WHERE Nombre='" & cboNombre.Text & "'"
-                        '        '        cmd2.ExecuteNonQuery()
-                        '        '        cnn2.Close()
-                        '        '    End If
-                        '        'End If
-                        '        'rd1.Close()
-                        '        'cnn1.Close()
-                        '    End If
-
-                        'End If
 
                         If TotFormaPago > 0 Then
 
@@ -8391,36 +8196,41 @@ kakaxd:
                 mydesc = grdcaptura.Rows(R).Cells(1).Value.ToString
                 myunid = grdcaptura.Rows(R).Cells(2).Value.ToString
 
+                Dim varcod As String = mycode
+                Dim index As Integer = -1
+                Dim row As DataGridViewRow
+                For Each row In DataGridView1.Rows
 
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText =
-                    "select p1.Departamento, p1.Grupo, p1.ProvRes, p1.MCD, p1.Multiplo, p1.Unico, p1.GPrint, p1.IVA, p2.Existencia, p2.PrecioCompra FROM Productos p1 LEFT JOIN Productos p2 ON p2.Codigo = LEFT(p1.Codigo, 6) WHERE p1.Codigo = '" & mycode & "'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        MyCostVUE = 0
-                        MyProm = 0
-                        MyDepto = rd1("Departamento").ToString()
-                        MyGrupo = rd1("Grupo").ToString()
-                        Kit = rd1("ProvRes").ToString()
-                        MyMCD = rd1("MCD").ToString()
-                        MyMulti2 = rd1("Multiplo").ToString()
-                        Unico = rd1("Unico").ToString()
-                        gprint = rd1("GPrint").ToString
-                        MyIVA = rd1("IVA").ToString
-                        If CStr(rd1("Departamento").ToString()) = "SERVICIOS" Then
-                            rd1.Close()
-                        Else
-                            existe = rd1("Existencia").ToString()
-                            MyMultiplo = rd1("Multiplo").ToString()
-                            Existencia = existe / MyMultiplo
-                            Pre_Comp = rd1("PrecioCompra").ToString()
-                            MyCostVUE = Pre_Comp * (mycant / MyMCD)
-                        End If
+                    If IsNothing(row.Cells("Codigo").Value) Then
+                        Exit For
+                    End If
 
+                    If row.Cells("Codigo").Value.ToString() = varcod Then
+                        index = row.Index
+                        Exit For
+                    End If
+                Next
+                If index <> -1 Then
+                    MyCostVUE = 0
+                    MyProm = 0
+                    MyDepto = DataGridView1.Rows(index).Cells("Departamento").Value.ToString()
+                    MyGrupo = DataGridView1.Rows(index).Cells("Grupo").Value.ToString()
+                    Kit = DataGridView1.Rows(index).Cells("ProvRes").Value.ToString()
+                    MyMCD = DataGridView1.Rows(index).Cells("MCD").Value.ToString()
+                    MyMulti2 = DataGridView1.Rows(index).Cells("Multiplo").Value.ToString()
+                    Unico = DataGridView1.Rows(index).Cells("Unico").Value.ToString()
+                    gprint = DataGridView1.Rows(index).Cells("GPrint").Value.ToString()
+                    MyIVA = DataGridView1.Rows(index).Cells("IVA").Value.ToString()
+                    If MyDepto = "SERVICIOS" Then
+                    Else
+                        existe = DataGridView1.Rows(index).Cells("Existencia").Value.ToString()
+                        MyMultiplo = DataGridView1.Rows(index).Cells("Multiplo").Value.ToString()
+                        Existencia = existe / MyMultiplo
+                        Pre_Comp = DataGridView1.Rows(index).Cells("PrecioCompra").Value.ToString()
+                        MyCostVUE = Pre_Comp * (mycant / MyMCD)
                     End If
                 End If
-                rd1.Close()
+
 
                 caduca = IIf(grdcaptura.Rows(R).Cells(9).Value.ToString = "", "", grdcaptura.Rows(R).Cells(9).Value.ToString)
                 lote = grdcaptura.Rows(R).Cells(8).Value.ToString
