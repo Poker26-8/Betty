@@ -466,17 +466,33 @@ Public Class frmVentas1
         cbotipo.Text = "Lista"
         txtdia.Text = Weekday(Date.Now)
 
-
         Dim sInfo As String = ""
         Dim cnn_c As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
         Dim odata As New ToolKitSQL.myssql
         Dim dt As New DataTable
-        Dim Sql111 As String = "select * from Productos where Grupo<>'INSUMO' and ProvRes<>1 order by Nombre"
+        'Dim Sql111 As String = "select  * from Productos where Grupo<>'INSUMO' and ProvRes<>1 order by Nombre"
+        Dim Sql111 As String = "select P.*, M.tipo_cambio from Productos P, tb_moneda M where P.id_tbMoneda = M.id and P.Grupo<>'INSUMO' and P.ProvRes<>1 order by P.Nombre, P.Codigo"
         Dim dr As DataRow
         With odata
             If .dbOpen(cnn_c, sTargetlocal, sInfo) Then
+                'If .getDt(cnn_c, dt, Sql111, sInfo) Then
+                '    DataGridView1.DataSource = dt
+                '    cbodesc.DataSource = dt
+                '    ' Establecemos la columna a mostrar en el ComboBox (por ejemplo, "Nombre")
+                '    cbodesc.DisplayMember = "Nombre"
+
+                '    ' Establecemos la columna que se usará como valor asociado (por ejemplo, "ID")
+                '    cbodesc.ValueMember = "Nombre"
+                '    cbodesc.SelectedIndex = -1
+                'End If
+
                 If .getDt(cnn_c, dt, Sql111, sInfo) Then
                     DataGridView1.DataSource = dt
+                End If
+
+                Sql111 = "select Nombre from Productos where Grupo<>'INSUMO' and ProvRes<>1 and LENGTH(Codigo) < 7 order by Nombre"
+
+                If .getDt(cnn_c, dt, Sql111, sInfo) Then
                     cbodesc.DataSource = dt
                     ' Establecemos la columna a mostrar en el ComboBox (por ejemplo, "Nombre")
                     cbodesc.DisplayMember = "Nombre"
@@ -485,30 +501,8 @@ Public Class frmVentas1
                     cbodesc.ValueMember = "Nombre"
                     cbodesc.SelectedIndex = -1
                 End If
+
                 cnn_c.Close()
-            End If
-        End With
-
-        Dim sInfo3 As String = ""
-        Dim cnn_c3 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
-        Dim odata3 As New ToolKitSQL.myssql
-        Dim dt3 As New DataTable
-        ' Dim Sql111 As String = "select * from Productos, where Grupo<>'INSUMO' and ProvRes<>1 order by Nombre"
-        Dim Sql333 As String = "select P.*, M.tipo_cambio from Productos P, tb_moneda M where P.id_tbMoneda = M.id and P.Grupo<>'INSUMO' and P.ProvRes<>1 order by P.Nombre"
-        Dim dr3 As DataRow
-        With odata3
-            If .dbOpen(cnn_c3, sTargetlocal, sInfo3) Then
-                If .getDt(cnn_c3, dt3, Sql333, sInfo3) Then
-                    DataGridView1.DataSource = dt3
-                    cbodesc.DataSource = dt3
-                    ' Establecemos la columna a mostrar en el ComboBox (por ejemplo, "Nombre")
-                    cbodesc.DisplayMember = "Nombre"
-
-                    ' Establecemos la columna que se usará como valor asociado (por ejemplo, "ID")
-                    cbodesc.ValueMember = "Nombre"
-                    cbodesc.SelectedIndex = -1
-                End If
-                cnn_c3.Close()
             End If
         End With
 
@@ -522,9 +516,9 @@ Public Class frmVentas1
         Dim dr2 As DataRow
         With odata2
             If .dbOpen(cnn_c2, sTargetlocal, sinfo2) Then
-                If .getDt(cnn_c2, dt, sql22, sinfo2) Then
-                    DataGridView2.DataSource = dt
-                    cboNombre.DataSource = dt
+                If .getDt(cnn_c2, dt2, sql22, sinfo2) Then
+                    DataGridView2.DataSource = dt2
+                    cboNombre.DataSource = dt2
                     ' Establecemos la columna a mostrar en el ComboBox (por ejemplo, "Nombre")
                     cboNombre.DisplayMember = "Nombre"
                     ' Establecemos la columna que se usará como valor asociado (por ejemplo, "ID")
@@ -7558,7 +7552,7 @@ doorcita:
 
 
         btnventa.Enabled = False
-        btnnuevo.Enabled = False
+
         My.Application.DoEvents()
 
         Dim TotalIEPSPrint As Double = 0
@@ -9111,14 +9105,6 @@ safo:
                 cnn150.Close()
             End If
         End If
-
-
-        btnnuevo.Enabled = True : My.Application.DoEvents()
-
-
-
-        btnventa.Enabled = True : My.Application.DoEvents()
-
 
         If pide = "1" Then
             lblusuario.Text = usu
@@ -17916,34 +17902,10 @@ kaka:
         'Dim sql1 As String = ""
         Try
 
-
-            'If odata4.dbOpen(cnn4, sTarget, serror) = True Then
-            '    sql = "select Codigo,Grupo from Productos where Nombre='" & cbodesc.Text & "'"
-            '    If odata4.getDr(cnn4, dr4, sql, serror) = True Then
-            '        MyCode = dr4(0).ToString
-            '        cbocodigo.Text = MyCode
-            '    End If
-            'Else
-            '    MsgBox("Producto no registrado en la base de datos.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-            '    cnn4.Close()
-            '    Exit Sub
-            'End If
-            'cnn4.Close()
-
-            'If odata4.dbOpen(cnn4, sTarget, serror) = True Then
-            '    sql1 = "select Codigo from Productos where Left(Codigo, 6)='" & MyCode & "'"
-            '    If odata4.getDt(cnn4, dt4, sql, serror) = True Then
-            '        For Each dr4 In dt4.Rows
-            '            cbocodigo.Items.Add(dr4(0).ToString)
-            '        Next
-            '    End If
-            '    cnn4.Close()
-            'End If
-
             cnn4.Close() : cnn4.Open()
             cmd4 = cnn4.CreateCommand
             cmd4.CommandText =
-                "select Codigo,Grupo from Productos where Nombre='" & cbodesc.Text & "'"
+                "select Codigo,Grupo from Productos where Nombre='" & cbodesc.Text & "' order by Codigo"
             rd4 = cmd4.ExecuteReader
             If rd4.HasRows Then
                 If rd4.Read Then
@@ -17961,7 +17923,7 @@ kaka:
 
             cmd4 = cnn4.CreateCommand
             cmd4.CommandText =
-                "select Codigo from Productos where Left(Codigo, 6)='" & MyCode & "'"
+                "select Codigo from Productos where Left(Codigo, 6)='" & MyCode & "' order by Codigo"
             rd4 = cmd4.ExecuteReader
             Do While rd4.Read
                 If rd4.HasRows Then cbocodigo.Items.Add(
