@@ -5637,9 +5637,7 @@ kaka:
         cbodesc.Text = ""
         My.Application.DoEvents()
 
-        If cbonota.Text <> "" Then
-            cargadatosgrid()
-        End If
+
         lblpedido.Text = "0"
         cbodesc.Focus.Equals(True)
         txtvalor.Text = "0.00"
@@ -5805,7 +5803,8 @@ kaka:
         boxcomentario.Visible = False
         txtcomentario.Text = ""
         ordetrabajo = 0
-        'cargadatosgrid()
+
+        cargadatosgrid()
         Folio()
         'FunctionVentasAsync()
         'FunctionClinetesAsync()
