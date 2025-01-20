@@ -108,6 +108,11 @@ Public Class frmVentas3
     Dim pide As String = ""
 
     Dim Edita As Boolean = False
+
+    Dim noprefijo As String = ""
+    Dim nocodigo As Integer = 0
+    Dim nopeso As Integer = 0
+    Dim basculaxd As String = ""
     Private Async Sub frmVentas3_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         pide = DatosRecarga("TomaContra")
@@ -122,6 +127,11 @@ Public Class frmVentas3
         whats = DatosRecarga("Whatsapp")
         autofact = DatosRecarga("LinkAuto")
         siqr = DatosRecarga2("LinkAuto")
+
+        basculaxd = DatosRecarga("Bascula")
+        noprefijo = DatosRecarga("Prefijo")
+        nocodigo = DatosRecarga("Codigo")
+        nopeso = DatosRecarga("Peso")
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -287,21 +297,9 @@ Public Class frmVentas3
         Dim log As String = ""
 
 
-        cnn4.Close() : cnn4.Open()
-        cmd4 = cnn4.CreateCommand
-        cmd4.CommandText = "select NotasCred from Formatos where Facturas='LogoG'"
-        rd4 = cmd4.ExecuteReader
-        If rd4.HasRows Then
-            If rd4.Read Then
-                log = rd4(0).ToString
-            End If
-        End If
-        rd4.Close()
-
-
-        If log <> "" Then
-            If File.Exists(My.Application.Info.DirectoryPath & "\" & log) Then
-                PictureBox2.Image = System.Drawing.Image.FromFile(My.Application.Info.DirectoryPath & "\" & log)
+        If nLogo <> "" Then
+            If File.Exists(My.Application.Info.DirectoryPath & "\" & nLogo) Then
+                PictureBox2.Image = System.Drawing.Image.FromFile(My.Application.Info.DirectoryPath & "\" & nLogo)
                 PictureBox2.SizeMode = PictureBoxSizeMode.Zoom
                 'PictureBox2.Dock = DockStyle.Fill
                 'Panel8.Controls.Add(PictureBox2)
@@ -1934,7 +1932,7 @@ kak:
                 cnn1.Close() : cnn1.Open()
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
-                   "select Suspender,Tipo,Id,Credito,Comisionista,Telefono,Correo,Observaciones,Calle,NInterior,NExterior,Colonia,Delegacion,Entidad,Pais,CP,SaldoFavor,DiasCred from Clientes where Nombre='" & cboNombre.Text & "'"
+                   "select Suspender,Nombre,Tipo,Id,Credito,Comisionista,Telefono,Correo,Observaciones,Calle,NInterior,NExterior,Colonia,Delegacion,Entidad,Pais,CP,SaldoFavor,DiasCred from Clientes where Nombre='" & cboNombre.Text & "'"
                 rd1 = cmd1.ExecuteReader
                 If rd1.HasRows Then
                     If rd1.Read Then
@@ -2052,7 +2050,7 @@ kak:
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText =
-                "select Suspender,Tipo,Id,Credito,Comisionista,Telefono,Correo,Observaciones,Calle,NInterior,NExterior,Colonia,Delegacion,Entidad,Pais,CP,SaldoFavor from Clientes where Nombre='" & cboNombre.Text & "'"
+                "select Suspender,Nombre,Tipo,Id,Credito,Comisionista,Telefono,Correo,Observaciones,Calle,NInterior,NExterior,Colonia,Delegacion,Entidad,Pais,CP,SaldoFavor from Clientes where Nombre='" & cboNombre.Text & "'"
             rd2 = cmd2.ExecuteReader
             If rd2.HasRows Then
                 If rd2.Read Then
@@ -2067,9 +2065,9 @@ kak:
                     txtObservaciones.Text = rd2("Observaciones").ToString
 
 
-                    IdCliente = rd1("Id").ToString()
+                    IdCliente = rd2("Id").ToString()
                     Cliente = cboNombre.Text
-                    dias_credito = rd1("DiasCred").ToString()
+                    dias_credito = rd2("DiasCred").ToString()
                     fecha_pago = DateAdd(DateInterval.Day, dias_credito, Date.Now)
 
                     'If Trim(cbocomisionista.Text) <> "" Then
@@ -2637,59 +2635,9 @@ kak:
             End If
 
             Try
-                Dim noprefijo As String = ""
-                Dim nocodigo As Integer = 0
-                Dim nopeso As Integer = 0
-                Dim basculaxd As String = ""
-
-                cnn1.Close()
-                cnn1.Open()
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Bascula'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.Read Then
-                    basculaxd = rd1(0).ToString
-                End If
-                rd1.Close()
-
 
                 If basculaxd = "Etiquetas" Then
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Prefijo'"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.Read Then
-                        noprefijo = rd1(0).ToString
-                    End If
-                    rd1.Close()
 
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Codigo'"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.Read Then
-                        nocodigo = rd1(0).ToString
-                    End If
-                    rd1.Close()
-
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Peso'"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.Read Then
-                        nopeso = rd1(0).ToString
-                    End If
-                    rd1.Close()
-
-
-
-                    'cmd1 = cnn1.CreateCommand
-                    'cmd1.CommandText =
-                    '"select VSE from Ticket"
-                    'rd1 = cmd1.ExecuteReader
-                    'If rd1.HasRows Then
-                    '    If rd1.Read Then
-                    '        VSE = rd1(0).ToString
-                    '    End If
-                    'End If
-                    'rd1.Close()
                     Dim codrecortado As String = ""
                     Dim pesofinal As String = ""
                     Dim primervalor As String = ""
@@ -2715,7 +2663,8 @@ kak:
                     primervalor = pesofinal(0)
                     pesofinal = primervalor & "." & pesofinal.Substring(1)
 
-
+                    cnn1.Close()
+                    cnn1.Open()
                     cmd1 = cnn1.CreateCommand
                     cmd1.CommandText =
                             "select Status_Promocion,Grupo,Departamento,Codigo,Nombre,UVenta,Multiplo,Min,Ubicacion from Productos where Codigo='" & codrecortado & "'"
@@ -7753,36 +7702,38 @@ doorcita:
             txtefectivo.Text = FormatNumber(txtefectivo.Text, 2)
             If txtefectivo.Text = "" Then txtefectivo.Text = "0.00"
 
-            cnn1.Close() : cnn1.Open()
-
 
             For N As Integer = 0 To grdcaptura.Rows.Count - 1
                 If CStr(grdcaptura.Rows(N).Cells(0).Value.ToString) <> "" Then
                     Dim ca As Double = grdcaptura.Rows(N).Cells(3).Value.ToString
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "select IVA,Comision from Productos where Codigo='" & CStr(grdcaptura.Rows(N).Cells(0).Value.ToString) & "'"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.HasRows Then
-                        If rd1.Read Then
-                            If rd1(0).ToString > 0 Then
+                    Dim varcod As String = cbocodigo.Text
+                    Dim index As Integer = -1
+                    Dim row As DataGridViewRow
+                    For Each row In DataGridView1.Rows
 
-                                ivaporproducto = CDbl(grdcaptura.Rows(N).Cells(5).Value.ToString) / (1 + rd1(0).ToString)
-                                ivaporproducto = FormatNumber(ivaporproducto, 2)
-                                ivaporproda = CDbl(grdcaptura.Rows(N).Cells(5).Value.ToString) - CDbl(ivaporproducto)
-                                ivaporproda = FormatNumber(ivaporproda, 2)
-
-                                TotalIVAPrint = TotalIVAPrint + CDbl(ivaporproda)
-                            End If
-                            comision = rd1(1).ToString * CDec(ca)
-                            totalcomision = totalcomision + CDec(comision)
+                        If IsNothing(row.Cells("Codigo").Value) Then
+                            Exit For
                         End If
+
+                        If row.Cells("Codigo").Value.ToString() = varcod Then
+                            index = row.Index
+                            Exit For
+                        End If
+                    Next
+                    If index <> -1 Then
+                        If DataGridView1.Rows(index).Cells("IVA").Value.ToString() > 0 Then
+                            ivaporproducto = CDbl(grdcaptura.Rows(N).Cells(5).Value.ToString) / (1 + DataGridView1.Rows(index).Cells("IVA").Value.ToString())
+                            ivaporproducto = FormatNumber(ivaporproducto, 2)
+                            ivaporproda = CDbl(grdcaptura.Rows(N).Cells(5).Value.ToString) - CDbl(ivaporproducto)
+                            ivaporproda = FormatNumber(ivaporproda, 2)
+
+                            TotalIVAPrint = TotalIVAPrint + CDbl(ivaporproda)
+                        End If
+                        comision = DataGridView1.Rows(index).Cells("Comision").Value.ToString() * CDec(ca)
+                        totalcomision = totalcomision + CDec(comision)
                     End If
-                    rd1.Close()
                 End If
             Next
-
-
             TotalIVAPrint = FormatNumber(TotalIVAPrint, 6)
             totalcomision = FormatNumber(totalcomision, 2)
         Catch ex As Exception
@@ -8943,9 +8894,7 @@ Door:
         cnn2.Close() : cnn2.Open()
         For luffy As Integer = 0 To grdcaptura.Rows.Count - 1
             cunico = IIf(grdcaptura.Rows(luffy).Cells(15).Value = "", "", grdcaptura.Rows(luffy).Cells(15).Value)
-
             If cunico = "" Then
-
             Else
                 cmd2 = cnn2.CreateCommand
                 cmd2.CommandText = "SELECT COUNT(CodUnico),Id FROM ventasdetalle WHERE CodUnico='" & cunico & "' AND Folio=" & MYFOLIO & ""
@@ -8966,9 +8915,25 @@ Door:
                 End If
                 rd2.Close()
             End If
+            cnn2.Clone()
 
+            If grdcaptura.Rows(luffy).Cells(0).Value.ToString <> "" And grdcaptura.Rows(luffy).Cells(15).Value.ToString <> "" And grdcaptura.Rows(luffy).Cells(16).Value.ToString <> "" Then
+
+                Dim cnn11 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+                Dim sinfo11 As String = ""
+                Dim odata11 As New ToolKitSQL.myssql
+                Dim dt11 As New DataTable
+                Dim dr11 As DataRow
+                If odata11.dbOpen(cnn11, sTarget, sinfo11) Then
+                    If odata11.getDr(cnn11, dr11, " SELECT Id FROM ventasdetalle WHERE CodUnico = '" & grdcaptura.Rows(luffy).Cells(15).Value.ToString & "'", sinfo11) Then
+                    Else
+                        odata11.runSp(cnn11, grdcaptura.Rows(luffy).Cells(16).Value.ToString, sinfo11)
+                    End If
+                    cnn11.Close()
+                End If
+            End If
         Next
-        cnn2.Close()
+
 
         '---------------------------------------imprimir comandas---------------------------------------------
 
@@ -9223,27 +9188,7 @@ safo:
             End If
         End If
 
-        For R As Integer = 0 To grdcaptura.Rows.Count - 1
 
-            If grdcaptura.Rows(R).Cells(0).Value.ToString <> "" And grdcaptura.Rows(R).Cells(15).Value.ToString <> "" And grdcaptura.Rows(R).Cells(16).Value.ToString <> "" Then
-
-                Dim cnn11 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
-                Dim sinfo11 As String = ""
-                Dim odata11 As New ToolKitSQL.myssql
-                Dim dt11 As New DataTable
-                Dim dr11 As DataRow
-                If odata11.dbOpen(cnn11, sTarget, sinfo11) Then
-                    If odata11.getDr(cnn11, dr11, " SELECT Id FROM ventasdetalle WHERE CodUnico = '" & grdcaptura.Rows(R).Cells(15).Value.ToString & "'", sinfo11) Then
-
-                    Else
-                        odata11.runSp(cnn11, grdcaptura.Rows(R).Cells(16).Value.ToString, sinfo11)
-                    End If
-                    cnn11.Close()
-                End If
-
-            End If
-
-        Next
 
         btnnuevo.Enabled = True : My.Application.DoEvents()
 

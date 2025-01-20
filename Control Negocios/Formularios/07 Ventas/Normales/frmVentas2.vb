@@ -111,6 +111,11 @@ Public Class frmVentas2
 
     Dim Edita As Boolean = False
 
+    Dim noprefijo As String = ""
+    Dim nocodigo As Integer = 0
+    Dim nopeso As Integer = 0
+    Dim basculaxd As String = ""
+
     Private Sub frmVentas2_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         txtdia.Text = Weekday(Date.Now)
     End Sub
@@ -264,6 +269,11 @@ Public Class frmVentas2
         whats = DatosRecarga("Whatsapp")
         autofact = DatosRecarga("LinkAuto")
         siqr = DatosRecarga2("LinkAuto")
+
+        basculaxd = DatosRecarga("Bascula")
+        noprefijo = DatosRecarga("Prefijo")
+        nocodigo = DatosRecarga("Codigo")
+        nopeso = DatosRecarga("Peso")
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -422,49 +432,17 @@ Public Class frmVentas2
         grdcaptura.DefaultCellStyle.SelectionBackColor = Color.WhiteSmoke
         grdcaptura.DefaultCellStyle.SelectionForeColor = Color.Blue
 
-        Dim log As String = ""
 
-
-        cnn4.Close() : cnn4.Open()
-        cmd4 = cnn4.CreateCommand
-        cmd4.CommandText = "select NotasCred from Formatos where Facturas='LogoG'"
-        rd4 = cmd4.ExecuteReader
-        If rd4.HasRows Then
-            If rd4.Read Then
-                log = rd4(0).ToString
-            End If
-        End If
-        rd4.Close()
-
-
-        If log <> "" Then
-            If File.Exists(My.Application.Info.DirectoryPath & "\" & log) Then
-                PictureBox2.Image = System.Drawing.Image.FromFile(My.Application.Info.DirectoryPath & "\" & log)
+        If nLogo <> "" Then
+            If File.Exists(My.Application.Info.DirectoryPath & "\" & nLogo) Then
+                PictureBox2.Image = System.Drawing.Image.FromFile(My.Application.Info.DirectoryPath & "\" & nLogo)
                 PictureBox2.SizeMode = PictureBoxSizeMode.Zoom
                 'PictureBox2.Dock = DockStyle.Fill
                 'Panel8.Controls.Add(PictureBox2)
             End If
         End If
 
-        Try
-            cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
-                "select Formato from RutasImpresion where Equipo='" & ObtenerNombreEquipo() & "' and Tipo='Venta'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    cboimpresion.Text = rd1(0).ToString()
-                End If
-            Else
-                cboimpresion.Text = "TICKET"
-            End If
-            rd1.Close()
-            cnn1.Close()
-        Catch ex As Exception
-            MessageBox.Show(ex.ToString())
-            cnn1.Close()
-        End Try
+
 
         DondeVoy = ""
         cbonombretag = ""
@@ -546,9 +524,6 @@ Public Class frmVentas2
         ' RunAsyncFunctionsV2()
         Me.Show()
         My.Application.DoEvents()
-
-
-
     End Sub
     Private Sub frmVentas2_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         cbodesc.Focus().Equals(True)
@@ -2658,167 +2633,109 @@ doorcita:
             Dim rd1 As MySqlDataReader
             Dim cmd1 As MySqlCommand
 
-            If franquicia = 0 Then
-                Try
-                    cnn1.Close() : cnn1.Open()
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "select Suspender,Tipo,Nombre,Id,Credito,Comisionista,Telefono,Correo,SaldoFavor from Clientes where Nombre='" & cboNombre.Text & "' or Referencia='" & cboNombre.Text & "'"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.HasRows Then
-                        If rd1.Read Then
-                            If (rd1("Suspender").ToString) Then MsgBox("Venta suspendida a este cliente." & vbNewLine & "Consulta con el administrador.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : rd1.Close() : cnn1.Close() : Exit Sub
-                            cbotipo.Text = rd1("Tipo").ToString
-                            cboNombre.Text = rd1("Nombre").ToString
-                            MyIdCliente = rd1("Id").ToString
-                            lblNumCliente.Text = MyIdCliente
-                            txtcredito.Text = FormatNumber(rd1("Credito").ToString, 4)
-                            'cbocomisionista.Text = rd1("Comisionista").ToString
-                            txttel.Text = rd1("Telefono").ToString
-                            lblcorreocli.Text = rd1("Correo").ToString
-                            'If Trim(cbocomisionista.Text) <> "" Then
-                            '    cbocomisionista.Enabled = True
-                            'Else
-                            '    cbocomisionista.Enabled = False
-                            'End If
+            Try
+                cnn1.Close() : cnn1.Open()
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText =
+                   "select Suspender,Nombre,Tipo,Id,Credito,Comisionista,Telefono,Correo,Observaciones,Calle,NInterior,NExterior,Colonia,Delegacion,Entidad,Pais,CP,SaldoFavor,DiasCred from Clientes where Nombre='" & cboNombre.Text & "'"
+                rd1 = cmd1.ExecuteReader
+                If rd1.HasRows Then
+                    If rd1.Read Then
+                        If (rd1("Suspender").ToString) Then MsgBox("Venta suspendida a este cliente." & vbNewLine & "Consulta con el administrador.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : rd1.Close() : cnn1.Close() : Exit Sub
+                        cbotipo.Text = rd1("Tipo").ToString
+                        cboNombre.Text = rd1("Nombre").ToString
+                        MyIdCliente = rd1("Id").ToString
+                        lblNumCliente.Text = MyIdCliente
+                        txtcredito.Text = FormatNumber(rd1("Credito").ToString, 4)
+                        'cbocomisionista.Text = rd1("Comisionista").ToString
+                        txttel.Text = rd1("Telefono").ToString
+                        lblcorreocli.Text = rd1("Correo").ToString
+                        'If Trim(cbocomisionista.Text) <> "" Then
+                        '    cbocomisionista.Enabled = True
+                        'Else
+                        '    cbocomisionista.Enabled = False
+                        'End If
 
-                            txtafavor.Text = FormatNumber(rd1("SaldoFavor").ToString(), 4)
+                        txtafavor.Text = FormatNumber(rd1("SaldoFavor").ToString(), 4)
 
-                            Label1.Visible = True
-                            cboDomi.Visible = True
-                            Label20.Visible = True
-                            txtcredito.Visible = True
-                            Label19.Visible = True
-                            cbotipo.Visible = True
-                            Label17.Visible = True
-                            txtafavor.Visible = True
-                            Label18.Visible = True
-                            txtadeuda.Visible = True
-                        End If
-                    Else
-                        cbocodigo.Text = ""
-                        cbodesc.Text = ""
-                        txtunidad.Text = ""
-                        txtcantidad.Text = ""
-                        txtprecio.Text = "0.00"
-                        txtprecio.Tag = 0
-                        txttotal.Text = "0.00"
-                        txtexistencia.Text = ""
-                        cboLote.Text = ""
-                        cboLote.Tag = 0
-                        cboDomi.Text = ""
-                        txtcredito.Text = "0.00"
-                        txtafavor.Text = "0.00"
-                        txtadeuda.Text = "0.00"
-                        txtfechacad.Text = ""
-                        Label1.Visible = False
-                        cboDomi.Visible = False
-                        Label20.Visible = False
-                        txtcredito.Visible = False
-                        Label19.Visible = False
-                        cbotipo.Visible = False
-                        Label17.Visible = False
-                        txtafavor.Visible = False
-                        Label18.Visible = False
-                        txtadeuda.Visible = False
-
-                        cbocomisionista.Enabled = False
-                        cbocomisionista.Text = ""
-                        lblNumCliente.Text = "MOSTRADOR"
-                        cboNombre.SelectionStart = 0
-                        cboNombre.SelectionLength = Len(cboNombre.Text)
-                        MyIdCliente = 0
-                        rd1.Close()
-                        cnn1.Close()
-                        txtdireccion.Focus().Equals(True)
-                        Exit Sub
+                        Label1.Visible = True
+                        cboDomi.Visible = True
+                        Label20.Visible = True
+                        txtcredito.Visible = True
+                        Label19.Visible = True
+                        cbotipo.Visible = True
+                        Label17.Visible = True
+                        txtafavor.Visible = True
+                        Label18.Visible = True
+                        txtadeuda.Visible = True
                     End If
-                    rd1.Close()
+                Else
+                    cbocodigo.Text = ""
+                    cbodesc.Text = ""
+                    txtunidad.Text = ""
+                    txtcantidad.Text = ""
+                    txtprecio.Text = "0.00"
+                    txtprecio.Tag = 0
+                    txttotal.Text = "0.00"
+                    txtexistencia.Text = ""
+                    cboLote.Text = ""
+                    cboLote.Tag = 0
+                    cboDomi.Text = ""
+                    txtcredito.Text = "0.00"
+                    txtafavor.Text = "0.00"
+                    txtadeuda.Text = "0.00"
+                    txtfechacad.Text = ""
+                    Label1.Visible = False
+                    cboDomi.Visible = False
+                    Label20.Visible = False
+                    txtcredito.Visible = False
+                    Label19.Visible = False
+                    cbotipo.Visible = False
+                    Label17.Visible = False
+                    txtafavor.Visible = False
+                    Label18.Visible = False
+                    txtadeuda.Visible = False
 
-                    Dim MySaldo As Double = 0
-
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "select Saldo from AbonoI where Id=(select max(Id) from AbonoI where Cliente='" & cboNombre.Text & "')"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.HasRows Then
-                        If rd1.Read Then
-                            MySaldo = CDbl(IIf(rd1(0).ToString = "", "0", rd1(0).ToString))
-                            If MySaldo > 0 Then
-                                txtadeuda.Text = Math.Abs(MySaldo)
-                                txtadeuda.Text = FormatNumber(txtadeuda.Text, 4)
-                            Else
-                                txtadeuda.Text = "0.00"
-                            End If
-                        End If
-                    Else
-                        txtadeuda.Text = "0.00"
-                    End If
+                    ' cbocomisionista.Enabled = False
+                    'cbocomisionista.Text = ""
+                    lblNumCliente.Text = "MOSTRADOR"
+                    cboNombre.SelectionStart = 0
+                    cboNombre.SelectionLength = Len(cboNombre.Text)
+                    MyIdCliente = 0
                     rd1.Close()
                     cnn1.Close()
-                Catch ex As Exception
-                    MessageBox.Show(ex.ToString)
-                    cnn1.Close()
-                End Try
-                txtdireccion.Focus().Equals(True)
-            Else
-                Try
-                    If cboNombre.Text = "" Then Exit Sub
-                    cbonombretag = cboNombre.Text
+                    txtdireccion.Focus().Equals(True)
+                    Exit Sub
+                End If
+                rd1.Close()
 
-                    Dim cnn As MySqlConnection = New MySqlConnection
-                    Dim sinfo As String = ""
-                    Dim oData As New ToolKitSQL.myssql
-                    Dim oData1 As New ToolKitSQL.myssql
-                    Dim dt As New DataTable
-                    Dim dr As DataRow
-                    Dim dt1 As New DataTable
-                    Dim dr1 As DataRow
-                    With oData
-                        If .dbOpen(cnn, sTargetdSincro, sinfo) Then
-                            If .getDt(cnn, dt1, "Select id from sucursales where nombre='" & cboNombre.Text & "'", "dtUno") Then
-                                For Each dr1 In dt1.Rows
-                                    MyIdCliente = dr1("id").ToString
-                                    lblNumCliente.Text = MyIdCliente
-                                    Label1.Visible = True
-                                    cboDomi.Visible = True
-                                    Label20.Visible = True
-                                    txtcredito.Visible = True
-                                    Label19.Visible = True
-                                    cbotipo.Visible = True
-                                    Label17.Visible = True
-                                    txtafavor.Visible = True
-                                    Label18.Visible = True
-                                    txtadeuda.Visible = True
-                                    chkBuscaCliente.Checked = False
-                                    txtNombreClave.Text = ""
-                                Next
-                            End If
+                Dim MySaldo As Double = 0
 
-                            If lblNumCliente.Text = "MOSTRADOR" Then MyIdCliente = 0 : Exit Sub
-                            cbocodigo.Text = ""
-                            cbodesc.Text = ""
-                            txtunidad.Text = ""
-                            txtcantidad.Text = ""
-                            txtprecio.Text = "0.00"
-                            txtprecio.Tag = 0
-                            txttotal.Text = "0.00"
-                            txtexistencia.Text = ""
-                            cboLote.Text = ""
-                            cboLote.Tag = 0
-                            cboDomi.Text = ""
+                cmd1 = cnn1.CreateCommand
+                cmd1.CommandText =
+                    "select Saldo from AbonoI where Id=(select max(Id) from AbonoI where Cliente='" & cboNombre.Text & "')"
+                rd1 = cmd1.ExecuteReader
+                If rd1.HasRows Then
+                    If rd1.Read Then
+                        MySaldo = CDbl(IIf(rd1(0).ToString = "", "0", rd1(0).ToString))
+                        If MySaldo > 0 Then
+                            txtadeuda.Text = Math.Abs(MySaldo)
+                            txtadeuda.Text = FormatNumber(txtadeuda.Text, 4)
+                        Else
                             txtadeuda.Text = "0.00"
-                            txtafavor.Text = "0.00"
-                            txtfechacad.Text = ""
-
-                            cnn.Close()
-                            If cboNombre.Text = "" Then lblNumCliente.Text = "MOSTRADOR" : MyIdCliente = 0
                         End If
-                    End With
-                Catch ex As Exception
-                    cnn1.Close()
-                End Try
-            End If
+                    End If
+                Else
+                    txtadeuda.Text = "0.00"
+                End If
+                rd1.Close()
+                cnn1.Close()
+            Catch ex As Exception
+                MessageBox.Show(ex.ToString)
+                cnn1.Close()
+            End Try
+            txtdireccion.Focus().Equals(True)
+
         End If
     End Sub
     Private Sub cboNombre_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboNombre.SelectedValueChanged
@@ -3432,59 +3349,9 @@ doorcita:
             End If
 
             Try
-                Dim noprefijo As String = ""
-                Dim nocodigo As Integer = 0
-                Dim nopeso As Integer = 0
-                Dim basculaxd As String = ""
-
-                cnn1.Close()
-                cnn1.Open()
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Bascula'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.Read Then
-                    basculaxd = rd1(0).ToString
-                End If
-                rd1.Close()
-
 
                 If basculaxd = "Etiquetas" Then
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Prefijo'"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.Read Then
-                        noprefijo = rd1(0).ToString
-                    End If
-                    rd1.Close()
 
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Codigo'"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.Read Then
-                        nocodigo = rd1(0).ToString
-                    End If
-                    rd1.Close()
-
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Peso'"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.Read Then
-                        nopeso = rd1(0).ToString
-                    End If
-                    rd1.Close()
-
-
-
-                    'cmd1 = cnn1.CreateCommand
-                    'cmd1.CommandText =
-                    '"select VSE from Ticket"
-                    'rd1 = cmd1.ExecuteReader
-                    'If rd1.HasRows Then
-                    '    If rd1.Read Then
-                    '        VSE = rd1(0).ToString
-                    '    End If
-                    'End If
-                    'rd1.Close()
                     Dim codrecortado As String = ""
                     Dim pesofinal As String = ""
                     Dim primervalor As String = ""
@@ -3510,7 +3377,8 @@ doorcita:
                     primervalor = pesofinal(0)
                     pesofinal = primervalor & "." & pesofinal.Substring(1)
 
-
+                    cnn1.Close()
+                    cnn1.Open()
                     cmd1 = cnn1.CreateCommand
                     cmd1.CommandText =
                             "select Status_Promocion,Grupo,Departamento,Codigo,Nombre,UVenta,Multiplo,Min,Ubicacion from Productos where Codigo='" & codrecortado & "'"
@@ -5020,6 +4888,7 @@ kaka:
         If Not IsNumeric(txtprecio.Text) Then txtprecio.Text = ""
         If cbocodigo.Text = "" Then MsgBox("Necesitas seleccionar un producto.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : cbodesc.Focus().Equals(True) : Exit Sub
 
+
         Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
         Dim rd1, rd2 As MySqlDataReader
@@ -5114,7 +4983,7 @@ kaka:
                             Dim TExiste As Double = existencia - CDbl(txtcantidad.Text)
 
                             If TExiste < 0 And btndevo.Text = "DEVOLUCIÓN" Then
-                                If Me.Text = "Ventas(2)" Then
+                                If Me.Text = "Ventas(1)" Then
                                     If txtunidad.Text <> "N/A" Then
                                         MsgBox("No puedes vender sin existencia.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
                                         txtcantidad.Focus().Equals(True)
@@ -5248,20 +5117,7 @@ kaka:
         If AscW(e.KeyChar) = Keys.Enter Then
             cnn1.Close() : cnn1.Open()
 
-            'cmd1 = cnn1.CreateCommand
-            'cmd1.CommandText =
-            '    "select VSE from Ticket"
-            'rd1 = cmd1.ExecuteReader
-            'If rd1.HasRows Then
-            '    If rd1.Read Then
-            '        chec = rd1(0).ToString()
-            '    End If
-            'End If
-            'rd1.Close()
-
             Dim cant_lotes As Double = 0
-
-
 
             If cboLote.Text <> "" Then
                 cmd1 = cnn1.CreateCommand
@@ -5306,7 +5162,7 @@ kaka:
                             If btndevo.Text <> "GUARDAR DEVOLUCIÓN" Then
                                 Dim Existe As Double = rd1("Existencia").ToString()
                                 Dim TExiste As Double = Existe - CDbl(txtcantidad.Text)
-                                If Me.Text = "Ventas (2)" Then
+                                If Me.Text = "Ventas (1)" Then
                                     If txtexistencia.Text <= 0 Then
                                         MsgBox("No está permitido vender sin existencias.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
                                         txtcantidad.Focus().Equals(True)
@@ -5363,17 +5219,6 @@ kaka:
             Dim decu As String = ""
             Dim pre_ini As Double = txtprecio.Text, pre_fini As Double = 0
 
-            'cmd1 = cnn1.CreateCommand
-            'cmd1.CommandText =
-            '    "select Dia,Descu from Productos where Codigo='" & cbocodigo.Text & "'"
-            'rd1 = cmd1.ExecuteReader
-            'If rd1.HasRows Then
-            '    If rd1.Read Then
-            '        dia = rd1(0).ToString
-            '        decu = rd1(1).ToString
-            '    End If
-            'End If
-            'rd1.Close()
             Dim varnom As String = cbocodigo.Text
             Dim index As Integer = -1
             Dim row As DataGridViewRow
@@ -5393,6 +5238,18 @@ kaka:
                 decu = DataGridView1.Rows(index).Cells("Descu").Value.ToString()
             End If
 
+            'cmd1 = cnn1.CreateCommand
+            'cmd1.CommandText =
+            '    "select Dia,Descu from Productos where Codigo='" & cbocodigo.Text & "'"
+            'rd1 = cmd1.ExecuteReader
+            'If rd1.HasRows Then
+            '    If rd1.Read Then
+            '        dia = rd1(0).ToString
+            '        decu = rd1(1).ToString
+            '    End If
+            'End If
+            'rd1.Close()
+
             If dia = 0 Then
             Else
                 If dia = CInt(txtdia.Text) Then
@@ -5407,7 +5264,6 @@ kaka:
             If cbocodigo.Text = "" Then cbodesc.Focus().Equals(True) : cnn1.Close() : Exit Sub
             If CDbl(IIf(txtcantidad.Text = "", "0", txtcantidad.Text)) = 0 Or txtcantidad.Text = "" Then cbocodigo.Focus().Equals(True) : cnn1.Close() : Exit Sub
             If CDbl(IIf(txtprecio.Text = "", "0", txtprecio.Text)) = 0 Or txtprecio.Text = "" Then cbocodigo.Focus().Equals(True) : cnn1.Close() : Exit Sub
-
 
             If index <> -1 Then
                 If Promo = False Then
@@ -5429,6 +5285,8 @@ kaka:
                     End If
                 End If
             End If
+
+
 
             'cmd1 = cnn1.CreateCommand
             'cmd1.CommandText =
@@ -8131,44 +7989,44 @@ Door:
             txtefectivo.Text = FormatNumber(txtefectivo.Text, 2)
             If txtefectivo.Text = "" Then txtefectivo.Text = "0.00"
 
-            cnn1.Close() : cnn1.Open()
-
 
             For N As Integer = 0 To grdcaptura.Rows.Count - 1
                 If CStr(grdcaptura.Rows(N).Cells(0).Value.ToString) <> "" Then
                     Dim ca As Double = grdcaptura.Rows(N).Cells(3).Value.ToString
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "select IVA,Comision from Productos where Codigo='" & CStr(grdcaptura.Rows(N).Cells(0).Value.ToString) & "'"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.HasRows Then
-                        If rd1.Read Then
-                            If rd1(0).ToString > 0 Then
+                    Dim varcod As String = cbocodigo.Text
+                    Dim index As Integer = -1
+                    Dim row As DataGridViewRow
+                    For Each row In DataGridView1.Rows
 
-                                ivaporproducto = CDbl(grdcaptura.Rows(N).Cells(5).Value.ToString) / (1 + rd1(0).ToString)
-                                ivaporproducto = FormatNumber(ivaporproducto, 2)
-                                ivaporproda = CDbl(grdcaptura.Rows(N).Cells(5).Value.ToString) - CDbl(ivaporproducto)
-                                ivaporproda = FormatNumber(ivaporproda, 2)
-
-                                TotalIVAPrint = TotalIVAPrint + CDbl(ivaporproda)
-                            End If
-                            comision = rd1(1).ToString * CDec(ca)
-                            totalcomision = totalcomision + CDec(comision)
+                        If IsNothing(row.Cells("Codigo").Value) Then
+                            Exit For
                         End If
+
+                        If row.Cells("Codigo").Value.ToString() = varcod Then
+                            index = row.Index
+                            Exit For
+                        End If
+                    Next
+                    If index <> -1 Then
+                        If DataGridView1.Rows(index).Cells("IVA").Value.ToString() > 0 Then
+                            ivaporproducto = CDbl(grdcaptura.Rows(N).Cells(5).Value.ToString) / (1 + DataGridView1.Rows(index).Cells("IVA").Value.ToString())
+                            ivaporproducto = FormatNumber(ivaporproducto, 2)
+                            ivaporproda = CDbl(grdcaptura.Rows(N).Cells(5).Value.ToString) - CDbl(ivaporproducto)
+                            ivaporproda = FormatNumber(ivaporproda, 2)
+
+                            TotalIVAPrint = TotalIVAPrint + CDbl(ivaporproda)
+                        End If
+                        comision = DataGridView1.Rows(index).Cells("Comision").Value.ToString() * CDec(ca)
+                        totalcomision = totalcomision + CDec(comision)
                     End If
-                    rd1.Close()
                 End If
             Next
-
-
             TotalIVAPrint = FormatNumber(TotalIVAPrint, 6)
             totalcomision = FormatNumber(totalcomision, 2)
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
-
             btnnuevo.Enabled = True
-
         End Try
 
         If grdcaptura.Rows.Count < 1 Then txtdescuento1.Focus().Equals(True) : cnn1.Close() : btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
@@ -9354,9 +9212,7 @@ Door:
         cnn2.Close() : cnn2.Open()
         For luffy As Integer = 0 To grdcaptura.Rows.Count - 1
             cunico = IIf(grdcaptura.Rows(luffy).Cells(15).Value = "", "", grdcaptura.Rows(luffy).Cells(15).Value)
-
             If cunico = "" Then
-
             Else
                 cmd2 = cnn2.CreateCommand
                 cmd2.CommandText = "SELECT COUNT(CodUnico),Id FROM ventasdetalle WHERE CodUnico='" & cunico & "' AND Folio=" & MYFOLIO & ""
@@ -9377,9 +9233,23 @@ Door:
                 End If
                 rd2.Close()
             End If
+            cnn2.Close()
 
+            If grdcaptura.Rows(luffy).Cells(0).Value.ToString <> "" And grdcaptura.Rows(luffy).Cells(15).Value.ToString <> "" And grdcaptura.Rows(luffy).Cells(16).Value.ToString <> "" Then
+                Dim cnn11 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+                Dim sinfo11 As String = ""
+                Dim odata11 As New ToolKitSQL.myssql
+                Dim dt11 As New DataTable
+                Dim dr11 As DataRow
+                If odata11.dbOpen(cnn11, sTarget, sinfo11) Then
+                    If odata11.getDr(cnn11, dr11, " SELECT Id FROM ventasdetalle WHERE CodUnico = '" & grdcaptura.Rows(luffy).Cells(15).Value.ToString & "'", sinfo11) Then
+                    Else
+                        odata11.runSp(cnn11, grdcaptura.Rows(luffy).Cells(16).Value.ToString, sinfo11)
+                    End If
+                    cnn11.Close()
+                End If
+            End If
         Next
-        cnn2.Close()
 
         '---------------------------------------imprimir comandas---------------------------------------------
 
@@ -9633,27 +9503,7 @@ safo:
             End If
         End If
 
-        For R As Integer = 0 To grdcaptura.Rows.Count - 1
 
-            If grdcaptura.Rows(R).Cells(0).Value.ToString <> "" And grdcaptura.Rows(R).Cells(15).Value.ToString <> "" And grdcaptura.Rows(R).Cells(16).Value.ToString <> "" Then
-
-                Dim cnn11 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
-                Dim sinfo11 As String = ""
-                Dim odata11 As New ToolKitSQL.myssql
-                Dim dt11 As New DataTable
-                Dim dr11 As DataRow
-                If odata11.dbOpen(cnn11, sTarget, sinfo11) Then
-                    If odata11.getDr(cnn11, dr11, " SELECT Id FROM ventasdetalle WHERE CodUnico = '" & grdcaptura.Rows(R).Cells(15).Value.ToString & "'", sinfo11) Then
-
-                    Else
-                        odata11.runSp(cnn11, grdcaptura.Rows(R).Cells(16).Value.ToString, sinfo11)
-                    End If
-                    cnn11.Close()
-                End If
-
-            End If
-
-        Next
 
         btnnuevo.Enabled = True : My.Application.DoEvents()
 
@@ -15816,7 +15666,7 @@ doorcita:
     End Function
 
     Private Sub cbodesc_TextChanged(sender As Object, e As EventArgs) Handles cbodesc.TextChanged
-        FiltrarDataGridView(cbodesc.Text, 2)
+
     End Sub
 
     Public Sub FiltrarDataGridView(ByVal filtro As String, ByVal columna As Integer)
