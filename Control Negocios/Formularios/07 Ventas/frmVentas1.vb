@@ -467,26 +467,11 @@ Public Class frmVentas1
         txtdia.Text = Weekday(Date.Now)
 
 
-
-        cargadatosgrid()
-
-        Folio()
-        ' RunAsyncFunctions()
-        My.Application.DoEvents()
-        'Timer1.Start()
-        cbodesc.Focus().Equals(True)
-
-        Me.Show()
-        My.Application.DoEvents()
-
-    End Sub
-    Public Sub cargadatosgrid()
         Dim sInfo As String = ""
         Dim cnn_c As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
         Dim odata As New ToolKitSQL.myssql
         Dim dt As New DataTable
-        ' Dim Sql111 As String = "select * from Productos, where Grupo<>'INSUMO' and ProvRes<>1 order by Nombre"
-        Dim Sql111 As String = "select P.*, M.tipo_cambio from Productos P, tb_moneda M where P.id_tbMoneda = M.id and P.Grupo<>'INSUMO' and P.ProvRes<>1 order by P.Nombre"
+        Dim Sql111 As String = "select * from Productos where Grupo<>'INSUMO' and ProvRes<>1 order by Nombre"
         Dim dr As DataRow
         With odata
             If .dbOpen(cnn_c, sTargetlocal, sInfo) Then
@@ -501,6 +486,29 @@ Public Class frmVentas1
                     cbodesc.SelectedIndex = -1
                 End If
                 cnn_c.Close()
+            End If
+        End With
+
+        Dim sInfo3 As String = ""
+        Dim cnn_c3 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+        Dim odata3 As New ToolKitSQL.myssql
+        Dim dt3 As New DataTable
+        ' Dim Sql111 As String = "select * from Productos, where Grupo<>'INSUMO' and ProvRes<>1 order by Nombre"
+        Dim Sql333 As String = "select P.*, M.tipo_cambio from Productos P, tb_moneda M where P.id_tbMoneda = M.id and P.Grupo<>'INSUMO' and P.ProvRes<>1 order by P.Nombre"
+        Dim dr3 As DataRow
+        With odata3
+            If .dbOpen(cnn_c3, sTargetlocal, sInfo3) Then
+                If .getDt(cnn_c3, dt3, Sql333, sInfo3) Then
+                    DataGridView1.DataSource = dt3
+                    cbodesc.DataSource = dt3
+                    ' Establecemos la columna a mostrar en el ComboBox (por ejemplo, "Nombre")
+                    cbodesc.DisplayMember = "Nombre"
+
+                    ' Establecemos la columna que se usará como valor asociado (por ejemplo, "ID")
+                    cbodesc.ValueMember = "Nombre"
+                    cbodesc.SelectedIndex = -1
+                End If
+                cnn_c3.Close()
             End If
         End With
 
@@ -528,6 +536,69 @@ Public Class frmVentas1
             End If
         End With
         banderaclientevalue = 1
+
+        ' cargadatosgrid()
+
+        Folio()
+        ' RunAsyncFunctions()
+        My.Application.DoEvents()
+        'Timer1.Start()
+        cbodesc.Focus().Equals(True)
+
+        Me.Show()
+        My.Application.DoEvents()
+
+    End Sub
+    Public Sub cargadatosgrid()
+
+        banderasalirvaluechange = 0
+        Dim sInfo As String = ""
+        Dim cnn_c As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+        Dim odata As New ToolKitSQL.myssql
+        Dim dt As New DataTable
+        ' Dim Sql111 As String = "select * from Productos, where Grupo<>'INSUMO' and ProvRes<>1 order by Nombre"
+        Dim Sql111 As String = "select P.*, M.tipo_cambio from Productos P, tb_moneda M where P.id_tbMoneda = M.id and P.Grupo<>'INSUMO' and P.ProvRes<>1 order by P.Nombre"
+        Dim dr As DataRow
+        With odata
+            If .dbOpen(cnn_c, sTargetlocal, sInfo) Then
+                If .getDt(cnn_c, dt, Sql111, sInfo) Then
+                    DataGridView1.DataSource = dt
+                    cbodesc.DataSource = dt
+                    ' Establecemos la columna a mostrar en el ComboBox (por ejemplo, "Nombre")
+                    cbodesc.DisplayMember = "Nombre"
+
+                    ' Establecemos la columna que se usará como valor asociado (por ejemplo, "ID")
+                    cbodesc.ValueMember = "Nombre"
+                    cbodesc.SelectedIndex = -1
+                End If
+                cnn_c.Close()
+            End If
+        End With
+
+        banderasalirvaluechange = 1
+
+        'Dim sinfo2 As String = ""
+        'Dim cnn_c2 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+        'Dim odata2 As New ToolKitSQL.myssql
+        'Dim dt2 As New DataTable
+        'Dim sql22 As String = "SELECT distinct Nombre FROM Clientes WHERE Nombre<>'' order by Nombre asc"
+        'Dim dr2 As DataRow
+        'With odata2
+        '    If .dbOpen(cnn_c2, sTargetlocal, sinfo2) Then
+        '        If .getDt(cnn_c2, dt, sql22, sinfo2) Then
+        '            DataGridView2.DataSource = dt
+        '            cboNombre.DataSource = dt
+        '            ' Establecemos la columna a mostrar en el ComboBox (por ejemplo, "Nombre")
+        '            cboNombre.DisplayMember = "Nombre"
+        '            ' Establecemos la columna que se usará como valor asociado (por ejemplo, "ID")
+        '            cboNombre.ValueMember = "Nombre"
+        '            cboNombre.SelectedIndex = -1
+
+        '        End If
+        '        cnn_c2.Close()
+        '    End If
+        'End With
+        'banderaclientevalue = 1
     End Sub
 
     Private Sub frmVentas1_Shown(sender As Object, e As System.EventArgs) Handles Me.Shown
@@ -5806,9 +5877,7 @@ kaka:
 
         cargadatosgrid()
         Folio()
-        'FunctionVentasAsync()
-        'FunctionClinetesAsync()
-        'Timer1.Start()
+
 
     End Sub
 
