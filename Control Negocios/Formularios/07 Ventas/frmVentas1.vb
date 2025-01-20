@@ -274,6 +274,7 @@ Public Class frmVentas1
         nocodigo = DatosRecarga("Codigo")
         nopeso = DatosRecarga("Peso")
 
+
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -286,15 +287,8 @@ Public Class frmVentas1
                 End If
             End If
             rd1.Close()
-            cnn1.Close()
-        Catch ex As Exception
-            MessageBox.Show(ex.ToString)
-            cnn1.Close()
-        End Try
 
-        Try
-            cnn1.Close()
-            cnn1.Open()
+
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select VSE,NoPrintCom,Copias from Ticket"
