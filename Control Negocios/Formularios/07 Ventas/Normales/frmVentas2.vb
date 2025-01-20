@@ -3350,6 +3350,22 @@ doorcita:
 
             Try
 
+                Dim varnom As String = cbodesc.Text
+                Dim index As Integer = -1
+                Dim row As DataGridViewRow
+                For Each row In DataGridView1.Rows
+
+                    If IsNothing(row.Cells("Nombre").Value) Then
+                        Exit For
+                    End If
+
+                    If row.Cells("Nombre").Value.ToString() = varnom Then
+                        index = row.Index
+                        Exit For
+                    End If
+                Next
+
+
                 If basculaxd = "Etiquetas" Then
 
                     Dim codrecortado As String = ""
@@ -3386,8 +3402,10 @@ doorcita:
                     If rd1.HasRows Then
                         If rd1.Read Then
 
-                            Promo = IIf(rd1("Status_Promocion").ToString = False, False, True)
-                            Anti = rd1("Grupo").ToString
+                            'Promo = IIf(rd1("Status_Promocion").ToString = False, False, True)
+                            Promo = IIf(DataGridView1.Rows(Index).Cells("Status_Promocion").Value.ToString = False, False, True)
+                            'Anti = rd1("Grupo").ToString
+                            Anti = DataGridView1.Rows(Index).Cells("Grupo").Value.ToString
                             If Anti = "ANTIBIOTICO" Or Anti = "CONTROLADO" Then
                                 If MsgBox("Este en un " & Anti & " ¿deseas continuar con el proceso?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then
                                     cbocodigo.Text = ""
@@ -3407,22 +3425,32 @@ doorcita:
                                     Exit Sub
                                 End If
                             End If
-                            If CStr(rd1("Departamento").ToString) = "SERVICIOS" Then
-                                cbocodigo.Text = rd1("Codigo").ToString
+                            ' If CStr(rd1("Departamento").ToString) = "SERVICIOS" Then
+                            If CStr(DataGridView1.Rows(index).Cells("Departamento").Value.ToString) = "SERVICIOS" Then
+                                '  cbocodigo.Text = rd1("Codigo").ToString
+                                cbocodigo.Text = DataGridView1.Rows(index).Cells("Departamento").Value.ToString()
                                 cbocodigo.Focus().Equals(True)
                                 rd1.Close()
                                 cnn1.Close()
                                 Exit Sub
                             End If
 
-                            cbocodigo.Text = rd1("Codigo").ToString()
-                            cbodesc.Text = rd1("Nombre").ToString()
-                            txtunidad.Text = rd1("UVenta").ToString()
-                            Multiplo = rd1("Multiplo").ToString()
-                            Minimo = rd1("Min").ToString()
-                            txtubicacion.Text = rd1("Ubicacion").ToString()
+                            'cbocodigo.Text = rd1("Codigo").ToString()
+                            'cbodesc.Text = rd1("Nombre").ToString()
+                            'txtunidad.Text = rd1("UVenta").ToString()
+                            'Multiplo = rd1("Multiplo").ToString()
+                            'Minimo = rd1("Min").ToString()
+                            'txtubicacion.Text = rd1("Ubicacion").ToString()
 
+                            cbocodigo.Text = DataGridView1.Rows(index).Cells("Codigo").Value.ToString()
+                            cbodesc.Text = DataGridView1.Rows(index).Cells("Nombre").Value.ToString()
+                            txtunidad.Text = DataGridView1.Rows(index).Cells("UVenta").Value.ToString()
+                            Multiplo = DataGridView1.Rows(index).Cells("Multiplo").Value.ToString()
+                            Minimo = DataGridView1.Rows(index).Cells("Min").Value.ToString()
+                            txtubicacion.Text = DataGridView1.Rows(index).Cells("Ubicacion").Value.ToString()
 
+                            PreLst = DataGridView1.Rows(index).Cells("PrecioVentaIVA").Value.ToString()
+                            PreEsp = DataGridView1.Rows(index).Cells("PreEsp").Value.ToString()
 
                             cnn2.Close() : cnn2.Open() : cmd2 = cnn2.CreateCommand
                             cmd2.CommandText =
@@ -3450,17 +3478,17 @@ doorcita:
                             End If
                             rd2.Close()
 
-                            cmd2 = cnn2.CreateCommand
-                            cmd2.CommandText =
-                                "select PrecioVentaIVA, PreEsp from Productos where Codigo='" & cbocodigo.Text & "'"
-                            rd2 = cmd2.ExecuteReader
-                            If rd2.HasRows Then
-                                If rd2.Read Then
-                                    PreLst = rd2(0).ToString
-                                    PreEsp = rd2(1).ToString
-                                End If
-                            End If
-                            rd2.Close()
+                            'cmd2 = cnn2.CreateCommand
+                            'cmd2.CommandText =
+                            '    "select PrecioVentaIVA, PreEsp from Productos where Codigo='" & cbocodigo.Text & "'"
+                            'rd2 = cmd2.ExecuteReader
+                            'If rd2.HasRows Then
+                            '    If rd2.Read Then
+                            '        PreLst = rd2(0).ToString
+                            '        PreEsp = rd2(1).ToString
+                            '    End If
+                            'End If
+                            'rd2.Close()
 
                             If cbotipo.Visible = False Then
                                 If T_Precio = "DIA_NOCHE" And (H_Actual > H_Inicia Or H_Actual < H_Final) Then
@@ -3612,25 +3640,12 @@ kaka:
                 'End If
                 'rd1.Close()
 
-                Dim varnom As String = cbodesc.Text
-                Dim index As Integer = -1
-                Dim row As DataGridViewRow
-                For Each row In DataGridView1.Rows
 
-                    If IsNothing(row.Cells("Nombre").Value) Then
-                        Exit For
-                    End If
 
-                    If row.Cells("Nombre").Value.ToString() = varnom Then
-                        index = row.Index
-                        Exit For
-                    End If
-                Next
+                If Index <> -1 Then
 
-                If index <> -1 Then
-
-                    Promo = IIf(DataGridView1.Rows(index).Cells("Status_Promocion").Value.ToString() = False, False, True)
-                    Anti = DataGridView1.Rows(index).Cells("Grupo").Value.ToString()
+                    Promo = IIf(DataGridView1.Rows(Index).Cells("Status_Promocion").Value.ToString() = False, False, True)
+                    Anti = DataGridView1.Rows(Index).Cells("Grupo").Value.ToString()
                     If Anti = "ANTIBIOTICO" Or Anti = "CONTROLADO" Then
                         If MsgBox("Este en un " & Anti & " ¿deseas continuar con el proceso?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then
                             cbocodigo.Text = ""
@@ -3651,20 +3666,24 @@ kaka:
                         End If
                     End If
 
-                    If CStr(DataGridView1.Rows(index).Cells("Departamento").Value.ToString()) = "SERVICIOS" Then
-                        cbocodigo.Text = DataGridView1.Rows(index).Cells("Codigo").Value.ToString()
+                    If CStr(DataGridView1.Rows(Index).Cells("Departamento").Value.ToString()) = "SERVICIOS" Then
+                        cbocodigo.Text = DataGridView1.Rows(Index).Cells("Codigo").Value.ToString()
                         cbocodigo.Focus().Equals(True)
                         rd1.Close()
                         cnn1.Close()
                         Exit Sub
                     End If
 
-                    cbocodigo.Text = DataGridView1.Rows(index).Cells("Codigo").Value.ToString()
-                    cbodesc.Text = DataGridView1.Rows(index).Cells("Nombre").Value.ToString()
-                    txtunidad.Text = DataGridView1.Rows(index).Cells("UVenta").Value.ToString()
-                    Multiplo = DataGridView1.Rows(index).Cells("Multiplo").Value.ToString()
-                    Minimo = DataGridView1.Rows(index).Cells("Min").Value.ToString()
-                    txtubicacion.Text = DataGridView1.Rows(index).Cells("Ubicacion").Value.ToString()
+                    cbocodigo.Text = DataGridView1.Rows(Index).Cells("Codigo").Value.ToString()
+                    cbodesc.Text = DataGridView1.Rows(Index).Cells("Nombre").Value.ToString()
+                    txtunidad.Text = DataGridView1.Rows(Index).Cells("UVenta").Value.ToString()
+                    Multiplo = DataGridView1.Rows(Index).Cells("Multiplo").Value.ToString()
+                    Minimo = DataGridView1.Rows(Index).Cells("Min").Value.ToString()
+                    txtubicacion.Text = DataGridView1.Rows(Index).Cells("Ubicacion").Value.ToString()
+
+                    PreLst = DataGridView1.Rows(index).Cells("PrecioVentaIVA").Value.ToString()
+                    PreEsp = DataGridView1.Rows(index).Cells("PreEsp").Value.ToString()
+
 
                     cnn2.Close() : cnn2.Open() : cmd2 = cnn2.CreateCommand
                     cmd2.CommandText =
@@ -3704,17 +3723,17 @@ kaka:
                     End If
                     rd2.Close()
 
-                    cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText =
-                        "select PrecioVentaIVA, PreEsp from Productos where Codigo='" & cbocodigo.Text & "'"
-                    rd2 = cmd2.ExecuteReader
-                    If rd2.HasRows Then
-                        If rd2.Read Then
-                            PreLst = rd2(0).ToString
-                            PreEsp = rd2(1).ToString
-                        End If
-                    End If
-                    rd2.Close()
+                    'cmd2 = cnn2.CreateCommand
+                    'cmd2.CommandText =
+                    '    "select PrecioVentaIVA, PreEsp from Productos where Codigo='" & cbocodigo.Text & "'"
+                    'rd2 = cmd2.ExecuteReader
+                    'If rd2.HasRows Then
+                    '    If rd2.Read Then
+                    '        PreLst = rd2(0).ToString
+                    '        PreEsp = rd2(1).ToString
+                    '    End If
+                    'End If
+                    'rd2.Close()
 
                     If cbotipo.Visible = False Then
                         If T_Precio = "DIA_NOCHE" And (H_Actual > H_Inicia Or H_Actual < H_Final) Then
@@ -3776,7 +3795,7 @@ kaka:
 
 
                 Dim codbarra As String = cbodesc.Text
-                index = -1
+                Index = -1
                 For Each row In DataGridView1.Rows
 
                     If IsNothing(row.Cells("CodBarra").Value) Then
@@ -3784,16 +3803,16 @@ kaka:
                     End If
 
                     If row.Cells("CodBarra").Value.ToString() = codbarra Then
-                        index = row.Index
+                        Index = row.Index
                         Exit For
                     End If
                 Next
 
                 ' Si encontramos el valor, usamos el índice para llenar los TextBox
-                If index <> -1 Then
+                If Index <> -1 Then
 
-                    Promo = IIf(DataGridView1.Rows(index).Cells("Status_Promocion").Value.ToString() = False, False, True)
-                    Anti = DataGridView1.Rows(index).Cells("Grupo").Value.ToString()
+                    Promo = IIf(DataGridView1.Rows(Index).Cells("Status_Promocion").Value.ToString() = False, False, True)
+                    Anti = DataGridView1.Rows(Index).Cells("Grupo").Value.ToString()
                     If Anti = "ANTIBIOTICO" Or Anti = "CONTROLADO" Then
                         If MsgBox("Este en un " & Anti & " ¿deseas continuar con el proceso?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then
                             cbocodigo.Text = ""
@@ -3814,20 +3833,25 @@ kaka:
                         End If
                     End If
 
-                    If CStr(DataGridView1.Rows(index).Cells("Departamento").Value.ToString()) = "SERVICIOS" Then
-                        cbocodigo.Text = DataGridView1.Rows(index).Cells("Codigo").Value.ToString()
+                    If CStr(DataGridView1.Rows(Index).Cells("Departamento").Value.ToString()) = "SERVICIOS" Then
+                        cbocodigo.Text = DataGridView1.Rows(Index).Cells("Codigo").Value.ToString()
                         cbocodigo.Focus().Equals(True)
                         rd1.Close()
                         cnn1.Close()
                         Exit Sub
                     End If
 
-                    cbocodigo.Text = DataGridView1.Rows(index).Cells("Codigo").Value.ToString()
-                    cbodesc.Text = DataGridView1.Rows(index).Cells("Nombre").Value.ToString()
-                    txtunidad.Text = DataGridView1.Rows(index).Cells("UVenta").Value.ToString()
-                    Multiplo = DataGridView1.Rows(index).Cells("Multiplo").Value.ToString()
-                    Minimo = DataGridView1.Rows(index).Cells("Min").Value.ToString()
+                    cbocodigo.Text = DataGridView1.Rows(Index).Cells("Codigo").Value.ToString()
+                    cbodesc.Text = DataGridView1.Rows(Index).Cells("Nombre").Value.ToString()
+                    txtunidad.Text = DataGridView1.Rows(Index).Cells("UVenta").Value.ToString()
+                    Multiplo = DataGridView1.Rows(Index).Cells("Multiplo").Value.ToString()
+                    Minimo = DataGridView1.Rows(Index).Cells("Min").Value.ToString()
                     txtubicacion.Text = DataGridView1.Rows(index).Cells("Ubicacion").Value.ToString()
+
+
+                    PreLst = DataGridView1.Rows(index).Cells("PrecioVentaIVA").Value.ToString()
+                    PreEsp = DataGridView1.Rows(index).Cells("PreEsp").Value.ToString()
+
 
                     If File.Exists(My.Application.Info.DirectoryPath & "\ProductosImg" & base & "\" & cbocodigo.Text & ".jpg") Then
                         picProd.Image = System.Drawing.Image.FromFile(My.Application.Info.DirectoryPath & "\ProductosImg" & base & "\" & cbocodigo.Text & ".jpg")
@@ -3858,17 +3882,17 @@ kaka:
                     End If
                     rd2.Close()
 
-                    cmd2 = cnn2.CreateCommand
-                    cmd2.CommandText =
-                        "select PrecioVentaIVA, PreEsp from Productos where Codigo='" & cbocodigo.Text & "'"
-                    rd2 = cmd2.ExecuteReader
-                    If rd2.HasRows Then
-                        If rd2.Read Then
-                            PreLst = rd2(0).ToString
-                            PreEsp = rd2(1).ToString
-                        End If
-                    End If
-                    rd2.Close()
+                    'cmd2 = cnn2.CreateCommand
+                    'cmd2.CommandText =
+                    '    "select PrecioVentaIVA, PreEsp from Productos where Codigo='" & cbocodigo.Text & "'"
+                    'rd2 = cmd2.ExecuteReader
+                    'If rd2.HasRows Then
+                    '    If rd2.Read Then
+                    '        PreLst = rd2(0).ToString
+                    '        PreEsp = rd2(1).ToString
+                    '    End If
+                    'End If
+                    'rd2.Close()
 
                     cboLote.Items.Clear()
                     cmd2 = cnn2.CreateCommand
@@ -4045,8 +4069,12 @@ kaka:
                         rd2 = cmd2.ExecuteReader
                         If rd2.HasRows Then
                             If rd2.Read Then
-                                Promo = IIf(rd2("Status_Promocion").ToString = False, False, True)
-                                Anti = rd2("Grupo").ToString
+                                ' Promo = IIf(rd2("Status_Promocion").ToString = False, False, True)
+                                'Anti = rd2("Grupo").ToString
+
+                                Promo = IIf(DataGridView1.Rows(index).Cells("PrecioVentaIVA").Value.ToString = False, False, True)
+                                Anti = DataGridView1.Rows(index).Cells("Grupo").Value.ToString
+
                                 If Anti = "ANTIBIOTICO" Or Anti = "CONTROLADO" Then
                                     If MsgBox("Este en un " & Anti & " ¿deseas continuar con el proceso?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then
                                         cbocodigo.Text = ""
@@ -4066,20 +4094,34 @@ kaka:
                                         Exit Sub
                                     End If
                                 End If
-                                If CStr(rd2("Departamento").ToString) = "SERVICIOS" Then
-                                    cbocodigo.Text = rd2("Codigo").ToString
+                                ' If CStr(rd2("Departamento").ToString) = "SERVICIOS" Then
+                                If CStr(DataGridView1.Rows(index).Cells("Departamento").Value.ToString()) = "SERVICIOS" Then
+
+                                    'cbocodigo.Text = rd2("Codigo").ToString
+                                    cbocodigo.Text = DataGridView1.Rows(index).Cells("Codigo").Value.ToString()
                                     cbocodigo.Focus().Equals(True)
                                     rd1.Close()
                                     cnn1.Close()
                                     Exit Sub
                                 End If
 
-                                cbocodigo.Text = rd2("Codigo").ToString()
-                                cbodesc.Text = rd2("Nombre").ToString()
-                                txtunidad.Text = rd2("UVenta").ToString()
-                                Multiplo = rd2("Multiplo").ToString()
-                                Minimo = rd2("Min").ToString()
-                                txtubicacion.Text = rd2("Ubicacion").ToString()
+                                'cbocodigo.Text = rd2("Codigo").ToString()
+                                'cbodesc.Text = rd2("Nombre").ToString()
+                                'txtunidad.Text = rd2("UVenta").ToString()
+                                'Multiplo = rd2("Multiplo").ToString()
+                                'Minimo = rd2("Min").ToString()
+                                'txtubicacion.Text = rd2("Ubicacion").ToString()
+
+                                cbocodigo.Text = DataGridView1.Rows(index).Cells("Codigo").Value.ToString()
+                                cbodesc.Text = DataGridView1.Rows(index).Cells("Nombre").Value.ToString()
+                                txtunidad.Text = DataGridView1.Rows(index).Cells("UVenta").Value.ToString()
+                                Multiplo = DataGridView1.Rows(index).Cells("Multiplo").Value.ToString()
+                                Minimo = DataGridView1.Rows(index).Cells("Min").Value.ToString()
+                                txtubicacion.Text = DataGridView1.Rows(index).Cells("Ubicacion").Value.ToString()
+
+                                PreLst = DataGridView1.Rows(index).Cells("PrecioVentaIVA").Value.ToString()
+                                PreEsp = DataGridView1.Rows(index).Cells("PreEsp").Value.ToString()
+
 
                                 cnn3.Close() : cnn3.Open() : cmd3 = cnn3.CreateCommand
                                 cmd3.CommandText =
@@ -4106,17 +4148,17 @@ kaka:
                                 End If
                                 rd3.Close()
 
-                                cmd3 = cnn3.CreateCommand
-                                cmd3.CommandText =
-                                    "select PrecioVentaIVA, PreEsp from Productos where Codigo='" & cbocodigo.Text & "'"
-                                rd3 = cmd3.ExecuteReader
-                                If rd3.HasRows Then
-                                    If rd3.Read Then
-                                        PreLst = rd3(0).ToString
-                                        PreEsp = rd3(1).ToString
-                                    End If
-                                End If
-                                rd3.Close()
+                                'cmd3 = cnn3.CreateCommand
+                                'cmd3.CommandText =
+                                '    "select PrecioVentaIVA, PreEsp from Productos where Codigo='" & cbocodigo.Text & "'"
+                                'rd3 = cmd3.ExecuteReader
+                                'If rd3.HasRows Then
+                                '    If rd3.Read Then
+                                '        PreLst = rd3(0).ToString
+                                '        PreEsp = rd3(1).ToString
+                                '    End If
+                                'End If
+                                'rd3.Close()
 
                                 cboLote.Items.Clear()
                                 cmd3 = cnn3.CreateCommand

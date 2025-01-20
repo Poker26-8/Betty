@@ -1795,16 +1795,15 @@ kak:
                         MyIdCliente = rd1("Id").ToString
                         lblNumCliente.Text = MyIdCliente
                         txtcredito.Text = FormatNumber(rd1("Credito").ToString, 4)
-                        'cbocomisionista.Text = rd1("Comisionista").ToString
                         txttel.Text = rd1("Telefono").ToString
                         lblcorreocli.Text = rd1("Correo").ToString
-                        'If Trim(cbocomisionista.Text) <> "" Then
-                        '    cbocomisionista.Enabled = True
-                        'Else
-                        '    cbocomisionista.Enabled = False
-                        'End If
 
                         txtafavor.Text = FormatNumber(rd1("SaldoFavor").ToString(), 4)
+
+                        IdCliente = rd2("Id").ToString()
+                        Cliente = cboNombre.Text
+                        dias_credito = rd2("DiasCred").ToString()
+                        fecha_pago = DateAdd(DateInterval.Day, dias_credito, Date.Now)
 
                         Label12121.Visible = True
                         cboDomi.Visible = True
@@ -1818,6 +1817,12 @@ kak:
                         txtadeuda.Visible = True
                     End If
                 Else
+
+                    IdCliente = 0
+                    Cliente = ""
+                    dias_credito = 0
+                    fecha_pago = ""
+
                     cbocodigo.Text = ""
                     cbodesc.Text = ""
                     txtunidad.Text = ""
@@ -1914,7 +1919,6 @@ kak:
                     MyIdCliente = rd2("Id").ToString
                     lblNumCliente.Text = MyIdCliente
                     txtcredito.Text = FormatNumber(rd2("Credito").ToString, 4)
-                    'cbocomisionista.Text = rd2("Comisionista").ToString
                     txttel.Text = rd2("Telefono").ToString
                     lblcorreocli.Text = rd2("Correo").ToString
                     txtObservaciones.Text = rd2("Observaciones").ToString
@@ -1923,12 +1927,6 @@ kak:
                     Cliente = cboNombre.Text
                     dias_credito = rd2("DiasCred").ToString()
                     fecha_pago = DateAdd(DateInterval.Day, dias_credito, Date.Now)
-
-                    'If Trim(cbocomisionista.Text) <> "" Then
-                    '    cbocomisionista.Enabled = False
-                    'Else
-                    '    cbocomisionista.Enabled = True
-                    'End If
 
                     Dim dire(9) As String
                     Dim direccion As String = ""
@@ -2099,51 +2097,50 @@ kak:
 
     Private Sub cboDomi_DropDown_1(sender As System.Object, e As System.EventArgs) Handles cboDomi.DropDown
         cboDomi.Items.Clear()
-        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
+        Dim cnn33 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd33 As MySqlDataReader
+        Dim cmd33 As MySqlCommand
         Try
-            cnn1.Close() : cnn1.Open()
-
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
+            cnn33.Close() : cnn33.Open()
+            cmd33 = cnn33.CreateCommand
+            cmd33.CommandText =
                  "select Contador from Entregas where IdCliente=(select Id from Clientes where Nombre='" & cboNombre.Text & "')"
-            rd1 = cmd1.ExecuteReader
-            Do While rd1.Read
-                If rd1.HasRows Then
-                    cboDomi.Items.Add(rd1(0).ToString())
+            rd33 = cmd33.ExecuteReader
+            Do While rd33.Read
+                If rd33.HasRows Then
+                    cboDomi.Items.Add(rd33(0).ToString())
                 End If
             Loop
-            rd1.Close()
-            cnn1.Close()
+            rd33.Close()
+            cnn33.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
-            cnn1.Close()
+            cnn33.Close()
         End Try
     End Sub
 
     Private Sub cboDomi_SelectedValueChanged1(sender As Object, e As System.EventArgs) Handles cboDomi.SelectedValueChanged
 
-        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
+        Dim cnn34 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd34 As MySqlDataReader
+        Dim cmd34 As MySqlCommand
 
         Try
-            cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
+            cnn34.Close() : cnn34.Open()
+            cmd34 = cnn34.CreateCommand
+            cmd34.CommandText =
                  "select Domicilio from Entregas where Contador=" & cboDomi.Text & " and IdCliente=(select Id from Clientes where Nombre='" & cboNombre.Text & "')"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    txtdireccion.Text = rd1(0).ToString()
+            rd34 = cmd34.ExecuteReader
+            If rd34.HasRows Then
+                If rd34.Read Then
+                    txtdireccion.Text = rd34(0).ToString()
                 End If
             End If
-            rd1.Close()
-            cnn1.Close()
+            rd34.Close()
+            cnn34.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
-            cnn1.Close()
+            cnn34.Close()
         End Try
     End Sub
     Private Sub txtdireccion_KeyPress_2(sender As System.Object, e As System.Windows.Forms.KeyPressEventArgs) Handles txtdireccion.KeyPress
@@ -2155,26 +2152,26 @@ kak:
 
     Private Sub cbocomisionista_DropDown(sender As System.Object, e As System.EventArgs) Handles cbocomisionista.DropDown
         cbocomisionista.Items.Clear()
-        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
+        Dim cnn35 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd35 As MySqlDataReader
+        Dim cmd35 As MySqlCommand
 
         Try
-            cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
+            cnn35.Close() : cnn35.Open()
+            cmd35 = cnn35.CreateCommand
+            cmd35.CommandText =
                 "select Alias from Usuarios where Comisionista=1"
-            rd1 = cmd1.ExecuteReader
-            Do While rd1.Read
-                If rd1.HasRows Then cbocomisionista.Items.Add(
-                    rd1(0).ToString
+            rd35 = cmd35.ExecuteReader
+            Do While rd35.Read
+                If rd35.HasRows Then cbocomisionista.Items.Add(
+                    rd35(0).ToString
                     )
             Loop
-            rd1.Close()
-            cnn1.Close()
+            rd35.Close()
+            cnn35.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn35.Close()
         End Try
     End Sub
 
@@ -2201,26 +2198,26 @@ kak:
 
     Private Sub cbonota_DropDown(sender As System.Object, e As System.EventArgs) Handles cbonota.DropDown
         cbonota.Items.Clear()
-        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
+        Dim cnn36 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd36 As MySqlDataReader
+        Dim cmd36 As MySqlCommand
 
         Try
-            cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
+            cnn36.Close() : cnn36.Open()
+            cmd36 = cnn36.CreateCommand
+            cmd36.CommandText =
                 "select DISTINCT Folio from Ventas where Status<>'CANCELADA' order by Folio"
-            rd1 = cmd1.ExecuteReader
-            Do While rd1.Read
-                If rd1.HasRows Then cbonota.Items.Add(
-                    rd1(0).ToString
+            rd36 = cmd36.ExecuteReader
+            Do While rd36.Read
+                If rd36.HasRows Then cbonota.Items.Add(
+                    rd36(0).ToString
                     )
             Loop
-            rd1.Close()
-            cnn1.Close()
+            rd36.Close()
+            cnn36.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn1.Close()
+            cnn36.Close()
         End Try
     End Sub
 
