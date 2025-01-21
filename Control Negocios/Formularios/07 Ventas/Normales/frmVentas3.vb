@@ -2102,7 +2102,7 @@ kak:
             cnn2.Close() : cnn2.Open()
             cmd2 = cnn2.CreateCommand
             cmd2.CommandText =
-                "select Suspender,Nombre,Tipo,Id,Credito,Comisionista,Telefono,Correo,Observaciones,Calle,NInterior,NExterior,Colonia,Delegacion,Entidad,Pais,CP,SaldoFavor from Clientes where Nombre='" & cboNombre.Text & "'"
+                "select Suspender,Nombre,Tipo,Id,Credito,Comisionista,Telefono,Correo,Observaciones,Calle,NInterior,NExterior,Colonia,Delegacion,Entidad,Pais,CP,SaldoFavor,DiasCred from Clientes where Nombre='" & cboNombre.Text & "'"
             rd2 = cmd2.ExecuteReader
             If rd2.HasRows Then
                 If rd2.Read Then
