@@ -2568,7 +2568,7 @@ kak:
 
             Try
                 Dim noprefijo As String = ""
-                Dim nocodigo As Integer = 0
+                'Dim nocodigo As Integer = 0
                 Dim nopeso As Integer = 0
                 Dim basculaxd As String = ""
 
@@ -2591,13 +2591,13 @@ kak:
                     End If
                     rd1.Close()
 
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Codigo'"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.Read Then
-                        nocodigo = rd1(0).ToString
-                    End If
-                    rd1.Close()
+                    'cmd1 = cnn1.CreateCommand
+                    'cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Codigo'"
+                    'rd1 = cmd1.ExecuteReader
+                    'If rd1.Read Then
+                    '    nocodigo = rd1(0).ToString
+                    'End If
+                    'rd1.Close()
 
                     cmd1 = cnn1.CreateCommand
                     cmd1.CommandText = "Select NotasCred from Formatos where Facturas='Peso'"
