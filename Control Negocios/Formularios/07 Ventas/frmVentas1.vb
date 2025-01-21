@@ -860,7 +860,7 @@ Public Class frmVentas1
 
             Dim existencia As Double = 0
             If unidad <> "N/A" Then
-                existencia = txtexistencia.Text
+                existencia = IIf(txtexistencia.Text = "", "0", txtexistencia.Text)
             Else
                 existencia = 0
             End If
@@ -3630,6 +3630,7 @@ kaka:
                             Exit For
                         End If
                     Next
+
                     If index <> -1 Then
                         Promo = IIf(DataGridView1.Rows(index).Cells("Status_Promocion").Value.ToString() = True, True, False)
                         Anti = DataGridView1.Rows(index).Cells("Grupo").Value.ToString()
@@ -3771,11 +3772,13 @@ kaka:
                 cbocodigo.Focus().Equals(True)
                 Exit Sub
             End If
+
+            txtcantidad.Focus().Equals(True)
+            My.Application.DoEvents()
+            leePeso()
+            My.Application.DoEvents()
         End If
-        txtcantidad.Focus().Equals(True)
-        My.Application.DoEvents()
-        leePeso()
-        My.Application.DoEvents()
+
 
 
         If AscW(e.KeyChar) = Keys.Enter And (cbocodigo.Text = "" And cbodesc.Text = "") Then

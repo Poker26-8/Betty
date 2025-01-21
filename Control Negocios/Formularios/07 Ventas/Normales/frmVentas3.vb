@@ -679,6 +679,7 @@ Public Class frmVentas3
                 MessageBox.Show(ex.ToString)
                 cnn1.Close()
             End Try
+
             If DondeVoy = "Venta" Then
                 btnventa.Focus().Equals(True)
             End If
@@ -7779,7 +7780,6 @@ doorcita:
         'Validación de los datos del cliente
         Valida_Datos_Cliente(cboNombre.Text)
 
-        Dim per_venta As Boolean = False
         If lblusuario.Text = "" Then
             MsgBox("Escribe/Revisa tu contraseña para continuar.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
             cnn1.Close()
@@ -8562,7 +8562,7 @@ Door:
                         End If
 
                         If ordetrabajo = 0 Then
-                            rd1.Close()
+                            'rd1.Close()
                             cmd1 = cnn1.CreateCommand
                             cmd1.CommandText =
                                 "update Productos set CargadoInv=0, Cargado=0, Existencia=Existencia - " & nueva_existe & " where Codigo='" & Strings.Left(mycode, 6) & "'"
@@ -8892,8 +8892,9 @@ Door:
         Dim ideli As Integer = 0
         Dim cunico As String = ""
 
-        cnn2.Close() : cnn2.Open()
+
         For luffy As Integer = 0 To grdcaptura.Rows.Count - 1
+            cnn2.Close() : cnn2.Open()
             cunico = IIf(grdcaptura.Rows(luffy).Cells(15).Value = "", "", grdcaptura.Rows(luffy).Cells(15).Value)
             If cunico = "" Then
             Else
@@ -18130,6 +18131,6 @@ doorcita:
     End Sub
 
     Private Sub txtcontraseña_TextChanged(sender As Object, e As EventArgs) Handles txtcontraseña.TextChanged
-        txtcontraseña_KeyPress(txtcontraseña, New KeyPressEventArgs(ControlChars.Cr))
+        ' txtcontraseña_KeyPress(txtcontraseña, New KeyPressEventArgs(ControlChars.Cr))
     End Sub
 End Class

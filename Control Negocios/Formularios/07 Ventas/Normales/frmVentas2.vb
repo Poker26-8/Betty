@@ -4552,11 +4552,14 @@ kaka:
                 cbocodigo.Focus().Equals(True)
                 Exit Sub
             End If
+
+            txtcantidad.Focus().Equals(True)
+            My.Application.DoEvents()
+            leePeso()
+            My.Application.DoEvents()
+
         End If
-        txtcantidad.Focus().Equals(True)
-        My.Application.DoEvents()
-        leePeso()
-        My.Application.DoEvents()
+
 
 
         If AscW(e.KeyChar) = Keys.Enter And (cbocodigo.Text = "" And cbodesc.Text = "") Then
@@ -8878,7 +8881,7 @@ Door:
                         End If
 
                         If ordetrabajo = 0 Then
-                            rd1.Close()
+                            '  rd1.Close()
                             cmd1 = cnn1.CreateCommand
                             cmd1.CommandText =
                                 "update Productos set CargadoInv=0, Cargado=0, Existencia=Existencia - " & nueva_existe & " where Codigo='" & Strings.Left(mycode, 6) & "'"
@@ -9228,8 +9231,9 @@ Door:
         Dim ideli As Integer = 0
         Dim cunico As String = ""
 
-        cnn2.Close() : cnn2.Open()
+
         For luffy As Integer = 0 To grdcaptura.Rows.Count - 1
+            cnn2.Close() : cnn2.Open()
             cunico = IIf(grdcaptura.Rows(luffy).Cells(15).Value = "", "", grdcaptura.Rows(luffy).Cells(15).Value)
             If cunico = "" Then
             Else
@@ -15714,7 +15718,7 @@ doorcita:
     End Sub
 
     Private Sub txtcontraseña_TextChanged(sender As Object, e As EventArgs) Handles txtcontraseña.TextChanged
-        txtcontraseña_KeyPress(txtcontraseña, New KeyPressEventArgs(ControlChars.Cr))
+        'txtcontraseña_KeyPress(txtcontraseña, New KeyPressEventArgs(ControlChars.Cr))
     End Sub
 
 
