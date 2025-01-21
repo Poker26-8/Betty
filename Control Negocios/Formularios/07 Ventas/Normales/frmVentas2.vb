@@ -474,12 +474,29 @@ Public Class frmVentas2
         Dim cnn_c As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
         Dim odata As New ToolKitSQL.myssql
         Dim dt As New DataTable
-        Dim Sql111 As String = "select * from Productos where Grupo<>'INSUMO' and ProvRes<>1 order by Nombre"
+        'Dim Sql111 As String = "select  * from Productos where Grupo<>'INSUMO' and ProvRes<>1 order by Nombre"
+        Dim Sql111 As String = "select P.*, M.tipo_cambio from Productos P, tb_moneda M where P.id_tbMoneda = M.id and P.Grupo<>'INSUMO' and P.ProvRes<>1 order by P.Nombre, P.Codigo"
         Dim dr As DataRow
         With odata
             If .dbOpen(cnn_c, sTargetlocal, sInfo) Then
+                'If .getDt(cnn_c, dt, Sql111, sInfo) Then
+                '    DataGridView1.DataSource = dt
+                '    cbodesc.DataSource = dt
+                '    ' Establecemos la columna a mostrar en el ComboBox (por ejemplo, "Nombre")
+                '    cbodesc.DisplayMember = "Nombre"
+
+                '    ' Establecemos la columna que se usará como valor asociado (por ejemplo, "ID")
+                '    cbodesc.ValueMember = "Nombre"
+                '    cbodesc.SelectedIndex = -1
+                'End If
+
                 If .getDt(cnn_c, dt, Sql111, sInfo) Then
                     DataGridView1.DataSource = dt
+                End If
+
+                Sql111 = "select Nombre from Productos where Grupo<>'INSUMO' and ProvRes<>1 and LENGTH(Codigo) < 7 order by Nombre"
+
+                If .getDt(cnn_c, dt, Sql111, sInfo) Then
                     cbodesc.DataSource = dt
                     ' Establecemos la columna a mostrar en el ComboBox (por ejemplo, "Nombre")
                     cbodesc.DisplayMember = "Nombre"
@@ -488,30 +505,8 @@ Public Class frmVentas2
                     cbodesc.ValueMember = "Nombre"
                     cbodesc.SelectedIndex = -1
                 End If
+
                 cnn_c.Close()
-            End If
-        End With
-
-        Dim sInfo3 As String = ""
-        Dim cnn_c3 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
-        Dim odata3 As New ToolKitSQL.myssql
-        Dim dt3 As New DataTable
-        ' Dim Sql111 As String = "select * from Productos, where Grupo<>'INSUMO' and ProvRes<>1 order by Nombre"
-        Dim Sql333 As String = "select P.*, M.tipo_cambio from Productos P, tb_moneda M where P.id_tbMoneda = M.id and P.Grupo<>'INSUMO' and P.ProvRes<>1 order by P.Nombre"
-        Dim dr3 As DataRow
-        With odata3
-            If .dbOpen(cnn_c3, sTargetlocal, sInfo3) Then
-                If .getDt(cnn_c3, dt3, Sql333, sInfo3) Then
-                    DataGridView1.DataSource = dt3
-                    cbodesc.DataSource = dt3
-                    ' Establecemos la columna a mostrar en el ComboBox (por ejemplo, "Nombre")
-                    cbodesc.DisplayMember = "Nombre"
-
-                    ' Establecemos la columna que se usará como valor asociado (por ejemplo, "ID")
-                    cbodesc.ValueMember = "Nombre"
-                    cbodesc.SelectedIndex = -1
-                End If
-                cnn_c3.Close()
             End If
         End With
 
@@ -525,9 +520,9 @@ Public Class frmVentas2
         Dim dr2 As DataRow
         With odata2
             If .dbOpen(cnn_c2, sTargetlocal, sinfo2) Then
-                If .getDt(cnn_c2, dt, sql22, sinfo2) Then
-                    DataGridView2.DataSource = dt
-                    cboNombre.DataSource = dt
+                If .getDt(cnn_c2, dt2, sql22, sinfo2) Then
+                    DataGridView2.DataSource = dt2
+                    cboNombre.DataSource = dt2
                     ' Establecemos la columna a mostrar en el ComboBox (por ejemplo, "Nombre")
                     cboNombre.DisplayMember = "Nombre"
                     ' Establecemos la columna que se usará como valor asociado (por ejemplo, "ID")
@@ -3294,10 +3289,9 @@ doorcita:
 
         Try
             cnn4.Close() : cnn4.Open()
-
             cmd4 = cnn4.CreateCommand
             cmd4.CommandText =
-                "select Codigo,Grupo from Productos where Nombre='" & cbodesc.Text & "'"
+                "select Codigo,Grupo from Productos where Nombre='" & cbodesc.Text & "' order by Codigo"
             rd4 = cmd4.ExecuteReader
             If rd4.HasRows Then
                 If rd4.Read Then
@@ -3315,7 +3309,7 @@ doorcita:
 
             cmd4 = cnn4.CreateCommand
             cmd4.CommandText =
-                "select Codigo from Productos where Left(Codigo, 6)='" & MyCode & "'"
+                "select Codigo from Productos where Left(Codigo, 6)='" & MyCode & "' order by Codigo"
             rd4 = cmd4.ExecuteReader
             Do While rd4.Read
                 If rd4.HasRows Then cbocodigo.Items.Add(
@@ -4412,15 +4406,15 @@ kaka:
                         txtunidad.Text = DataGridView1.Rows(index).Cells("UVenta").Value.ToString()
                         cbocodigo.Text = DataGridView1.Rows(index).Cells("Codigo").Value.ToString()
                         cbodesc.Text = DataGridView1.Rows(index).Cells("Nombre").Value.ToString()
-                        MCD = DataGridView1.Rows(index).Cells("MCD").Value.ToString()
-                        Multiplo = DataGridView1.Rows(index).Cells("Multiplo").Value.ToString()
-                        Minimo = DataGridView1.Rows(index).Cells("Min").Value.ToString()
-                        txtubicacion.Text = DataGridView1.Rows(index).Cells("Ubicacion").Value.ToString()
+                        If ordetrabajo = 0 Then
+                            '  rd1.Close()
+                            cmd1 = cnn1.CreateCommand
+                            cmd1.CommandText =
+                                "update Productos set CargadoInv=0, Cargado=0, Existencia=Existencia - " & nueva_existe & " where Codigo='" & Strings.Left(mycode, 6) & "'"
+                            If cmd1.ExecuteNonQuery Then
+                                PreEsp = DataGridView1.Rows(index).Cells("PreEsp").Value.ToString()
 
-                        PreLst = DataGridView1.Rows(index).Cells("PrecioVentaIVA").Value.ToString()
-                        PreEsp = DataGridView1.Rows(index).Cells("PreEsp").Value.ToString()
-
-                        TiCambio = IIf(DataGridView1.Rows(index).Cells("tipo_cambio").Value.ToString() = "0", ",", DataGridView1.Rows(index).Cells("tipo_cambio").Value.ToString())
+                                TiCambio = IIf(DataGridView1.Rows(index).Cells("tipo_cambio").Value.ToString() = "0", ",", DataGridView1.Rows(index).Cells("tipo_cambio").Value.ToString())
                     End If
 
                     If File.Exists(My.Application.Info.DirectoryPath & "\ProductosImg" & base & "\" & cbocodigo.Text & ".jpg") Then
@@ -7960,6 +7954,17 @@ Door:
 
     Private Sub btnventa_Click(sender As System.Object, e As System.EventArgs) Handles btnventa.Click
 
+
+        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+
+        Dim rd1, rd2, rd3 As MySqlDataReader
+        Dim cmd1, cmd2, cmd3 As MySqlCommand
+
+
+
         Dim VarUser As String = "", VarIdUsuario As Integer = 0, DsctoProd As Single = 0, PorcentDscto As Single = 0, DsctoProdTod As Single = 0
         Dim CveLte As Double = 0
         Dim IdCliente As Integer = 0
@@ -7968,7 +7973,6 @@ Door:
 
 
         btnventa.Enabled = False
-        btnnuevo.Enabled = False
 
         My.Application.DoEvents()
 
@@ -7976,13 +7980,6 @@ Door:
         Dim SubtotalPrint As Double = 0
         Dim MySubtotal As Double = 0
         Dim TotalIVAPrint As Double = 0
-
-        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1, rd2, rd3, rd5 As MySqlDataReader
-        Dim cmd1, cmd2, cmd3, cmd5 As MySqlCommand
 
         'Cálculo del subtotal
         Try
@@ -8000,13 +7997,15 @@ Door:
             btnnuevo.Enabled = True
         End Try
 
-
         'Cálculo de Subtotal e IVA
         Dim ivaporproducto As Double = 0
         Dim ivaporproda As Double = 0
 
         Dim comision As Double = 0
         Dim totalcomision As Double = 0
+
+        Dim sqlselectiva As String = ""
+
         Try
             txtefectivo.Text = FormatNumber(txtefectivo.Text, 2)
             If txtefectivo.Text = "" Then txtefectivo.Text = "0.00"
@@ -8074,12 +8073,14 @@ Door:
             End If
         End If
 
+        Dim max_cred As Double = 0
+
         My.Application.DoEvents()
 
         'Validación de los datos del cliente
         Valida_Datos_Cliente(cboNombre.Text)
 
-        '    Dim per_venta As Boolean = False
+
         If lblusuario.Text = "" Then
             MsgBox("Escribe/Revisa tu contraseña para continuar.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
             cnn1.Close()
@@ -8091,7 +8092,6 @@ Door:
                 MsgBox("No cuentas con permiso para realizar notas de venta.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
                 btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
             End If
-
         End If
 
         'Comienza proceso de guardado de la venta
@@ -8215,6 +8215,7 @@ kakaxd:
         Try
             Select Case lblNumCliente.Text
                 Case Is = "MOSTRADOR"
+
                     Cliente = ""
                     Efectivo = txtefectivo.Text
                     ACuenta = FormatNumber((Efectivo - CDbl(txtCambio.Text)) + CDbl(txtMontoP.Text), 2)
@@ -8284,6 +8285,7 @@ kakaxd:
                                 cnn12.Close()
                             End If
                         End With
+
                     Else
                         If TotalIVAPrint = 0 Then
                             IVA_Vent = 0
@@ -8313,8 +8315,6 @@ kakaxd:
                                 cnn12.Close()
                             End If
                         End With
-
-
                     End If
 
                 Case Is <> "MOSTRADOR"
@@ -8381,7 +8381,6 @@ kakaxd:
                     MontoSDesc = FormatNumber(CDbl(txtPagar.Text) + CDec(txtdescuento2.Text), 2)
                     sumadescuento = FormatNumber(sumadescuento, 2)
 
-
                     Dim varstrvent As String = ""
                     varstrvent = "insert into Ventas(IdCliente,Cliente,Direccion,Subtotal,IVA,Totales,Descuento,Devolucion,ACuenta,Resta,Usuario,FVenta,HVenta,FPago,FCancelado,Status,Comisionista,Comision,Concepto,MontoSinDesc,FEntrega,Entrega,Comentario,StatusE,FolMonedero,CodFactura,IP,Formato,Pedido,Fecha) values(" & IdCliente & ",'" & IIf(cboNombre.Text = "", "PUBLICO EN GENERAL", cboNombre.Text) & "','" & nuvdire & "'," & SubTotal & "," & IVA_Vent & "," & Total_Ve & "," & sumadescuento & ",0," & ACUenta2 & "," & Resta & ",'" & lblusuario.Text & "','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & fecha_pago & "','','" & MyStatus & "','" & cbocomisionista.Text & "'," & totalcomision & ",''," & MontoSDesc & ",'" & Format(dtpFecha_E.Value, "dd/MM/yyyy") & "',0,'" & observaciones & "',0,'" & txttel.Text & "','" & cadenafact & "','" & dameIP2() & "','" & cboimpresion.Text & "'," & IIf(lblpedido.Text = "", 0, lblpedido.Text) & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "')"
 
@@ -8428,7 +8427,10 @@ kakaxd:
 
         Loop
 
+
+
         'Llenado de variables de pago (Tarjeta, Transferencia, Saldo, Efectivo y Otro)
+
         Dim EfectivoX As Double = (CDbl(txtefectivo.Text) - CDbl(txtCambio.Text))
 
         Dim FormaPago As String = ""
@@ -8448,14 +8450,6 @@ kakaxd:
             Dim MySaldo As Double = 0
 
             If lblNumCliente.Text <> "MOSTRADOR" Then
-
-                If MySaldo = 0 Then
-                    MySaldo = MySaldo = txtPagar.Text
-                Else
-                    MySaldo = CDbl(MySaldo) + CDbl(txtPagar.Text)
-                End If
-
-
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
                     "select Saldo from AbonoI where Id=(select MAX(Id) from AbonoI where Cliente='" & cboNombre.Text & "')"
@@ -8530,7 +8524,6 @@ kakaxd:
                         End If
                     End With
 
-
                 End If
 
                 If grdpago.Rows.Count > 0 Then
@@ -8548,13 +8541,6 @@ kakaxd:
                         End If
 
 
-                        If FormaPago = "SALDO A FAVOR" Then
-                            If TotFormaPago > 0 Then
-                                TotSaldo = TotFormaPago
-
-                            End If
-
-                        End If
 
                         If TotFormaPago > 0 Then
 
@@ -8575,8 +8561,6 @@ kakaxd:
                                     cnn12.Close()
                                 End If
                             End With
-
-
 
                             Dim saldocuenta As Double = 0
 
@@ -8613,9 +8597,7 @@ kakaxd:
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
-
             btnnuevo.Enabled = True
-
         End Try
 
 
@@ -8626,7 +8608,6 @@ kakaxd:
             'Actualiza saldo a favor del cliente
             Try
                 cnn1.Close() : cnn1.Open()
-
                 cmd1 = cnn1.CreateCommand
                 cmd1.CommandText =
                     "select SaldoFavor from Clientes where Nombre='" & cboNombre.Text & "'"
@@ -8650,15 +8631,13 @@ kakaxd:
             Catch ex As Exception
                 MessageBox.Show(ex.ToString())
                 cnn1.Close()
-
-                btnnuevo.Enabled = True
-
             End Try
         End If
 
         Try
-            cnn1.Close() : cnn1.Open()
+
             For R As Integer = 0 To grdcaptura.Rows.Count - 1
+                cnn1.Close() : cnn1.Open()
 
                 If grdcaptura.Rows(R).Cells(0).Value.ToString = "" Then GoTo Door
                 DsctoProd = 0
@@ -8703,7 +8682,6 @@ kakaxd:
                 mydesc = grdcaptura.Rows(R).Cells(1).Value.ToString
                 myunid = grdcaptura.Rows(R).Cells(2).Value.ToString
 
-
                 Dim varcod As String = mycode
                 Dim index As Integer = -1
                 Dim row As DataGridViewRow
@@ -8740,10 +8718,7 @@ kakaxd:
                 End If
 
 
-                '  Dim fechacaducidad As String = ""
-
                 caduca = IIf(grdcaptura.Rows(R).Cells(9).Value.ToString = "", "", grdcaptura.Rows(R).Cells(9).Value.ToString)
-                ' fechacaducidad = Format(caduca, "yyyy-MM-dd")
                 lote = grdcaptura.Rows(R).Cells(8).Value.ToString
 
 
@@ -8775,6 +8750,7 @@ kakaxd:
                 monedero = IIf(grdcaptura.Rows(R).Cells(14).Value.ToString() = "", 0, grdcaptura.Rows(R).Cells(14).Value.ToString())
 
 
+
                 TotalIEPSPrint = TotalIEPSPrint + CDbl(IIf(grdcaptura.Rows(R).Cells(10).Value.ToString = "", 0, grdcaptura.Rows(R).Cells(10).Value.ToString))
 
 
@@ -8788,7 +8764,11 @@ Door:
 
                 If grdcaptura.Rows(R).Cells(15).Value() <> "" Then
                     Dim codunico As String = grdcaptura.Rows(R).Cells(15).Value.ToString()
+                    Dim comentario As String = ""
                     Dim mycodd As String = mycode
+                    'If grdcaptura.Rows(R).Cells(0).Value.ToString = "" And grdcaptura.Rows(R).Cells(1).Value.ToString <> "" Then
+                    '    comentario = grdcaptura.Rows(R).Cells(1).Value.ToString
+                    'End If
 
 
 
@@ -8828,6 +8808,7 @@ Door:
                         command.Parameters.AddWithValue("descuen", descuentoproducto)
                         command.Parameters.AddWithValue("impresora", gprint)
                         command.Parameters.AddWithValue("cunico", codunico)
+                        'command.Parameters.AddWithValue("comen", comentario)
                         command.ExecuteNonQuery()
                         cnn5.Close()
                     End Using
@@ -8836,6 +8817,7 @@ Door:
                     creainsert = "insert into VentasDetalle(Folio,Codigo,Nombre,Unidad,Cantidad,CostoVP,CostoVUE,Precio,Total,PrecioSinIVA,TotalSinIVA,Fecha,FechaCompleta,Comisionista,Facturado,Depto,Grupo,CostVR,Descto,VDCosteo,TotalIEPS,TasaIEPS,Caducidad,Lote,CantidadE,Promo_Monedero,Unico,Descuento,Gprint,CodUnico) values(" & MYFOLIO & ",'" & mycode & "','" & mydesc & "','" & myunid & "'," & mycant & "," & MyProm & "," & MyCostVUE & "," & mypreciodescuento & "," & mytotal & "," & myprecioS & "," & mytotalS & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & cbocomisionista.Text & "','0','" & MyDepto & "','" & MyGrupo & "','0'," & descuentoproducto & ",0," & ieps & "," & tasaieps & ",'" & caduca & "','" & lote & "',0," & monedero & "," & IIf(Unico = False, 0, 1) & "," & descuentoproducto & ",'" & gprint & "','" & codunico & "')"
 
                     grdcaptura.Rows(R).Cells(16).Value = creainsert
+
 
                     If grdcaptura.Rows(R).Cells(0).Value.ToString = "" And grdcaptura.Rows(R).Cells(1).Value.ToString <> "" Then
 
@@ -8860,6 +8842,7 @@ Door:
 
                     End If
 
+
                     Dim necesito As Double = mycant / MyMCD
                     Dim tengo As Double = 0
                     Dim cuanto_cuestan As Double = 0
@@ -8881,7 +8864,7 @@ Door:
                         End If
 
                         If ordetrabajo = 0 Then
-                            '  rd1.Close()
+                            rd1.Close()
                             cmd1 = cnn1.CreateCommand
                             cmd1.CommandText =
                                 "update Productos set CargadoInv=0, Cargado=0, Existencia=Existencia - " & nueva_existe & " where Codigo='" & Strings.Left(mycode, 6) & "'"
@@ -8890,34 +8873,11 @@ Door:
                             Else
 
                             End If
-                        Else
-                            Dim soy As String = ""
-                            Dim soyexi As Double = 0
-                            cmd1 = cnn1.CreateCommand
-                            cmd1.CommandText = "select Codigo,Cantidad from MiProd where CodigoP='" & mycode & "'"
-                            rd1 = cmd1.ExecuteReader
-                            Do While rd1.Read
-                                soy = rd1(0).ToString
-                                soyexi = rd1(1).ToString
-                                soyexi = soyexi * CDec(mycant)
-                                cnn2.Close()
-                                cnn2.Open()
-                                cmd2 = cnn2.CreateCommand
-                                cmd2.CommandText =
-                                    "update Productos set CargadoInv=0, Cargado=0, Existencia=Existencia - " & soyexi & " where Codigo='" & Strings.Left(soy, 6) & "'"
-                                If cmd2.ExecuteNonQuery Then
 
-                                Else
 
-                                End If
-                                cnn2.Close()
-                            Loop
-                            rd1.Close()
-                        End If
+                            Dim MyExiste As Double = 0
 
-                        Dim MyExiste As Double = 0
 
-                        If ordetrabajo = 0 Then
                             cmd1 = cnn1.CreateCommand
                             cmd1.CommandText =
                                 "select Existencia from Productos where Codigo='" & Strings.Left(mycode, 6) & "'"
@@ -8928,138 +8888,179 @@ Door:
                                 End If
                             End If
                             rd1.Close()
-                        Else
+
+
+
+                            If Len(mycode) = 6 Then
+                                Dim mycoddd As String = mycode
+                                MyExiste = FormatNumber(MyExiste / MyMultiplo, 2)
+                                cmd1 = cnn1.CreateCommand
+                                cmd1.CommandText =
+                                    "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & mycodd & "','" & mydesc & "','Venta'," & Existencia & "," & mycant & "," & MyExiste & "," & myprecio & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblusuario.Text & "','" & MYFOLIO & "','','','','','')"
+                                cmd1.ExecuteNonQuery()
+                            Else
+                                Dim mycoddd As String = mycode
+
+                                Existencia = Existencia
+                                MyExiste = FormatNumber((Existencia - mycant) / MyMulti2, 2)
+
+                                cmd1 = cnn1.CreateCommand
+                                cmd1.CommandText =
+                                    "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & mycodd & "','" & mydesc & "','Venta'," & Existencia & "," & mycant & "," & MyExiste * MyMulti2 & "," & myprecio & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblusuario.Text & "','" & MYFOLIO & "','','','','','')"
+                                cmd1.ExecuteNonQuery()
+                            End If
+                        End If
+
+                        utilidad = 0
+                        v_venta = 0
+                        v_costo = 0
+                        necesito = 0
+                        tengo = 0
+
+
+                        If Kit = True Then
+                            cnn1.Close() : cnn1.Open()
                             cmd1 = cnn1.CreateCommand
                             cmd1.CommandText =
-                                "select Existencia from OrdenTrabajo where Codigo='" & Strings.Left(mycode, 6) & "'"
+                                "select Codigo,Descrip,PPrecio,UVenta,Cantidad from Kits where Nombre='" & mydesc & "'"
                             rd1 = cmd1.ExecuteReader
-                            If rd1.HasRows Then
-                                If rd1.Read Then
-                                    MyExiste = rd1(0).ToString()
+                            cnn2.Close() : cnn2.Open()
+                            Do While rd1.Read
+                                If rd1.HasRows Then
+                                    Dim Cod As String = rd1("Codigo").ToString
+                                    Dim Nomb As String = rd1("Descrip").ToString
+                                    Dim Preci As Double = rd1("PPrecio").ToString
+                                    Dim Unid As String = rd1("UVenta").ToString()
+                                    Dim cant As Double = FormatNumber(CDbl(rd1("Cantidad").ToString) * mycant, 4)
+
+                                    Dim exi_hay As Double = 0
+                                    Dim exi_mas As Double = 0
+                                    necesito = cant * MyMultiplo
+
+                                    'Cálculos de PePs
+                                    'Do While necesito > 0
+                                    '    rd1.Close()
+                                    '    cmd1 = cnn1.CreateCommand
+                                    '    cmd1.CommandText =
+                                    '        "select Id,Saldo,Costo from Costeo where Id=(select MIN(Id) from Costeo where (Concepto='COMPRA' or Concepto='ENTRADA') and Saldo>0 and Codigo='" & Strings.Left(Cod, 6) & "')"
+                                    '    rd1 = cmd1.ExecuteReader
+                                    '    If rd1.HasRows Then
+                                    '        If rd1.Read Then
+                                    '            id_peps = rd1("Id").ToString()
+                                    '            tengo = rd1("Saldo").ToString()
+                                    '            cuanto_cuestan = rd1("Costo").ToString()
+                                    '        End If
+                                    '    Else
+                                    '        rd1.Close()
+                                    '        Exit Do
+                                    '    End If
+                                    '    rd1.Close()
+                                    '    'En todo va a hacer los cálculos de la utilidad
+                                    '    If tengo >= necesito Then
+                                    '        quedan = tengo - necesito
+                                    '        cmd1 = cnn1.CreateCommand
+                                    '        cmd1.CommandText =
+                                    '            "update Costeo set Saldo=" & quedan & " where Id=" & id_peps
+                                    '        cmd1.ExecuteNonQuery()
+
+                                    '        v_costo = necesito * cuanto_cuestan
+                                    '        v_venta = necesito * Preci
+                                    '        utilidad = utilidad + (v_venta - v_costo)
+
+                                    '        Exit Do
+                                    '    ElseIf tengo < necesito Then
+                                    '        cmd1 = cnn1.CreateCommand
+                                    '        cmd1.CommandText =
+                                    '            "update Costeo set Saldo=0 where Id=" & id_peps
+                                    '        cmd1.ExecuteNonQuery()
+
+                                    '        v_costo = tengo * cuanto_cuestan
+                                    '        v_venta = tengo * Preci
+                                    '        utilidad = (v_venta - v_costo)
+                                    '        necesito = necesito - tengo
+                                    '        utilidad = 0
+
+                                    '        cmd1 = cnn1.CreateCommand
+                                    '        cmd1.CommandText =
+                                    '            "insert into Costeo(Fecha,Hora,Concepto,Referencia,Codigo,Descripcion,Unidad,Entrada,Salida,Saldo,Costo,Precio,Utilidad,Usuario) values('" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','VENTA','" & MYFOLIO & "','" & Strings.Left(mycode, 6) & "','" & mydesc & "','" & myunid & "',0," & (tengo * MyMultiplo) & ",0," & cuanto_cuestan & "," & myprecio & "," & utilidad & ",'" & lblusuario.Text & "')"
+                                    '        cmd1.ExecuteNonQuery()
+                                    '    End If
+                                    'Loop
+
+                                    'Sí alcanzan las que tengo en el primer registro, entonces guarda y avanza
+                                    cmd2 = cnn2.CreateCommand
+                                    cmd2.CommandText =
+                                        "insert into Costeo(Fecha,Hora,Concepto,Referencia,Codigo,Descripcion,Unidad,Entrada,Salida,Saldo,Costo,Precio,Utilidad,Usuario) values('" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','VENTA','" & MYFOLIO & "','" & Strings.Left(Cod, 6) & "','" & Nomb & "','" & Unid & "',0," & (necesito * MyMultiplo) & ",0," & cuanto_cuestan & "," & Preci & "," & utilidad & ",'" & lblusuario.Text & "')"
+                                    cmd2.ExecuteNonQuery()
+
+                                    cmd2 = cnn2.CreateCommand
+                                    cmd2.CommandText =
+                                        "select Existencia,Multiplo from Productos where Codigo='" & Strings.Left(Cod, 6) & "'"
+                                    rd2 = cmd2.ExecuteReader
+                                    If rd2.HasRows Then
+                                        If rd2.Read Then
+                                            existe = rd2("Existencia").ToString()
+                                            MyMultiplo = rd2("Multiplo").ToString()
+                                            exi_hay = existe / MyMultiplo
+                                        End If
+                                    End If
+                                    rd2.Close()
+
+                                    exi_mas = FormatNumber(exi_hay - (cant * MyMultiplo), 4)
+
+                                    cmd2 = cnn2.CreateCommand
+                                    cmd2.CommandText =
+                                        "update Productos set Cargado=0, CargadoInv=0, Existencia=" & exi_mas & " where Codigo='" & Strings.Left(Cod, 6) & "'"
+                                    cmd2.ExecuteNonQuery()
+
+                                    cmd2 = cnn2.CreateCommand
+                                    cmd2.CommandText =
+                                        "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & Cod & "','" & Nomb & "','Venta'," & exi_hay & "," & cant & "," & exi_mas & "," & Preci & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblusuario.Text & "','" & MYFOLIO & "','','','','','')"
+                                    cmd2.ExecuteNonQuery()
                                 End If
-                            End If
+                            Loop
+                            cnn2.Close()
                             rd1.Close()
                         End If
+                    End If
 
 
-                        If Len(mycode) = 6 Then
-                            Dim mycoddd As String = mycode
-                            MyExiste = FormatNumber(MyExiste / MyMultiplo, 2)
+
+                    If lote <> "" Then
+                        Dim IdVD As Integer = 0
+                        Dim idLote As Integer = grdcaptura.Rows(R).Cells(7).Value.ToString
+
+                        cmd1 = cnn1.CreateCommand
+                        cmd1.CommandText =
+                            "select max(Id) as FVD from VentasDetalle"
+                        rd1 = cmd1.ExecuteReader
+                        If rd1.HasRows Then
+                            If rd1.Read Then
+                                IdVD = rd1("FVD").ToString
+                            End If
+                        End If
+                        rd1.Close()
+
+                        Dim cant_lote As Double = GetCantLote(mycode, lote)
+
+                        If cant_lote > mycant Then
+                            Dim nueva_cant As Double = cant_lote - mycant
                             cmd1 = cnn1.CreateCommand
                             cmd1.CommandText =
-                                "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & mycodd & "','" & mydesc & "','Venta'," & Existencia & "," & mycant & "," & MyExiste & "," & myprecio & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblusuario.Text & "','" & MYFOLIO & "','','','','','')"
+                                "update LoteCaducidad set Cantidad=" & nueva_cant & " where Id=" & idLote
                             cmd1.ExecuteNonQuery()
                         Else
-                            Dim mycoddd As String = mycode
-
-                            Existencia = Existencia
-                            MyExiste = FormatNumber((Existencia - mycant) / MyMulti2, 2)
-
                             cmd1 = cnn1.CreateCommand
                             cmd1.CommandText =
-                                "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & mycodd & "','" & mydesc & "','Venta'," & Existencia & "," & mycant & "," & MyExiste * MyMulti2 & "," & myprecio & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblusuario.Text & "','" & MYFOLIO & "','','','','','')"
+                                "update LoteCaducidad set Cantidad=0 where Id=" & idLote
                             cmd1.ExecuteNonQuery()
                         End If
+
                     End If
 
-                    utilidad = 0
-                    v_venta = 0
-                    v_costo = 0
-                    necesito = 0
-                    tengo = 0
-
-
-                    If Kit = True Then
-                        cnn1.Close() : cnn1.Open()
-                        cmd1 = cnn1.CreateCommand
-                        cmd1.CommandText =
-                            "select Codigo,Descrip,PPrecio,UVenta,Cantidad from Kits where Nombre='" & mydesc & "'"
-                        rd1 = cmd1.ExecuteReader
-                        cnn2.Close() : cnn2.Open()
-                        Do While rd1.Read
-                            If rd1.HasRows Then
-                                Dim Cod As String = rd1("Codigo").ToString
-                                Dim Nomb As String = rd1("Descrip").ToString
-                                Dim Preci As Double = rd1("PPrecio").ToString
-                                Dim Unid As String = rd1("UVenta").ToString()
-                                Dim cant As Double = FormatNumber(CDbl(rd1("Cantidad").ToString) * mycant, 4)
-
-                                Dim exi_hay As Double = 0
-                                Dim exi_mas As Double = 0
-                                necesito = cant * MyMultiplo
-
-                                'Sí alcanzan las que tengo en el primer registro, entonces guarda y avanza
-                                cmd2 = cnn2.CreateCommand
-                                cmd2.CommandText =
-                                    "insert into Costeo(Fecha,Hora,Concepto,Referencia,Codigo,Descripcion,Unidad,Entrada,Salida,Saldo,Costo,Precio,Utilidad,Usuario) values('" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','VENTA','" & MYFOLIO & "','" & Strings.Left(Cod, 6) & "','" & Nomb & "','" & Unid & "',0," & (necesito * MyMultiplo) & ",0," & cuanto_cuestan & "," & Preci & "," & utilidad & ",'" & lblusuario.Text & "')"
-                                cmd2.ExecuteNonQuery()
-
-                                cmd2 = cnn2.CreateCommand
-                                cmd2.CommandText =
-                                    "select Existencia,Multiplo from Productos where Codigo='" & Strings.Left(Cod, 6) & "'"
-                                rd2 = cmd2.ExecuteReader
-                                If rd2.HasRows Then
-                                    If rd2.Read Then
-                                        existe = rd2("Existencia").ToString()
-                                        MyMultiplo = rd2("Multiplo").ToString()
-                                        exi_hay = existe / MyMultiplo
-                                    End If
-                                End If
-                                rd2.Close()
-
-                                exi_mas = FormatNumber(exi_hay - (cant * MyMultiplo), 4)
-
-                                cmd2 = cnn2.CreateCommand
-                                cmd2.CommandText =
-                                    "update Productos set Cargado=0, CargadoInv=0, Existencia=" & exi_mas & " where Codigo='" & Strings.Left(Cod, 6) & "'"
-                                cmd2.ExecuteNonQuery()
-
-                                cmd2 = cnn2.CreateCommand
-                                cmd2.CommandText =
-                                    "insert into Cardex(Codigo,Nombre,Movimiento,Inicial,Cantidad,Final,Precio,Fecha,Usuario,Folio,Tipo,Cedula,Receta,Medico,Domicilio) values('" & Cod & "','" & Nomb & "','Venta'," & exi_hay & "," & cant & "," & exi_mas & "," & Preci & ",'" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "','" & lblusuario.Text & "','" & MYFOLIO & "','','','','','')"
-                                cmd2.ExecuteNonQuery()
-                            End If
-                        Loop
-                        cnn2.Close()
-                        rd1.Close()
-                    End If
-                End If
-
-
-
-                If lote <> "" Then
-                    Dim IdVD As Integer = 0
-                    Dim idLote As Integer = grdcaptura.Rows(R).Cells(7).Value.ToString
-
-                    cmd1 = cnn1.CreateCommand
-                    cmd1.CommandText =
-                        "select max(Id) as FVD from VentasDetalle"
-                    rd1 = cmd1.ExecuteReader
-                    If rd1.HasRows Then
-                        If rd1.Read Then
-                            IdVD = rd1("FVD").ToString
-                        End If
-                    End If
-                    rd1.Close()
-
-                    Dim cant_lote As Double = GetCantLote(mycode, lote)
-
-                    If cant_lote > mycant Then
-                        Dim nueva_cant As Double = cant_lote - mycant
-                        cmd1 = cnn1.CreateCommand
-                        cmd1.CommandText =
-                            "update LoteCaducidad set Cantidad=" & nueva_cant & " where Id=" & idLote
-                        cmd1.ExecuteNonQuery()
-                    Else
-                        cmd1 = cnn1.CreateCommand
-                        cmd1.CommandText =
-                            "update LoteCaducidad set Cantidad=0 where Id=" & idLote
-                        cmd1.ExecuteNonQuery()
-                    End If
-
-                End If
+                    cnn1.Close()
             Next
-            cnn1.Close()
+
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close() : cnn2.Close()
@@ -9154,12 +9155,9 @@ Door:
                                 CuentaFP = grdpago.Rows(R).Cells(6).Value.ToString()
                                 BancoCFP = grdpago.Rows(R).Cells(7).Value.ToString
                             End If
-
-
                             If FormaPago = "SALDO A FAVOR" Then
                                 If TotFormaPago > 0 Then
                                     TotSaldo = TotFormaPago
-
                                 End If
 
                             End If
@@ -9207,20 +9205,18 @@ Door:
             Catch ex As Exception
                 MessageBox.Show(ex.ToString())
                 cnn1.Close()
-
-                btnnuevo.Enabled = True
-
             End Try
         End If
         rd3.Close()
         cnn3.Close()
 
 
+
         Dim TPrint As String = ""
         Dim Imprime_En As String = ""
 
-        Dim Pasa_Print As Boolean = False
 
+        Dim Pasa_Print As Boolean = False
         Dim contra As String = txtcontraseña.Text, usu As String = lblusuario.Text
 
 
@@ -9244,7 +9240,6 @@ Door:
                     If rd2.Read Then
                         sumac = rd2(0).ToString
                         ideli = rd2(1).ToString
-
                         If sumac > 1 Then
                             cnn3.Close() : cnn3.Open()
                             cmd3 = cnn3.CreateCommand
@@ -9274,11 +9269,12 @@ Door:
             End If
         Next
 
+
         '---------------------------------------imprimir comandas---------------------------------------------
+
 
         cnn1.Close() : cnn1.Open()
         cnn3.Close() : cnn3.Open()
-
 
         If imprimeorden = 1 Then
 
@@ -9338,6 +9334,8 @@ Door:
         End If
 
 
+
+
         If (Imprime) Then
             If MsgBox("¿Deseas imprimir nota de venta?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
                 Pasa_Print = True
@@ -9351,6 +9349,8 @@ Door:
         If (Pasa_Print) Then
 
             TPrint = cboimpresion.Text
+
+
 
             If TPrint = "PDF - CARTA 1" Then
 
@@ -9499,6 +9499,7 @@ Door:
 
 safo:
 
+
         If txtcotped.Text <> "" Then
             Dim cnn100 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
             Dim sinfo100 As String = ""
@@ -9526,15 +9527,6 @@ safo:
             End If
         End If
 
-
-
-        btnnuevo.Enabled = True : My.Application.DoEvents()
-
-        btnnuevo.PerformClick()
-
-        btnventa.Enabled = True : My.Application.DoEvents()
-
-
         If pide = "1" Then
             lblusuario.Text = usu
             txtcontraseña.Text = contra
@@ -9543,6 +9535,7 @@ safo:
         Else
             cboNombre.Text = "MOSTRADOR"
         End If
+        btnnuevo.PerformClick()
         cbodesc.Focus().Equals(True)
         MYFOLIO = 0
     End Sub
@@ -15718,7 +15711,7 @@ doorcita:
     End Sub
 
     Private Sub txtcontraseña_TextChanged(sender As Object, e As EventArgs) Handles txtcontraseña.TextChanged
-        'txtcontraseña_KeyPress(txtcontraseña, New KeyPressEventArgs(ControlChars.Cr))
+        txtcontraseña_KeyPress(txtcontraseña, New KeyPressEventArgs(ControlChars.Cr))
     End Sub
 
 
