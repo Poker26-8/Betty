@@ -18097,7 +18097,9 @@ doorcita:
         End Try
     End Sub
 
+
     Private Sub txtcontraseña_TextChanged(sender As Object, e As EventArgs) Handles txtcontraseña.TextChanged
         ' txtcontraseña_KeyPress(txtcontraseña, New KeyPressEventArgs(ControlChars.Cr))
     End Sub
+
 End Class
