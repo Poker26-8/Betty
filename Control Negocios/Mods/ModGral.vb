@@ -185,32 +185,30 @@ Module ModGral
         Dim respuesta As String = ""
         Dim siono As Integer = 0
 
-        'Dim cnn As MySqlConnection = New MySqlConnection
-        'Dim serror As String = ""
-        'Dim dr As DataRow
-        'Dim odata As New ToolKitSQL.myssql
-        'Dim sql As String = ""
+        Dim cnn500 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd500 As MySqlDataReader
+        Dim cmd500 As MySqlCommand
 
         Try
 
 
-            cnn5.Close() : cnn5.Open()
-            cmd5 = cnn5.CreateCommand
-            cmd5.CommandText =
+            cnn500.Close() : cnn500.Open()
+            cmd500 = cnn500.CreateCommand
+            cmd500.CommandText =
                 "select Facturas, NotasCred, NumPart from Formatos where Facturas='" & valor & "'"
-            rd5 = cmd5.ExecuteReader
-            If rd5.HasRows Then
-                If rd5.Read Then
-                    respuesta = IIf(rd5("NotasCred").ToString = "", "0", rd5("NotasCred").ToString)
-                    siono = IIf(rd5("NumPart").ToString = "", "0", rd5("NumPart").ToString)
+            rd500 = cmd500.ExecuteReader
+            If rd500.HasRows Then
+                If rd500.Read Then
+                    respuesta = IIf(rd500("NotasCred").ToString = "", "0", rd500("NotasCred").ToString)
+                    siono = IIf(rd500("NumPart").ToString = "", "0", rd500("NumPart").ToString)
                 End If
             Else
                 respuesta = ""
             End If
-            rd5.Close() : cnn5.Close()
+            rd500.Close() : cnn500.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn5.Close()
+            cnn500.Close()
         End Try
         Return respuesta
 
