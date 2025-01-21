@@ -120,35 +120,34 @@ Public Class frmVentas1
     Public Sub leePeso()
 
         Try
-            Dim cnn1 As MySqlConnection = New MySqlConnection
-            cnn1 = New MySqlClient.MySqlConnection("server=" & servidor & ";uid=Delsscom;password=jipl22;database=cn" & base & ";persist security info=false;connect timeout=300")
-            Dim rd1 As MySqlDataReader
-            Dim cmd1 As MySqlCommand
+            Dim cnn100 As MySqlConnection = New MySqlConnection(sTargetlocal)
+            Dim rd100 As MySqlDataReader
+            Dim cmd100 As MySqlCommand
 
             Dim puertobascula As String = ""
             Dim bascula As String = ""
 
-            cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "Select NotasCred From Formatos Where Facturas='Pto-Bascula'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    puertobascula = rd1("NotasCred").ToString
+            cnn100.Close() : cnn100.Open()
+            cmd100 = cnn100.CreateCommand
+            cmd100.CommandText = "Select NotasCred From Formatos Where Facturas='Pto-Bascula'"
+            rd100 = cmd100.ExecuteReader
+            If rd100.HasRows Then
+                If rd100.Read Then
+                    puertobascula = rd100("NotasCred").ToString
                 End If
             End If
-            rd1.Close()
+            rd100.Close()
 
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "Select NotasCred From Formatos Where Facturas='Bascula'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    bascula = rd1("NotasCred").ToString
+            cmd100 = cnn100.CreateCommand
+            cmd100.CommandText = "Select NotasCred From Formatos Where Facturas='Bascula'"
+            rd100 = cmd100.ExecuteReader
+            If rd100.HasRows Then
+                If rd100.Read Then
+                    bascula = rd100("NotasCred").ToString
                 End If
             End If
-            rd1.Close()
-            cnn1.Close()
+            rd100.Close()
+            cnn100.Close()
 
             If bascula = "SBascula" Then
                 txtcantidad.Text = 1
