@@ -201,8 +201,8 @@ Module ModGral
             rd5 = cmd5.ExecuteReader
             If rd5.HasRows Then
                 If rd5.Read Then
-                    respuesta = rd5("NotasCred").ToString
-                    siono = rd5("NumPart").ToString
+                    respuesta = IIf(rd5("NotasCred").ToString = "", "0", rd5("NotasCred").ToString)
+                    siono = IIf(rd5("NumPart").ToString = "", "0", rd5("NumPart").ToString)
                 End If
             Else
                 respuesta = ""
