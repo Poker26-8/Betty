@@ -185,30 +185,27 @@ Module ModGral
         Dim respuesta As String = ""
         Dim siono As Integer = 0
 
-        Dim cnn500 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd500 As MySqlDataReader
-        Dim cmd500 As MySqlCommand
 
         Try
 
 
-            cnn500.Close() : cnn500.Open()
-            cmd500 = cnn500.CreateCommand
-            cmd500.CommandText =
+            cnn8.Close() : cnn8.Open()
+            cmd8 = cnn8.CreateCommand
+            cmd8.CommandText =
                 "select Facturas, NotasCred, NumPart from Formatos where Facturas='" & valor & "'"
-            rd500 = cmd500.ExecuteReader
-            If rd500.HasRows Then
-                If rd500.Read Then
-                    respuesta = IIf(rd500("NotasCred").ToString = "", "0", rd500("NotasCred").ToString)
-                    siono = IIf(rd500("NumPart").ToString = "", "0", rd500("NumPart").ToString)
+            rd8 = cmd8.ExecuteReader
+            If rd8.HasRows Then
+                If rd8.Read Then
+                    respuesta = IIf(rd8("NotasCred").ToString = "", "0", rd8("NotasCred").ToString)
+                    siono = IIf(rd8("NumPart").ToString = "", "0", rd8("NumPart").ToString)
                 End If
             Else
                 respuesta = ""
             End If
-            rd500.Close() : cnn500.Close()
+            rd8.Close() : cnn8.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
-            cnn500.Close()
+            cnn8.Close()
         End Try
         Return respuesta
 

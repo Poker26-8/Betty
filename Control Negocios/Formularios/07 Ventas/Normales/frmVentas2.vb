@@ -855,8 +855,8 @@ Public Class frmVentas2
             Dim desucentoiva As Double = 0
             Dim total1 As Double = 0
             Dim monedero As Double = 0
-            cnn3.Close() : cnn3.Open()
 
+            cnn3.Close() : cnn3.Open()
             cmd3 = cnn3.CreateCommand
             cmd3.CommandText =
                 "select IVA,Promo_Monedero,Min from Productos where Codigo='" & cbocodigo.Text & "'"
@@ -3432,17 +3432,13 @@ doorcita:
                             txtfechacad.Text = ""
                             txtubicacion.Text = ""
                             cbodesc.Focus().Equals(True)
-                            rd1.Close() : cnn1.Close()
                             Exit Sub
                         End If
                     End If
-                    '  If CStr(rd1("Departamento").ToString) = "SERVICIOS" Then
+
                     If CStr(DataGridView1.Rows(index).Cells("Departamento").Value.ToString) = "SERVICIOS" Then
-                        'cbocodigo.Text = rd1("Codigo").ToString
                         cbocodigo.Text = DataGridView1.Rows(index).Cells("Departamento").Value.ToString
                         cbocodigo.Focus().Equals(True)
-                        rd1.Close()
-                        cnn1.Close()
                         Exit Sub
                     End If
 
@@ -3457,7 +3453,8 @@ doorcita:
 
                     TiCambio = IIf(DataGridView1.Rows(index).Cells("tipo_cambio").Value.ToString() = "0", ",", DataGridView1.Rows(index).Cells("tipo_cambio").Value.ToString())
 
-                    cnn2.Close() : cnn2.Open() : cmd2 = cnn2.CreateCommand
+                    cnn2.Close() : cnn2.Open()
+                    cmd2 = cnn2.CreateCommand
                     cmd2.CommandText =
                         "select Existencia from Productos where Codigo='" & Strings.Left(cbocodigo.Text, 6) & "'"
                     rd2 = cmd2.ExecuteReader
@@ -3600,32 +3597,8 @@ doorcita:
 
 kaka:
 
-                cnn1.Close() : cnn1.Open()
-                'cmd1 = cnn1.CreateCommand
-                'cmd1.CommandText =
-                '    "select VSE from Ticket"
-                'rd1 = cmd1.ExecuteReader
-                'If rd1.HasRows Then
-                '    If rd1.Read Then
-                '        VSE = rd1(0).ToString
-                '    End If
-                'End If
-                'rd1.Close()
+                ' cnn1.Close() : cnn1.Open()
 
-                'Dim varnom As String = cbodesc.Text
-                'Dim index As Integer = -1
-                'Dim row As DataGridViewRow
-                'For Each row In DataGridView1.Rows
-
-                '    If IsNothing(row.Cells("Nombre").Value) Then
-                '        Exit For
-                '    End If
-
-                '    If row.Cells("Nombre").Value.ToString() = varnom Then
-                '        index = row.Index
-                '        Exit For
-                '    End If
-                'Next
 
                 If index <> -1 Then
 
@@ -3646,7 +3619,7 @@ kaka:
                             txtfechacad.Text = ""
                             txtubicacion.Text = ""
                             cbodesc.Focus().Equals(True)
-                            rd1.Close() : cnn1.Close()
+
                             Exit Sub
                         End If
                     End If
@@ -3654,8 +3627,7 @@ kaka:
                     If CStr(DataGridView1.Rows(index).Cells("Departamento").Value.ToString()) = "SERVICIOS" Then
                         cbocodigo.Text = DataGridView1.Rows(index).Cells("Codigo").Value.ToString()
                         cbocodigo.Focus().Equals(True)
-                        rd1.Close()
-                        cnn1.Close()
+
                         Exit Sub
                     End If
 
@@ -3671,7 +3643,8 @@ kaka:
 
                     TiCambio = IIf(DataGridView1.Rows(index).Cells("tipo_cambio").Value.ToString() = "0", ",", DataGridView1.Rows(index).Cells("tipo_cambio").Value.ToString())
 
-                    cnn2.Close() : cnn2.Open() : cmd2 = cnn2.CreateCommand
+                    cnn2.Close() : cnn2.Open()
+                    cmd2 = cnn2.CreateCommand
                     cmd2.CommandText =
                         "select Existencia from Productos where Codigo='" & Strings.Left(cbocodigo.Text, 6) & "'"
                     rd2 = cmd2.ExecuteReader
@@ -3694,32 +3667,6 @@ kaka:
                         Label2.Text = "DescrIpción"
                     End If
                     rd2.Close()
-
-                    'cmd2 = cnn2.CreateCommand
-                    'cmd2.CommandText =
-                    '    "select tipo_cambio from tb_moneda,Productos where Codigo='" & cbocodigo.Text & "' and Productos.id_tbMoneda=tb_moneda.id"
-                    'rd2 = cmd2.ExecuteReader
-                    'If rd2.HasRows Then
-                    '    If rd2.Read Then
-                    '        TiCambio = rd2(0).ToString
-                    '        If TiCambio = 0 Then TiCambio = 1
-                    '    End If
-                    'Else
-                    '    TiCambio = 1
-                    'End If
-                    'rd2.Close()
-
-                    'cmd2 = cnn2.CreateCommand
-                    'cmd2.CommandText =
-                    '    "select PrecioVentaIVA, PreEsp from Productos where Codigo='" & cbocodigo.Text & "'"
-                    'rd2 = cmd2.ExecuteReader
-                    'If rd2.HasRows Then
-                    '    If rd2.Read Then
-                    '        PreLst = rd2(0).ToString
-                    '        PreEsp = rd2(1).ToString
-                    '    End If
-                    'End If
-                    'rd2.Close()
 
                     If cbotipo.Visible = False Then
                         If T_Precio = "DIA_NOCHE" And (H_Actual > H_Inicia Or H_Actual < H_Final) Then
@@ -3773,8 +3720,6 @@ kaka:
                     cnn2.Close()
 
                     cbocodigo.Focus().Equals(True)
-                    rd1.Close()
-                    cnn1.Close()
                     Exit Sub
 
                 End If
@@ -5941,9 +5886,6 @@ kaka:
             Dim CampoDsct As Double = IIf(txtdescuento1.Text = "", "0", txtdescuento1.Text)
             Dim Desc As Double = 0
 
-            Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd5 As MySqlDataReader
-            Dim cmd5 As MySqlCommand
 
             txtdescuento2.Text = (CampoDsct / 100) * CDbl(txtSubTotal.Text)
             txtdescu.Text = (CampoDsct / 100) * CDbl(txtSubTotal.Text)
@@ -5955,7 +5897,6 @@ kaka:
             txtResta.Text = FormatNumber(txtResta.Text, 2)
 
             cnn5.Close() : cnn5.Open()
-
             cmd5 = cnn5.CreateCommand
             cmd5.CommandText =
                 "select NotasCred from Formatos where Facturas='Mdescuento'"
@@ -7988,7 +7929,7 @@ Door:
 
 
         btnventa.Enabled = False
-
+        btnnuevo.Enabled = False
         My.Application.DoEvents()
 
         Dim TotalIEPSPrint As Double = 0
@@ -8063,6 +8004,7 @@ Door:
             MessageBox.Show(ex.ToString())
             cnn1.Close()
             btnnuevo.Enabled = True
+
         End Try
 
         If grdcaptura.Rows.Count < 1 Then txtdescuento1.Focus().Equals(True) : cnn1.Close() : btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
@@ -9220,6 +9162,7 @@ Door:
             Catch ex As Exception
                 MessageBox.Show(ex.ToString())
                 cnn1.Close()
+                btnnuevo.Enabled = True
             End Try
         End If
         rd3.Close()
@@ -9550,6 +9493,7 @@ safo:
         Else
             cboNombre.Text = "MOSTRADOR"
         End If
+        btnnuevo.Enabled = True
         btnnuevo.PerformClick()
         cbodesc.Focus().Equals(True)
         MYFOLIO = 0

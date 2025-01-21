@@ -465,35 +465,35 @@ Public Class frmVentas3
     End Sub
 
     Public Sub leePeso()
-        Dim cnn100 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd100 As MySqlDataReader
-        Dim cmd100 As MySqlCommand
+        Dim cnn1000 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
+        Dim rd1000 As MySqlDataReader
+        Dim cmd1000 As MySqlCommand
         Try
 
             Dim puertobascula As String = ""
             Dim bascula As String = ""
 
-            cnn100.Close() : cnn1.Open()
-            cmd100 = cnn100.CreateCommand
-            cmd100.CommandText = "Select NotasCred From Formatos Where Facturas='Pto-Bascula'"
-            rd100 = cmd100.ExecuteReader
-            If rd100.HasRows Then
-                If rd100.Read Then
-                    puertobascula = rd100("NotasCred").ToString
+            cnn1000.Close() : cnn1000.Open()
+            cmd1000 = cnn1000.CreateCommand
+            cmd1000.CommandText = "Select NotasCred From Formatos Where Facturas='Pto-Bascula'"
+            rd1000 = cmd1000.ExecuteReader
+            If rd1000.HasRows Then
+                If rd1000.Read Then
+                    puertobascula = rd1000("NotasCred").ToString
                 End If
             End If
-            rd100.Close()
+            rd1000.Close()
 
-            cmd100 = cnn100.CreateCommand
-            cmd100.CommandText = "Select NotasCred From Formatos Where Facturas='Bascula'"
-            rd100 = cmd1.ExecuteReader
-            If rd100.HasRows Then
-                If rd100.Read Then
-                    bascula = rd100("NotasCred").ToString
+            cmd1000 = cnn1000.CreateCommand
+            cmd1000.CommandText = "Select NotasCred From Formatos Where Facturas='Bascula'"
+            rd1000 = cmd1000.ExecuteReader
+            If rd1000.HasRows Then
+                If rd1000.Read Then
+                    bascula = rd1000("NotasCred").ToString
                 End If
             End If
-            rd100.Close()
-            cnn100.Close()
+            rd1000.Close()
+            cnn1000.Close()
 
             If bascula = "SBascula" Then
                 txtcantidad.Text = 1
@@ -5226,9 +5226,7 @@ kaka:
                 Exit Sub
             End If
 
-            Dim cnn5 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-            Dim rd5 As MySqlDataReader
-            Dim cmd5 As MySqlCommand
+
 
             If CDbl(txtdescuento1.Text) > 0 Then
                 If grdpago.Rows.Count > 0 Then grdpago.Rows.Clear() : txtMontoP.Text = "0.00"
@@ -7633,7 +7631,7 @@ doorcita:
 
 
         btnventa.Enabled = False
-
+        btnnuevo.Enabled = False
         My.Application.DoEvents()
 
         Dim TotalIEPSPrint As Double = 0
@@ -7756,21 +7754,21 @@ doorcita:
             MsgBox("Escribe/Revisa tu contraseña para continuar.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
             cnn1.Close()
             DondeVoy = "Venta"
-            txtcontraseña.Focus().Equals(True) : btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
+            txtcontraseña.Focus().Equals(True) : btnventa.Enabled = True : btnnuevo.Enabled = True : My.Application.DoEvents() : Exit Sub
         Else
             If Not (per_venta) Then
                 MsgBox("No cuentas con permiso para realizar notas de venta.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
+                btnventa.Enabled = True : btnnuevo.Enabled = True : My.Application.DoEvents() : Exit Sub
             End If
         End If
 
         'Comienza proceso de guardado de la venta
 
         If validaTarjeta = 0 Then
-            If MsgBox("¿Deseas guardar los datos de esta venta?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then cnn1.Close() : btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
+            If MsgBox("¿Deseas guardar los datos de esta venta?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then cnn1.Close() : btnventa.Enabled = True : btnnuevo.Enabled = True : My.Application.DoEvents() : Exit Sub
         Else
             If SiPago = 0 Then
-                If MsgBox("¿Deseas guardar los datos de esta venta?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then cnn1.Close() : btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
+                If MsgBox("¿Deseas guardar los datos de esta venta?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbCancel Then cnn1.Close() : btnventa.Enabled = True : btnnuevo.Enabled = True : My.Application.DoEvents() : Exit Sub
             End If
         End If
 
@@ -7802,7 +7800,7 @@ kakaxd:
         If CDbl(txtResta.Text) > 0 Then
             If lblNumCliente.Text <> "MOSTRADOR" And ((CDbl(txtPagar.Text) + CDbl(txtadeuda.Text)) - (CDbl(txtMontoP.Text) + CDbl(txtefectivo.Text))) > (CDbl(txtcredito.Text)) Then
                 MsgBox("No se puede completar la operación porque se rebasaría el crédito disponible." & vbNewLine & "Crédito disponible: " & FormatNumber(credito_dispo, 4) & ".", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro")
-                cnn1.Close() : txtefectivo.Focus().Equals(True) : btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
+                cnn1.Close() : txtefectivo.Focus().Equals(True) : btnventa.Enabled = True : btnnuevo.Enabled = True : My.Application.DoEvents() : Exit Sub
             End If
         End If
 
@@ -9162,7 +9160,7 @@ safo:
             End If
         End If
 
-
+        btnnuevo.Enabled = True
         btnnuevo.PerformClick()
 
 

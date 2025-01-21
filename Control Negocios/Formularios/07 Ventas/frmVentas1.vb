@@ -7554,7 +7554,7 @@ doorcita:
 
 
         btnventa.Enabled = False
-
+        btnnuevo.Enabled = False
         My.Application.DoEvents()
 
         Dim TotalIEPSPrint As Double = 0
@@ -8212,6 +8212,7 @@ kakaxd:
             Catch ex As Exception
                 MessageBox.Show(ex.ToString())
                 cnn1.Close()
+                btnnuevo.Enabled = True
             End Try
         End If
 
@@ -8786,6 +8787,7 @@ Door:
             Catch ex As Exception
                 MessageBox.Show(ex.ToString())
                 cnn1.Close()
+                btnnuevo.Enabled = True
             End Try
         End If
         rd3.Close()
@@ -9116,6 +9118,7 @@ safo:
         Else
             cboNombre.Text = "MOSTRADOR"
         End If
+        btnnuevo.Enabled = True
         btnnuevo.PerformClick()
         cbodesc.Focus().Equals(True)
         MYFOLIO = 0
