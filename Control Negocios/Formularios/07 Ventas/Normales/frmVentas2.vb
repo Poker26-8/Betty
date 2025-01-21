@@ -4390,6 +4390,7 @@ kaka:
                             Exit For
                         End If
                     Next
+
                     If index <> -1 Then
                         Promo = IIf(DataGridView1.Rows(index).Cells("Status_Promocion").Value.ToString() = True, True, False)
                         Anti = DataGridView1.Rows(index).Cells("Grupo").Value.ToString()
@@ -4406,16 +4407,30 @@ kaka:
                         txtunidad.Text = DataGridView1.Rows(index).Cells("UVenta").Value.ToString()
                         cbocodigo.Text = DataGridView1.Rows(index).Cells("Codigo").Value.ToString()
                         cbodesc.Text = DataGridView1.Rows(index).Cells("Nombre").Value.ToString()
-                        If ordetrabajo = 0 Then
-                            '  rd1.Close()
-                            cmd1 = cnn1.CreateCommand
-                            cmd1.CommandText =
-                                "update Productos set CargadoInv=0, Cargado=0, Existencia=Existencia - " & nueva_existe & " where Codigo='" & Strings.Left(mycode, 6) & "'"
-                            If cmd1.ExecuteNonQuery Then
-                                PreEsp = DataGridView1.Rows(index).Cells("PreEsp").Value.ToString()
 
-                                TiCambio = IIf(DataGridView1.Rows(index).Cells("tipo_cambio").Value.ToString() = "0", ",", DataGridView1.Rows(index).Cells("tipo_cambio").Value.ToString())
+                        MCD = DataGridView1.Rows(index).Cells("MCD").Value.ToString()
+                        Multiplo = DataGridView1.Rows(index).Cells("Multiplo").Value.ToString()
+                        Minimo = DataGridView1.Rows(index).Cells("Min").Value.ToString()
+                        txtubicacion.Text = DataGridView1.Rows(index).Cells("Ubicacion").Value.ToString()
+
+                        PreLst = DataGridView1.Rows(index).Cells("PrecioVentaIVA").Value.ToString()
+                        PreEsp = DataGridView1.Rows(index).Cells("PreEsp").Value.ToString()
+
+                        TiCambio = IIf(DataGridView1.Rows(index).Cells("tipo_cambio").Value.ToString() = "0", ",", DataGridView1.Rows(index).Cells("tipo_cambio").Value.ToString())
+
                     End If
+
+                    'If ordetrabajo = 0 Then
+                    '    '  rd1.Close()
+                    '    cmd1 = cnn1.CreateCommand
+                    '    cmd1.CommandText =
+                    '        "update Productos set CargadoInv=0, Cargado=0, Existencia=Existencia - " & nueva_existe & " where Codigo='" & Strings.Left(mycode, 6) & "'"
+                    '    If cmd1.ExecuteNonQuery Then
+                    '        PreEsp = DataGridView1.Rows(index).Cells("PreEsp").Value.ToString()
+
+                    '        TiCambio = IIf(DataGridView1.Rows(index).Cells("tipo_cambio").Value.ToString() = "0", ",", DataGridView1.Rows(index).Cells("tipo_cambio").Value.ToString())
+                    '    End If
+                    'End If
 
                     If File.Exists(My.Application.Info.DirectoryPath & "\ProductosImg" & base & "\" & cbocodigo.Text & ".jpg") Then
                         picProd.Image = System.Drawing.Image.FromFile(My.Application.Info.DirectoryPath & "\ProductosImg" & base & "\" & cbocodigo.Text & ".jpg")
@@ -8864,7 +8879,7 @@ Door:
                         End If
 
                         If ordetrabajo = 0 Then
-                            rd1.Close()
+                            'rd1.Close()
                             cmd1 = cnn1.CreateCommand
                             cmd1.CommandText =
                                 "update Productos set CargadoInv=0, Cargado=0, Existencia=Existencia - " & nueva_existe & " where Codigo='" & Strings.Left(mycode, 6) & "'"
@@ -9025,8 +9040,8 @@ Door:
                     End If
 
 
-
-                    If lote <> "" Then
+                End If
+                If lote <> "" Then
                         Dim IdVD As Integer = 0
                         Dim idLote As Integer = grdcaptura.Rows(R).Cells(7).Value.ToString
 
@@ -15711,7 +15726,7 @@ doorcita:
     End Sub
 
     Private Sub txtcontraseña_TextChanged(sender As Object, e As EventArgs) Handles txtcontraseña.TextChanged
-        txtcontraseña_KeyPress(txtcontraseña, New KeyPressEventArgs(ControlChars.Cr))
+        'txtcontraseña_KeyPress(txtcontraseña, New KeyPressEventArgs(ControlChars.Cr))
     End Sub
 
 
