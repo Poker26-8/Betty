@@ -8392,6 +8392,8 @@ kakaxd:
                         End If
                     End With
 
+                    MsgBox("1-INSERTO VENTAS", vbInformation + vbOKOnly)
+
             End Select
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
@@ -8400,6 +8402,7 @@ kakaxd:
             btnnuevo.Enabled = True
 
         End Try
+
 
         'Obtiene el folio que se acaba de insertar
         Do Until MYFOLIO <> 0
@@ -8419,8 +8422,6 @@ kakaxd:
             End With
 
         Loop
-
-
 
         'Llenado de variables de pago (Tarjeta, Transferencia, Saldo, Efectivo y Otro)
 
@@ -8587,6 +8588,8 @@ kakaxd:
                 End If
             End If
             cnn1.Close()
+
+            MsgBox("2-INSERTO ABONOI", vbInformation + vbOKOnly)
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
@@ -9054,12 +9057,12 @@ Door:
                     cnn1.Close()
             Next
 
+            MsgBox("3-INSERTO VENTASDETALLE", vbInformation + vbOKOnly)
+
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close() : cnn2.Close()
-
             btnnuevo.Enabled = True
-
         End Try
 
         'Call BorraLotes()
@@ -9204,7 +9207,7 @@ Door:
         rd3.Close()
         cnn3.Close()
 
-
+        MsgBox("4-TERMINO DE BUSCAR LOS ABONOI", vbInformation + vbOKOnly)
 
         Dim TPrint As String = ""
         Dim Imprime_En As String = ""
@@ -9262,7 +9265,7 @@ Door:
                 End If
             End If
         Next
-
+        MsgBox("5-VERIFICO VENTASDETALLE ", vbInformation + vbOKOnly)
 
         '---------------------------------------imprimir comandas---------------------------------------------
 
@@ -9490,6 +9493,8 @@ Door:
                 End If
             End If
         End If
+
+        MsgBox("6-TERMINO DE IMPRIMIR ", vbInformation + vbOKOnly)
 
 safo:
 
