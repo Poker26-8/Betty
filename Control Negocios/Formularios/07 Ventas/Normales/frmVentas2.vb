@@ -116,6 +116,19 @@ Public Class frmVentas2
     Dim nopeso As Integer = 0
     Dim basculaxd As String = ""
 
+    Dim autofac As Integer = 0
+    Dim linkauto As String = ""
+    Dim siqrwhats As Integer = 0
+
+    Dim Pie As String = ""
+    Dim pagare As String = ""
+    Dim cab0 As String = ""
+    Dim cab1 As String = ""
+    Dim cab2 As String = ""
+    Dim cab3 As String = ""
+    Dim cab4 As String = ""
+    Dim cab5 As String = ""
+    Dim cab6 As String = ""
     Private Sub frmVentas2_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         txtdia.Text = Weekday(Date.Now)
     End Sub
@@ -274,9 +287,32 @@ Public Class frmVentas2
         noprefijo = DatosRecarga("Prefijo")
         nocodigo = DatosRecarga("Codigo")
         nopeso = DatosRecarga("Peso")
+        autofac = DatosRecarga("AutoFac")
+        linkauto = DatosRecarga("LinkAuto")
+        siqr = DatosRecarga2("LinkAuto")
+        siqrwhats = DatosRecarga2("WhatsApp").ToString
 
         Try
             cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText =
+                "select Pie1,Pagare,Cab0,Cab1,Cab2,Cab3,Cab4,Cab5,Cab6 from Ticket"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    Pie = rd1("Pie1").ToString
+                    pagare = rd1("Pagare").ToString
+                    cab0 = rd1("Cab0").ToString
+                    cab1 = rd1("Cab1").ToString
+                    cab2 = rd1("Cab2").ToString
+                    cab3 = rd1("Cab3").ToString
+                    cab4 = rd1("Cab4").ToString
+                    cab5 = rd1("Cab5").ToString
+                    cab6 = rd1("Cab6").ToString
+                End If
+            End If
+            rd1.Close()
+
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select Vent_EPrec from Permisos where IdEmpleado=" & id_usu_log
@@ -10195,8 +10231,6 @@ ecomoda:
         Dim Logotipo As Drawing.Image = Nothing
         Dim tLogo As String = DatosRecarga("TipoLogo")
         Dim simbolo As String = DatosRecarga("Simbolo")
-        Dim Pie As String = ""
-        Dim pagare As String = ""
         Dim DesglosaIVA As String = DatosRecarga("Desglosa")
         Dim ligaqr As String = ""
         Dim whats As String = DatosRecarga("Whatsapp")
@@ -10204,10 +10238,6 @@ ecomoda:
         Dim autofact As String = DatosRecarga("LinkAuto")
         Dim siqr As String = DatosRecarga2("LinkAuto")
 
-
-        Dim cnn10000 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd10000 As MySqlDataReader
-        Dim cmd10000 As MySqlCommand
 
         If whats <> "" Then
             ligaqr = "http://wa.me/" & whats
@@ -10234,67 +10264,45 @@ ecomoda:
             End If
 
             '[°]. Datos del negocio
-            cnn10000.Close() : cnn10000.Open()
-            cmd10000 = cnn10000.CreateCommand
-            cmd10000.CommandText = "SELECT Saldo FROM monedero WHERE Barras='" & txttel.Text & "'"
-            rd10000 = cmd10000.ExecuteReader
-            If rd10000.HasRows Then
-                If rd10000.Read Then
-                    saldomonedero = rd10000("Saldo").ToString
-                End If
-            End If
-            rd10000.Close()
 
-            cmd10000 = cnn10000.CreateCommand
-            cmd10000.CommandText =
-                "select Pie1,Pagare,Cab0,Cab1,Cab2,Cab3,Cab4,Cab5,Cab6 from Ticket"
-            rd10000 = cmd10000.ExecuteReader
-            If rd10000.HasRows Then
-                If rd10000.Read Then
-                    Pie = rd10000("Pie1").ToString
-                    pagare = rd10000("Pagare").ToString
-
-                    'Razón social
-                    If rd10000("Cab0").ToString() <> "" Then
-                        e.Graphics.DrawString(rd10000("Cab0").ToString, New Drawing.Font(tipografia, 8, FontStyle.Bold), Brushes.Black, 140, Y, sc)
-                        Y += 12.5
-                    End If
-                    'RFC
-                    If rd10000("Cab1").ToString() <> "" Then
-                        e.Graphics.DrawString(rd10000("Cab1").ToString, New Drawing.Font(tipografia, 8, FontStyle.Bold), Brushes.Black, 140, Y, sc)
-                        Y += 12.5
-                    End If
-                    'Calle  N°.
-                    If rd10000("Cab2").ToString() <> "" Then
-                        e.Graphics.DrawString(rd10000("Cab2").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
-                        Y += 12
-                    End If
-                    'Colonia
-                    If rd10000("Cab3").ToString() <> "" Then
-                        e.Graphics.DrawString(rd10000("Cab3").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
-                        Y += 12
-                    End If
-                    'Delegación / Municipio - Entidad
-                    If rd10000("Cab4").ToString() <> "" Then
-                        e.Graphics.DrawString(rd10000("Cab4").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
-                        Y += 12
-                    End If
-                    'Teléfono
-                    If rd10000("Cab5").ToString() <> "" Then
-                        e.Graphics.DrawString(rd10000("Cab5").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
-                        Y += 12
-                    End If
-                    'Correo
-                    If rd10000("Cab6").ToString() <> "" Then
-                        e.Graphics.DrawString(rd10000("Cab6").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
-                        Y += 12
-                    End If
-                    Y += 3
-                End If
-            Else
-                Y += 0
+            'Razón social
+            If cab0 <> "" Then
+                e.Graphics.DrawString(cab0, New Drawing.Font(tipografia, 8, FontStyle.Bold), Brushes.Black, 140, Y, sc)
+                Y += 12.5
             End If
-            rd10000.Close()
+            'RFC
+            If cab1 <> "" Then
+                e.Graphics.DrawString(cab1, New Drawing.Font(tipografia, 8, FontStyle.Bold), Brushes.Black, 140, Y, sc)
+                Y += 12.5
+            End If
+            'Calle  N°.
+            If cab2 <> "" Then
+                e.Graphics.DrawString(cab2, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
+                Y += 12
+            End If
+            'Colonia
+            If cab3 <> "" Then
+                e.Graphics.DrawString(cab3, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
+                Y += 12
+            End If
+            'Delegación / Municipio - Entidad
+            If cab4 <> "" Then
+                e.Graphics.DrawString(cab4, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
+                Y += 12
+            End If
+            'Teléfono
+            If cab5 <> "" Then
+                e.Graphics.DrawString(cab5, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
+                Y += 12
+            End If
+            'Correo
+            If cab6 <> "" Then
+                e.Graphics.DrawString(cab6, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
+                Y += 12
+            End If
+            Y += 3
+
+
 
             '[1]. Datos de la venta
             e.Graphics.DrawString("--------------------------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
@@ -10464,53 +10472,33 @@ ecomoda:
             Dim IVAPRODUCTO As Double = 0
             Dim IVADELPRODUCTO As Double = 0
             Try
-                cnn10000.Close() : cnn10000.Open()
+                cnn1.Close() : cnn1.Open()
                 For N As Integer = 0 To grdcaptura.Rows.Count - 1
                     If CStr(grdcaptura.Rows(N).Cells(0).Value.ToString) <> "" Then
-                        If ordetrabajo = 0 Then
-                            cmd10000 = cnn10000.CreateCommand
-                            cmd10000.CommandText =
+
+                        cmd1 = cnn1.CreateCommand
+                        cmd1.CommandText =
                             "select IVA from Productos where Codigo='" & CStr(grdcaptura.Rows(N).Cells(0).Value.ToString) & "'"
-                            rd10000 = cmd10000.ExecuteReader
-                            If rd10000.HasRows Then
-                                If rd10000.Read Then
+                        rd1 = cmd1.ExecuteReader
+                        If rd1.HasRows Then
+                            If rd1.Read Then
 
-                                    If rd10000(0).ToString > 0 Then
-                                        MySubtotal = grdcaptura.Rows(N).Cells(5).Value.ToString
-                                        IVAPRODUCTO = MySubtotal / (1 + rd10000(0).ToString)
-                                        IVADELPRODUCTO = MySubtotal - IVAPRODUCTO
-                                        TotalIVAPrint = TotalIVAPrint + IVADELPRODUCTO
-                                    End If
-
+                                If rd1(0).ToString > 0 Then
+                                    MySubtotal = grdcaptura.Rows(N).Cells(5).Value.ToString
+                                    IVAPRODUCTO = MySubtotal / (1 + rd1(0).ToString)
+                                    IVADELPRODUCTO = MySubtotal - IVAPRODUCTO
+                                    TotalIVAPrint = TotalIVAPrint + IVADELPRODUCTO
                                 End If
-                            End If
-                            rd10000.Close()
-                        Else
-                            cmd10000 = cnn10000.CreateCommand
-                            cmd10000.CommandText =
-                            "select IVA from OrdenTrabajo where Codigo='" & CStr(grdcaptura.Rows(N).Cells(0).Value.ToString) & "'"
-                            rd10000 = cmd10000.ExecuteReader
-                            If rd10000.HasRows Then
-                                If rd10000.Read Then
 
-                                    If rd10000(0).ToString > 0 Then
-                                        MySubtotal = grdcaptura.Rows(N).Cells(5).Value.ToString
-                                        IVAPRODUCTO = MySubtotal / (1 + rd10000(0).ToString)
-                                        IVADELPRODUCTO = MySubtotal - IVAPRODUCTO
-                                        TotalIVAPrint = TotalIVAPrint + IVADELPRODUCTO
-                                    End If
-
-                                End If
                             End If
-                            rd10000.Close()
                         End If
+                        rd1.Close()
                     End If
                 Next
                 TotalIVAPrint = FormatNumber(TotalIVAPrint, 2)
                 MySubtotal = FormatNumber(MySubtotal, 2)
             Catch ex As Exception
                 MessageBox.Show(ex.ToString())
-                cnn10000.Close()
             End Try
 
             If CDbl(txtdescuento2.Text) > 0 Then
@@ -10675,43 +10663,8 @@ ecomoda:
 
             'para el qr
 
-            Dim autofac As Integer = 0
-            Dim linkauto As String = ""
 
-            cnn10000.Close() : cnn10000.Open()
-            cmd10000 = cnn10000.CreateCommand
-            cmd10000.CommandText = "SELECT NotasCred FROM formatos WHERE Facturas='AutoFac'"
-            rd10000 = cmd10000.ExecuteReader
-            If rd10000.HasRows Then
-                If rd10000.Read Then
-                    autofac = rd10000(0).ToString
-                End If
-            End If
-            rd10000.Close()
 
-            cmd10000 = cnn10000.CreateCommand
-            cmd10000.CommandText = "SELECT NotasCred,NumPart FROM formatos WHERE Facturas='LinkAuto'"
-            rd10000 = cmd10000.ExecuteReader
-            If rd10000.HasRows Then
-                If rd10000.Read Then
-                    linkauto = rd10000(0).ToString
-                    siqr = rd10000(1).ToString
-                End If
-            End If
-            rd10000.Close()
-
-            Dim siqrwhats As Integer = 0
-
-            cmd10000 = cnn10000.CreateCommand
-            cmd10000.CommandText = "SELECT NotasCred,NumPart FROM formatos WHERE Facturas='WhatsApp'"
-            rd10000 = cmd10000.ExecuteReader
-            If rd10000.HasRows Then
-                If rd10000.Read Then
-                    siqrwhats = rd10000(1).ToString
-                End If
-            End If
-            rd10000.Close()
-            cnn10000.Close()
 
             If siqrwhats = 1 Then
                 If ligaqr <> "" Then
@@ -10759,7 +10712,6 @@ ecomoda:
             e.HasMorePages = False
         Catch ex As Exception
             MessageBox.Show("No se pudo generar el docuemnto, a continuación se muestra la descripción del error." & vbNewLine & ex.ToString())
-            cnn10000.Close()
         End Try
     End Sub
 
