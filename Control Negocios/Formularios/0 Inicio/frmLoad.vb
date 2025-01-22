@@ -710,7 +710,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         'trasladosdet
         Try
             cnn1.Close()
@@ -729,7 +730,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         Try
             cnn1.Close()
             cnn1.Open()
@@ -747,6 +749,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
 
         'devoluciones
         Try
@@ -766,7 +770,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         'profesion
         Try
             cnn1.Close()
@@ -785,6 +790,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
 
         'CEDULA
         Try
@@ -804,6 +811,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
 
         'escuela
         Try
@@ -823,6 +832,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         'especialidad
         Try
             cnn1.Close()
@@ -841,7 +852,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         'logor
         Try
             cnn1.Close()
@@ -860,7 +872,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         'hismesa
         Try
             cnn1.Close()
@@ -879,7 +892,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         'hismesa
         Try
             cnn1.Close()
@@ -898,7 +912,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         'ventas
         Try
             cnn1.Close()
@@ -917,7 +932,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         'clientes
         Try
             cnn1.Close()
@@ -958,7 +974,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         Try
             cnn1.Close()
             cnn1.Open()
@@ -976,7 +993,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         'pedidosvendet
         Try
             cnn1.Close()
@@ -1017,7 +1035,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         'ventasdetalla
         Try
             cnn1.Close()
@@ -1059,6 +1078,8 @@ Public Class frmLoad
             cnn1.Close()
         End Try
 
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         'abonoi
         Try
             cnn1.Close()
@@ -1099,6 +1120,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
 
         'clientes
         Try
@@ -1140,6 +1163,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         'vehiculo2
         Try
             cnn1.Close()
@@ -1181,7 +1206,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         Try
             cnn1.Close()
             cnn1.Open()
@@ -1221,6 +1247,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         'abonoi
         Try
             cnn1.Close()
@@ -1927,6 +1955,8 @@ Public Class frmLoad
             cnn1.Close()
         End Try
 
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         'mesa
         Try
             cnn1.Close() : cnn1.Open()
@@ -1980,7 +2010,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         'cartaporte
         Try
             cnn1.Close() : cnn1.Open()
@@ -2035,7 +2066,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         Try
             cnn1.Close()
             cnn1.Open()
@@ -2088,7 +2120,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         Try
             cnn1.Close()
             cnn1.Open()
@@ -2144,6 +2177,8 @@ Public Class frmLoad
             cnn1.Close()
         End Try
 
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -2194,7 +2229,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -2261,7 +2297,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -2328,6 +2365,9 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
+
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
 
         Try
             cnn1.Close() : cnn1.Open()
@@ -2396,6 +2436,8 @@ Public Class frmLoad
             cnn1.Close()
         End Try
 
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -2427,7 +2469,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -2494,7 +2537,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -2526,7 +2570,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         Try
             cnn1.Close() : cnn1.Open()
             cmd1 = cnn1.CreateCommand
@@ -2602,7 +2647,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         'ventas
         Try
             cnn1.Close() : cnn1.Open()
@@ -2637,7 +2683,8 @@ Public Class frmLoad
             cmd1.ExecuteNonQuery()
             cnn1.Close()
         End Try
-
+        ProgressBar1.Value = ProgressBar1.Value + 1
+        My.Application.DoEvents()
         Try
             cnn1.Close()
             cnn1.Open()
