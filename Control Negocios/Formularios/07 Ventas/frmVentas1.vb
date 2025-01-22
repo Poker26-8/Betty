@@ -7319,28 +7319,24 @@ doorcita:
 
     Private Sub Valida_Datos_Cliente(ByVal nombre As String)
 
-        Dim cnn1000 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim cnn4000 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd4000, rd1000 As MySqlDataReader
-        Dim cmd4000 As MySqlCommand
         Try
             Dim MySaldo As Double = 0
-            cnn4000.Close() : cnn4000.Open()
+            cnn4.Close() : cnn4.Open()
 
             For valida_cli As Integer = 1 To 6
-                cmd4000 = cnn4000.CreateCommand
-                cmd4000.CommandText =
+                cmd4 = cnn4.CreateCommand
+                cmd4.CommandText =
                     "select Suspender,Tipo,Id,Credito,Comisionista,SaldoFavor from Clientes where Nombre='" & nombre & "'"
-                rd4000 = cmd4000.ExecuteReader
-                If rd4000.HasRows Then
-                    If rd4000.Read Then
-                        If (rd4000("Suspender").ToString) Then MsgBox("Venta suspendida a este cliente." & vbNewLine & "Consulta con el administrador.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : rd4000.Close() : cnn4000.Close() : Exit Sub
+                rd4 = cmd4.ExecuteReader
+                If rd4.HasRows Then
+                    If rd4.Read Then
+                        If (rd4("Suspender").ToString) Then MsgBox("Venta suspendida a este cliente." & vbNewLine & "Consulta con el administrador.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : rd4.Close() : cnn4.Close() : Exit Sub
 
-                        cbotipo.Text = rd4000("Tipo").ToString
-                        MyIdCliente = rd4000("Id").ToString
+                        cbotipo.Text = rd4("Tipo").ToString
+                        MyIdCliente = rd4("Id").ToString
                         lblNumCliente.Text = MyIdCliente
-                        txtcredito.Text = FormatNumber(rd4000("Credito").ToString, 4)
-                        txtafavor.Text = FormatNumber(rd4000("SaldoFavor").ToString(), 4)
+                        txtcredito.Text = FormatNumber(rd4("Credito").ToString, 4)
+                        txtafavor.Text = FormatNumber(rd4("SaldoFavor").ToString(), 4)
 
                         Label12121.Visible = True
                         cboDomi.Visible = True
@@ -7386,16 +7382,16 @@ doorcita:
 
                     txtdireccion.Focus().Equals(True)
                 End If
-                rd4000.Close()
+                rd4.Close()
 
                 If lblNumCliente.Text <> "MOSTRADOR" Then
-                    cmd4000 = cnn4000.CreateCommand
-                    cmd4000.CommandText =
+                    cmd4 = cnn4.CreateCommand
+                    cmd4.CommandText =
                         "select Saldo from AbonoI where Id=(select max(Id) from AbonoI where Cliente='" & cboNombre.Text & "')"
-                    rd4000 = cmd4000.ExecuteReader
-                    If rd4000.HasRows Then
-                        If rd4000.Read Then
-                            MySaldo = CDbl(IIf(rd4000(0).ToString = "", "0", rd4000(0).ToString))
+                    rd4 = cmd4.ExecuteReader
+                    If rd4.HasRows Then
+                        If rd4.Read Then
+                            MySaldo = CDbl(IIf(rd4(0).ToString = "", "0", rd4(0).ToString))
 
                             If MySaldo > 0 Then
                                 txtadeuda.Text = Math.Abs(MySaldo)
@@ -7407,13 +7403,13 @@ doorcita:
                     Else
                         txtadeuda.Text = "0.00"
                     End If
-                    rd4000.Close()
+                    rd4.Close()
                 End If
             Next
-            cnn4000.Close()
+            cnn4.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
-            cnn4000.Close()
+            cnn4.Close()
         End Try
     End Sub
 
@@ -8697,7 +8693,7 @@ Door:
         End If
 
         'busca abonos si no los encuentra
-        MsgBox("1- ENTRA A VALIDAR ABONOI", vbInformation + vbOKOnly)
+
 
         cnn3.Close() : cnn3.Open()
         cmd3 = cnn3.CreateCommand
@@ -8829,7 +8825,8 @@ Door:
         End If
         rd3.Close()
         cnn3.Close()
-        MsgBox("2- SALE DE VALIDAR ABONOI", vbInformation + vbOKOnly)
+
+
 
 
         Dim TPrint As String = ""
@@ -8888,7 +8885,7 @@ Door:
 
         '---------------------------------------imprimir comandas---------------------------------------------
 
-        MsgBox("3- ENTRA A LA FUNCION DE IMPRIMIR", vbInformation + vbOKOnly)
+
         cnn1.Close() : cnn1.Open()
         cnn3.Close() : cnn3.Open()
 
@@ -9049,21 +9046,10 @@ Door:
 
             ElseIf TPrint = "TICKET MATRIZ DE PUNTO" Then
 
-                'Dim cnn160 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
-                'Dim sinfo160 As String = ""
-                'Dim odata160 As New ToolKitSQL.myssql
-                'Dim dt160 As New DataTable
-                'Dim dr160 As DataRow
-                'If odata160.dbOpen(cnn160, sTarget, sinfo160) Then
-                '    If odata160.getDr(cnn160, dr160, "select Impresora from RutasImpresion where Equipo='" & ObtenerNombreEquipo() & "' and Tipo='Venta' and Formato='" & TPrint & "'", sinfo160) Then
-                '        Impresora = dr160(0).ToString
-                '    End If
-                '    cnn160.Close()
-                'End If
 
 
             End If
-            MsgBox("4- ENTRA A LA FUNCION DE IMPRIMIR EL TICKET", vbInformation + vbOKOnly)
+
 
             If TPrint = "TICKET" Then
                 If Impresora = "" Then MsgBox("No se encontró una impresora.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Termina_Error_Ventas() : btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
@@ -9098,23 +9084,8 @@ Door:
 
             End If
 
-            'If TPrint = "TICKET MATRIZ DE PUNTO" Then
-            '    If Impresora = "" Then MsgBox("No se encontró una impresora.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Termina_Error_Ventas() : btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
-            '    If Tamaño = "80" Then
-            '        For t As Integer = 1 To Copias
-            '            pVentaMatriz80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
-            '            pVentaMatriz80.Print()
-            '        Next
-            '    End If
-            '    If Tamaño = "58" Then
-            '        For t As Integer = 1 To Copias
-            '            pVenta58.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
-            '            pVenta58.Print()
-            '        Next
-            '    End If
-            'End If
         End If
-        MsgBox("5- SALE DEL TICKET", vbInformation + vbOKOnly)
+
 safo:
 
 
@@ -16912,6 +16883,8 @@ doorcita:
                 Multiplica = "*"
                 cbodesc.Text = Mid(cbodesc.Text, 2, 99)
             End If
+
+
 
             Try
 
