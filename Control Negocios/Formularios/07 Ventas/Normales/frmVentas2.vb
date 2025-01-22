@@ -8392,7 +8392,7 @@ kakaxd:
                         End If
                     End With
 
-                    MsgBox("1-INSERTO VENTAS", vbInformation + vbOKOnly)
+
 
             End Select
         Catch ex As Exception
@@ -8589,7 +8589,6 @@ kakaxd:
             End If
             cnn1.Close()
 
-            MsgBox("2-INSERTO ABONOI", vbInformation + vbOKOnly)
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
             cnn1.Close()
@@ -9057,7 +9056,6 @@ Door:
                     cnn1.Close()
             Next
 
-            MsgBox("3-INSERTO VENTASDETALLE", vbInformation + vbOKOnly)
 
         Catch ex As Exception
             MessageBox.Show(ex.ToString())
@@ -9207,7 +9205,7 @@ Door:
         rd3.Close()
         cnn3.Close()
 
-        MsgBox("4-TERMINO DE BUSCAR LOS ABONOI", vbInformation + vbOKOnly)
+
 
         Dim TPrint As String = ""
         Dim Imprime_En As String = ""
@@ -9265,7 +9263,7 @@ Door:
                 End If
             End If
         Next
-        MsgBox("5-VERIFICO VENTASDETALLE ", vbInformation + vbOKOnly)
+
 
         '---------------------------------------imprimir comandas---------------------------------------------
 
@@ -9494,7 +9492,7 @@ Door:
             End If
         End If
 
-        MsgBox("6-TERMINO DE IMPRIMIR ", vbInformation + vbOKOnly)
+
 
 safo:
 
@@ -10222,6 +10220,7 @@ ecomoda:
     End Sub
 
     Private Sub pVenta80_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles pVenta80.PrintPage
+
         'Fuentes prederminadas
         Dim tipografia As String = "Lucida Sans Typewriter"
         Dim fuente_datos As New Drawing.Font(tipografia, 10, FontStyle.Regular)

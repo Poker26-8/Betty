@@ -113,6 +113,21 @@ Public Class frmVentas3
     Dim nocodigo As Integer = 0
     Dim nopeso As Integer = 0
     Dim basculaxd As String = ""
+
+    Dim Pie As String = ""
+    Dim pagare As String = ""
+    Dim cab0 As String = ""
+    Dim cab1 As String = ""
+    Dim cab2 As String = ""
+    Dim cab3 As String = ""
+    Dim cab4 As String = ""
+    Dim cab5 As String = ""
+    Dim cab6 As String = ""
+
+    Dim autofac As Integer = 0
+    Dim linkauto As String = ""
+    Dim siqrwhats As Integer = 0
+
     Private Async Sub frmVentas3_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         pide = DatosRecarga("TomaContra")
@@ -132,9 +147,32 @@ Public Class frmVentas3
         noprefijo = DatosRecarga("Prefijo")
         nocodigo = DatosRecarga("Codigo")
         nopeso = DatosRecarga("Peso")
+        autofac = DatosRecarga("AutoFac")
+        linkauto = DatosRecarga("LinkAuto")
+        siqrwhats = DatosRecarga2("WhatsApp")
+
 
         Try
             cnn1.Close() : cnn1.Open()
+            cmd1 = cnn1.CreateCommand
+            cmd1.CommandText =
+                "select Pie1,Pagare,Cab0,Cab1,Cab2,Cab3,Cab4,Cab5,Cab6 from Ticket"
+            rd1 = cmd1.ExecuteReader
+            If rd1.HasRows Then
+                If rd1.Read Then
+                    Pie = rd1("Pie1").ToString
+                    pagare = rd1("Pagare").ToString
+                    cab0 = rd1("Cab0").ToString
+                    cab1 = rd1("Cab1").ToString
+                    cab2 = rd1("Cab2").ToString
+                    cab3 = rd1("Cab3").ToString
+                    cab4 = rd1("Cab4").ToString
+                    cab5 = rd1("Cab5").ToString
+                    cab6 = rd1("Cab6").ToString
+                End If
+            End If
+            rd1.Close()
+
             cmd1 = cnn1.CreateCommand
             cmd1.CommandText =
                 "select Vent_EPrec from Permisos where IdEmpleado=" & id_usu_log
@@ -12403,13 +12441,8 @@ ecomoda:
         Dim pen As New Pen(Brushes.Black, 1)
         Dim Y As Double = 0
         Dim Logotipo As Drawing.Image = Nothing
-        Dim Pie As String = ""
-        Dim pagare As String = ""
         Dim ligaqr As String = ""
 
-        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
 
         If whats <> "" Then
             ligaqr = "http://wa.me/" & whats
@@ -12436,67 +12469,46 @@ ecomoda:
             End If
 
             '[°]. Datos del negocio
-            cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT Saldo FROM monedero WHERE Barras='" & txttel.Text & "'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    saldomonedero = rd1("Saldo").ToString
-                End If
-            End If
-            rd1.Close()
 
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
-                "select Pie1,Pagare,Cab0,Cab1,Cab2,Cab3,Cab4,Cab5,Cab6 from Ticket"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    Pie = rd1("Pie1").ToString
-                    pagare = rd1("Pagare").ToString
 
-                    'Razón social
-                    If rd1("Cab0").ToString() <> "" Then
-                        e.Graphics.DrawString(rd1("Cab0").ToString, New Drawing.Font(tipografia, 8, FontStyle.Bold), Brushes.Black, 140, Y, sc)
-                        Y += 12.5
-                    End If
-                    'RFC
-                    If rd1("Cab1").ToString() <> "" Then
-                        e.Graphics.DrawString(rd1("Cab1").ToString, New Drawing.Font(tipografia, 8, FontStyle.Bold), Brushes.Black, 140, Y, sc)
-                        Y += 12.5
-                    End If
-                    'Calle  N°.
-                    If rd1("Cab2").ToString() <> "" Then
-                        e.Graphics.DrawString(rd1("Cab2").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
-                        Y += 12
-                    End If
-                    'Colonia
-                    If rd1("Cab3").ToString() <> "" Then
-                        e.Graphics.DrawString(rd1("Cab3").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
-                        Y += 12
-                    End If
-                    'Delegación / Municipio - Entidad
-                    If rd1("Cab4").ToString() <> "" Then
-                        e.Graphics.DrawString(rd1("Cab4").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
-                        Y += 12
-                    End If
-                    'Teléfono
-                    If rd1("Cab5").ToString() <> "" Then
-                        e.Graphics.DrawString(rd1("Cab5").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
-                        Y += 12
-                    End If
-                    'Correo
-                    If rd1("Cab6").ToString() <> "" Then
-                        e.Graphics.DrawString(rd1("Cab6").ToString, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
-                        Y += 12
-                    End If
-                    Y += 3
-                End If
-            Else
-                Y += 0
+            'Razón social
+            If cab0 <> "" Then
+                e.Graphics.DrawString(cab0, New Drawing.Font(tipografia, 8, FontStyle.Bold), Brushes.Black, 140, Y, sc)
+                Y += 12.5
             End If
-            rd1.Close()
+            'RFC
+            If cab1 <> "" Then
+                e.Graphics.DrawString(cab1, New Drawing.Font(tipografia, 8, FontStyle.Bold), Brushes.Black, 140, Y, sc)
+                Y += 12.5
+            End If
+            'Calle  N°.
+            If cab2 <> "" Then
+                e.Graphics.DrawString(cab2, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
+                Y += 12
+            End If
+            'Colonia
+            If cab3 <> "" Then
+                e.Graphics.DrawString(cab3, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
+                Y += 12
+            End If
+            'Delegación / Municipio - Entidad
+            If cab4 <> "" Then
+                e.Graphics.DrawString(cab4, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
+                Y += 12
+            End If
+            'Teléfono
+            If cab5 <> "" Then
+                e.Graphics.DrawString(cab5, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
+                Y += 12
+            End If
+            'Correo
+            If cab6 <> "" Then
+                e.Graphics.DrawString(cab6, New Drawing.Font(tipografia, 8, FontStyle.Regular), Brushes.Gray, 140, Y, sc)
+                Y += 12
+            End If
+            Y += 3
+
+
 
             '[1]. Datos de la venta
             e.Graphics.DrawString("--------------------------------------------------------", New Drawing.Font(tipografia, 12, FontStyle.Regular), Brushes.Black, 1, Y)
@@ -12880,44 +12892,6 @@ ecomoda:
 
             'para el qr
 
-            Dim autofac As Integer = 0
-            Dim linkauto As String = ""
-
-            cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT NotasCred FROM formatos WHERE Facturas='AutoFac'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    autofac = rd1(0).ToString
-                End If
-            End If
-            rd1.Close()
-
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT NotasCred,NumPart FROM formatos WHERE Facturas='LinkAuto'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    linkauto = rd1(0).ToString
-                    siqr = rd1(1).ToString
-                End If
-            End If
-            rd1.Close()
-
-            Dim siqrwhats As Integer = 0
-
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT NotasCred,NumPart FROM formatos WHERE Facturas='WhatsApp'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    siqrwhats = rd1(1).ToString
-                End If
-            End If
-            rd1.Close()
-
-            cnn1.Close()
             If siqrwhats = 1 Then
                 If ligaqr <> "" Then
                     Dim qre As New QrCodeImgControl
