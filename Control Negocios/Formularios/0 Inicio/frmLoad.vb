@@ -59,18 +59,18 @@ Public Class frmLoad
         My.Application.DoEvents()
         'Licencia()
 
-        cnn1.Close()
-        cnn1.Open()
-        cmd1 = cnn1.CreateCommand
-        cmd1.CommandText = "Select numero,usuario,password from loginrecargas"
-        rd1 = cmd1.ExecuteReader
-        If rd1.Read Then
-            varnumero = rd1("numero").ToString
-            varusuario = rd1("usuario").ToString
-            varcontra = rd1("password").ToString
+        cnn2.Close()
+        cnn2.Open()
+        cmd2 = cnn2.CreateCommand
+        cmd2.CommandText = "Select numero,usuario,password from loginrecargas"
+        rd2 = cmd2.ExecuteReader
+        If rd2.Read Then
+            varnumero = rd2("numero").ToString
+            varusuario = rd2("usuario").ToString
+            varcontra = rd2("password").ToString
         End If
-        rd1.Close()
-        cnn1.Close()
+        rd2.Close()
+        cnn2.Close()
 
 
         If tienda_enlinea = True Then
@@ -467,18 +467,18 @@ Public Class frmLoad
         ''Validación de la aditoria
 
         Try
-            cnn1.Close() : cnn1.Open()
-            cmd1 = cnn1.CreateCommand
-            cmd1.CommandText =
+            cnn2.Close() : cnn2.Open()
+            cmd2 = cnn2.CreateCommand
+            cmd2.CommandText =
                 "select NotasCred from Formatos where Facturas='Audita'"
-            rd1 = cmd1.ExecuteReader
-            If rd1.HasRows Then
-                If rd1.Read Then
-                    validaciones.audita = rd1(0).ToString
+            rd2 = cmd2.ExecuteReader
+            If rd2.HasRows Then
+                If rd2.Read Then
+                    validaciones.audita = rd2(0).ToString
                 End If
             End If
-            rd1.Close()
-            cnn1.Close()
+            rd2.Close()
+            cnn2.Close()
 
             ProgressBar1.Value = 100
             My.Application.DoEvents()
@@ -497,10 +497,6 @@ Public Class frmLoad
 
     Public Sub verif()
         'cumpleaños monedero
-
-        'Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        'Dim rd1 As MySqlDataReader
-        'Dim cmd1 As MySqlCommand
 
         Try
             cnn1.Close()
@@ -3846,14 +3842,6 @@ Public Class frmLoad
     End Sub
 
     Public Sub VerificarVentasDetalle()
-
-        'Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        'Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        'Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        'Dim cnn4 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-
-        'Dim rd1, rd2, rd3, rd4 As MySqlDataReader
-        'Dim cmd1, cmd2, cmd3, cmd4 As MySqlCommand
 
         Try
 
