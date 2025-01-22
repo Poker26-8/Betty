@@ -8836,51 +8836,51 @@ Door:
 
 
         '---------------------------------------FUNCION PARA ELIMINAR DETALLES DE VENTAS DUPLICADOS-----------
-        Dim sumac As Integer = 0
-        Dim ideli As Integer = 0
-        Dim cunico As String = ""
+        ' Dim sumac As Integer = 0
+        ' Dim ideli As Integer = 0
+        ' Dim cunico As String = ""
 
 
-        For luffy As Integer = 0 To grdcaptura.Rows.Count - 1
-            cnn2.Close() : cnn2.Open()
-            cunico = IIf(grdcaptura.Rows(luffy).Cells(15).Value = "", "", grdcaptura.Rows(luffy).Cells(15).Value)
-            If cunico = "" Then
-            Else
-                cmd2 = cnn2.CreateCommand
-                cmd2.CommandText = "SELECT COUNT(CodUnico),Id FROM ventasdetalle WHERE CodUnico='" & cunico & "' AND Folio=" & MYFOLIO & ""
-                rd2 = cmd2.ExecuteReader
-                If rd2.HasRows Then
-                    If rd2.Read Then
-                        sumac = rd2(0).ToString
-                        ideli = rd2(1).ToString
-                        If sumac > 1 Then
-                            cnn3.Close() : cnn3.Open()
-                            cmd3 = cnn3.CreateCommand
-                            cmd3.CommandText = "DELETE FROM ventasdetalle WHERE Id=" & ideli & " AND CodUnico='" & cunico & "'"
-                            cmd3.ExecuteNonQuery()
-                            cnn3.Close()
-                        End If
-                    End If
-                End If
-                rd2.Close()
-            End If
-            cnn2.Close()
+        'For luffy As Integer = 0 To grdcaptura.Rows.Count - 1
+        '    cnn2.Close() : cnn2.Open()
+        '    cunico = IIf(grdcaptura.Rows(luffy).Cells(15).Value = "", "", grdcaptura.Rows(luffy).Cells(15).Value)
+        '    If cunico = "" Then
+        '    Else
+        '        cmd2 = cnn2.CreateCommand
+        '        cmd2.CommandText = "SELECT COUNT(CodUnico),Id FROM ventasdetalle WHERE CodUnico='" & cunico & "' AND Folio=" & MYFOLIO & ""
+        '        rd2 = cmd2.ExecuteReader
+        '        If rd2.HasRows Then
+        '            If rd2.Read Then
+        '                sumac = rd2(0).ToString
+        '                ideli = rd2(1).ToString
+        '                If sumac > 1 Then
+        '                    cnn3.Close() : cnn3.Open()
+        '                    cmd3 = cnn3.CreateCommand
+        '                    cmd3.CommandText = "DELETE FROM ventasdetalle WHERE Id=" & ideli & " AND CodUnico='" & cunico & "'"
+        '                    cmd3.ExecuteNonQuery()
+        '                    cnn3.Close()
+        '                End If
+        '            End If
+        '        End If
+        '        rd2.Close()
+        '    End If
+        '    cnn2.Close()
 
-            If grdcaptura.Rows(luffy).Cells(0).Value.ToString <> "" And grdcaptura.Rows(luffy).Cells(15).Value.ToString <> "" And grdcaptura.Rows(luffy).Cells(16).Value.ToString <> "" Then
-                Dim cnn11 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
-                Dim sinfo11 As String = ""
-                Dim odata11 As New ToolKitSQL.myssql
-                Dim dt11 As New DataTable
-                Dim dr11 As DataRow
-                If odata11.dbOpen(cnn11, sTarget, sinfo11) Then
-                    If odata11.getDr(cnn11, dr11, " SELECT Id FROM ventasdetalle WHERE CodUnico = '" & grdcaptura.Rows(luffy).Cells(15).Value.ToString & "'", sinfo11) Then
-                    Else
-                        odata11.runSp(cnn11, grdcaptura.Rows(luffy).Cells(16).Value.ToString, sinfo11)
-                    End If
-                    cnn11.Close()
-                End If
-            End If
-        Next
+        '    If grdcaptura.Rows(luffy).Cells(0).Value.ToString <> "" And grdcaptura.Rows(luffy).Cells(15).Value.ToString <> "" And grdcaptura.Rows(luffy).Cells(16).Value.ToString <> "" Then
+        '        Dim cnn11 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+        '        Dim sinfo11 As String = ""
+        '        Dim odata11 As New ToolKitSQL.myssql
+        '        Dim dt11 As New DataTable
+        '        Dim dr11 As DataRow
+        '        If odata11.dbOpen(cnn11, sTarget, sinfo11) Then
+        '            If odata11.getDr(cnn11, dr11, " SELECT Id FROM ventasdetalle WHERE CodUnico = '" & grdcaptura.Rows(luffy).Cells(15).Value.ToString & "'", sinfo11) Then
+        '            Else
+        '                odata11.runSp(cnn11, grdcaptura.Rows(luffy).Cells(16).Value.ToString, sinfo11)
+        '            End If
+        '            cnn11.Close()
+        '        End If
+        '    End If
+        'Next
 
 
         '---------------------------------------imprimir comandas---------------------------------------------
@@ -8945,9 +8945,6 @@ Door:
         Else
 
         End If
-
-
-
 
         If (Imprime) Then
             If MsgBox("¿Deseas imprimir nota de venta?", vbInformation + vbOKCancel, "Delsscom Control Negocios Pro") = vbOK Then
