@@ -8697,6 +8697,7 @@ Door:
         End If
 
         'busca abonos si no los encuentra
+        MsgBox("1- ENTRA A VALIDAR ABONOI", vbInformation + vbOKOnly)
 
         cnn3.Close() : cnn3.Open()
         cmd3 = cnn3.CreateCommand
@@ -8828,17 +8829,13 @@ Door:
         End If
         rd3.Close()
         cnn3.Close()
-
+        MsgBox("2- SALE DE VALIDAR ABONOI", vbInformation + vbOKOnly)
 
 
         Dim TPrint As String = ""
         Dim Imprime_En As String = ""
-
-
         Dim Pasa_Print As Boolean = False
         Dim contra As String = txtcontraseña.Text, usu As String = lblusuario.Text
-
-
 
 
         '---------------------------------------FUNCION PARA ELIMINAR DETALLES DE VENTAS DUPLICADOS-----------
@@ -8891,7 +8888,7 @@ Door:
 
         '---------------------------------------imprimir comandas---------------------------------------------
 
-
+        MsgBox("3- ENTRA A LA FUNCION DE IMPRIMIR", vbInformation + vbOKOnly)
         cnn1.Close() : cnn1.Open()
         cnn3.Close() : cnn3.Open()
 
@@ -9038,6 +9035,7 @@ Door:
                             Else
                                 cboNombre.Text = "MOSTRADOR"
                             End If
+                            btnnuevo.Enabled = True
                             btnnuevo.PerformClick()
                             cbodesc.Focus().Equals(True)
                             MYFOLIO = 0
@@ -9051,20 +9049,21 @@ Door:
 
             ElseIf TPrint = "TICKET MATRIZ DE PUNTO" Then
 
-                Dim cnn160 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
-                Dim sinfo160 As String = ""
-                Dim odata160 As New ToolKitSQL.myssql
-                Dim dt160 As New DataTable
-                Dim dr160 As DataRow
-                If odata160.dbOpen(cnn160, sTarget, sinfo160) Then
-                    If odata160.getDr(cnn160, dr160, "select Impresora from RutasImpresion where Equipo='" & ObtenerNombreEquipo() & "' and Tipo='Venta' and Formato='" & TPrint & "'", sinfo160) Then
-                        Impresora = dr160(0).ToString
-                    End If
-                    cnn160.Close()
-                End If
+                'Dim cnn160 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+                'Dim sinfo160 As String = ""
+                'Dim odata160 As New ToolKitSQL.myssql
+                'Dim dt160 As New DataTable
+                'Dim dr160 As DataRow
+                'If odata160.dbOpen(cnn160, sTarget, sinfo160) Then
+                '    If odata160.getDr(cnn160, dr160, "select Impresora from RutasImpresion where Equipo='" & ObtenerNombreEquipo() & "' and Tipo='Venta' and Formato='" & TPrint & "'", sinfo160) Then
+                '        Impresora = dr160(0).ToString
+                '    End If
+                '    cnn160.Close()
+                'End If
 
 
             End If
+            MsgBox("4- ENTRA A LA FUNCION DE IMPRIMIR EL TICKET", vbInformation + vbOKOnly)
 
             If TPrint = "TICKET" Then
                 If Impresora = "" Then MsgBox("No se encontró una impresora.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Termina_Error_Ventas() : btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
@@ -9099,23 +9098,23 @@ Door:
 
             End If
 
-            If TPrint = "TICKET MATRIZ DE PUNTO" Then
-                If Impresora = "" Then MsgBox("No se encontró una impresora.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Termina_Error_Ventas() : btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
-                If Tamaño = "80" Then
-                    For t As Integer = 1 To Copias
-                        pVentaMatriz80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
-                        pVentaMatriz80.Print()
-                    Next
-                End If
-                If Tamaño = "58" Then
-                    For t As Integer = 1 To Copias
-                        pVenta58.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
-                        pVenta58.Print()
-                    Next
-                End If
-            End If
+            'If TPrint = "TICKET MATRIZ DE PUNTO" Then
+            '    If Impresora = "" Then MsgBox("No se encontró una impresora.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Termina_Error_Ventas() : btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
+            '    If Tamaño = "80" Then
+            '        For t As Integer = 1 To Copias
+            '            pVentaMatriz80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
+            '            pVentaMatriz80.Print()
+            '        Next
+            '    End If
+            '    If Tamaño = "58" Then
+            '        For t As Integer = 1 To Copias
+            '            pVenta58.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
+            '            pVenta58.Print()
+            '        Next
+            '    End If
+            'End If
         End If
-
+        MsgBox("5- SALE DEL TICKET", vbInformation + vbOKOnly)
 safo:
 
 
