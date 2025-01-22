@@ -7970,7 +7970,7 @@ Door:
             For N As Integer = 0 To grdcaptura.Rows.Count - 1
                 If CStr(grdcaptura.Rows(N).Cells(0).Value.ToString) <> "" Then
                     Dim ca As Double = grdcaptura.Rows(N).Cells(3).Value.ToString
-                    Dim varcod As String = cbocodigo.Text
+                    Dim varcod As String = grdcaptura.Rows(N).Cells(0).Value.ToString
                     Dim index As Integer = -1
                     Dim row As DataGridViewRow
                     For Each row In DataGridView1.Rows
