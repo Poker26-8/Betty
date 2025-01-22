@@ -21,21 +21,18 @@ Public Class frmLoad
 
     Public Sub cargaTodo()
 
-        'Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        'Dim cnn2 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        'Dim rd1, rd2 As MySqlDataReader
-        'Dim cmd1, cmd2 As MySqlCommand
+
         PrimeraConfig = ""
         Login.Hide()
 
-        ' VerificarVentasDetalle()
+        VerificarVentasDetalle()
         My.Application.DoEvents()
 
         Label1.Text = "Cargando base de datos..."
         ProgressBar1.Value = 25
         My.Application.DoEvents()
 
-        ' BuscarTablas()
+        '' BuscarTablas()
 
         ProgressBar1.Value = 40
         My.Application.DoEvents()
@@ -57,7 +54,7 @@ Public Class frmLoad
         ProgressBar1.Value = 60
         Label1.Text = "Cargando Permisos de usuario..."
         My.Application.DoEvents()
-        'Licencia()
+        ''Licencia()
 
         cnn2.Close()
         cnn2.Open()
@@ -3855,7 +3852,7 @@ Public Class frmLoad
             cnn3.Close() : cnn3.Open()
 
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT Folio FROM ventas ORDER BY Folio desc LIMIT 60"
+            cmd1.CommandText = "SELECT Folio FROM ventas ORDER BY Folio desc LIMIT 20"
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 Do While rd1.Read
