@@ -5719,9 +5719,6 @@ kaka:
         Dim limpiar As Integer = DatosRecarga2("LimpiarV")
         btnventa.Enabled = True : My.Application.DoEvents()
 
-        Dim cnn1 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
-        Dim rd1 As MySqlDataReader
-        Dim cmd1 As MySqlCommand
 
         If limpiar = 1 Then
 
@@ -5920,7 +5917,7 @@ kaka:
         txtcomentario.Text = ""
         ordetrabajo = 0
 
-        cargadatosgrid()
+        ' cargadatosgrid()
         Folio()
 
 
@@ -7775,57 +7772,57 @@ kakaxd:
         Dim Descuento As Double = 0
         Dim MontoSDesc As Double = 0
 
-        Dim CodCadena As String = ""
-        Dim cadena As String = ""
-        Dim ope1 As Double = 0
-        Dim Car As Integer = 0
+        ' Dim CodCadena As String = ""
+        'Dim cadena As String = ""
+        'Dim ope1 As Double = 0
+        'Dim Car As Integer = 0
 
-        Dim letters As String = ""
-        Dim Numeros As String = ""
-        Dim Letras As String = ""
-        Dim lic As String = ""
+        'Dim letters As String = ""
+        'Dim Numeros As String = ""
+        'Dim Letras As String = ""
+        'Dim lic As String = ""
 
-        ope1 = Math.Cos(CDbl(lblfolio.Text))
-        If ope1 > 0 Then
-            cadena = Strings.Left(Replace(CStr(ope1), ".", "9"), 10)
-        Else
-            cadena = Strings.Left(Replace(CStr(Math.Abs(ope1)), ".", "8"), 10)
-        End If
-        For i = 1 To 10
-            Car = Mid(cadena, i, 1)
-            Select Case Car
-                Case Is = 0
-                    letters = letters & "Y"
-                Case Is = 1
-                    letters = letters & "Z"
-                Case Is = 2
-                    letters = letters & "W"
-                Case Is = 3
-                    letters = letters & "H"
-                Case Is = 4
-                    letters = letters & "S"
-                Case Is = 5
-                    letters = letters & "B"
-                Case Is = 6
-                    letters = letters & "C"
-                Case Is = 7
-                    letters = letters & "P"
-                Case Is = 8
-                    letters = letters & "Q"
-                Case Is = 9
-                    letters = letters & "A"
-                Case Else
-                    letters = letters & Car
-            End Select
-        Next
-        For w = 1 To 10 Step 2
-            Numeros = Mid(lblfolio.Text, w, 4)
-            Letras = Mid(letters, w, 4)
-            lic = lic & Numeros & Letras & "-"
-        Next
-        lic = Strings.Left(lic, Len(lic) - 1)
-        CodCadena = lic
-        cadenafact = Trim(CodCadena)
+        'ope1 = Math.Cos(CDbl(lblfolio.Text))
+        'If ope1 > 0 Then
+        '    cadena = Strings.Left(Replace(CStr(ope1), ".", "9"), 10)
+        'Else
+        '    cadena = Strings.Left(Replace(CStr(Math.Abs(ope1)), ".", "8"), 10)
+        'End If
+        'For i = 1 To 10
+        '    Car = Mid(cadena, i, 1)
+        '    Select Case Car
+        '        Case Is = 0
+        '            letters = letters & "Y"
+        '        Case Is = 1
+        '            letters = letters & "Z"
+        '        Case Is = 2
+        '            letters = letters & "W"
+        '        Case Is = 3
+        '            letters = letters & "H"
+        '        Case Is = 4
+        '            letters = letters & "S"
+        '        Case Is = 5
+        '            letters = letters & "B"
+        '        Case Is = 6
+        '            letters = letters & "C"
+        '        Case Is = 7
+        '            letters = letters & "P"
+        '        Case Is = 8
+        '            letters = letters & "Q"
+        '        Case Is = 9
+        '            letters = letters & "A"
+        '        Case Else
+        '            letters = letters & Car
+        '    End Select
+        'Next
+        'For w = 1 To 10 Step 2
+        '    Numeros = Mid(lblfolio.Text, w, 4)
+        '    Letras = Mid(letters, w, 4)
+        '    lic = lic & Numeros & Letras & "-"
+        'Next
+        'lic = Strings.Left(lic, Len(lic) - 1)
+        'CodCadena = lic
+        'cadenafact = Trim(CodCadena)
 
         Dim observaciones As String = ""
         observaciones = txtcomentario.Text.TrimEnd(vbCrLf.ToCharArray)
@@ -8224,51 +8221,51 @@ kakaxd:
 
 
 
-                        If TotFormaPago > 0 Then
+                        'If TotFormaPago > 0 Then
 
-                            Dim varstrvent As String = ""
-                            varstrvent = "insert into AbonoI(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Comentario,CuentaC,Comisiones,NumSuc) values(" & MYFOLIO & "," & IdCliente & ",'" & IIf(cboNombre.Text = "", "PUBLICO EN GENERAL", cboNombre.Text) & "','ABONO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & TotFormaPago & "," & (MySaldo) & ",'" & FormaPago & "'," & TotFormaPago & ",'" & BancoFP & "','" & ReferenciaFP & "','" & lblusuario.Text & "','" & CmentarioFP & "','" & CuentaFP & "'," & totalcomision & "," & base & ")"
+                        '    Dim varstrvent As String = ""
+                        '    varstrvent = "insert into AbonoI(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Comentario,CuentaC,Comisiones,NumSuc) values(" & MYFOLIO & "," & IdCliente & ",'" & IIf(cboNombre.Text = "", "PUBLICO EN GENERAL", cboNombre.Text) & "','ABONO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & TotFormaPago & "," & (MySaldo) & ",'" & FormaPago & "'," & TotFormaPago & ",'" & BancoFP & "','" & ReferenciaFP & "','" & lblusuario.Text & "','" & CmentarioFP & "','" & CuentaFP & "'," & totalcomision & "," & base & ")"
 
-                            Dim cnn12 As OleDb.OleDbConnection = New OleDb.OleDbConnection
-                            Dim sinfo12 As String = ""
-                            Dim odata12 As New ToolKitSQL.oledbdata
-                            With odata12
-                                If .dbOpen(cnn12, Direcc_Access, sinfo12) Then
-                                    If .runSp(cnn12, varstrvent, sinfo12) Then
-                                    Else
-                                        MsgBox(sinfo12)
-                                    End If
-                                    cnn12.Close()
-                                End If
-                            End With
+                        '    Dim cnn12 As OleDb.OleDbConnection = New OleDb.OleDbConnection
+                        '    Dim sinfo12 As String = ""
+                        '    Dim odata12 As New ToolKitSQL.oledbdata
+                        '    With odata12
+                        '        If .dbOpen(cnn12, Direcc_Access, sinfo12) Then
+                        '            If .runSp(cnn12, varstrvent, sinfo12) Then
+                        '            Else
+                        '                MsgBox(sinfo12)
+                        '            End If
+                        '            cnn12.Close()
+                        '        End If
+                        '    End With
 
-                            Dim saldocuenta As Double = 0
+                        '    Dim saldocuenta As Double = 0
 
-                            cnn1.Close() : cnn1.Open()
-                            cmd1 = cnn1.CreateCommand
-                            cmd1.CommandText = "SELECT Saldo FROM movCuenta WHERE Id=(SELECT MAX(Id) FROM movcuenta WHERE Cuenta='" & CuentaFP & "')"
-                            rd1 = cmd1.ExecuteReader
-                            If rd1.HasRows Then
-                                If rd1.Read Then
-                                    saldocuenta = IIf(rd1(0).ToString = "", 0, rd1(0).ToString) + TotFormaPago
+                        '    cnn1.Close() : cnn1.Open()
+                        '    cmd1 = cnn1.CreateCommand
+                        '    cmd1.CommandText = "SELECT Saldo FROM movCuenta WHERE Id=(SELECT MAX(Id) FROM movcuenta WHERE Cuenta='" & CuentaFP & "')"
+                        '    rd1 = cmd1.ExecuteReader
+                        '    If rd1.HasRows Then
+                        '        If rd1.Read Then
+                        '            saldocuenta = IIf(rd1(0).ToString = "", 0, rd1(0).ToString) + TotFormaPago
 
-                                    cnn2.Close() : cnn2.Open()
-                                    cmd2 = cnn2.CreateCommand
-                                    cmd2.CommandText = "INSERT INTO movcuenta(Tipo,Banco,Referencia,Concepto,Total,Retiro,Deposito,Saldo,Fecha,Hora,Folio,Cliente,Comentario,Cuenta,BancoCuenta) VALUES('" & FormaPago & "','" & BancoFP & "','" & ReferenciaFP & "','VENTA'," & TotFormaPago & ",0," & TotFormaPago & "," & saldocuenta & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & MYFOLIO & "','" & cboNombre.Text & "','" & CmentarioFP & "','" & CuentaFP & "','" & BancoCFP & "')"
-                                    cmd2.ExecuteNonQuery()
-                                    cnn2.Close()
-                                End If
-                            Else
-                                cnn2.Close() : cnn2.Open()
-                                cmd2 = cnn2.CreateCommand
-                                cmd2.CommandText = "INSERT INTO movcuenta(Tipo,Banco,Referencia,Concepto,Total,Retiro,Deposito,Fecha,Hora,Folio,Cliente,Comentario,Cuenta,BancoCuenta) VALUES('" & FormaPago & "','" & BancoFP & "','" & ReferenciaFP & "','VENTA'," & TotFormaPago & ",0," & TotFormaPago & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & MYFOLIO & "','" & cboNombre.Text & "','" & CmentarioFP & "','" & CuentaFP & "','" & BancoCFP & "')"
-                                cmd2.ExecuteNonQuery()
-                                cnn2.Close()
-                            End If
-                            rd1.Close()
-                            cnn1.Close()
+                        '            cnn2.Close() : cnn2.Open()
+                        '            cmd2 = cnn2.CreateCommand
+                        '            cmd2.CommandText = "INSERT INTO movcuenta(Tipo,Banco,Referencia,Concepto,Total,Retiro,Deposito,Saldo,Fecha,Hora,Folio,Cliente,Comentario,Cuenta,BancoCuenta) VALUES('" & FormaPago & "','" & BancoFP & "','" & ReferenciaFP & "','VENTA'," & TotFormaPago & ",0," & TotFormaPago & "," & saldocuenta & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & MYFOLIO & "','" & cboNombre.Text & "','" & CmentarioFP & "','" & CuentaFP & "','" & BancoCFP & "')"
+                        '            cmd2.ExecuteNonQuery()
+                        '            cnn2.Close()
+                        '        End If
+                        '    Else
+                        '        cnn2.Close() : cnn2.Open()
+                        '        cmd2 = cnn2.CreateCommand
+                        '        cmd2.CommandText = "INSERT INTO movcuenta(Tipo,Banco,Referencia,Concepto,Total,Retiro,Deposito,Fecha,Hora,Folio,Cliente,Comentario,Cuenta,BancoCuenta) VALUES('" & FormaPago & "','" & BancoFP & "','" & ReferenciaFP & "','VENTA'," & TotFormaPago & ",0," & TotFormaPago & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & MYFOLIO & "','" & cboNombre.Text & "','" & CmentarioFP & "','" & CuentaFP & "','" & BancoCFP & "')"
+                        '        cmd2.ExecuteNonQuery()
+                        '        cnn2.Close()
+                        '    End If
+                        '    rd1.Close()
+                        '    cnn1.Close()
 
-                        End If
+                        'End If
                     Next
 
                 End If
@@ -8286,33 +8283,33 @@ kakaxd:
             Dim saldo_actual As Double = 0
 
             'Actualiza saldo a favor del cliente
-            Try
-                cnn1.Close() : cnn1.Open()
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText =
-                    "select SaldoFavor from Clientes where Nombre='" & cboNombre.Text & "'"
-                rd1 = cmd1.ExecuteReader
-                If rd1.HasRows Then
-                    If rd1.Read Then
-                        saldo_actual = rd1("SaldoFavor").ToString()
-                    End If
-                End If
-                rd1.Close()
+            'Try
+            '    cnn1.Close() : cnn1.Open()
+            '    cmd1 = cnn1.CreateCommand
+            '    cmd1.CommandText =
+            '        "select SaldoFavor from Clientes where Nombre='" & cboNombre.Text & "'"
+            '    rd1 = cmd1.ExecuteReader
+            '    If rd1.HasRows Then
+            '        If rd1.Read Then
+            '            saldo_actual = rd1("SaldoFavor").ToString()
+            '        End If
+            '    End If
+            '    rd1.Close()
 
-                Dim quita__saldo As Double = TotSaldo
-                Dim nuevo_saldo As Double = saldo_actual - quita__saldo
+            '    Dim quita__saldo As Double = TotSaldo
+            '    Dim nuevo_saldo As Double = saldo_actual - quita__saldo
 
-                cmd1 = cnn1.CreateCommand
-                cmd1.CommandText =
-                    "update Clientes set SaldoFavor=" & nuevo_saldo & " where Nombre='" & cboNombre.Text & "'"
-                cmd1.ExecuteNonQuery()
+            '    cmd1 = cnn1.CreateCommand
+            '    cmd1.CommandText =
+            '        "update Clientes set SaldoFavor=" & nuevo_saldo & " where Nombre='" & cboNombre.Text & "'"
+            '    cmd1.ExecuteNonQuery()
 
-                cnn1.Close()
-            Catch ex As Exception
-                MessageBox.Show(ex.ToString())
-                cnn1.Close()
-                btnnuevo.Enabled = True
-            End Try
+            '    cnn1.Close()
+            'Catch ex As Exception
+            '    MessageBox.Show(ex.ToString())
+            '    cnn1.Close()
+            '    btnnuevo.Enabled = True
+            'End Try
         End If
 
         Try
@@ -9023,32 +9020,32 @@ Door:
 safo:
 
 
-        If txtcotped.Text <> "" Then
-            Dim cnn100 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
-            Dim sinfo100 As String = ""
-            Dim odata100 As New ToolKitSQL.myssql
-            Dim dt100 As New DataTable
-            Dim dr100 As DataRow
-            If odata100.dbOpen(cnn100, sTarget, sinfo100) Then
-                odata100.runSp(cnn100, "delete from CotPed where Folio=" & txtcotped.Text, sinfo100)
-                odata100.runSp(cnn100, "delete from CotPedDet where Folio=" & txtcotped.Text, sinfo100)
-                cnn100.Close()
-            End If
-        End If
+        'If txtcotped.Text <> "" Then
+        '    Dim cnn100 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+        '    Dim sinfo100 As String = ""
+        '    Dim odata100 As New ToolKitSQL.myssql
+        '    Dim dt100 As New DataTable
+        '    Dim dr100 As DataRow
+        '    If odata100.dbOpen(cnn100, sTarget, sinfo100) Then
+        '        odata100.runSp(cnn100, "delete from CotPed where Folio=" & txtcotped.Text, sinfo100)
+        '        odata100.runSp(cnn100, "delete from CotPedDet where Folio=" & txtcotped.Text, sinfo100)
+        '        cnn100.Close()
+        '    End If
+        'End If
 
-        If lblpedido.Text <> "0" Then
-            Dim cnn150 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
-            Dim sinfo150 As String = ""
-            Dim odata150 As New ToolKitSQL.myssql
-            Dim dt150 As New DataTable
-            Dim dr150 As DataRow
+        'If lblpedido.Text <> "0" Then
+        '    Dim cnn150 As MySqlClient.MySqlConnection = New MySqlClient.MySqlConnection
+        '    Dim sinfo150 As String = ""
+        '    Dim odata150 As New ToolKitSQL.myssql
+        '    Dim dt150 As New DataTable
+        '    Dim dr150 As DataRow
 
-            If odata150.dbOpen(cnn150, sTarget, sinfo150) Then
-                odata150.runSp(cnn150, "DELETE FROM pedidosven WHERE Folio='" & lblpedido.Text & "'", sinfo150)
-                odata150.runSp(cnn150, "DELETE FROM pedidosvendet WHERE Folio='" & lblpedido.Text & "'", sinfo150)
-                cnn150.Close()
-            End If
-        End If
+        '    If odata150.dbOpen(cnn150, sTarget, sinfo150) Then
+        '        odata150.runSp(cnn150, "DELETE FROM pedidosven WHERE Folio='" & lblpedido.Text & "'", sinfo150)
+        '        odata150.runSp(cnn150, "DELETE FROM pedidosvendet WHERE Folio='" & lblpedido.Text & "'", sinfo150)
+        '        cnn150.Close()
+        '    End If
+        'End If
 
         If pide = "1" Then
             lblusuario.Text = usu
