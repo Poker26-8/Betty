@@ -538,7 +538,7 @@ Public Class frmVentas1
                     DataGridView1.DataSource = dt
                 End If
 
-                Sql111 = "select Nombre from Productos where Grupo<>'INSUMO' and ProvRes<>1 and LENGTH(Codigo) < 7 order by Nombre"
+                Sql111 = "select distinct Nombre from Productos where Grupo<>'INSUMO' and ProvRes<>1  order by Nombre"
 
                 If .getDt(cnn_c, dt, Sql111, sInfo) Then
                     cbodesc.DataSource = dt
@@ -8108,25 +8108,6 @@ kakaxd:
                 'End If
                 'rd1.Close()
 
-                'Dim cnn27 As OleDb.OleDbConnection = New OleDb.OleDbConnection
-                'Dim sinfo27 As String = ""
-                'Dim sql27 As String = "select Saldo from abonoi where Id=(select MAX(Id) from abonoi where Cliente='" & cboNombre.Text & "')"
-                'Dim dr27 As DataRow
-                'Dim dt27 As New DataTable
-                'Dim odata27 As New ToolKitSQL.oledbdata
-                'With odata27
-                '    If .dbOpen(cnn27, Direcc_Access, sinfo27) Then
-                '        If .getDr(cnn27, dr27, sql27, sinfo27) Then
-                '            MySaldo = CDbl(IIf(dr27(0).ToString = "", 0, dr27(0).ToString)) + CDbl(txtPagar.Text)
-                '        Else
-                '            MySaldo = txtPagar.Text
-                '        End If
-                '        cnn27.Close()
-                '    Else
-                '        MsgBox(sinfo27)
-                '    End If
-                'End With
-
                 Dim varstrvent As String = ""
                 varstrvent = "insert into AbonoI(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,Banco,Referencia,Usuario,MontoSF,Comentario,NumSuc) values(" & MYFOLIO & "," & IdCliente & ",'" & IIf(cboNombre.Text = "", "PUBLICO EN GENERAL", cboNombre.Text) & "','NOTA VENTA','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "'," & Total_Ve & ",0," & MySaldo & ",'','','" & lblusuario.Text & "',0,''," & base & ")"
 
@@ -8161,23 +8142,6 @@ kakaxd:
                     '    MySaldo = FormatNumber(txtPagar.Text, 4)
                     'End If
                     'rd1.Close()
-
-                    'Dim cnn27 As OleDb.OleDbConnection = New OleDb.OleDbConnection
-                    'Dim sinfo27 As String = ""
-                    'Dim sql As String = "select Saldo from AbonoI where Id=(select MAX(Id) from AbonoI where Cliente='" & cboNombre.Text & "')"
-                    'Dim dt27 As New DataTable
-                    'Dim dr27 As DataRow
-                    'Dim odata27 As New ToolKitSQL.oledbdata
-                    'With odata27
-                    '    If .dbOpen(cnn27, Direcc_Access, sinfo27) Then
-                    '        If .getDr(cnn27, dr27, sql, sinfo27) Then
-                    '            MySaldo = FormatNumber(IIf(dr27(0).ToString = "", 0, dr27(0).ToString - ACuenta), 4)
-                    '        Else
-                    '            MySaldo = FormatNumber(txtPagar.Text, 4)
-                    '        End If
-                    '        cnn2.Clone()
-                    '    End If
-                    'End With
 
                 Else
                     MySaldo = 0
@@ -8221,51 +8185,51 @@ kakaxd:
 
 
 
-                        'If TotFormaPago > 0 Then
+                        If TotFormaPago > 0 Then
 
-                        '    Dim varstrvent As String = ""
-                        '    varstrvent = "insert into AbonoI(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Comentario,CuentaC,Comisiones,NumSuc) values(" & MYFOLIO & "," & IdCliente & ",'" & IIf(cboNombre.Text = "", "PUBLICO EN GENERAL", cboNombre.Text) & "','ABONO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & TotFormaPago & "," & (MySaldo) & ",'" & FormaPago & "'," & TotFormaPago & ",'" & BancoFP & "','" & ReferenciaFP & "','" & lblusuario.Text & "','" & CmentarioFP & "','" & CuentaFP & "'," & totalcomision & "," & base & ")"
+                            Dim varstrvent As String = ""
+                            varstrvent = "insert into AbonoI(NumFolio,IdCliente,Cliente,Concepto,Fecha,Hora,FechaCompleta,Cargo,Abono,Saldo,FormaPago,Monto,Banco,Referencia,Usuario,Comentario,CuentaC,Comisiones,NumSuc) values(" & MYFOLIO & "," & IdCliente & ",'" & IIf(cboNombre.Text = "", "PUBLICO EN GENERAL", cboNombre.Text) & "','ABONO','" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & Format(Date.Now, "yyyy-MM-dd HH:mm:ss") & "',0," & TotFormaPago & "," & (MySaldo) & ",'" & FormaPago & "'," & TotFormaPago & ",'" & BancoFP & "','" & ReferenciaFP & "','" & lblusuario.Text & "','" & CmentarioFP & "','" & CuentaFP & "'," & totalcomision & "," & base & ")"
 
-                        '    Dim cnn12 As OleDb.OleDbConnection = New OleDb.OleDbConnection
-                        '    Dim sinfo12 As String = ""
-                        '    Dim odata12 As New ToolKitSQL.oledbdata
-                        '    With odata12
-                        '        If .dbOpen(cnn12, Direcc_Access, sinfo12) Then
-                        '            If .runSp(cnn12, varstrvent, sinfo12) Then
-                        '            Else
-                        '                MsgBox(sinfo12)
-                        '            End If
-                        '            cnn12.Close()
-                        '        End If
-                        '    End With
+                            Dim cnn12 As OleDb.OleDbConnection = New OleDb.OleDbConnection
+                            Dim sinfo12 As String = ""
+                            Dim odata12 As New ToolKitSQL.oledbdata
+                            With odata12
+                                If .dbOpen(cnn12, Direcc_Access, sinfo12) Then
+                                    If .runSp(cnn12, varstrvent, sinfo12) Then
+                                    Else
+                                        MsgBox(sinfo12)
+                                    End If
+                                    cnn12.Close()
+                                End If
+                            End With
 
-                        '    Dim saldocuenta As Double = 0
+                            Dim saldocuenta As Double = 0
 
-                        '    cnn1.Close() : cnn1.Open()
-                        '    cmd1 = cnn1.CreateCommand
-                        '    cmd1.CommandText = "SELECT Saldo FROM movCuenta WHERE Id=(SELECT MAX(Id) FROM movcuenta WHERE Cuenta='" & CuentaFP & "')"
-                        '    rd1 = cmd1.ExecuteReader
-                        '    If rd1.HasRows Then
-                        '        If rd1.Read Then
-                        '            saldocuenta = IIf(rd1(0).ToString = "", 0, rd1(0).ToString) + TotFormaPago
+                            cnn1.Close() : cnn1.Open()
+                            cmd1 = cnn1.CreateCommand
+                            cmd1.CommandText = "SELECT Saldo FROM movCuenta WHERE Id=(SELECT MAX(Id) FROM movcuenta WHERE Cuenta='" & CuentaFP & "')"
+                            rd1 = cmd1.ExecuteReader
+                            If rd1.HasRows Then
+                                If rd1.Read Then
+                                    saldocuenta = IIf(rd1(0).ToString = "", 0, rd1(0).ToString) + TotFormaPago
 
-                        '            cnn2.Close() : cnn2.Open()
-                        '            cmd2 = cnn2.CreateCommand
-                        '            cmd2.CommandText = "INSERT INTO movcuenta(Tipo,Banco,Referencia,Concepto,Total,Retiro,Deposito,Saldo,Fecha,Hora,Folio,Cliente,Comentario,Cuenta,BancoCuenta) VALUES('" & FormaPago & "','" & BancoFP & "','" & ReferenciaFP & "','VENTA'," & TotFormaPago & ",0," & TotFormaPago & "," & saldocuenta & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & MYFOLIO & "','" & cboNombre.Text & "','" & CmentarioFP & "','" & CuentaFP & "','" & BancoCFP & "')"
-                        '            cmd2.ExecuteNonQuery()
-                        '            cnn2.Close()
-                        '        End If
-                        '    Else
-                        '        cnn2.Close() : cnn2.Open()
-                        '        cmd2 = cnn2.CreateCommand
-                        '        cmd2.CommandText = "INSERT INTO movcuenta(Tipo,Banco,Referencia,Concepto,Total,Retiro,Deposito,Fecha,Hora,Folio,Cliente,Comentario,Cuenta,BancoCuenta) VALUES('" & FormaPago & "','" & BancoFP & "','" & ReferenciaFP & "','VENTA'," & TotFormaPago & ",0," & TotFormaPago & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & MYFOLIO & "','" & cboNombre.Text & "','" & CmentarioFP & "','" & CuentaFP & "','" & BancoCFP & "')"
-                        '        cmd2.ExecuteNonQuery()
-                        '        cnn2.Close()
-                        '    End If
-                        '    rd1.Close()
-                        '    cnn1.Close()
+                                    cnn2.Close() : cnn2.Open()
+                                    cmd2 = cnn2.CreateCommand
+                                    cmd2.CommandText = "INSERT INTO movcuenta(Tipo,Banco,Referencia,Concepto,Total,Retiro,Deposito,Saldo,Fecha,Hora,Folio,Cliente,Comentario,Cuenta,BancoCuenta) VALUES('" & FormaPago & "','" & BancoFP & "','" & ReferenciaFP & "','VENTA'," & TotFormaPago & ",0," & TotFormaPago & "," & saldocuenta & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & MYFOLIO & "','" & cboNombre.Text & "','" & CmentarioFP & "','" & CuentaFP & "','" & BancoCFP & "')"
+                                    cmd2.ExecuteNonQuery()
+                                    cnn2.Close()
+                                End If
+                            Else
+                                cnn2.Close() : cnn2.Open()
+                                cmd2 = cnn2.CreateCommand
+                                cmd2.CommandText = "INSERT INTO movcuenta(Tipo,Banco,Referencia,Concepto,Total,Retiro,Deposito,Fecha,Hora,Folio,Cliente,Comentario,Cuenta,BancoCuenta) VALUES('" & FormaPago & "','" & BancoFP & "','" & ReferenciaFP & "','VENTA'," & TotFormaPago & ",0," & TotFormaPago & ",'" & Format(Date.Now, "yyyy-MM-dd") & "','" & Format(Date.Now, "HH:mm:ss") & "','" & MYFOLIO & "','" & cboNombre.Text & "','" & CmentarioFP & "','" & CuentaFP & "','" & BancoCFP & "')"
+                                cmd2.ExecuteNonQuery()
+                                cnn2.Close()
+                            End If
+                            rd1.Close()
+                            cnn1.Close()
 
-                        'End If
+                        End If
                     Next
 
                 End If

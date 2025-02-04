@@ -414,7 +414,7 @@ Public Class frmVentas3
                     DataGridView1.DataSource = dt
                 End If
 
-                Sql111 = "select Nombre from Productos where Grupo<>'INSUMO' and ProvRes<>1 and LENGTH(Codigo) < 7 order by Nombre"
+                Sql111 = "select distinct Nombre from Productos where Grupo<>'INSUMO' and ProvRes<>1 order by Nombre"
 
                 If .getDt(cnn_c, dt, Sql111, sInfo) Then
                     cbodesc.DataSource = dt
