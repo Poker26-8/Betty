@@ -906,6 +906,7 @@ Public Class frmVentas1
             Else
                 existencia = 0
             End If
+
             Dim lote As String = cboLote.Text
             Dim id_lote As Integer = IIf(cboLote.Tag = 0, 0, cboLote.Tag)
             Dim fcad As String = txtfechacad.Text
@@ -917,7 +918,6 @@ Public Class frmVentas1
             Dim desucentoiva As Double = 0
             Dim total1 As Double = 0
             Dim monedero As Double = 0
-
 
             cnn3.Close() : cnn3.Open()
             cmd3 = cnn3.CreateCommand
@@ -942,8 +942,6 @@ Public Class frmVentas1
             End If
             rd3.Close()
             cnn3.Close()
-
-
 
 
             Dim varcodunico As String = Format(CDate(Date.Now), "yyyy/MM/ddHH:mm:ss.fff") & codigo
@@ -10413,6 +10411,8 @@ ecomoda:
                     Y += 21
                 End If
                 total_prods = total_prods + canti
+
+
             Next
             Y += 3
 
@@ -10480,6 +10480,8 @@ ecomoda:
                                 IVADELPRODUCTO = MySubtotal - IVAPRODUCTO
                                 TotalIVAPrint = TotalIVAPrint + IVADELPRODUCTO
                             End If
+
+                            TotalIEPS = TotalIEPS + IIf(grdcaptura.Rows(N).Cells(10).Value.ToString = "", 0, grdcaptura.Rows(N).Cells(10).Value.ToString)
                         End If
 
                         'cmd1 = cnn1.CreateCommand
@@ -10561,6 +10563,7 @@ ecomoda:
             End If
 
             Dim IVA As Double = CDbl(txtPagar.Text) - TotalIVAPrint
+
 
             If DesglosaIVA = "1" Then
                 If TotalIVAPrint > 0 Then
