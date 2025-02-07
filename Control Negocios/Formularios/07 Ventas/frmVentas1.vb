@@ -276,7 +276,7 @@ Public Class frmVentas1
         nLogo = DatosRecarga("LogoG")
         tLogo = DatosRecarga("TipoLogo")
         simbolo = DatosRecarga("Simbolo")
-        DesglosaIVA = DatosRecarga("Desglosa")
+        DesglosaIVA = DatosRecarga2("Desglosa")
         whats = DatosRecarga("Whatsapp")
         autofact = DatosRecarga("LinkAuto")
         siqr = DatosRecarga2("LinkAuto")
