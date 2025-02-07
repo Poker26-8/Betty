@@ -10359,6 +10359,7 @@ ecomoda:
                     Continue For
                 End If
 
+
                 Dim codigo As String = grdcaptura.Rows(miku).Cells(0).Value.ToString()
                 Dim nombre As String = grdcaptura.Rows(miku).Cells(1).Value.ToString()
                 Dim unidad As String = grdcaptura.Rows(miku).Cells(2).Value.ToString()
@@ -10483,17 +10484,6 @@ ecomoda:
 
                             TotalIEPS = TotalIEPS + IIf(grdcaptura.Rows(N).Cells(10).Value.ToString = "", 0, grdcaptura.Rows(N).Cells(10).Value.ToString)
                         End If
-
-                        'cmd1 = cnn1.CreateCommand
-                        'cmd1.CommandText =
-                        '    "select IVA from Productos where Codigo='" & CStr(grdcaptura.Rows(N).Cells(0).Value.ToString) & "'"
-                        'rd1 = cmd1.ExecuteReader
-                        'If rd1.HasRows Then
-                        '    If rd1.Read Then
-                        '    End If
-                        'End If
-                        'rd1.Close()
-
                     End If
                     'cnn1.Close()
                 Next
