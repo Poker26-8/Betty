@@ -2,6 +2,7 @@
 Imports System.Xml
 Imports System.Data.OleDb
 Imports MySql.Data.MySqlClient
+Imports System.Drawing.Printing
 
 Public Class frmCompras
     Dim DondeVoy As String = ""
@@ -6303,7 +6304,7 @@ quepasowey:
                 If tMilimetros = "80" Then
 
 
-
+                    pTicket80.PrintController = New StandardPrintController()
                     pTicket80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
                     Dim ps As New System.Drawing.Printing.PaperSize("Custom", 305, 3000)
                     pTicket80.DefaultPageSettings.PaperSize = ps
@@ -6311,6 +6312,7 @@ quepasowey:
                     pTicket80.Print()
                 End If
                 If tMilimetros = "58" Then
+                    pTicket58.PrintController = New StandardPrintController()
                     pTicket58.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
                     pTicket58.Print()
                 End If

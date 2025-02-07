@@ -11,6 +11,7 @@ Imports System.Threading.Tasks
 Imports System.Net
 Imports System.Text
 Imports System.Xml
+Imports System.Drawing.Printing
 
 Public Class frmVentas2
     'upgrid
@@ -7230,6 +7231,7 @@ Door:
                         If Impresora = "" Then MsgBox("No se encontró una impresora.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Termina_Error_Ventas() : Exit Sub
                         If Tamaño = "80" Then
                             For t As Integer = 1 To Copias
+                                pCotiza80.PrintController = New StandardPrintController()
                                 Dim ps As New System.Drawing.Printing.PaperSize("Custom", 269, 3000)
                                 pCotiza80.DefaultPageSettings.PaperSize = ps
                                 pCotiza80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
@@ -7238,6 +7240,7 @@ Door:
                         End If
                         If Tamaño = "58" Then
                             For t As Integer = 1 To Copias
+                                pCotiza58.PrintController = New StandardPrintController()
                                 pCotiza58.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
                                 pCotiza58.Print()
                             Next
@@ -9022,38 +9025,35 @@ Door:
 
                 End If
                 If lote <> "" Then
-                        Dim IdVD As Integer = 0
-                        Dim idLote As Integer = grdcaptura.Rows(R).Cells(7).Value.ToString
+                    Dim IdVD As Integer = 0
+                    Dim idLote As Integer = grdcaptura.Rows(R).Cells(7).Value.ToString
+                    cmd1 = cnn1.CreateCommand
+                    cmd1.CommandText =
+"select max(Id) as FVD from VentasDetalle"
+                    rd1 = cmd1.ExecuteReader
+                    If rd1.HasRows Then
+                        If rd1.Read Then
+                            IdVD = rd1("FVD").ToString
+                        End If
+                    End If
+                    rd1.Close()
 
+                    Dim cant_lote As Double = GetCantLote(mycode, lote)
+
+                    If cant_lote > mycant Then
+                        Dim nueva_cant As Double = cant_lote - mycant
                         cmd1 = cnn1.CreateCommand
                         cmd1.CommandText =
-                            "select max(Id) as FVD from VentasDetalle"
-                        rd1 = cmd1.ExecuteReader
-                        If rd1.HasRows Then
-                            If rd1.Read Then
-                                IdVD = rd1("FVD").ToString
-                            End If
-                        End If
-                        rd1.Close()
-
-                        Dim cant_lote As Double = GetCantLote(mycode, lote)
-
-                        If cant_lote > mycant Then
-                            Dim nueva_cant As Double = cant_lote - mycant
-                            cmd1 = cnn1.CreateCommand
-                            cmd1.CommandText =
-                                "update LoteCaducidad set Cantidad=" & nueva_cant & " where Id=" & idLote
-                            cmd1.ExecuteNonQuery()
-                        Else
-                            cmd1 = cnn1.CreateCommand
-                            cmd1.CommandText =
-                                "update LoteCaducidad set Cantidad=0 where Id=" & idLote
-                            cmd1.ExecuteNonQuery()
-                        End If
-
+"update LoteCaducidad set Cantidad=" & nueva_cant & " where Id=" & idLote
+                        cmd1.ExecuteNonQuery()
+                    Else
+                        cmd1 = cnn1.CreateCommand
+                        cmd1.CommandText =
+"update LoteCaducidad set Cantidad=0 where Id=" & idLote
+                        cmd1.ExecuteNonQuery()
                     End If
-
-                    cnn1.Close()
+                End If
+                cnn1.Close()
             Next
 
 
@@ -9447,6 +9447,7 @@ Door:
                 If Tamaño = "80" Then
                     For t As Integer = 1 To Copias
 
+                        pVenta80.PrintController = New StandardPrintController()
                         pVenta80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
                         Dim ps As New System.Drawing.Printing.PaperSize("Custom", 297, 3000)
                         pVenta80.DefaultPageSettings.PaperSize = ps
@@ -9462,6 +9463,7 @@ Door:
                 End If
                 If Tamaño = "58" Then
                     For t As Integer = 1 To Copias
+                        pVenta58.PrintController = New StandardPrintController()
                         pVenta58.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
                         If pVenta58.DefaultPageSettings.PrinterSettings.PrinterName = Impresora Then
                             pVenta58.Print()
@@ -15441,12 +15443,14 @@ rayos2:
                 If TPrint = "TICKET" Then
                     If impresora = "" Then MsgBox("No se encontró una impresora.", vbInformation + vbOKOnly, titulocentral) : Termina_Error_Coti() : Exit Sub
                     If Tamaño = "80" Then
+                        pPedido80.PrintController = New StandardPrintController()
                         Dim ps As New System.Drawing.Printing.PaperSize("Custom", 269, 3000)
                         pPedido80.DefaultPageSettings.PaperSize = ps
                         pPedido80.DefaultPageSettings.PrinterSettings.PrinterName = impresora
                         pPedido80.Print()
                     End If
                     If Tamaño = "58" Then
+                        pPedido58.PrintController = New StandardPrintController()
                         pPedido58.DefaultPageSettings.PrinterSettings.PrinterName = impresora
                         pPedido58.Print()
                     End If

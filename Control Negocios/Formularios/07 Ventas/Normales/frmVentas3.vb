@@ -12,6 +12,7 @@ Imports System.Threading.Tasks
 Imports System.Security.Cryptography
 Imports System.Text
 Imports System.Net
+Imports System.Drawing.Printing
 Public Class frmVentas3
     'permiso del usuario
     Dim per_venta As Boolean = False
@@ -6618,6 +6619,7 @@ Door:
                         If Impresora = "" Then MsgBox("No se encontró una impresora.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Termina_Error_Ventas() : Exit Sub
                         If Tamaño = "80" Then
                             For t As Integer = 1 To Copias
+                                pCotiza80.PrintController = New StandardPrintController()
                                 Dim ps As New System.Drawing.Printing.PaperSize("Custom", 269, 3000)
                                 pVenta80.DefaultPageSettings.PaperSize = ps
                                 pCotiza80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
@@ -6626,6 +6628,7 @@ Door:
                         End If
                         If Tamaño = "58" Then
                             For t As Integer = 1 To Copias
+                                pCotiza58.PrintController = New StandardPrintController()
                                 pCotiza58.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
                                 pCotiza58.Print()
                             Next
@@ -9124,7 +9127,7 @@ Door:
                 If Impresora = "" Then MsgBox("No se encontró una impresora.", vbInformation + vbOKOnly, "Delsscom Control Negocios Pro") : Termina_Error_Ventas() : btnventa.Enabled = True : My.Application.DoEvents() : Exit Sub
                 If Tamaño = "80" Then
                     For t As Integer = 1 To Copias
-
+                        pVenta80.PrintController = New StandardPrintController()
                         pVenta80.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
                         Dim ps As New System.Drawing.Printing.PaperSize("Custom", 297, 3000)
                         pVenta80.DefaultPageSettings.PaperSize = ps
@@ -9140,6 +9143,7 @@ Door:
                 End If
                 If Tamaño = "58" Then
                     For t As Integer = 1 To Copias
+                        pVenta58.PrintController = New StandardPrintController()
                         pVenta58.DefaultPageSettings.PrinterSettings.PrinterName = Impresora
                         If pVenta58.DefaultPageSettings.PrinterSettings.PrinterName = Impresora Then
                             pVenta58.Print()
@@ -17439,12 +17443,14 @@ rayos2:
                 If TPrint = "TICKET" Then
                     If impresora = "" Then MsgBox("No se encontró una impresora.", vbInformation + vbOKOnly, titulocentral) : Termina_Error_Coti() : Exit Sub
                     If Tamaño = "80" Then
+                        PPedido80.PrintController = New StandardPrintController()
                         Dim ps As New System.Drawing.Printing.PaperSize("Custom", 269, 3000)
                         PPedido80.DefaultPageSettings.PaperSize = ps
                         PPedido80.DefaultPageSettings.PrinterSettings.PrinterName = impresora
                         PPedido80.Print()
                     End If
                     If Tamaño = "58" Then
+                        PPedido58.PrintController = New StandardPrintController()
                         PPedido58.DefaultPageSettings.PrinterSettings.PrinterName = impresora
                         PPedido58.Print()
                     End If
