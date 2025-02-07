@@ -3852,7 +3852,7 @@ Public Class frmLoad
             cnn3.Close() : cnn3.Open()
 
             cmd1 = cnn1.CreateCommand
-            cmd1.CommandText = "SELECT Folio FROM ventas ORDER BY Folio desc LIMIT 20"
+            cmd1.CommandText = "SELECT Folio FROM ventas ORDER BY Folio desc LIMIT 5"
             rd1 = cmd1.ExecuteReader
             If rd1.HasRows Then
                 Do While rd1.Read
