@@ -2377,6 +2377,7 @@ Partial Class frmVentas1
         Me.chkBuscaProd.Size = New System.Drawing.Size(15, 14)
         Me.chkBuscaProd.TabIndex = 213
         Me.chkBuscaProd.UseVisualStyleBackColor = False
+        Me.chkBuscaProd.Visible = False
         '
         'txtubicacion
         '

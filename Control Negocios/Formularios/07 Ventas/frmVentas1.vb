@@ -5093,7 +5093,7 @@ kaka:
 
     Private Sub txtProdClave_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtProdClave.KeyPress
         If AscW(e.KeyChar) = Keys.Enter Then
-            cbodesc.Items.Clear()
+            'cbodesc.Items.Clear()
 
             Dim cnn3 As MySqlConnection = New MySqlConnection(sTargetlocalmysql)
             Dim rd3 As MySqlDataReader
@@ -5107,7 +5107,9 @@ kaka:
                     "select distinct Nombre from Productos where Nombre like '%" & txtProdClave.Text & "%' order by Nombre"
                 rd3 = cmd3.ExecuteReader
                 Do While rd3.Read
-                    If rd3.HasRows Then cbodesc.Items.Add(rd3(0).ToString())
+                    If rd3.HasRows Then
+                        cbodesc.Items.Add(rd3(0).ToString)
+                    End If
                 Loop
                 rd3.Close() : cnn3.Close()
             Catch ex As Exception
